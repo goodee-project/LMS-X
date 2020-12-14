@@ -15,7 +15,6 @@ public class Lecture {
 	private String	lectureStartdate;	// 강좌 개강일
 	private String	lectureEnddate;		// 강좌 종강일
 	private int		lectureTotal;		// 강좌 최대 정원
-	private int		syllabusNo;			// 강의 계획서 고유번호
 	private int		classroomNo;		// 강의실 고유번호
 	private String	lectureCreatedate;	// 강좌 정보 생성 일시
 	private String	lectureUpdatedate;	// 강좌 정보 업데이트 일시
