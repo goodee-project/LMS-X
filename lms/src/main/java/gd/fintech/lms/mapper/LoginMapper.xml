@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.mapper.LoginMapper">
-	
+	<select id="loginCheck" parameterType="gd.fintech.lms.vo.Account" resultType="gd.fintech.lms.vo.Account">
+		SELECT
+		 	account_id accountId,
+		 	account_level accountLevle
+		FROM account
+		WHERE account_id=#{accountId}
+		and account_pw =Password(#{acountPw})
+		and account_level=#{accountLevel}
+	</select>
 </mapper>

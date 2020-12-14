@@ -2,7 +2,9 @@ package gd.fintech.lms.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
-public class LoginMapper {
+import gd.fintech.lms.vo.Account;
 
+@Mapper
+public interface LoginMapper {
+	public Account loginCheck(Account account);
 }
