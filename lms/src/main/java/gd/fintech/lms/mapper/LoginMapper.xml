@@ -4,10 +4,10 @@
 	<select id="loginCheck" parameterType="gd.fintech.lms.vo.Account" resultType="gd.fintech.lms.vo.Account">
 		SELECT
 		 	account_id accountId,
-		 	account_level accountLevle
+		 	account_level accountLevel
 		FROM account
-		WHERE account_id=#{accountId}
-		and account_pw =Password(#{acountPw})
-		and account_level=#{accountLevel}
+		WHERE account_id = #{accountId}
+		AND account_pw = PASSWORD(#{accountPw})
+		AND account_level = #{accountLevel}
 	</select>
 </mapper>

@@ -22,8 +22,8 @@ public class AdminLoginFilter implements Filter {
 
 		HttpSession session = ((HttpServletRequest) request).getSession();
 
-		// 로그인 실패
-		if (session.getAttribute("accountId") == null) {
+		//권한실패
+		if (!session.getAttribute("loginLevel").equals("4")) {
 			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/login");
 
 			return;

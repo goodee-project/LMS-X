@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import gd.fintech.lms.vo.Account;
+
 @WebFilter(urlPatterns = "/auth/student/*")
 public class StudentLoginFilter implements Filter {
 	@Override
@@ -22,8 +24,9 @@ public class StudentLoginFilter implements Filter {
 
 		HttpSession session = ((HttpServletRequest) request).getSession();
 
-		// 로그인 실패
-		if (session.getAttribute("accountId") == null) {
+		//권한실패
+		if (!session.getAttribute("loginLevel").equals("1")) {
+			
 			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/login");
 
 			return;

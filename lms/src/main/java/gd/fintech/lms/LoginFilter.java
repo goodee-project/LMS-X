@@ -23,7 +23,7 @@ public class LoginFilter implements Filter {
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
 		// 로그인 실패
-		if (session.getAttribute("accountId") == null) {
+		if (session.getAttribute("loginId") == null) {
 			((HttpServletResponse)response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/login");
 			
 			return;

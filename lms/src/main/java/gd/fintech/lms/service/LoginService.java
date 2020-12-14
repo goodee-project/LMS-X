@@ -16,6 +16,14 @@ public class LoginService {
 	
 	public Account loginCheck(Account account){
 		Account loginCheck= loginMapper.loginCheck(account);
-		return loginCheck;
+		
+		//loginCheck가 null이 아니면 loginCheck값을 리턴 
+		if(loginCheck!=null) {
+			return loginCheck;
+		}
+		
+		//null이면 null 리턴
+		return null;
+		
 	}
 }
