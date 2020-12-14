@@ -11,7 +11,7 @@
 			lecture_startdate lectureStartdate, 
 			lecture_enddate lectureEnddate
 		FROM lecture
-		WHERE account_id = #{accountId};
+		WHERE account_id = #{accountId}
 		ORDER BY lecture_no asc
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>

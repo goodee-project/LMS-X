@@ -20,12 +20,13 @@ public class TeacherIndexController {
 	@Autowired TeacherLectureService teacherLectureService;
 	
 	// 강사 Index
-	@GetMapping(value="/auth/teacher/index")
+	@GetMapping(value="/auth/teacher/index/{currentPage}")
 	public String index(ServletRequest request, Model model, 
 			@PathVariable(value = "currentPage") int currentPage) {
 		HttpSession session = ((HttpServletRequest)request).getSession();	// 세션 정보를 가져온다.
 		
-		String accountId = session.getAttribute("loginId").toString();		// 세션에 있는 아이디를 가져온다 (강사)
+		// String accountId = session.getAttribute("loginId").toString();		// 세션에 있는 아이디를 가져온다 (강사)
+		String accountId = "sunghyun";
 		
 		int rowPerPage = 10;	// 한 페이지에 표시할 데이터 수
 		
@@ -61,6 +62,6 @@ public class TeacherIndexController {
 		model.addAttribute("navFirstPage", navFirstPage);
 		model.addAttribute("navLastPage", navLastPage);
 		
-		return "index";
+		return "/auth/teacher/index";
 	}
 }
