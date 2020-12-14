@@ -11,7 +11,7 @@ public class Lecture {
 	private int		subjectNo;			// 과목 고유번호
 	private String	teacherName;		// 강사 이름
 	private String	lectureName;		// 강좌 이름
-	private int		textbookIsbn;		// 교재 고유번호 (ISBN)
+	private String	textbookIsbn;		// 교재 고유번호 (ISBN)
 	private String	lectureStartdate;	// 강좌 개강일
 	private String	lectureEnddate;		// 강좌 종강일
 	private int		lectureTotal;		// 강좌 최대 정원

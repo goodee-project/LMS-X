@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class Textbook {
-	private int		textbookIsbn;			// 교재 고유번호 (ISBN)
+	private String	textbookIsbn;			// 교재 고유번호 (ISBN)
 	private String	textbookTitle;			// 교재 이름
 	private String	textbookWriter;			// 교재 저자
 	private String	textbookPublisher;		// 교재 출판사
