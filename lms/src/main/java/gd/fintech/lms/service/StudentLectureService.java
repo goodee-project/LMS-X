@@ -18,4 +18,14 @@ public class StudentLectureService {
 	public List<LectureAndClassRegistration> selectStudentClassListByPage(Map<String, Object> map){
 		return studentLectureMapper.selectStudentClassListByPage(map);
 	}
+	// 자신이 수강중인 강좌 개수
+	public int selectStudentClassListEndPage(String studentId, int rowPerPage) {
+		int endPage = studentLectureMapper.selectStudentClassListCount(studentId);
+		
+		if(endPage % rowPerPage == 0) {
+			return endPage / rowPerPage;
+		} else {
+			return endPage / rowPerPage + 1;			
+		}
+	}
 }
