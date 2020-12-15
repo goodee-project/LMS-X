@@ -16,20 +16,19 @@ import javax.servlet.http.HttpSession;
 public class FirstLoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-		throws IOException, ServletException {
-		
+			throws IOException, ServletException {
+
 		System.out.println("Debug:FirstLoginFilter 실행");
-		
-		HttpSession session = ((HttpServletRequest)request).getSession();
-		
+
+		HttpSession session = ((HttpServletRequest) request).getSession();
+
 		// 로그인 실패
 		if (session.getAttribute("loginId") == null) {
-			((HttpServletResponse)response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/");
-			
+			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/");
+
 			return;
 		}
-		
+
 		chain.doFilter(request, response);
 	}
 }
-

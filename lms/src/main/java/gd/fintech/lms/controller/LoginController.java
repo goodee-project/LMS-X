@@ -12,13 +12,11 @@ import gd.fintech.lms.vo.Account;
 
 @Controller
 public class LoginController {
-	@Autowired LoginService loginService;
+	@Autowired private LoginService loginService;
 	
 	//로그인 페이지 이동
 	@GetMapping({"/","/login"})
 	public String login(HttpSession session) {
-		System.out.println(session.getAttribute("loginId"));
-		System.out.println(session.getAttribute("loginLevel"));
 		
 		//로그인이 되어 있으면
 		if(session.getAttribute("loginId")!=null) {

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.mapper.SignupMapper">
+	<!-- 계정테이블 추가 -->
+	<insert id="insertAccount" parameterType="gd.fintech.lms.vo.Account">
+		INSERT INTO
+			account(
+				account_id,
+				account_pw,
+				account_state,
+				account_level,
+				account_createdate,
+				account_updatedate
+				)
+		VALUES	(
+				#{accountId},
+				PASSWORD(#{accountPw}),
+				#{accountState},
+				#{accountLevel},
+				now(),
+				now()
+				)			
+	</insert>
+	<!-- 학생 대기테이블 추가 -->
+	<insert id="insertStudentQueue" parameterType="gd.fintech.lms.vo.StudentQueue">
+		INSERT INTO
+			student_queue(
+				student_id,
+				student_email,
+				student_name,
+				student_phone,
+				student_gender,
+				student_birth,
+				student_address_main,
+				student_address_sub
+				)
+		VALUES	(
+				#{studentId},
+				#{studentEmail},
+				#{studentName},
+				#{studentPhone},
+				#{studentGender},
+				#{studentBirth},
+				#{studentAddressMain},
+				#{studentAddressSub}
+				)
+	</insert>
+	<!-- 강사 대기테이블 추가 -->
+	<insert id="insertTeacherQueue" parameterType="gd.fintech.lms.vo.TeacherQueue">
+				INSERT INTO
+			teacher_queue(
+				teacher_id,
+				teacher_email,
+				teacher_name,
+				teacher_phone,
+				teacher_gender,
+				teacher_birth,
+				teacher_address_main,
+				teacher_address_sub
+				)
+		VALUES	(
+				#{teacherId},
+				#{teacherEmail},
+				#{teacherName},
+				#{teacherPhone},
+				#{teacherGender},
+				#{teacherBirth},
+				#{teacherAddressMain},
+				#{teacherAddressSub}
+				)
+	</insert>
+	<!-- 운영자 대기테이블 추가 -->
+	<insert id="insertManagerQueue" parameterType="gd.fintech.lms.vo.ManagerQueue">
+				INSERT INTO
+			manager_queue(
+				manager_id,
+				manager_email,
+				manager_name,
+				manager_phone,
+				manager_gender,
+				manager_birth,
+				manager_address_main,
+				manager_address_sub
+				)
+		VALUES	(
+				#{managerId},
+				#{managerEmail},
+				#{managerName},
+				#{managerPhone},
+				#{managerGender},
+				#{managerBirth},
+				#{managerAddressMain},
+				#{managerAddressSub}
+				)
+	</insert>
+	
+</mapper>
