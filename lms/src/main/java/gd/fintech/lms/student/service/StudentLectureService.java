@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import gd.fintech.lms.student.mapper.StudentLectureMapper;
 import gd.fintech.lms.vo.ClassRegistration;
+import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom;
 
@@ -39,5 +40,20 @@ public class StudentLectureService {
 	// 수강중인 강좌의 후기(별점, 리뷰)를 수정하기
 	public int updateStudentClassReview(ClassRegistration classRegistration) {
 		return studentLectureMapper.updateStudentClassReview(classRegistration);
+	}
+	
+	// 학생이 수강 신청 가능한 강좌 목록
+	public List<Lecture> selectStudentLectureListByPage(Map<String, Object> map){
+		return studentLectureMapper.selectStudentLectureListByPage(map);
+	}
+	// 학생이 수강 신청 가능한 강좌 개수
+	public int selectStudentLectureListEndPage(int rowPerPage){
+		int endPage = studentLectureMapper.selectStudentLectureListCount();		
+		
+		if(endPage % rowPerPage == 0) {
+			return endPage / rowPerPage;
+		} else {
+			return endPage / rowPerPage + 1;			
+		}
 	}
 }
