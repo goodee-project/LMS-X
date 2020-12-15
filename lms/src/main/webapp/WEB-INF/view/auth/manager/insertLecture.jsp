@@ -9,21 +9,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-	$('#addBtn').click(function(){
+	$('#insertBtn').click(function(){
 		if($('#teacherNametext').val().length < 1){
 			alert('강사명을 입력해주세요.');
 			return;
-		} else if{
-			$('#addCommentForm').submit();
-		}
+		} 
+		if($('#lectureNametext').val().length < 1){
+			alert('강의명을 입력해주세요.');
+			return;	 
+		} 
+		
+		$('#insertLectureForm').submit();
 	});
 });
 </script>
 </head>
 <body>
 	<h1>강의 개설</h1>
-	<form method="post"
-		action="${pageContext.request.contextPath}/auth/manager/insertLecture">
+	<form method="post" action="${pageContext.request.contextPath}/auth/manager/insertLecture" id="insertLectureForm">
 		<table border="1">
 			<tr>
 				<td>강사 계정</td>
@@ -47,7 +50,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td>강의 명</td>
-				<td><input type="text" name="lectureName" placeholder="강의 명을 입력해주세요."></td>
+				<td><input type="text" name="lectureName"id="lectureNametext" placeholder="강의 명을 입력해주세요."></td>
 			</tr>
 			<tr>
 				<td>교재</td>
@@ -67,7 +70,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td>정원</td>
-				<td></td>
+				<td><input type="number" name="lectureTotal" id="lectureTotaltext"></td>
 			</tr>
 			<tr>
 				<td>강의실</td>
@@ -78,7 +81,8 @@ $(document).ready(function(){
 				</select></td>
 			</tr>
 		</table>
-		<button type="submit">개설</button>
+		<button type="button" id="insertBtn">개설</button>
 	</form>
+	<a href="${pageContext.request.contextPath}/auth/manager/lectureList/1">뒤로가기</a>
 </body>
 </html>
