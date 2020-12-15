@@ -16,8 +16,20 @@ public class LoginController {
 	
 	//로그인 페이지 이동
 	@GetMapping({"/","/login"})
-	public String login() {
+	public String login(HttpSession session) {
 		
+		//로그인이 되어 있으면
+		if(session.getAttribute("loginId")!=null) {
+			if(session.getAttribute("loginLelvel").equals("1")) {
+				return "redirect:/auth/student/index/1";
+			}else if(session.getAttribute("loginLelvel").equals("2")) {
+				return "redirect:/auth/teacher/index/1";
+			}else if(session.getAttribute("loginLelvel").equals("3")) {
+				return "redirect:/auth/manager/index";
+			}else {
+				return "redirect:/auth/admin/index";
+			}
+		}
 		return "login";
 	}
 	//학생 로그인 페이지 이동
@@ -56,9 +68,9 @@ public class LoginController {
 		session.setAttribute("loginLevel", loginAccount.getAccountLevel());
 		
 		if(loginAccount.getAccountLevel()==1) {
-			return "redirect:/auth/student/index";
+			return "redirect:/auth/student/index/1";
 		}else if(loginAccount.getAccountLevel()==2) {
-			return "redirect:/auth/teacher/index";
+			return "redirect:/auth/teacher/index/1";
 		}else if(loginAccount.getAccountLevel()==3) {
 			return "redirect:/auth/manager/index";
 		}else {

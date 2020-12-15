@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import gd.fintech.lms.vo.Account;
-
 @WebFilter(urlPatterns = "/auth/student/*")
 public class StudentLoginFilter implements Filter {
 	@Override

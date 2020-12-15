@@ -6,5 +6,6 @@ import gd.fintech.lms.vo.Account;
 
 @Mapper
 public interface LoginMapper {
-	public Account loginCheck(Account account);
+	//로그인 아이디 있는지 체크 
+	public Account selectLoginCheck(Account account);
 }
