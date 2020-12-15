@@ -166,7 +166,7 @@
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 학생이 수강 신청 가능한 강좌 개수 -->
-	<select id="selectStudentLectureListCount" resultMap="int">
+	<select id="selectStudentLectureListCount" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM lecture l
