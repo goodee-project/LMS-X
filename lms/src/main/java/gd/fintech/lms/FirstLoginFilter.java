@@ -13,18 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = "/auth/*")
-public class LoginFilter implements Filter {
+public class FirstLoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 		throws IOException, ServletException {
 		
-		System.out.println("Debug: LoginFilter 실행");
+		System.out.println("Debug:FirstLoginFilter 실행");
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
 		// 로그인 실패
 		if (session.getAttribute("loginId") == null) {
-			((HttpServletResponse)response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/login");
+			((HttpServletResponse)response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/");
 			
 			return;
 		}

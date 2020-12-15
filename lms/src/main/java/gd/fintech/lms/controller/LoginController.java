@@ -17,16 +17,22 @@ public class LoginController {
 	//로그인 페이지 이동
 	@GetMapping({"/","/login"})
 	public String login(HttpSession session) {
+		System.out.println(session.getAttribute("loginId"));
+		System.out.println(session.getAttribute("loginLevel"));
 		
 		//로그인이 되어 있으면
 		if(session.getAttribute("loginId")!=null) {
-			if(session.getAttribute("loginLelvel").equals("1")) {
+			if(session.getAttribute("loginLevel").equals(1)) {
 				return "redirect:/auth/student/index/1";
-			}else if(session.getAttribute("loginLelvel").equals("2")) {
+			}
+			if(session.getAttribute("loginLevel").equals(2)) {
 				return "redirect:/auth/teacher/index/1";
-			}else if(session.getAttribute("loginLelvel").equals("3")) {
+			}
+			if(session.getAttribute("loginLevel").equals(3)) {
 				return "redirect:/auth/manager/index";
-			}else {
+			}
+			if(session.getAttribute("loginLevel").equals(4)) {
+				
 				return "redirect:/auth/admin/index";
 			}
 		}
@@ -34,22 +40,82 @@ public class LoginController {
 	}
 	//학생 로그인 페이지 이동
 	@GetMapping("/studentLogin")
-	public String studentLogin() {
+	public String studentLogin(HttpSession session) {
+		if(session.getAttribute("loginId")!=null) {
+			if(session.getAttribute("loginLevel").equals(1)) {
+				return "redirect:/auth/student/index/1";
+			}
+			if(session.getAttribute("loginLevel").equals(2)) {
+				return "redirect:/auth/teacher/index/1";
+			}
+			if(session.getAttribute("loginLevel").equals(3)) {
+				return "redirect:/auth/manager/index";
+			}
+			if(session.getAttribute("loginLevel").equals(4)) {
+				
+				return "redirect:/auth/admin/index";
+			}
+		}
 		return "studentLogin";
 	}
 	//강사 로그인 페이지 이동
 	@GetMapping("/teacherLogin")
-	public String teacherLogin() {
+	public String teacherLogin(HttpSession session) {
+		if(session.getAttribute("loginId")!=null) {
+			if(session.getAttribute("loginLevel").equals(1)) {
+				return "redirect:/auth/student/index/1";
+			}
+			if(session.getAttribute("loginLevel").equals(2)) {
+				return "redirect:/auth/teacher/index/1";
+			}
+			if(session.getAttribute("loginLevel").equals(3)) {
+				return "redirect:/auth/manager/index";
+			}
+			if(session.getAttribute("loginLevel").equals(4)) {
+				
+				return "redirect:/auth/admin/index";
+			}
+		}
 		return "teacherLogin";
 	}
 	//운영자 로그인 페이지 이동
 	@GetMapping("/managerLogin")
-	public String managerLogin() {
+	public String managerLogin(HttpSession session) {
+		if(session.getAttribute("loginId")!=null) {
+			if(session.getAttribute("loginLevel").equals(1)) {
+				return "redirect:/auth/student/index/1";
+			}
+			if(session.getAttribute("loginLevel").equals(2)) {
+				return "redirect:/auth/teacher/index/1";
+			}
+			if(session.getAttribute("loginLevel").equals(3)) {
+				return "redirect:/auth/manager/index";
+			}
+			if(session.getAttribute("loginLevel").equals(4)) {
+				
+				return "redirect:/auth/admin/index";
+			}
+		}
 		return "managerLogin";
 	}
 	//관리자 로그인 페이지 이동
 	@GetMapping("/adminLogin")
-	public String adminLogin() {
+	public String adminLogin(HttpSession session) {
+		if(session.getAttribute("loginId")!=null) {
+			if(session.getAttribute("loginLevel").equals(1)) {
+				return "redirect:/auth/student/index/1";
+			}
+			if(session.getAttribute("loginLevel").equals(2)) {
+				return "redirect:/auth/teacher/index/1";
+			}
+			if(session.getAttribute("loginLevel").equals(3)) {
+				return "redirect:/auth/manager/index";
+			}
+			if(session.getAttribute("loginLevel").equals(4)) {
+				
+				return "redirect:/auth/admin/index";
+			}
+		}
 		return "adminLogin";
 	}
 	//로그인 시 확인

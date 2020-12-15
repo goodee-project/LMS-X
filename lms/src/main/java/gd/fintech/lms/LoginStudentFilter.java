@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = "/auth/admin/*")
-public class AdminLoginFilter implements Filter {
+@WebFilter(urlPatterns = "/auth/student/*")
+public class LoginStudentFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -23,8 +23,9 @@ public class AdminLoginFilter implements Filter {
 		HttpSession session = ((HttpServletRequest) request).getSession();
 
 		//권한실패
-		if (!session.getAttribute("loginLevel").equals("4")) {
-			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/login");
+		if (!session.getAttribute("loginLevel").equals(1)) {
+			
+			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/");
 
 			return;
 		}

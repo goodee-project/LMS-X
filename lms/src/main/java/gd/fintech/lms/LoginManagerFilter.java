@@ -12,19 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = "/auth/teacher/*")
-public class TeacherLoginFilter implements Filter {
+@WebFilter(urlPatterns = "/auth/manager/*")
+public class LoginManagerFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		System.out.println("Debug: LoginStudentFilter 실행");
+		System.out.println("Debug: LoginManagerFilter 실행");
 
 		HttpSession session = ((HttpServletRequest) request).getSession();
 
 		//권한실패
-		if (!session.getAttribute("loginLevel").equals("2")) {
-			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/login");
+		if (!session.getAttribute("loginLevel").equals(3)) {
+			
+			((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/");
 
 			return;
 		}
