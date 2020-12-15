@@ -14,4 +14,7 @@ public interface TeacherLectureMapper {
 	
 	// 강사 강좌 목록 페이지 카운트
 	int selectTeacherLectureListCount(String teacherId);	// 강사 아이디를 받아온다
+	
+	// 각 강좌별 정보를 출력
+	Lecture selectTeacherLectureOne(int lectureNo);
 }

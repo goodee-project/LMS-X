@@ -38,4 +38,9 @@ public class TeacherLectureService {
 	public int getCountTeacherLecture(String teacherId) {
 		return teacherLectureMapper.selectTeacherLectureListCount(teacherId);
 	}
+	
+	// 각 강좌별 정보를 출력
+	public Lecture getTeacherLectureOne(int lectureNo) {
+		return teacherLectureMapper.selectTeacherLectureOne(lectureNo);
+	}
 }

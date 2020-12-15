@@ -80,7 +80,7 @@
 								<td>${tll.accountId}</td>
 								<td>${tll.subject.subjectName}</td>
 								<td>${tll.teacherName}</td>
-								<td>${tll.lectureName}</td>
+								<td><a href="${pageContext.request.contextPath}/auth/teacher/lecture/${tll.lectureNo}">${tll.lectureName}</a></td>
 								<td>${tll.lectureStartdate}</td>
 								<td>${tll.lectureEnddate}</td>
 							</tr>
