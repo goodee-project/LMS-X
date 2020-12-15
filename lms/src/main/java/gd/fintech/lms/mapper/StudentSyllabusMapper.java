@@ -8,5 +8,5 @@ import gd.fintech.lms.vo.Syllabus;
 public interface StudentSyllabusMapper {
 	
 	// 학생 : 강의 계획서 내용 보기
-	public Syllabus selectStudentSyllabus(int lectureNo);
+	public Syllabus selectStudentSyllabusOne(int lectureNo);
 }
