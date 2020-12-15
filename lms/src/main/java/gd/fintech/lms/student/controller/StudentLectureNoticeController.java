@@ -18,7 +18,7 @@ public class StudentLectureNoticeController {
 	@Autowired private StudentLectureNoticeService studentLectureNoticeService;
 	
 	// 학생이 강의 공지사항 리스트를 확인
-	@GetMapping("/auth/student/StudentLectureNoticeList/{currentPage}")
+	@GetMapping("/auth/student/studentLectureNoticeList/{currentPage}")
 	public String StudentLectureNoticeList(Model model,
 			@PathVariable(name = "currentPage", required = true) int currentPage) {
 		int rowPerPage = 20; // 한 페이지에 출력할 게시물의 개수는 20개입니다
@@ -36,6 +36,6 @@ public class StudentLectureNoticeController {
 		
 		model.addAttribute("studentLectureNoticeList", studentLectureNoticeList);
 		
-		return null;
+		return "auth/student/studentLectureNoticeList/1";
 	}
 }
