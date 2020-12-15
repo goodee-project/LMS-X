@@ -16,4 +16,8 @@ public interface TeacherReportMapper {
 	// 강사 과제 목록 페이지 카운트
 	// 강좌 고유번호(lectureNo)를 이용
 	int selectTeacherReportListCount(int lectureNo);
+	
+	// 강사 과제 정보 조회
+	// 과제 고유번호(reportNo)를 이용
+	Report selectTeacherReportOne(int reportNo);
 }

@@ -70,4 +70,20 @@ public class TeacherReportController {
 		// view의 /auth/teacher/lecture/report/reportList.jsp를 이용한다
 		return "/auth/teacher/lecture/report/reportList";
 	}
+	
+	// 강사가 제출한 과제에 대한 정보 조회
+	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}")
+	public String reportOne(Model model, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "reportNo") int reportNo) {
+		// 과제 고유번호(reportNo)에 해당하는 과제의 정보를 데이터베이스에서 가져온다
+		Report report = teacherReportService.getTeacherReportOne(reportNo);
+		System.out.println("Debug: report - " + report);
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("report", report);
+		
+		// view의 /auth/teacher/lecture/report/reportOne.jsp를 이용한다
+		return "/auth/teacher/lecture/report/reportOne";
+	}
 }

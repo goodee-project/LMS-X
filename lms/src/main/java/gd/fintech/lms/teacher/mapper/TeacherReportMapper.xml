@@ -25,4 +25,19 @@
   		FROM report
   		WHERE lecture_no = #{lectureNo};
   	</select>
+  	
+  	<!-- 강사가 과제(report) 테이블에서 과제 고유번호(reportNo)에 해당하는 데이터를 가져온다 -->
+  	<select id="selectTeacherReportOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Report">
+  		SELECT
+  			report_no reportNo, 
+  			lecture_no lectureNo, 
+  			report_title reportTitle, 
+  			report_content reportContent, 
+  			report_createdate reportCreatedate, 
+  			report_updatedate reportUpdatedate, 
+  			report_startdate reportStartdate, 
+  			report_enddate reportEnddate
+  		FROM report
+  		WHERE report_no = #{reportNo}
+  	</select>
 </mapper>

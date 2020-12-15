@@ -40,4 +40,10 @@ public class TeacherReportService {
 	public int getCountTeacherReport(int lectureNo) {
 		return teacherReportMapper.selectTeacherReportListCount(lectureNo);
 	}
+	
+	// 강사가 출제한 과제에 대한 정보를 출력
+	// 과제 고유번호(reportNo)를 이용
+	public Report getTeacherReportOne(int reportNo) {
+		return teacherReportMapper.selectTeacherReportOne(reportNo);
+	}
 }

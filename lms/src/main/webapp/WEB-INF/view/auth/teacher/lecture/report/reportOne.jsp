@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>reportList</title>
+		<title>reportOne</title>
 		
 		<!-- Bootstrap Framework 사용 -->
 		
@@ -52,46 +51,55 @@
 		<!-- 상단 인터페이스 -->
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
-				<h1>과제 관리</h1>
-				<p>학생들에게 출제한 과제를 관리하는 메뉴입니다.</p>
+				<h1>과제 조회</h1>
+				<p>학생들에게 출제한 과제 정보를 확인하는 메뉴입니다.</p>
 			</div>
 		</div>
-	
+		
 		<!-- 본문 -->
 		<div class="container">
-			<div>
-				<h3>과제 목록</h3>
-				<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/insertReport'">과제 출제</button>
-			</div>
+			<h3>과제 정보</h3>
+				
+			<br>
+			
+			<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportList/1'">목록</button>
+			<button type="button" class="btn btn-sm btn-primary" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/updateReport/${reportNo}'">수정</button>
 			
 			<br><br>
 			
 			<table class="table">
-				<thead>
-					<tr>
-						<th>과제 번호</th>
-						<th>과제 제목</th>
-						<th>과제 시작일시</th>
-						<th>과제 마감일시</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:if test="${teacherReportList[0].reportNo != null}">
-						<c:forEach var="trl" items="${teacherReportList}">
-							<tr>
-								<td width="15%">${trl.reportNo}</td>
-								<td width="45%"><a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${trl.reportNo}">${trl.reportTitle}</a></td>
-								<td width="20%">${trl.reportStartdate}</td>
-								<td width="20%">${trl.reportEnddate}</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-					<c:if test="${teacherReportList[0].reportNo == null}">
-						<tr>
-							<td colspan="7">(출제한 과제가 없습니다)</td>
-						</tr>
-					</c:if>
-				</tbody>
+				<tr>
+					<td width="30%">과제 번호</td>
+					<td width="70%">${report.reportNo}</td>
+				</tr>
+				<tr>
+					<td>강좌 번호</td>
+					<td>${report.lectureNo}</td>
+				</tr>
+				<tr>
+					<td>과제 제목</td>
+					<td>${report.reportTitle}</td>
+				</tr>
+				<tr>
+					<td>과제 내용</td>
+					<td>${report.reportContent}</td>
+				</tr>
+				<tr>
+					<td>과제 출제일시</td>
+					<td>${report.reportCreatedate}</td>
+				</tr>
+				<tr>
+					<td>과제 수정일시</td>
+					<td>${report.reportUpdatedate}</td>
+				</tr>
+				<tr>
+					<td>과제 시작일시</td>
+					<td>${report.reportStartdate}</td>
+				</tr>
+				<tr>
+					<td>과제 마감일시</td>
+					<td>${report.reportEnddate}</td>
+				</tr>
 			</table>
 		</div>
 	</body>
