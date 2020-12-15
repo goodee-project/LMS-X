@@ -22,12 +22,6 @@
 		
 		<!-- Bootstrap 4 Icons -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-		
-		<!-- Google Web Fonts -->
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 	
 		<style>
 			.table {
@@ -49,41 +43,52 @@
 		</style>
 	</head>
 	<body>
+		<!-- 내비게이션 메인 메뉴 -->
+		<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
+	
+		<!-- 상단 인터페이스 -->
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<h1>Index</h1>
+				<p>LMS에서 이용하실 메뉴를 선택해주세요.</p>
+			</div>
+		</div>
+		
+		<!-- 본문 -->
 		<div class="container">
-			<h1>강사 Index</h1>
-			
-			<h3>${teacherId} 강사님</h3>
-			
-			<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
+			<h3>강좌 목록</h3>
 			
 			<br>
-			
-			<table class="table table-hover">
+		
+			<table class="table">
 				<thead>
 					<tr>
 						<th>강좌 번호</th>
-						<th>계정 아이디</th>
 						<th>과목</th>
 						<th>강사</th>
 						<th>강좌</th>
 						<th>강좌 개강일</th>
 						<th>강좌 종강일</th>
+						<th>강좌 이동</th>
 					</tr>
 				</thead>
 				<tbody>
+					<!-- 학생들을 가르치고 있는 강좌가 존재하는 경우 데이터 출력 -->
 					<c:if test="${teacherLectureList[0].lectureNo != null}">
 						<c:forEach var="tll" items="${teacherLectureList}">
 							<tr>
 								<td>${tll.lectureNo}</td>
-								<td>${tll.accountId}</td>
 								<td>${tll.subject.subjectName}</td>
 								<td>${tll.teacherName}</td>
-								<td><a href="${pageContext.request.contextPath}/auth/teacher/lecture/${tll.lectureNo}">${tll.lectureName}</a></td>
+								<td>${tll.lectureName}</td>
 								<td>${tll.lectureStartdate}</td>
 								<td>${tll.lectureEnddate}</td>
+								<td><button type="button" class="btn btn-primary btn-sm" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${tll.lectureNo}'">강좌 이동</button></td>
 							</tr>
 						</c:forEach>
 					</c:if>
+					
+					<!-- 학생들을 가르치고 있는 강좌가 없는 경우 (강좌가 없습니다) 출력 -->
 					<c:if test="${teacherLectureList[0].lectureNo == null}">
 						<tr>
 							<td colspan="7">(강좌가 없습니다)</td>

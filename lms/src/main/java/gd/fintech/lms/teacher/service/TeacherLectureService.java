@@ -17,6 +17,7 @@ public class TeacherLectureService {
 	@Autowired private TeacherLectureMapper teacherLectureMapper;
 	
 	// 강사가 수업중인 강좌 목록을 출력
+	// 강사 아이디(teacherId)를 이용
 	public List<Lecture> getTeacherLectureListByPage(String teacherId, int currentPage, int rowPerPage) {
 		// currentPage, rowPerPage를 통해 beginRow, rowPerPage 전달하여
 		// TeacherLectureMapper의 메소드를 호출한다.
@@ -35,11 +36,13 @@ public class TeacherLectureService {
 	}
 	
 	// 강사가 수업중인 강좌의 총 갯수 계산
+	// 강사 아이디(teacherId)를 이용
 	public int getCountTeacherLecture(String teacherId) {
 		return teacherLectureMapper.selectTeacherLectureListCount(teacherId);
 	}
 	
 	// 각 강좌별 정보를 출력
+	// 강좌 고유번호(lectureNo)를 이용
 	public Lecture getTeacherLectureOne(int lectureNo) {
 		return teacherLectureMapper.selectTeacherLectureOne(lectureNo);
 	}

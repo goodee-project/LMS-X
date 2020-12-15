@@ -17,6 +17,7 @@ public class TeacherReportService {
 @Autowired private TeacherReportMapper teacherReportMapper;
 	
 	// 강사가 출제한 과제 목록을 출력
+	// 강좌 고유번호(lectureNo)를 이용
 	public List<Report> getTeacherReportListByPage(int lectureNo, int currentPage, int rowPerPage) {
 		// currentPage, rowPerPage를 통해 beginRow, rowPerPage 전달하여
 		// TeacherReportMapper의 메소드를 호출한다.
@@ -35,6 +36,7 @@ public class TeacherReportService {
 	}
 	
 	// 강사가 출제한 과제의 총 갯수 계산
+	// 강좌 고유번호(lectureNo)를 이용
 	public int getCountTeacherReport(int lectureNo) {
 		return teacherReportMapper.selectTeacherReportListCount(lectureNo);
 	}
