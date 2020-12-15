@@ -9,7 +9,7 @@
 	<h1>운영자 index</h1>
 	<table border="1">
 		<tr>
-			<td><a href="/auth/manager/lectureList">강의 관리 페이지</a></td>
+			<td><a href="/auth/manager/lectureList/1">강의 관리 페이지</a></td>
 			<td><a href="/auth/manager/classroomList">강의실 관리 페이지</a></td>
 			<td><a href="/auth/manager/textbookList">교재 관리 페이지</a></td>
 			<td><a href="/auth/manager/subjectList">과목 관리 페이지</a></td>
