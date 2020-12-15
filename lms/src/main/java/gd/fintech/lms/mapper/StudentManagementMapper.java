@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import gd.fintech.lms.vo.Student;
 
 @Mapper
-public interface StudentMapper {
+public interface StudentManagementMapper {
 	List<Student> selectStudentList();
 }
