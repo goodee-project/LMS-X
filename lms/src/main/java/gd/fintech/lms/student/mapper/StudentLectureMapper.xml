@@ -135,4 +135,44 @@
 			class_registration_review = #{classRegistrationReview}
 		WHERE class_registration_no = #{classRegistrationNo}
 	</update>
+	
+	<!-- 학생이 신청할 수 있는 강좌 목록 -->
+	<resultMap type="gd.fintech.lms.vo.Lecture" id="selectStudentLectureListResult">
+		<result property="lectureNo" column="lecture_no" />
+		<result property="accountId" column="account_id" />
+		<result property="teacherName" column="teacher_name" />
+		<result property="lectureName" column="lecture_name" />
+		<result property="lectureStartdate" column="lecture_startdate" />
+		<result property="lectureEnddate" column="lecture_enddate" />
+		<association property="subject" javaType="gd.fintech.lms.vo.Subject">
+			<result property="subjectName" column="subject_name" />
+		</association>
+	</resultMap>
+	<select id="selectStudentLectureListByPage" parameterType="java.util.Map" resultMap="selectStudentLectureListResult">
+		SELECT
+			l.lecture_no, 
+			l.account_id, 
+			s.subject_name, 
+			l.teacher_name, 
+			l.lecture_name, 
+			l.lecture_startdate, 
+			l.lecture_enddate
+		FROM lecture l
+		JOIN subject s
+		ON l.subject_no = s.subject_no
+		WHERE 
+			DATE_FORMAT(NOW(), '%Y-%m-%d') >= l.lecture_startdate AND l.lecture_enddate >= DATE_FORMAT(NOW(), '%Y-%m-%d')
+		ORDER BY l.lecture_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 학생이 수강 신청 가능한 강좌 개수 -->
+	<select id="selectStudentLectureListCount" resultMap="int">
+		SELECT
+			COUNT(*)
+		FROM lecture l
+		JOIN subject s
+		ON l.subject_no = s.subject_no
+		WHERE l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
+	</select>
+	
 </mapper>
