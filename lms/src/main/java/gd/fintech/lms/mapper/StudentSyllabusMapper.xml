@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.mapper.StudentSyllabusMapper">
-	<select id="selectStudentSyllabus" parameterType="int" resultType="gd.fintech.lms.vo.syllabus">
+	<select id="selectStudentSyllabus" parameterType="int" resultType="gd.fintech.lms.vo.Syllabus">
 		SELECT
 			lecture_no lectureNo,
 			syllabus_file_size syllabusFileSize,
