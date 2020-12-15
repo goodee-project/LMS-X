@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gd.fintech.lms.mapper.StudentLectureMapper">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentLectureMapper">
 	<!-- 학생 : 자신이 수강중인 강좌 목록 보기  -->
 	<resultMap type="gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject" id="selectStudentClassListByPageResult">
 		<!-- 강좌 정보 -->
