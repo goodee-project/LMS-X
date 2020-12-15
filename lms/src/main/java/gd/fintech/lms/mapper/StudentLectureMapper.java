@@ -5,12 +5,12 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import gd.fintech.lms.vo.LectureAndClassRegistration;
+import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject;
 
 @Mapper
 public interface StudentLectureMapper {
 	// 학생 : 자신이 수강중인 강좌 목록
-	public List<LectureAndClassRegistration> selectStudentClassListByPage(Map<String, Object> map);
+	public List<LectureAndClassRegistrationAndSubject> selectStudentClassListByPage(Map<String, Object> map);
 	// 학생 : 자신이 수강중인 강좌의 개수
 	public int selectStudentClassListCount(String studentId);
 }

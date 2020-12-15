@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.mapper.StudentLectureMapper">
 	<!-- 학생 : 자신이 수강중인 강좌 목록 보기  -->
-	<resultMap type="gd.fintech.lms.vo.LectureAndClassRegistration" id="selectStudentClassListByPageResult">
+	<resultMap type="gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject" id="selectStudentClassListByPageResult">
 		<association property="lecture" javaType="gd.fintech.lms.vo.Lecture">
              <result property="lectureNo" column="lecture_no" />
              <result property="subjectNo" column="subject_no" />
@@ -13,6 +13,10 @@
              <result property="lectureEnddate" column="lecture_enddate" />
              <result property="lectureTotal" column="lecture_total" />
 		</association>
+		<association property="subject" javaType="gd.fintech.lms.vo.Subject">
+             <result property="subjectName" column="subject_name" />
+             <result property="subjectTotalday" column="subject_totalday" />
+		</association>	
 		<association property="classRegistration" javaType="gd.fintech.lms.vo.ClassRegistration">
              <result property="classRegistrationNo" column="class_registration_no" />
              <result property="accountId" column="account_id" />
@@ -22,21 +26,24 @@
 	<select id="selectStudentClassListByPage" parameterType="java.util.Map" resultMap="selectStudentClassListByPageResult">
 		SELECT 
 			l.lecture_no, 
-			l.subject_no,  
+			s.subject_name,
 			l.account_id,
 			l.teacher_name, 
 			l.lecture_name, 
 			l.lecture_startdate, 
 			l.lecture_enddate, 
 			l.lecture_total,
+			s.subject_totalday,
 			cr.class_registration_no, 
 			cr.account_id,
 			cr.class_registration_state
 		FROM class_registration cr 
 		JOIN lecture l 
 		ON cr.lecture_no = l.lecture_no 
+		JOIN subject s
+		ON s.subject_no = l.subject_no
 		WHERE cr.account_id = #{studentId}
-		ORDER BY l.lecture_startdate DESC 
+		ORDER BY cr.class_registration_no DESC 
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
@@ -47,4 +54,5 @@
 		FROM class_registration
 		WHERE account_id = #{studentId}
 	</select>
+	
 </mapper>
