@@ -28,7 +28,7 @@ public class StudentIndexController {
 			@PathVariable(name="currentPage") int currentPage) {
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
-		String studentId = session.getAttribute("loginId").toString();
+		String studentId = (String)session.getAttribute("loginId");
 		System.out.println(studentId + " 로그인");
 		
 		int rowPerPage = 10; // 한페이지에 출력할 개수

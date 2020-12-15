@@ -3,9 +3,9 @@
 <mapper namespace="gd.fintech.lms.mapper.StudentLectureMapper">
 	<!-- 학생 : 자신이 수강중인 강좌 목록 보기  -->
 	<resultMap type="gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject" id="selectStudentClassListByPageResult">
+		<!-- 강좌 정보 -->
 		<association property="lecture" javaType="gd.fintech.lms.vo.Lecture">
              <result property="lectureNo" column="lecture_no" />
-             <result property="subjectNo" column="subject_no" />
              <result property="accountId" column="account_id" />
              <result property="teacherName" column="teacher_name" />
              <result property="lectureName" column="lecture_name" />
@@ -13,10 +13,12 @@
              <result property="lectureEnddate" column="lecture_enddate" />
              <result property="lectureTotal" column="lecture_total" />
 		</association>
+		<!-- 과목 정보 -->
 		<association property="subject" javaType="gd.fintech.lms.vo.Subject">
              <result property="subjectName" column="subject_name" />
              <result property="subjectTotalday" column="subject_totalday" />
 		</association>	
+		<!-- 수강 정보 -->
 		<association property="classRegistration" javaType="gd.fintech.lms.vo.ClassRegistration">
              <result property="classRegistrationNo" column="class_registration_no" />
              <result property="accountId" column="account_id" />
@@ -55,4 +57,82 @@
 		WHERE account_id = #{studentId}
 	</select>
 	
+	<!-- 학생 : 수강중인 강좌 상세보기 -->
+	<resultMap type="gd.fintech.lms.vo.LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom" id="selectStudentClassOneResult">
+		<!-- 강좌 정보 -->
+		<association property="lecture" javaType="gd.fintech.lms.vo.Lecture">
+             <result property="lectureNo" column="lecture_no" />
+             <result property="accountId" column="account_id" />
+             <result property="teacherName" column="teacher_name" />
+             <result property="lectureName" column="lecture_name" />
+             <result property="lectureStartdate" column="lecture_startdate" />
+             <result property="lectureEnddate" column="lecture_enddate" />
+             <result property="lectureTotal" column="lecture_total" />
+		</association>
+		<!-- 수강 정보 -->
+		<association property="classRegistration" javaType="gd.fintech.lms.vo.ClassRegistration">
+             <result property="classRegistrationNo" column="class_registration_no" />
+             <result property="accountId" column="account_id" />
+             <result property="classRegistrationState" column="class_registration_state" />
+             <result property="classRegistrationPoint" column="class_registration_point" />
+             <result property="classRegistrationReview" column="class_registration_review" />
+		</association>
+		<!-- 과목 정보 -->
+		<association property="subject" javaType="gd.fintech.lms.vo.Subject">
+             <result property="subjectName" column="subject_name" />
+             <result property="subjectTotalday" column="subject_totalday" />
+             <result property="subjectInfo" column="subject_info" />
+		</association>	
+		<!-- 교재 정보 -->
+		<association property="textbook" javaType="gd.fintech.lms.vo.Textbook">
+             <result property="textbookIsbn" column="textbook_isbn" />
+             <result property="textbookTitle" column="textbook_title" />
+		</association>	
+		<!-- 강의실 정보 -->
+		<association property="classroom" javaType="gd.fintech.lms.vo.Classroom">
+             <result property="classroomNo" column="classroom_no" />
+             <result property="classroomNumber" column="classroom_number" />
+		</association>	
+	</resultMap>
+	<select id="selectStudentClassOne" parameterType="int" resultMap="selectStudentClassOneResult">
+		SELECT 
+			l.lecture_no, 
+			l.account_id,
+			l.teacher_name, 
+			l.lecture_name, 
+			l.lecture_startdate, 
+			l.lecture_enddate, 
+			l.lecture_total,
+			cr.class_registration_no, 
+			cr.account_id,
+			cr.class_registration_state,
+			cr.class_registration_point,
+			cr.class_registration_review,
+			s.subject_name,
+			s.subject_totalday,
+			s.subject_info,
+			t.textbook_isbn,
+			t.textbook_title,
+			c.classroom_no,
+			c.classroom_number
+		FROM class_registration cr 
+		JOIN lecture l 
+		ON cr.lecture_no = l.lecture_no 
+		JOIN subject s
+		ON s.subject_no = l.subject_no
+		JOIN textbook t
+		ON t.textbook_isbn = l.textbook_isbn
+		JOIN classroom c 
+		ON c.classroom_no = l.classroom_no
+		WHERE cr.class_registration_no = #{classRegistrationNo}
+	</select>
+	
+	<!-- 학생이 수강하는 강좌의 후기를 수정 -->
+	<update id="updateStudentClassReview" parameterType="gd.fintech.lms.vo.ClassRegistration">
+		UPDATE class_registration 
+		SET
+			class_registration_point = #{classRegistrationPoint},
+			class_registration_review = #{classRegistrationReview}
+		WHERE class_registration_no = #{classRegistrationNo}
+	</update>
 </mapper>

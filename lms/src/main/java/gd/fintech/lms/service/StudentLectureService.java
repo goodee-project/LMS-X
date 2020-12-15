@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gd.fintech.lms.mapper.StudentLectureMapper;
+import gd.fintech.lms.vo.ClassRegistration;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject;
+import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom;
 
 // 학생 강좌 서비스
 @Service
@@ -27,5 +29,15 @@ public class StudentLectureService {
 		} else {
 			return endPage / rowPerPage + 1;			
 		}
+	}
+	
+	// 자신이 수강중인 강좌 상세보기
+	public LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom selectStudentClassOne(int classRegistrationNo) {
+		return studentLectureMapper.selectStudentClassOne(classRegistrationNo);
+	}
+	
+	// 수강중인 강좌의 후기(별점, 리뷰)를 수정하기
+	public int updateStudentClassReview(ClassRegistration classRegistration) {
+		return studentLectureMapper.updateStudentClassReview(classRegistration);
 	}
 }

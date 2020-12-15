@@ -8,6 +8,9 @@
 </head>
 <body>
 	<h1>학생 index</h1>
+	<div>
+    	<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
+    </div>
 	<!-- 수강 목록 -->
 	<h3>수강 목록</h3>
 	<table border="1">	
@@ -24,7 +27,7 @@
 		</tr>
 		<c:forEach items="${lectureList}" var="l">
 			<tr>
-				<td><a href="">${l.classRegistration.classRegistrationNo}</a></td>
+				<td><a href="${pageContext.request.contextPath }/auth/student/classOne/${l.classRegistration.classRegistrationNo}">${l.classRegistration.classRegistrationNo}</a></td>
 				<td>${l.lecture.teacherName}</td>
 				<td>${l.subject.subjectName}</td>
 				<td>${l.lecture.lectureName}</td>
