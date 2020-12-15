@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="gd.fintech.lms.mapper.ClassroomManagementMapper"> 
+	<select id="selectClassroomList" resultType="gd.fintech.lms.vo.Classroom">
+		SELECT 
+		classroom_no classroomNo,
+		classroom_number classroomNumber,
+		classroom_size classroomSize,
+		classroom_total classroomTotal
+		FROM classroom
+	</select>
+</mapper>
