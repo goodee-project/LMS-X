@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import gd.fintech.lms.vo.Classroom;
 
 @Mapper
-public interface ClassroomManagementMapper {
+public interface ManagerClassroomMapper {
 	List<Classroom> selectClassroomList(); // 리스트
 	
 	// 삭제

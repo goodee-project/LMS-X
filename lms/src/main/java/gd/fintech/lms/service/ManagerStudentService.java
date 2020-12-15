@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import gd.fintech.lms.mapper.StudentManagementMapper;
+import gd.fintech.lms.mapper.ManagerStudentMapper;
 import gd.fintech.lms.vo.Student;
 
 @Service
 @Transactional
-public class StudentManagementService {
-	@Autowired StudentManagementMapper studentManagementMapper;
+public class ManagerStudentService {
+	@Autowired ManagerStudentMapper managerStudentMapper;
 	
 	public List<Student> getStudentList() {
-		return studentManagementMapper.selectStudentList();
+		return managerStudentMapper.selectStudentList();
 	}
 }

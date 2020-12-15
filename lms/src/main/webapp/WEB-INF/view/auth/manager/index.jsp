@@ -20,5 +20,8 @@
 			<td><a href="/auth/manager/FAQList">FAQ 관리 페이지</a></td>
 		</tr>
 	</table>
+	<div>
+		<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
+    </div>
 </body>
 </html>

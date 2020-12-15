@@ -7,16 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import gd.fintech.lms.service.StudentManagementService;
+import gd.fintech.lms.service.ManagerStudentService;
 import gd.fintech.lms.vo.Student;
 
 @Controller
-public class StudentManagementController {
-	@Autowired private StudentManagementService studentManagementService;
+public class ManagerStudentController {
+	@Autowired private ManagerStudentService managerStudentService;
 	
 	@GetMapping("/auth/manager/studentList")
 	public String studentList(Model model) {
-		List<Student> studentList = studentManagementService.getStudentList();
+		List<Student> studentList = managerStudentService.getStudentList();
 		model.addAttribute("studentList", studentList);
 		return "auth/manager/studentList";
 	}

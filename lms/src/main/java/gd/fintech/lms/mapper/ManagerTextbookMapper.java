@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import gd.fintech.lms.vo.Student;
+import gd.fintech.lms.vo.Textbook;
 
 @Mapper
-public interface StudentManagementMapper {
-	List<Student> selectStudentList();
+public interface ManagerTextbookMapper {
+	List<Textbook> selectTextbookList();
 }
