@@ -25,15 +25,16 @@ public class TeacherIndexController {
 			@PathVariable(value = "currentPage") int currentPage) {
 		HttpSession session = ((HttpServletRequest)request).getSession();	// 세션 정보를 가져온다.
 		
-		// String accountId = session.getAttribute("loginId").toString();		// 세션에 있는 아이디를 가져온다 (강사)
-		String accountId = "sunghyun";
+		// String teacherId = session.getAttribute("loginId").toString();		// 세션에 있는 아이디를 가져온다 (강사)
+		String teacherId = "sunghyun";
 		
 		int rowPerPage = 10;	// 한 페이지에 표시할 데이터 수
 		
-		List<Lecture> teacherLectureList = teacherLectureService.getTeacherLectureListByPage(accountId, currentPage, rowPerPage);
+		List<Lecture> teacherLectureList = teacherLectureService.getTeacherLectureListByPage(teacherId, currentPage, rowPerPage);
+		System.out.println("Debug: teacherLectureList - " + teacherLectureList);
 		
 		// 페이징 코드
-		int totalCount = teacherLectureService.getCountTeacherLecture(accountId);	// 전체 데이터 수
+		int totalCount = teacherLectureService.getCountTeacherLecture(teacherId);	// 전체 데이터 수
 		int lastPage = totalCount / rowPerPage;	// 마지막 페이지
 		
 		if (totalCount % rowPerPage != 0) {	// 10 미만의 개수의 데이터가 있는 페이지를 표시

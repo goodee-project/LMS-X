@@ -17,15 +17,15 @@ public class TeacherLectureService {
 	@Autowired private TeacherLectureMapper teacherLectureMapper;
 	
 	// 강사가 수업중인 강좌 목록을 출력
-	public List<Lecture> getTeacherLectureListByPage(String accountId, int currentPage, int rowPerPage) {
+	public List<Lecture> getTeacherLectureListByPage(String teacherId, int currentPage, int rowPerPage) {
 		// currentPage, rowPerPage를 통해 beginRow, rowPerPage 전달하여
-		// noticeMapper 메소드를 호출한다.
+		// TeacherLectureMapper의 메소드를 호출한다.
 		// 이후 결과값을 받아 return 한다.
 		
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("accountId", accountId);		// 강사 아이디
+		map.put("teacherId", teacherId);		// 강사 아이디
 		map.put("beginRow", beginRow);			// 시작 데이터
 		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
 		
@@ -35,7 +35,7 @@ public class TeacherLectureService {
 	}
 	
 	// 강사가 수업중인 강좌의 총 갯수 계산
-	public int getCountTeacherLecture(String accountId) {
-		return teacherLectureMapper.countTeacherLecture(accountId);
+	public int getCountTeacherLecture(String teacherId) {
+		return teacherLectureMapper.selectTeacherLectureListCount(teacherId);
 	}
 }

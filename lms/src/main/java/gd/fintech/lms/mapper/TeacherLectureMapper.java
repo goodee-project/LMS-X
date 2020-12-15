@@ -13,5 +13,5 @@ public interface TeacherLectureMapper {
 	List<Lecture> selectTeacherLectureListByPage(Map<String, Object> map);
 	
 	// 강사 강좌 목록 페이지 카운트
-	int countTeacherLecture(String accountId);	// 강사 아이디를 받아옴
+	int selectTeacherLectureListCount(String teacherId);	// 강사 아이디를 받아온다
 }

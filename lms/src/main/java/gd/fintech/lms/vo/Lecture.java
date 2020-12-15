@@ -9,6 +9,7 @@ public class Lecture {
 	private int		lectureNo;			// 강좌 고유번호
 	private String	accountId;			// 계정 아이디 (강사)
 	private int		subjectNo;			// 과목 고유번호
+	private Subject	subject;			// 과목 Vo
 	private String	teacherName;		// 강사 이름
 	private String	lectureName;		// 강좌 이름
 	private String	textbookIsbn;		// 교재 고유번호 (ISBN)
