@@ -13,7 +13,7 @@ public class LoginService {
 	@Autowired private LoginMapper loginMapper;
 	
 	//로그인 체크 
-	public Account loginCheck(Account account){
+	public Account getLoginCheck(Account account){
 		Account loginCheck= loginMapper.selectLoginCheck(account);
 		
 		//loginCheck가 null이 아니면 loginCheck값을 리턴 

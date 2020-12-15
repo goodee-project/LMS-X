@@ -122,7 +122,7 @@ public class LoginController {
 		
 		//db에 있는지 확인
 	
-		Account loginAccount = loginService.loginCheck(account); 
+		Account loginAccount = loginService.getLoginCheck(account); 
 		//로그인실패
 		if(loginAccount==null) {
 			return "redirect:/login";
