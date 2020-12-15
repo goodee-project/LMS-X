@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.mapper.LectureManagementMapper">
+	<!-- 운영자가 추가한 강의 목록 -->
+	<select id="selectLectureListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Lecture">
+		SELECTE 
+			lecture_no,
+			teacher_name,
+			lecture_name,
+			lecture_startdate,
+			lecture_enddate,
+			lecture_total 
+		FROM lecture
+		ORDER BY lecture_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 개설 되어 있는 강의 개수 -->
+	<select id="selectLectureCount" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM lecture
+	</select>
+</mapper>
