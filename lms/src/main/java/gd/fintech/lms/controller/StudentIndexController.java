@@ -15,7 +15,7 @@ import gd.fintech.lms.vo.LectureAndClassRegistration;
 
 // 학생 강좌 컨트롤러
 @Controller
-public class StudentLectureController {
+public class StudentIndexController {
 	@Autowired StudentLectureService studentLectureService;
 	
 	// 학생 인덱스
