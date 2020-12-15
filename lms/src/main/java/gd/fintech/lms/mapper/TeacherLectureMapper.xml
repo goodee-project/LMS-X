@@ -15,13 +15,13 @@
 
 	<select id="selectTeacherLectureListByPage" parameterType="java.util.Map" resultMap="selectTeacherLectureListResult">
 		SELECT
-			l.lecture_no lectureNo, 
-			l.account_id accountId, 
-			s.subject_name subjectName, 
-			l.teacher_name teacherName, 
-			l.lecture_name lectureName, 
-			l.lecture_startdate lectureStartdate, 
-			l.lecture_enddate lectureEnddate
+			l.lecture_no, 
+			l.account_id, 
+			s.subject_name, 
+			l.teacher_name, 
+			l.lecture_name, 
+			l.lecture_startdate, 
+			l.lecture_enddate
 		FROM lecture l
 		JOIN subject s
 		ON l.subject_no = s.subject_no

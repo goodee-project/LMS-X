@@ -25,8 +25,8 @@ public class TeacherIndexController {
 			@PathVariable(value = "currentPage") int currentPage) {
 		HttpSession session = ((HttpServletRequest)request).getSession();	// 세션 정보를 가져온다.
 		
-		// String teacherId = session.getAttribute("loginId").toString();		// 세션에 있는 아이디를 가져온다 (강사)
-		String teacherId = "sunghyun";
+		String teacherId = session.getAttribute("loginId").toString();		// 세션에 있는 아이디를 가져온다 (강사)
+		System.out.println("Debug: nowSessionId[" + teacherId +  "]");
 		
 		int rowPerPage = 10;	// 한 페이지에 표시할 데이터 수
 		
@@ -53,6 +53,8 @@ public class TeacherIndexController {
 			navFirstPage = navFirstPage - navPerPage;
 			navLastPage = navLastPage - navPerPage;
 		}
+		
+		model.addAttribute("teacherId", teacherId);
 		
 		model.addAttribute("teacherLectureList", teacherLectureList);
 		
