@@ -17,7 +17,7 @@
 			<td><a href="/auth/manager/teacherList">강사정보 페이지</a></td>
 			<td><a href="/auth/manager/chartList">통계 페이지</a></td> 		<!-- 학생 출석 통계 등등 -->
 			<td><a href="/auth/manager/questionList">질문 목록 페이지</a></td>
-			<td><a href="/auth/manager/FAQList">FAQ 관리 페이지</a></td>
+			<td><a href="/auth/manager/faqList">FAQ 관리 페이지</a></td>
 		</tr>
 	</table>
 	<div>
