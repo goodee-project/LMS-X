@@ -27,4 +27,8 @@ public class LectureManagementService {
 			return endPage / rowPerPage + 1;			
 		}
 	}
+	//새로운 강의 개설
+	public int insertLecture(Lecture lecture) {
+		return lectureManagementMapper.insertLecture(lecture);
+	}
 }

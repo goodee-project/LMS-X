@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.service.LectureManagementService;
 import gd.fintech.lms.vo.Lecture;
@@ -18,7 +19,7 @@ public class LectureManagementController {
 	@Autowired private LectureManagementService lectureManagementService;
 	
 	//운영자가 추가한 강의 목록 리스트
-	@GetMapping("/")
+	@GetMapping("/auth/manager/lectureManagementList/{currnetPage}")
 	public String lectureManagementList(Model model,
 			@PathVariable(name = "currentPage", required = true) int currentPage) {
 		int rowPerPage = 10; //한 페이지에 출력할 개수
@@ -49,5 +50,16 @@ public class LectureManagementController {
 		model.addAttribute("lectureManagementList", lectureManagementList);
 		
 		return "lectureManagementList";
+	}
+	// 강의 개설 액션 
+	@PostMapping("/auth/manager/insertLecture")
+	public String insertLecture(Lecture lecture) { // 커맨트 객체
+		lectureManagementService.insertLecture(lecture);
+		return "redirect:/lectureManagementList";
+	}
+	// 강의 개설 폼
+	@GetMapping("/auth/manager/insertLecture")
+	public String insertLecture() {
+		return null;
 	}
 }

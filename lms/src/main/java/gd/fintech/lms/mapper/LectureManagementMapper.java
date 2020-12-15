@@ -13,6 +13,7 @@ public interface LectureManagementMapper {
 	public List<Lecture> selectLectureListByPage(Map<String, Object> map);
 	// 페이징 하기 위한 강의 개수
 	int selectLectureCount();
-	
+	// 강의 추가
+	int insertLecture(Lecture lecture);
 }
  

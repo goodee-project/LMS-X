@@ -21,4 +21,32 @@
 			COUNT(*)
 		FROM lecture
 	</select>
+	<!-- 강의 추가 -->
+	<insert id="insertLecture" parameterType="gd.fintech.lms.vo.Lecture">
+		INSERT INTO lecture(
+			account_id,
+			subject_no,
+			teacher_name,
+			lecture_name,
+			textbook_isbn,
+			lecture_startdate,
+			lecture_enddate,
+			lecture_total,
+			classroom_no,
+			lecture_createdate,
+			lecture_updatedate
+		) VALUES (
+			#{accountId},
+			#{subjectNo},
+			#{teacherName},
+			#{lectureName},
+			#{textbookIsbn},	
+			#{lectureStartdate},
+			#{lectureEnddate},	
+			#{lectureTotal},
+			#{classroomNo},
+			NOW(),
+			NOW()
+		)	
+	</insert>
 </mapper>
