@@ -6,20 +6,20 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import gd.fintech.lms.mapper.LectureManagementMapper;
+import gd.fintech.lms.mapper.ManagerLectureMapper;
 import gd.fintech.lms.vo.Lecture;
 
 @Service
-public class LectureManagementService {
-	@Autowired private LectureManagementMapper lectureManagementMapper;
+public class ManagerLectureService {
+	@Autowired private ManagerLectureMapper managerLectureMapper;
 	
 	//현재 추가 되어 있는 강의 목록 출력
 	public List<Lecture> getLectureListByPage(Map<String, Object> map){
-		return lectureManagementMapper.selectLectureListByPage(map);
+		return managerLectureMapper.selectLectureListByPage(map);
 	}
 	//현재 추가되어 있는 강의 개수
 	public int getCountLecture(int rowPerPage) {
-		int endPage = lectureManagementMapper.selectLectureCount();
+		int endPage = managerLectureMapper.selectLectureCount();
 		
 		if(endPage % rowPerPage == 0) {
 			return endPage / rowPerPage;
@@ -29,6 +29,6 @@ public class LectureManagementService {
 	}
 	//새로운 강의 개설
 	public int insertLecture(Lecture lecture) {
-		return lectureManagementMapper.insertLecture(lecture);
+		return managerLectureMapper.insertLecture(lecture);
 	}
 }

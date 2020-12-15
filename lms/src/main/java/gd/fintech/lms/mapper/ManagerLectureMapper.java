@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import gd.fintech.lms.vo.Lecture;
 
 @Mapper
-public interface LectureManagementMapper {
+public interface ManagerLectureMapper {
 	// 운영자가 추가한 강의 목록
 	public List<Lecture> selectLectureListByPage(Map<String, Object> map);
 	// 페이징 하기 위한 강의 개수
