@@ -54,9 +54,7 @@
 			
 			<h3>${teacherId} 강사님</h3>
 			
-			<div>
-				<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
-			</div>
+			<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
 			
 			<br>
 			

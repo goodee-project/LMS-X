@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>lectureIndex</title>
+		<title>reportList</title>
 		
 		<!-- Bootstrap Framework 사용 -->
 		
@@ -50,33 +50,38 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1>강의실</h1>
+			<h1>과제 목록</h1>
 			
 			<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
 			
 			<br>
 			
-			<table class="table">
-				<tr>
-					<td>과목</td>
-					<td>${lecture.subject.subjectName}</td>
-				</tr>
-				<tr>
-					<td>강좌</td>
-					<td>${lecture.lectureName}</td>
-				</tr>
-				<tr>
-					<td>강사</td>
-					<td>${lecture.teacherName}</td>
-				</tr>
-				<tr>
-					<td>개강일</td>
-					<td>${lecture.lectureStartdate}</td>
-				</tr>
-				<tr>
-					<td>종강일</td>
-					<td>${lecture.lectureEnddate}</td>
-				</tr>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>과제 번호</th>
+						<th>과제 제목</th>
+						<th>과제 출제일</th>
+						<th>과제 마감일</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${teacherReportList[0].reportNo != null}">
+						<c:forEach var="trl" items="${teacherReportList}">
+							<tr>
+								<td>${trl.reportNo}</td>
+								<td>${trl.reportTitle}</td>
+								<td>${trl.reportStartdate}</td>
+								<td>${trl.reportEnddate}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${teacherReportList[0].reportNo == null}">
+						<tr>
+							<td colspan="7">(출제한 과제가 없습니다)</td>
+						</tr>
+					</c:if>
+				</tbody>
 			</table>
 		</div>
 	</body>
