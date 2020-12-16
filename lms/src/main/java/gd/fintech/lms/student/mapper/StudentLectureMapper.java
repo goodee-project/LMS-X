@@ -19,7 +19,7 @@ public interface StudentLectureMapper {
 	public int selectStudentClassListCount(String studentId);
 	
 	// 자신이 수강중인 강좌 상세보기
-	public LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom selectStudentClassOne(int classRegistrationNo);
+	public LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom selectStudentClassOne(Map<String, Object> map);
 	// 수강중인 강좌의 후기를 수정
 	public int updateStudentClassReview(ClassRegistration classRegistration);
 	

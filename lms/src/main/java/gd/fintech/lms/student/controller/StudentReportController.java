@@ -20,23 +20,23 @@ public class StudentReportController {
 	@Autowired StudentReportService studentReportService;
 	
 	// 강사가 출제한 과제 목록
-	@GetMapping("auth/student/report/reportList/{classNo}/{currentPage}")
+	@GetMapping("auth/student/report/reportList/{lectureNo}/{currentPage}")
 	public String reportList(Model model,
-			@PathVariable(name="classNo") int classNo,
+			@PathVariable(name="lectureNo") int lectureNo,
 			@PathVariable(name="currentPage") int currentPage) {
 
 		int rowPerPage = 10; // 한페이지에 출력할 개수
-		int endPage = studentReportService.selectStudentReportListEndPage(classNo, rowPerPage); // 마지막 페이지
+		int endPage = studentReportService.selectStudentReportListEndPage(lectureNo, rowPerPage); // 마지막 페이지
 		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
 		
 		// 맵에 페이지 정보 추가
 		Map<String, Object> map = new HashMap<>();
-		map.put("classNo", classNo);
+		map.put("lectureNo", lectureNo);
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		
 		// 과제 목록 가져오기
-		ClassRegistration reportList = studentReportService.selectReportListByPage(map);
+		List<Report> reportList = studentReportService.selectReportListByPage(map);
 		
 		int navPerPage = 10; // 네비에 출력될 페이지 개수
 		int navFirstPage = currentPage - (currentPage % navPerPage) + 1; // 네비의 첫 페이지 
@@ -56,9 +56,8 @@ public class StudentReportController {
 		model.addAttribute("navFirstPage", navFirstPage);
 		model.addAttribute("navLastPage", navLastPage);
 
-		model.addAttribute("classNo", reportList.getClassRegistrationNo());
-		
 		model.addAttribute("reportList", reportList);
+		model.addAttribute("lectureNo", lectureNo);
 		return "/auth/student/report/reportList";
 	}
 }

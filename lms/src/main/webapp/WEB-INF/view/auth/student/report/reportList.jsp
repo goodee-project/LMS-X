@@ -23,7 +23,7 @@
 			<th>제목</th>
 			<th>제출 기간</th>
 		</tr>
-		<c:forEach items="${reportList.reportList}" var="r">
+		<c:forEach items="${reportList}" var="r">
 			<tr>
 				<td>${r.reportNo}</td>
 				<td><a href="">${r.reportTitle}</a></td>
@@ -36,17 +36,17 @@
 	<div>
 		<!-- 이전 페이지 네비 -->
 		<c:if test="${navFirstPage > navPerPage }">
-			<a href="${pageContext.request.contextPath }/auth/student/report/reportList/${classNo}/${navFirstPage - 1}">이전</a>	
+			<a href="${pageContext.request.contextPath }/auth/student/report/reportList/${lectureNo}/${navFirstPage - 1}">이전</a>	
 		</c:if>
 		<!-- 현재 페이지 네비 -->
 		<c:forEach var="navPage" begin="${navFirstPage }" end="${navLastPage }">
 			<c:if test="${navPage <= endPage }">
-				<a href="${pageContext.request.contextPath }/auth/student/report/reportList/${classNo}/${navPage}">${navPage}</a>
+				<a href="${pageContext.request.contextPath }/auth/student/report/reportList/${lectureNo}/${navPage}">${navPage}</a>
 			</c:if>
 		</c:forEach>
 		<!-- 다음 페이지 네비 -->
 		<c:if test="${navLastPage < endPage }">
-			<a href="${pageContext.request.contextPath }/auth/student/report/reportList/${classNo}/${navLastPage + 1}">다음</a>	
+			<a href="${pageContext.request.contextPath }/auth/student/report/reportList/${lectureNo}/${navLastPage + 1}">다음</a>	
 		</c:if>
 	</div>
 

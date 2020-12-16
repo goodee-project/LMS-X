@@ -16,7 +16,7 @@ public class StudentReportService {
 	@Autowired StudentReportMapper studentReportMapper;
 	
 	// 강사가 출제한 과제 목록
-	public ClassRegistration selectReportListByPage(Map<String, Object> map){
+	public List<Report> selectReportListByPage(Map<String, Object> map){
 		return studentReportMapper.selectReportListByPage(map);
 	}
 	// 강사가 출제한 과제 개수

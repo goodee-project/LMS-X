@@ -94,7 +94,7 @@
              <result property="classroomNumber" column="classroom_number" />
 		</association>	
 	</resultMap>
-	<select id="selectStudentClassOne" parameterType="int" resultMap="selectStudentClassOneResult">
+	<select id="selectStudentClassOne" parameterType="java.util.Map" resultMap="selectStudentClassOneResult">
 		SELECT 
 			l.lecture_no, 
 			l.account_id,
@@ -124,7 +124,7 @@
 		ON t.textbook_isbn = l.textbook_isbn
 		JOIN classroom c 
 		ON c.classroom_no = l.classroom_no
-		WHERE cr.class_registration_no = #{classRegistrationNo}
+		WHERE cr.lecture_no = #{lectureNo} AND cr.account_id = #{studentId}
 	</select>
 	
 	<!-- 학생이 수강하는 강좌의 후기를 수정 -->

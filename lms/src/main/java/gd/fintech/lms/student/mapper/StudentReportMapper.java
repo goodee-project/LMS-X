@@ -11,7 +11,7 @@ import gd.fintech.lms.vo.Report;
 @Mapper
 public interface StudentReportMapper {
 	// 강사가 출제한 과제 목록
-	public ClassRegistration selectReportListByPage(Map<String, Object> map);
+	public List<Report> selectReportListByPage(Map<String, Object> map);
 	// 강사가 출제한 과제 개수
 	public int selectReportListCount(int classNo);
 }

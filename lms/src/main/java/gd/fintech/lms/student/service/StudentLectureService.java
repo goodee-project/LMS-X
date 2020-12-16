@@ -34,8 +34,8 @@ public class StudentLectureService {
 	}
 	
 	// 자신이 수강중인 강좌 상세보기
-	public LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom selectStudentClassOne(int classRegistrationNo) {
-		return studentLectureMapper.selectStudentClassOne(classRegistrationNo);
+	public LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom selectStudentClassOne(Map<String, Object> map) {
+		return studentLectureMapper.selectStudentClassOne(map);
 	}
 	
 	// 수강중인 강좌의 후기(별점, 리뷰)를 수정하기

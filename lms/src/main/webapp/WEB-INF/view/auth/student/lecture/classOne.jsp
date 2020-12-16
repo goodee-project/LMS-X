@@ -119,6 +119,7 @@
 	<form id="classReviewForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/updateClassReview">
 		<input type="hidden" name="classRegistrationPoint" id="classRegistrationPoint" value="${lcstc.classRegistration.classRegistrationPoint}">
 		<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
+		<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
 		<table border="1">	
 			<tr>
 				<th>강좌 별점</th>
@@ -144,6 +145,7 @@
 	<c:if test="${lcstc.classRegistration.classRegistrationState == '대기'}">	
 		<form id="cancelClassForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/cancelClass">
 			<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
+			<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
 			<div id="cancelClass">
 			</div>
 			<button id="cancelClassBtn" type="button" value="수강 신청 취소">수강 신청 취소</button>

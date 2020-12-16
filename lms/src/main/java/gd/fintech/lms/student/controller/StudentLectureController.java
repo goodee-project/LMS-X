@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.student.service.StudentLectureService;
 import gd.fintech.lms.vo.ClassRegistration;
@@ -27,14 +28,21 @@ public class StudentLectureController {
 	@Autowired StudentLectureService studentLectureService;
 	
 	// 학생 수강 상세보기
-	@GetMapping("auth/student/lecture/classOne/{classRegistrationNo}")
-	public String classOne(Model model,
-			@PathVariable(name="classRegistrationNo") int classRegistrationNo) {
+	@GetMapping("auth/student/lecture/classOne/{lectureNo}")
+	public String classOne(Model model,ServletRequest request,
+			@PathVariable(name="lectureNo") int lectureNo) {
+		// 세션에서 학생 아이디 가져오기
+		HttpSession session = ((HttpServletRequest)request).getSession();	
+		String studentId = (String)session.getAttribute("loginId");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("studentId", studentId);
+		
 		// 수강 리스트 가져오기
-		LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom lcstc = studentLectureService.selectStudentClassOne(classRegistrationNo);
+		LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom lcstc = studentLectureService.selectStudentClassOne(map);
 		
 		model.addAttribute("lcstc", lcstc);
-		model.addAttribute("classNo", classRegistrationNo);
 		return "/auth/student/lecture/classOne";
 	}
 	
@@ -42,7 +50,7 @@ public class StudentLectureController {
 	@PostMapping("auth/student/lecture/updateClassReview")
 	public String updateClassReview(ClassRegistration classRegistration) {
 		studentLectureService.updateStudentClassReview(classRegistration);
-		return "redirect:/auth/student/lecture/classOne/" + classRegistration.getClassRegistrationNo();
+		return "redirect:/auth/student/lecture/classOne/" + classRegistration.getLectureNo();
 	}
 	
 	// 학생의 수강신청을 위한 강좌 목록
@@ -100,9 +108,9 @@ public class StudentLectureController {
 	
 	// 수강 대기 상태일시 수강 취소 액션
 	@PostMapping("auth/student/lecture/cancelClass")
-	public String cancelClass(ClassRegistrationCancel classRegistrationCancel) {
-		
+	public String cancelClass(ClassRegistrationCancel classRegistrationCancel,
+			@RequestParam(name="lectureNo") int lectureNo) {
 		studentLectureService.updateClassRegistrationState(classRegistrationCancel);
-		return "redirect:/auth/student/lecture/classOne/" + classRegistrationCancel.getClassRegistrationNo();
+		return "redirect:/auth/student/lecture/classOne/" + lectureNo;
 	}
 }

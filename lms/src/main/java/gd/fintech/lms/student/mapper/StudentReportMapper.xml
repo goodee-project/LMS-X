@@ -2,29 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.mapper.StudentReportMapper">
 	<!-- 강사가 출제한 과제 목록 -->
-	<resultMap type="gd.fintech.lms.vo.ClassRegistration" id="selectReportListResult">
-        <result property="classRegistrationNo" column="class_registration_no" />		
-		<collection property="reportList" ofType="gd.fintech.lms.vo.Report">
-             <result property="reportNo" column="report_no" />	
-             <result property="lectureNo" column="lecture_no" />	
-             <result property="reportTitle" column="report_title" />	
-             <result property="reportContent" column="report_content" />	
-             <result property="reportStartdate" column="report_startdate" />
-             <result property="reportEnddate" column="report_enddate" />
-		</collection>
-	</resultMap>
-	<select id="selectReportListByPage" parameterType="java.util.Map" resultMap="selectReportListResult">
+	<select id="selectReportListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Report">
 		SELECT 
-			cr.class_registration_no,
-			r.report_no, 
-			r.lecture_no, 
-			r.report_title, 
-			r.report_content, 
-			r.report_startdate, 
-			r.report_enddate 
-		FROM class_registration cr LEFT JOIN report r
-		ON cr.lecture_no = r.lecture_no
-		WHERE class_registration_no = #{classNo}
+			report_no reportNo, 
+			lecture_no lectureNo, 
+			report_title reportTitle, 
+			report_content reportContent, 
+			report_startdate reportStartdate, 
+			report_enddate reportEnddate 
+		FROM report
+		WHERE lecture_no = #{lectureNo}
 		ORDER BY report_createdate DESC 
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
@@ -32,8 +19,7 @@
 	<select id="selectReportListCount" parameterType="int" resultType="int">
 		SELECT 
 			COUNT(*)
-		FROM class_registration cr LEFT JOIN report r
-		ON cr.lecture_no = r.lecture_no
-		WHERE class_registration_no = #{classNo}
+		FROM report
+		WHERE lecture_no = #{lectureNo}
 	</select>
 </mapper>
