@@ -56,4 +56,8 @@ public class StudentLectureService {
 			return endPage / rowPerPage + 1;			
 		}
 	}
+	// 수강 신청 취소
+	public int updateClassRegistrationState(int classRegistrationNo) {
+		return studentLectureMapper.updateClassRegistrationState(classRegistrationNo);
+	}
 }

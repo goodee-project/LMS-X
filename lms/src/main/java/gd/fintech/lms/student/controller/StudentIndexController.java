@@ -29,7 +29,6 @@ public class StudentIndexController {
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
 		String studentId = (String)session.getAttribute("loginId");
-		System.out.println(studentId + " 로그인");
 		
 		int rowPerPage = 10; // 한페이지에 출력할 개수
 		int endPage = studentLectureService.selectStudentClassListEndPage(studentId, rowPerPage); // 마지막 페이지
@@ -62,6 +61,6 @@ public class StudentIndexController {
 		model.addAttribute("navLastPage", navLastPage);
 		
 		model.addAttribute("lectureList", lectureList);
-		return "auth/student/index";
+		return "/auth/student/index";
 	}
 }

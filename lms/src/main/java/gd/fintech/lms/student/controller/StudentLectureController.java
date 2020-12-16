@@ -26,7 +26,7 @@ public class StudentLectureController {
 	@Autowired StudentLectureService studentLectureService;
 	
 	// 학생 수강 상세보기
-	@GetMapping("auth/student/classOne/{classRegistrationNo}")
+	@GetMapping("auth/student/lecture/classOne/{classRegistrationNo}")
 	public String classOne(Model model,
 			@PathVariable(name="classRegistrationNo") int classRegistrationNo) {
 		LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom lcstc = studentLectureService.selectStudentClassOne(classRegistrationNo);
@@ -36,14 +36,14 @@ public class StudentLectureController {
 	}
 	
 	// 학생이 수강하는 강의의 후기를 수정하는 액션
-	@PostMapping("auth/student/updateClassReview")
+	@PostMapping("auth/student/lecture/updateClassReview")
 	public String updateClassReview(ClassRegistration classRegistration) {
 		studentLectureService.updateStudentClassReview(classRegistration);
-		return "redirect:/auth/student/classOne/" + classRegistration.getClassRegistrationNo();
+		return "redirect:/auth/student/lecture/classOne/" + classRegistration.getClassRegistrationNo();
 	}
 	
 	// 학생의 수강신청을 위한 강좌 목록
-	@GetMapping("auth/student/lectureList/{currentPage}")
+	@GetMapping("auth/student/lecture/lectureList/{currentPage}")
 	public String lectureList(Model model,
 			@PathVariable(name="currentPage") int currentPage) {
 		int rowPerPage = 10; // 한페이지에 출력할 개수
@@ -75,6 +75,14 @@ public class StudentLectureController {
 		model.addAttribute("navLastPage", navLastPage);
 		
 		model.addAttribute("lectureList", lectureList);
-		return "auth/student/lecture/lectureList";
+		return "/auth/student/lecture/lectureList";
+	}
+	
+	// 수강 대기 상태일시 수강 취소 액션
+	@PostMapping("auth/student/lecture/cancelClass/{classRegistrationNo}")
+	public String cancelClass(@PathVariable(name="classRegistrationNo") int classRegistrationNo) {
+		
+		studentLectureService.updateClassRegistrationState(classRegistrationNo);
+		return "redirect:/auth/student/lecture/classOne/" + classRegistrationNo;
 	}
 }

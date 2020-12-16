@@ -26,4 +26,6 @@ public interface StudentLectureMapper {
 	public List<Lecture> selectStudentLectureListByPage(Map<String, Object> map);
 	// 수강 신청 가능한 강좌 개수
 	public int selectStudentLectureListCount();
+	// 수강 신청 취소
+	public int updateClassRegistrationState(int classRegistrationNo);
 }

@@ -33,12 +33,13 @@
 		$('#classReviewBtn').click(function(){
 			$('#classReviewForm').submit();
 		})
-
+		// 별점 감소
 		$('#minusPoint').click(function(){
 			if(paramPoint > 0){
 				changePoint(-1);
 			}
 		})
+		// 별점 증가
 		$('#plusPoint').click(function(){
 			if(paramPoint < 5){
 				changePoint(1);
@@ -46,12 +47,34 @@
 		})
 		changePoint();
 
+		// 
+		$('#cancelClassBtn').click(function(){
+			console.log($('#cancelClassBtn').text());
+			// 처음 수강 신청 버튼 클릭시
+			// 수강 신청 사유를 적을 수 있는 칸이 출력되고 버튼 값이 바뀜
+			if($('#cancelClassBtn').text() == '수강 신청 취소'){
+				let cancelHtml = `
+					취소 사유 : <textarea cols="50" rows="3" name="classContent" id="classContent"></textarea>
+				`
+				$('#cancelClassBtn').text('수강 취소하기');
+				$('#cancelClass').html(cancelHtml);
+				
+			// 사유 작성후 다시 버튼 클릭시
+			// 취소 폼을 submit함
+			}else if($('#cancelClassBtn').text() == '수강 취소하기'){
+				$('#cancelClassForm').submit();
+			}
+		})
+
 	})
 </script>
 </head>
 <body>
 	<h1>수강 상세보기</h1>
 	
+	<div>
+		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
+    </div>
 	<table border="1">
 		<tr>
 			<th>강좌 번호</th>
@@ -90,7 +113,7 @@
 	</table>
 	
 	<!-- 수강 후기 -->
-	<form id="classReviewForm" method="post" action="${pageContext.request.contextPath}/auth/student/updateClassReview">
+	<form id="classReviewForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/updateClassReview">
 		<input type="hidden" name="classRegistrationPoint" id="classRegistrationPoint" value="${lcstc.classRegistration.classRegistrationPoint}">
 		<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
 		<table border="1">	
@@ -113,6 +136,15 @@
 			</tr>
 		</table>
 	</form>
+	
+	<!-- 수강 대기상태 일시 수강 취소 가능 -->
+	<c:if test="${lcstc.classRegistration.classRegistrationState == '대기'}">		
+		<form id="cancelClassForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/cancelClass/${lcstc.classRegistration.classRegistrationNo}">
+			<div id="cancelClass">
+			</div>
+			<button id="cancelClassBtn" type="button" value="수강 신청 취소">수강 신청 취소</button>
+		</form>
+	</c:if>
 	
 	<!-- 수강 목록으로 -->
 	<a href="${pageContext.request.contextPath}/auth/student/index/1">목록</a>

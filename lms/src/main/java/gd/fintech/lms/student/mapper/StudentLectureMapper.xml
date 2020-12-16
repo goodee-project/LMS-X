@@ -144,19 +144,23 @@
 		<result property="lectureName" column="lecture_name" />
 		<result property="lectureStartdate" column="lecture_startdate" />
 		<result property="lectureEnddate" column="lecture_enddate" />
+		<result property="lectureTotal" column="lecture_total" />
 		<association property="subject" javaType="gd.fintech.lms.vo.Subject">
 			<result property="subjectName" column="subject_name" />
+			<result property="subjectTotalday" column="subject_totalday" />
 		</association>
 	</resultMap>
 	<select id="selectStudentLectureListByPage" parameterType="java.util.Map" resultMap="selectStudentLectureListResult">
 		SELECT
 			l.lecture_no, 
 			l.account_id, 
-			s.subject_name, 
 			l.teacher_name, 
 			l.lecture_name, 
 			l.lecture_startdate, 
-			l.lecture_enddate
+			l.lecture_enddate,
+			l.lecture_total,
+			s.subject_name, 
+			s.subject_totalday
 		FROM lecture l
 		JOIN subject s
 		ON l.subject_no = s.subject_no
@@ -174,5 +178,12 @@
 		ON l.subject_no = s.subject_no
 		WHERE l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</select>
-	
+	<!-- 수강 신청 -->
+	<insert id="insertClassRegistration"></insert>
+	<!-- 수강 대기 상태일시 수강 취소 -->
+	<update id="updateClassRegistrationState" parameterType="int">
+		UPDATE class_registration 
+		SET class_registration_state = '취소'
+		WHERE class_registration_no = #{classRegistrationNo}
+	</update>
 </mapper>

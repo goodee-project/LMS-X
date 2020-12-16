@@ -9,7 +9,7 @@
 <body>
 	<h1>학생 index</h1>
 	<div>
-    	<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
+		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
     </div>
 	<!-- 수강 목록 -->
 	<h3>수강 목록</h3>
@@ -27,7 +27,7 @@
 		</tr>
 		<c:forEach items="${lectureList}" var="l">
 			<tr>
-				<td><a href="${pageContext.request.contextPath }/auth/student/classOne/${l.classRegistration.classRegistrationNo}">${l.classRegistration.classRegistrationNo}</a></td>
+				<td><a href="${pageContext.request.contextPath }/auth/student/lecture/classOne/${l.classRegistration.classRegistrationNo}">${l.classRegistration.classRegistrationNo}</a></td>
 				<td>${l.lecture.teacherName}</td>
 				<td>${l.subject.subjectName}</td>
 				<td>${l.lecture.lectureName}</td>
