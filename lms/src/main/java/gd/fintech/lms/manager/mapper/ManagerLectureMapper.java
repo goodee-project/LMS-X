@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.LectureAndClassAndTextbook;
 
 @Mapper
 public interface ManagerLectureMapper {
@@ -16,6 +17,8 @@ public interface ManagerLectureMapper {
 	// 강의 추가
 	int insertLecture(Lecture lecture);
 	// 강의 상세보기
-	Lecture selectLectureOne(int lectureNo);
+	LectureAndClassAndTextbook selectLectureOne(int lectureNo);
+	// 강의 수정
+	int updateLecture(Lecture lecture);
 }
  

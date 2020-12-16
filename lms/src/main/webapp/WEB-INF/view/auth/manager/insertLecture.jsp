@@ -48,10 +48,10 @@ $(document).ready(function(){
 				</select></td>
 			</tr>
 			<tr>
-				<td>과목 번호</td>
+				<td>과목</td>
 				<td><select name="subjectNo">
 						<c:forEach var="s" items="${subjectList}">
-							<option value="${s.subjectNo}">${s.subjectNo}:${s.subjectName}</option>
+							<option value="${s.subjectNo}">${s.subjectName}</option>
 						</c:forEach>
 				</select></td>
 			</tr>

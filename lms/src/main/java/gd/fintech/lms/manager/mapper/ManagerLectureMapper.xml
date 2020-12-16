@@ -23,66 +23,85 @@
 	</select>
 	<!-- 강의 추가 -->
 	<insert id="insertLecture" parameterType="gd.fintech.lms.vo.Lecture">
-	INSERT INTO lecture(	
-		account_id,	
-		subject_no,	
-		teacher_name,	
-		lecture_name,	
-		textbook_isbn,	
-		lecture_startdate,
-		lecture_enddate,
-		lecture_total,
-		classroom_no,
-		lecture_createdate,
-		lecture_updatedate
-	) VALUES (
-		#{accountId},
-		#{subjectNo},
-		#{teacherName},
-		#{lectureName},
-		#{textbookIsbn},	
-		#{lectureStartdate},
-		#{lectureEnddate},	
-		#{lectureTotal},
-		#{classroomNo},
-		NOW(),
-		NOW()
-		)	
+		INSERT INTO lecture(	
+			account_id,	
+			subject_no,	
+			teacher_name,	
+			lecture_name,	
+			textbook_isbn,	
+			lecture_startdate,
+			lecture_enddate,
+			lecture_total,
+			classroom_no,
+			lecture_createdate,
+			lecture_updatedate
+		) VALUES (
+			#{accountId},
+			#{subjectNo},
+			#{teacherName},
+			#{lectureName},
+			#{textbookIsbn},	
+			#{lectureStartdate},
+			#{lectureEnddate},	
+			#{lectureTotal},
+			#{classroomNo},
+			NOW(),
+			NOW()
+			)	
 	</insert>
 	<resultMap type="gd.fintech.lms.vo.LectureAndClassAndTextbook" id="selectLectureOneResult">
-		<result property="accountId" column="account_id"/>
-		<result property="subjectNo" column="subject_no"/>
-		<result property="teacherName" column="teacher_name"/>
-		<result property="lectureName" column="lecture_name"/>
-		<result property="lectureStartdate" column="lecture_startdate"/>
-		<result property="lectureEnddate" column="lecture_enddate"/>
-		<result property="lectureTotal" column="lecture_total"/>
-		<collection property="textbookList" ofType="gd.fintech.lms.vo.Textbook">
+		<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
+			<result property="lectureNo" column="lecture_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="subjectNo" column="subject_no"/>
+			<result property="teacherName" column="teacher_name"/>
+			<result property="lectureName" column="lecture_name"/>
+			<result property="lectureStartdate" column="lecture_startdate"/>
+			<result property="lectureEnddate" column="lecture_enddate"/>
+			<result property="lectureTotal" column="lecture_total"/>
+		</collection>
+		<collection property="textbook" ofType="gd.fintech.lms.vo.Textbook">
 			<result property="textbookIsbn" column="textbook_isbn"/>
 			<result property="textbookTitle" column="textbook_title"/>
 		</collection>
-		<collection property="classroomList" ofType="gd.fintech.lms.vo.Classroom">
+		<collection property="classroom" ofType="gd.fintech.lms.vo.Classroom">
 			<result property="classroomNo" column="classroom_no"/>
 			<result property="classroomNumber" column="classroom_number"/>
 		</collection>
 	</resultMap>
 	<!-- 강의 상세 보기 출력 쿼리문 -->
-	<select id="selectLectureOne" resultMap="selectLectureOneResult">			
-	SELECT 
-		l.account_id, 
-		l.subject_no,	
-		l.teacher_name,
-		l.lecture_name,	
-		t.textbook_title,	
-		l.lecture_startdate,
-		l.lecture_enddate,
-		l.lecture_total,
-		c.classroom_number
-	FROM lecture AS l 
-	LEFT JOIN textbook AS t
-		ON l.textbook_isbn = t.textbook_isbn
-	LEFT JOIN classroom AS c
-		ON l.classroom_no = c.classroom_no
-	WHERE lecture_no = 1
+	<select id="selectLectureOne" parameterType="int" resultMap="selectLectureOneResult">			
+		SELECT
+			l.lecture_no, 
+			l.account_id, 
+			l.subject_no,	
+			l.teacher_name,
+			l.lecture_name,	
+			t.textbook_title,	
+			l.lecture_startdate,
+			l.lecture_enddate,
+			l.lecture_total,
+			c.classroom_number
+		FROM lecture AS l 
+		LEFT JOIN textbook AS t
+			ON l.textbook_isbn = t.textbook_isbn
+		LEFT JOIN classroom AS c
+			ON l.classroom_no = c.classroom_no
+		WHERE lecture_no = #{lectureNo}
 	</select>
+	<!-- 강의 수정 쿼리문 -->
+	<update id="updateLecture" parameterType="gd.fintech.lms.vo.Lecture">
+		UPDATE lecture SET
+			account_id = #{accountId},
+			subject_no = #{subjectNo},
+			teacher_name = #{teacherName},
+			lecture_name = #{lectureName},
+			textbook_isbn = #{textbookIsbn},
+			lecture_startdate = #{lectureStartdate},
+			lecture_enddate = #{lectureEnddate},
+			lecture_total = #{lectureTotal},
+			classroom_no = #{classroomNo},
+			lecture_updatedate = NOW()
+		WHERE lecture_no = #{lectureNo}
+	</update>
 </mapper>

@@ -9,4 +9,5 @@ import gd.fintech.lms.vo.Account;
 @Mapper
 public interface ManagerAccountMapper {
 	public List<Account> selectAccountList();
+	public List<Account> selectFaqAccountList();
 }

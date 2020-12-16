@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import gd.fintech.lms.manager.mapper.ManagerLectureMapper;
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.LectureAndClassAndTextbook;
 
 @Service
 public class ManagerLectureService {
@@ -32,8 +33,12 @@ public class ManagerLectureService {
 		return managerLectureMapper.insertLecture(lecture);
 	}
 	// 강의 상세보기
-	public Lecture getLectureOne(int lectureNo) {
-		Lecture lecture = managerLectureMapper.selectLectureOne(lectureNo);
-		return lecture;
+	public LectureAndClassAndTextbook getLectureOne(int lectureNo) {
+		LectureAndClassAndTextbook lectureAndClassAndTextbook = managerLectureMapper.selectLectureOne(lectureNo);
+		return lectureAndClassAndTextbook;
+	}
+	// 강의 수정
+	public void updateLecture(Lecture lecture) {
+		managerLectureMapper.updateLecture(lecture);
 	}
 }

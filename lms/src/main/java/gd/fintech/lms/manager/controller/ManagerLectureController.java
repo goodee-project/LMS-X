@@ -19,6 +19,7 @@ import gd.fintech.lms.manager.service.ManagerTextbookService;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Classroom;
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.LectureAndClassAndTextbook;
 import gd.fintech.lms.vo.Subject;
 import gd.fintech.lms.vo.Textbook;
 
@@ -95,9 +96,37 @@ public class ManagerLectureController {
 	//강의 상세 보기
 	@GetMapping("/auth/manager/lectureOne/{lectureNo}")
 	public String lectureOne(Model model, @PathVariable(value = "lectureNo") int lectureNo) {
-		Lecture lecture = managerLectureService.getLectureOne(lectureNo);
-		model.addAttribute("lecture", lecture);
+		LectureAndClassAndTextbook lectureAndClassAndTextbook = managerLectureService.getLectureOne(lectureNo);
+		System.out.println(lectureAndClassAndTextbook);
+		model.addAttribute("lct", lectureAndClassAndTextbook);
 		
 		return "/auth/manager/lectureOne";
+	}
+	
+	//강의 수정 액션
+	@PostMapping("/auth/manager/updateLecture/{lectureNo}")
+	public String updateLecture(Lecture lecture) {
+		return "redirect:/auth/manager/lectureList/1";
+	}
+	//강의 수정 폼
+	@GetMapping("/auth/manager/updateLecture/{lectureNo}")
+	public String updateLecture(Model model, @PathVariable(value = "lectureNo") int lectureNo){
+		LectureAndClassAndTextbook LectureAndClassAndTextbook = managerLectureService.getLectureOne(lectureNo);
+		//강의 수정 시 편의성을 위해 필요한 리스트 
+		//강사 계정 리스트
+		List<Account> accountList = managerAccountService.getAccountList();
+		//교과목 리스트
+		List<Subject> subjectList = managerSubjectService.getSubjectList();
+		//교재 리스트
+		List<Textbook> textbookList = managertextbookService.getTextbookList();
+		//강의실 리스트
+		List<Classroom> classroomList = managerClassroomService.getClassroomList();
+		model.addAttribute("lct",LectureAndClassAndTextbook);
+		model.addAttribute("accountList", accountList);
+		model.addAttribute("subjectList", subjectList);
+		model.addAttribute("textbookList", textbookList);
+		model.addAttribute("classroomList", classroomList);
+		
+		return "/auth/manager/updateLecture";
 	}
 }
