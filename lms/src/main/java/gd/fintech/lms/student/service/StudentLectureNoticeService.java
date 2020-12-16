@@ -38,5 +38,4 @@ public class StudentLectureNoticeService {
 	public LectureNotice getStudentLectureNoticeOne(int lectureNoticeNo) {
 		return studentLectureNoticeMapper.selectStudentLectureNoticeOne(lectureNoticeNo);
 	}
-
 }
