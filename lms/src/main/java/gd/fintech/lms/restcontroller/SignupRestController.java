@@ -47,6 +47,6 @@ public class SignupRestController {
 	//이메일 중복 체크
 	@GetMapping("/signup/emailCheck/{email}")
 	public String selectEmail(@PathVariable(name="email")String email) {
-		return null;
+		return signupRestService.checkEmail(email);
 	}
 }

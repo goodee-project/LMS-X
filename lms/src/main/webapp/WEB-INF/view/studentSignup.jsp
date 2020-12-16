@@ -94,10 +94,10 @@
 				type: 'get',
 				success: function(data){
 					if(data == "true"){
-						$("#idCheckMs").html("사용가능한 아이디입니다.");
+						$("#idCheckMs").html("사용 가능한 아이디입니다.");
 						
 					}else{
-						$("#idCheckMs").html("사용불가능한 아이디입니다.");
+						$("#idCheckMs").html("사용 불가능한 아이디입니다.");
 						idCheck= "false";
 						return;
 					}
@@ -116,14 +116,14 @@
 			}else{
 				$('#studentEmailCheck').html('');
 				$.ajax({
-					url: "${pageContext.request.contextPath}/signup/EmailCheck/"+$('#studentEmail').val(),
+					url: "${pageContext.request.contextPath}/signup/emailCheck/"+$('#studentEmail').val(),
 					type: 'get',
 					success: function(data){
 						if(data == "true"){
-							$("#emailCheckMs").html("사용가능한 이메일입니다.");
+							$("#emailCheckMs").html("사용 가능한 이메일입니다.");
 							
 						}else{
-							$("#emailCheckMs").html("사용불가능한 이메일입니다.");
+							$("#emailCheckMs").html("사용 불가능한 이메일입니다.");
 							emailCheck= "false";
 							return;
 						}

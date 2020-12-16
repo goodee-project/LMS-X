@@ -24,7 +24,45 @@
 		FROM student_queue
 		WHERE student_email = #{email}
 	</select>
-
+	
+	<!-- 강사테이블 이메일 검색 -->
+	<select id="selectTeacherEmail" parameterType="String" resultType="String">
+		SELECT
+			teacher_email
+		FROM teacher
+		WHERE teacher_email = #{email}
+	</select>
+	
+	<!--  강사 대기테이블 이메일 검색 -->
+	<select id="selectTeacherQueueEmail" parameterType="String" resultType="String">
+		SELECT
+			teacher_email
+		FROM teacher_queue
+		WHERE teacher_email = #{email}
+	</select>
+	
+	<!--  운영자테이블 이메일 검색 -->
+	<select id="selectManagerEmail" parameterType="String" resultType="String">
+		SELECT
+			manager_email
+		FROM manager
+		WHERE manager_email = #{email}
+	</select>
+	
+	<!--  운영자 대기테이블 이메일 검색 -->
+	<select id="selectManagerQueueEmail" parameterType="String" resultType="String">
+		SELECT
+			manager_email
+		FROM manager_queue
+		WHERE manager_email = #{email}
+	</select>
+	<!-- 관리자테이블 이메일 검색 -->
+	<select id="selectAdminEmail" parameterType="String" resultType="String">
+		SELECT
+			admin_email
+		FROM admin
+		WHERE admin_email = #{email}
+	</select>
 	<!-- 주소검색 -->
 	<select id="selectAddress" parameterType="gd.fintech.lms.vo.Address" resultType="gd.fintech.lms.vo.Address" >
 		SELECT 

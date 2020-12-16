@@ -31,15 +31,16 @@ public class SignupRestService {
 	//이메일 중복검사
 	public String checkEmail(String email) {
 		String emailCheck ;
-		/*
+		
 		if(signupRestMapper.selectStudentEmail(email)==null&&signupRestMapper.selectStudentQueueEmail(email)==null
 			&&signupRestMapper.selectTeacherEmail(email)==null&&signupRestMapper.selectTeacherQueueEmail(email)==null
 			&&signupRestMapper.selectManagerEmail(email)==null&&signupRestMapper.selectManagerQueueEmail(email)==null
 			&&signupRestMapper.selectAdminEmail(email)==null) {
 			
 			emailCheck = "true";
+			return emailCheck;
 		}
-		*/
+		
 		emailCheck = "false";
 		return emailCheck;
 	}
