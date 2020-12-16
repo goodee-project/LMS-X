@@ -15,4 +15,7 @@ public class ManagerAccountService {
 	public List<Account> getAccountList(){
 		return managerAccountMapper.selectAccountList();
 	}
+	public List<Account> getFaqAccountList(){
+		return managerAccountMapper.selectFaqAccountList();
+	}
 }
