@@ -9,5 +9,8 @@
 <body>
 	<h1>강의 수정</h1>
 	<a href="${pageContext.request.contextPath}/auth/manger/lectureOne/{lectureNo}">뒤로가기</a>
+	<form id="">
+	
+	</form>
 </body>
 </html>

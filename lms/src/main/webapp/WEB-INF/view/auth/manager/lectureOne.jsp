@@ -10,7 +10,7 @@
 	<h1>강의 상세보기</h1>
 	<div>
 		<a href="${pageContext.request.contextPath}/auth/manager/lectureList/1">뒤로가기</a>
-		<a href="${pageContext.request.contextPath}/auth/manager/updateLecture/{lectureNo}">수정</a>
+		<a href="${pageContext.request.contextPath}/auth/manager/updateLecture/${lectureNo}">수정</a>
 	</div>
 	<table border="1">
 		<tr>
