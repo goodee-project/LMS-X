@@ -16,9 +16,9 @@
 	<form method="post" action="${pageContext.request.contextPath}/login">
 		<input type="text" name="accountLevel" value="1" hidden="hidden">
 		<div>아이디</div>
-		<input type="text" placeholder="아이디를 입력해주세요" name="accountId">
+		<input type="text" placeholder="아이디를 입력해주세요" name="accountId" value="youngi">
 		<div>비밀번호</div>
-		<input type="password" placeholder="비밀번호를 입력해주세요" name="accountPw">
+		<input type="password" placeholder="비밀번호를 입력해주세요" name="accountPw" value="1234">
 		<button type="submit">로그인</button>
 	</form>
 	<a href="${pageContext.request.contextPath}/student/signup">회원가입</a>
