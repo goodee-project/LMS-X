@@ -5,15 +5,37 @@
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerFaqMapper"> 
 	<select id="selectFaqList" resultType="gd.fintech.lms.vo.Faq">
 		SELECT 
-		faq_no faqNo,
-		account_id AccountId,
-		faq_writer faqWriter,
-		faq_title faqTitle,
-		faq_content faqContent,
-		faq_createdate faqCreatedate,
-		faq_updatedate faqUpdatedate,
-		faq_count faqCount,
-		faq_category faqCategory
+			faq_no faqNo,
+			account_id AccountId,
+			faq_writer faqWriter,
+			faq_title faqTitle,
+			faq_content faqContent,
+			faq_createdate faqCreatedate,
+			faq_updatedate faqUpdatedate,
+			faq_count faqCount,
+			faq_category faqCategory
 		FROM faq
 	</select>
+	
+	<insert id="insertFaq" parameterType="gd.fintech.lms.vo.Faq">
+		INSERT INTO faq (
+			account_id,
+			faq_writer,
+			faq_title,
+			faq_content,
+			faq_createdate,
+			faq_updatedate,
+			faq_count,
+			faq_category
+		) VALUES (
+			#{accountId},
+			#{faqWriter},
+			#{faqTitle},
+			#{faqContent},
+			now(),
+			now(),
+			0,
+			#{faqCategory}
+		)
+	</insert>
 </mapper>
