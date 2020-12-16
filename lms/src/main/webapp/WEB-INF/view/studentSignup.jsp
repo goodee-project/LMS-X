@@ -5,19 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 	<h1>학생회원가입</h1>
-	<form id="studentForm" method="post"
-		action="${pageContext.request.contextPath}/student/signup">
+	<form id="studentForm" method="post"action="${pageContext.request.contextPath}/student/signup">
 		<input type="text" hidden="hidden" value="1" name="accountLevel">
 		<input type="text" hidden="hidden" value="대기" name="accountState">
 		<div>아이디</div>
 		<div>
-			<input id="accountId" type="text" placeholder="아이디를 입력하세요"
-				name="accountId">
+			<input id="accountId" type="text" placeholder="아이디를 입력하세요"	name="accountId"> <button id="idCheck" type="button">중복체크</button>
 		</div>
+		<span id="idCheckMs"></span>
 
 		<div>비밀번호</div>
 		<div class="input password">
@@ -31,10 +30,11 @@
 
 		<div>이메일</div>
 		<div>
-			<input id="studentEmail" type="email" placeholder="abc@abc.abc"
-				name="studentEmail">
+			<input id="studentEmail" type="email" placeholder="abc@abc.abc"	name="studentEmail">
+			<button id="emailCheck" type="button">중복체크</button>
 		</div>
 		<div id="studentEmailCheck"></div>
+		<span id="emailCheckMs"></span>
 
 		<div>이름</div>
 		<div>
@@ -61,13 +61,14 @@
 			<input id="studentBirth" type="date" name="studentBirth">
 		</div>
 		<div id="studentBirthCheck"></div>
-		<div>주소</div>
+		<div>주소  <span id="addressWait"></span> </div>
+		
 		<div>
-			<button type="button" id="zipCodeBtn">우편번호</button>
-			<button type="button" id="streetBtn">도로명</button>
-			
+			<input id="street" type="text" name="street" placeholder="도로명을 입력하세요.">
+			<button id="check" type="button">검색</button>
+			<span id="addressCheck"></span>
 			<div id="studentAddressMain"></div>
-			<div id="selectAddress"></div>
+			<div id="selectAddress" style="overflow:auto; width:500px; max-height:200px;"></div>
 		</div>
 
 		<div>상세주소</div>
@@ -83,60 +84,151 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	//주소 검색
-	
-	let address;
-	//우편번호로 검색
-	$('#zipCodeBtn').click(function(){
 
-		$('#studentAddressMain').html(`<input id="zipCode" type="text" name="zipCode" placeholder="우편번호를 입력하세요.">
-				 					   <button id="check" type="button">검색</button>`);
-	});	
-	//도로명으로 검색
-	$('#streetBtn').click(function(){
-		
-		$('#studentAddressMain').html(`<input id="street" type="text" name="street" placeholder="도로명을 입력하세요.">
-									   <button id="check" type="button">검색</button>`);
-
-			if($('#street').val().length <1){
-				$('#check').click(function(){
-
-					
-					let afterAddress = $('#street').val().split(" ");
-					let street = afterAddress[0];
-					let buildingTotal = afterAddress[1];
-	
-					let afterBuilding = buildingTotal.split("-");
-					let building1 = afterBuilding[0];
-					
-					let building2 = afterBuilding[1];
-	
-					console.log(street); 
-					console.log(building1); 
-					console.log(building2); 
-		
-				});
+	//아이디 중복 검사
+	let idCheck ;
+	$('#idCheck').click(function(){
+		if($('#accountId').val() != ""){
+			$.ajax({
+				url: "${pageContext.request.contextPath}/signup/accountIdCheck/"+$('#accountId').val(),
+				type: 'get',
+				success: function(data){
+					if(data == "true"){
+						$("#idCheckMs").html("사용가능한 아이디입니다.");
+						
+					}else{
+						$("#idCheckMs").html("사용불가능한 아이디입니다.");
+						idCheck= "false";
+						return;
+					}
+				}
+			})
+		}
+	})
+	//이메일 중복검사
+	let emailCheck ;
+	$('#emailCheck').click(function(){
+		if($('#studentEmail').val() != ""){
+			if(CheckEmail($('#studentEmail').val())==false) {
+				$('#studentEmail').focus();
+				$('#studentEmailCheck').html('이메일 형식이 잘못 되었습니다.');
+				return;
+			}else{
+				$('#studentEmailCheck').html('');
+				$.ajax({
+					url: "${pageContext.request.contextPath}/signup/EmailCheck/"+$('#studentEmail').val(),
+					type: 'get',
+					success: function(data){
+						if(data == "true"){
+							$("#emailCheckMs").html("사용가능한 이메일입니다.");
+							
+						}else{
+							$("#emailCheckMs").html("사용불가능한 이메일입니다.");
+							emailCheck= "false";
+							return;
+						}
+					}
+				})
 			}
+		}
+	})
+	let address;
+	//주소 검색
+	if($('#street').val().length <1){
+		//공백 체크
+		function checkSpace(str) {
+			if(str.search(/\s/) != -1) {
+				return true;  //공백이 있으면
+			}else{
+				return false; //공백이 없으면
+			} 
+		}
+		function checkSpecial(str) {
+			if(str.search(/-/)!= -1) {
+				return true;
+			}else{
+				return false;
+			}
+		}
 		
-		});
-	if($('#street').val()==""){
-	
-	}
-	
-	if(address == '1sadfasdfs'){
-		$.ajax({
-			url: '${pageContext.request.contextPath}/signup/address'
-	
-	
-	
+		$('#check').click(function(){
+			if($('#street').val() != ""){
+				$('#addressWait').html("(잠시만 기달려주세요)");
+				let street = null;
+				let building1 = null;
+				let building2 = null;
+				let trimStreet = $('#street').val().trim(); // 앞뒤 공백 제거
+				if(checkSpace(trimStreet) == true){
+				
+					let replaceStreet = trimStreet.replace(/ +/g, " ");//연속된 공백을 1개의 공백으로 설정
+					
+					let afterAddress = replaceStreet.split(" "); //값에 공백이 있으면 나누기
+					street = afterAddress[0];
+					let buildingTotal = afterAddress[1];
+					
+					//변수 값에 '-' 가 있는지 체크
+					if(checkSpecial(buildingTotal) == true){
+						let allReplaceBuilding = buildingTotal.replace(/(\s*)/g, "") //모든 공백 제거
+						let afterBuilding = allReplaceBuilding.split("-"); // 값에 - 가 있으면 나누기
+						building1 = afterBuilding[0]; 
+						building2 = afterBuilding[1];
+						
+						if(building2 == ""){//building2가 공백이면 null
+							building2 = null;
+						}
+					
+					}else{
+						building1 = buildingTotal;
+					}
+					
+					
+				}else {	
+					let trimStreet = $('#street').val().trim(); // 앞뒤 공백 제거
+					street = trimStreet;
+				}
+				$.ajax({
+					url: "${pageContext.request.contextPath}/signup/address/"+street+"/"+building1+"/"+building2,
+					type:'get',
+					success: function(data){
+						$("#selectAddress").html("");
+						
+						for(i=0;i<data.length;i++){
+							//building2데이터가 있으면
+							if(data[i].building2 !=0){
+								$("#selectAddress").append("<div><input type='radio' class='address' name='studentAddressMain' value='"+data[i].province+" "+data[i].city+" "+data[i].town+" "+data[i].street+" "+data[i].building1+"-"+data[i].building2+"("+data[i].zipCode+")"+"'>"
+										+data[i].province+" "+data[i].city+" "+data[i].town+" "+data[i].street+" "+data[i].building1+"-"+data[i].building2+"("+data[i].zipCode+")"+"</div>");
+							}
+							//building2데이터가 없으면
+							if(data[i].building2 ==0){
+								$("#selectAddress").append("<div><input type='radio' class='address' name='studentAddressMain' value='"+data[i].province+" "+data[i].city+" "+data[i].town+" "+data[i].street+" "+data[i].building1+"("+data[i].zipCode+")"+"'>"
+										+data[i].province+" "+data[i].city+" "+data[i].town+" "+data[i].street+" "+data[i].building1+"("+data[i].zipCode+")"+"</div>");
+							}
+						}
+						$('#addressWait').html("");
+					}	
+
+				});
+
+			}
 		})
 	}
-
+	//이메일 형식 검사
+	function CheckEmail(str) {
+	   var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	   if (regExp.test(str)){
+	       return true;
+	   }else{
+	       return false;
+	   }
+	}
 
 	//회원가입 버튼을 눌렀을 경우
 	$('#btn').click(function() {
 		//아이디검사
 		if ($('#accountId').val() == "") {
+			$('#accountId').focus();
+			return;
+		}else if(idCheck=="false"){
 			$('#accountId').focus();
 			return;
 		}
@@ -148,8 +240,7 @@
 		} else if ($('#studentPw2').val() == "") {
 			$('#studentPw2').focus();
 			return;
-		} else if ($('#studentPw1').val() != $('#studentPw2')
-				.val()) {
+		} else if ($('#studentPw1').val() != $('#studentPw2').val()) {
 			$('#studentPw1').focus();
 			$('#studentPwCheck').html('비밀번호가 일치하지않습니다.');
 			return;
@@ -157,15 +248,7 @@
 			$('#studentPwCheck').html('');
 		}
 
-		//이메일 형식 검사
-		function CheckEmail(str) {
-		   var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		   if (regExp.test(str)){
-		       return true;
-		   }else{
-		       return false;
-		   }
-		}
+
 		
 		//이메일 검사
 		if ($('#studentEmail').val() == "") {
@@ -175,7 +258,10 @@
 			$('#studentEmail').focus();
 			$('#studentEmailCheck').html('이메일 형식이 잘못 되었습니다.');
 			return;
-		} else {
+		}else if(emailCheck =="false"){
+			$('#studentEmail').focus();
+			return;
+		}else {
 			$('#studentEmailCheck').html('');
 		}
 
@@ -223,9 +309,11 @@
 		}
 		
 		//주소 검사
-		if($('#studentAddressMain').val()==""){
-			$('#studentAddressMain').focus();
+		if($('.address:checked').val()==undefined){
+			$('#addressCheck').html("주소를 검색해주세요")
 			return;
+		}else{
+			$('#addressCheck').html("");
 		}
 		
 		//상세주소 검사
