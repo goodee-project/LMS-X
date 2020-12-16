@@ -34,6 +34,7 @@ public class StudentLectureController {
 		LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom lcstc = studentLectureService.selectStudentClassOne(classRegistrationNo);
 		
 		model.addAttribute("lcstc", lcstc);
+		model.addAttribute("classNo", classRegistrationNo);
 		return "/auth/student/lecture/classOne";
 	}
 	

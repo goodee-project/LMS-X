@@ -1,5 +1,7 @@
 package gd.fintech.lms.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 // 강좌 수강 Vo
@@ -14,4 +16,7 @@ public class ClassRegistration {
 	private String	classRegistrationPoint;			// 강좌 평점 (0, 1, 2, 3, 4, 5)
 	private String	classRegistrationReview;		// 강좌 후기
 	private String	classRegistrationCreatedate;	// 강좌 수강 정보 생성 일시
+	
+	private List<Report> reportList; // 해당 수강 강좌의 과제
+	private List<Test> testList; // 해당 수강 강좌의 평가
 }

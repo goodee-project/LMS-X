@@ -75,6 +75,9 @@
 	<div>
 		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
     </div>
+	<div>
+		<jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
+    </div>
 	<table border="1">
 		<tr>
 			<th>강좌 번호</th>
