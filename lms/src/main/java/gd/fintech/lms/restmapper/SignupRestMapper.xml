@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.restmapper.SignupRestMapper">
+	<!-- 주소  -->
+	<select id="selectAddress" resultType="gd.fintech.lms.vo.Address">
+		SELECT 
+			zip_code,
+			province,
+			city,
+			town,
+			street,
+			building1,
+			building2
+		FROM address 
+		<choose>
+			<when test="street == null and zipCode != null">
+				WHERE
+					zip_code = #{zipCode}
+			</when>
+			<when test="street != null and zipCode == null">
+				WHERE
+					street like '#{street}%'
+			</when>
+			<when test="street != null and zipCode != null">
+				WHERE
+					street like '#{street}%' 
+				And zip_code = #{zipCode}
+			</when>
+		</choose>
+	</select>
+
+</mapper>
