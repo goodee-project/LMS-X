@@ -26,7 +26,7 @@ public class TeacherLectureController {
 		Lecture lecture = teacherLectureService.getTeacherLectureOne(lectureNo);
 		
 		// [Logger] 강좌 정보(lecture) 확인
-		logger.trace("Debug: lecture[" + lecture + "]");
+		logger.trace("lecture[" + lecture + "]");
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("lecture", lecture);

@@ -31,7 +31,7 @@ public class TeacherReportController {
 		List<Report> teacherReportList = teacherReportService.getTeacherReportListByPage(lectureNo, currentPage, rowPerPage);
 		
 		// [Logger] 과제 목록(teacherReportList) 확인
-		logger.trace("Debug: teacherReportList[" + teacherReportList + "]");
+		logger.trace("teacherReportList[" + teacherReportList + "]");
 		
 		// 페이징 코드
 		// 전체 데이터 수
@@ -88,7 +88,7 @@ public class TeacherReportController {
 		Report report = teacherReportService.getTeacherReportOne(reportNo);
 		
 		// [Logger] 과제(report) 확인
-		logger.trace("Debug: report[" + report + "]");
+		logger.trace("report[" + report + "]");
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("report", report);
@@ -109,7 +109,7 @@ public class TeacherReportController {
 		Report returnReport = teacherReportService.insertTeacherReport(report);
 		
 		// [Logger] 과제(report) 확인
-		logger.trace("Debug: report[" + report + "]");
+		logger.trace("report[" + report + "]");
 		
 		return "redirect:/auth/teacher/lecture/" + report.getLectureNo() + "/report/reportOne/" + returnReport.getReportNo();
 	}
@@ -127,7 +127,7 @@ public class TeacherReportController {
 		report.setReportEnddate(report.getReportEnddate().replace(" ", "T"));
 		
 		// [Logger] 과제(report) 확인
-		logger.trace("Debug: report[" + report + "]");
+		logger.trace("report[" + report + "]");
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("report", report);
@@ -143,7 +143,7 @@ public class TeacherReportController {
 		teacherReportService.updateTeacherReport(report);
 		
 		// [Logger] 과제(report) 확인
-		logger.trace("Debug: report[" + report + "]");
+		logger.trace("report[" + report + "]");
 		
 		return "redirect:/auth/teacher/lecture/" + report.getLectureNo() + "/report/reportOne/" + report.getReportNo();
 	}

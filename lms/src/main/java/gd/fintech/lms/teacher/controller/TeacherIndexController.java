@@ -35,14 +35,14 @@ public class TeacherIndexController {
 		String teacherId = (String)session.getAttribute("loginId");
 		
 		// [Logger] 세션에 있는 teacherId 확인
-		logger.trace("Debug: nowSessionId[" + teacherId + "]");
+		logger.trace("nowSessionId[" + teacherId + "]");
 		
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
 		
 		// [Logger] 데이터베이스로부터 강사가 속해있는 강좌 목록을 가져온다
 		List<Lecture> teacherLectureList = teacherLectureService.getTeacherLectureListByPage(teacherId, currentPage, rowPerPage);
-		logger.trace("Debug: teacherLectureList - " + teacherLectureList);
+		logger.trace("teacherLectureList - " + teacherLectureList);
 		
 		// 페이징 코드
 		// 전체 데이터 수
