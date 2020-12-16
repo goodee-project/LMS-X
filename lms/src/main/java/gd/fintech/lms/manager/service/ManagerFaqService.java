@@ -17,4 +17,8 @@ public class ManagerFaqService {
 	public List<Faq> getFaqList(){
 		return managerFaqMapper.selectFaqList();
 	}
+	
+	public int insertFaq(Faq faq) {
+		return managerFaqMapper.insertFaq(faq);
+	}
 }

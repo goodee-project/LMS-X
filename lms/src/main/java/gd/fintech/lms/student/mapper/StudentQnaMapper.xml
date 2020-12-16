@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentQnaMapper">
+	
+	<!-- select 쿼리 태그에 관계도를 위한 resultMap 속성 추가  -->
+	<resultMap type="gd.fintech.lms.vo.Question" id="selectStudentQnaOneResult">
+	
+      <result property="lectureNo" column="lecture_no"/>
+      <result property="questionNo" column="question_no"/>
+      <result property="questionTitle" column="question_title"/>
+      <result property="questionContent" column="question_content"/>
+      <result property="questionCount" column="question_count"/>
+      <result property="questionCreatedate" column="question_createdate"/>
+      <result property="questionUpdatedate" column="question_updatedate"/>
+      <result property="questionPassword" column="question_password"/>
+      
+     <collection property="questionFile" ofType="gd.fintech.lms.vo.QuestionFile">
+      <result property="questionFileUuid" column="question_file_uuid"/>
+      <result property="questionFileOriginal" column="question_file_original"/>
+      <result property="questionNo" column="questionNo"/>
+      <result property="questionFileSize" column="question_file_size"/>
+      <result property="questionFileType" column="question_file_type"/>
+      <result property="questionFileCreatedate" column="question_file_createdate"/>
+     </collection>
+     
+   </resultMap>
+	
+	<!-- 질문 리스트 페이징 + 학생이 질문 리스트 출력시 질문 번호 강의 번호 글쓴이 이름 제목 생성일 조회수를 보여준다  --> 
+	<select id="selectStudentQnaListByPage" resultType="gd.fintech.lms.vo.Question" parameterType="java.util.Map">
+		SELECT
+			question_no questionNo,
+			lecture_no lectureNo,
+			question_writer qestionWriter,
+			question_title questionTitle,
+			question_createdate questionCreatedate,
+			question_count questionCount
+		FROM question
+		WHERE lecture_no = #{lectureNo}
+		ORDER BY question_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 질문 게시판의 게시글 수 : 학생  -->
+	<select id="selectQnaCount" parameterType="String" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM question 
+	</select>
+	
+	<!--질문 게시판 게시글 작성-->
+	<insert id="insertStudentQna" parameterType="gd.fintech.lms.vo.Question">
+		INSERT INTO question(
+			question_title,
+			question_content,
+			question_createdate,
+			question_updatedate,
+			question_count,
+			question_password
+		) VALUES (
+			#{questionTitle},
+			#{questionContent},
+			#{questionCreatedate},
+			#{questionUpdatedate},
+			#{questionCount},
+			#{questionPassword}
+		)
+		
+	</insert>
+	<!--질문 게시판 상세보기-->
+	<select id="selectStudentQnaOne" resultMap="selectStudentQnaOneResult" parameterType="int">
+		SELECT
+			q.question_no,
+			q.question_writer,
+			q.question_title,
+			q.question_content,
+			q.question_createdate,
+			q.question_updatedate,
+			q.question_count,
+			qf.question_file_original,
+			qf.question_file_size,
+			qf.question_file_type,
+			qf.question_file_count,
+			qf.question_file_createdate
+		From question q
+		LEFT OUTER JOIN question_file qf
+		on q.question_no = qf.question_no
+		WHERE q.question_no = #{questionNo}
+	</select>
+	
+	<!--질문 게시판 내용 수정-->
+	<update id="updateStudentQna" parameterType="gd.fintech.lms.vo.Question">
+		UPDATE question
+		SET
+			question_title = #{questionTitle},
+			question_content = #{questionContent},
+			question_updatedate = #{questionUpdatedate}
+	</update>
+	
+	<!-- 질문 게시판 게시글 삭제 -->
+	<delete id="deleteStudentQna" parameterType="int">
+		DELETE FROM question
+		WHERE question_no = #{questionNo}
+	</delete>
+</mapper>

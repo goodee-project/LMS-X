@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.studentFileMapper">
+	<!--학생 : 질문 게시판 게시글 작성시 파일 추가 -->
+	<insert id="insertStudentQnaFile" parameterType="gd.fintech.lms.vo.QuestionFile">
+		INSERT INTO question_file(
+			question_no,
+			question_file_uuid,
+			question_file_original,
+			question_file_size,
+			question_file_type,
+			question_file_createdate
+		) VALUES (
+			#{questionNo},
+			#{questionFileUuid},
+			#{questionFileOriginal},
+			#{questionFileSize},
+			#{questionFileType},
+			#{questionFileCreatedate}
+		)
+	</insert>
+	
+	<!--질문 게시판 게시글 파일 이름 리스트-->
+	<select id="selectStudentQnaFileNameList" parameterType="int" resultType="String">
+		SELECT question_file_uuid
+		FROM question_file
+		WHERE question_no = #{questionNo}
+	</select>
+	
+	<!--학생 : 질문 게시판 파일 삭제 -->
+	<delete id="deleteStudentQnaFile" parameterType="int">
+		DELETE FROM question_file
+		WHERE question_No = #{questionNo}
+	</delete>
+	
+	<!-- 질문 게시판 수정시 파일 한개만 삭제 하는 기능  -->
+	<delete id="deleteStudentQnaFileOne" parameterType="String">
+		DELETE FROM question_file
+		WHERE question_file_uuid = #{questionFileUuid}
+	</delete>
+</mapper>
