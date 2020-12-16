@@ -164,8 +164,7 @@
 		FROM lecture l
 		JOIN subject s
 		ON l.subject_no = s.subject_no
-		WHERE 
-			DATE_FORMAT(NOW(), '%Y-%m-%d') >= l.lecture_startdate AND l.lecture_enddate >= DATE_FORMAT(NOW(), '%Y-%m-%d')
+		WHERE l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
 		ORDER BY l.lecture_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
@@ -179,11 +178,35 @@
 		WHERE l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</select>
 	<!-- 수강 신청 -->
-	<insert id="insertClassRegistration"></insert>
-	<!-- 수강 대기 상태일시 수강 취소 -->
+	<insert id="insertClassRegistration" parameterType="gd.fintech.lms.vo.ClassRegistration">
+		INSERT INTO class_registration(
+			lecture_no,
+			account_id,
+			class_registration_state,
+			class_registration_createdate
+		) VALUES (
+			#{lectureNo},
+			#{accountId},
+			'대기',
+			NOW()
+		)
+	</insert>
+	<!-- 수강 대기 상태일시 수강 상태를 취소 변경 -->
 	<update id="updateClassRegistrationState" parameterType="int">
 		UPDATE class_registration 
 		SET class_registration_state = '취소'
 		WHERE class_registration_no = #{classRegistrationNo}
 	</update>
+	<!-- 수강신청 취소시 수강신청 취소 테이블 입력 -->
+	<insert id="insertClassRegistrationCancel" parameterType="gd.fintech.lms.vo.ClassRegistrationCancel">
+		INSERT INTO class_registration_cancel(
+			class_registration_no,
+			cancel_createdate,
+			cancel_content
+		) VALUES (
+			#{classRegistrationNo},
+			NOW(),
+			#{cancelContent}
+		)
+	</insert>
 </mapper>
