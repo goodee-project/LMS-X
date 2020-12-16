@@ -10,15 +10,22 @@
 <script>
 $(document).ready(function(){
 	$('#insertBtn').click(function(){
-		if($('#teacherNametext').val().length < 1){
+		if($('#teacherNametext').val().length <= 0){
 			alert('강사명을 입력해주세요.');
 			return;
 		} 
-		if($('#lectureNametext').val().length < 1){
+		if($('#lectureNametext').val().length <= 0){
 			alert('강의명을 입력해주세요.');
 			return;	 
-		} 
-		
+		}
+		if($('#lectureTotaltext').val() <= 0){
+			alert('0보다 커야합니다.');
+			return;
+			}
+		if($('#lectureTotaltext').val() > 24){
+			alert('25보다 작아야합니다.');
+			return;
+			}
 		$('#insertLectureForm').submit();
 	});
 });
@@ -62,15 +69,16 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td>개강일</td>
-				<td><input type="datetime-local" name="lectureStartdate"></td>
+				<td><input type="date" name="lectureStartdate"></td>
 			</tr>
 			<tr>
 				<td>종강일</td>
-				<td><input type="datetime-local" name="lectureEnddate"></td>
+				<td><input type="date" name="lectureEnddate"></td>
 			</tr>
 			<tr>
 				<td>정원</td>
-				<td><input type="number" name="lectureTotal" id="lectureTotaltext"></td>
+				
+					<td><input type="number" name="lectureTotal" id="lectureTotaltext"></td>
 			</tr>
 			<tr>
 				<td>강의실</td>
