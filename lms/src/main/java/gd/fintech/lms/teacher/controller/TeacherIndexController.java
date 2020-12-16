@@ -40,9 +40,9 @@ public class TeacherIndexController {
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
 		
-		// 데이터베이스로부터 강사가 속해있는 강좌 목록을 가져온다
+		// [Logger] 데이터베이스로부터 강사가 속해있는 강좌 목록을 가져온다
 		List<Lecture> teacherLectureList = teacherLectureService.getTeacherLectureListByPage(teacherId, currentPage, rowPerPage);
-		System.out.println("Debug: teacherLectureList - " + teacherLectureList);
+		logger.trace("Debug: teacherLectureList - " + teacherLectureList);
 		
 		// 페이징 코드
 		// 전체 데이터 수

@@ -2,6 +2,8 @@ package gd.fintech.lms.teacher.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,9 @@ import gd.fintech.lms.vo.Report;
 public class TeacherReportController {
 	@Autowired TeacherReportService teacherReportService;
 	
+	// Logger 사용
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	// 강사가 해당 강의실에서 출제한 과제 목록
 	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/reportList/{currentPage}")
 	public String reportList(Model model, 
@@ -24,7 +29,9 @@ public class TeacherReportController {
 		int rowPerPage = 10;	// 한 페이지에 표시할 데이터 수
 		
 		List<Report> teacherReportList = teacherReportService.getTeacherReportListByPage(lectureNo, currentPage, rowPerPage);
-		System.out.println("Debug: teacherReportList - " + teacherReportList);
+		
+		// [Logger] 과제 목록(teacherReportList) 확인
+		logger.trace("Debug: teacherReportList[" + teacherReportList + "]");
 		
 		// 페이징 코드
 		// 전체 데이터 수
@@ -79,7 +86,9 @@ public class TeacherReportController {
 			@PathVariable(value = "reportNo") int reportNo) {
 		// 과제 고유번호(reportNo)에 해당하는 과제의 정보를 데이터베이스에서 가져온다
 		Report report = teacherReportService.getTeacherReportOne(reportNo);
-		System.out.println("Debug: report - " + report);
+		
+		// [Logger] 과제(report) 확인
+		logger.trace("Debug: report[" + report + "]");
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("report", report);
@@ -98,6 +107,9 @@ public class TeacherReportController {
 	@PostMapping(value="/auth/teacher/lecture/{lectureNo}/report/insertReport")
 	public String insertReport(Report report) {
 		Report returnReport = teacherReportService.insertTeacherReport(report);
+		
+		// [Logger] 과제(report) 확인
+		logger.trace("Debug: report[" + report + "]");
 		
 		return "redirect:/auth/teacher/lecture/" + report.getLectureNo() + "/report/reportOne/" + returnReport.getReportNo();
 	}
