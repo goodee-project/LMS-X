@@ -47,12 +47,25 @@
 		FROM question 
 	</select>
 	
-	<!-- 질문 게시판 게시글 삭제 -->
-	<delete id="deleteStudentQna" parameterType="int">
-		DELETE FROM question
-		WHERE question_no = #{questionNo}
-	</delete>
-	
+	<!--질문 게시판 게시글 작성-->
+	<insert id="insertStudentQna" parameterType="gd.fintech.lms.vo.Question">
+		INSERT INTO question(
+			question_title,
+			question_content,
+			question_createdate,
+			question_updatedate,
+			question_count,
+			question_password
+		) VALUES (
+			#{questionTitle},
+			#{questionContent},
+			#{questionCreatedate},
+			#{questionUpdatedate},
+			#{questionCount},
+			#{questionPassword}
+		)
+		
+	</insert>
 	<!--질문 게시판 상세보기-->
 	<select id="selectStudentQnaOne" resultMap="selectStudentQnaOneResult" parameterType="int">
 		SELECT
@@ -75,5 +88,17 @@
 	</select>
 	
 	<!--질문 게시판 내용 수정-->
-	<update id="updateStudentQna" parameterType="gd.fintech.lms.vo.question"></update>
+	<update id="updateStudentQna" parameterType="gd.fintech.lms.vo.Question">
+		UPDATE question
+		SET
+			question_title = #{questionTitle},
+			question_content = #{questionContent},
+			question_updatedate = #{questionUpdatedate}
+	</update>
+	
+	<!-- 질문 게시판 게시글 삭제 -->
+	<delete id="deleteStudentQna" parameterType="int">
+		DELETE FROM question
+		WHERE question_no = #{questionNo}
+	</delete>
 </mapper>
