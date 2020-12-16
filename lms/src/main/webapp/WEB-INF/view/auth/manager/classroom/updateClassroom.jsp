@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>updateClassroom</h1>
-	<form method="post" action="${pageContext.request.contextPath}/auth/manager/updateClassroom">
+	<form method="post" action="${pageContext.request.contextPath}/auth/manager/classroom/updateClassroom">
 		<table border="1">
 			<tr>
 				<td>강의실 번호</td>
@@ -16,15 +16,15 @@
 			<tr>
 			<tr>
 				<td>강의실 호실</td>
-				<td><input type="text" name="classroomNumber" value="${classroom.classroomNumber"></td>
+				<td><input type="text" name="classroomNumber" value="${classroom.classroomNumber}"></td>
 			</tr>
 			<tr>
 				<td>강의실 사이즈</td>
-				<td><input type="text" name="classroomSize" value="${classroom.classroomSize"></td>
+				<td><input type="text" name="classroomSize" value="${classroom.classroomSize}"></td>
 			</tr>
 			<tr>
 				<td>강의실 총 인원</td>
-				<td><input type="text" name="classroomTotal" value="${classroom.classroomTotal"></td>
+				<td><input type="text" name="classroomTotal" value="${classroom.classroomTotal}"></td>
 			</tr>
 		</table>
 		<button type="submit">강의실 수정</button>

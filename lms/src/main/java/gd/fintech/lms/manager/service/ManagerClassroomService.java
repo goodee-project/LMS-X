@@ -29,4 +29,8 @@ public class ManagerClassroomService {
 	public int updateClassroom(Classroom classroom) {
 		return managerClassroomMapper.updateClassroom(classroom);
 	}
+	
+	public Classroom classroomOne(int classroomNo) {
+		return managerClassroomMapper.classroomOne(classroomNo);
+	}
 }
