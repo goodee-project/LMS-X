@@ -46,4 +46,12 @@ public class TeacherReportService {
 	public Report getTeacherReportOne(int reportNo) {
 		return teacherReportMapper.selectTeacherReportOne(reportNo);
 	}
+	
+	public Report insertTeacherReport(Report report) {
+		Report returnReport = new Report();
+		teacherReportMapper.insertTeacherReport(report);
+		returnReport.setReportNo(report.getReportNo());		// reportNo Autoincrement 번호를 받아온다.
+		
+		return returnReport;
+	}
 }

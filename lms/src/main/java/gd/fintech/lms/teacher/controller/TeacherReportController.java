@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherReportService;
 import gd.fintech.lms.vo.Report;
@@ -85,5 +86,29 @@ public class TeacherReportController {
 		
 		// view의 /auth/teacher/lecture/report/reportOne.jsp를 이용한다
 		return "/auth/teacher/lecture/report/reportOne";
+	}
+	
+	// 강좌 고유번호(lectureNo)에 해당하는 강좌에 강사가 새로운 과제를 출제 (Form)
+	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/insertReport")
+	public String insertReport(@PathVariable(value = "lectureNo") int lectureNo) {
+		return "/auth/teacher/lecture/report/insertReport";
+	}
+	
+	// 강좌 고유번호(lectureNo)에 해당하는 강좌에 강사가 새로운 과제를 출제 (Action)
+	@PostMapping(value="/auth/teacher/lecture/{lectureNo}/report/insertReport")
+	public String insertReport(Report report) {
+		Report returnReport = teacherReportService.insertTeacherReport(report);
+		
+		return "redirect:/auth/teacher/lecture/" + report.getLectureNo() + "/report/reportOne/" + returnReport.getReportNo();
+	}
+	
+	// 과제 고유번호(reportNo)에 해당하는 과제에 대한 정보를 수정
+	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
+	public String updateReport(Model model, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "reportNo") int reportNo) {
+		// 작성 바람
+		
+		return "/auth/teacher/lecture/report/updateReport";
 	}
 }

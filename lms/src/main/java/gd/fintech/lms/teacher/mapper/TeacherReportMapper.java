@@ -20,4 +20,8 @@ public interface TeacherReportMapper {
 	// 강사 과제 정보 조회
 	// 과제 고유번호(reportNo)를 이용
 	Report selectTeacherReportOne(int reportNo);
+	
+	// 강사 과제출제
+	// Report 객체에 담겨있는 정보를 이용
+	int insertTeacherReport(Report report);
 }

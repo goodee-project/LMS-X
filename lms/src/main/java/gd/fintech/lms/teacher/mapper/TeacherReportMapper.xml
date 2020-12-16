@@ -40,4 +40,28 @@
   		FROM report
   		WHERE report_no = #{reportNo}
   	</select>
+  	
+  	<!-- 강사가 과제(report) 테이블에 과제(Report)에 해당하는 데이터를 입력한다 -->
+  	<insert id="insertTeacherReport" parameterType="gd.fintech.lms.vo.Report">
+  		<selectKey resultType="Integer" keyProperty="reportNo" order="AFTER">
+  			SELECT LAST_INSERT_ID()
+  		</selectKey>
+  		INSERT INTO report (
+  			lecture_no, 
+  			report_title, 
+  			report_content, 
+  			report_createdate, 
+  			report_updatedate, 
+  			report_startdate, 
+  			report_enddate
+  		) VALUES (
+  			#{lectureNo}, 
+  			#{reportTitle}, 
+  			#{reportContent}, 
+  			now(), 
+  			now(), 
+  			#{reportStartdate}, 
+  			#{reportEnddate}
+  		)
+  	</insert>
 </mapper>
