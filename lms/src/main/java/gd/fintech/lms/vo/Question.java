@@ -1,5 +1,7 @@
 package gd.fintech.lms.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 // 질문 Vo
@@ -17,4 +19,5 @@ public class Question {
 	private String	questionUpdatedate;		// 질문 업데이트 일시
 	private int		questionCount;			// 질문 조회수
 	private String	questionPassword;		// 질문 비밀번호 (비밀글 설정시 필요)
+	private List<QuestionFile> questionFile;
 }
