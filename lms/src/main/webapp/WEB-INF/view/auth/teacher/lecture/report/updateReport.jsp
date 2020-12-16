@@ -40,6 +40,24 @@
 				background-color: #F9F9FB;
 			}
 		</style>
+		
+		<!-- jQuery를 이용하여 제목, 내용 검사 -->
+		<script>
+			// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
+			$(document).ready(function() {
+				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+				$("#submitBtn").click(function() {
+					if () {
+						alert('날짜 오류 발생. 입력 확인바랍니다.');
+						
+						return;
+					}
+
+					// 폼 내용을 POST로 전송한다.
+					$('#reportForm').submit();
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
@@ -58,10 +76,10 @@
 		
 		<!-- 본문 -->
 		<div class="container">
-			<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/insertReport">
+			<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/insertReport" id="reportForm">
 				<div>
 					<h3>과제 정보</h3>
-					<button type="submit" class="btn btn-sm btn-success" style="float: right;">입력</button>
+					<button type="button" class="btn btn-sm btn-success" id="submitBtn" style="float: right;">입력</button>
 				</div>
 				
 				<br><br>
@@ -106,6 +124,7 @@
 								let rEnddate = "${report.reportEnddate}";
 								$('#reportEnddate').val(rEnddate);
 							</script>
+							<p><script>document.write($("#reportEnddate").val());</script></p>
 						</td>
 					</tr>
 				</table>
