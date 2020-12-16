@@ -11,4 +11,30 @@
 		classroom_total classroomTotal
 		FROM classroom
 	</select>
+	
+	<insert id="insertClassroom" parameterType="gd.fintech.lms.vo.Classroom">
+		INSERT INTO classroom(
+			classroom_number,
+			classroom_size,
+			classroom_total
+		) VALUES (
+			#{classroomNumber},
+			#{classroomSize},
+			#{classroomTotal}
+		)
+	</insert>
+	
+	<delete id="deleteClassroom" parameterType="int">
+		DELETE FROM classroom
+		WHERE classroom_no=#{classroomNo}
+	</delete>
+	
+	<update id="updateClassroom" parameterType="gd.fintech.lms.vo.Classroom">
+		UPDATE classroom
+		SET	classroom_number = #{classroomNumber},
+		classroom_size = #{classroomSize},
+		classroom_total = #{classroomTotal}
+		WHERE classroom_no = #{classroomNo}
+	</update>
+	
 </mapper>
