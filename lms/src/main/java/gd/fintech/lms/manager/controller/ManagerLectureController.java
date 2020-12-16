@@ -105,7 +105,8 @@ public class ManagerLectureController {
 	
 	//강의 수정 액션
 	@PostMapping("/auth/manager/updateLecture/{lectureNo}")
-	public String updateLecture(Lecture lecture) {
+	public String updateLecture(Lecture lecture, @PathVariable(value = "lectureNo") int lectureNo) {
+		managerLectureService.updateLecture(lecture);
 		return "redirect:/auth/manager/lectureList/1";
 	}
 	//강의 수정 폼

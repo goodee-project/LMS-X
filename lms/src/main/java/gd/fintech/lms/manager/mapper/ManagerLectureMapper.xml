@@ -59,6 +59,7 @@
 			<result property="lectureStartdate" column="lecture_startdate"/>
 			<result property="lectureEnddate" column="lecture_enddate"/>
 			<result property="lectureTotal" column="lecture_total"/>
+			<result property="classroomNo" column="classroom_no"/>
 		</collection>
 		<collection property="textbook" ofType="gd.fintech.lms.vo.Textbook">
 			<result property="textbookIsbn" column="textbook_isbn"/>
@@ -81,6 +82,7 @@
 			l.lecture_startdate,
 			l.lecture_enddate,
 			l.lecture_total,
+			l.classroom_no,
 			c.classroom_number
 		FROM lecture AS l 
 		LEFT JOIN textbook AS t

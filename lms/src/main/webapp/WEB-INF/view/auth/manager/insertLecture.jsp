@@ -53,7 +53,8 @@ $(document).ready(function(){
 						<c:forEach var="s" items="${subjectList}">
 							<option value="${s.subjectNo}">${s.subjectName}</option>
 						</c:forEach>
-				</select></td>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>강사 명</td>
@@ -69,7 +70,8 @@ $(document).ready(function(){
 						<c:forEach var="t" items="${textbookList}">
 							<option value="${t.textbookIsbn}">${t.textbookTitle}:${t.textbookIsbn}</option>
 						</c:forEach>
-				</select></td>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>개강일</td>
@@ -90,7 +92,8 @@ $(document).ready(function(){
 						<c:forEach var="c" items="${classroomList}">
 							<option value="${c.classroomNo}">${c.classroomNo}:${c.classroomNumber}</option>
 						</c:forEach>
-				</select></td>
+					</select>
+				</td>
 			</tr>
 		</table>
 		<button type="button" id="insertBtn">개설</button>
