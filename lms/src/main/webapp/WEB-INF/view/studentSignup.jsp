@@ -63,15 +63,18 @@
 		<div id="studentBirthCheck"></div>
 		<div>주소</div>
 		<div>
-			<input id="studentAddressMain" type="text" name="studentAddressMain"
-				placeholder="임시 주소입니다.">
+			<button type="button" id="zipCodeBtn">우편번호</button>
+			<button type="button" id="streetBtn">도로명</button>
+			
+			<div id="studentAddressMain"></div>
+			<div id="selectAddress"></div>
 		</div>
 
 		<div>상세주소</div>
 		<div>
 			<input id="studentAddressSub" type="text" placeholder="상세주소를 입력하세요"	name="studentAddressSub">
 		</div>
-
+	
 		<div>
 			<button id="btn" type="button">회원가입</button>
 		</div>
@@ -80,8 +83,58 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$('#btn').click(
-		function() {
+	//주소 검색
+	
+	let address;
+	//우편번호로 검색
+	$('#zipCodeBtn').click(function(){
+
+		$('#studentAddressMain').html(`<input id="zipCode" type="text" name="zipCode" placeholder="우편번호를 입력하세요.">
+				 					   <button id="check" type="button">검색</button>`);
+	});	
+	//도로명으로 검색
+	$('#streetBtn').click(function(){
+		
+		$('#studentAddressMain').html(`<input id="street" type="text" name="street" placeholder="도로명을 입력하세요.">
+									   <button id="check" type="button">검색</button>`);
+
+			if($('#street').val().length <1){
+				$('#check').click(function(){
+
+					
+					let afterAddress = $('#street').val().split(" ");
+					let street = afterAddress[0];
+					let buildingTotal = afterAddress[1];
+	
+					let afterBuilding = buildingTotal.split("-");
+					let building1 = afterBuilding[0];
+					
+					let building2 = afterBuilding[1];
+	
+					console.log(street); 
+					console.log(building1); 
+					console.log(building2); 
+		
+				});
+			}
+		
+		});
+	if($('#street').val()==""){
+	
+	}
+	
+	if(address == '1sadfasdfs'){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/signup/address'
+	
+	
+	
+		})
+	}
+
+
+	//회원가입 버튼을 눌렀을 경우
+	$('#btn').click(function() {
 		//아이디검사
 		if ($('#accountId').val() == "") {
 			$('#accountId').focus();

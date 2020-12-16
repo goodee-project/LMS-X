@@ -144,7 +144,7 @@ public class LoginController {
 	//로그아웃
 	@GetMapping("/auth/logout")
 	public String logout(HttpSession session) {
-		System.out.println("로그아웃");
+		//System.out.println("로그아웃");
 		session.invalidate(); //session데이터 삭제
 		return "redirect:/login";
 	}

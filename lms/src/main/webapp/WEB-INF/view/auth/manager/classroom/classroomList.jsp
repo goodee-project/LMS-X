@@ -8,12 +8,16 @@
 </head>
 <body>
 	<h1>강의실 index</h1>
+	<div><a href="${pageContext.request.contextPath }/auth/manager/index">홈으로</div></div>
+	<div><a href="${pageContext.request.contextPath }/auth/manager/classroom/insertClassroom">강의실 추가</a></div>
 	<table border="1">
 		<tr>
 			<th>강의실 번호</th>
 			<th>강의실 호실</th>
 			<th>강의실 사이즈</th>
 			<th>강의실 총 인원</th>
+			<th>수정</th>
+			<th>삭제</th>
 		</tr>
 		<c:forEach items="${classroomList}" var="cr">
 			<tr>
@@ -21,6 +25,16 @@
 				<td>${cr.classroomNumber}</td>
 				<td>${cr.classroomSize}</td>
 				<td>${cr.classroomTotal}</td>
+				<td>
+					<a href="${pageContext.request.contextPath }/auth/manager/classroom/updateClassroom/${cr.classroomNo}">
+						수정
+					</a>
+				</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/auth/manager/classroom/deleteClassroom?classroomNo=${cr.classroomNo}">
+						삭제
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

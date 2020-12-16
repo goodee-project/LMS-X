@@ -8,9 +8,9 @@ import gd.fintech.lms.vo.Classroom;
 
 @Mapper
 public interface ManagerClassroomMapper {
-	List<Classroom> selectClassroomList(); // 리스트
-	
-	// 삭제
-	// 추가
-	// 수정
+	List<Classroom> selectClassroomList(); // 강의실 리스트
+	int insertClassroom(Classroom classroom);// 강의실 추가
+	int deleteClassroom(int classroomNo);// 강의실 삭제
+	int updateClassroom(Classroom classroom);// 강의실 수정
+	Classroom classroomOne(int classroomNo); // 강좌 정보
 }

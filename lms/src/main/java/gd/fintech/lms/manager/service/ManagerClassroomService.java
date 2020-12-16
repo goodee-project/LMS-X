@@ -17,4 +17,20 @@ public class ManagerClassroomService {
 	public List<Classroom> getClassroomList(){
 		return managerClassroomMapper.selectClassroomList();
 	}
+	
+	public int insertClassroom(Classroom classroom) {
+		return managerClassroomMapper.insertClassroom(classroom);
+	}
+	
+	public int deleteClassroom(int classroomNo) {
+		return managerClassroomMapper.deleteClassroom(classroomNo);
+	}
+	
+	public int updateClassroom(Classroom classroom) {
+		return managerClassroomMapper.updateClassroom(classroom);
+	}
+	
+	public Classroom classroomOne(int classroomNo) {
+		return managerClassroomMapper.classroomOne(classroomNo);
+	}
 }

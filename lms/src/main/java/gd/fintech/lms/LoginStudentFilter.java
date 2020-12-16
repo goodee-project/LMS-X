@@ -12,14 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebFilter(urlPatterns = "/auth/student/*")
 public class LoginStudentFilter implements Filter {
+	
+	private static final Logger log = LoggerFactory.getLogger(LoginStudentFilter.class);
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		System.out.println("Debug: LoginStudentFilter 실행");
-
+		//System.out.println("Debug: LoginStudentFilter 실행");
+		log.debug("LoginStudentFilter 실행");
 		HttpSession session = ((HttpServletRequest) request).getSession();
 
 		//권한실패
