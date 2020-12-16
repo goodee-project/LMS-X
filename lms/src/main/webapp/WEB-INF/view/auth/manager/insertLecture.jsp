@@ -18,6 +18,10 @@ $(document).ready(function(){
 			alert('강의명을 입력해주세요.');
 			return;	 
 		}
+		if( $('#lectureEnddate').val() <= $('#lectureStartdate').val()){
+			alert('개강일은 종강일보다 빨라야 합니다.');
+			return;
+			}
 		if($('#lectureTotaltext').val() <= 0){
 			alert('0보다 커야합니다.');
 			return;
@@ -69,11 +73,11 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td>개강일</td>
-				<td><input type="date" name="lectureStartdate"></td>
+				<td><input type="date" name="lectureStartdate" id="lectureStartdate"></td>
 			</tr>
 			<tr>
 				<td>종강일</td>
-				<td><input type="date" name="lectureEnddate"></td>
+				<td><input type="date" name="lectureEnddate" id="lectureEnddate"></td>
 			</tr>
 			<tr>
 				<td>정원</td>

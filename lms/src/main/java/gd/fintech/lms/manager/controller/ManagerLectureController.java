@@ -92,4 +92,12 @@ public class ManagerLectureController {
 		
 		return "/auth/manager/insertLecture";
 	}
+	//강의 상세 보기
+	@GetMapping("/auth/manager/lectureOne/{lectureNo}")
+	public String lectureOne(Model model, @PathVariable(value = "lectureNo") int lectureNo) {
+		Lecture lecture = managerLectureService.getLectureOne(lectureNo);
+		model.addAttribute("lecture", lecture);
+		
+		return "/auth/manager/lectureOne";
+	}
 }

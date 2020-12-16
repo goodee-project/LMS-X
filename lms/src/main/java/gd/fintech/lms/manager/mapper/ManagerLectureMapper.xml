@@ -49,4 +49,40 @@
 		NOW()
 		)	
 	</insert>
+	<resultMap type="gd.fintech.lms.vo.LectureAndClassAndTextbook" id="selectLectureOneResult">
+		<result property="accountId" column="account_id"/>
+		<result property="subjectNo" column="subject_no"/>
+		<result property="teacherName" column="teacher_name"/>
+		<result property="lectureName" column="lecture_name"/>
+		<result property="lectureStartdate" column="lecture_startdate"/>
+		<result property="lectureEnddate" column="lecture_enddate"/>
+		<result property="lectureTotal" column="lecture_total"/>
+		<collection property="textbookList" ofType="gd.fintech.lms.vo.Textbook">
+			<result property="textbookIsbn" column="textbook_isbn"/>
+			<result property="textbookTitle" column="textbook_title"/>
+		</collection>
+		<collection property="classroomList" ofType="gd.fintech.lms.vo.Classroom">
+			<result property="classroomNo" column="classroom_no"/>
+			<result property="classroomNumber" column="classroom_number"/>
+		</collection>
+	</resultMap>
+	<!-- 강의 상세 보기 출력 쿼리문 -->
+	<select id="selectLectureOne" resultMap="selectLectureOneResult">			
+	SELECT 
+		l.account_id, 
+		l.subject_no,	
+		l.teacher_name,
+		l.lecture_name,	
+		t.textbook_title,	
+		l.lecture_startdate,
+		l.lecture_enddate,
+		l.lecture_total,
+		c.classroom_number
+	FROM lecture AS l 
+	LEFT JOIN textbook AS t
+		ON l.textbook_isbn = t.textbook_isbn
+	LEFT JOIN classroom AS c
+		ON l.classroom_no = c.classroom_no
+	WHERE lecture_no = 1
+	</select>
 </mapper>

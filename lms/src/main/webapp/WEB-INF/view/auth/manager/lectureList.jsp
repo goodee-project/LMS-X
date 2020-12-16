@@ -24,7 +24,9 @@
 		</tr>
 		<c:forEach items="${lectureList}" var="l">
 			<tr>
-				<td>${l.lectureNo}</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/auth/manager/lectureOne/${l.lectureNo}">${l.lectureNo}</a>
+				</td>
 				<td>${l.teacherName}</td>
 				<td>${l.lectureName}</td>
 				<td>${l.lectureStartdate}</td>

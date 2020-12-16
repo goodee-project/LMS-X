@@ -15,5 +15,7 @@ public interface ManagerLectureMapper {
 	int selectLectureCount();
 	// 강의 추가
 	int insertLecture(Lecture lecture);
+	// 강의 상세보기
+	Lecture selectLectureOne(int lectureNo);
 }
  
