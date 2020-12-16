@@ -6,6 +6,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ import gd.fintech.lms.vo.Lecture;
 public class TeacherIndexController {
 	@Autowired TeacherLectureService teacherLectureService;
 	
+	// Logger 사용
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	// 강사 Index
 	@GetMapping(value="/auth/teacher/index/{currentPage}")
 	public String index(ServletRequest request, Model model, 
@@ -28,7 +33,9 @@ public class TeacherIndexController {
 		
 		// 세션에 있는 아이디를 가져온다 (강사)
 		String teacherId = (String)session.getAttribute("loginId");
-		System.out.println("Debug: nowSessionId[" + teacherId +  "]");
+		
+		// [Logger] 세션에 있는 teacherId 확인
+		logger.trace("Debug: nowSessionId[" + teacherId + "]");
 		
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
