@@ -114,13 +114,37 @@ public class TeacherReportController {
 		return "redirect:/auth/teacher/lecture/" + report.getLectureNo() + "/report/reportOne/" + returnReport.getReportNo();
 	}
 	
-	// 과제 고유번호(reportNo)에 해당하는 과제에 대한 정보를 수정
+	// 과제 고유번호(reportNo)에 해당하는 과제에 대한 정보를 수정 (Form)
 	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
 	public String updateReport(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 
 			@PathVariable(value = "reportNo") int reportNo) {
-		// 작성 바람
+		// 과제 고유번호(reportNo)에 해당하는 과제의 정보를 데이터베이스에서 가져온다
+		Report report = teacherReportService.getTeacherReportOne(reportNo);
+		// reportStartDate의 String 형태를 yyyy-MM-ddThh:mm 형식으로 변환한다
+		report.setReportStartdate(report.getReportStartdate().replace(" ", "T"));
+		// reportEndDate의 String 형태를 yyyy-MM-ddThh:mm 형식으로 변환한다
+		report.setReportEnddate(report.getReportEnddate().replace(" ", "T"));
+		
+		// [Logger] 과제(report) 확인
+		logger.trace("Debug: report[" + report + "]");
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("report", report);
 		
 		return "/auth/teacher/lecture/report/updateReport";
+	}
+	
+	// 과제 고유번호(reportNo)에 해당하는 과제에 대한 정보를 수정 (Form)
+	@PostMapping(value="/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
+	public String updateReport(Report report, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "reportNo") int reportNo) {
+		teacherReportService.updateTeacherReport(report);
+		
+		// [Logger] 과제(report) 확인
+		logger.trace("Debug: report[" + report + "]");
+		
+		return "redirect:/auth/teacher/lecture/" + report.getLectureNo() + "/report/reportOne/" + report.getReportNo();
 	}
 }
