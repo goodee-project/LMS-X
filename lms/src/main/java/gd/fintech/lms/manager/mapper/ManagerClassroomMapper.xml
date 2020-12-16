@@ -37,4 +37,13 @@
 		WHERE classroom_no = #{classroomNo}
 	</update>
 	
+	<select id="classroomOne" parameterType="int" resultType="gd.fintech.lms.vo.Classroom">
+		SELECT
+		classroom_no classroomNo,
+		classroom_number classroomNumber,
+		classroom_size classroomSize,
+		classroom_total classroomTotal
+		FROM classroom
+		WHERE classroom_no = ${classroomNo}
+	</select>
 </mapper>

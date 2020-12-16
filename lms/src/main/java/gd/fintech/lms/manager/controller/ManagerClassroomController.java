@@ -17,41 +17,41 @@ import gd.fintech.lms.vo.Classroom;
 public class ManagerClassroomController {
 	@Autowired private ManagerClassroomService managerClassroomService;
 	
-	@GetMapping("/auth/manager/classroomList")
+	@GetMapping("/auth/manager/classroom/classroomList")
 	public String classroomList(Model model) {
 		List<Classroom> classroomList = managerClassroomService.getClassroomList();
 		model.addAttribute("classroomList", classroomList);
-		return "auth/manager/classroomList";
+		return "auth/manager/classroom/classroomList";
 	}
 	
-	@GetMapping("/auth/manager/insertClassroom")
+	@GetMapping("/auth/manager/classroom/insertClassroom")
 	public String insertClassroom() {
-		return "auth/manager/insertClassroom";
+		return "auth/manager/classroom/insertClassroom";
 	}
 	
-	@PostMapping("/auth/manager/insertClassroom")
+	@PostMapping("/auth/manager/classroom/insertClassroom")
 	public String insertClassroom(Classroom classroom) {
 		managerClassroomService.insertClassroom(classroom);
-		return "redirect:/auth/manager/classroomList";
+		return "redirect:/auth/manager/classroom/classroomList";
 	}
 	
-	@GetMapping("/auth/manager/deleteClassroom")
+	@GetMapping("/auth/manager/classroom/deleteClassroom")
 	public String deleteClassroom(int classroomNo) {
 		managerClassroomService.deleteClassroom(classroomNo);
-		return "redirect:/auth/manager/classroomList";
+		return "redirect:/auth/manager/classroom/classroomList";
 	}
 	
-	@PostMapping("/auth/manager/updateClassroom")
+	@PostMapping("/auth/manager/classroom/updateClassroom")
 	public String updateClassroom(Classroom classroom) {
 		managerClassroomService.updateClassroom(classroom);
-		return "redirect:/auth/manager/updateClassroom";
+		return "redirect:/auth/manager/classroom/classroomList";
 	}
 	
-	@GetMapping("/auth/manager/updateClassroom/{classroomNo}")
+	@GetMapping("/auth/manager/classroom/updateClassroom/{classroomNo}")
 	public String updateClassroom(Model model,
 		@PathVariable(name="classroomNo") int classroomNo) {
-		
-		// model.addAttribute("classroom", classroom);
-		return "/auth/manager/updateClassroom";
+		Classroom classroomOne = managerClassroomService.classroomOne(classroomNo);
+		model.addAttribute("classroom", classroomOne);
+		return "auth/manager/classroom/updateClassroom";
 	}
 }

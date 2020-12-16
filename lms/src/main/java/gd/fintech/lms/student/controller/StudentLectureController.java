@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.student.service.StudentLectureService;
 import gd.fintech.lms.vo.ClassRegistration;
+import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom;
@@ -29,6 +30,7 @@ public class StudentLectureController {
 	@GetMapping("auth/student/lecture/classOne/{classRegistrationNo}")
 	public String classOne(Model model,
 			@PathVariable(name="classRegistrationNo") int classRegistrationNo) {
+		// 수강 리스트 가져오기
 		LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom lcstc = studentLectureService.selectStudentClassOne(classRegistrationNo);
 		
 		model.addAttribute("lcstc", lcstc);
@@ -78,11 +80,28 @@ public class StudentLectureController {
 		return "/auth/student/lecture/lectureList";
 	}
 	
-	// 수강 대기 상태일시 수강 취소 액션
-	@PostMapping("auth/student/lecture/cancelClass/{classRegistrationNo}")
-	public String cancelClass(@PathVariable(name="classRegistrationNo") int classRegistrationNo) {
+	// 학생 수강 신청 
+	@PostMapping("auth/student/lecture/registrationClass")
+	public String registrationClass(ClassRegistration classRegistration, ServletRequest request) {
+		// 세션에서 로그인 아이디 가져옴
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		String studentId = (String)session.getAttribute("loginId");
 		
-		studentLectureService.updateClassRegistrationState(classRegistrationNo);
-		return "redirect:/auth/student/lecture/classOne/" + classRegistrationNo;
+		// classRegistration에 데이터 추가
+		classRegistration.setAccountId(studentId);
+		
+		// 수강 신청
+		studentLectureService.insertRegistrationClass(classRegistration);
+		
+		return "redirect:/auth/student/index/1";
+	}
+	
+	
+	// 수강 대기 상태일시 수강 취소 액션
+	@PostMapping("auth/student/lecture/cancelClass")
+	public String cancelClass(ClassRegistrationCancel classRegistrationCancel) {
+		
+		studentLectureService.updateClassRegistrationState(classRegistrationCancel);
+		return "redirect:/auth/student/lecture/classOne/" + classRegistrationCancel.getClassRegistrationNo();
 	}
 }

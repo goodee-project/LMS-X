@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>updateReport</title>
+		<title>insertReport</title>
 		
 		<!-- Bootstrap Framework 사용 -->
 		

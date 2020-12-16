@@ -48,10 +48,15 @@ public class TeacherReportService {
 	}
 	
 	public Report insertTeacherReport(Report report) {
-		Report returnReport = new Report();
 		teacherReportMapper.insertTeacherReport(report);
+		
+		Report returnReport = new Report();
 		returnReport.setReportNo(report.getReportNo());		// reportNo Autoincrement 번호를 받아온다.
 		
 		return returnReport;
+	}
+	
+	public void updateTeacherReport(Report report) {
+		teacherReportMapper.updateTeacherReport(report);
 	}
 }

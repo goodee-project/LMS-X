@@ -47,14 +47,14 @@
 		})
 		changePoint();
 
-		// 
+		// 수강 신청 취소 버튼
 		$('#cancelClassBtn').click(function(){
 			console.log($('#cancelClassBtn').text());
 			// 처음 수강 신청 버튼 클릭시
 			// 수강 신청 사유를 적을 수 있는 칸이 출력되고 버튼 값이 바뀜
 			if($('#cancelClassBtn').text() == '수강 신청 취소'){
 				let cancelHtml = `
-					취소 사유 : <textarea cols="50" rows="3" name="classContent" id="classContent"></textarea>
+					취소 사유 : <textarea cols="50" rows="3" name="cancelContent" id="cancelContent"></textarea>
 				`
 				$('#cancelClassBtn').text('수강 취소하기');
 				$('#cancelClass').html(cancelHtml);
@@ -138,8 +138,9 @@
 	</form>
 	
 	<!-- 수강 대기상태 일시 수강 취소 가능 -->
-	<c:if test="${lcstc.classRegistration.classRegistrationState == '대기'}">		
-		<form id="cancelClassForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/cancelClass/${lcstc.classRegistration.classRegistrationNo}">
+	<c:if test="${lcstc.classRegistration.classRegistrationState == '대기'}">	
+		<form id="cancelClassForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/cancelClass">
+			<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
 			<div id="cancelClass">
 			</div>
 			<button id="cancelClassBtn" type="button" value="수강 신청 취소">수강 신청 취소</button>

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.ClassRegistration;
+import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom;
@@ -26,6 +27,12 @@ public interface StudentLectureMapper {
 	public List<Lecture> selectStudentLectureListByPage(Map<String, Object> map);
 	// 수강 신청 가능한 강좌 개수
 	public int selectStudentLectureListCount();
-	// 수강 신청 취소
+	// 수강 신청
+	public int insertClassRegistration(ClassRegistration classRegistration);
+	
+	
+	// 수강 신청 테이블 - 수강 신청 상태를 취소로 변경
 	public int updateClassRegistrationState(int classRegistrationNo);
+	// 수강 신청 취소 테이블 - 수강 신청 취소 내용 입력
+	public int insertClassRegistrationCancel(ClassRegistrationCancel classRegistrationCancel);
 }

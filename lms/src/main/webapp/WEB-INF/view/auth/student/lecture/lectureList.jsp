@@ -5,6 +5,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Lecture List</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.classRegistrationBtn').on('click', function(){
+			let paramLectureNo = $(this).val();
+			$.ajax({
+				url: '${pageContext.request.contextPath}/auth/student/lecture/checkClassRegistration',
+				type: 'post',
+				data: {lectureNo:paramLectureNo},
+				success: function(data){
+					if(data == false){
+						alert('이미 수강신청한 강좌입니다.');
+						return;
+					}else{
+						$('#classRegistrationForm' + paramLectureNo).submit();
+						return;
+					}
+				}
+			})
+		});
+	})
+</script>
 </head>
 <body>
 	<h1>수강 신청 - 강좌 목록</h1>
@@ -31,7 +53,12 @@
 				<td>${l.lectureStartdate}</td>
 				<td>${l.lectureEnddate}</td>
 				<td>${l.lectureTotal}명</td>
-				<td><a href="${pageContext.request.contextPath }/">수강 신청</a></td>
+				<td>
+					<form id="classRegistrationForm${l.lectureNo}" action="${pageContext.request.contextPath}/auth/student/lecture/registrationClass" method="post">
+						<input type="hidden" name="lectureNo" value="${l.lectureNo}">
+						<button class="classRegistrationBtn" type="button" value="${l.lectureNo}">수강 신청</button>
+					</form>
+				</td>
 			</tr>	
 		</c:forEach>
 	</table>

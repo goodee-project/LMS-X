@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import gd.fintech.lms.student.mapper.StudentLectureMapper;
 import gd.fintech.lms.vo.ClassRegistration;
+import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubjectAndTextbookAndClassroom;
@@ -56,8 +57,14 @@ public class StudentLectureService {
 			return endPage / rowPerPage + 1;			
 		}
 	}
+	// 수강 신청
+	public int insertRegistrationClass(ClassRegistration classRegistration) {
+		return studentLectureMapper.insertClassRegistration(classRegistration);
+	}
+	
 	// 수강 신청 취소
-	public int updateClassRegistrationState(int classRegistrationNo) {
-		return studentLectureMapper.updateClassRegistrationState(classRegistrationNo);
+	public void updateClassRegistrationState(ClassRegistrationCancel classRegistrationCancel) {
+		studentLectureMapper.updateClassRegistrationState(classRegistrationCancel.getClassRegistrationNo());
+		studentLectureMapper.insertClassRegistrationCancel(classRegistrationCancel);
 	}
 }
