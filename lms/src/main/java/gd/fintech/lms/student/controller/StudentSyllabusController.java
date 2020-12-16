@@ -15,11 +15,11 @@ public class StudentSyllabusController {
 	@Autowired StudentSyllabusService studentSyllabusService;
 	
 	//강의 계획서 페이지
-	@GetMapping("/auth/student/syllabus/{lectureNo}")
+	@GetMapping("/auth/student/lecture/syllabus/syllabus/{lectureNo}")
 	public String StudentSyllabus(Model model, @PathVariable(value = "lectureNo") int lectureNo) {
 		Syllabus studentSyllabus = studentSyllabusService.getStudentSyllabus(lectureNo);
 		
 		model.addAttribute("studentSyllabus", studentSyllabus);
-		return "syllabus";
+		return "/auth/student/lecture/syllabus/syllabus";
 	}
 }
