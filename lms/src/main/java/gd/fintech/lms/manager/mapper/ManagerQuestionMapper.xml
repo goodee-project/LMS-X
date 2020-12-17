@@ -39,6 +39,6 @@
 		FROM
 			question
 		WHERE
-			question_no = ${questionNo}
+			question_no = #{questionNo}
 	</select>
 </mapper>

@@ -17,4 +17,20 @@ public class ManagerSubjectService {
 	public List<Subject> getSubjectList() {
 		return managerSubjectMapper.selectSubjectList();
 	}
+	
+	public int insertSubject(Subject subject) {
+		return managerSubjectMapper.insertSubject(subject);
+	}
+	
+	public int deleteSubject(int subjectNo) {
+		return managerSubjectMapper.deleteSubject(subjectNo);
+	}
+	
+	public int updateSubject(Subject subject) {
+		return managerSubjectMapper.updateSubject(subject);
+	}
+	
+	public Subject subjectOne(int subjectNo) {
+		return managerSubjectMapper.subjectOne(subjectNo);
+	}
 }

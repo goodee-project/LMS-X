@@ -13,4 +13,61 @@
 		FROM
 			textbook
 	</select>
+	
+	<insert id="insertTextbook" parameterType="gd.fintech.lms.vo.Textbook">
+		INSERT INTO textbook (
+			textbook_isbn,
+			textbook_title,
+			textbook_writer,
+			textbook_publisher,
+			textbook_publishdate,
+			textbook_info,
+			textbook_price
+		) VALUES (
+			#{textbookIsbn},
+			#{textbookTitle},
+			#{textbookWriter},
+			#{textbookPublisher},
+			now(),
+			#{textbookInfo},
+			#{textbookPrice}
+		)
+	</insert>
+	
+	<delete id="deleteTextbook" parameterType="String">
+		DELETE FROM
+			textbook
+		WHERE
+			textbook_isbn = #{textbookIsbn}
+	</delete>
+	
+	<update id="updateTextbook" parameterType="gd.fintech.lms.vo.Textbook">
+		UPDATE
+			textbook
+		SET
+			textbook_isbn = #{textbookIsbn},
+			textbook_title = #{textbookTitle},
+			textbook_writer = #{textbookWriter},
+			textbook_publisher = #{textbookPublisher},
+			textbook_publishdate = now(),
+			textbook_info = #{textbookInfo},
+			textbook_price = #{textbookPrice}
+		WHERE
+			textbook_isbn = #{textbookIsbn}
+	</update>
+	
+	<select id="textbookOne" parameterType="String" resultType="gd.fintech.lms.vo.Textbook">
+		SELECT 
+			textbook_isbn textbookIsbn,
+			textbook_title textbookTitle,
+			textbook_writer textbookWriter,
+			textbook_publisher textbookPublisher,
+			textbook_publishdate textbookPublishdate,
+			textbook_info textbookInfo,
+			textbook_price textbookPrice
+		FROM
+			textbook
+		WHERE
+			textbook_isbn = #{textbookIsbn}
+	</select>
 </mapper>

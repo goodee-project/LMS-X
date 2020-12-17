@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import gd.fintech.lms.manager.mapper.ManagerClassroomMapper;
 import gd.fintech.lms.manager.service.ManagerClassroomService;
 import gd.fintech.lms.vo.Classroom;
 

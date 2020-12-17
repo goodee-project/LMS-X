@@ -12,4 +12,53 @@
 		FROM
 			subject
 	</select>
+	
+	<insert id="insertSubject" parameterType="gd.fintech.lms.vo.Subject">
+		INSERT INTO subject (
+			subject_name,
+			subject_createdate,
+			subject_updatedate,
+			subject_totalday,
+			subject_info
+		) VALUES (
+			#{subjectName},
+			now(),
+			now(),
+			#{subjectTotalday},
+			#{subjectInfo}
+		)
+	</insert>
+	
+	<delete id="deleteSubject" parameterType="int">
+		DELETE FROM
+			subject
+		WHERE
+			subject_no = #{subjectNo}
+	</delete>
+	
+	<update id="updateSubject" parameterType="gd.fintech.lms.vo.Subject">
+		UPDATE
+			subject
+		SET
+			subject_name = #{subjectName},
+			subject_updatedate = now(),
+			subject_totalday = #{subjectTotalday},
+			subject_info = #{subjectInfo}
+		WHERE
+			subject_no = #{subjectNo}
+	</update>
+	
+	<select id="subjectOne" parameterType="int" resultType="gd.fintech.lms.vo.Subject">
+		SELECT
+			subject_no subjectNo,
+			subject_name subjectName,
+			subject_createdate subjectCreatedate,
+			subject_updatedate subjectUpdatedate,
+			subject_totalday subjectTotalday,
+			subject_info subjectInfo
+		FROM
+			subject
+		WHERE
+			subject_no = #{subjectNo}
+	</select>
 </mapper>

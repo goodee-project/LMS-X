@@ -22,7 +22,7 @@ public class ManagerQuestionService {
 		return managerQuestionMapper.deleteQuestion(questionNo);
 	}
 	
-	public Question getQuestionOne(int questionNo) {
+	public Question questionOne(int questionNo) {
 		return managerQuestionMapper.questionOne(questionNo);
 	}
 }

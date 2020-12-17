@@ -71,6 +71,6 @@
 		FROM
 			faq
 		WHERE
-			faq_no = ${faqNo}
+			faq_no = #{faqNo}
 	</select>
 </mapper>

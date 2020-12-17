@@ -50,6 +50,6 @@
 		FROM
 			classroom
 		WHERE
-			classroom_no = ${classroomNo}
+			classroom_no = #{classroomNo}
 	</select>
 </mapper>
