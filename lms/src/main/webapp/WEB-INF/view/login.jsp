@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>login</title>
 </head>
 <body>
 <a href="${pageContext.request.contextPath}/studentLogin">학생 로그인</a>

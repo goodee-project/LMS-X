@@ -18,11 +18,11 @@ public class SignupRestController {
 	 
 	private static final Logger log = LoggerFactory.getLogger(SignupRestController.class);
 
-	//도로명으로 주소찾기
+	// 도로명으로 주소찾기
 	@GetMapping("/signup/address/{street}/{building1}/{building2}")
-	public List<Address> selectAddress(@PathVariable(name="street")String street,
-									   @PathVariable(name="building1")String building1,
-									   @PathVariable(name="building2")String building2){
+	public List<Address> selectAddress(@PathVariable(name="street") String street,
+									   @PathVariable(name="building1") String building1,
+									   @PathVariable(name="building2") String building2){
 		log.debug("address 도로명찾기 접속 성공");
 		log.debug(street);
 		log.debug(building1);
@@ -38,15 +38,16 @@ public class SignupRestController {
 		return signupRestService.getAddress(address);
 		
 	}
-	//아이디 중복 체크
+	// 아이디 중복 체크
 	@GetMapping("/signup/accountIdCheck/{accountId}")
-	public String selectAccountId(@PathVariable(name="accountId")String accountId) {
+	public String selectAccountId(@PathVariable(name="accountId") String accountId) {
 		
 		return signupRestService.checkAccountId(accountId);
 	}
-	//이메일 중복 체크
+	// 이메일 중복 체크
 	@GetMapping("/signup/emailCheck/{email}")
-	public String selectEmail(@PathVariable(name="email")String email) {
+	public String selectEmail(@PathVariable(name="email") String email) {
+		
 		return signupRestService.checkEmail(email);
 	}
 }

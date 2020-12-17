@@ -1,68 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.restmapper.SignupRestMapper">
+
 	<!-- 아이디 검색 -->
 	<select id="selectAccountId" parameterType="String" resultType="String">
 		SELECT
 			account_id
-		FROM account
-		WHERE account_id = #{accountId}
+		FROM 
+			account
+		WHERE 
+			account_id = #{accountId}
 	</select>
 	
 	<!-- 학생테이블 이메일 검색 -->
 	<select id="selectStudentEmail" parameterType="String" resultType="String">
 		SELECT
 			student_email
-		FROM student
-		WHERE student_email = #{email}
+		FROM 
+			student
+		WHERE
+			student_email = #{email}
 	</select>
 	
 	<!-- 학생 대기테이블 이메일 검색 -->
 	<select id="selectStudentQueueEmail" parameterType="String" resultType="String">
 		SELECT
 			student_email
-		FROM student_queue
-		WHERE student_email = #{email}
+		FROM 
+			student_queue
+		WHERE 
+			student_email = #{email}
 	</select>
 	
 	<!-- 강사테이블 이메일 검색 -->
 	<select id="selectTeacherEmail" parameterType="String" resultType="String">
 		SELECT
 			teacher_email
-		FROM teacher
-		WHERE teacher_email = #{email}
+		FROM 
+			teacher
+		WHERE 
+			teacher_email = #{email}
 	</select>
 	
 	<!--  강사 대기테이블 이메일 검색 -->
 	<select id="selectTeacherQueueEmail" parameterType="String" resultType="String">
 		SELECT
 			teacher_email
-		FROM teacher_queue
-		WHERE teacher_email = #{email}
+		FROM 
+			teacher_queue
+		WHERE 
+			teacher_email = #{email}
 	</select>
 	
 	<!--  운영자테이블 이메일 검색 -->
 	<select id="selectManagerEmail" parameterType="String" resultType="String">
 		SELECT
 			manager_email
-		FROM manager
-		WHERE manager_email = #{email}
+		FROM 
+			manager
+		WHERE 
+			manager_email = #{email}
 	</select>
 	
 	<!--  운영자 대기테이블 이메일 검색 -->
 	<select id="selectManagerQueueEmail" parameterType="String" resultType="String">
 		SELECT
 			manager_email
-		FROM manager_queue
-		WHERE manager_email = #{email}
+		FROM 
+			manager_queue
+		WHERE 
+			manager_email = #{email}
 	</select>
+	
 	<!-- 관리자테이블 이메일 검색 -->
 	<select id="selectAdminEmail" parameterType="String" resultType="String">
 		SELECT
 			admin_email
-		FROM admin
-		WHERE admin_email = #{email}
+		FROM 
+			admin
+		WHERE 
+			admin_email = #{email}
 	</select>
+	
 	<!-- 주소검색 -->
 	<select id="selectAddress" parameterType="gd.fintech.lms.vo.Address" resultType="gd.fintech.lms.vo.Address" >
 		SELECT 
@@ -73,24 +92,24 @@
 			 	 street,
 			 	 building1,
 			 	 building2
-		FROM address 
+		FROM 
+			address 
 		<where>
 			<!-- 도로명만 있을경우 -->
-			<if test="street != null and building1 == 'null' and building2 == 'null'">
+			<if test = "street != null and building1 == 'null' and building2 == 'null'">
 				street = #{street}
 			</if>
 			<!-- 도로명+building1 만 있을경우 -->
-			<if test="street != null and building1 != 'null' and building2 == 'null'">
-				street = #{street}
-				AND building1 = #{building1}
+			<if test = "street != null and building1 != 'null' and building2 == 'null'">
+				street = #{street} AND
+				building1 = #{building1}
 			</if>
 			<!-- 우편번호 제외 다 있을경우 -->
-			<if test="street != null and building1 != 'null' and building2 != 'null'">
-				street = #{street}
-				AND building1 = #{building1}
-				AND building2 = #{building2}
+			<if test = "street != null and building1 != 'null' and building2 != 'null'">
+				street = #{street} AND 
+				building1 = #{building1} AND
+				building2 = #{building2}
 			</if>
 		</where>
 	</select>
-
 </mapper>

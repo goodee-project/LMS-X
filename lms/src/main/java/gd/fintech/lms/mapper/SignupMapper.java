@@ -9,14 +9,15 @@ import gd.fintech.lms.vo.TeacherQueue;
 
 @Mapper
 public interface SignupMapper {
-	//계정 추가
+	// 계정 추가
 	public int insertAccount(Account account);
-	//학생 대기 추가
-	public int insertStudentQueue(StudentQueue studentQueue);
 	
-	//강사 대기 추가
+	// 학생 대기 추가
+	public int insertStudentQueue(StudentQueue studentQueue);
+
+	// 강사 대기 추가
 	public int insertTeacherQueue(TeacherQueue teacherQueue);
 	
-	//운영자 대기 추가
+	// 운영자 대기 추가
 	public int insertManagerQueue(ManagerQueue managerQueue);
 }

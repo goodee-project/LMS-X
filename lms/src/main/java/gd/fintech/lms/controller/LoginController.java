@@ -2,6 +2,8 @@ package gd.fintech.lms.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,23 +16,24 @@ import gd.fintech.lms.vo.Account;
 public class LoginController {
 	@Autowired private LoginService loginService;
 	
-	//로그인 페이지 이동
+	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
+
+	// 로그인 페이지 이동
 	@GetMapping({"/","/login"})
 	public String login(HttpSession session) {
 		
-		//로그인이 되어 있으면
-		if(session.getAttribute("loginId")!=null) {
-			if(session.getAttribute("loginLevel").equals(1)) {
+		// 로그인이 되어 있으면
+		if ( session.getAttribute("loginId") != null ) {
+			if ( session.getAttribute("loginLevel").equals(1) ) {
 				return "redirect:/auth/student/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(2)) {
+			if ( session.getAttribute("loginLevel").equals(2) ) {
 				return "redirect:/auth/teacher/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(3)) {
+			if ( session.getAttribute("loginLevel").equals(3) ) {
 				return "redirect:/auth/manager/index";
 			}
-			if(session.getAttribute("loginLevel").equals(4)) {
-				
+			if ( session.getAttribute("loginLevel").equals(4) ) {
 				return "redirect:/auth/admin/index";
 			}
 		}
@@ -39,18 +42,17 @@ public class LoginController {
 	//학생 로그인 페이지 이동
 	@GetMapping("/studentLogin")
 	public String studentLogin(HttpSession session) {
-		if(session.getAttribute("loginId")!=null) {
-			if(session.getAttribute("loginLevel").equals(1)) {
+		if ( session.getAttribute("loginId") != null ) {
+			if ( session.getAttribute("loginLevel").equals(1) ) {
 				return "redirect:/auth/student/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(2)) {
+			if ( session.getAttribute("loginLevel").equals(2) ) {
 				return "redirect:/auth/teacher/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(3)) {
+			if ( session.getAttribute("loginLevel").equals(3) ) {
 				return "redirect:/auth/manager/index";
 			}
-			if(session.getAttribute("loginLevel").equals(4)) {
-				
+			if ( session.getAttribute("loginLevel").equals(4) ) {
 				return "redirect:/auth/admin/index";
 			}
 		}
@@ -59,18 +61,17 @@ public class LoginController {
 	//강사 로그인 페이지 이동
 	@GetMapping("/teacherLogin")
 	public String teacherLogin(HttpSession session) {
-		if(session.getAttribute("loginId")!=null) {
-			if(session.getAttribute("loginLevel").equals(1)) {
+		if ( session.getAttribute("loginId") != null ) {
+			if ( session.getAttribute("loginLevel").equals(1) ) {
 				return "redirect:/auth/student/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(2)) {
+			if ( session.getAttribute("loginLevel").equals(2) ) {
 				return "redirect:/auth/teacher/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(3)) {
+			if ( session.getAttribute("loginLevel").equals(3) ) {
 				return "redirect:/auth/manager/index";
 			}
-			if(session.getAttribute("loginLevel").equals(4)) {
-				
+			if ( session.getAttribute("loginLevel").equals(4) ) {
 				return "redirect:/auth/admin/index";
 			}
 		}
@@ -79,18 +80,17 @@ public class LoginController {
 	//운영자 로그인 페이지 이동
 	@GetMapping("/managerLogin")
 	public String managerLogin(HttpSession session) {
-		if(session.getAttribute("loginId")!=null) {
-			if(session.getAttribute("loginLevel").equals(1)) {
+		if ( session.getAttribute("loginId") != null ) {
+			if ( session.getAttribute("loginLevel").equals(1) ) {
 				return "redirect:/auth/student/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(2)) {
+			if ( session.getAttribute("loginLevel").equals(2) ) {
 				return "redirect:/auth/teacher/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(3)) {
+			if ( session.getAttribute("loginLevel").equals(3) ) {
 				return "redirect:/auth/manager/index";
 			}
-			if(session.getAttribute("loginLevel").equals(4)) {
-				
+			if ( session.getAttribute("loginLevel").equals(4) ) {
 				return "redirect:/auth/admin/index";
 			}
 		}
@@ -99,18 +99,17 @@ public class LoginController {
 	//관리자 로그인 페이지 이동
 	@GetMapping("/adminLogin")
 	public String adminLogin(HttpSession session) {
-		if(session.getAttribute("loginId")!=null) {
-			if(session.getAttribute("loginLevel").equals(1)) {
+		if ( session.getAttribute("loginId") != null ) {
+			if ( session.getAttribute("loginLevel").equals(1) ) {
 				return "redirect:/auth/student/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(2)) {
+			if ( session.getAttribute("loginLevel").equals(2) ) {
 				return "redirect:/auth/teacher/index/1";
 			}
-			if(session.getAttribute("loginLevel").equals(3)) {
+			if ( session.getAttribute("loginLevel").equals(3) ) {
 				return "redirect:/auth/manager/index";
 			}
-			if(session.getAttribute("loginLevel").equals(4)) {
-				
+			if ( session.getAttribute("loginLevel").equals(4) ) {
 				return "redirect:/auth/admin/index";
 			}
 		}
@@ -124,20 +123,20 @@ public class LoginController {
 	
 		Account loginAccount = loginService.getLoginCheck(account); 
 		//로그인실패
-		if(loginAccount==null) {
+		if ( loginAccount==null ) {
 			return "redirect:/login";
 		}
 		//로그인 성공
 		session.setAttribute("loginId", loginAccount.getAccountId());
 		session.setAttribute("loginLevel", loginAccount.getAccountLevel());
 		
-		if(loginAccount.getAccountLevel()==1) {
+		if ( session.getAttribute("loginLevel").equals(1) ) {
 			return "redirect:/auth/student/index/1";
-		}else if(loginAccount.getAccountLevel()==2) {
+		} else if ( session.getAttribute("loginLevel").equals(2) ) {
 			return "redirect:/auth/teacher/index/1";
-		}else if(loginAccount.getAccountLevel()==3) {
+		} else if ( session.getAttribute("loginLevel").equals(3) ) {
 			return "redirect:/auth/manager/index";
-		}else {
+		} else {
 			return "redirect:/auth/admin/index";
 		}
 	}
@@ -145,7 +144,10 @@ public class LoginController {
 	@GetMapping("/auth/logout")
 	public String logout(HttpSession session) {
 		//System.out.println("로그아웃");
-		session.invalidate(); //session데이터 삭제
+		log.debug("로그아웃");
+		
+		//session데이터 삭제
+		session.invalidate(); 
 		return "redirect:/login";
 	}
 }
