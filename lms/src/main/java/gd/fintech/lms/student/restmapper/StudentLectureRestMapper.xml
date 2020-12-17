@@ -11,4 +11,24 @@
 			lecture_no = #{lectureNo} AND
 			account_id = #{accountId}
 	</select>
+	
+	<!-- 과제 제출 첨부파일 다운로드 횟수 증가 -->
+	<update id="updateReportSubmitFileCount" parameterType="String">
+		UPDATE 
+			report_submit_file
+		SET
+			report_submit_file_count = report_submit_file_count + 1
+		WHERE
+			report_submit_file_uuid = #{uuid}
+	</update>
+	
+	<!-- 과제 제출 첨부파일 다운로드 횟수 가져오기 -->
+	<select id="selectReportSubmitFileCount" parameterType="String" resultType="int">
+		SELECT 
+			report_submit_file_count
+		FROM 
+			report_submit_file
+		WHERE 
+			report_submit_file_uuid = #{uuid}
+	</select>
 </mapper>

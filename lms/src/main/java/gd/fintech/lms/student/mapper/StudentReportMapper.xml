@@ -95,7 +95,7 @@
 		<selectKey resultType="int" keyProperty="reportSubmitNo" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO report_submit_no (
+		INSERT INTO report_submit (
 			report_no,
 			account_id,
 			report_submit_writer,

@@ -22,6 +22,7 @@ import gd.fintech.lms.vo.ClassRegistration;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject;
 import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.ReportSubmit;
+import gd.fintech.lms.vo.ReportSubmitFile;
 import gd.fintech.lms.vo.ReportSubmitForm;
 
 @Controller
@@ -130,7 +131,7 @@ public class StudentReportController {
 		if (reportSubmit == null) {
 			return "redirect:/auth/student/lecture/" + lectureNo + "/report/insertReport/" + reportNo;
 		}
-
+		
 		model.addAttribute("lectureNo", lectureNo);
 		model.addAttribute("report", report);
 		model.addAttribute("reportSubmit", reportSubmit);
