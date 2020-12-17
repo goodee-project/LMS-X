@@ -12,9 +12,14 @@
 		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1">강좌 공지사항</a>
 		    </li>
 		    
-		    <!-- 질문게시판 -->
+		    <!-- 질문 게시판 -->
 		    <li class="nav-item">
-		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionList/1">질문게시판</a>
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionList/1">질문 게시판</a>
+		    </li>
+		    
+		    <!-- 자료 게시판 -->
+		    <li class="nav-item">
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/lectureArchive/lectureArchiveList/1">자료 게시판</a>
 		    </li>
 		    
 		    <!-- 과제 관리 -->
@@ -24,7 +29,7 @@
 		    
 		    <!-- 출석 관리 -->
 		    <li class="nav-item">
-		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/attendanceCalendar">출석 관리</a>
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/attendanceCalendarByMonth/-1/-1">출석 관리</a>
 		    </li>
 		    
 		    <!-- 강의계획서 관리 -->
