@@ -10,7 +10,9 @@
 			syllabus_file_original syllabusFileOriginal,
 			syllabus_file_uuid syllabusFileUuid,
 			syllabus_file_createdate syllabusFileCreateDate
-		From syllabus
-		WHERE lecture_no = #{lectureNo}
+		From 
+			syllabus
+		WHERE 
+			lecture_no = #{lectureNo}
 	</select>
 </mapper>

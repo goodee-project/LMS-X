@@ -14,26 +14,34 @@
 			#{questionFileOriginal},
 			#{questionFileSize},
 			#{questionFileType},
-			#{questionFileCreatedate}
+			now()
 		)
 	</insert>
 	
 	<!--질문 게시판 게시글 파일 이름 리스트-->
 	<select id="selectStudentQnaFileNameList" parameterType="int" resultType="String">
-		SELECT question_file_uuid
-		FROM question_file
-		WHERE question_no = #{questionNo}
+		SELECT 
+			question_file_uuid
+		FROM 
+			question_file
+		WHERE 
+			question_no = #{questionNo}
 	</select>
 	
 	<!--학생 : 질문 게시판 파일 삭제 -->
 	<delete id="deleteStudentQnaFile" parameterType="int">
-		DELETE FROM question_file
-		WHERE question_No = #{questionNo}
+		DELETE FROM 
+			question_file
+		WHERE 
+			question_No = #{questionNo}
 	</delete>
 	
 	<!-- 질문 게시판 수정시 파일 한개만 삭제 하는 기능  -->
 	<delete id="deleteStudentQnaFileOne" parameterType="String">
-		DELETE FROM question_file
-		WHERE question_file_uuid = #{questionFileUuid}
+		DELETE 
+		FROM 
+			question_file
+		WHERE 
+			question_file_uuid = #{questionFileUuid}
 	</delete>
 </mapper>

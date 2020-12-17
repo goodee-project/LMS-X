@@ -20,7 +20,7 @@ public class StudentLectureNoticeController {
 	@Autowired private StudentLectureNoticeService studentLectureNoticeService;
 	
 	// 학생이 강의 공지사항 리스트를 확인
-	@GetMapping("/auth/student/lectureNotice/lectureNoticeList/{lectureNo}/{currentPage}")
+	@GetMapping("/auth/student/lecture/{lectureNo}/lectureNotice/lectureNoticeList/{currentPage}")
 	public String StudentLectureNoticeList(Model model,
 			@PathVariable(name = "currentPage", required = true) int currentPage,
 			@PathVariable(name = "lectureNo", required = true)int lectureNo) {
@@ -53,17 +53,18 @@ public class StudentLectureNoticeController {
 		model.addAttribute("navLastPage", navLastPage);
 		
 		model.addAttribute("lectureNotice", lectureNotice);
+		model.addAttribute("lectureNo", lectureNo);
 		
-		return "auth/student/lectureNotice/lectureNoticeList";
+		return "auth/student/lecture/lectureNotice/lectureNoticeList";
 	}
 	
 	//공지사항 상세보기
-	@GetMapping("/auth/student/lectureNotice/lectureNoticeOne/{lectureNo}/{lectureNotcieNo}")
+	@GetMapping("/auth/student/lecture/{lectureNo}/lectureNotice/lectureNoticeOne/{lectureNotcieNo}")
 	public String lectureNoticeOne(Model model,
 			@PathVariable(value = "lectureNo") int lectureNo,
 			@PathVariable(value = "lectureNotcieNo") int lectureNoticeNo) {
 		LectureNotice lectureNotice = studentLectureNoticeService.getStudentLectureNoticeOne(lectureNoticeNo);
 		model.addAttribute("lectureNotice", lectureNotice);
-		return "/auth/student/lectureNotice/lectureNoticeOne";
+		return "/auth/student/lecture/lectureNotice/lectureNoticeOne";
 	}
 }

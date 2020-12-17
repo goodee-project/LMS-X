@@ -3,26 +3,25 @@
 <mapper namespace="gd.fintech.lms.student.mapper.StudentQnaMapper">
 	
 	<!-- select 쿼리 태그에 관계도를 위한 resultMap 속성 추가  -->
+	<!--질문 정보-->
 	<resultMap type="gd.fintech.lms.vo.Question" id="selectStudentQnaOneResult">
-	
-      <result property="lectureNo" column="lecture_no"/>
-      <result property="questionNo" column="question_no"/>
-      <result property="questionTitle" column="question_title"/>
-      <result property="questionContent" column="question_content"/>
-      <result property="questionCount" column="question_count"/>
-      <result property="questionCreatedate" column="question_createdate"/>
-      <result property="questionUpdatedate" column="question_updatedate"/>
-      <result property="questionPassword" column="question_password"/>
-      
-     <collection property="questionFile" ofType="gd.fintech.lms.vo.QuestionFile">
-      <result property="questionFileUuid" column="question_file_uuid"/>
-      <result property="questionFileOriginal" column="question_file_original"/>
-      <result property="questionNo" column="questionNo"/>
-      <result property="questionFileSize" column="question_file_size"/>
-      <result property="questionFileType" column="question_file_type"/>
-      <result property="questionFileCreatedate" column="question_file_createdate"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="questionNo" column="question_no"/>
+		<result property="questionTitle" column="question_title"/>
+		<result property="questionContent" column="question_content"/>
+		<result property="questionCount" column="question_count"/>
+		<result property="questionCreatedate" column="question_createdate"/>
+		<result property="questionUpdatedate" column="question_updatedate"/>
+		<result property="questionPassword" column="question_password"/>
+    <!-- 질문 파일 정보  -->  
+	<collection property="questionFile" ofType="gd.fintech.lms.vo.QuestionFile">
+		<result property="questionFileUuid" column="question_file_uuid"/>
+		<result property="questionFileOriginal" column="question_file_original"/>
+		<result property="questionNo" column="questionNo"/>
+		<result property="questionFileSize" column="question_file_size"/>
+		<result property="questionFileType" column="question_file_type"/>
+		<result property="questionFileCreatedate" column="question_file_createdate"/>
      </collection>
-     
    </resultMap>
 	
 	<!-- 질문 리스트 페이징 + 학생이 질문 리스트 출력시 질문 번호 강의 번호 글쓴이 이름 제목 생성일 조회수를 보여준다  --> 
@@ -34,17 +33,22 @@
 			question_title questionTitle,
 			question_createdate questionCreatedate,
 			question_count questionCount
-		FROM question
-		WHERE lecture_no = #{lectureNo}
-		ORDER BY question_no DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+		FROM
+			question
+		WHERE 
+			lecture_no = #{lectureNo}
+		ORDER BY 
+			question_no DESC
+		LIMIT 
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- 질문 게시판의 게시글 수 : 학생  -->
 	<select id="selectQnaCount" parameterType="String" resultType="int">
 		SELECT
 		COUNT(*)
-		FROM question 
+		FROM 
+			question 
 	</select>
 	
 	<!--질문 게시판 게시글 작성-->
@@ -59,9 +63,9 @@
 		) VALUES (
 			#{questionTitle},
 			#{questionContent},
-			#{questionCreatedate},
-			#{questionUpdatedate},
-			#{questionCount},
+			now(),
+			now(),
+			0,
 			#{questionPassword}
 		)
 		
@@ -81,15 +85,19 @@
 			qf.question_file_type,
 			qf.question_file_count,
 			qf.question_file_createdate
-		From question q
-		LEFT OUTER JOIN question_file qf
-		on q.question_no = qf.question_no
-		WHERE q.question_no = #{questionNo}
+		From 
+			question q
+		LEFT OUTER JOIN 
+			question_file qf ON 
+			q.question_no = qf.question_no
+		WHERE 
+			q.question_no = #{questionNo}
 	</select>
 	
 	<!--질문 게시판 내용 수정-->
 	<update id="updateStudentQna" parameterType="gd.fintech.lms.vo.Question">
-		UPDATE question
+		UPDATE 
+			question
 		SET
 			question_title = #{questionTitle},
 			question_content = #{questionContent},
@@ -98,7 +106,9 @@
 	
 	<!-- 질문 게시판 게시글 삭제 -->
 	<delete id="deleteStudentQna" parameterType="int">
-		DELETE FROM question
-		WHERE question_no = #{questionNo}
+		DELETE FROM 
+			question
+		WHERE 
+			question_no = #{questionNo}
 	</delete>
 </mapper>
