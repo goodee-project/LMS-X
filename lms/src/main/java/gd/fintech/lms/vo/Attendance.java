@@ -9,6 +9,7 @@ import lombok.Data;
 public class Attendance {
 	private int		lectureNo;				// 강좌 고유번호
 	private String	accountId;				// 계정 아이디 (학생)
+	private Student	student;				// 학생 Vo
 	private String	attendenceDay;			// 출석한 날짜
 	private String	attendanceCreatedate;	// 출석부 정보 생성 일시
 	private String	attendanceUpdatedate;	// 출석부 정보 업데이트 일시

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherAttendanceMapper">
+	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectTeacherAttendanceListResult">
+		<result property="accountId" column="account_id" />
+		<result property="attendanceState" column="attendance_state" />
+		<result property="attendanceRemark" column="attendance_remark" />
+		<collection property="student" ofType="gd.fintech.lms.vo.Student">
+			<result property="studentName" column="student_name" />
+			<result property="studentGender" column="student_gender" />
+		</collection>
+	</resultMap>
+	
+	<!-- 수강신청(class_registration), 학생(student), 출석(attendance) 테이블을 통해 학생들의 출석 상태 목록을 가져온다 -->
+	<select id="selectTeacherAttendanceListByDay" parameterType="java.util.Map" resultMap="selectTeacherAttendanceListResult">
+		SELECT
+			cr.account_id, 
+		 	s.student_name, 
+			s.student_gender, 
+			a.attendance_state, 
+			a.attendance_remark
+		FROM
+			class_registration cr
+		LEFT OUTER JOIN
+			student s ON
+			cr.account_id = s.student_id
+		LEFT OUTER JOIN
+			attendance a ON
+			cr.account_id = a.account_id AND
+			YEAR(a.attendance_day) = #{currentYear} AND
+			MONTH(a.attendance_day) = #{currentMonth} AND
+			DAY(a.attendance_day) = #{currentDay}
+		WHERE
+			cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료" AND
+			cr.lecture_no = #{lectureNo}
+		ORDER BY
+			s.student_name
+	</select>
+	
+	<!-- 강사가 출석(attendance) 테이블에 강좌 고유번호, 계정 아이디, 출석 날짜에 모두 해당하는 데이터를 수정한다 (출석 상태 변경) -->
+  	<update id="updateTeacherAttendance" parameterType="gd.fintech.lms.vo.Attendance">
+  		UPDATE
+			attendance
+		SET
+			attendance_state = #{attendanceState}, 
+			attendance_updatedate = NOW()
+		WHERE
+			lecture_no = 1 AND
+			account_id = #{accountId} AND
+			attendance_day = #{attendanceDays}
+  	</update>
+</mapper>

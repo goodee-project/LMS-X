@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.teacher.service.TeacherAttendanceService;
+import gd.fintech.lms.vo.Attendance;
 
 @Controller
 public class TeacherAttendanceController {
 	@Autowired private TeacherAttendanceService teacherAttendanceService;
 	
-	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/attendance/attendanceCalendarByMonth/{currentYear}/{currentMonth}")
+	// 월별 출석 페이지
+	@GetMapping(value = "/auth/teacher/lecture/{lectureNo}/attendance/attendanceCalendarByMonth/{currentYear}/{currentMonth}")
 	public String attendanceByMonth(Model model, 
 			@PathVariable(name = "lectureNo") int lectureNo, 
 			@PathVariable(name = "currentYear") int currentYear, 
@@ -56,5 +58,39 @@ public class TeacherAttendanceController {
 		model.addAttribute("firstDayOfWeek", firstDayOfWeek);			// 1일의 요일
 		
 		return "/auth/teacher/lecture/attendance/attendanceCalendarByMonth";
+	}
+	
+	// 일별 출석 페이지
+	@GetMapping(value = "/auth/teacher/lecture/{lectureNo}/attendance/attendanceCalendarByDay/{target}/{currentYear}/{currentMonth}/{currentDay}")
+	public String attendanceByDay(Model model, 
+			@PathVariable(name = "lectureNo") int lectureNo, 
+			@PathVariable(name = "target") String target, 
+			@PathVariable(name = "currentYear", required = true) int currentYear, 
+			@PathVariable(name = "currentMonth", required = true) int currentMonth, 
+			@PathVariable(name = "currentDay", required = true) int currentDay) {
+		Calendar targetDay = Calendar.getInstance();
+		targetDay.set(Calendar.YEAR, currentYear);
+		targetDay.set(Calendar.MONTH, currentMonth - 1);
+		targetDay.set(Calendar.DATE, currentDay);
+		
+		if (target.equals("pre")) {
+			targetDay.add(Calendar.DATE, -1);
+		} else if (target.equals("next")) {
+			targetDay.add(Calendar.DATE, 1);
+		}
+		
+		List<Attendance> attendanceList = teacherAttendanceService.getTeacherAttendanceListByDay(
+				lectureNo, 
+				targetDay.get(Calendar.YEAR), 
+				targetDay.get(Calendar.MONTH) + 1, 
+				targetDay.get(Calendar.DATE));
+		
+		model.addAttribute("attendanceList", attendanceList);
+		
+		model.addAttribute("currentYear", targetDay.get(Calendar.YEAR));
+		model.addAttribute("currentMonth", targetDay.get(Calendar.MONTH) + 1);
+		model.addAttribute("currentDay", targetDay.get(Calendar.DATE));
+		
+		return "/auth/teacher/lecture/attendance/attendanceCalendarByDay";
 	}
 }

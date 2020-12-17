@@ -87,7 +87,7 @@
 		<div class="container">
 			<h3>월별 출석부</h3>
 			
-			<!-- 연도 및 월 출력 -->
+			<!-- 날짜 출력 및 이동 -->
             <table class="attendanceTableMenu">
                <tr>
                   <td width="35%" style="text-align: right;">

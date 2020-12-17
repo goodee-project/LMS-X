@@ -14,7 +14,7 @@ import gd.fintech.lms.vo.Report;
 @Service
 @Transactional
 public class TeacherReportService {
-@Autowired private TeacherReportMapper teacherReportMapper;
+	@Autowired private TeacherReportMapper teacherReportMapper;
 	
 	// 강사가 출제한 과제 목록을 출력
 	// 강좌 고유번호(lectureNo)를 이용
