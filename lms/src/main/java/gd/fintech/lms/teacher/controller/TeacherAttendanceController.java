@@ -93,4 +93,16 @@ public class TeacherAttendanceController {
 		
 		return "/auth/teacher/lecture/attendance/attendanceCalendarByDay";
 	}
+	
+	// 오늘 날짜의 일별 페이지 이동
+	@GetMapping(value = "/auth/teacher/lecture/{lectureNo}/attendance/attendanceToday")
+	String attencanceToday(@PathVariable(name = "lectureNo") int lectureNo) {
+		Calendar targetDay = Calendar.getInstance();
+		
+		int currentYear = targetDay.get(Calendar.YEAR);
+		int currentMonth = targetDay.get(Calendar.MONTH) + 1;
+		int currentDay = targetDay.get(Calendar.DATE);
+		
+		return "redirect:/auth/teacher/lecture/" + lectureNo + "/attendance/attendanceCalendarByDay/default/" + currentYear + "/" + currentMonth + "/" + currentDay;
+	}
 }

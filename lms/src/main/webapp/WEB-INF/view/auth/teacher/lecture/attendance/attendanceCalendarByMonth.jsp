@@ -106,7 +106,9 @@
                </tr>
             </table>
 			
-			<br>
+			<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/attendanceToday'">오늘 날짜 이동</button>
+			
+			<br><br>
 			
 			<table class="table table-bordered attendanceTable">
 				<thead>
