@@ -65,6 +65,20 @@ public class TeacherReportController {
 			navLastPage = navLastPage - navPerPage;
 		}
 		
+		// 현재 페이지에 대한 이전 페이지
+		int prePage;
+		if (currentPage > 10) {
+			prePage = currentPage - (currentPage % navPerPage) + 1 - 10;
+		} else {
+			prePage = 1;
+		}
+		
+		// 현재 페이지에 대한 다음 페이지
+		int nextPage = currentPage - (currentPage % navPerPage) + 1 + 10;
+		if (nextPage > totalCount) {
+			nextPage = totalCount;
+		}
+		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("teacherReportList", teacherReportList);
 		
@@ -74,6 +88,9 @@ public class TeacherReportController {
 		model.addAttribute("navPerPage", navPerPage);
 		model.addAttribute("navFirstPage", navFirstPage);
 		model.addAttribute("navLastPage", navLastPage);
+		
+		model.addAttribute("prePage", prePage);
+		model.addAttribute("nextPage", nextPage);
 		
 		// view의 /auth/teacher/lecture/report/reportList.jsp를 이용한다
 		return "/auth/teacher/lecture/report/reportList";

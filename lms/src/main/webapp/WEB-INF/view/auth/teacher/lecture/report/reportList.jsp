@@ -122,7 +122,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportList/${currentPage - 1}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportList/${prePage}">
 								<i class='fas fa-angle-left'></i>
 							</a>
 						</li>
@@ -160,7 +160,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportList/${currentPage + 1}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportList/${nextPage}">
 								<i class='fas fa-angle-right'></i>
 							</a>
 						</li>
