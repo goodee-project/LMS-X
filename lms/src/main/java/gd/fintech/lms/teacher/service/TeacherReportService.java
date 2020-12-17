@@ -18,13 +18,7 @@ public class TeacherReportService {
 	
 	// 강사가 출제한 과제 목록을 출력
 	// 강좌 고유번호(lectureNo)를 이용
-	public List<Report> getTeacherReportListByPage(int lectureNo, int currentPage, int rowPerPage) {
-		// currentPage, rowPerPage를 통해 beginRow, rowPerPage 전달하여
-		// TeacherReportMapper의 메소드를 호출한다.
-		// 이후 결과값을 받아 return 한다.
-		
-		int beginRow = (currentPage - 1) * rowPerPage;
-		
+	public List<Report> getTeacherReportListByPage(int lectureNo, int beginRow, int rowPerPage) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("lectureNo", lectureNo);		// 강의실 고유번호
 		map.put("beginRow", beginRow);			// 시작 데이터

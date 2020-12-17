@@ -26,9 +26,13 @@ public class TeacherReportController {
 	public String reportList(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 
 			@PathVariable(value = "currentPage") int currentPage) {
-		int rowPerPage = 10;	// 한 페이지에 표시할 데이터 수
+		// 한 페이지에 표시할 데이터 수
+		int rowPerPage = 10;
 		
-		List<Report> teacherReportList = teacherReportService.getTeacherReportListByPage(lectureNo, currentPage, rowPerPage);
+		// 시작 페이지 계산
+		int beginRow = (currentPage - 1) * rowPerPage;
+		
+		List<Report> teacherReportList = teacherReportService.getTeacherReportListByPage(lectureNo, beginRow, rowPerPage);
 		
 		// [Logger] 과제 목록(teacherReportList) 확인
 		logger.trace("teacherReportList[" + teacherReportList + "]");

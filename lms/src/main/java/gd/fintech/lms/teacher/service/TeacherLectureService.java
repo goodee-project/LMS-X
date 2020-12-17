@@ -18,13 +18,7 @@ public class TeacherLectureService {
 	
 	// 강사가 수업중인 강좌 목록을 출력
 	// 강사 아이디(teacherId)를 이용
-	public List<Lecture> getTeacherLectureListByPage(String teacherId, int currentPage, int rowPerPage) {
-		// currentPage, rowPerPage를 통해 beginRow, rowPerPage 전달하여
-		// TeacherLectureMapper의 메소드를 호출한다.
-		// 이후 결과값을 받아 return 한다.
-		
-		int beginRow = (currentPage - 1) * rowPerPage;
-		
+	public List<Lecture> getTeacherLectureListByPage(String teacherId, int beginRow, int rowPerPage) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("teacherId", teacherId);		// 강사 아이디
 		map.put("beginRow", beginRow);			// 시작 데이터
