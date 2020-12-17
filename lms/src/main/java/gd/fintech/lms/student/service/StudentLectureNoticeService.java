@@ -1,6 +1,5 @@
 package gd.fintech.lms.student.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,15 +22,9 @@ public class StudentLectureNoticeService {
 		return studentLectureNoticeMapper.selectStudentLectureNoticeListByPage(map);
 
 	}
-	public int getCountLectureNotice(int rowPerPage) {
-		// endPage 수를 구하기 위해 변수 생성
-		int endPage = studentLectureNoticeMapper.selectLectureNoticeCount(); 
-		
-		if(endPage % rowPerPage == 0) {
-			return endPage / rowPerPage;
-		} else {
-			return endPage / rowPerPage + 1;
-		}
+	// 게시글 수 구하기
+	public int getCountLectureNotice() {
+		return studentLectureNoticeMapper.selectLectureNoticeCount();
 	}
 	
 	// 학생이 강의 공지사항을 상세보기

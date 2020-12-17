@@ -7,7 +7,9 @@
 </head>
 	<body>
 		<h1>강의 공지사항 상세보기</h1>
-	
+		<div>
+			<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
+	    </div>
 		<table border="1">
 			<tr>
 				<td>강좌 번호</td>
@@ -38,6 +40,6 @@
 				<td>${lectureNotice.lectureNoticeCount}</td>
 			</tr>
 		</table>
-			<a href="${pageContext.request.contextPath}/auth/student/lectureNotice/lectureNoticeList/${lectureNotice.lectureNo}/1">뒤로가기</a>
+			<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/notice/noticeList/1">뒤로가기</a>
 	</body>
 </html>

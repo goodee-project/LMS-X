@@ -10,39 +10,40 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import gd.fintech.lms.student.service.StudentLectureNoticeService;
-import gd.fintech.lms.vo.LectureNotice;
+import gd.fintech.lms.student.service.StudentQnaService;
+import gd.fintech.lms.vo.Question;
 
 @Controller
-public class StudentLectureNoticeController {
-	@Autowired private StudentLectureNoticeService studentLectureNoticeService;
-	
-	// 학생이 강의 공지사항 리스트를 확인
-	@GetMapping("/auth/student/lecture/{lectureNo}/notice/noticeList/{currentPage}")
-	public String StudentLectureNoticeList(Model model,
+public class StudentQnaController {
+	// Autowired annotation 사용
+	@Autowired private StudentQnaService studentQnaService;
+	//auth/student/lecture/qna/qnaList
+	// Qna 리스트 페이징
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaList/{currentPage}")
+	public String qnaList(Model model,
 			@PathVariable(name = "currentPage", required = true) int currentPage,
 			@PathVariable(name = "lectureNo", required = true) int lectureNo) {
-		// 한 페이지에 출력할 게시물의 개수는 20개입니다
-		int rowPerPage = 20; 
-		// 전체 데이터 수
-		int totalCount = studentLectureNoticeService.getCountLectureNotice(); 
+		// 한 페이지에 출력할 게시물의 수
+		int rowPerPage = 10;
+		// 전체 데이터(게시글)의 수
+		int totalCount = studentQnaService.getCountStudentQnaList();
 		// 시작 페이지
-		int beginRow = (currentPage - 1) * rowPerPage; 
+		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		// 마지막 페이지 구하기
 		int lastPage = 0;
 		if(totalCount % rowPerPage == 0) {
-			lastPage = totalCount / rowPerPage;
+				lastPage = totalCount / rowPerPage;
 		} else {
-			lastPage = totalCount / rowPerPage + 1;			
+				lastPage = totalCount / rowPerPage + 1;			
 		}
 		
-		//공지사항 리스트 가져오기
+		// 질문게시판 게시글 리스트 가져오기
 		Map<String, Object> map = new HashMap<>();
 		map.put("lectureNo", lectureNo);
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
-		List<LectureNotice> lectureNotice = studentLectureNoticeService.getStudentLectureNoticeListByPage(map);
+		List<Question> question = studentQnaService.getStudenQnaListByPage(map);
 		
 		// 네비에 출력될 페이지 개수
 		int navPerPage = 10; 
@@ -81,25 +82,27 @@ public class StudentLectureNoticeController {
 		model.addAttribute("prePage", prePage);
 		model.addAttribute("nextPage", nextPage);
 		
-		model.addAttribute("lectureNotice", lectureNotice);
+		model.addAttribute("question", question);
 		model.addAttribute("lectureNo", lectureNo);
 		
-		return "/auth/student/lecture/notice/noticeList";
+		return "/auth/student/lecture/qna/qnaList";
 	}
 	
-	//공지사항 상세보기
-	@GetMapping("/auth/student/lecture/{lectureNo}/notice/noticeOne/{lectureNotcieNo}")
-	public String lectureNoticeOne(Model model,
+	//Qna 상세보기
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}")
+	public String qnaOne(Model model,
 			@PathVariable(value = "lectureNo") int lectureNo,
-			@PathVariable(value = "lectureNotcieNo") int lectureNoticeNo) {
-		LectureNotice lectureNotice = studentLectureNoticeService.getStudentLectureNoticeOne(lectureNoticeNo);
+			@PathVariable(value = "questionNo") int questionNo) {
+		Question question = studentQnaService.getStudentQnaOne(questionNo);
 		
+		// Map 안에 강좌번호 넣기
 		Map<String, Object> map = new HashMap<>();
 		map.put("lectureNo", lectureNo);
 		
-		model.addAttribute("lectureNo", lectureNo);
-		model.addAttribute("lectureNotice", lectureNotice);
-		return "/auth/student/lecture/notice/noticeOne";
+		model.addAttribute("lectrueNo", lectureNo);
+		model.addAttribute("question", question);
 		
+		return "/auth/student/lecture/qna/qnaOne";
 	}
+	
 }
