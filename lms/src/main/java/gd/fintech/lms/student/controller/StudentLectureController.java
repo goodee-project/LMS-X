@@ -68,7 +68,11 @@ public class StudentLectureController {
 		} else {
 			lastPage = totalCount / rowPerPage + 1;			
 		}
-		
+
+		// 전체 페이지가 0개이면 현재 페이지도 0으로 표시
+		if (lastPage == 0) {
+			currentPage = 0;
+		}
 		// 강좌 목록 가져오기
 		Map<String, Object> map = new HashMap<>();
 		map.put("beginRow", beginRow);

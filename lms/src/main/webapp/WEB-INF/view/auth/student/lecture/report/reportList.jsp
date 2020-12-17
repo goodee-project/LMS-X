@@ -5,9 +5,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>reportList</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script>
-		</script>
 	</head>
 	<body>
 		<h1>강좌 - 과제</h1>
@@ -26,7 +23,7 @@
 			<c:forEach items="${reportList}" var="r">
 				<tr>
 					<td>${r.reportNo}</td>
-					<td><a href="">${r.reportTitle}</a></td>
+					<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${r.lectureNo}/report/reportOne/${r.reportNo}">${r.reportTitle}</a></td>
 					<td>${r.reportStartdate} ~ ${r.reportEnddate}</td>
 				</tr>	
 			</c:forEach>

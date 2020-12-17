@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.restmapper.StudentLectureRestMapper">
+	<!-- 이미 수강신청을 했는지 알아옴 -->
 	<select id="selectCheckClassRegistration" parameterType="gd.fintech.lms.vo.ClassRegistration" resultType="int">
 		SELECT 
 			COUNT(*)

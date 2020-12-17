@@ -28,4 +28,89 @@
 		WHERE 
 			lecture_no = #{lectureNo}
 	</select>
+	
+	<!-- 과제 상세보기 -->
+	<select id="selectReportOne" parameterType="int" resultType="gd.fintech.lms.vo.Report">
+		SELECT 
+			report_no reportNo, 
+			lecture_no lectureNo, 
+			report_title reportTitle, 
+			report_content reportContent, 
+			report_startdate reportStartdate, 
+			report_enddate reportEnddate 
+		FROM 
+			report
+		WHERE 
+			report_no = #{reportNo}
+	</select>
+	
+	<!-- 해당 과제에서 학생 본인이 제출한 과제를 가져옴 -->
+	<resultMap type="gd.fintech.lms.vo.ReportSubmit" id="selectReportSubmitOneResult">
+        <result property="reportSubmitNo" column="report_submit_no" />
+        <result property="reportNo" column="report_no" />
+        <result property="accountId" column="account_id" />
+        <result property="reportSubmitWriter" column="report_submit_writer" />
+        <result property="reportSubmitTitle" column="report_submit_title" />
+        <result property="reportSubmitContent" column="report_submit_content" />
+        <result property="reportSubmitPoint" column="report_submit_point" />
+        <result property="reportSubmitFeedback" column="report_submit_feedback" />
+        <!-- 과제 제출 첨부파일 -->
+		<collection  property="reportSubmitFileList" ofType="gd.fintech.lms.vo.ReportSubmitFile">
+             <result property="reportSubmitFileUuid" column="report_submit_file_uuid" />
+             <result property="reportSubmitFileOriginal" column="report_submit_file_original" />
+             <result property="reportSubmitFileSize" column="report_submit_file_size" />
+             <result property="reportSubmitFileType" column="report_submit_file_type" />
+             <result property="reportSubmitFileCount" column="report_submit_file_count" />
+             <result property="reportSubmitFileCreatedate" column="report_submit_file_createdate" />
+		</collection>	
+	</resultMap>
+	<select id="selectReportSubmitOne" parameterType="gd.fintech.lms.vo.ReportSubmit" resultMap="selectReportSubmitOneResult">
+		SELECT
+		 	rs.report_submit_no,
+		 	rs.report_no,
+		 	rs.account_id,
+		 	rs.report_submit_writer,
+		 	rs.report_submit_title,
+		 	rs.report_submit_content,
+		 	rs.report_submit_point,
+		 	rs.report_submit_feedback,
+		 	rsf.report_submit_file_uuid,
+		 	rsf.report_submit_file_original,
+		 	rsf.report_submit_file_size,
+		 	rsf.report_submit_file_type,
+		 	rsf.report_submit_file_count,
+		 	rsf.report_submit_file_createdate
+		FROM
+			report_submit rs
+		LEFT JOIN 
+			report_submit_file rsf ON
+			rs.report_submit_no = rsf.report_submit_no
+		WHERE 
+			rs.report_no = #{reportNo} AND
+			rs.account_id = #{accountId}	
+	</select>
+	
+	<!-- 과제 제출 입력 -->
+	<insert id="insertReportSubmit">
+		<selectKey resultType="int" keyProperty="reportSubmitNo" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO report_submit_no (
+			report_no,
+			account_id,
+			report_submit_writer,
+			report_submit_createdate,
+			report_submit_updatedate,
+			report_submit_title,
+			report_submit_content
+		) VALUES (
+			#{reportNo},
+			#{accountId},
+			#{accountId},
+			NOW(),
+			NOW(),
+			#{reportSubmitTitle},
+			#{reportSubmitContent}
+		)
+	</insert>
 </mapper>
