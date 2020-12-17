@@ -37,7 +37,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<h1>강의 개설</h1>
-	<form method="post" action="${pageContext.request.contextPath}/auth/manager/insertLecture" id="insertLectureForm">
+	<form method="post" action="${pageContext.request.contextPath}/auth/manager/lecture/insertLecture" id="insertLectureForm">
 		<table border="1">
 			<tr>
 				<td>강사 계정</td>
@@ -98,6 +98,6 @@ $(document).ready(function(){
 		</table>
 		<button type="button" id="insertBtn">개설</button>
 	</form>
-	<a href="${pageContext.request.contextPath}/auth/manager/lectureList/1">뒤로가기</a>
+	<a href="${pageContext.request.contextPath}/auth/manager/lecture/lectureList/1">뒤로가기</a>
 </body>
 </html>

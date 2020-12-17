@@ -11,7 +11,7 @@
 	<h1>강의 관리 목록</h1>
 	<div>
 		<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
-		<a href="${pageContext.request.contextPath}/auth/manager/insertLecture">강의 개설</a>
+		<a href="${pageContext.request.contextPath}/auth/manager/lecture/insertLecture">강의 개설</a>
 	</div>
 	<table border="1">
 		<tr>
@@ -25,7 +25,7 @@
 		<c:forEach items="${lectureList}" var="l">
 			<tr>
 				<td>
-					<a href="${pageContext.request.contextPath}/auth/manager/lectureOne/${l.lectureNo}">${l.lectureNo}</a>
+					<a href="${pageContext.request.contextPath}/auth/manager/lecture/lectureOne/${l.lectureNo}">${l.lectureNo}</a>
 				</td>
 				<td>${l.teacherName}</td>
 				<td>${l.lectureName}</td>
@@ -39,21 +39,18 @@
 	<div>
 		<!-- 이전 페이지 네비 -->
 		<c:if test="${navFirstPage > navPerPage }">
-			<a
-				href="${pageContext.request.contextPath }/auth/manager/lectureList/${navFirstPage - 1}">이전</a>
+			<a href="${pageContext.request.contextPath }/auth/manager/lecture/lectureList/${navFirstPage - 1}">이전</a>
 		</c:if>
 		<!-- 현재 페이지 네비 -->
 		<c:forEach var="navPage" begin="${navFirstPage }"
 			end="${navLastPage }">
 			<c:if test="${navPage <= endPage }">
-				<a
-					href="${pageContext.request.contextPath }/auth/manager/lectureList/${navPage}">${navPage}</a>
+				<a href="${pageContext.request.contextPath }/auth/manager/lecture/lectureList/${navPage}">${navPage}</a>
 			</c:if>
 		</c:forEach>
 		<!-- 다음 페이지 네비 -->
 		<c:if test="${navLastPage < endPage }">
-			<a
-				href="${pageContext.request.contextPath }/auth/manager//${navLastPage + 1}">다음</a>
+			<a href="${pageContext.request.contextPath }/auth/manager/lecture/${navLastPage + 1}">다음</a>
 		</c:if>
 	</div>
 </body>

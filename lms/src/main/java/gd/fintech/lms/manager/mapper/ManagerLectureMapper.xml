@@ -10,20 +10,25 @@
 			lecture_startdate lectureStartdate,
 			lecture_enddate lectureEnddate,
 			lecture_total lectureTotal
-		FROM lecture
-		ORDER BY lecture_no DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+		FROM 
+			lecture
+		ORDER BY 
+			lecture_no DESC
+		LIMIT 
+			 #{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- 개설 되어 있는 강의 개수 -->
 	<select id="selectLectureCount" resultType="Integer">
 		SELECT
 			COUNT(*)
-		FROM lecture
+		FROM 
+			lecture
 	</select>
 	<!-- 강의 추가 -->
 	<insert id="insertLecture" parameterType="gd.fintech.lms.vo.Lecture">
-		INSERT INTO lecture(	
+		INSERT INTO 
+		lecture (	
 			account_id,	
 			subject_no,	
 			teacher_name,	
@@ -84,16 +89,22 @@
 			l.lecture_total,
 			l.classroom_no,
 			c.classroom_number
-		FROM lecture AS l 
-		LEFT JOIN textbook AS t
-			ON l.textbook_isbn = t.textbook_isbn
-		LEFT JOIN classroom AS c
-			ON l.classroom_no = c.classroom_no
-		WHERE lecture_no = #{lectureNo}
+		FROM 
+			lecture AS l 
+		LEFT JOIN 
+			textbook AS t ON 
+			l.textbook_isbn = t.textbook_isbn
+		LEFT JOIN 
+			classroom AS c ON 
+			l.classroom_no = c.classroom_no
+		WHERE 
+			lecture_no = #{lectureNo}
 	</select>
 	<!-- 강의 수정 쿼리문 -->
 	<update id="updateLecture" parameterType="gd.fintech.lms.vo.Lecture">
-		UPDATE lecture SET
+		UPDATE 
+			lecture 
+		SET
 			account_id = #{accountId},
 			subject_no = #{subjectNo},
 			teacher_name = #{teacherName},
@@ -104,6 +115,7 @@
 			lecture_total = #{lectureTotal},
 			classroom_no = #{classroomNo},
 			lecture_updatedate = NOW()
-		WHERE lecture_no = #{lectureNo}
+		WHERE 
+			lecture_no = #{lectureNo}
 	</update>
 </mapper>

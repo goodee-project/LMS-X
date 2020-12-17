@@ -17,7 +17,7 @@ $(document).ready(function(){
 			alert('강의명을 입력해주세요.');
 			return;	 
 		}
-		if( $('#lectureEnddate').val() <= $('#lectureStartdate').val()){
+		if($('#lectureEnddate').val() <= $('#lectureStartdate').val()){
 			alert('개강일은 종강일보다 빨라야 합니다.');
 			return;
 			}
@@ -30,14 +30,14 @@ $(document).ready(function(){
 			return;
 			}
 		$('#updateLectureForm').submit();
-	});
+	});	 
 });
 </script>
 </head>
 <body>
 	<h1>강의 수정</h1>
-	<a href="${pageContext.request.contextPath}/auth/manager/lectureOne/${lectureNo}">뒤로가기</a>
-	<form method="post" action="${pageContext.request.contextPath}/auth/manager/updateLecture/${lectureNo}" id="updateLectureForm">
+	<a href="${pageContext.request.contextPath}/auth/manager/lecture/lectureOne/${lectureNo}">뒤로가기</a>
+	<form method="post" action="${pageContext.request.contextPath}/auth/manager/lecture/updateLecture/${lectureNo}" id="updateLectureForm">
 		<table border="1">
 			<tr>
 				<td>강의 번호</td>
@@ -83,19 +83,13 @@ $(document).ready(function(){
 			<tr>
 				<td>개강일</td>
 				<td>
-					<input type="date" name="lectureStartdate" id="lectureStartdate">
-					<script>
-   						 $('#lectureStartdate').val("${lct.lecture.lectureStartdate}");
-					</script>
+					<input type="date" name="lectureStartdate" id="lectureStartdate" value="${lct.lecture.lectureStartdate}">
 				</td>
 			</tr>
 			<tr>
 				<td>종강일</td>
 				<td>
-					<input type="date" name="lectureEnddate" id="lectureEnddate">
-					<script>
-   						 $('#lectureEnddate').val("${lct.lecture.lectureEnddate}");
-					</script>
+					<input type="date" name="lectureEnddate" id="lectureEnddate" value="${lct.lecture.lectureEnddate}">
 				</td>
 			</tr>
 			<tr>

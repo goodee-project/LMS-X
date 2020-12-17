@@ -5,14 +5,20 @@
 	<select id="selectAccountList" resultType="gd.fintech.lms.vo.Account">
 		SELECT 
 			account_id accountId
-		FROM account 
-		WHERE account_state = "활성화" and account_level=2
+		FROM 
+			account 
+		WHERE 
+			account_state = "활성화" AND
+			account_level = 2
 	</select>
 	<!-- FAQ 관련 계정 ID 출력문 -->
 	<select id="selectFaqAccountList" resultType="gd.fintech.lms.vo.Account">
 		SELECT 
 			account_id accountId
-		FROM account 
-		WHERE account_state = "활성화" and account_level=3
+		FROM 
+			account 
+		WHERE 
+			account_state = "활성화" AND
+			account_level = 3
 	</select>
 </mapper>

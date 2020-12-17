@@ -35,7 +35,7 @@ public class ManagerLectureController {
 	// 강의실 리스트 출력을 위한 AutoWired
 	@Autowired private ManagerClassroomService managerClassroomService;
 	//운영자가 추가한 강의 목록 리스트
-	@GetMapping("/auth/manager/lectureList/{currentPage}")
+	@GetMapping("/auth/manager/lecture/lectureList/{currentPage}")
 	public String lectureList(Model model,
 			@PathVariable(name = "currentPage") int currentPage) {
 		int rowPerPage = 10; //한 페이지에 출력할 개수
@@ -66,16 +66,16 @@ public class ManagerLectureController {
 		
 		model.addAttribute("lectureList", lectureList);
 		
-		return "auth/manager/lectureList";
+		return "auth/manager/lecture/lectureList";
 	}
 	// 강의 개설 액션 
-	@PostMapping("/auth/manager/insertLecture")
+	@PostMapping("/auth/manager/lecture/insertLecture")
 	public String insertLecture(Lecture lecture) { // 커맨트 객체
 		managerLectureService.insertLecture(lecture);
-		return "redirect:/auth/manager/lectureList/1";
+		return "redirect:/auth/manager/lecture/lectureList/1";
 	}
 	// 강의 개설 폼
-	@GetMapping("/auth/manager/insertLecture")
+	@GetMapping("/auth/manager/lecture/insertLecture")
 	public String insertLecture(Model model) {
 		//강의 개설 시 필요한 리스트
 		//강사 계정 리스트
@@ -91,26 +91,26 @@ public class ManagerLectureController {
 		model.addAttribute("textbookList", textbookList);
 		model.addAttribute("classroomList", classroomList);
 		
-		return "/auth/manager/insertLecture";
+		return "/auth/manager/lecture/insertLecture";
 	}
 	//강의 상세 보기
-	@GetMapping("/auth/manager/lectureOne/{lectureNo}")
+	@GetMapping("/auth/manager/lecture/lectureOne/{lectureNo}")
 	public String lectureOne(Model model, @PathVariable(value = "lectureNo") int lectureNo) {
 		LectureAndClassAndTextbook lectureAndClassAndTextbook = managerLectureService.getLectureOne(lectureNo);
 		System.out.println(lectureAndClassAndTextbook);
 		model.addAttribute("lct", lectureAndClassAndTextbook);
 		
-		return "/auth/manager/lectureOne";
+		return "/auth/manager/lecture/lectureOne";
 	}
 	
 	//강의 수정 액션
-	@PostMapping("/auth/manager/updateLecture/{lectureNo}")
+	@PostMapping("/auth/manager/lecture/updateLecture/{lectureNo}")
 	public String updateLecture(Lecture lecture, @PathVariable(value = "lectureNo") int lectureNo) {
 		managerLectureService.updateLecture(lecture);
-		return "redirect:/auth/manager/lectureList/1";
+		return "redirect:/auth/manager/lecture/lectureList/1";
 	}
 	//강의 수정 폼
-	@GetMapping("/auth/manager/updateLecture/{lectureNo}")
+	@GetMapping("/auth/manager/lecture/updateLecture/{lectureNo}")
 	public String updateLecture(Model model, @PathVariable(value = "lectureNo") int lectureNo){
 		LectureAndClassAndTextbook LectureAndClassAndTextbook = managerLectureService.getLectureOne(lectureNo);
 		//강의 수정 시 편의성을 위해 필요한 리스트 
@@ -128,6 +128,6 @@ public class ManagerLectureController {
 		model.addAttribute("textbookList", textbookList);
 		model.addAttribute("classroomList", classroomList);
 		
-		return "/auth/manager/updateLecture";
+		return "/auth/manager/lecture/updateLecture";
 	}
 }
