@@ -20,13 +20,7 @@ public class StudentReportService {
 		return studentReportMapper.selectReportListByPage(map);
 	}
 	// 강사가 출제한 과제 개수
-	public int selectStudentReportListEndPage(int classNo, int rowPerPage){
-		int endPage = studentReportMapper.selectReportListCount(classNo);	
-		
-		if(endPage % rowPerPage == 0) {
-			return endPage / rowPerPage;
-		} else {
-			return endPage / rowPerPage + 1;			
-		}
+	public int selectStudentReportListEndPage(int classNo){
+		return studentReportMapper.selectReportListCount(classNo);	
 	}
 }

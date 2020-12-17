@@ -58,8 +58,16 @@ public class StudentLectureController {
 	public String lectureList(Model model,
 			@PathVariable(name="currentPage") int currentPage) {
 		int rowPerPage = 10; // 한페이지에 출력할 개수
-		int endPage = studentLectureService.selectStudentLectureListEndPage(rowPerPage); // 마지막 페이지
+		int totalCount = studentLectureService.selectStudentLectureListEndPage(); // 마지막 페이지
 		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
+
+		// 마지막 페이지 구하기
+		int lastPage = 0;
+		if(totalCount % rowPerPage == 0) {
+			lastPage = totalCount / rowPerPage;
+		} else {
+			lastPage = totalCount / rowPerPage + 1;			
+		}
 		
 		// 강좌 목록 가져오기
 		Map<String, Object> map = new HashMap<>();
@@ -77,13 +85,30 @@ public class StudentLectureController {
 			navFirstPage = navFirstPage - navPerPage;
 			navLastPage = navLastPage - navPerPage;
 		}
+	
+		// 현재 페이지에 대한 이전 페이지
+		int prePage;
+		if (currentPage > 10) {
+			prePage = currentPage - (currentPage % navPerPage) + 1 - 10;
+		} else {
+			prePage = 1;
+		}
+
+		// 현재 페이지에 대한 다음 페이지
+		int nextPage = currentPage - (currentPage % navPerPage) + 1 + 10;
+		if (nextPage > totalCount) {
+			nextPage = totalCount;
+		}
 		
 		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("endPage", endPage);
+		model.addAttribute("lastPage", lastPage);
 		
 		model.addAttribute("navPerPage", navPerPage);
 		model.addAttribute("navFirstPage", navFirstPage);
 		model.addAttribute("navLastPage", navLastPage);
+
+		model.addAttribute("prePage", prePage);
+		model.addAttribute("nextPage", nextPage);
 		
 		model.addAttribute("lectureList", lectureList);
 		return "/auth/student/lecture/lectureList";

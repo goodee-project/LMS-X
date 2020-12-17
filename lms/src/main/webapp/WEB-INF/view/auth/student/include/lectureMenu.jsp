@@ -4,4 +4,6 @@
 	<a href="${pageContext.request.contextPath}/auth/student/lecture/classOne/${lectureNo}">강좌 홈</a>
 	
 	<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/report/reportList/1">과제</a>
+	
+	<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/lectureNotice/lectureNoticeList/1">강의 공지사항</a>
 </div>

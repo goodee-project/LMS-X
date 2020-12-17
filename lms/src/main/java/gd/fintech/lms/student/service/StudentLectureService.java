@@ -23,14 +23,8 @@ public class StudentLectureService {
 		return studentLectureMapper.selectStudentClassListByPage(map);
 	}
 	// 자신이 수강중인 강좌 개수
-	public int selectStudentClassListEndPage(String studentId, int rowPerPage) {
-		int endPage = studentLectureMapper.selectStudentClassListCount(studentId);
-		
-		if(endPage % rowPerPage == 0) {
-			return endPage / rowPerPage;
-		} else {
-			return endPage / rowPerPage + 1;			
-		}
+	public int selectStudentClassListEndPage(String studentId) {
+		return studentLectureMapper.selectStudentClassListCount(studentId);
 	}
 	
 	// 자신이 수강중인 강좌 상세보기
@@ -48,14 +42,8 @@ public class StudentLectureService {
 		return studentLectureMapper.selectStudentLectureListByPage(map);
 	}
 	// 학생이 수강 신청 가능한 강좌 개수
-	public int selectStudentLectureListEndPage(int rowPerPage){
-		int endPage = studentLectureMapper.selectStudentLectureListCount();		
-		
-		if(endPage % rowPerPage == 0) {
-			return endPage / rowPerPage;
-		} else {
-			return endPage / rowPerPage + 1;			
-		}
+	public int selectStudentLectureListEndPage(){
+		return studentLectureMapper.selectStudentLectureListCount();		
 	}
 	// 수강 신청
 	public int insertRegistrationClass(ClassRegistration classRegistration) {
