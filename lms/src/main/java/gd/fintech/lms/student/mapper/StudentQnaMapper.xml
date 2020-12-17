@@ -5,27 +5,27 @@
 	<!-- select 쿼리 태그에 관계도를 위한 resultMap 속성 추가  -->
 	<!--질문 정보-->
 	<resultMap type="gd.fintech.lms.vo.Question" id="selectStudentQnaOneResult">
-		<result property="lectureNo" column="lecture_no"/>
 		<result property="questionNo" column="question_no"/>
+		<result property="questionWriter" column="question_writer"/>
 		<result property="questionTitle" column="question_title"/>
 		<result property="questionContent" column="question_content"/>
 		<result property="questionCount" column="question_count"/>
 		<result property="questionCreatedate" column="question_createdate"/>
 		<result property="questionUpdatedate" column="question_updatedate"/>
-		<result property="questionPassword" column="question_password"/>
-    <!-- 질문 파일 정보  -->  
-	<collection property="questionFile" ofType="gd.fintech.lms.vo.QuestionFile">
-		<result property="questionFileUuid" column="question_file_uuid"/>
-		<result property="questionFileOriginal" column="question_file_original"/>
-		<result property="questionNo" column="questionNo"/>
-		<result property="questionFileSize" column="question_file_size"/>
-		<result property="questionFileType" column="question_file_type"/>
-		<result property="questionFileCreatedate" column="question_file_createdate"/>
-     </collection>
-   </resultMap>
+		
+		<!-- 질문 파일 정보  -->  
+		<collection property="questionFileList" ofType="gd.fintech.lms.vo.QuestionFile">
+			<result property="questionFileUuid" column="question_file_uuid"/>
+			<result property="questionFileOriginal" column="question_file_original"/>
+			<result property="questionFileSize" column="question_file_size"/>
+			<result property="questionFileType" column="question_file_type"/>
+			<result property="questionFileCount" column="question_file_count"/>
+			<result property="questionFileCreatedate" column="question_file_createdate"/>
+		</collection>
+	</resultMap>
 	
 	<!-- 질문 리스트 페이징 + 학생이 질문 리스트 출력시 질문 번호 강의 번호 글쓴이 이름 제목 생성일 조회수를 보여준다  --> 
-	<select id="selectStudentQnaListByPage" resultType="gd.fintech.lms.vo.Question" parameterType="java.util.Map">
+	<select id="selectStudentQnaListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Question">
 		SELECT
 			question_no questionNo,
 			lecture_no lectureNo,
@@ -71,15 +71,16 @@
 		
 	</insert>
 	<!--질문 게시판 상세보기-->
-	<select id="selectStudentQnaOne" resultMap="selectStudentQnaOneResult" parameterType="int">
+	<select id="selectStudentQnaOne" parameterType="int" resultMap="selectStudentQnaOneResult">
 		SELECT
 			q.question_no,
 			q.question_writer,
 			q.question_title,
 			q.question_content,
+			q.question_count,
 			q.question_createdate,
 			q.question_updatedate,
-			q.question_count,
+			qf.question_file_uuid,
 			qf.question_file_original,
 			qf.question_file_size,
 			qf.question_file_type,

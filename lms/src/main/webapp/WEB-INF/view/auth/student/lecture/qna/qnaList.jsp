@@ -7,7 +7,7 @@
 	<title>QnA</title>
 </head>
 	<body>
-		<h1>QnA</h1>
+		<h1>공지사항 리스트</h1>
 		<div>
 			<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
 	    </div>
@@ -15,10 +15,11 @@
 			<table border="1">
 				<thead>
 					<tr>
-						<td>게시글 번호</td>
-						<td>게시글 제목</td>
-						<td>게시글 작성일</td>
-						<td>게시글 조회수</td>
+						<td>질문 번호</td>
+						<td>질문 제목</td>
+						<td>작성자</td>
+						<td>작성일</td>
+						<td>조회수</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -26,6 +27,7 @@
 						<tr>
 							<td>${q.questionNo}</td>
 							<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${q.lectureNo}/qna/qnaOne/${q.questionNo}">${q.questionTitle}</a></td>
+							<td>${q.questionWriter}</td>
 							<td>${q.questionCreatedate}</td>
 							<td>${q.questionCount}</td>
 						</tr>
