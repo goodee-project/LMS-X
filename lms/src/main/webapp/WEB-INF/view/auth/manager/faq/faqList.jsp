@@ -36,7 +36,7 @@
 				<td>${f.faqCount}</td>
 				<td>${f.faqCategory}</td>
 				<td><a href="${pageContext.request.contextPath}/auth/manager/faq/updateFaq/${f.faqNo}">수정</a></td>
-				<td><a href="${pageContext.request.contextPath}/auth/manager/faq/deleteFaq?faqNo=${f.faqNo}">삭제</a></td>
+				<td><a href="${pageContext.request.contextPath}/auth/manager/faq/deleteFaq/${f.faqNo}">삭제</a></td>
 			</tr>	
 		</c:forEach>
 	</table>

@@ -14,10 +14,10 @@ import gd.fintech.lms.vo.Teacher;
 public class ManagerTeacherController {
 	@Autowired private ManagerTeacherService managerTeacherService;
 	
-	@GetMapping("/auth/manager/teacherList")
+	@GetMapping("/auth/manager/teacher/teacherList")
 	public String teacherList(Model model) {
 		List<Teacher> teacherList = managerTeacherService.getTeacherList();
 		model.addAttribute("teacherList", teacherList);
-		return "auth/manager/teacherList";
+		return "auth/manager/teacher/teacherList";
 	}
 }

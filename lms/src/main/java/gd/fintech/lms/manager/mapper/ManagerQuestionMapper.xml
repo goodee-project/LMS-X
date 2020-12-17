@@ -16,4 +16,29 @@
 		FROM
 			question
 	</select>
+	
+	<delete id="deleteQuestion" parameterType="int">
+		DELETE FROM
+			question
+		WHERE
+			question_no = #{questionNo}
+	</delete>
+	
+	<select id="questionOne" parameterType="int" resultType="gd.fintech.lms.vo.Question">
+		SELECT 
+			question_no questionNo,
+			lecture_no lectureNo,
+			account_id accountId,
+			question_writer questionWriter,
+			question_title questionTitle,
+			question_content questionContent,
+			question_createdate questionCreatedate,
+			question_updatedate questionUpdatedate,
+			question_count questionCount,
+			question_password questionPassword
+		FROM
+			question
+		WHERE
+			question_no = ${questionNo}
+	</select>
 </mapper>

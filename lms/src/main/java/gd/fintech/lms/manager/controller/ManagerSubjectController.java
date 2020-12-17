@@ -14,10 +14,10 @@ import gd.fintech.lms.vo.Subject;
 public class ManagerSubjectController {
 	@Autowired private ManagerSubjectService managerSubjectService;
 	
-	@GetMapping("/auth/manager/subjectList")
+	@GetMapping("/auth/manager/subject/subjectList")
 	public String subjectList(Model model) {
 		List<Subject> subjectList = managerSubjectService.getSubjectList();
 		model.addAttribute("subjectList", subjectList);
-		return "auth/manager/subjectList";
+		return "auth/manager/subject/subjectList";
 	}
 }

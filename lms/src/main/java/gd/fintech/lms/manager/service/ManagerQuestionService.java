@@ -17,4 +17,12 @@ public class ManagerQuestionService {
 	public List<Question> getQuestionList() {
 		return managerQuestionMapper.selectQuestionList();
 	}
+	
+	public int deleteQuestion(int questionNo) {
+		return managerQuestionMapper.deleteQuestion(questionNo);
+	}
+	
+	public Question getQuestionOne(int questionNo) {
+		return managerQuestionMapper.questionOne(questionNo);
+	}
 }

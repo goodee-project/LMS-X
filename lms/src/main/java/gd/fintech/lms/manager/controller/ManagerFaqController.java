@@ -45,8 +45,9 @@ public class ManagerFaqController {
 		return "redirect:/auth/manager/faq/faqList";
 	}
 	
-	@GetMapping("/auth/manager/faq/deleteFaq")
-	public String deleteFaq(int faqNo) {
+	@GetMapping("/auth/manager/faq/deleteFaq/{faqNo}")
+	public String deleteFaq(
+		@PathVariable(name="faqNo") int faqNo) {
 		managerFaqService.deleteFaq(faqNo);
 		return "redirect:/auth/manager/faq/faqList";
 	}

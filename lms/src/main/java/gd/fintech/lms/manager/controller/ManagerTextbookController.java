@@ -14,10 +14,10 @@ import gd.fintech.lms.vo.Textbook;
 public class ManagerTextbookController {
 	@Autowired private ManagerTextbookService managerTextbookService;
 	
-	@GetMapping("/auth/manager/textbookList")
+	@GetMapping("/auth/manager/textbook/textbookList")
 	public String textbookList(Model model) {
 		List<Textbook> textbookList = managerTextbookService.getTextbookList();
 		model.addAttribute("textbookList", textbookList);
-		return "auth/manager/textbookList";
+		return "auth/manager/textbook/textbookList";
 	}
 }
