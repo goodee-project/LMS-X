@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.admin.mapper.AdminManagerMapper">
+
+	<!-- 운영자 승인 대기 목록 -->
+	<select id="selectManagerQueueList" resultType="gd.fintech.lms.vo.ManagerQueue">
+		SELECT
+			manager_id managerId,
+			manager_email managerEmail,
+			manager_phone managerPhone,
+			manager_name managerName,
+			manager_gender managerGender,
+			manager_birth managerBirth,
+			manager_address_main managerAddressMain,
+			manager_address_sub managerAddressSub
+		FROM
+			manager_queue
+	</select>
+	
+	<!-- 운영자 승인대기테이블 삭제 -->
+	<delete id="deleteManagerQueue" parameterType="String">
+		DELETE FROM
+			manager_queue
+		WHERE 
+			manager_id = #{accountId}
+	</delete>
+	
+	<!-- 계정 삭제 -->
+	<delete id="deleteAccount" parameterType="String">
+		DELETE FROM
+			account
+		WHERE
+			account_id = #{accountId}
+	</delete>
+	
+	<!-- 계정 상태 업데이트 -->
+	<update id="updateAccountState" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE 
+			account
+		SET 
+			account_state = #{accountState}
+		WHERE
+			account_id = #{accountId}
+	</update>
+	
+	<!-- 운영자 승인 대기 정보 검색 -->
+	<select id="selectManagerQueueOne" parameterType="String" resultType="gd.fintech.lms.vo.Manager">
+		SELECT
+			manager_id managerId,
+			manager_email managerEmail,
+			manager_phone managerPhone,
+			manager_name managerName,
+			manager_gender managerGender,
+			manager_birth managerBirth,
+			manager_address_main managerAddressMain,
+			manager_address_sub managerAddressSub
+		FROM
+			manager_queue
+		WHERE
+			manager_id = #{accountId}
+	</select>
+	
+	<!-- 운영자 테이블 추가  -->
+	<insert id="insertManager" parameterType="gd.fintech.lms.vo.Manager" >
+		INSERT INTO	manager (
+			manager_id,
+			manager_email,
+			manager_phone,
+			manager_name,
+			manager_gender,
+			manager_birth,
+			manager_position,
+			manager_address_main,
+			manager_address_sub,
+			manager_image,
+			manager_accessdate,
+			manager_updatedate
+		) VALUES (
+			#{managerId},
+			#{managerEmail},
+			#{managerPhone},
+			#{managerName},
+			#{managerGender},
+			#{managerBirth},
+			#{managerPosition},
+			#{managerAddressMain},
+			#{managerAddressSub},
+			#{managerImage},
+			now(),
+			now()
+		)
+	
+	</insert>
+</mapper>

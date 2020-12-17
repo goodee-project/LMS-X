@@ -130,15 +130,21 @@
 							success : function(data) {
 								$('#selectAddress').html("");
 								
+								// 데이터가 없으면
+								if ( data.length == 0 ) {
+									$('#selectAddress').html("등록된 주소가 없습니다.");
+								}
+								
 								for ( i=0; i<data.length; i++ ) {
+									
 									// building2데이터가 있으면
 									if ( data[i].building2 != 0 ) {
-										$('#selectAddress').append('<div><input type="radio" class="address" name="managerAddressMain" value="'+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'-'+data[i].building2+'('+data[i].zipCode+')'+'">'
+										$('#selectAddress').append('<div><input type="radio" class="address" name="managerAddressMain" value="'+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'-'+data[i].building2+'('+data[i].zipCode+')">'
 												+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'-'+data[i].building2+'('+data[i].zipCode+')'+'</div>');
 									}
 									// building2데이터가 없으면
 									if ( data[i].building2 == 0 ) {
-										$('#selectAddress').append('<div><input type="radio" class="address" name="managerAddressMain" value="'+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'-'+data[i].building2+'">'
+										$('#selectAddress').append('<div><input type="radio" class="address" name="managerAddressMain" value="'+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'('+data[i].zipCode+')">'
 												+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'('+data[i].zipCode+')'+'</div>');
 									}
 								}
