@@ -39,22 +39,30 @@
 			cr.class_registration_no, 
 			cr.account_id,
 			cr.class_registration_state
-		FROM class_registration cr 
-		JOIN lecture l 
-		ON cr.lecture_no = l.lecture_no 
-		JOIN subject s
-		ON s.subject_no = l.subject_no
-		WHERE cr.account_id = #{studentId}
-		ORDER BY cr.class_registration_no DESC 
-		LIMIT #{beginRow}, #{rowPerPage}
+		FROM 
+			class_registration cr 
+		JOIN 
+			lecture l ON 
+			cr.lecture_no = l.lecture_no 
+		JOIN 
+			subject s ON 
+			s.subject_no = l.subject_no
+		WHERE 
+			cr.account_id = #{studentId}
+		ORDER BY 
+			cr.class_registration_no DESC 
+		LIMIT 
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- 학생 : 자신이 수강중인 강좌의 개수 -->
 	<select id="selectStudentClassListCount" parameterType="String" resultType="int">
 		SELECT 
 			COUNT(*)
-		FROM class_registration
-		WHERE account_id = #{studentId}
+		FROM 
+			class_registration
+		WHERE 
+			account_id = #{studentId}
 	</select>
 	
 	<!-- 학생 : 수강중인 강좌 상세보기 -->
@@ -115,25 +123,33 @@
 			t.textbook_title,
 			c.classroom_no,
 			c.classroom_number
-		FROM class_registration cr 
-		JOIN lecture l 
-		ON cr.lecture_no = l.lecture_no 
-		JOIN subject s
-		ON s.subject_no = l.subject_no
-		JOIN textbook t
-		ON t.textbook_isbn = l.textbook_isbn
-		JOIN classroom c 
-		ON c.classroom_no = l.classroom_no
-		WHERE cr.lecture_no = #{lectureNo} AND cr.account_id = #{studentId}
+		FROM 
+			class_registration cr 
+		JOIN 
+			lecture l ON 
+			cr.lecture_no = l.lecture_no 
+		JOIN 
+			subject s ON 
+			s.subject_no = l.subject_no
+		JOIN 
+			textbook t ON 
+			t.textbook_isbn = l.textbook_isbn
+		JOIN 
+			classroom c ON
+			c.classroom_no = l.classroom_no
+		WHERE 
+			cr.lecture_no = #{lectureNo} AND cr.account_id = #{studentId}
 	</select>
 	
 	<!-- 학생이 수강하는 강좌의 후기를 수정 -->
 	<update id="updateStudentClassReview" parameterType="gd.fintech.lms.vo.ClassRegistration">
-		UPDATE class_registration 
+		UPDATE 
+			class_registration 
 		SET
 			class_registration_point = #{classRegistrationPoint},
 			class_registration_review = #{classRegistrationReview}
-		WHERE class_registration_no = #{classRegistrationNo}
+		WHERE 
+			class_registration_no = #{classRegistrationNo}
 	</update>
 	
 	<!-- 학생이 신청할 수 있는 강좌 목록 -->
@@ -161,25 +177,33 @@
 			l.lecture_total,
 			s.subject_name, 
 			s.subject_totalday
-		FROM lecture l
-		JOIN subject s
-		ON l.subject_no = s.subject_no
-		WHERE l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
-		ORDER BY l.lecture_no DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+		FROM 
+			lecture l
+		JOIN 
+			subject s ON 
+			l.subject_no = s.subject_no
+		WHERE 
+			l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
+		ORDER BY 
+			l.lecture_no DESC
+		LIMIT 
+			#{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 학생이 수강 신청 가능한 강좌 개수 -->
 	<select id="selectStudentLectureListCount" resultType="int">
 		SELECT
 			COUNT(*)
-		FROM lecture l
-		JOIN subject s
-		ON l.subject_no = s.subject_no
-		WHERE l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
+		FROM 
+			lecture l
+		JOIN
+			subject s ON 
+			l.subject_no = s.subject_no
+		WHERE 
+			l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</select>
 	<!-- 수강 신청 -->
 	<insert id="insertClassRegistration" parameterType="gd.fintech.lms.vo.ClassRegistration">
-		INSERT INTO class_registration(
+		INSERT INTO class_registration (
 			lecture_no,
 			account_id,
 			class_registration_state,
@@ -193,9 +217,11 @@
 	</insert>
 	<!-- 수강 대기 상태일시 수강 상태를 취소 변경 -->
 	<update id="updateClassRegistrationState" parameterType="int">
-		UPDATE class_registration 
-		SET class_registration_state = '취소'
-		WHERE class_registration_no = #{classRegistrationNo}
+		UPDATE 
+			class_registration 
+			SET class_registration_state = '취소'
+		WHERE 
+			class_registration_no = #{classRegistrationNo}
 	</update>
 	<!-- 수강신청 취소시 수강신청 취소 테이블 입력 -->
 	<insert id="insertClassRegistrationCancel" parameterType="gd.fintech.lms.vo.ClassRegistrationCancel">

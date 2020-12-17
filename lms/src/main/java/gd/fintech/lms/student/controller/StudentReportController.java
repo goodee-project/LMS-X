@@ -20,7 +20,7 @@ public class StudentReportController {
 	@Autowired StudentReportService studentReportService;
 	
 	// 강사가 출제한 과제 목록
-	@GetMapping("auth/student/report/reportList/{lectureNo}/{currentPage}")
+	@GetMapping("auth/student/lecture/{lectureNo}/report/reportList/{currentPage}")
 	public String reportList(Model model,
 			@PathVariable(name="lectureNo") int lectureNo,
 			@PathVariable(name="currentPage") int currentPage) {
@@ -58,6 +58,6 @@ public class StudentReportController {
 
 		model.addAttribute("reportList", reportList);
 		model.addAttribute("lectureNo", lectureNo);
-		return "/auth/student/report/reportList";
+		return "/auth/student/lecture/report/reportList";
 	}
 }

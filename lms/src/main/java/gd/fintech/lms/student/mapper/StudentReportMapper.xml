@@ -10,16 +10,22 @@
 			report_content reportContent, 
 			report_startdate reportStartdate, 
 			report_enddate reportEnddate 
-		FROM report
-		WHERE lecture_no = #{lectureNo}
-		ORDER BY report_createdate DESC 
-		LIMIT #{beginRow}, #{rowPerPage}
+		FROM 
+			report
+		WHERE 
+			lecture_no = #{lectureNo}
+		ORDER BY 
+			report_createdate DESC 
+		LIMIT 
+			#{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 강사가 출제한 과제 개수 -->
 	<select id="selectReportListCount" parameterType="int" resultType="int">
 		SELECT 
 			COUNT(*)
-		FROM report
-		WHERE lecture_no = #{lectureNo}
+		FROM 
+			report
+		WHERE 
+			lecture_no = #{lectureNo}
 	</select>
 </mapper>

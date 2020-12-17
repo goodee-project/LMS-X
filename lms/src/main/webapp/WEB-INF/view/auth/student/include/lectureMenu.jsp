@@ -3,5 +3,5 @@
 <div>
 	<a href="${pageContext.request.contextPath}/auth/student/lecture/classOne/${lectureNo}">강좌 홈</a>
 	
-	<a href="${pageContext.request.contextPath}/auth/student/report/reportList/${lectureNo}/1">과제</a>
+	<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/report/reportList/1">과제</a>
 </div>
