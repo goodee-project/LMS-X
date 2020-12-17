@@ -14,7 +14,7 @@ import gd.fintech.lms.vo.Faq;
 public class ManagerFaqService {
 	@Autowired ManagerFaqMapper managerFaqMapper;
 	
-	public List<Faq> getFaqList(){
+	public List<Faq> getFaqList() {
 		return managerFaqMapper.selectFaqList();
 	}
 	

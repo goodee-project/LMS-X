@@ -14,7 +14,7 @@ import gd.fintech.lms.vo.Classroom;
 public class ManagerClassroomService {
 	@Autowired ManagerClassroomMapper managerClassroomMapper;
 	
-	public List<Classroom> getClassroomList(){
+	public List<Classroom> getClassroomList() {
 		return managerClassroomMapper.selectClassroomList();
 	}
 	

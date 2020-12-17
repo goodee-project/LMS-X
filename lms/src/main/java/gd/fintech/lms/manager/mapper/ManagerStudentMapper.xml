@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerStudentMapper"> 
 	<select id="selectStudentList" resultType="gd.fintech.lms.vo.Student">
 		SELECT 
-		student_id studentId,
-		student_email studentEmail,
-		student_name studentName,
-		student_phone studentPhone,
-		student_gender studentGender,
-		student_birth studentBirth,
-		student_address_main studentAddressMain,
-		student_address_sub studentAddressSub,
-		student_image studentImage,
-		student_accessdate studentAccessdate,
-		student_updatedate studentUpdatedate
-		FROM student
+			student_id studentId,
+			student_email studentEmail,
+			student_name studentName,
+			student_phone studentPhone,
+			student_gender studentGender,
+			student_birth studentBirth,
+			student_address_main studentAddressMain,
+			student_address_sub studentAddressSub,
+			student_image studentImage,
+			student_accessdate studentAccessdate,
+			student_updatedate studentUpdatedate
+		FROM
+			student
 	</select>
 </mapper>

@@ -14,7 +14,7 @@ import gd.fintech.lms.vo.Question;
 public class ManagerQuestionService {
 	@Autowired ManagerQuestionMapper managerQuestionMapper;
 	
-	public List<Question> getQuestionList(){
+	public List<Question> getQuestionList() {
 		return managerQuestionMapper.selectQuestionList();
 	}
 }

@@ -12,27 +12,19 @@
 		<table border="1">
 			<tr>
 				<td>계정 id</td>
-				<td>
-					<input type="text" name="accountId" value="${sessionScope.loginId}" readonly="readonly">
-				</td>
+				<td><input type="text" name="accountId" value="${sessionScope.loginId}" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>FAQ 작성자</td>
-				<td>
-					<input type="text" name="faqWriter">
-				</td>
+				<td> <input type="text" name="faqWriter"></td>
 			</tr>
 			<tr>
 				<td>FAQ 제목</td>
-				<td>
-					<input type="text" name="faqTitle">
-				</td>
+				<td><input type="text" name="faqTitle"></td>
 			</tr>
 			<tr>
 				<td>FAQ 내용</td>
-				<td>
-					<input type="text" name="faqContent">
-				</td>
+				<td><input type="text" name="faqContent"></td>
 			</tr>
 			<tr>
 				<td>FAQ 카테고리</td>

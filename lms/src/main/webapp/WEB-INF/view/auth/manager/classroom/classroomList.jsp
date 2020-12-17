@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>강의실 index</h1>
-	<div><a href="${pageContext.request.contextPath }/auth/manager/index">홈으로</div></div>
+	<div><a href="${pageContext.request.contextPath }/auth/manager/index">홈으로</a></div>
 	<div><a href="${pageContext.request.contextPath }/auth/manager/classroom/insertClassroom">강의실 추가</a></div>
 	<table border="1">
 		<tr>
@@ -25,16 +25,8 @@
 				<td>${cr.classroomNumber}</td>
 				<td>${cr.classroomSize}</td>
 				<td>${cr.classroomTotal}</td>
-				<td>
-					<a href="${pageContext.request.contextPath }/auth/manager/classroom/updateClassroom/${cr.classroomNo}">
-						수정
-					</a>
-				</td>
-				<td>
-					<a href="${pageContext.request.contextPath}/auth/manager/classroom/deleteClassroom?classroomNo=${cr.classroomNo}">
-						삭제
-					</a>
-				</td>
+				<td><a href="${pageContext.request.contextPath }/auth/manager/classroom/updateClassroom/${cr.classroomNo}">수정</a></td>
+				<td><a href="${pageContext.request.contextPath}/auth/manager/classroom/deleteClassroom?classroomNo=${cr.classroomNo}">삭제</a></td>
 			</tr>
 		</c:forEach>
 	</table>

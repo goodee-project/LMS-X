@@ -12,7 +12,7 @@ import gd.fintech.lms.vo.FaqCategory;
 public class ManagerFaqCategoryService {
 	@Autowired ManagerFaqCategoryMapper managerFaqCategoryMapper;
 	
-	public List<FaqCategory> getFaqCategoryList(){
+	public List<FaqCategory> getFaqCategoryList() {
 		return managerFaqCategoryMapper.selectFaqCategoryList();
 	}
 }

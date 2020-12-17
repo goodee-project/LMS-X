@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import gd.fintech.lms.manager.service.ManagerTeacherService;
 import gd.fintech.lms.vo.Teacher;
 
-
 @Controller
 public class ManagerTeacherController {
 	@Autowired private ManagerTeacherService managerTeacherService;

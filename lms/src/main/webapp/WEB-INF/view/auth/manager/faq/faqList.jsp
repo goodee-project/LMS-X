@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>FAQ index</h1>
-	<div><a href="${pageContext.request.contextPath }/auth/manager/index">홈으로</div></div>
+	<div><a href="${pageContext.request.contextPath }/auth/manager/index">홈으로</a></div>
 	<div><a href="${pageContext.request.contextPath }/auth/manager/faq/insertFaq">FAQ 추가</a></div>
 	<table border="1">	
 		<tr>
