@@ -12,18 +12,24 @@
 			report_updatedate reportUpdatedate, 
 			report_startdate reportStartdate, 
 			report_enddate reportEnddate
-		FROM report
-		WHERE lecture_no = #{lectureNo}
-		ORDER BY report_no DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+		FROM
+			report
+		WHERE
+			lecture_no = #{lectureNo}
+		ORDER BY
+			report_no DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- 과제(report) 테이블에서 강좌 고유번호(lectureNo)에 해당하는 총 데이터 수를 확인한다 -->
 	<select id="selectTeacherReportListCount" parameterType="Integer" resultType="Integer">
   		SELECT
   			COUNT(*)
-  		FROM report
-  		WHERE lecture_no = #{lectureNo};
+  		FROM
+  			report
+  		WHERE
+  			lecture_no = #{lectureNo};
   	</select>
   	
   	<!-- 강사가 과제(report) 테이블에서 과제 고유번호(reportNo)에 해당하는 데이터를 가져온다 -->
@@ -37,8 +43,10 @@
   			report_updatedate reportUpdatedate, 
   			report_startdate reportStartdate, 
   			report_enddate reportEnddate
-  		FROM report
-  		WHERE report_no = #{reportNo}
+  		FROM
+  			report
+  		WHERE
+  			report_no = #{reportNo}
   	</select>
   	
   	<!-- 강사가 과제(report) 테이블에 과제(Report)에 해당하는 데이터를 입력한다 -->
@@ -67,13 +75,15 @@
   	
   	<!-- 강사가 과제(report) 테이블에 있는 과제 고유번호(reportNo)에 해당하는 데이터를 수정한다 -->
   	<update id="updateTeacherReport" parameterType="gd.fintech.lms.vo.Report">
-  		UPDATE report
+  		UPDATE
+  			report
   		SET
   			report_title = #{reportTitle}, 
   			report_content = #{reportContent}, 
   			report_updatedate = #{reportUpdatedate}, 
   			report_startdate = #{reportStartdate}, 
   			report_enddate = #{reportEnddate}
-  		WHERE report_no = #{reportNo}
+  		WHERE
+  			report_no = #{reportNo}
   	</update>
 </mapper>

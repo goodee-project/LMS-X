@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>index.jsp</title>
+		<title>index</title>
 		
 		<!-- Bootstrap Framework 사용 -->
 		

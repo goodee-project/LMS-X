@@ -45,6 +45,12 @@
 		<script>
 			// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
 			$(document).ready(function() {
+				let rStartdate = "${report.reportStartdate}";
+				let rEnddate = "${report.reportEnddate}";
+				
+				$('#reportEnddate').val(rEnddate);
+				$('#reportEnddate').val(rEnddate);
+				
 				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
 				$("#submitBtn").click(function() {
 					if () {
@@ -110,21 +116,12 @@
 						<td>과제 시작일시</td>
 						<td>
 							<input type="datetime-local" class="form-control" name="reportStartdate" id="reportStartdate">
-							<script>
-								let rStartdate = "${report.reportStartdate}";
-								document.getElementById('reportStartdate').value = rStartdate;
-							</script>
 						</td>
 					</tr>
 					<tr>
 						<td>과제 종료일시</td>
 						<td>
 							<input type="datetime-local" class="form-control" name="reportEnddate" id="reportEnddate">
-							<script>
-								let rEnddate = "${report.reportEnddate}";
-								$('#reportEnddate').val(rEnddate);
-							</script>
-							<p><script>document.write($("#reportEnddate").val());</script></p>
 						</td>
 					</tr>
 				</table>

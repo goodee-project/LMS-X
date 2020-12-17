@@ -80,7 +80,9 @@
 						<c:forEach var="trl" items="${teacherReportList}">
 							<tr>
 								<td width="15%">${trl.reportNo}</td>
-								<td width="45%"><a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${trl.reportNo}">${trl.reportTitle}</a></td>
+								<td width="45%">
+									<a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${trl.reportNo}">${trl.reportTitle}</a>
+								</td>
 								<td width="20%">${trl.reportStartdate}</td>
 								<td width="20%">${trl.reportEnddate}</td>
 							</tr>

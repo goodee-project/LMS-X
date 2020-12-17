@@ -22,19 +22,26 @@
 			l.lecture_name, 
 			l.lecture_startdate, 
 			l.lecture_enddate
-		FROM lecture l
-		JOIN subject s
-		ON l.subject_no = s.subject_no
-		WHERE l.account_id = #{teacherId}
-		ORDER BY l.lecture_no DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+		FROM
+			lecture l
+		JOIN
+			subject s ON
+			l.subject_no = s.subject_no
+		WHERE
+			l.account_id = #{teacherId}
+		ORDER BY
+			l.lecture_no DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<select id="selectTeacherLectureListCount" parameterType="String" resultType="Integer">
   		SELECT
   			COUNT(*)
-  		FROM lecture
-  		WHERE account_id = #{teacherId};
+  		FROM
+  			lecture
+  		WHERE
+  			account_id = #{teacherId};
   	</select>
   	
   	<select id="selectTeacherLectureOne" parameterType="java.util.Map" resultMap="selectTeacherLectureListResult">
@@ -46,9 +53,12 @@
 			l.lecture_name, 
 			l.lecture_startdate, 
 			l.lecture_enddate
-		FROM lecture l
-		JOIN subject s
-		ON l.subject_no = s.subject_no
-		WHERE lecture_no = #{lectureNo}
+		FROM
+			lecture l
+		JOIN
+			subject s ON
+			l.subject_no = s.subject_no
+		WHERE
+			lecture_no = #{lectureNo}
 	</select>
 </mapper>
