@@ -21,6 +21,8 @@
 			<th>FAQ 수정날짜</th>
 			<th>FAQ 조회수</th>
 			<th>FAQ 카테고리</th>
+			<th>수정</th>
+			<th>삭제</th>
 		</tr>
 		<c:forEach items="${faqList}" var="f">
 			<tr>
@@ -33,6 +35,8 @@
 				<td>${f.faqUpdatedate}</td>
 				<td>${f.faqCount}</td>
 				<td>${f.faqCategory}</td>
+				<td><a href="${pageContext.request.contextPath}/auth/manager/faq/updateFaq/${f.faqNo}">수정</a></td>
+				<td><a href="${pageContext.request.contextPath}/auth/manager/faq/deleteFaq?faqNo=${f.faqNo}">삭제</a></td>
 			</tr>	
 		</c:forEach>
 	</table>

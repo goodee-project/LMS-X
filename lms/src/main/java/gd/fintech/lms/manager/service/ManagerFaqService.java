@@ -21,4 +21,16 @@ public class ManagerFaqService {
 	public int insertFaq(Faq faq) {
 		return managerFaqMapper.insertFaq(faq);
 	}
+	
+	public int deleteFaq(int faqNo) {
+		return managerFaqMapper.deleteFaq(faqNo);
+	}
+	
+	public int updateFaq(Faq faq) {
+		return managerFaqMapper.updateFaq(faq);
+	}
+	
+	public Faq faq(int faqNo) {
+		return managerFaqMapper.faqOne(faqNo);
+	}
 }

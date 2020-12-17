@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.manager.service.ManagerAccountService;
@@ -43,4 +44,26 @@ public class ManagerFaqController {
 		managerFaqService.insertFaq(faq);
 		return "redirect:/auth/manager/faq/faqList";
 	}
-}
+	
+	@GetMapping("/auth/manager/faq/deleteFaq")
+	public String deleteFaq(int faqNo) {
+		managerFaqService.deleteFaq(faqNo);
+		return "redirect:/auth/manager/faq/faqList";
+	}
+	
+	@GetMapping("/auth/manager/faq/updateFaq/{faqNo}")
+	public String updateFaq(Model model,
+		@PathVariable(name="faqNo") int faqNo) {
+		List<FaqCategory> faqCategoryList = managerFaqCategoryService.getFaqCategoryList();
+		Faq faqOne = managerFaqService.faq(faqNo);
+		model.addAttribute("faq", faqOne);
+		model.addAttribute("faqCategoryList", faqCategoryList);
+		return "auth/manager/faq/updateFaq";
+	}
+	
+	@PostMapping("/auth/manager/faq/updateFaq")
+	public String updateFaq(Faq faq) {
+		managerFaqService.updateFaq(faq);
+		return "redirect:/auth/manager/faq/faqList";
+	}
+} 

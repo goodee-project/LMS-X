@@ -41,17 +41,17 @@ public class ManagerClassroomController {
 		return "redirect:/auth/manager/classroom/classroomList";
 	}
 	
-	@PostMapping("/auth/manager/classroom/updateClassroom")
-	public String updateClassroom(Classroom classroom) {
-		managerClassroomService.updateClassroom(classroom);
-		return "redirect:/auth/manager/classroom/classroomList";
-	}
-	
 	@GetMapping("/auth/manager/classroom/updateClassroom/{classroomNo}")
 	public String updateClassroom(Model model,
 		@PathVariable(name="classroomNo") int classroomNo) {
 		Classroom classroomOne = managerClassroomService.classroomOne(classroomNo);
 		model.addAttribute("classroom", classroomOne);
 		return "auth/manager/classroom/updateClassroom";
+	}
+	
+	@PostMapping("/auth/manager/classroom/updateClassroom")
+	public String updateClassroom(Classroom classroom) {
+		managerClassroomService.updateClassroom(classroom);
+		return "redirect:/auth/manager/classroom/classroomList";
 	}
 }
