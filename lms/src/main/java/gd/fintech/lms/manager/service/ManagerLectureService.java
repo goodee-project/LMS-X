@@ -20,13 +20,7 @@ public class ManagerLectureService {
 	}
 	//현재 추가되어 있는 강의 개수
 	public int getCountLecture(int rowPerPage) {
-		int endPage = managerLectureMapper.selectLectureCount();
-		
-		if(endPage % rowPerPage == 0) {
-			return endPage / rowPerPage;
-		} else {
-			return endPage / rowPerPage + 1;			
-		}
+		return managerLectureMapper.selectLectureCount();
 	}
 	//새로운 강의 개설
 	public int insertLecture(Lecture lecture) {

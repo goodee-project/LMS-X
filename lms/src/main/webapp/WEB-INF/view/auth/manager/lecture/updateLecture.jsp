@@ -75,7 +75,12 @@ $(document).ready(function(){
 				<td>교재</td>
 				<td><select name="textbookIsbn">
 						<c:forEach var="t" items="${textbookList}">
-							<option value="${t.textbookIsbn}"selected="selected">${t.textbookTitle}:${t.textbookIsbn}</option>
+							<c:if test = "${t.textbookIsbn == lct.lecture.textbookIsbn}">
+								<option value="${t.textbookIsbn}"selected="selected">${t.textbookTitle}:${t.textbookIsbn}</option>
+							</c:if>
+							<c:if test = "${t.textbookIsbn != lct.lecture.textbookIsbn}">
+								<option value="${t.textbookIsbn}"selected="selected">${t.textbookTitle}:${t.textbookIsbn}</option>
+							</c:if>
 						</c:forEach>
 					</select>
 				</td>

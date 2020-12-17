@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherLectureNoticeMapper">
+	<!-- 페이징을 적용하여 강좌 공지사항 테이블에서 강좌 고유번호에 해당하는 데이터 목록을 가져온다 -->
+	<select id="selectTeacherLectuceNoticeListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.LectureNotice">
+		SELECT
+			lecture_no lectureNo, 
+			lecture_notice_no lectureNoticeNo, 
+			lecture_notice_title lectureNoticeTitle, 
+			lecture_notice_createdate lectureNoticeCreatedate,
+			lecture_notice_count lectureNoticeCount
+		 FROM 
+		 	lecture_notice 
+		 WHERE 
+		 	lecture_no = #{lectureNo}
+		 ORDER BY
+		 	lecture_notice_no DESC
+		 LIMIT
+		 	#{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 강좌 고유번호에 해당하는 총 데이터 수를 출력한다. -->
+	<select id="selectTeacherLectureNoticeListCount" parameterType="Integer" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			lecture_notice
+		WHERE
+			lecture_no = #{lectureNo}
+	</select>
+	<!-- 강의 고유번호에 해당하는 공지사항 상세보기 데이터를 가져온다. -->
+	<select id="selectTeacherLectureNoticeOne" parameterType="int" resultType="gd.fintech.lms.vo.LectureNotice">
+			SELECT 
+				lecture_notice_no lectureNoticeNo, 
+				lecture_notice_title lectureNoticeTitle, 
+				lecture_notice_content lectureNoticeContent, 
+				lecture_notice_createdate lectureNoticeCreatedate,
+				lecture_notice_updatedate lectureNoticeUpdatedate, 
+				lecture_notice_count lectureNoticeCount
+			FROM 
+				lecture_notice 
+			WHERE 
+				lecture_no = #{lectureNo} AND 
+				lecture_notice_no = #{lectureNoticeNo}
+	</select>
+	<update id="updateTeacherLectureNoticeCountUp" parameterType="gd.fintech.lms.vo.LectureNotice">
+		UPDATE 
+			lecture_notice
+		SET 
+			lecture_notice_count = lecture_notice_count + 1
+		WHERE 
+			lecture_no = 1 AND lecture_notice_no = 1
+	</update>
+</mapper>
