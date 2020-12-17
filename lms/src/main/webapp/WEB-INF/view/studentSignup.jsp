@@ -10,7 +10,7 @@
 	<script>
 		$(document).ready(function(){
 			// 아이디 중복 검사
-			let idCheck ;
+			let idCheck = "false";
 			$('#idCheck').click(function() {
 				if ( $('#accountId').val() != "" ) {
 					$.ajax({
@@ -19,9 +19,10 @@
 						success : function(data) {
 							if ( data == "true" ) {
 								$("#idCheckMs").html("사용 가능한 아이디입니다.");
+								idCheck = "true";
 							} else {
 								$("#idCheckMs").html("사용 불가능한 아이디입니다.");
-								idCheck = "false";
+							
 								return;
 							}
 						}
@@ -31,25 +32,31 @@
 			// 이메일 중복검사
 			let emailCheck ; // 이메일 체크
 			$('#emailCheck').click(function(){
+				
 				if ( $('#studentEmail').val() != "" ) {
+					$('#studentEmailCheck').html("");
 					if ( CheckEmail( $('#studentEmail').val() ) == false ) {
 						$('#studentEmail').focus();
-						$('#studentEmailCheck').html('이메일 형식이 잘못 되었습니다.');
+						$('#studentEmailCheck').html("이메일 형식이 잘못 되었습니다.");
 						return;
 					} else {
-						$('#studentEmailCheck').html('');
+						
 						$.ajax({
-							url : "${pageContext.request.contextPath}/signup/emailCheck/"+$('#studentEmail').val(),
+							url : '${pageContext.request.contextPath}/signup/emailCheck/'+$('#studentEmail').val(),
 							type : 'get',
 							success : function(data) {
+								$('#studentEmailCheck').html("");
 								if ( data == "true" ) {
-									$("#emailCheckMs").html("사용 가능한 이메일입니다.");
+									$('#studentEmailCheck').html("사용 가능한 이메일입니다.");
+									emailCheck = "ture";
+									return;
 									
 								} else {
-									$("#emailCheckMs").html("사용 불가능한 이메일입니다.");
-									emailCheck = "false";
+									$('#studentEmailCheck').html("사용 불가능한 이메일입니다.");
+									
 									return;
 								}
+								
 							}
 						})
 					}
@@ -118,21 +125,21 @@
 							street = trimStreet;
 						}
 						$.ajax({
-							url : "${pageContext.request.contextPath}/signup/address/"+street+"/"+building1+"/"+building2,
+							url : '${pageContext.request.contextPath}/signup/address/'+street+'/'+building1+'/'+building2,
 							type :'get',
 							success : function(data) {
-								$("#selectAddress").html("");
+								$('#selectAddress').html("");
 								
 								for ( i=0; i<data.length; i++ ) {
 									// building2데이터가 있으면
 									if ( data[i].building2 != 0 ) {
-										$("#selectAddress").append("<div><input type='radio' class='address' name='studentAddressMain' value='"+data[i].province+" "+data[i].city+" "+data[i].town+" "+data[i].street+" "+data[i].building1+"-"+data[i].building2+"("+data[i].zipCode+")"+"'>"
-												+data[i].province+" "+data[i].city+" "+data[i].town+" "+data[i].street+" "+data[i].building1+"-"+data[i].building2+"("+data[i].zipCode+")"+"</div>");
+										$('#selectAddress').append('<div><input type="radio" class="address" name="studentAddressMain" value="'+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'-'+data[i].building2+'('+data[i].zipCode+')'+'">'
+												+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'-'+data[i].building2+'('+data[i].zipCode+')'+'</div>');
 									}
 									// building2데이터가 없으면
 									if ( data[i].building2 == 0 ) {
-										$("#selectAddress").append("<div><input type='radio' class='address' name='studentAddressMain' value='"+data[i].province+" "+data[i].city+" "+data[i].town+" "+data[i].street+" "+data[i].building1+"("+data[i].zipCode+")"+"'>"
-												+data[i].province+" "+data[i].city+" "+data[i].town+" "+data[i].street+" "+data[i].building1+"("+data[i].zipCode+")"+"</div>");
+										$('#selectAddress').append('<div><input type="radio" class="address" name="studentAddressMain" value="'+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'-'+data[i].building2+'">'
+												+data[i].province+' '+data[i].city+' '+data[i].town+' '+data[i].street+' '+data[i].building1+'('+data[i].zipCode+')'+'</div>');
 									}
 								}
 								$('#addressWait').html("");
@@ -145,12 +152,24 @@
 			}
 			// 이메일 형식 검사
 			function CheckEmail(str) {
-			   var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			   var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
 			   if ( regExp.test(str) ) {
 			       return true;
-			   }else{
+			   } else {
 			       return false;
 			   }
+			}
+			//비밀번호 형식 검사
+			function isJobPassword(str) {
+				// 8 ~ 10자 영문, 숫자 조합
+				var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/; 
+				// 형식에 맞는 경우 true 리턴
+				if ( regExp.test(str) ) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 
 			// 회원가입 버튼을 눌렀을 경우
@@ -159,7 +178,7 @@
 				if ( $('#accountId').val() == "" ) {
 					$('#accountId').focus();
 					return;
-				}else if ( idCheck == "false" ) {
+				} else if ( idCheck == "false" ) {
 					$('#accountId').focus();
 					return;
 				}
@@ -171,12 +190,17 @@
 				} else if ( $('#studentPw2').val() == "" ) {
 					$('#studentPw2').focus();
 					return;
+				} else if ( isJobPassword($('#studentPw1').val()) == false ) {
+					$('#studentPw1').focus();
+					$('#studentPwCheck').html("비밀번호 형식이 맞지 않습니다.");
+					return;
+					
 				} else if ( $('#studentPw1').val() != $('#studentPw2').val() ) {
 					$('#studentPw1').focus();
-					$('#studentPwCheck').html('비밀번호가 일치하지않습니다.');
+					$('#studentPwCheck').html("비밀번호가 일치하지않습니다.");
 					return;
 				} else {
-					$('#studentPwCheck').html('');
+					$('#studentPwCheck').html("");
 				}
 
 
@@ -187,13 +211,13 @@
 					return;
 				} else if ( CheckEmail($('#studentEmail').val()) == false ) {
 					$('#studentEmail').focus();
-					$('#studentEmailCheck').html('이메일 형식이 잘못 되었습니다.');
+					$('#studentEmailCheck').html("이메일 형식이 잘못 되었습니다.");
 					return;
-				}else if ( emailCheck == "false" ) {
+				} else if ( emailCheck == "false" ) {
 					$('#studentEmail').focus();
 					return;
-				}else {
-					$('#studentEmailCheck').html('');
+				} else {
+					$('#studentEmailCheck').html("");
 				}
 
 				// 이름 검사
@@ -213,30 +237,30 @@
 				if ( $('#studentPhone').val() == "" ) {
 					$('#studentPhone').focus();
 					return;
-				}else if ( telValidator($('#studentPhone').val()) == false ) {
+				} else if ( telValidator($('#studentPhone').val()) == false ) {
 					$('#studentPhone').focus();
-					$('#studentPhoneCheck').html('전화번호 형식이 잘못 되었습니다.');
+					$('#studentPhoneCheck').html("전화번호 형식이 잘못 되었습니다.");
 					return;
 				} else {
-					$('#studentPhoneCheck').html('');
+					$('#studentPhoneCheck').html("");
 				}
 				
 				// 성별 검사
 				if ( $('.studentGender:checked').val() == undefined ) {
 					$('#studentGender').focus();
-					$('#studentGenderCheck').html('성별을 체크해주세요');
+					$('#studentGenderCheck').html("성별을 체크해주세요");
 					return;
-				}else {
-					$('#studentGenderCheck').html('');
+				} else {
+					$('#studentGenderCheck').html("");
 				}
 				
 				// 생년월일 검사
 				if ( $('#studentBirth').val() == "" ) {
 					$('#studentBirth').focus();
-					$('#studentBirthCheck').html('생년월일을 입력해주세요')
+					$('#studentBirthCheck').html("생년월일을 입력해주세요")
 					return;
 				} else {
-					$('#studentBirthCheck').html('')
+					$('#studentBirthCheck').html("")
 				}
 				
 				// 주소 검사
@@ -272,10 +296,10 @@
 
 		<div>비밀번호</div>
 		<div class="input password">
-			<input id="studentPw1" type="password" placeholder="7자리 이상 입력해주세요" name=accountPw>
+			<input id="studentPw1" type="password" placeholder="8~10자 영문,숫자 " name=accountPw>
 		</div>
 		<div class="input password">
-			<input id="studentPw2" type="password" placeholder="다시 비밀번호를 입력하세요">
+			<input id="studentPw2" type="password" placeholder="한번 더 비밀번호를 입력하세요">
 		</div>
 		<div id="studentPwCheck"></div>
 
@@ -285,7 +309,6 @@
 			<button id="emailCheck" type="button">중복체크</button>
 		</div>
 		<div id="studentEmailCheck"></div>
-		<span id="emailCheckMs"></span>
 
 		<div>이름</div>
 		<div>

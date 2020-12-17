@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.restmapper.LoginRestMapper">
+	<!-- 로그인 할 아이디 상태 체크 -->
+	<select id="selectAccountState" parameterType="gd.fintech.lms.vo.Account" resultType="String">
+		SELECT
+			account_state
+		FROM
+			account
+		WHERE 
+			account_id = #{accountId} AND
+			account_pw = PASSWORD(#{accountPw}) AND
+			account_level = #{accountLevel}
+	</select>
+
+</mapper>
