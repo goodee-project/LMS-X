@@ -53,7 +53,7 @@
 				});
 				
 				// 이메일 중복검사
-				let emailCheck ; // 이메일 체크
+				let emailCheck ="false" ; // 이메일 체크
 				$('#emailCheck').click(function(){
 					
 					if ( $('#studentEmail').val() != "" ) {
@@ -88,98 +88,97 @@
 				
 				let address;
 				// 주소 검색
-				if ( $('#street').val().length <1 ) {
-					// 공백 체크
-					function checkSpace(str) {
-						if (str.search(/\s/) != -1) {
-							// 공백이 있으면
-							return true;  
-						} else {
-							// 공백이 없으면
-							return false; 
-						} 
+				// 공백 체크
+				function checkSpace(str) {
+					if (str.search(/\s/) != -1) {
+						// 공백이 있으면
+						return true;  
+					} else {
+						// 공백이 없으면
+						return false; 
+					} 
+				}
+				
+				function checkSpecial(str) {
+					if (str.search(/-/) != -1) {
+						return true;
+					} else {
+						return false;
 					}
-					
-					function checkSpecial(str) {
-						if (str.search(/-/) != -1) {
-							return true;
-						} else {
-							return false;
-						}
-					}
-					
-					$('#check').click(function() {
-						if ( $('#street').val() != "" ) {
-							$('#addressWait').html("(잠시만 기다려 주세요...)");
-							let street = null;
-							let building1 = null;
-							let building2 = null;
+				}
+				
+				$('#check').click(function() {
+					$('#addressCheck').html("");
+					if ( $('#street').val().length > 1 ) {
+						$('#addressWait').html("(잠시만 기다려 주세요...)");
+						let street = null;
+						let building1 = null;
+						let building2 = null;
+						// 앞뒤 공백 제거
+						let trimStreet = $('#street').val().trim(); 
+						if ( checkSpace(trimStreet) == true ) {
+							// 연속된 공백을 1개의 공백으로 설정
+							let replaceStreet = trimStreet.replace(/ +/g, " ");
+							
+							// 값에 공백이 있으면 나누기
+							let afterAddress = replaceStreet.split(" "); 
+							street = afterAddress[0];
+							let buildingTotal = afterAddress[1];
+							
+							// 변수 값에 '-' 가 있는지 체크
+							if ( checkSpecial(buildingTotal) == true ) {
+								// 모든 공백 제거
+								let allReplaceBuilding = buildingTotal.replace(/(\s*)/g, "") 
+								// 값에 - 가 있으면 나누기
+								let afterBuilding = allReplaceBuilding.split("-"); 
+								building1 = afterBuilding[0]; 
+								building2 = afterBuilding[1];
+
+								//building2가 공백이면 null
+								if ( building2 == "" ) {
+									building2 = null;
+								}
+							
+							} else {
+								building1 = buildingTotal;
+							}
+							
+							
+						} else {	
 							// 앞뒤 공백 제거
 							let trimStreet = $('#street').val().trim(); 
-							if ( checkSpace(trimStreet) == true ) {
-								// 연속된 공백을 1개의 공백으로 설정
-								let replaceStreet = trimStreet.replace(/ +/g, " ");
-								
-								// 값에 공백이 있으면 나누기
-								let afterAddress = replaceStreet.split(" "); 
-								street = afterAddress[0];
-								let buildingTotal = afterAddress[1];
-								
-								// 변수 값에 '-' 가 있는지 체크
-								if ( checkSpecial(buildingTotal) == true ) {
-									// 모든 공백 제거
-									let allReplaceBuilding = buildingTotal.replace(/(\s*)/g, "") 
-									// 값에 - 가 있으면 나누기
-									let afterBuilding = allReplaceBuilding.split("-"); 
-									building1 = afterBuilding[0]; 
-									building2 = afterBuilding[1];
-	
-									//building2가 공백이면 null
-									if ( building2 == "" ) {
-										building2 = null;
-									}
-								
-								} else {
-									building1 = buildingTotal;
+							street = trimStreet;
+						}
+						$.ajax({
+							url : '${pageContext.request.contextPath}/signup/address/' + street + '/' + building1 + '/' + building2,
+							type :'get',
+							success : function(data) {
+								$('#selectAddress').html("");
+
+								// 데이터가 없으면
+								if (data.length == 0) {
+									$('#selectAddress').html("등록된 주소가 없습니다.");
 								}
 								
-								
-							} else {	
-								// 앞뒤 공백 제거
-								let trimStreet = $('#street').val().trim(); 
-								street = trimStreet;
-							}
-							$.ajax({
-								url : '${pageContext.request.contextPath}/signup/address/' + street + '/' + building1 + '/' + building2,
-								type :'get',
-								success : function(data) {
-									$('#selectAddress').html("");
-	
-									// 데이터가 없으면
-									if (data.length == 0) {
-										$('#selectAddress').html("등록된 주소가 없습니다.");
+								for (i = 0; i < data.length; i++) {
+									// building2 데이터가 있으면
+									if (data[i].building2 != 0) {
+										$('#selectAddress').append('<div><input type="radio" class="address" name="studentAddressMain" value="' + data[i].province + ' ' + data[i].city+' ' + data[i].town+' ' + data[i].street+' ' + data[i].building1+'-'+ data[i].building2+'(' + data[i].zipCode + ')">'
+												+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '-' + data[i].building2 + '('+data[i].zipCode + ')' + '</div>');
 									}
-									
-									for (i = 0; i < data.length; i++) {
-										// building2 데이터가 있으면
-										if (data[i].building2 != 0) {
-											$('#selectAddress').append('<div><input type="radio" class="address" name="studentAddressMain" value="' + data[i].province + ' ' + data[i].city+' ' + data[i].town+' ' + data[i].street+' ' + data[i].building1+'-' + data[i].building2+'(' + data[i].zipCode + ')">'
-													+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '('+data[i].zipCode + ')' + '</div>');
-										}
-										// building2 데이터가 없으면
-										if (data[i].building2 == 0) {
-											$('#selectAddress').append('<div><input type="radio" class="address" name="studentAddressMain" value="' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '(' + data[i].zipCode + ')">'
-													+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '('+data[i].zipCode + ')' + '</div>');
-										}
+									// building2 데이터가 없으면
+									if (data[i].building2 == 0) {
+										$('#selectAddress').append('<div><input type="radio" class="address" name="studentAddressMain" value="' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '(' + data[i].zipCode + ')">'
+												+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '('+data[i].zipCode + ')' + '</div>');
 									}
-									$('#addressWait').html("");
-								}	
-	
-							});
-	
-						}
-					});
-				}
+								}
+								$('#addressWait').html("");
+							}	
+
+						});
+
+					}
+				});
 				
 				// 이메일 형식 검사
 				function CheckEmail(str) {
@@ -212,6 +211,7 @@
 						return;
 					} else if ( idCheck == "false" ) {
 						$('#accountId').focus();
+						$('#idCheckMs').html("아이디 중복 확인해주세요.")
 						return;
 					}
 	
@@ -247,6 +247,7 @@
 						return;
 					} else if (emailCheck == "false") {
 						$('#studentEmail').focus();
+						$('#studentEmailCheck').html("이메일 중복 확인해주세요");
 						return;
 					} else {
 						$('#studentEmailCheck').html("");
