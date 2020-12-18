@@ -114,4 +114,11 @@ public class TeacherLectureNoticeController {
 		teacherLectureNoticeService.insertTeacherLectureNotice(lectureNotice);
 		return "redirect:/auth/teacher/lecture/" + lectureNotice.getLectureNo() + "/notice/noticeList/1";
 	}
+	// 강좌별 삭제
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/notice/deleteNotice/{lectureNoticeNo}")
+	public String deleteNotice(@PathVariable(value="lectureNo") int lectureNo,
+			@PathVariable(value="lectureNoticeNo") int lectureNoticeNo) {
+		teacherLectureNoticeService.deleteTeacherLectureNotice(lectureNoticeNo);
+		return "redirect:/auth/teacher/lecture/{lectureNo}/notice/noticeList/1";
+	}
 }

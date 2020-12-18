@@ -92,6 +92,9 @@
 					<td>${lectureNotice.lectureNoticeCount}</td>
 				</tr>
 			</table>
+			<div>
+				<button type="button" class="btn btn-sm btn-danger" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/deleteNotice/${lectureNoticeNo}'">삭제</button>
+			</div>
 		</div>
 	</body>
 </html>

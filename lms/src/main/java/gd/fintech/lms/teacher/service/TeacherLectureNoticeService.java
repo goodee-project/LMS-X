@@ -56,4 +56,9 @@ public class TeacherLectureNoticeService {
 	public int insertTeacherLectureNotice(LectureNotice lectureNotice) {
 		return teacherLectureNoticeMapper.insertTeacherLectureNotice(lectureNotice);	
 	}
+	// 강좌별 공지사항 삭제
+	// 강좌 공지사항 번호(lectureNoticeNo) 사용
+	public void deleteTeacherLectureNotice(int lectureNoticeNo) {
+		teacherLectureNoticeMapper.deleteTeacherLectureNotice(lectureNoticeNo);
+	}
 }

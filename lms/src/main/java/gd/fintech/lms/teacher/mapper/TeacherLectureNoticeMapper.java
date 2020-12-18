@@ -31,4 +31,8 @@ public interface TeacherLectureNoticeMapper {
 	// 공지사항 작성
 	// LectureNotice 객체에 담겨 있는 정보 사용
 	int insertTeacherLectureNotice(LectureNotice lectureNotice);
+	
+	// 공지사항 삭제
+	// 강좌 공지사항 번호(lectureNoticeNo) 사용
+	int deleteTeacherLectureNotice(int lectureNoticeNo);
 }
