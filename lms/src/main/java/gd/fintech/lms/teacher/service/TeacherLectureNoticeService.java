@@ -52,4 +52,8 @@ public class TeacherLectureNoticeService {
 	public int updateTeacherLectureNoticeCountUp(int lectureNoticeNo) {
 		return teacherLectureNoticeMapper.updateTeacherLectureNoticeCountUp(lectureNoticeNo);
 	}
+	// 강좌별 공지사항 작성
+	public int insertTeacherLectureNotice(LectureNotice lectureNotice) {
+		return teacherLectureNoticeMapper.insertTeacherLectureNotice(lectureNotice);	
+	}
 }

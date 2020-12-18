@@ -28,4 +28,7 @@ public interface TeacherLectureNoticeMapper {
 	// 공지사항 조회수 증가
 	// 강좌 공지사항 번호(lectureNoticeNo) 사용
 	int updateTeacherLectureNoticeCountUp(int lectureNoticeNo);
+	// 공지사항 작성
+	// LectureNotice 객체에 담겨 있는 정보 사용
+	int insertTeacherLectureNotice(LectureNotice lectureNotice);
 }

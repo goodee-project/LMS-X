@@ -72,4 +72,22 @@
 		WHERE 
 			lecture_notice_no = #{lectureNoticeNo}
 	</update>
+	<!-- 강사가 공지사항(LectureNotice) 테이블에 공지사항(LectureNotice)에 해당하는 데이터를 입력한다 -->
+	<insert id="insertTeacherLectureNotice" parameterType="gd.fintech.lms.vo.LectureNotice">
+		INSERT INTO lecture_notice (
+			lecture_no,
+			lecture_notice_title,
+			lecture_notice_content,
+			lecture_notice_createdate,
+			lecture_notice_updatedate,
+			lecture_notice_count
+		)VALUE (
+			#{lectureNo},
+			#{lectureNoticeTitle},
+			#{lectureNoticeContent},
+			NOW(),
+			NOW(),
+			0
+		)
+	</insert>
 </mapper>

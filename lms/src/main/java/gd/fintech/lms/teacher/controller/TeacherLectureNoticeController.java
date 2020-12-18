@@ -102,4 +102,16 @@ public class TeacherLectureNoticeController {
 		
 		return "auth/teacher/lecture/notice/noticeOne";
 	}
+	//강좌별 공지사항 작성 폼
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/notice/insertNotice")
+	public String insertNotice(Model model, @PathVariable(value = "lectureNo")int lectureNo) {
+		
+		return "auth/teacher/lecture/notice/insertNotice";
+	}
+	//강좌별 공지사항 작성 액션
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/notice/insertNotice")
+	public String insertNotice(LectureNotice lectureNotice) {
+		teacherLectureNoticeService.insertTeacherLectureNotice(lectureNotice);
+		return "redirect:/auth/teacher/lecture/" + lectureNotice.getLectureNo() + "/notice/noticeList/1";
+	}
 }
