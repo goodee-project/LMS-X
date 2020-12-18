@@ -1,5 +1,7 @@
 package gd.fintech.lms.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 // 강사 Vo
@@ -19,4 +21,6 @@ public class Teacher {
 	private String	teacherUpdatedate;		// 강사 계정 업데이트 일시
 	private String	managerIdAccess;		// 계정을 승인한 운영자의 아이디
 	private String	teacherInfo;			// 강사 한 줄 자기소개
+	private List<Career> careerList; 		// 강사 경력 리스트
+	private List<License> licenseList;		// 강사 자격증 리스트
 }
