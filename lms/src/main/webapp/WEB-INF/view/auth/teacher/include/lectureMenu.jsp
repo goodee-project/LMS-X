@@ -19,7 +19,7 @@
 		    
 		    <!-- 자료 게시판 -->
 		    <li class="nav-item">
-		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/lectureArchive/lectureArchiveList/1">자료 게시판</a>
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveList/1">자료 게시판</a>
 		    </li>
 		    
 		    <!-- 과제 관리 -->

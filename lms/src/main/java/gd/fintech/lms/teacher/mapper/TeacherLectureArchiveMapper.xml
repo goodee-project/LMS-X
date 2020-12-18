@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherLectureArchiveMapper">
+	<!-- 페이징을 적용하여 강좌 고유번호(lectureNo)에 해당하는 자료실 목록 출력 -->
+	<select id="selectTeacherLectureArchiveListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.LectureArchive">
+		SELECT
+			lecture_archive_no lectureArchiveNo, 
+			lecture_archive_writer lectureArchiveWriter, 
+			lecture_archive_title lectureArchiveTitle, 
+			lecture_archive_createdate lectureArchiveCreatedate, 
+			lecture_archive_count lectureArchiveCount
+		FROM
+			lecture_archive
+		WHERE
+			lecture_no = #{lectureNo}
+		ORDER BY
+			lecture_archive_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="selectTeacherLectureArchiveListCount" parameterType="Integer" resultType="Integer">
+  		SELECT
+  			COUNT(*)
+  		FROM
+  			lecture_archive
+  		WHERE
+  			lecture_no = #{lectureNo};
+  	</select>
+</mapper>

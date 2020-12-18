@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.teacher.mapper.TeacherLectureNoticeMapper;
 import gd.fintech.lms.vo.LectureNotice;
 
 @Service
+@Transactional
 public class TeacherLectureNoticeService {
 	@Autowired private TeacherLectureNoticeMapper teacherLectureNoticeMapper;
 	
