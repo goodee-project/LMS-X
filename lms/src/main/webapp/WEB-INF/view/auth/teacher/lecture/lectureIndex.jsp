@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -83,11 +84,44 @@
 			
 			<br>
 			
-			<h3>강좌 공지사항</h3>
+			<div>
+				<h3>강좌 공지사항</h3>
+				<button type="button" class="btn btn-sm btn-dark" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1'">더 보기</button>
+			</div>
 			
-			<br>
+			<br><br>
 			
-			<p>(강좌 공지사항 최근 5개 목록 출력바람)</p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성일시</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${lectureNoticeList[0].lectureNoticeNo != null}">
+						<c:forEach var="lnl" items="${lectureNoticeList}">
+							<tr>
+								<td width="15%">${lnl.lectureNoticeNo}</td>
+								<td width="45%">
+									<a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lnl.lectureNo}/notice/noticeOne/${lnl.lectureNoticeNo}">${lnl.lectureNoticeTitle}</a>
+								</td>
+								<td width="20%">${lnl.lectureNoticeCreatedate}</td>
+								<td width="20%">${lnl.lectureNoticeCount}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${lectureNoticeList[0].lectureNoticeNo == null}">
+						<tr>
+							<td colspan="7">(공지사항이 없습니다)</td>
+						</tr>
+					</c:if>
+				</tbody>
+			</table>
+			
+			<br><br>
 		</div>
 	</body>
 </html>

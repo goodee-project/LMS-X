@@ -50,13 +50,22 @@
 		<!-- 상단 인터페이스 -->
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
-				<h1>강좌</h1>
-				<p>공지사항 상세보기입니다.</p>
+				<h1>강좌 공지사항</h1>
+				<p>강좌 공지사항입니다.</p>
 			</div>
 		</div>
+		
 		<!-- 본문 -->
 		<div class="container">
-			<a href="/auth/teacher/lecture/${lectureNo}/notice/noticeList/1">목록</a>
+			<h3>공지사항</h3>
+			
+			<br>
+			
+			<button type="button" class="btn btn-sm btn-dark" style="float: left;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1'">목록</button>
+			<button type="button" class="btn btn-sm btn-primary" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/modifyNotice/${lectureNoticeNo}'">수정</button>
+			
+			<br><br>
+
 			<table class=table>
 				<tr>
 					<td width="20%">번호</td>
@@ -71,11 +80,11 @@
 					<td>${lectureNotice.lectureNoticeContent}</td>
 				</tr>
 				<tr>
-					<td>작성일</td>
+					<td>작성일시</td>
 					<td>${lectureNotice.lectureNoticeCreatedate}</td>
 				</tr>
 				<tr>
-					<td>수정일</td>
+					<td>수정일시</td>
 					<td>${lectureNotice.lectureNoticeUpdatedate}</td>				
 				</tr>
 				<tr>

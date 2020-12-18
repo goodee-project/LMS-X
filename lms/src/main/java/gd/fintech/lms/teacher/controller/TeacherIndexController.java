@@ -89,8 +89,8 @@ public class TeacherIndexController {
 		
 		// 현재 페이지에 대한 다음 페이지
 		int nextPage = currentPage - (currentPage % navPerPage) + 1 + 10;
-		if (nextPage > totalCount) {
-			nextPage = totalCount;
+		if (nextPage > lastPage) {
+			nextPage = lastPage;
 		}
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다

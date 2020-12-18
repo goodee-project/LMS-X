@@ -42,7 +42,7 @@
 		</style>
 	</head>
 	<body>
-	<!-- 내비게이션 메인 메뉴 -->
+		<!-- 내비게이션 메인 메뉴 -->
 		<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
 		
 		<!-- 내비게이션 서브 메뉴 -->
@@ -51,17 +51,25 @@
 		<!-- 상단 인터페이스 -->
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
-				<h1>강좌</h1>
-				<p>강의별 공지사항입니다.</p>
+				<h1>강좌 공지사항</h1>
+				<p>강좌 공지사항 목록입니다.</p>
 			</div>
 		</div>
+		
 		<!-- 본문 -->
 		<div class="container">
+			<div>
+				<h3>공지사항 목록</h3>
+				<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/insertNotice'">작성</button>
+			</div>
+			
+			<br><br>
+		
 			<table class=table>
 				<thead>
 					<th>번호</th>
 					<th>제목</th>
-					<th>작성일</th>
+					<th>작성일시</th>
 					<th>조회수</th>
 				</thead>
 				<tbody>
@@ -75,7 +83,8 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<!-- 페이지 네비게이션 -->
+			
+		<!-- 페이지 내비게이션 -->
 		<ul class="pagination justify-content-center">
 			<!-- 처음으로 버튼 -->
 			<c:choose>
