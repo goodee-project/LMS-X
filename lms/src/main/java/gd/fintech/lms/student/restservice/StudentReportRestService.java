@@ -33,4 +33,9 @@ public class StudentReportRestService {
 		
 		return studentReportRestMapper.deleteReportSubmitFileOne(uuid);
 	}
+	
+	// 해당 과제가 제출 기간 인지
+	public int selectCheckReportSubmitDate(int reportNo) {
+		return studentReportRestMapper.selectCheckReportSubmitDate(reportNo);
+	}
 }

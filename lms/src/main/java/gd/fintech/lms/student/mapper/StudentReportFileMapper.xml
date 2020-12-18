@@ -21,4 +21,22 @@
 			NOW()
 		)
 	</insert>
+	
+	<!-- 파일 이름들 가져오기 -->
+	<select id="selectReportSubmitFileName" parameterType="int" resultType="String">
+		SELECT 
+			report_submit_file_uuid
+		FROM
+			report_submit_file
+		WHERE
+			report_submit_no = #{reportSubmitNo}
+	</select>
+	
+	<!-- 제출된 해당 과제의 파일들을 삭제함 -->
+	<delete id="deleteReportSubmitFile" parameterType="int">
+		DELETE FROM
+			report_submit_file
+		WHERE
+			report_submit_no = #{reportSubmitNo}		
+	</delete>
 </mapper>

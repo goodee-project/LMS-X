@@ -8,6 +8,20 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function(){	
+				// 과제가 제출기간이 맞는지 확인
+				$.ajax({
+					url: '${pageContext.request.contextPath}/auth/student/lecture/report/checkReportSubmitDate/' + ${report.reportNo},
+					type:'post',
+					success: function(data){
+						// 제출기간이 아닐경우
+						if(!data){
+							alert('제출 기간이 아닙니다.');
+							$(location).attr('href', '${pageContext.request.contextPath}/auth/student/lecture/' + ${lectureNo} + '/report/reportOne/' + ${report.reportNo})
+							return;
+						}
+					}
+				});
+				
 				// 파일 추가 버튼
 				$('#addFileBtn').click(function(){
 					// 파일 개수 제한
@@ -40,7 +54,7 @@
 		
 					// 첨부 파일 유효성 검사
 					let submitCk = true;
-					$('.reportFileList').each(function(index, item){
+					$('.reportSubmitFileList').each(function(index, item){
 						// 파일 비어있을시 && submitCk가 true일때(경고창 한번만 출력하기 위함)
 						if($(item).val() == '' && submitCk){
 							alert('파일이 비어있습니다!');
@@ -48,9 +62,12 @@
 							return;
 						}
 					})
-					
+
 					// 정상적일 때 submit
-					$('#reportSubmitForm').submit();
+					if(submitCk){
+						$('#reportSubmitForm').submit();
+					}
+					
 				})
 		
 			})

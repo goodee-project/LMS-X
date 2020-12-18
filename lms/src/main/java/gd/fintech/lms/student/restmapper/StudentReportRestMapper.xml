@@ -28,4 +28,16 @@
 		WHERE
 			report_submit_file_uuid = #{uuid}
 	</delete>
+	
+	<!-- 해당 과제가 제출기간이 맞는지 -->
+	<select id="selectCheckReportSubmitDate" parameterType="int" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			report 
+		WHERE 
+			NOW() >= report_startdate AND 
+			report_enddate >= NOW() AND 
+			report_no = #{reportNo}
+	</select>
 </mapper>

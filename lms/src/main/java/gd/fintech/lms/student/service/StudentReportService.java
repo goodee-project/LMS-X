@@ -42,6 +42,7 @@ public class StudentReportService {
 		ReportSubmit reportSubmit = new ReportSubmit();
 		reportSubmit.setReportNo(reportSubmitForm.getReportNo());
 		reportSubmit.setAccountId(reportSubmitForm.getAccountId());
+		reportSubmit.setReportSubmitWriter(reportSubmitForm.getReportSubmitWriter());
 		reportSubmit.setReportSubmitTitle(reportSubmitForm.getReportSubmitTitle());
 		reportSubmit.setReportSubmitContent(reportSubmitForm.getReportSubmitContent());
 		studentReportMapper.insertReportSubmit(reportSubmit);
@@ -158,5 +159,19 @@ public class StudentReportService {
 		}
 			
 		return;
+	}
+	
+	// 과제 제출 삭제하기
+	public void deleteReportSubmit(int reportSubmitNo) {
+		
+		// 실제 파일 이름들 가져오기
+		List<String> fileNameList= studentReportFileMapper.selectReportSubmitFileName(reportSubmitNo);
+		for(String fn : fileNameList) {
+			File f = new File(PATH + fn);
+			f.delete();		
+		}
+		// DB 삭제
+		studentReportFileMapper.deleteReportSubmitFile(reportSubmitNo);
+		studentReportMapper.deleteReportSubmit(reportSubmitNo);
 	}
 }

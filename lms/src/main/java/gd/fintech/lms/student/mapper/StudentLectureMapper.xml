@@ -147,7 +147,8 @@
 			class_registration 
 		SET
 			class_registration_point = #{classRegistrationPoint},
-			class_registration_review = #{classRegistrationReview}
+			class_registration_review = #{classRegistrationReview},
+			class_registration_updatedate = NOW()
 		WHERE 
 			class_registration_no = #{classRegistrationNo}
 	</update>
@@ -207,11 +208,13 @@
 			lecture_no,
 			account_id,
 			class_registration_state,
-			class_registration_createdate
+			class_registration_createdate,
+			class_registration_updatedate
 		) VALUES (
 			#{lectureNo},
 			#{accountId},
 			'대기',
+			NOW(),
 			NOW()
 		)
 	</insert>
@@ -219,7 +222,9 @@
 	<update id="updateClassRegistrationState" parameterType="int">
 		UPDATE 
 			class_registration 
-			SET class_registration_state = '취소'
+		SET 
+			class_registration_state = '취소',
+			class_registration_updatedate = NOW()
 		WHERE 
 			class_registration_no = #{classRegistrationNo}
 	</update>

@@ -106,7 +106,7 @@
 		) VALUES (
 			#{reportNo},
 			#{accountId},
-			#{accountId},
+			#{reportSubmitWriter},
 			NOW(),
 			NOW(),
 			#{reportSubmitTitle},
@@ -125,4 +125,12 @@
 		WHERE
 			report_submit_no = #{reportSubmitNo}	
 	</update>
+	
+	<!-- 과제 제출 삭제 -->
+	<delete id="deleteReportSubmit" parameterType="int">
+		DELETE FROM
+			report_submit
+		WHERE 
+			report_submit_no = #{reportSubmitNo}
+	</delete>
 </mapper>

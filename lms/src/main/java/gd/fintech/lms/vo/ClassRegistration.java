@@ -16,4 +16,5 @@ public class ClassRegistration {
 	private String	classRegistrationPoint;			// 강좌 평점 (0, 1, 2, 3, 4, 5)
 	private String	classRegistrationReview;		// 강좌 후기
 	private String	classRegistrationCreatedate;	// 강좌 수강 정보 생성 일시
+	private String  classRegistrationUpdatedate;    // 강좌 업데이트 일시
 }

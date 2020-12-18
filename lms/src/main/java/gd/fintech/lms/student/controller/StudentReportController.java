@@ -17,17 +17,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import gd.fintech.lms.student.restservice.StudentReportRestService;
 import gd.fintech.lms.student.service.StudentReportService;
-import gd.fintech.lms.vo.ClassRegistration;
-import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject;
 import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.ReportSubmit;
-import gd.fintech.lms.vo.ReportSubmitFile;
 import gd.fintech.lms.vo.ReportSubmitForm;
 
 @Controller
 public class StudentReportController {
 	@Autowired StudentReportService studentReportService;
+	@Autowired StudentReportRestService studentReportRestService;
 
 	// Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -126,9 +125,10 @@ public class StudentReportController {
 		paramReportSubmit.setAccountId(accountId);
 		paramReportSubmit.setReportNo(reportNo);
 		ReportSubmit reportSubmit = studentReportService.selectReportSubmitOne(paramReportSubmit);
+	
 		
-		// 제출된 과제가 없다면 과제 제출 폼으로 이동
-		if (reportSubmit == null) {
+		// 제출된 과제가 없고, 과제 제출 기간이면 과제 작성 폼으로 이동
+		if (reportSubmit == null && studentReportRestService.selectCheckReportSubmitDate(reportNo) > 0) {
 			return "redirect:/auth/student/lecture/" + lectureNo + "/report/insertReport/" + reportNo;
 		}
 		
@@ -161,8 +161,10 @@ public class StudentReportController {
 		// 세션에서 아이디 가져오기
 		HttpSession session = ((HttpServletRequest)request).getSession();	
 		String accountId = (String)session.getAttribute("loginId");
+		String studentName = (String)session.getAttribute("loginName");
 		reportSubmitForm.setAccountId(accountId);
-
+		reportSubmitForm.setReportSubmitWriter(studentName);
+		
 		// logger
 		logger.trace("reportSubmitForm["+reportSubmitForm+"]");
 		
@@ -202,5 +204,17 @@ public class StudentReportController {
 
 		studentReportService.updateReportSubmit(reportSubmitForm);
 		return "redirect:/auth/student/lecture/" + lectureNo + "/report/reportOne/" + reportSubmitForm.getReportNo();
+	}
+	
+	// 제출한 과제 삭제하기
+	@GetMapping("auth/student/lecture/{lectureNo}/report/{reportNo}/deleteReport/{reportSubmitNo}")
+	public String deleteReport(
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "reportNo") int reportNo,
+			@PathVariable(name = "reportSubmitNo") int reportSubmitNo){
+		
+		studentReportService.deleteReportSubmit(reportSubmitNo);
+		
+		return "redirect:/auth/student/lecture/" + lectureNo + "/report/insertReport/" + reportNo;
 	}
 }
