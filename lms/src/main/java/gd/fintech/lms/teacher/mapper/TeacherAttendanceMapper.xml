@@ -31,8 +31,8 @@
 			MONTH(a.attendance_day) = #{currentMonth} AND
 			DAY(a.attendance_day) = #{currentDay}
 		WHERE
-			cr.class_registration_state = "수강중" OR
-			cr.class_registration_state = "수료" AND
+			(cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료") AND
 			cr.lecture_no = #{lectureNo}
 		ORDER BY
 			s.student_name
