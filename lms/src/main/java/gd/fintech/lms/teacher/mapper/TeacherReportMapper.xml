@@ -66,8 +66,8 @@
   			#{lectureNo}, 
   			#{reportTitle}, 
   			#{reportContent}, 
-  			now(), 
-  			now(), 
+  			NOW(), 
+  			NOW(), 
   			#{reportStartdate}, 
   			#{reportEnddate}
   		)
@@ -80,7 +80,7 @@
   		SET
   			report_title = #{reportTitle}, 
   			report_content = #{reportContent}, 
-  			report_updatedate = #{reportUpdatedate}, 
+  			report_updatedate = NOW(), 
   			report_startdate = #{reportStartdate}, 
   			report_enddate = #{reportEnddate}
   		WHERE

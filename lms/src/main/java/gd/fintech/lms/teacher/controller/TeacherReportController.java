@@ -158,9 +158,7 @@ public class TeacherReportController {
 	
 	// 과제 고유번호(reportNo)에 해당하는 과제에 대한 정보를 수정 (Action)
 	@PostMapping(value="/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
-	public String updateReport(Report report, 
-			@PathVariable(value = "lectureNo") int lectureNo, 
-			@PathVariable(value = "reportNo") int reportNo) {
+	public String updateReport(Report report) {
 		teacherReportService.updateTeacherReport(report);
 		
 		// [Logger] 과제(report) 확인

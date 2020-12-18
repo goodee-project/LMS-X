@@ -43,6 +43,7 @@
 		
 		<!-- jQuery를 이용하여 제목, 내용 검사 -->
 		<script>
+			/*
 			// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
 			$(document).ready(function() {
 				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
@@ -57,6 +58,7 @@
 					$('#reportForm').submit();
 				}
 			}
+			*/
 		</script>
 	</head>
 	<body>
@@ -76,10 +78,10 @@
 		
 		<!-- 본문 -->
 		<div class="container">
-			<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/insertReport" id="reportForm">
+			<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/updateReport" id="reportForm">
 				<div>
 					<h3>과제 정보</h3>
-					<button type="button" class="btn btn-sm btn-success" id="submitBtn" style="float: right;">입력</button>
+					<button type="submit" class="btn btn-sm btn-success" id="submitBtn" style="float: right;">입력</button>
 				</div>
 				
 				<br><br>
