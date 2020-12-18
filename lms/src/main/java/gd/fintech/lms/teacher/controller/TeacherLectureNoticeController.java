@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import gd.fintech.lms.teacher.service.TeacherLectureNoticeService;
 import gd.fintech.lms.vo.LectureNotice;
@@ -89,11 +90,13 @@ public class TeacherLectureNoticeController {
 		
 		return "auth/teacher/lecture/notice/noticeList";
 	}
-	@GetMapping(value ="/auth/teacher/lecture/{lectureNo}/notice/noticeOne/{lectureNoticeNo}")
+	@RequestMapping(value ="/auth/teacher/lecture/{lectureNo}/notice/noticeOne/{lectureNoticeNo}")
 	public String noticeOne(Model model,
 			@PathVariable(value="lectureNo") int lectureNo,
 			@PathVariable(value="lectureNoticeNo") int lectureNoticeNo) {
+		teacherLectureNoticeService.updateTeacherLectureNoticeCountUp(lectureNoticeNo);
 		LectureNotice lectureNotice = teacherLectureNoticeService.getTeacherNoticeOne(lectureNoticeNo);
+		System.out.println("-------------------------------상세보기 확인" + lectureNotice);
 		//model을 통해 View에 다음과 같은 정보를 보내온다.
 		model.addAttribute("lectureNotice", lectureNotice);
 		

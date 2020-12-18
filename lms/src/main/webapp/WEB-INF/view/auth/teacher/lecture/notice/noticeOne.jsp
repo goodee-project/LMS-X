@@ -56,6 +56,7 @@
 		</div>
 		<!-- 본문 -->
 		<div class="container">
+			<a href="/auth/teacher/lecture/${lectureNo}/notice/noticeList/1">목록</a>
 			<table class=table>
 				<tr>
 					<td width="20%">번호</td>
