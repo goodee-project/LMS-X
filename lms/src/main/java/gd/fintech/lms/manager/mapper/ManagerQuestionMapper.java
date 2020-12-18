@@ -10,5 +10,5 @@ import gd.fintech.lms.vo.Question;
 public interface ManagerQuestionMapper {
 	List<Question> selectQuestionList(); // 질문 리스트 
 	int deleteQuestion(int question);	 // 질문 삭제
-	Question questionOne(int question);  // 질문 상세보기
+	Question selectQuestionOne(int question);  // 질문 상세보기
 }

@@ -12,5 +12,5 @@ public interface ManagerTextbookMapper {
 	int insertTextbook(Textbook textbook);  // 교재 추가
 	int deleteTextbook(String textbookIsbn);	// 교재 삭제
 	int updateTextbook(Textbook textbook);	// 교재 수정
-	Textbook textbookOne(String textbookIsbn); // 교제 정보
+	Textbook selectTextbookOne(String textbookIsbn); // 교제 정보
 }

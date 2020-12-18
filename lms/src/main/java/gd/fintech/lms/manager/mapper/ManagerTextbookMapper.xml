@@ -56,7 +56,7 @@
 			textbook_isbn = #{textbookIsbn}
 	</update>
 	
-	<select id="textbookOne" parameterType="String" resultType="gd.fintech.lms.vo.Textbook">
+	<select id="selectTextbookOne" parameterType="String" resultType="gd.fintech.lms.vo.Textbook">
 		SELECT 
 			textbook_isbn textbookIsbn,
 			textbook_title textbookTitle,

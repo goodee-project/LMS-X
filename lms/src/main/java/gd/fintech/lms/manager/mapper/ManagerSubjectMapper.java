@@ -12,5 +12,5 @@ public interface ManagerSubjectMapper {
 	int insertSubject(Subject subject); // 과목 생성
 	int deleteSubject(int subjectNo);	// 과목 삭제
 	int updateSubject(Subject subject);	// 과목 수정
-	Subject subjectOne(int subjectNo);  // 과목 정보
+	Subject selectSubjectOne(int subjectNo);  // 과목 정보
 }

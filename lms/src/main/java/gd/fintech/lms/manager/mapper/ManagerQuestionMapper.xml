@@ -24,7 +24,7 @@
 			question_no = #{questionNo}
 	</delete>
 	
-	<select id="questionOne" parameterType="int" resultType="gd.fintech.lms.vo.Question">
+	<select id="selectQuestionOne" parameterType="int" resultType="gd.fintech.lms.vo.Question">
 		SELECT 
 			question_no questionNo,
 			lecture_no lectureNo,

@@ -20,4 +20,6 @@ public class ManagerStudentController {
 		model.addAttribute("studentList", studentList);
 		return "auth/manager/student/studentList";
 	}
+	
+	
 }

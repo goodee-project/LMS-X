@@ -13,30 +13,18 @@
 	<table border="1">	
 		<tr>
 			<th>FAQ 번호</th>
-			<th>계정 ID</th>
 			<th>FAQ 작성자</th>
 			<th>FAQ 제목</th>
-			<th>FAQ 내용</th>
-			<th>FAQ 생성날짜</th>
-			<th>FAQ 수정날짜</th>
 			<th>FAQ 조회수</th>
 			<th>FAQ 카테고리</th>
-			<th>수정</th>
-			<th>삭제</th>
 		</tr>
 		<c:forEach items="${faqList}" var="f">
 			<tr>
-				<td>${f.faqNo}</td>
-				<td>${f.accountId}</td>
+				<td><a href="${pageContext.request.contextPath}/auth/manager/faq/faqOne/${f.faqNo}">${f.faqNo}</a></td>	
 				<td>${f.faqWriter}</td>
 				<td>${f.faqTitle}</td>
-				<td>${f.faqContent}</td>
-				<td>${f.faqCreatedate}</td>
-				<td>${f.faqUpdatedate}</td>
 				<td>${f.faqCount}</td>
 				<td>${f.faqCategory}</td>
-				<td><a href="${pageContext.request.contextPath}/auth/manager/faq/updateFaq/${f.faqNo}">수정</a></td>
-				<td><a href="${pageContext.request.contextPath}/auth/manager/faq/deleteFaq/${f.faqNo}">삭제</a></td>
 			</tr>	
 		</c:forEach>
 	</table>

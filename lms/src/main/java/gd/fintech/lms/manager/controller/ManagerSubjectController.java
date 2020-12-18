@@ -43,8 +43,8 @@ public class ManagerSubjectController {
 	@GetMapping("/auth/manager/subject/updateSubject/{subjectNo}")
 	public String updateSubject(Model model,
 		@PathVariable(name="subjectNo") int subjectNo) {
-		Subject subjectOne = managerSubjectService.subjectOne(subjectNo);
-		model.addAttribute("subject", subjectOne);
+		Subject subject = managerSubjectService.getSubjectOne(subjectNo);
+		model.addAttribute("subject", subject);
 		return "auth/manager/subject/updateSubject";
 	}
 	
@@ -57,7 +57,8 @@ public class ManagerSubjectController {
 	@GetMapping("/auth/manager/subject/subjectOne/{subjectNo}")
 	public String subjectOne(Model model,
 		@PathVariable(name = "subjectNo") int subjectNo) {
-		model.addAttribute("subject", managerSubjectService.subjectOne(subjectNo));
+		Subject subject = managerSubjectService.getSubjectOne(subjectNo);
+		model.addAttribute("subject", subject);
 		return "auth/manager/subject/subjectOne";
 	}
 }

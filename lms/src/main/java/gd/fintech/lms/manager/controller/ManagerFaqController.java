@@ -56,8 +56,8 @@ public class ManagerFaqController {
 	public String updateFaq(Model model,
 		@PathVariable(name="faqNo") int faqNo) {
 		List<FaqCategory> faqCategoryList = managerFaqCategoryService.getFaqCategoryList();
-		Faq faqOne = managerFaqService.faq(faqNo);
-		model.addAttribute("faq", faqOne);
+		Faq faq = managerFaqService.getFaqOne(faqNo);
+		model.addAttribute("faq", faq);
 		model.addAttribute("faqCategoryList", faqCategoryList);
 		return "auth/manager/faq/updateFaq";
 	}
@@ -66,5 +66,13 @@ public class ManagerFaqController {
 	public String updateFaq(Faq faq) {
 		managerFaqService.updateFaq(faq);
 		return "redirect:/auth/manager/faq/faqList";
+	}
+	
+	@GetMapping("/auth/manager/faq/faqOne/{faqNo}")
+	public String textbookOne(Model model,
+		@PathVariable(name = "faqNo") int faqNo) {
+		Faq faq = managerFaqService.getFaqOne(faqNo);
+		model.addAttribute("faq", faq);
+		return "auth/manager/faq/faqOne";
 	}
 } 

@@ -30,7 +30,7 @@ public class ManagerFaqService {
 		return managerFaqMapper.updateFaq(faq);
 	}
 	
-	public Faq faq(int faqNo) {
-		return managerFaqMapper.faqOne(faqNo);
+	public Faq getFaqOne(int faqNo) {
+		return managerFaqMapper.selectFaqOne(faqNo);
 	}
 }

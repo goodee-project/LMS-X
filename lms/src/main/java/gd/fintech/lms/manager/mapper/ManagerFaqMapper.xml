@@ -57,7 +57,7 @@
 			faq_no = #{faqNo}
 	</update>
 	
-	<select id="faqOne" parameterType="int" resultType="gd.fintech.lms.vo.Faq">
+	<select id="selectFaqOne" parameterType="int" resultType="gd.fintech.lms.vo.Faq">
 		SELECT 
 			faq_no faqNo,
 			account_id AccountId,

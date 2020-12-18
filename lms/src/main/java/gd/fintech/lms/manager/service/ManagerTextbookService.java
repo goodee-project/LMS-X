@@ -30,7 +30,7 @@ public class ManagerTextbookService {
 		return managerTextbookMapper.updateTextbook(textbook);
 	}
 	
-	public Textbook textbookOne(String textbookIsbn) {
-		return managerTextbookMapper.textbookOne(textbookIsbn);
+	public Textbook getTextbookOne(String textbookIsbn) {
+		return managerTextbookMapper.selectTextbookOne(textbookIsbn);
 	}
 }

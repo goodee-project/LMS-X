@@ -48,7 +48,7 @@
 			subject_no = #{subjectNo}
 	</update>
 	
-	<select id="subjectOne" parameterType="int" resultType="gd.fintech.lms.vo.Subject">
+	<select id="selectSubjectOne" parameterType="int" resultType="gd.fintech.lms.vo.Subject">
 		SELECT
 			subject_no subjectNo,
 			subject_name subjectName,

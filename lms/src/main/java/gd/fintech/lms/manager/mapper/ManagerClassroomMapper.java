@@ -12,5 +12,5 @@ public interface ManagerClassroomMapper {
 	int insertClassroom(Classroom classroom);	// 강의실 추가
 	int deleteClassroom(int classroomNo);		// 강의실 삭제
 	int updateClassroom(Classroom classroom);	// 강의실 수정
-	Classroom classroomOne(int classroomNo);	// 강좌 정보
+	Classroom selectClassroomOne(int classroomNo);	// 강좌 정보
 }

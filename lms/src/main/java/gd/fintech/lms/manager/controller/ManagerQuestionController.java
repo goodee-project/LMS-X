@@ -32,7 +32,8 @@ public class ManagerQuestionController {
 	@GetMapping("/auth/manager/question/questionOne/{questionNo}")
 	public String questionOne(Model model,
 		@PathVariable(name = "questionNo") int questionNo) {
-		model.addAttribute("question", managerQuestionService.questionOne(questionNo));
+		Question question = managerQuestionService.getQuestionOne(questionNo);
+		model.addAttribute("question", question);
 		return "auth/manager/question/questionOne";
 	}
 }

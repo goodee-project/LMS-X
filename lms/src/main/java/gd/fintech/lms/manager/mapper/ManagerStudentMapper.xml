@@ -17,4 +17,32 @@
 		FROM
 			student
 	</select>
+	
+	<update id="updateStudentList" parameterType="gd.fintech.lms.vo.Student">
+		UPDATE
+			student
+		SET
+			student_accessdate = #{studentAccessdate},
+		WHERE
+			student_id = #{studentId}
+	</update>
+	
+	<select id="selectStudentOne" parameterType="int" resultType="gd.fintech.lms.vo.Student">
+		SELECT
+			student_id studentId,
+			student_email studentEmail,
+			student_name studentName,
+			student_phone studentPhone,
+			student_gender studentGender,
+			student_birth studentBirth,
+			student_address_main studentAddressMain,
+			student_address_sub studentAddressSub,
+			student_image studentImage,
+			student_accessdate studentAccessdate,
+			student_updatedate studentUpdatedate
+		FROM
+			student
+		WHERE
+			student_id = #{studentId}
+	</select>
 </mapper>

@@ -12,5 +12,5 @@ public interface ManagerFaqMapper {
 	int insertFaq(Faq faq); // FAQ 추가
 	int deleteFaq(int faqNo); // FAQ 삭제
 	int updateFaq(Faq faq); // FAQ 수정
-	Faq faqOne(int faqNo); // FAQ 정보
+	Faq selectFaqOne(int faqNo); // FAQ 정보
 }

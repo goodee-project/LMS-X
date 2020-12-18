@@ -44,9 +44,9 @@ public class ManagerTextbookController {
 	@GetMapping("/auth/manager/textbook/updateTextbook/{textbookIsbn}")
 	public String updateTextbook(Model model,
 		@PathVariable(name="textbookIsbn") String textbookIsbn) {
-		Textbook textbookOne = managerTextbookService.textbookOne(textbookIsbn);
-		System.out.println(textbookOne);
-		model.addAttribute("textbook", textbookOne);
+		Textbook textbook = managerTextbookService.getTextbookOne(textbookIsbn);
+		System.out.println(textbook);
+		model.addAttribute("textbook", textbook);
 		return "auth/manager/textbook/updateTextbook";
 	}
 	
@@ -59,7 +59,7 @@ public class ManagerTextbookController {
 	@GetMapping("/auth/manager/textbook/textbookOne/{textbookIsbn}")
 	public String textbookOne(Model model,
 		@PathVariable(name = "textbookIsbn") String textbookIsbn) {
-		Textbook textbook = managerTextbookService.textbookOne(textbookIsbn);
+		Textbook textbook = managerTextbookService.getTextbookOne(textbookIsbn);
 		model.addAttribute("textbook", textbook);
 		return "auth/manager/textbook/textbookOne";
 	}

@@ -21,4 +21,36 @@
 			account_state = "활성화" AND
 			account_level = 3
 	</select>
+	<!-- 운영자 계정 관리 페이지 출력문 -->
+	<select id="selectManagerAccountList" resultType="gd.fintech.lms.vo.Account">
+		SELECT 
+			account_id accountId,
+			account_state accountState,
+			account_level accountLevel
+		FROM
+			account
+	</select>
+	
+	<update id="updateAccount" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE
+			account
+		SET
+			account_state = #{accountState},
+			account_updatedate = now()
+		WHERE
+			account_id = #{accountId}
+	</update>
+	
+	<select id="selectAccountOne" parameterType="String" resultType="gd.fintech.lms.vo.Account">
+		SELECT 
+			account_id accountId,
+			account_state accountState,
+			account_level accountLevel,
+			account_createdate accountCreatedate,
+			account_updatedate accountUpdatedate
+		FROM
+			account
+		WHERE
+			account_id = #{accountId}
+	</select>
 </mapper>

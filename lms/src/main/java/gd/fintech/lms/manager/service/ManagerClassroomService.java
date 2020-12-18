@@ -30,7 +30,7 @@ public class ManagerClassroomService {
 		return managerClassroomMapper.updateClassroom(classroom);
 	}
 	
-	public Classroom classroomOne(int classroomNo) {
-		return managerClassroomMapper.classroomOne(classroomNo);
+	public Classroom getClassroomOne(int classroomNo) {
+		return managerClassroomMapper.selectClassroomOne(classroomNo);
 	}
 }

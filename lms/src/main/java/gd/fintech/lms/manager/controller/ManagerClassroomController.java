@@ -43,8 +43,8 @@ public class ManagerClassroomController {
 	@GetMapping("/auth/manager/classroom/updateClassroom/{classroomNo}")
 	public String updateClassroom(Model model,
 		@PathVariable(name="classroomNo") int classroomNo) {
-		Classroom classroomOne = managerClassroomService.classroomOne(classroomNo);
-		model.addAttribute("classroom", classroomOne);
+		Classroom classroom = managerClassroomService.getClassroomOne(classroomNo);
+		model.addAttribute("classroom", classroom);
 		return "auth/manager/classroom/updateClassroom";
 	}
 	

@@ -41,7 +41,7 @@
 			classroom_no = #{classroomNo}
 	</update>
 	
-	<select id="classroomOne" parameterType="int" resultType="gd.fintech.lms.vo.Classroom">
+	<select id="selectClassroomOne" parameterType="int" resultType="gd.fintech.lms.vo.Classroom">
 		SELECT
 			classroom_no classroomNo,
 			classroom_number classroomNumber,

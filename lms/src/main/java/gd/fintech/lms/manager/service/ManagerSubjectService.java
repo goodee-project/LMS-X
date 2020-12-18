@@ -30,7 +30,7 @@ public class ManagerSubjectService {
 		return managerSubjectMapper.updateSubject(subject);
 	}
 	
-	public Subject subjectOne(int subjectNo) {
-		return managerSubjectMapper.subjectOne(subjectNo);
+	public Subject getSubjectOne(int subjectNo) {
+		return managerSubjectMapper.selectSubjectOne(subjectNo);
 	}
 }
