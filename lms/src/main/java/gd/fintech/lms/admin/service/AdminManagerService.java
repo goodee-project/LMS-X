@@ -1,6 +1,8 @@
 package gd.fintech.lms.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +23,19 @@ public class AdminManagerService {
 	private static final Logger log = LoggerFactory.getLogger(AdminManagerService.class);
 
 	// 운영자 승인 대기 목록
-	public List<ManagerQueue> getManagerQueueList(){
-		return adminManagerMapper.selectManagerQueueList();
+	public List<ManagerQueue> getManagerQueueList(int beginRow, int rowPerPage){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		
+		return adminManagerMapper.selectManagerQueueList(map);
+	}
+	
+	// 운영자 승인 대기 총 인원
+	public int getManagerQueueCount() {
+		
+		return adminManagerMapper.selectManagerQueueCount();
 	}
 	
 	// 운영자 승인 거절
@@ -51,5 +64,17 @@ public class AdminManagerService {
 		adminManagerMapper.insertManager(manager);
 		// 운영자 승인대기테이블 삭제
 		adminManagerMapper.deleteManagerQueue(accountId);
+	}
+	
+	// 운영자 상세보기
+	public Manager getManagerOne(String managerId) {
+		
+		return adminManagerMapper.selectManagerOne(managerId);
+	}
+	
+	// 운영자 직급수정
+	public int updateManagerPosition(Manager manager) {
+		
+		return adminManagerMapper.updateManagerOnePosition(manager);
 	}
 }

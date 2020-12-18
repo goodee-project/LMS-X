@@ -3,7 +3,7 @@
 <mapper namespace="gd.fintech.lms.admin.mapper.AdminManagerMapper">
 
 	<!-- 운영자 승인 대기 목록 -->
-	<select id="selectManagerQueueList" resultType="gd.fintech.lms.vo.ManagerQueue">
+	<select id="selectManagerQueueList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.ManagerQueue">
 		SELECT
 			manager_id managerId,
 			manager_email managerEmail,
@@ -15,8 +15,17 @@
 			manager_address_sub managerAddressSub
 		FROM
 			manager_queue
+		LIMIT 
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
+	<!-- 운영자 승인 대기 총 인원 -->
+	<select id="selectManagerQueueCount" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			manager_queue
+	</select>
 	<!-- 운영자 승인대기테이블 삭제 -->
 	<delete id="deleteManagerQueue" parameterType="String">
 		DELETE FROM
@@ -89,6 +98,78 @@
 			now(),
 			now()
 		)
-	
 	</insert>
+	
+	<!-- 운영자 상세보기 : 운영자의 경력과 자격증 -->
+	<resultMap type="gd.fintech.lms.vo.Manager" id="selectManagerOneResult">
+		<result property="managerId" column="manager_id"/>
+		<result property="managerEmail" column="manager_email"/>
+		<result property="managerPhone" column="manager_phone"/>
+		<result property="managerName" column="manager_name"/>
+		<result property="managerGender" column="manager_gender"/>
+		<result property="managerBirth" column="manager_birth"/>
+		<result property="managerPosition" column="manager_position"/>
+		<result property="managerAddressMain" column="manager_address_main"/>
+		<result property="managerAddressSub" column="manager_address_sub"/>
+		<result property="managerImage" column="manager_image"/>
+		<result property="managerAccessdate" column="manager_accessdate"/>
+		<collection property="careerList"  ofType="gd.fintech.lms.vo.Career">
+			<result property="careerNo" column="career_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="careerContent" column="career_content"/>
+			<result property="careerStartdate" column="career_startdate"/>
+			<result property="careerEnddate" column="career_enddate"/>
+		</collection>
+		<collection property="licenseList" ofType="gd.fintech.lms.vo.License">
+			<result property="licenseNo" column="license_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="licenseNumber" column="license_number"/>
+			<result property="licenseName" column="license_name"/>
+			<result property="licenseAgency" column="license_agency"/>
+			<result property="licenseGetdate" column="license_getdate"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectManagerOne" parameterType="String" resultMap="selectManagerOneResult">
+		SELECT
+			m.manager_id,
+			m.manager_email,
+			m.manager_phone,
+			m.manager_name,
+			m.manager_gender,
+			m.manager_birth,
+			m.manager_position,
+			m.manager_address_main,
+			m.manager_address_sub,
+			m.manager_image,
+			m.manager_accessdate,
+			c.career_content,
+			c.career_startdate,
+			c.career_enddate,
+			l.license_number,
+			l.license_name,
+			l.license_agency,
+			l.license_getdate
+		FROM
+			manager m
+		LEFT JOIN
+			career c ON
+			c.account_id = m.manager_id
+		LEFT JOIN
+			license l ON
+			l.account_id = m.manager_id 
+		WHERE
+			manager_id = #{managerId}
+	</select>
+	
+	<!-- 운영자 직급 수정 -->
+	<update id="updateManagerOnePosition" parameterType="gd.fintech.lms.vo.Manager">
+		UPDATE 
+			manager
+		SET
+			manager_position = #{managerPosition}
+		WHERE
+			manager_id = #{managerId}
+	
+	</update>
 </mapper>

@@ -1,6 +1,7 @@
 package gd.fintech.lms.admin.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,7 +12,10 @@ import gd.fintech.lms.vo.ManagerQueue;
 @Mapper
 public interface AdminManagerMapper {
 	// 운영자 승인 대기 목록
-	public List<ManagerQueue> selectManagerQueueList(); 
+	public List<ManagerQueue> selectManagerQueueList(Map<String,Object> map); 
+	
+	// 운영자 승인 대기 총 인원
+	public int selectManagerQueueCount();
 	
 	// 운영자 승인 거절
 	public int deleteManagerQueue(String managerId);
@@ -24,4 +28,10 @@ public interface AdminManagerMapper {
 	public Manager selectManagerQueueOne(String accountId);
 	// 운영자 테이블 추가
 	public int insertManager(Manager manager);
+	
+	// 운영자 상세보기
+	public Manager selectManagerOne(String managerId);
+	
+	// 운영자 직급 수정
+	public int updateManagerOnePosition(Manager manager);
 }
