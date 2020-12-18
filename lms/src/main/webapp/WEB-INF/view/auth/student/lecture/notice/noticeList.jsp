@@ -12,6 +12,9 @@
 		<div>
 			<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
 	    </div>
+	    <div>
+         <jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
+       </div>
 		<div>
 			<table border="1">
 				<thead>

@@ -29,7 +29,7 @@
 		SELECT
 			question_no questionNo,
 			lecture_no lectureNo,
-			question_writer qestionWriter,
+			question_writer questionWriter,
 			question_title questionTitle,
 			question_createdate questionCreatedate,
 			question_count questionCount
@@ -53,7 +53,13 @@
 	
 	<!--질문 게시판 게시글 작성-->
 	<insert id="insertStudentQna" parameterType="gd.fintech.lms.vo.Question">
+		<selectKey resultType="int" keyProperty="questionNo" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 		INSERT INTO question(
+			account_id,
+			lecture_no,
+			question_writer,
 			question_title,
 			question_content,
 			question_createdate,
@@ -61,6 +67,9 @@
 			question_count,
 			question_password
 		) VALUES (
+			#{accountId},
+			#{lectureNo},
+			#{questionWriter},
 			#{questionTitle},
 			#{questionContent},
 			now(),
@@ -68,7 +77,6 @@
 			0,
 			#{questionPassword}
 		)
-		
 	</insert>
 	<!--질문 게시판 상세보기-->
 	<select id="selectStudentQnaOne" parameterType="int" resultMap="selectStudentQnaOneResult">

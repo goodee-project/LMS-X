@@ -4,16 +4,20 @@
 	<!--학생 : 질문 게시판 게시글 작성시 파일 추가 -->
 	<insert id="insertStudentQnaFile" parameterType="gd.fintech.lms.vo.QuestionFile">
 		INSERT INTO question_file(
+			question_no,
 			question_file_uuid,
 			question_file_original,
 			question_file_size,
 			question_file_type,
+			question_file_count,
 			question_file_createdate
 		) VALUES (
+			#{questionNo},
 			#{questionFileUuid},
 			#{questionFileOriginal},
 			#{questionFileSize},
 			#{questionFileType},
+			0,
 			now()
 		)
 	</insert>

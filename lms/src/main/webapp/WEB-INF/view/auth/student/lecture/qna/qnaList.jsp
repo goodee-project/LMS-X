@@ -7,10 +7,13 @@
 	<title>QnA</title>
 </head>
 	<body>
-		<h1>공지사항 리스트</h1>
+		<h1>질문 게시판</h1>
 		<div>
 			<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
 	    </div>
+	    <div>
+         <jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
+       </div>
 	    <div>
 			<table border="1">
 				<thead>
@@ -34,6 +37,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/insertQna">질문 작성</a>
 					<!-- 페이지 네비게이션 -->
 			<ul class="pagination justify-content-center">
 				<!-- 처음으로 버튼 -->

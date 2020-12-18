@@ -49,7 +49,7 @@
 				<table border="1">
 					<tr>
 						<td>파일 이름</td>
-						<td><a href="${pageContext.request.contextPath}/upload/${qfl.questionFileUuid}">${qfl.questionFileOriginal}</a></td>
+						<td><a href="${pageContext.request.contextPath}/resource/questionFile/${qfl.questionFileUuid}">${qfl.questionFileOriginal}</a></td>
 					</tr>
 					<tr>
 						<td>파일 사이즈</td>

@@ -4,20 +4,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.student.service.StudentQnaService;
 import gd.fintech.lms.vo.Question;
+import gd.fintech.lms.vo.QuestionForm;
 
 @Controller
 public class StudentQnaController {
 	// Autowired annotation 사용
 	@Autowired private StudentQnaService studentQnaService;
-	//auth/student/lecture/qna/qnaList
 	// Qna 리스트 페이징
 	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaList/{currentPage}")
 	public String qnaList(Model model,
@@ -88,11 +93,11 @@ public class StudentQnaController {
 		return "/auth/student/lecture/qna/qnaList";
 	}
 	
-	//Qna 상세보기
+	// Qna 상세보기
 	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}")
 	public String qnaOne(Model model,
-			@PathVariable(value = "lectureNo") int lectureNo,
-			@PathVariable(value = "questionNo") int questionNo) {
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionNo") int questionNo) {
 		Question question = studentQnaService.getStudentQnaOne(questionNo);
 		
 		// Map 안에 강좌번호 넣기
@@ -105,4 +110,32 @@ public class StudentQnaController {
 		return "/auth/student/lecture/qna/qnaOne";
 	}
 	
+	// Qna 작성 폼
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/insertQna")
+	public String insertQna(Model model,
+			@PathVariable(name = "lectureNo") int lectureNo) {
+		
+		model.addAttribute("lectureNo", lectureNo);
+		return "/auth/student/lecture/qna/insertQna";
+	}
+	
+	// Qna 작성 액션
+	@PostMapping("/auth/student/lecture/{lectureNo}/qna/insertQna")
+	public String insertQna(QuestionForm questionForm, ServletRequest request,
+			@PathVariable(name = "lectureNo") int lectureNo) {
+		
+		System.out.println("questionForm" + questionForm);
+		// 세션에서 아이디 가져오기
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		String accountId = (String)session.getAttribute("loginId");
+		String loginName = (String)session.getAttribute("loginName");
+		
+		questionForm.setAccountId(accountId);
+		questionForm.setQuestionWriter(loginName);
+		
+		studentQnaService.insertQuestion(questionForm);
+		
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaList/1";
+		
+	}
 }

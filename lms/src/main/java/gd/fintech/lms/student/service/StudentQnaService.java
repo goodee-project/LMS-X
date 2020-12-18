@@ -23,9 +23,12 @@ import gd.fintech.lms.vo.QuestionForm;
 @Service
 @Transactional
 public class StudentQnaService {
-	// aws 서버용
-	private final String PATH = "C:\\Users\\wntjd\\Documents\\teamproject\\maven.1608002103348\\lms\\src\\main\\webapp\\resource\\questionFile\\";
+	
+	// Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	// localhost 서버용
+    File file = new File("");
+	String PATH = file.getAbsolutePath() + "\\src\\main\\webapp\\resource\\questionFile\\";
 	//	private final String PATH = "/////"
 	@Autowired StudentQnaMapper studentQnaMapper;
 	@Autowired StudentQnaFileMapper studentQnaFileMapper;
@@ -45,42 +48,52 @@ public class StudentQnaService {
 		return studentQnaMapper.selectQnaCount();
 	}
 	
-	// 질문 게시판 게시글 작성 폼
+	// 질문 게시판 게시글 작성
 	public void insertQuestion(QuestionForm questionForm) {
 		//question 변수 생성
 		Question question = new Question();
 		
-		//set -> questionForm.get
+		//set -> questionForm.get 질문 내용 추가
+		question.setAccountId(questionForm.getAccountId());
+		question.setQuestionWriter(questionForm.getQuestionWriter());
+		question.setLectureNo(questionForm.getLectureNo());
 		question.setQuestionTitle(questionForm.getQuestionTitle());
 		question.setQuestionContent(questionForm.getQuestionContent());
 		question.setQuestionCreatedate(questionForm.getQuestionCreatedate());
 		question.setQuestionUpdatedate(questionForm.getQuestionUpdatedate());
+		question.setQuestionPassword(questionForm.getQuestionPassword());
 		studentQnaMapper.insertStudentQna(question);
 		
 		// List questionFile = null로 설정
 		List<QuestionFile> questionFile = null;
 		
 		if (questionForm.getQuestionFile() != null) {
-			//ArrayList 생성
+			// ArrayList 생성
 			questionFile = new ArrayList<QuestionFile>();
-			//for문 생성
+			// for문 생성
 			for (MultipartFile mf : questionForm.getQuestionFile()) {
 				QuestionFile qf = new QuestionFile();
-				qf.setQuestionNo(question.getQuestionNo());
 				
-				// 오리지널 파일 네임 뒤에.을 붙여줘서 확장자 형식 구분
+				// 오리지널 파일 네임 뒤에.
 				int p = mf.getOriginalFilename().lastIndexOf(".");
 				logger.debug("p :" + p);
 				
-				String ext = qf.getQuestionFileOriginal().substring(p).toLowerCase();
+				// 확장자
+				String ext = mf.getOriginalFilename().substring(p).toLowerCase();  
 				
-				//UUID로 생성
+				// UUID로 생성
 				String fileName = UUID.randomUUID().toString().replace("-", " ");
 				
+				// 파일 정보 저장
 				qf.setQuestionNo(question.getQuestionNo());
 				qf.setQuestionFileUuid(fileName + ext);
-				qf.setQuestionFileSize(qf.getQuestionFileSize());
-				qf.setQuestionFileType(qf.getQuestionFileType());
+				qf.setQuestionFileOriginal(mf.getOriginalFilename());
+				qf.setQuestionFileSize(mf.getSize());
+				qf.setQuestionFileType(mf.getContentType());
+				qf.setQuestionFileCreatedate(qf.getQuestionFileCreatedate());
+				qf.setQuestionFileCount(qf.getQuestionFileCount());
+				
+				
 				questionFile.add(qf);
 
 				// try ~ catch 문 생성 (예외처리)
@@ -99,5 +112,6 @@ public class StudentQnaService {
 				studentQnaFileMapper.insertStudentQnaFile(qf);
 			}
 		}
+		return;
 	}
 }
