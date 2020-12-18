@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -101,6 +102,45 @@
 					<td>${report.reportEnddate}</td>
 				</tr>
 			</table>
+			
+			<br>
+			
+			<h3>학생 과제 제출 목록</h3>
+			
+			<br>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th width="15%">학생 아이디</th>
+						<th width="15%">학생 이름</th>
+						<th width="55%">과제 이름</th>
+						<th width="15%">과제 점수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${reportSubmitList[0].reportSubmitNo != null}">
+						<c:forEach var="rsl" items="${reportSubmitList}">
+							<tr>
+								<td>${rsl.accountId}</td>
+								<td>${rsl.student.studentName}</td>
+								<td>
+									<a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}/reportSubmitOne/${rsl.reportSubmitNo}">${rsl.reportSubmitTitle}</a>
+								</td>
+								
+								<td>${rsl.reportSubmitPoint}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${reportSubmitList[0].reportSubmitNo == null}">
+						<tr>
+							<td colspan="7">(학생들이 제출한 과제가 없습니다)</td>
+						</tr>
+					</c:if>
+				</tbody>
+			</table>
 		</div>
+		
+		<br><br>
 	</body>
 </html>

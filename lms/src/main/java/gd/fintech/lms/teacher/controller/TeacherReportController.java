@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherReportService;
 import gd.fintech.lms.vo.Report;
+import gd.fintech.lms.vo.ReportSubmit;
 
 @Controller
 public class TeacherReportController {
@@ -111,8 +112,15 @@ public class TeacherReportController {
 		// [Logger] 과제(report) 확인
 		logger.trace("report[" + report + "]");
 		
+		// 과제 고유번호(reportNo)에 해당하는 학생 과제 제출 목록을 데이터베이스에서 가져온다
+		List<ReportSubmit> reportSubmitList = teacherReportService.getTeacherReportSubmitList(lectureNo, reportNo);
+		
+		// [Logger] 학생 과제 제출 목록(List<ReportSubmit>) 확인
+		logger.trace("reportSubmitList[" + reportSubmitList + "]");
+		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("report", report);
+		model.addAttribute("reportSubmitList", reportSubmitList);
 		
 		// view의 /auth/teacher/lecture/report/reportOne.jsp를 이용한다
 		return "/auth/teacher/lecture/report/reportOne";

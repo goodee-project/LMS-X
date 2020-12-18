@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.teacher.mapper.TeacherReportMapper;
 import gd.fintech.lms.vo.Report;
+import gd.fintech.lms.vo.ReportSubmit;
 
 @Service
 @Transactional
@@ -45,12 +46,25 @@ public class TeacherReportService {
 		teacherReportMapper.insertTeacherReport(report);
 		
 		Report returnReport = new Report();
-		returnReport.setReportNo(report.getReportNo());		// reportNo Autoincrement 번호를 받아온다.
+		
+		// reportNo Autoincrement 번호를 받아온다.
+		returnReport.setReportNo(report.getReportNo());
 		
 		return returnReport;
 	}
 	
 	public void updateTeacherReport(Report report) {
 		teacherReportMapper.updateTeacherReport(report);
+	}
+	
+	// 학생들이 제출한 과제에 대한 목록을 출력
+	// 과제 고유번호(reportNo)를 이용
+	public List<ReportSubmit> getTeacherReportSubmitList(int lectureNo, int reportNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);			// 강좌 고유번호
+		map.put("reportNo", reportNo);				// 학생 과제 제출 고유번호
+		
+		List<ReportSubmit> reportSubmitList = teacherReportMapper.selectTeacherReportSubmitList(map);
+		return reportSubmitList;
 	}
 }

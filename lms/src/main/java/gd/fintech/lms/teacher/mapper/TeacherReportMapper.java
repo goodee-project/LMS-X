@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Report;
+import gd.fintech.lms.vo.ReportSubmit;
 
 @Mapper
 public interface TeacherReportMapper {
@@ -20,6 +21,10 @@ public interface TeacherReportMapper {
 	// 강사 과제 정보 조회
 	// 과제 고유번호(reportNo)를 이용
 	Report selectTeacherReportOne(int reportNo);
+	
+	// 학생 과제 제출 목록
+	// 강좌 고유번호(lectureNo), 과제 고유번호(reportNo)를 이용
+	List<ReportSubmit> selectTeacherReportSubmitList(Map<String, Object> map);
 	
 	// 강사 과제 출제
 	// Report 객체에 담겨있는 정보를 이용

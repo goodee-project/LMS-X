@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherReportMapper">
+	<resultMap type="gd.fintech.lms.vo.ReportSubmit" id="selectTeacherReportSubmitListResult">
+		<result property="reportSubmitNo" column="report_submit_no" />
+		<result property="accountId" column="account_id" />
+		<result property="reportSubmitTitle" column="report_submit_title" />
+		<result property="reportSubmitPoint" column="report_submit_point" />
+		<collection property="student" ofType="gd.fintech.lms.vo.Student">
+			<result property="studentName" column="student_name" />
+			<result property="studentGender" column="student_gender" />
+		</collection>
+	</resultMap>
+	
 	<!-- 페이징을 적용하여 과제(report) 테이블에서 강좌 고유번호(lectureNo)에 해당하는 데이터 목록을 가져온다 -->
 	<select id="selectTeacherReportListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Report">
 		SELECT
@@ -48,6 +59,32 @@
   		WHERE
   			report_no = #{reportNo}
   	</select>
+  	
+  	<!-- 각 과제 고유번호(reportNo)에 해당하는 페이지일 경우 학생들의 과제 제출 목록을 출력한다 -->
+  	<select id="selectTeacherReportSubmitList" parameterType="java.util.Map" resultMap="selectTeacherReportSubmitListResult">
+	  	SELECT
+			rs.report_submit_no, 
+			cr.account_id, 
+			s.student_name, 
+			s.student_gender,
+			rs.report_submit_title, 
+			rs.report_submit_point
+		FROM
+			class_registration cr
+		LEFT OUTER JOIN
+			student s ON
+			cr.account_id = s.student_id
+		LEFT OUTER JOIN
+			report_submit rs ON
+			cr.account_id = rs.account_id AND
+			rs.report_no = 1
+		WHERE
+			(cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료") AND
+			cr.lecture_no = 1
+		ORDER BY
+			s.student_name
+	</select>
   	
   	<!-- 강사가 과제(report) 테이블에 과제(Report)에 해당하는 데이터를 입력한다 -->
   	<insert id="insertTeacherReport" parameterType="gd.fintech.lms.vo.Report">
