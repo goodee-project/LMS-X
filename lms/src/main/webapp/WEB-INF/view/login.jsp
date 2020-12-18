@@ -239,10 +239,7 @@
 	</script>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/studentLogin">학생 로그인</a>
-<a href="${pageContext.request.contextPath}/teacherLogin">강사 로그인</a>
-<a href="${pageContext.request.contextPath}/managerLogin">운영자 로그인</a>
-<a href="${pageContext.request.contextPath}/adminLogin">관리자 로그인</a>
+
 	<button id="studentLogin" type="button">학생 로그인</button>
 	<button id="teacherLogin" type="button">강사 로그인</button>
 	<button id="managerLogin" type="button">운영자 로그인</button>

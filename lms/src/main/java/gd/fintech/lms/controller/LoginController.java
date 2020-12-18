@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.service.LoginService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Manager;
+import gd.fintech.lms.vo.Student;
+import gd.fintech.lms.vo.Teacher;
 
 @Controller
 public class LoginController {
@@ -34,7 +37,7 @@ public class LoginController {
 				return "redirect:/auth/manager/index";
 			}
 			if ( session.getAttribute("loginLevel").equals(4) ) {
-				return "redirect:/auth/admin/index";
+				return "redirect:/auth/admin/index/1";
 			}
 		}
 		return "login";
@@ -53,7 +56,7 @@ public class LoginController {
 				return "redirect:/auth/manager/index";
 			}
 			if ( session.getAttribute("loginLevel").equals(4) ) {
-				return "redirect:/auth/admin/index";
+				return "redirect:/auth/admin/index/1";
 			}
 		}
 		return "studentLogin";
@@ -72,7 +75,7 @@ public class LoginController {
 				return "redirect:/auth/manager/index";
 			}
 			if ( session.getAttribute("loginLevel").equals(4) ) {
-				return "redirect:/auth/admin/index";
+				return "redirect:/auth/admin/index/1";
 			}
 		}
 		return "teacherLogin";
@@ -91,7 +94,7 @@ public class LoginController {
 				return "redirect:/auth/manager/index";
 			}
 			if ( session.getAttribute("loginLevel").equals(4) ) {
-				return "redirect:/auth/admin/index";
+				return "redirect:/auth/admin/index/1";
 			}
 		}
 		return "managerLogin";
@@ -110,7 +113,7 @@ public class LoginController {
 				return "redirect:/auth/manager/index";
 			}
 			if ( session.getAttribute("loginLevel").equals(4) ) {
-				return "redirect:/auth/admin/index";
+				return "redirect:/auth/admin/index/1";
 			}
 		}
 		return "adminLogin";
@@ -126,18 +129,34 @@ public class LoginController {
 		if ( loginAccount==null ) {
 			return "redirect:/login";
 		}
+		
 		//로그인 성공
 		session.setAttribute("loginId", loginAccount.getAccountId());
 		session.setAttribute("loginLevel", loginAccount.getAccountLevel());
 		
 		if ( session.getAttribute("loginLevel").equals(1) ) {
+			
+			//session에 이름 추가
+			Student student = loginService.getStudentName(loginAccount.getAccountId());
+			session.setAttribute("loginName", student.getStudentName());
+			
 			return "redirect:/auth/student/index/1";
 		} else if ( session.getAttribute("loginLevel").equals(2) ) {
+			
+			//session에 이름 추가
+			Teacher teacher = loginService.getTeacherName(loginAccount.getAccountId());
+			session.setAttribute("loginName", teacher.getTeacherName());
+			
 			return "redirect:/auth/teacher/index/1";
 		} else if ( session.getAttribute("loginLevel").equals(3) ) {
+			
+			//session에 이름 추가
+			Manager manager = loginService.getManagerName(loginAccount.getAccountId());
+			session.setAttribute("loginName", manager.getManagerName());
+		
 			return "redirect:/auth/manager/index";
 		} else {
-			return "redirect:/auth/admin/index";
+			return "redirect:/auth/admin/index/1";
 		}
 	}
 	//로그아웃

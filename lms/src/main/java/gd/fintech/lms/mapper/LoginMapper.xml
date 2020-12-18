@@ -13,4 +13,34 @@
 			account_pw = PASSWORD(#{accountPw})	AND 
 			account_level = #{accountLevel}
 	</select>
+	
+	<!--  학생 이름 찾기 -->
+	<select id="selectStudentName" parameterType="String" resultType="gd.fintech.lms.vo.Student">
+		SELECT
+			student_name studentName
+		FROM 
+			student
+		WHERE
+			student_id = #{accountId} 
+	</select>
+	
+	<!--  강사 이름 찾기 -->
+	<select id="selectTeacherName" parameterType="String" resultType="gd.fintech.lms.vo.Teacher">
+		SELECT
+			teacher_name teacherName
+		FROM 
+			teacher
+		WHERE
+			teacher_id = #{accountId} 
+	</select>
+	
+	<!--  학생 이름 찾기 -->
+	<select id="selectManagerName" parameterType="String" resultType="gd.fintech.lms.vo.Manager">
+		SELECT
+			manager_name managerName
+		FROM 
+			manager
+		WHERE
+			manager_id = #{accountId} 
+	</select>
 </mapper>
