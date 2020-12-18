@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -52,7 +54,20 @@
 					// 정상적일 때 submit
 					$('#reportSubmitForm').submit();
 				})
-		
+
+				
+				// 파일 한개 삭제 -- 비동기 요청
+				$('.deleteReportSubmitFileOneBtn').on('click', function(){
+					let uuid = $(this).val();
+					let fileId = uuid.split('.')[0];
+					$.ajax({
+						url: '${pageContext.request.contextPath}/auth/student/lecture/report/deleteReportSubmitFileOne/' + uuid,
+						type:'get',
+						success: function(){
+							$('#' + fileId).remove();
+						}
+					})
+				})
 			})
 		</script>
 	</head>
@@ -83,20 +98,21 @@
 	    	</table>
 	    </div>
 	    
-	    <!-- 과제 제출 폼 -->
+	    <!-- 과제 제출 수정 폼 -->
 	    <div>
-	    	<form id="reportSubmitForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/${report.lectureNo}/report/insertReport">   	
+	    	<form id="reportSubmitForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/${report.lectureNo}/report/updateReport">   	
 	    		<input id="lectureNo" type="hidden" name="lectureNo" value="${lectureNo}"> 	
 	    		<input id="reportNo" type="hidden" name="reportNo" value="${reportNo}">
+	    		<input id="reportSubmitNo" type="hidden" name="reportSubmitNo" value="${reportSubmit.reportSubmitNo}">
 	    		<!-- 내용 -->
 		    	<table border="1">
 		    		<tr>
 		    			<th>제목</th>
-		    			<td><input id="reportSubmitTitle" type="text" name="reportSubmitTitle"></td>
+		    			<td><input id="reportSubmitTitle" type="text" name="reportSubmitTitle" value="${reportSubmit.reportSubmitTitle}"></td>
 		    		</tr>
 		    		<tr>
 		    			<th>내용</th>
-		    			<td><textarea rows="3" cols="50" id="reportSubmitContent" name="reportSubmitContent"></textarea></td>
+		    			<td><textarea rows="3" cols="50" id="reportSubmitContent" name="reportSubmitContent">${reportSubmit.reportSubmitContent}</textarea></td>
 		    		</tr>
 		    	</table>
 		    	
@@ -104,10 +120,45 @@
     			<h3>첨부파일</h3>
    				<button id="addFileBtn" type="button">파일 추가</button>
    				<button id="delFileBtn" type="button">파일 삭제</button>
+   				<div>
+			    	<!-- 첨부파일 -->
+			    	<table border="1">
+			    		<thead>
+				    		<tr>
+				    			<th colspan="4">첨부파일</th>
+				    		</tr>
+				    	</thead>
+				    	
+				    	<c:set var="fileId" value="" />
+
+			    		<c:forEach items="${reportSubmit.reportSubmitFileList}" var="rsf">
+      						<c:set var="uuid">${rsf.reportSubmitFileUuid}</c:set>
+			    			<tr id="${fn:split(uuid ,'.')[0]}">
+			    				<td>${rsf.reportSubmitFileOriginal}</td>
+			    				<!-- 파일 사이즈 -->
+			    				<td>
+			    					<c:choose>
+			    						<c:when test="${rsf.reportSubmitFileSize >= (1024 * 1024)}">
+			    							<fmt:formatNumber value="${rsf.reportSubmitFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
+			    						</c:when>
+			    						<c:when test="${rsf.reportSubmitFileSize >= 1024}">
+			    							<fmt:formatNumber value="${rsf.reportSubmitFileSize/1024}" type="pattern" pattern="0.00" />B 
+			    						</c:when>
+			    						<c:otherwise>
+			    							<fmt:formatNumber value="${rsf.reportSubmitFileSize}" type="pattern" pattern="0.00" />KB 	
+			    						</c:otherwise>
+			    					</c:choose>
+			    				</td>
+			    				<td id="fileCount">다운 횟수 : ${rsf.reportSubmitFileCount}회</td>
+			    				<td><button class="deleteReportSubmitFileOneBtn" value="${rsf.reportSubmitFileUuid}" type="button">X</button></td>
+			    			</tr>
+			    		</c:forEach>
+			    	</table>
+   				</div>
     			<div id="fileInput"></div>
     			<!-- 과제 제출 -->   
 			    <div>
-			    	<button id="reportSubmitBtn" type="button">과제 제출</button>
+			    	<button id="reportSubmitBtn" type="button">수정</button>
 			    </div>
 	    	</form>
 	    </div> 

@@ -106,4 +106,57 @@ public class StudentReportService {
 	public ReportSubmit selectReportSubmitOne(ReportSubmit reportSubmit) {
 		return studentReportMapper.selectReportSubmitOne(reportSubmit);
 	}
+	
+	// 과제 제출 수정
+	public void updateReportSubmit(ReportSubmitForm reportSubmitForm) {
+		// 과제 내용 추가
+		ReportSubmit reportSubmit = new ReportSubmit();
+		reportSubmit.setReportSubmitNo(reportSubmitForm.getReportSubmitNo());
+		reportSubmit.setReportSubmitTitle(reportSubmitForm.getReportSubmitTitle());
+		reportSubmit.setReportSubmitContent(reportSubmitForm.getReportSubmitContent());
+		studentReportMapper.updateReportSubmit(reportSubmit);
+		
+		// 공지사항 파일 추가
+		// 파일이 들어 올 시 실제 파일 저장, 리스트에 파일 정보 저장
+		List<ReportSubmitFile> reportFile = null;
+		if(reportSubmitForm.getReportSubmitFileList() != null) {
+			reportFile = new ArrayList<ReportSubmitFile>();
+			
+			// 파일을 각각 저장 -> 파일의 개수만큼 반복
+			for(MultipartFile mf : reportSubmitForm.getReportSubmitFileList()) {
+				ReportSubmitFile rsf = new ReportSubmitFile();
+				int p = mf.getOriginalFilename().lastIndexOf("."); // 확장자 저장
+				String ext = mf.getOriginalFilename().substring(p).toLowerCase(); // 확장자
+				String filename = UUID.randomUUID().toString().replace("-", ""); // uuid 생성
+
+				// 파일 정보 저장
+				rsf.setReportSubmitNo(reportSubmit.getReportSubmitNo());
+				rsf.setReportSubmitFileOriginal(mf.getOriginalFilename()); // 오리지널 이름
+				rsf.setReportSubmitFileUuid(filename + ext); // uuid
+				rsf.setReportSubmitFileSize(mf.getSize());
+				rsf.setReportSubmitFileType(mf.getContentType());
+				
+				// 리스트에 저장
+				reportFile.add(rsf);
+				
+				try {
+					mf.transferTo(new File(PATH + filename + ext));
+				} catch(Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException();
+				}
+			}
+		}
+		// logger
+		logger.trace("reportFile["+reportFile+"]");
+		
+		// 파일이 들어 올 시 리스트를 DB에 저장
+		if(reportFile != null) {
+			for(ReportSubmitFile nf : reportFile) {
+				studentReportFileMapper.insertReportSubmitFile(nf);
+			}
+		}
+			
+		return;
+	}
 }

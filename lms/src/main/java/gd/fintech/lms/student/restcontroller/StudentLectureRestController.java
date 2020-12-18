@@ -30,9 +30,4 @@ public class StudentLectureRestController {
 		return studentLectureRestService.selectCheckClassRegistration(classRegistration);
 	}
 	
-	// 과제 제출 첨부파일 다운로드 횟수 증가
-	@PostMapping("auth/student/lecture/reportSubmitFileCount/{uuid}")
-	public int reportSubmitFileCount(@PathVariable(name="uuid") String uuid) {
-		return studentLectureRestService.updateReportSubmitFileCount(uuid);
-	}
 }

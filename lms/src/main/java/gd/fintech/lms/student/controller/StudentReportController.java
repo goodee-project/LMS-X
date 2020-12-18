@@ -89,8 +89,8 @@ public class StudentReportController {
 
 		// 현재 페이지에 대한 다음 페이지
 		int nextPage = currentPage - (currentPage % navPerPage) + 1 + 10;
-		if (nextPage > totalCount) {
-			nextPage = totalCount;
+		if (nextPage > lastPage) {
+			nextPage = lastPage;
 		}
 		
 		// 뷰 연결
@@ -112,7 +112,7 @@ public class StudentReportController {
 	// 과제 상세보기 
 	// - 강사가 출제한 과제 내용과 학생이 제출한 과제 내용을 같이 출력함 
 	@GetMapping("auth/student/lecture/{lectureNo}/report/reportOne/{reportNo}")
-	public String reportOne(Model model,ServletRequest request,
+	public String reportOne(Model model, ServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "reportNo") int reportNo) {
 		// 세션에서 아이디 가져오기
@@ -168,6 +168,39 @@ public class StudentReportController {
 		
 		studentReportService.insertReportSubmit(reportSubmitForm);
 		
+		return "redirect:/auth/student/lecture/" + lectureNo + "/report/reportOne/" + reportSubmitForm.getReportNo();
+	}
+	
+	// 과제 제출 수정 폼
+	@GetMapping("auth/student/lecture/{lectureNo}/report/updateReport/{reportNo}")
+	public String updateReport(Model model, ServletRequest request,
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "reportNo") int reportNo) {
+		// 세션에서 아이디 가져오기
+		HttpSession session = ((HttpServletRequest)request).getSession();	
+		String accountId = (String)session.getAttribute("loginId");
+		
+		// 출제된 과제 가져오기
+		Report report = studentReportService.selectReportOne(reportNo);
+		// 제출한 과제 가져오기
+		ReportSubmit paramReportSubmit = new ReportSubmit();
+		paramReportSubmit.setAccountId(accountId);
+		paramReportSubmit.setReportNo(reportNo);
+		ReportSubmit reportSubmit = studentReportService.selectReportSubmitOne(paramReportSubmit);
+		
+		model.addAttribute("lectureNo", lectureNo);
+		model.addAttribute("report", report);
+		model.addAttribute("reportSubmit", reportSubmit);
+		
+		return "/auth/student/lecture/report/updateReport";
+	}
+	
+	// 과제 제출 수정 액션
+	@PostMapping("auth/student/lecture/{lectureNo}/report/updateReport")
+	public String updateReport(ReportSubmitForm reportSubmitForm, ServletRequest request,
+			@PathVariable(name = "lectureNo") int lectureNo) {
+
+		studentReportService.updateReportSubmit(reportSubmitForm);
 		return "redirect:/auth/student/lecture/" + lectureNo + "/report/reportOne/" + reportSubmitForm.getReportNo();
 	}
 }

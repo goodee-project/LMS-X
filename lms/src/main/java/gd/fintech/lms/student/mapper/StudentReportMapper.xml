@@ -113,4 +113,16 @@
 			#{reportSubmitContent}
 		)
 	</insert>
+	
+	<!-- 과제 제출 수정 -->
+	<update id="updateReportSubmit" parameterType="gd.fintech.lms.vo.ReportSubmit">
+		UPDATE 
+			report_submit
+		SET
+			report_submit_updatedate = NOW(),
+			report_submit_title = #{reportSubmitTitle},
+			report_submit_content = #{reportSubmitContent}
+		WHERE
+			report_submit_no = #{reportSubmitNo}	
+	</update>
 </mapper>

@@ -11,7 +11,7 @@
 			// 다운로드 횟수 증가 시키기
 			function fileDownloadCount(paramUuid){
 				$.ajax({
-					url: '${pageContext.request.contextPath}/auth/student/lecture/reportSubmitFileCount/' + paramUuid,
+					url: '${pageContext.request.contextPath}/auth/student/lecture/report/reportSubmitFileCount/' + paramUuid,
 					type:'post',
 					success: function(data){
 						let html = '다운 횟수 : ' + data + '회';
@@ -53,7 +53,11 @@
 	    	<table border="1">
 	    		<tr>
 	    			<th>점수</th>
-	    			<td>${reportSubmit.reportSubmitPoint}</td>
+	    			<td>
+	    				<c:if test="${reportSubmit.reportSubmitPoint != -1}">
+	    					${reportSubmit.reportSubmitPoint}점
+	    				</c:if>
+	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<th>피드백</th>
@@ -100,6 +104,8 @@
 	    			</tr>
 	    		</c:forEach>
 	    	</table>
+	    	<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/report/updateReport/${reportSubmit.reportNo}">수정</a>
+	    	<a href="">삭제</a>
 	    </div>    
 	</body>
 </html>

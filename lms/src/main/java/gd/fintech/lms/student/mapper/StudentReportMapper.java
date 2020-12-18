@@ -21,4 +21,7 @@ public interface StudentReportMapper {
 	public ReportSubmit selectReportSubmitOne(ReportSubmit reportSubmit);
 	// 과제 제출하기
 	public int insertReportSubmit(ReportSubmit reportSubmit);
+	
+	// 과제 제출 수정하기
+	public int updateReportSubmit(ReportSubmit reportSubmit);
 }
