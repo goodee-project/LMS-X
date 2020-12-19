@@ -26,4 +26,30 @@
   		WHERE
   			lecture_no = #{lectureNo};
   	</select>
+  	
+  	<insert id="insertTeacherLectureArchive" parameterType="gd.fintech.lms.vo.LectureArchive">
+  		<selectKey resultType="int" keyProperty="lectureArchiveNo" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		
+  		INSERT INTO lecture_archive (
+  			lecture_no, 
+  			account_id, 
+  			lecture_archive_writer, 
+  			lecture_archive_title, 
+  			lecture_archive_content, 
+  			lecture_archive_createdate, 
+  			lecture_archive_updatedate, 
+  			lecture_archive_count
+  		) VALUES (
+  			#{lectureNo}, 
+  			#{accountId}, 
+  			#{lectureArchiveWriter}, 
+  			#{lectureArchiveTitle}, 
+  			#{lectureArchiveContent}, 
+  			NOW(), 
+  			NOW(), 
+  			0
+  		)
+  	</insert>
 </mapper>

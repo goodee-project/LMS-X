@@ -15,5 +15,7 @@ public interface TeacherLectureArchiveMapper {
 	
 	// 자료실 페이지 카운트
 	// 강좌 고유번호(lectureNo) 사용
-	int selectTeacherLectureArchiveListCount(int lectureNo);;
+	int selectTeacherLectureArchiveListCount(int lectureNo);
+	
+	int insertTeacherLectureArchive(LectureArchive lectureArchive);
 }

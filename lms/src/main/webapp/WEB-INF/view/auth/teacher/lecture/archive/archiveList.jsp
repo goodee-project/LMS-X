@@ -59,9 +59,12 @@
 		
 		<!-- 본문 -->
 		<div class="container">
-			<h3>자료실 목록</h3>
+			<div>
+				<h3>자료실 목록</h3>
+				<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/insertArchive'">작성</button>
+			</div>
 			
-			<br>
+			<br><br>
 			
 			<table class="table">
 				<thead>

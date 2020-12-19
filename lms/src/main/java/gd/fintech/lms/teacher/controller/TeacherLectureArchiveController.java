@@ -2,6 +2,8 @@ package gd.fintech.lms.teacher.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherLectureArchiveService;
 import gd.fintech.lms.vo.LectureArchive;
+import gd.fintech.lms.vo.LectureArchiveForm;
 
 @Controller
 public class TeacherLectureArchiveController {
@@ -21,7 +25,7 @@ public class TeacherLectureArchiveController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 자료실 목록
-	@GetMapping(value ="/auth/teacher/lecture/{lectureNo}/archive/archiveList/{currentPage}")
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/archiveList/{currentPage}")
 	public String lectureArchiveList(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo,
 			@PathVariable(value = "currentPage") int currentPage) {
@@ -96,5 +100,39 @@ public class TeacherLectureArchiveController {
 		
 		// view의 /auth/teacher/lecture/archive/archiveList.jsp를 이용한다
 		return "/auth/teacher/lecture/archive/archiveList";
+	}
+	
+	// 자료실 입력 Form
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/insertArchive")
+	public String insertArchive(Model model, HttpSession session, 
+			@PathVariable(value = "lectureNo") int lectureNo) {
+		// 세션에 있는 아이디와 이름을 가져온다 (강사)
+		String teacherId = (String)session.getAttribute("loginId");
+		String teacherName = (String)session.getAttribute("loginName");
+		
+		// [Logger] 세션에 있는 teacherId, teacherName 확인
+		logger.trace("nowSession[ " + teacherId + ", " + teacherName + " ]");
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("teacherId", teacherId);
+		model.addAttribute("teacherName", teacherName);
+		
+		return "/auth/teacher/lecture/archive/insertArchive";
+	}
+	
+	// 자료실 입력 Action
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/archive/insertArchive")
+	public String insertArchive(LectureArchiveForm lectureArchiveForm) {
+		LectureArchive lectureArchive = teacherLectureArchiveService.insertTeacherLectureArchive(lectureArchiveForm);
+		
+		return "redirect:/auth/teacher/lecture/" + lectureArchiveForm.getLectureNo() + "/archive/archiveOne/" + lectureArchive.getLectureArchiveNo();
+	}
+	
+	// 자료 조회
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/archiveOne/{archiveId}")
+	public String archiveOne() {
+		
+		
+		return "";
 	}
 }
