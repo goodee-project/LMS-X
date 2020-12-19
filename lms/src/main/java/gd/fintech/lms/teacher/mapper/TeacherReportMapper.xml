@@ -77,11 +77,11 @@
 		LEFT OUTER JOIN
 			report_submit rs ON
 			cr.account_id = rs.account_id AND
-			rs.report_no = 1
+			rs.report_no = #{reportNo}
 		WHERE
 			(cr.class_registration_state = "수강중" OR
 			cr.class_registration_state = "수료") AND
-			cr.lecture_no = 1
+			cr.lecture_no = #{lectureNo}
 		ORDER BY
 			s.student_name
 	</select>
