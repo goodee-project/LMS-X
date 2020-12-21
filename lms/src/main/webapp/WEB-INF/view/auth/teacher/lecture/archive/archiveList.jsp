@@ -77,20 +77,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${lectureArchiveList[0].lectureArchiveNo != null}">
-						<c:forEach var="lal" items="${lectureArchiveList}">
+					<c:if test="${teacherLectureArchiveList[0].lectureArchiveNo != null}">
+						<c:forEach var="tlal" items="${teacherLectureArchiveList}">
 							<tr>
-								<td width="15%">${lal.lectureArchiveNo}</td>
+								<td width="15%">${tlal.lectureArchiveNo}</td>
 								<td width="40%">
-									<a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveOne/${lal.lectureArchiveNo}">${lal.lectureArchiveTitle}</a>
+									<a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveOne/${tlal.lectureArchiveNo}">${tlal.lectureArchiveTitle}</a>
 								</td>
-								<td width="15%">${lal.lectureArchiveWriter}</td>
-								<td width="20%">${lal.lectureArchiveCreatedate}</td>
-								<td width="10%">${lal.lectureArchiveCount}</td>
+								<td width="15%">${tlal.lectureArchiveWriter}</td>
+								<td width="20%">${tlal.lectureArchiveCreatedate}</td>
+								<td width="10%">${tlal.lectureArchiveCount}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
-					<c:if test="${lectureArchiveList[0].lectureArchiveNo == null}">
+					<c:if test="${teacherLectureArchiveList[0].lectureArchiveNo == null}">
 						<tr>
 							<td colspan="7">(등록된 자료가 없습니다)</td>
 						</tr>

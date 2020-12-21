@@ -26,9 +26,12 @@ public class TeacherLectureArchiveService {
 	@Autowired private TeacherLectureArchiveMapper teacherLectureArchiveMapper;
 	@Autowired private TeacherLectureArchiveFileMapper teacherLectureArchiveFileMapper;
 	
+	//Logger 사용
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+	
 	// 첨부파일 경로
 	File file = new File("");
-	private String PATH = file.getAbsoluteFile() + "\\src\\main\\webapp\\resource\\archiveFile";
+	private String PATH = file.getAbsoluteFile() + "\\src\\main\\webapp\\resource\\archiveFile\\";
 	
 	// 강좌 자료실 목록
 	// 강좌 고유번호(lectureNo)를 이용
@@ -49,15 +52,13 @@ public class TeacherLectureArchiveService {
 		return teacherLectureArchiveMapper.selectTeacherLectureArchiveListCount(lectureNo);
 	}
 	
-	/*
 	// 자료 조회
 	// 자료 고유번호(lectureArchiveNo)를 이용
-	public List<LectureArchive> selectTeacherLectureArchiveOne(int lectureArchiveNo) {
-		List<LectureArchive> lectureArchiveOne = teacherLectureArchiveMapper.selectTeacherLectureArchiveOne(lectureArchiveNo);
+	public List<LectureArchive> selectTeacherLectureArchiveOne(int archiveId) {
+		List<LectureArchive> lectureArchiveOne = teacherLectureArchiveMapper.selectTeacherLectureArchiveOne(archiveId);
 		
 		return lectureArchiveOne;
 	}
-	*/
 	
 	// 자료 입력
 	// 자료 Form(LectureArchiveForm)을 이용
@@ -66,10 +67,14 @@ public class TeacherLectureArchiveService {
 		
 		// lectureArchiveForm의 아이디, 작성자, 제목, 내용을 lectureArchive 객체에 넣어준다
 		// 자바스크립트가 데이터베이스에 입력되는 것을 방지
+		lectureArchive.setLectureNo(lectureArchiveForm.getLectureNo());
 		lectureArchive.setAccountId(lectureArchiveForm.getAccountId());
 		lectureArchive.setLectureArchiveWriter(lectureArchiveForm.getLectureArchiveWriter());
 		lectureArchive.setLectureArchiveTitle(lectureArchiveForm.getLectureArchiveTitle().replaceAll("(?i)<script", "&lt;script"));
 		lectureArchive.setLectureArchiveContent(lectureArchiveForm.getLectureArchiveContent().replaceAll("(?i)<script", "&lt;script"));
+		
+		// [Logger] 강좌 자료 입력 확인
+		logger.trace("lectureArchive - " + lectureArchive);
 		
 		// Mapper를 통해 lectureArchive의 내용을 입력
 		teacherLectureArchiveMapper.insertTeacherLectureArchive(lectureArchive);

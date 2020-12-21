@@ -86,7 +86,7 @@ public class TeacherLectureArchiveController {
 		}
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
-		model.addAttribute("teacherLectureList", teacherLectureArchiveList);
+		model.addAttribute("teacherLectureArchiveList", teacherLectureArchiveList);
 		
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
@@ -129,10 +129,18 @@ public class TeacherLectureArchiveController {
 	}
 	
 	// 자료 조회
-	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/archiveOne/{archiveId}")
-	public String archiveOne() {
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/archiveOne/{archiveNo}")
+	public String archiveOne(Model model, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "archiveNo") int archiveNo) {
+		List<LectureArchive> lectureArchive = teacherLectureArchiveService.selectTeacherLectureArchiveOne(archiveNo);
 		
+		// [Logger] 세션에 있는 teacherId, teacherName 확인
+		logger.trace("lectureArchive[ " + lectureArchive + " ]");
 		
-		return "";
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("lectureArchive", lectureArchive);
+		
+		return "/auth/teacher/lecture/archive/archiveOne";
 	}
 }

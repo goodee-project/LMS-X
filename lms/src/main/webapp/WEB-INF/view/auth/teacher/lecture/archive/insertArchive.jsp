@@ -124,7 +124,7 @@
 		
 		<!-- 본문 -->
 		<div class="container">
-			<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/insertArchive" enctype="multipart/form-data" id="lectureArchiveForm">
+			<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/insertArchive" enctype="multipart/form-data" id="lectureArchiveForm">
 				<h3>자료 작성</h3>
 				
 				<br>

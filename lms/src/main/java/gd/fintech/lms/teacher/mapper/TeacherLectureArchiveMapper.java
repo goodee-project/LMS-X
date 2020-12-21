@@ -18,4 +18,6 @@ public interface TeacherLectureArchiveMapper {
 	int selectTeacherLectureArchiveListCount(int lectureNo);
 	
 	int insertTeacherLectureArchive(LectureArchive lectureArchive);
+	
+	List<LectureArchive> selectTeacherLectureArchiveOne(int archiveNo);
 }

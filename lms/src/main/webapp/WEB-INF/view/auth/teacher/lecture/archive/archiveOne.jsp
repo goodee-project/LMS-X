@@ -64,15 +64,60 @@
 			<br>
 			
 			<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveList/1'">목록</button>
-			<button type="button" class="btn btn-sm btn-primary" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/updateArchive/${lectureArchiveNo}'">목록</button>
+			<button type="button" class="btn btn-sm btn-primary" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/updateArchive/${archiveNo}'">수정</button>
 			
-			<br>
+			<br><br>
 			
 			<table class="table">
 				<tr>
-					<td></td>
+					<td>게시글 번호</td>
+					<td>${archiveNo}</td>
+				</tr>
+				<tr>
+					<td>작성자</td>
+					<td>${lectureArchive[0].lectureArchiveWriter}</td>
+				</tr>
+				<tr>
+					<td>조회수</td>
+					<td>${lectureArchive[0].lectureArchiveCount}</td>
+				</tr>
+				<tr>
+					<td>작성일시</td>
+					<td>${lectureArchive[0].lectureArchiveCreatedate}</td>
+				</tr>
+				<tr>
+					<td>수정일시</td>
+					<td>${lectureArchive[0].lectureArchiveUpdatedate}</td>
+				</tr>
+				<tr>
+					<td>제목</td>
+					<td>${lectureArchive[0].lectureArchiveTitle}</td>
+				</tr>
+				<tr>
+					<td>내용</td>
+					<td>${lectureArchive[0].lectureArchiveContent}</td>
+				</tr>
+				<tr>
+					<td>첨부파일</td>
+					<td>
+						<c:forEach var="laf" items="${lectureArchive[0].lectureArchiveFileList}">
+							<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileOriginal != null}">
+								<div>
+									<a href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}">
+										${laf.lectureArchiveFileOriginal}
+									</a>
+									&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, 다운로드 횟수: ${laf.lectureArchiveFileCount})
+								</div>
+							</c:if>
+							<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileOriginal == null}">
+								(첨부파일이 없습니다)							
+							</c:if>
+						</c:forEach>
+					</td>
 				</tr>
 			</table>
 		</div>
+		
+		<br><br>
 	</body>
 </html>

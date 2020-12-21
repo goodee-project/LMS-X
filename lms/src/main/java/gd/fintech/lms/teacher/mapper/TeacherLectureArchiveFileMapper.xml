@@ -9,7 +9,7 @@
 			lecture_archive_file_size, 
 			lecture_archive_file_type, 
 			lecture_archive_file_count, 
-			lecture_archive_createdate
+			lecture_archive_file_createdate
 		) VALUES (
 			#{lectureArchiveFileUuid}, 
 			#{lectureArchiveFileOriginal},
