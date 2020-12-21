@@ -63,4 +63,9 @@ public class TeacherLectureNoticeService {
 	public void deleteTeacherLectureNotice(int lectureNoticeNo) {
 		teacherLectureNoticeMapper.deleteTeacherLectureNotice(lectureNoticeNo);
 	}
+	// 강좌별 공지사항 수정
+	// lectureNotice에 객체에 담긴 데이터 수정
+	public void updateTeacherLectureNotice(LectureNotice lectureNotice) {
+		teacherLectureNoticeMapper.updateTeacherLectureNotice(lectureNotice);
+	}
 }

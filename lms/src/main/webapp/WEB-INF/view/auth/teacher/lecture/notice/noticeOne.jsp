@@ -62,7 +62,7 @@
 			<br>
 			
 			<button type="button" class="btn btn-sm btn-dark" style="float: left;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1'">목록</button>
-			<button type="button" class="btn btn-sm btn-primary" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/modifyNotice/${lectureNoticeNo}'">수정</button>
+			<button type="button" class="btn btn-sm btn-primary" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/updateNotice/${lectureNoticeNo}'">수정</button>
 			
 			<br><br>
 

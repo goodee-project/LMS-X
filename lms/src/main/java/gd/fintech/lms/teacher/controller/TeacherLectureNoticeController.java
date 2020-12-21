@@ -114,11 +114,29 @@ public class TeacherLectureNoticeController {
 		teacherLectureNoticeService.insertTeacherLectureNotice(lectureNotice);
 		return "redirect:/auth/teacher/lecture/" + lectureNotice.getLectureNo() + "/notice/noticeList/1";
 	}
-	// 강좌별 삭제
+	// 강좌별 공지사항 삭제
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/notice/deleteNotice/{lectureNoticeNo}")
 	public String deleteNotice(@PathVariable(value="lectureNo") int lectureNo,
 			@PathVariable(value="lectureNoticeNo") int lectureNoticeNo) {
 		teacherLectureNoticeService.deleteTeacherLectureNotice(lectureNoticeNo);
 		return "redirect:/auth/teacher/lecture/{lectureNo}/notice/noticeList/1";
+	}
+	// 공지사항 수정 액션
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/notice/updateNotice/{lectureNoticeNo}")
+	public String updateNotice(LectureNotice lectureNotice) {
+		teacherLectureNoticeService.updateTeacherLectureNotice(lectureNotice);
+		return "redirect:/auth/teacher/lecture/" + lectureNotice.getLectureNo() + "/notice/noticeOne/" + lectureNotice.getLectureNoticeNo();
+	}
+	// 공지사항 수정 폼
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/notice/updateNotice/{lectureNoticeNo}")
+	public String updateNotice(Model model, @PathVariable(value = "lectureNo")int lectureNo,
+			@PathVariable(value = "lectureNoticeNo") int lectureNoticeNo) {
+		LectureNotice lectureNotice = teacherLectureNoticeService.getTeacherNoticeOne(lectureNoticeNo);
+		
+		//Logger 확인
+		logger.trace("lectureNotice :" + lectureNotice);
+		
+		model.addAttribute("lectureNotice", lectureNotice);
+		return "/auth/teacher/lecture/notice/updateNotice";
 	}
 }
