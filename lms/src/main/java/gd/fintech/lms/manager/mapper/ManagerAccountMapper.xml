@@ -22,13 +22,30 @@
 			account_level = 3
 	</select>
 	<!-- 운영자 계정 관리 페이지 출력문 -->
-	<select id="selectManagerAccountList" resultType="gd.fintech.lms.vo.Account">
+	<select id="selectManagerAccountListByPage" resultType="gd.fintech.lms.vo.Account">
 		SELECT 
 			account_id accountId,
 			account_state accountState,
 			account_level accountLevel
 		FROM
 			account
+		WHERE
+			account_level = 1
+		OR
+			account_level = 2
+		OR
+			account_level = 3
+		ORDER BY
+			account_id DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="selectAccountCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			teacher
 	</select>
 	
 	<update id="updateAccount" parameterType="gd.fintech.lms.vo.Account">

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,25 +7,36 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>강사 index</h1>
-	<div><a href="${pageContext.request.contextPath }/auth/manager/index">홈으로</a></div>
-	<table border="1">	
-		<tr>
-			<th>강사 ID</th>
-			<th>강사 이름</th>
-			<th>강사 성별</th>
-			<th>강사정보 등록날짜</th>
-			<th>강사정보 수정날짜</th>
-		</tr>
-		<c:forEach items="${teacherList}" var="t">
+	<div><a href="${pageContext.request.contextPath}/auth/manager/index">홈으로</a></div>
+	<div><a href="${pageContext.request.contextPath}/auth/manager/student/studentList/1">학생목록으로</a></div>
+	<h1>학생 승인대기 목록</h1>
+	<table border="1">
+		<thead>
 			<tr>
-				<td>${t.teacherId}</td>
-				<td>${t.teacherName}</td>
-				<td>${t.teacherGender}</td>
-				<td>${t.teacherAccessdate}</td>
-				<td>${t.teacherUpdatedate}</td>
-			</tr>	
-		</c:forEach>
+				<th>아이디</th>
+				<th>이메일</th>
+				<th>핸드폰번호</th>
+				<th>이름</th>
+				<th>성별</th>
+				<th>생일</th>
+				<th>주소</th>
+				<th>승인</th>
+				<th>거절</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="sql" items="${studentQueueList}">
+				<tr>
+					<td>${sql.studentId}</td>
+					<td>${sql.studentEmail}</td>
+					<td>${sql.studentPhone}</td>
+					<td>${sql.studentName}</td>
+					<td>${sql.studentGender}</td>
+					<td>${sql.studentBirth}</td>
+					<td>${sql.studentAddressMain} ${sql.studentAddressSub}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	<!-- 페이지 네비게이션 -->
 	<ul class="pagination justify-content-center">
@@ -33,7 +44,7 @@
 		<c:choose>
 			<c:when test="${currentPage > 1}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/1">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/student/studentList/1">
 						<i class='fas fa-angle-double-left'></i>
 					</a>
 				</li>
@@ -51,7 +62,7 @@
 		<c:choose>
 			<c:when test="${currentPage > 1}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/${prePage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/student/studentList/${prePage}">
 						<i class='fas fa-angle-left'></i>
 					</a>
 				</li>
@@ -78,7 +89,7 @@
 					<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 					<c:otherwise>
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/${i}">${i}</a>
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/student/studentList/${i}">${i}</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -89,7 +100,7 @@
 		<c:choose>
 			<c:when test="${currentPage < lastPage}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/${nextPage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/student/studentList/${nextPage}">
 						<i class='fas fa-angle-right'></i>
 					</a>
 				</li>
@@ -107,7 +118,7 @@
 		<c:choose>
 			<c:when test="${currentPage < lastPage}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/${lastPage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/student/studentList/${lastPage}">
 						<i class='fas fa-angle-double-right'></i>
 					</a>
 				</li>

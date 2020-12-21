@@ -9,7 +9,7 @@ import gd.fintech.lms.vo.Textbook;
 
 @Mapper
 public interface ManagerTextbookMapper {
-	List<Textbook> selectTextbookListByPage(Map<String, Object> map); 	// 교재 리스트
+	public List<Textbook> selectTextbookListByPage(Map<String, Object> map); 	// 교재 리스트
 	int selectTextbookCount();							// 교재 페이징 카운트
 	int insertTextbook(Textbook textbook);  			// 교재 추가
 	int deleteTextbook(String textbookIsbn);			// 교재 삭제

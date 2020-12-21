@@ -1,6 +1,7 @@
 package gd.fintech.lms.manager.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,15 @@ import gd.fintech.lms.vo.Teacher;
 public class ManagerTeacherService {
 	@Autowired ManagerTeacherMapper managerTeacherMapper;
 	
-	public List<Teacher> getTeacherList() {
-		return managerTeacherMapper.selectTeacherList();
+	public List<Teacher> getTeacherListByPage(Map<String, Object> map) {
+		return managerTeacherMapper.selectTeacherListByPage(map);
+	}
+	
+	public int getCountTeacher(int rowPerPage) {
+		return managerTeacherMapper.selectTeacherCount();
+	}
+	
+	public Teacher getTeacherOne(String teacherId) {
+		return managerTeacherMapper.selectTeacherOne(teacherId);
 	}
 }

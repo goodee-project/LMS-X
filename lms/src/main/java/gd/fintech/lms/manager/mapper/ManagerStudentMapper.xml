@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerStudentMapper"> 
-	<select id="selectStudentList" resultType="gd.fintech.lms.vo.Student">
+	<select id="selectStudentListByPage" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT 
-			student_id studentId,
-			student_email studentEmail,
-			student_name studentName,
-			student_phone studentPhone,
-			student_gender studentGender,
-			student_birth studentBirth,
-			student_address_main studentAddressMain,
-			student_address_sub studentAddressSub,
-			student_image studentImage,
-			student_accessdate studentAccessdate,
-			student_updatedate studentUpdatedate
+			s.student_id studentId,
+			s.student_name studentName,
+			s.student_gender studentGender,
+			a.account_state accountState
+		FROM
+			student s
+		INNER JOIN 
+			account a 
+		ON
+			s.student_id = a.account_id
+		ORDER BY
+			s.student_id DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="selectStudentCount" resultType="int">
+		SELECT
+			COUNT(*)
 		FROM
 			student
 	</select>
 	
-	<update id="updateStudentList" parameterType="gd.fintech.lms.vo.Student">
-		UPDATE
-			student
-		SET
-			student_accessdate = #{studentAccessdate},
-		WHERE
-			student_id = #{studentId}
-	</update>
-	
-	<select id="selectStudentOne" parameterType="int" resultType="gd.fintech.lms.vo.Student">
+	<select id="selectStudentOne" parameterType="String" resultType="gd.fintech.lms.vo.Student">
 		SELECT
 			student_id studentId,
 			student_email studentEmail,
@@ -44,5 +43,30 @@
 			student
 		WHERE
 			student_id = #{studentId}
+	</select>
+	
+	<!-- 학생 승인 대기 목록 -->
+	<select id="selectStudentQueueListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.StudentQueue">
+		SELECT
+			student_id studentId,
+			student_email studentEmail,
+			student_name studentName,
+			student_phone studentPhone,
+			student_gender studentGender,
+			student_birth studentBirth,
+			student_address_main studentAddressMain,
+			student_address_sub studentAddressSub
+		FROM
+			student_queue
+		LIMIT 
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 학생 승인 대기 페이징 카운트 -->
+	<select id="selectStudentQueueCount" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			student_queue
 	</select>
 </mapper>

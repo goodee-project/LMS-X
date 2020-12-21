@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerTeacherMapper"> 
-	<select id="selectTeacherList" resultType="gd.fintech.lms.vo.Teacher">
+	<select id="selectTeacherListByPage" resultType="gd.fintech.lms.vo.Teacher">
+		SELECT 
+			teacher_id teacherId,
+			teacher_name teacherName,
+			teacher_gender teacherGender,
+			teacher_accessdate teacherAccessdate,
+			teacher_updatedate teacherUpdatedate
+		FROM
+			teacher
+		ORDER BY
+			teacher_id DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="selectTeacherCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			teacher
+	</select>
+	
+	<select id="selectTeacherOne" parameterType="String" resultType="gd.fintech.lms.vo.Teacher">
 		SELECT 
 			teacher_id teacherId,
 			teacher_email teacherEmail,
@@ -17,5 +39,7 @@
 			teacher_info teacherInfo
 		FROM
 			teacher
+		WHERE
+			teacher_id = #{teacherId}
 	</select>
 </mapper>

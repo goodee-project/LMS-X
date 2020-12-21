@@ -123,7 +123,7 @@ public class ManagerFaqController {
 	}
 	
 	@GetMapping("/auth/manager/faq/faqOne/{faqNo}")
-	public String textbookOne(Model model,
+	public String faqOne(Model model,
 			@PathVariable(name = "faqNo") int faqNo) {
 		Faq faq = managerFaqService.getFaqOne(faqNo);
 		model.addAttribute("faq", faq);
