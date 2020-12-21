@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import gd.fintech.lms.pathutil.PathUtil;
 import gd.fintech.lms.student.mapper.StudentReportFileMapper;
 import gd.fintech.lms.student.mapper.StudentReportMapper;
 import gd.fintech.lms.vo.ClassRegistration;
@@ -29,12 +30,7 @@ public class StudentReportService {
 	// Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	// localhost로 작업 할 때의 경로
-    File file = new File("");
-	String PATH = file.getAbsolutePath() + "\\src\\main\\webapp\\resource\\reportSubmitFile\\";  
-	
-	// aws에 업로드 시 사용하는 경로
-	// String PATH = "/home/ubuntu/tomcat9/webapps/lms/resource/";  
+	String PATH = PathUtil.PATH + "reportSubmitFile\\";  
 	
 	// 과제 제출 (입력)
 	public void insertReportSubmit(ReportSubmitForm reportSubmitForm) {

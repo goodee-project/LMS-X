@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.restmapper.StudentTestRestMapper">
+	<!-- 해당 답안지가 이미 존재하는지 -->	
+	<select id="selectCheckAnswersheet" parameterType="java.util.Map" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			answersheet
+		WHERE 
+			multiplechoice_no = #{multiplechoiceNo} AND
+			account_id = #{accountId}
+	</select>
+	
+	<!-- 해당 답안지를 제출 -->
+	<insert id="insertAnswersheet">
+	</insert>
+	<!-- 해당 답안지를 수정 -->
+	<update id="updateAnswersheet">
+	</update>
+</mapper>

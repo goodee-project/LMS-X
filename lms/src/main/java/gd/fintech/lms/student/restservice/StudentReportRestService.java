@@ -5,18 +5,14 @@ import java.io.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import gd.fintech.lms.pathutil.PathUtil;
 import gd.fintech.lms.student.restmapper.StudentReportRestMapper;
 
 @Service
 public class StudentReportRestService {
 	@Autowired StudentReportRestMapper studentReportRestMapper;
 
-	// localhost로 작업 할 때의 경로
-    File file = new File("");
-	String PATH = file.getAbsolutePath() + "\\src\\main\\webapp\\resource\\reportSubmitFile\\";  
-	
-	// aws에 업로드 시 사용하는 경로
-	// String PATH = "/home/ubuntu/tomcat9/webapps/lms/resource/";  
+	String PATH = PathUtil.PATH + "reportSubmitFile\\";   
 	
 	// 과제 제출 첨부파일 다운로드 횟수 증가
 	public int updateReportSubmitFileCount(String uuid) {

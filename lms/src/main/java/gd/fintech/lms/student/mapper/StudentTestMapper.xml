@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentTestMapper">
+	<!-- 평가 목록 가져오기 -->
+	<select id="selectTestListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Test">
+		SELECT 
+			test_no testNo,
+			lecture_no lectureNo,
+			test_startdate testStartdate,
+			test_enddate testEnddate,
+			test_content testContent,
+			test_createdate testCreatedate
+		FROM
+			test
+		WHERE 
+			lecture_no = #{lectureNo}
+		ORDER BY
+			test_createdate DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 평가 개수 가져오기 -->
+	<select id="selectTestListCount" parameterType="int" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			test
+		WHERE
+			lecture_no = #{lectureNo}
+	</select>
+	
+	<!-- 평가 문제들 가져오기 -->
+	<resultMap type="gd.fintech.lms.vo.Multiplechoice" id="selectTestOneResult">
+        <result property="multiplechoiceNo" column="multiplechoice_no" />
+        <result property="testNo" column="test_no" />
+        <result property="multiplechoiceId" column="multiplechoice_id" />
+        <result property="multiplechoiceQuestion" column="multiplechoice_question" />
+        <result property="multiplechoiceAnswer" column="multiplechoice_answer" />
+        <result property="multiplechoiceCreatedate" column="multiplechoice_createdate" />
+        <result property="multiplechoiceScore" column="multiplechoice_score" />
+        <!-- 문제 보기 -->
+		<collection  property="multiplechoiceExampleList" ofType="gd.fintech.lms.vo.MultiplechoiceExample">
+             <result property="multiplechoiceNo" column="multiplechoice_no" />
+             <result property="multiplechoiceExampleNo" column="multiplechoice_example_no" />
+             <result property="multiplechoiceExampleId" column="multiplechoice_example_id" />
+             <result property="multiplechoiceExampleContent" column="multiplechoice_example_content" />
+		</collection>	
+	</resultMap>
+	<select id="selectTestOne" parameterType="java.util.Map" resultMap="selectTestOneResult">
+		SELECT 
+			m.multiplechoice_no,
+			m.test_no,
+			m.multiplechoice_id,
+			m.multiplechoice_question,
+			m.multiplechoice_answer,
+			m.multiplechoice_createdate,
+			m.multiplechoice_score,
+			me.multiplechoice_no,
+			me.multiplechoice_example_no,
+			me.multiplechoice_example_id,
+			me.multiplechoice_example_content
+		FROM 
+			multiplechoice m
+		LEFT JOIN
+			multiplechoice_example me ON 
+			m.multiplechoice_no = me.multiplechoice_no
+		WHERE
+			m.test_no = #{testNo}
+		ORDER BY 
+			m.multiplechoice_no ASC, 
+			me.multiplechoice_example_no ASC
+		LIMIT 
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 평가 - 문제 개수 -->
+	<select id="selectMultiplechoiceCount" parameterType="int" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM	
+			multiplechoice m
+		LEFT JOIN
+			multiplechoice_example me ON 
+			m.multiplechoice_no = me.multiplechoice_no
+		WHERE
+			m.test_no = #{testNo}
+	</select>
+</mapper>
