@@ -20,10 +20,11 @@ public class AdminIndexController {
 	@Autowired private AdminIndexService adminIndexService;
 	
 	private static final Logger log = LoggerFactory.getLogger(AdminIndexController.class);
-
+	
 	@GetMapping("/auth/admin/index/{currentPage}")
 	public String index(Model model, HttpSession session,
-				@PathVariable(name="currentPage") int currentPage) {
+						@PathVariable(name="currentPage") int currentPage,
+						Manager managerSearch) {
 		
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
@@ -32,12 +33,27 @@ public class AdminIndexController {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		// 운영자 리스트 출력
-		List<Manager> managerList = adminIndexService.getManagerList(beginRow, rowPerPage); 
+		
+		if(managerSearch != null) {
+			if(managerSearch.getManagerPosition()=="") {
+				managerSearch.setManagerPosition(null);
+			}
+			if(managerSearch.getManagerName()=="") {
+				managerSearch.setManagerName(null);
+			}
+		}
+		
+		
+			
+		List<Manager> managerList = adminIndexService.getManagerList(beginRow, rowPerPage, managerSearch);
+		int totalCount = adminIndexService.getManagerCount(managerSearch);
+	
+		
 		log.debug(managerList.toString());
 		
 		// 페이징 코드
 		// 전체 데이터 수
-		int totalCount = adminIndexService.getManagerCount();
+
 		
 		int lastPage = totalCount / rowPerPage;
 		
@@ -81,7 +97,7 @@ public class AdminIndexController {
 		}
 		
 		model.addAttribute("managerList",managerList);
-		
+		model.addAttribute("managerSearch", managerSearch);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
 		

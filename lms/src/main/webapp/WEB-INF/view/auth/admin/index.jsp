@@ -29,7 +29,43 @@
 	<jsp:include page="/WEB-INF/view/auth/admin/include/menu.jsp"/>
 	<h1>운영자 목록</h1>
 	<a href="${pageContext.request.contextPath}/auth/admin/managerQueue/1">승인 대기</a>
-	
+	<div>
+		<form method="get" action="${pageContext.request.contextPath}/auth/admin/index/1">
+			<select name="managerPosition">
+				<c:if test="${manager.managerPosition == null}">
+					<option value="" selected="selected">==전체==</option>
+					<option value="사원">사원</option>
+					<option value="대리">대리</option>
+					<option value="팀장">팀장</option>
+				</c:if>
+				<c:if test="${manager.managerPosition == '사원'}">
+					<option value="" >==전체==</option>
+					<option value="사원" selected="selected">사원</option>
+					<option value="대리">대리</option>
+					<option value="팀장">팀장</option>
+				</c:if>
+				<c:if test="${manager.managerPosition == '대리'}">
+					<option value="">==전체==</option>
+					<option value="사원">사원</option>
+					<option value="대리" selected="selected">대리</option>
+					<option value="팀장">팀장</option>
+				</c:if>
+				<c:if test="${manager.managerPosition == '팀장'}">
+					<option value="" selected="selected">==전체==</option>
+					<option value="사원">사원</option>
+					<option value="대리">대리</option>
+					<option value="팀장" selected="selected">팀장</option>
+				</c:if>
+			</select>
+			<c:if test="${manager.managerName == null}">
+			<input type="text" name="managerName" placeholder="이름을 검색해주세요." >
+			</c:if>
+			<c:if test="${manager.managerName != null }">
+			<input type="text" name="managerName" value = "${manager.managerName}" >
+			</c:if>
+			<button type ="submit">검색</button>
+		</form>
+	</div>
 	<table class="table-bordered">
 		<thead>
 			<tr>
@@ -55,7 +91,7 @@
 					<td>${m.managerEmail}</td>
 					<td>${m.managerPhone}</td>
 					<td>${m.managerAccessdate}</td>
-					<th><a href="${pageContext.request.contextPath}/auth/admin/deleteManager/${currentPage}/${m.managerId}">탈퇴</a></th>
+					<th><a href="${pageContext.request.contextPath}/auth/admin/deleteManager/${currentPage}/${m.managerId}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">탈퇴</a></th>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -66,7 +102,7 @@
 		<c:choose>
 			<c:when test="${currentPage > 1}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/1">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/1?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
 						<i class='fas fa-angle-double-left'></i>
 					</a>
 				</li>
@@ -84,7 +120,7 @@
 		<c:choose>
 			<c:when test="${currentPage > 1}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${prePage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${prePage}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
 						<i class='fas fa-angle-left'></i>
 					</a>
 				</li>
@@ -111,7 +147,7 @@
 					<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 					<c:otherwise>
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${i}">${i}</a>
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${i}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">${i}</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -122,7 +158,7 @@
 		<c:choose>
 			<c:when test="${currentPage < lastPage}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${nextPage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${nextPage}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
 						<i class='fas fa-angle-right'></i>
 					</a>
 				</li>
@@ -140,7 +176,7 @@
 		<c:choose>
 			<c:when test="${currentPage < lastPage}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${lastPage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${lastPage}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
 						<i class='fas fa-angle-double-right'></i>
 					</a>
 				</li>

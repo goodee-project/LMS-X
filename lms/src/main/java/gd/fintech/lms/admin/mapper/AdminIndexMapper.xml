@@ -18,19 +18,42 @@
 			manager_accessdate managerAccessdate
 		FROM
 			manager
+		<where>
+			<if test = "managerPosition != null and managerName == null">
+					manager_position = #{managerPosition}
+			</if>
+			<if test = "managerPosition == null and managerName != null">
+					manager_name LIKE CONCAT(#{managerName},'%')
+			</if>
+			<if test = "managerPosition != null and managerName != null">
+					manager_position = #{managerPosition} AND
+					manager_name LIKE CONCAT(#{managerName},'%')
+			</if>
+		</where>
 		ORDER BY
 			manager_accessdate DESC
 		LIMIT 
 			#{beginRow}, #{rowPerPage}
-	
 	</select>
 	
-	<!-- 운영자 총 인원 -->
-	<select id="selectManagerCount" resultType="int">
+	<!-- 운영자 총 인원 및 검색 인원 -->
+	<select id="selectManagerCount" parameterType="gd.fintech.lms.vo.Manager" resultType="int">
 		SELECT 
 			COUNT(*)
 		FROM 
 			manager
+		<where>
+			<if test = "managerPosition != null and managerName == null">
+					manager_position = #{managerPosition}
+			</if>
+			<if test = "managerPosition == null and managerName != null">
+					manager_name LIKE CONCAT(#{managerName},'%')
+			</if>
+			<if test = "managerPosition != null and managerName != null">
+					manager_position = #{managerPosition} AND
+					manager_name LIKE CONCAT(#{managerName},'%')
+			</if>
+		</where>
 	</select>
-	
+
 </mapper>

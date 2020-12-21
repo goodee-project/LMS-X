@@ -133,9 +133,10 @@ public class AdminManagerController {
 	// 운영자 탈퇴
 	@GetMapping("/auth/admin/deleteManager/{currentPage}/{managerId}")
 	public String deleteManager(@PathVariable(name="currentPage") String currentPage,
-								@PathVariable(name="managerId") String managerId) {
+								@PathVariable(name="managerId") String managerId,
+								Manager manager) {
 		
 		adminManagerService.deleteManagerAll(managerId);
-		return "redirect:/auth/admin/index/"+currentPage;
+		return "redirect:/auth/admin/index/"+currentPage+"?managerPosition="+manager.getManagerPosition()+"&"+"managerName="+manager.getManagerName();
 	}
 }	
