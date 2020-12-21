@@ -47,7 +47,8 @@
 		UPDATE 
 			account
 		SET 
-			account_state = #{accountState}
+			account_state = #{accountState},
+			account_updatedate = now()
 		WHERE
 			account_id = #{accountId}
 	</update>
@@ -167,9 +168,43 @@
 		UPDATE 
 			manager
 		SET
-			manager_position = #{managerPosition}
+			manager_position = #{managerPosition},
+			manager_updatedate = now()
 		WHERE
 			manager_id = #{managerId}
-	
 	</update>
+	
+	<!-- 운영자 탈퇴 -->
+	<!-- 운영자 계정 비활성화 -->
+	<update id="updateManagerAccount" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE
+			account
+		SET
+			account_state = #{accountState},
+			account_updatedate = now()
+		WHERE
+			account_id = #{accountId}
+	</update>
+	<!-- 운영자 정보 삭제 -->
+	<delete id="deleteManagerOne" parameterType="String">
+		DELETE FROM
+			manager
+		WHERE
+			manager_id = #{managerId}
+	</delete>
+	<!-- 운영자 경력 삭제 -->
+	<delete id="deleteManagerCareer" parameterType="String">
+		DELETE FROM
+			career
+		WHERE
+			account_id = #{accountId}
+	</delete>
+	<!-- 운영자 자격증 삭제 -->
+	<delete id="deleteManagerLicense" parameterType="String">
+		DELETE FROM
+			license
+		WHERE
+			account_id = #{accountId}
+	</delete>
+	
 </mapper>

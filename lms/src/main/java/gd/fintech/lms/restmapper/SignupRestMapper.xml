@@ -103,14 +103,14 @@
 			</if>
 			<!-- 도로명+building1 만 있을경우 -->
 			<if test = "street != null and building1 != 'null' and building2 == 'null'">
-					street  LIKE CONCAT(#{street},'%') AND
+					street LIKE CONCAT(#{street},'%') AND
 					building1 = #{building1}
 				ORDER BY
 					building2 ASC
 			</if>
 			<!-- 우편번호 제외 다 있을경우 -->
 			<if test = "street != null and building1 != 'null' and building2 != 'null'">
-					street  LIKE CONCAT(#{street},'%') AND 
+					street LIKE CONCAT(#{street},'%') AND 
 					building1 = #{building1} AND
 					building2 = #{building2}
 			</if>

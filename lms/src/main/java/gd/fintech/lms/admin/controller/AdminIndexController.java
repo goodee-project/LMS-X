@@ -22,7 +22,8 @@ public class AdminIndexController {
 	private static final Logger log = LoggerFactory.getLogger(AdminIndexController.class);
 
 	@GetMapping("/auth/admin/index/{currentPage}")
-	public String index(Model model, HttpSession session, @PathVariable(name="currentPage") int currentPage) {
+	public String index(Model model, HttpSession session,
+				@PathVariable(name="currentPage") int currentPage) {
 		
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
@@ -93,4 +94,6 @@ public class AdminIndexController {
 		
 		return "auth/admin/index";
 	}
+	
+	
 }

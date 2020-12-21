@@ -123,10 +123,19 @@ public class AdminManagerController {
 	@PostMapping("/auth/admin/updatePosition/{managerId}")
 	public String updatePosition(Manager manager,
 								@PathVariable(name="managerId") String managerId) {
+		
 		manager.setManagerId(managerId);
 		adminManagerService.updateManagerPosition(manager);
 		
-		
 		return "redirect:/auth/admin/managerOne/"+managerId;
 	}
-}
+	
+	// 운영자 탈퇴
+	@GetMapping("/auth/admin/deleteManager/{currentPage}/{managerId}")
+	public String deleteManager(@PathVariable(name="currentPage") String currentPage,
+								@PathVariable(name="managerId") String managerId) {
+		
+		adminManagerService.deleteManagerAll(managerId);
+		return "redirect:/auth/admin/index/"+currentPage;
+	}
+}	

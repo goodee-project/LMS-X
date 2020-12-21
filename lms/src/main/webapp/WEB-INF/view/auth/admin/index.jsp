@@ -29,6 +29,7 @@
 	<jsp:include page="/WEB-INF/view/auth/admin/include/menu.jsp"/>
 	<h1>운영자 목록</h1>
 	<a href="${pageContext.request.contextPath}/auth/admin/managerQueue/1">승인 대기</a>
+	
 	<table class="table-bordered">
 		<thead>
 			<tr>
@@ -40,6 +41,7 @@
 				<th>이메일</th>
 				<th>핸드폰번호</th>
 				<th>승인날짜</th>
+				<th>탈퇴</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -53,6 +55,7 @@
 					<td>${m.managerEmail}</td>
 					<td>${m.managerPhone}</td>
 					<td>${m.managerAccessdate}</td>
+					<th><a href="${pageContext.request.contextPath}/auth/admin/deleteManager/${currentPage}/${m.managerId}">탈퇴</a></th>
 				</tr>
 			</c:forEach>
 		</tbody>

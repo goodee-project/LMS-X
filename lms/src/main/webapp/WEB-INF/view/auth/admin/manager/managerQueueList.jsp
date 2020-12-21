@@ -36,6 +36,7 @@
 			<tr>
 				<th>아이디</th>
 				<th>이메일</th>
+				<th>핸드폰번호</th>
 				<th>이름</th>
 				<th>성별</th>
 				<th>생일</th>
@@ -49,6 +50,7 @@
 				<tr>
 					<td>${mql.managerId}</td>
 					<td>${mql.managerEmail}</td>
+					<td>${mql.managerPhone}</td>
 					<td>${mql.managerName}</td>
 					<td>${mql.managerGender}</td>
 					<td>${mql.managerBirth}</td>

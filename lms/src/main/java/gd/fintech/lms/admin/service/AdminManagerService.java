@@ -72,9 +72,29 @@ public class AdminManagerService {
 		return adminManagerMapper.selectManagerOne(managerId);
 	}
 	
+
 	// 운영자 직급수정
 	public int updateManagerPosition(Manager manager) {
 		
 		return adminManagerMapper.updateManagerOnePosition(manager);
+	}
+	
+	// 계정 탈퇴
+	public void deleteManagerAll(String managerId) {
+			
+		Account account = new Account();
+		account.setAccountId(managerId);
+		account.setAccountState("탈퇴");
+		
+		// 운영자 계정(탈퇴) 업데이트
+		adminManagerMapper.updateManagerAccount(account);
+		
+		// 운영자 정보 삭제
+		adminManagerMapper.deleteManagerOne(managerId);
+		// 운영자 경력 삭제
+		adminManagerMapper.deleteManagerCareer(managerId);
+		// 운영자 자격증 삭제
+		adminManagerMapper.deleteManagerLicense(managerId);
+		
 	}
 }

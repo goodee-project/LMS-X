@@ -34,4 +34,16 @@ public interface AdminManagerMapper {
 	
 	// 운영자 직급 수정
 	public int updateManagerOnePosition(Manager manager);
+	
+	// 운영자 탈퇴
+	// 운영자 계정 비활성화
+	public int updateManagerAccount(Account account);
+	// 운영자 정보 삭제
+	public int deleteManagerOne(String managerId);
+	// 운영자 경력 삭제
+	public int deleteManagerCareer(String managerId);
+	// 운영자 자격증 삭제 
+	public int deleteManagerLicense(String managerId);
+	
+
 }

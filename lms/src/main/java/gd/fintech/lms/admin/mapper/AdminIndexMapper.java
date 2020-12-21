@@ -12,4 +12,5 @@ public interface AdminIndexMapper {
 	// 운영자 리스트 출력
 	public List<Manager> selectManagerList(Map<String,Object> map); 
 	public int selectManagerCount();
+	
 }
