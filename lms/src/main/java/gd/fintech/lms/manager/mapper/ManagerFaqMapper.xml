@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerFaqMapper"> 
-	<select id="selectFaqList" resultType="gd.fintech.lms.vo.Faq">
+	<select id="selectFaqListByPage" resultType="gd.fintech.lms.vo.Faq">
 		SELECT 
 			faq_no faqNo,
 			account_id AccountId,
@@ -12,6 +12,17 @@
 			faq_updatedate faqUpdatedate,
 			faq_count faqCount,
 			faq_category faqCategory
+		FROM
+			faq
+		ORDER BY
+			faq_no DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="selectFaqCount" resultType="int">
+		SELECT
+			COUNT(*)
 		FROM
 			faq
 	</select>

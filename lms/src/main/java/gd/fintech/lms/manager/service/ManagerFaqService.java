@@ -1,6 +1,7 @@
 package gd.fintech.lms.manager.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,12 @@ import gd.fintech.lms.vo.Faq;
 public class ManagerFaqService {
 	@Autowired ManagerFaqMapper managerFaqMapper;
 	
-	public List<Faq> getFaqList() {
-		return managerFaqMapper.selectFaqList();
+	public List<Faq> getFaqListByPage(Map<String, Object> map) {
+		return managerFaqMapper.selectFaqListByPage(map);
+	}
+	
+	public int getCountFaq(int rowPerPage) {
+		return managerFaqMapper.selectFaqCount();
 	}
 	
 	public int insertFaq(Faq faq) {

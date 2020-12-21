@@ -1,6 +1,7 @@
 package gd.fintech.lms.manager.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,12 @@ import gd.fintech.lms.vo.Subject;
 public class ManagerSubjectService {
 	@Autowired ManagerSubjectMapper managerSubjectMapper;
 	
-	public List<Subject> getSubjectList() {
-		return managerSubjectMapper.selectSubjectList();
+	public List<Subject> getSubjectListByPage(Map<String, Object> map) {
+		return managerSubjectMapper.selectSubjectListByPage(map);
+	}
+	
+	public int getCountSubject(int rowPerPage) {
+		return managerSubjectMapper.selectSubjectCount();
 	}
 	
 	public int insertSubject(Subject subject) {

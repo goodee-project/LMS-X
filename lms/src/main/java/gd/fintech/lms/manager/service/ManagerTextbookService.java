@@ -1,6 +1,7 @@
 package gd.fintech.lms.manager.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,12 @@ import gd.fintech.lms.vo.Textbook;
 public class ManagerTextbookService {
 	@Autowired ManagerTextbookMapper managerTextbookMapper;
 	
-	public List<Textbook> getTextbookList() {
-		return managerTextbookMapper.selectTextbookList();
+	public List<Textbook> getTextbookListByPage(Map<String, Object> map) {
+		return managerTextbookMapper.selectTextbookListByPage(map);
+	}
+	
+	public int getCountTextbook(int rowPerPage) {
+		return managerTextbookMapper.selectTextbookCount();
 	}
 	
 	public int insertTextbook(Textbook textbook) {

@@ -26,7 +26,7 @@ public class ManagerAccountController {
 	
 	@GetMapping("/auth/manager/account/updateAccount/{accountId}")
 	public String updateAccount(Model model,
-		@PathVariable(name="accountId") String accountId) {
+			@PathVariable(name="accountId") String accountId) {
 		Account account = managerAccountService.getAccountOne(accountId);
 		System.out.println(account);
 		model.addAttribute("account", account);
@@ -41,7 +41,7 @@ public class ManagerAccountController {
 	
 	@GetMapping("/auth/manager/account/accountOne/{accountId}")
 	public String accountOne(Model model,
-		@PathVariable(name = "accountId") String accountId) {
+			@PathVariable(name = "accountId") String accountId) {
 		Account account = managerAccountService.getAccountOne(accountId);
 		model.addAttribute("account", account);
 		return "auth/manager/account/accountOne";
