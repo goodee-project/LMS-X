@@ -13,6 +13,7 @@
 		</collection>
 	</resultMap>
 
+	<!-- 강좌 목록 -->
 	<select id="selectTeacherLectureListByPage" parameterType="java.util.Map" resultMap="selectTeacherLectureListResult">
 		SELECT
 			l.lecture_no, 
@@ -35,6 +36,7 @@
 			#{beginRow}, #{rowPerPage}
 	</select>
 	
+	<!-- 강좌 데이터 수 조회 -->
 	<select id="selectTeacherLectureListCount" parameterType="String" resultType="Integer">
   		SELECT
   			COUNT(*)
@@ -44,6 +46,7 @@
   			account_id = #{teacherId};
   	</select>
   	
+  	<!-- 강좌 조회 -->
   	<select id="selectTeacherLectureOne" parameterType="java.util.Map" resultMap="selectTeacherLectureListResult">
 		SELECT
 			l.lecture_no, 

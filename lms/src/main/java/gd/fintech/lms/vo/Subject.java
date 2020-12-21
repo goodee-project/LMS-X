@@ -10,6 +10,6 @@ public class Subject {
 	private String	subjectName;			// 과목 이름
 	private String	subjectCreatedate;		// 과목 생성 일시
 	private String	subjectUpdatedate;		// 과목 업데이트 일시
-	private int		subjectTotalday;		// 과목 총이수일
+	private int		subjectTotalday;		// 과목 총 이수일
 	private String	subjectInfo;			// 과목 정보
 }

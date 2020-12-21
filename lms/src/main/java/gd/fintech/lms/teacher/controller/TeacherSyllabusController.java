@@ -22,26 +22,38 @@ public class TeacherSyllabusController {
 	// Logger 사용
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	//강의 계획서
+	// 강의계획서 조회
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/syllabus/syllabusOne")
 	public String syllabusOne(Model model,
-			@PathVariable(value = "lectureNo") int lectureNo) {
+			@PathVariable(value = "lectureNo") int lectureNo) {		// 강좌 고유번호
 		Syllabus syllabus = teacherSyllabusService.selectSyllabusOne(lectureNo);
 		
-		//model 을 통해 View에 다음과 같은 정보들을 보내온다.
+		// [Logger] 강의계획서(syllabus)
+		logger.trace("syllabus[" + syllabus + "]");
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("syllabus", syllabus);
 		
-		return "auth/teacher/lecture/syllabus/syllabusOne";
+		// [View] /auth/teacher/lecture/syllabus/syllabusOne.jsp
+		return "/auth/teacher/lecture/syllabus/syllabusOne";
 	}
-	// 계획서 첨부 폼
+	
+	// 강의계획서 첨부 Form
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/syllabus/insertSyllabus")
 	public String insertSyllabus() {
-		return "auth/teacher/lecture/syllabus/insertSyllabus";
+		// [View] /auth/teacher/lecture/syllabus/insertSyllabus.jsp
+		return "/auth/teacher/lecture/syllabus/insertSyllabus";
 	}
-	// 게획서 첨부 액션
+	
+	// 강의계획서 첨부 Action
 	@PostMapping("/auth/teacher/lecture/{lectureNo}/syllabus/insertSyllabus")
 	public String insertSyllabus(SyllabusForm syllabusForm) {
+		// [Logger] 강의계획서 Form(syllabusForm)
+		logger.trace("syllabusForm[" + syllabusForm + "]");
+		
 		teacherSyllabusService.insertTeacherSyllabus(syllabusForm);
+		
+		// [Redirect] 강의계획서 첨부파일을 업로드 후 강의계획서 조회 페이지로 이동
 		return "redirect:/auth/teacher/lecture/" + syllabusForm.getLectureNo() + "/syllabus/syllabusOne";
 	}
 }

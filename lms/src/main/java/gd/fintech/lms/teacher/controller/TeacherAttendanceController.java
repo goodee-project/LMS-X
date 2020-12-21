@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,15 @@ import gd.fintech.lms.vo.Attendance;
 public class TeacherAttendanceController {
 	@Autowired private TeacherAttendanceService teacherAttendanceService;
 	
-	// 월별 출석 페이지
+	// Logger 사용
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	// 월별 출석 목록
 	@GetMapping(value = "/auth/teacher/lecture/{lectureNo}/attendance/attendanceCalendarByMonth/{currentYear}/{currentMonth}")
 	public String attendanceByMonth(Model model, 
-			@PathVariable(name = "lectureNo") int lectureNo, 
-			@PathVariable(name = "currentYear") int currentYear, 
-			@PathVariable(name = "currentMonth") int currentMonth) {
+			@PathVariable(name = "lectureNo") int lectureNo, 			// 강좌 고유번호
+			@PathVariable(name = "currentYear") int currentYear, 		// 조회 년
+			@PathVariable(name = "currentMonth") int currentMonth) {	// 조회 월
 		// 오늘 날짜
 		Calendar currentDay = Calendar.getInstance();
 		
@@ -50,32 +55,32 @@ public class TeacherAttendanceController {
 		int lastDay = currentDay.getActualMaximum(Calendar.DATE); 		// 월 마지막 날짜
 		int firstDayOfWeek = currentDay.get(Calendar.DAY_OF_WEEK);		// 이번 달 1일의 요일
 		
-		// List<Map<String, Object>> attendanceList = teacherAttendanceService.getTeacherAttendanceListByMonth(lectureNo, currentYear, currentMonth);
-		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("currentYear", currentYear);					// 년도
 		model.addAttribute("currentMonth", currentMonth);				// 월
 		model.addAttribute("lastDay", lastDay);							// 마지막 날
 		model.addAttribute("firstDayOfWeek", firstDayOfWeek);			// 1일의 요일
 		
+		// [View] /auth/teacher/lecture/attendance/attendanceCalendarByMonth.jsp
 		return "/auth/teacher/lecture/attendance/attendanceCalendarByMonth";
 	}
 	
-	// 일별 출석 페이지
+	// 일별 출석 목록
 	@GetMapping(value = "/auth/teacher/lecture/{lectureNo}/attendance/attendanceCalendarByDay/{target}/{currentYear}/{currentMonth}/{currentDay}")
 	public String attendanceByDay(Model model, 
-			@PathVariable(name = "lectureNo") int lectureNo, 
-			@PathVariable(name = "target") String target, 
-			@PathVariable(name = "currentYear", required = true) int currentYear, 
-			@PathVariable(name = "currentMonth", required = true) int currentMonth, 
-			@PathVariable(name = "currentDay", required = true) int currentDay) {
-		Calendar targetDay = Calendar.getInstance();
+			@PathVariable(name = "lectureNo") int lectureNo, 							// 강좌 고유번호
+			@PathVariable(name = "target") String target, 								// pre, next
+			@PathVariable(name = "currentYear", required = true) int currentYear, 		// 현재 년
+			@PathVariable(name = "currentMonth", required = true) int currentMonth, 	// 현재 월
+			@PathVariable(name = "currentDay", required = true) int currentDay) {		// 현재 일
+		Calendar targetDay = Calendar.getInstance();									// Calendar 객체를 이용해 오늘 날짜를 확인한다.
 		targetDay.set(Calendar.YEAR, currentYear);
 		targetDay.set(Calendar.MONTH, currentMonth - 1);
 		targetDay.set(Calendar.DATE, currentDay);
 		
-		if (target.equals("pre")) {
+		if (target.equals("pre")) {					// 이전 날짜 이동
 			targetDay.add(Calendar.DATE, -1);
-		} else if (target.equals("next")) {
+		} else if (target.equals("next")) {			// 다음 날짜 이동
 			targetDay.add(Calendar.DATE, 1);
 		}
 		
@@ -85,16 +90,21 @@ public class TeacherAttendanceController {
 				targetDay.get(Calendar.MONTH) + 1, 
 				targetDay.get(Calendar.DATE));
 		
+		// [Logger] 학생 출석 목록(attendanceList)
+		logger.trace("attendanceList[" + attendanceList + "]");
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("attendanceList", attendanceList);
 		
-		model.addAttribute("currentYear", targetDay.get(Calendar.YEAR));
-		model.addAttribute("currentMonth", targetDay.get(Calendar.MONTH) + 1);
-		model.addAttribute("currentDay", targetDay.get(Calendar.DATE));
+		model.addAttribute("currentYear", targetDay.get(Calendar.YEAR));			// 년도
+		model.addAttribute("currentMonth", targetDay.get(Calendar.MONTH) + 1);		// 월
+		model.addAttribute("currentDay", targetDay.get(Calendar.DATE));				// 일
 		
+		// [View] /auth/teacher/lecture/attendance/attendanceCalendarByDay.jsp
 		return "/auth/teacher/lecture/attendance/attendanceCalendarByDay";
 	}
 	
-	// 오늘 날짜의 일별 페이지 이동
+	// 오늘 날짜 이동
 	@GetMapping(value = "/auth/teacher/lecture/{lectureNo}/attendance/attendanceToday")
 	String attencanceToday(@PathVariable(name = "lectureNo") int lectureNo) {
 		Calendar targetDay = Calendar.getInstance();
@@ -103,6 +113,10 @@ public class TeacherAttendanceController {
 		int currentMonth = targetDay.get(Calendar.MONTH) + 1;
 		int currentDay = targetDay.get(Calendar.DATE);
 		
+		// [Logger] 오늘 날짜(currentYear, currentMonth, currentDay)
+		logger.trace("Today[" + currentYear + "." + currentMonth + "." + currentDay + "]");
+		
+		// [Redirect] 오늘 날짜의 일별 출석 목록으로 이동
 		return "redirect:/auth/teacher/lecture/" + lectureNo + "/attendance/attendanceCalendarByDay/default/" + currentYear + "/" + currentMonth + "/" + currentDay;
 	}
 }

@@ -10,15 +10,15 @@ import gd.fintech.lms.vo.LectureNotice;
 
 @Mapper
 public interface TeacherLectureMapper {
-	// 강사 강좌 목록 페이지에서 목록 페이징
-	// 강사 아이디(teacherId), 시작 데이터 번호(beginRow), 페이지당 표시 데이터 수(rowPerPage)를 이용
+	// 강좌 목록
+	// 강사 아이디(teacherId), 시작 데이터 번호(beginRow), 페이지당 표시 데이터 수(rowPerPage)
 	List<Lecture> selectTeacherLectureListByPage(Map<String, Object> map);
 	
-	// 강사 강좌 목록 페이지 카운트
-	// 강사 아이디(teacherId)를 이용
+	// 강좌 데이터 수 조회
+	// 강사 아이디(teacherId)
 	int selectTeacherLectureListCount(String teacherId);
 	
-	// 각 강좌별 정보를 출력
-	// 강좌 고유번호(lectureNo)를 이용
+	// 강좌 조회
+	// 강좌 고유번호(lectureNo)
 	Lecture selectTeacherLectureOne(int lectureNo);
 }

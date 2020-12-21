@@ -24,7 +24,7 @@ public class TeacherLectureArchiveController {
 	// Logger 사용
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	// 자료실 목록
+	// 자료 목록
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/archiveList/{currentPage}")
 	public String lectureArchiveList(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo,
@@ -37,7 +37,7 @@ public class TeacherLectureArchiveController {
 		
 		// [Logger] 데이터베이스로부터 강사가 속해있는 강좌 목록을 가져온다
 		List<LectureArchive> teacherLectureArchiveList = teacherLectureArchiveService.getTeacherLectureArchiveListByPage(lectureNo, beginRow, rowPerPage);
-		logger.trace("teacherLectureArchiveList - " + teacherLectureArchiveList);
+		logger.trace("teacherLectureArchiveList[" + teacherLectureArchiveList + "]");
 		
 		// 페이징 코드
 		// 전체 데이터 수
@@ -98,11 +98,28 @@ public class TeacherLectureArchiveController {
 		model.addAttribute("prePage", prePage);
 		model.addAttribute("nextPage", nextPage);
 		
-		// view의 /auth/teacher/lecture/archive/archiveList.jsp를 이용한다
+		// [View] /auth/teacher/lecture/archive/archiveList.jsp
 		return "/auth/teacher/lecture/archive/archiveList";
 	}
 	
-	// 자료실 입력 Form
+	// 자료 조회
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/archiveOne/{archiveNo}")
+	public String archiveOne(Model model, 
+			@PathVariable(value = "lectureNo") int lectureNo, 		// 강좌 고유번호
+			@PathVariable(value = "archiveNo") int archiveNo) {		// 자료 고유번호
+		List<LectureArchive> lectureArchive = teacherLectureArchiveService.selectTeacherLectureArchiveOne(archiveNo);
+		
+		// [Logger] 세션에 있는 teacherId, teacherName 확인
+		logger.trace("lectureArchive[ " + lectureArchive + " ]");
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("lectureArchive", lectureArchive);
+		
+		// [View] /auth/teacher/lecture/archive/archiveOne.jsp
+		return "/auth/teacher/lecture/archive/archiveOne";
+	}
+	
+	// 자료 입력 Form
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/insertArchive")
 	public String insertArchive(Model model, HttpSession session, 
 			@PathVariable(value = "lectureNo") int lectureNo) {
@@ -117,6 +134,7 @@ public class TeacherLectureArchiveController {
 		model.addAttribute("teacherId", teacherId);
 		model.addAttribute("teacherName", teacherName);
 		
+		// [View] /auth/teacher/lecture/archive/insertArchive.jsp
 		return "/auth/teacher/lecture/archive/insertArchive";
 	}
 	
@@ -125,32 +143,18 @@ public class TeacherLectureArchiveController {
 	public String insertArchive(LectureArchiveForm lectureArchiveForm) {
 		LectureArchive lectureArchive = teacherLectureArchiveService.insertTeacherLectureArchive(lectureArchiveForm);
 		
+		// [Redirect] 자료 입력 후 새로 생성된 강좌 고유번호(lectureNo)에 해당하는 게시글로 이동
 		return "redirect:/auth/teacher/lecture/" + lectureArchiveForm.getLectureNo() + "/archive/archiveOne/" + lectureArchive.getLectureArchiveNo();
-	}
-	
-	// 자료 조회
-	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/archiveOne/{archiveNo}")
-	public String archiveOne(Model model, 
-			@PathVariable(value = "lectureNo") int lectureNo, 
-			@PathVariable(value = "archiveNo") int archiveNo) {
-		List<LectureArchive> lectureArchive = teacherLectureArchiveService.selectTeacherLectureArchiveOne(archiveNo);
-		
-		// [Logger] 세션에 있는 teacherId, teacherName 확인
-		logger.trace("lectureArchive[ " + lectureArchive + " ]");
-		
-		// model을 통해 View에 다음과 같은 정보들을 보내준다
-		model.addAttribute("lectureArchive", lectureArchive);
-		
-		return "/auth/teacher/lecture/archive/archiveOne";
 	}
 	
 	// 자료 삭제
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/deleteArchive/{archiveNo}")
 	public String deleteArchive(Model model, 
-			@PathVariable(value = "lectureNo") int lectureNo, 
-			@PathVariable(value = "archiveNo") int archiveNo) {
+			@PathVariable(value = "lectureNo") int lectureNo, 		// 강좌 고유번호
+			@PathVariable(value = "archiveNo") int archiveNo) {		// 자료 고유번호
 		teacherLectureArchiveService.deleteTeacherLectureArchive(archiveNo);
 		
+		// [Redirect] 자료 삭제시 이동할 페이지가 없으므로 자료 목록의 1페이지로 이동
 		return "redirect:/auth/teacher/lecture/" + lectureNo + "/archive/archiveList/1";
 	}	
 }

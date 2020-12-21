@@ -16,6 +16,7 @@
 		WHERE 
 			lecture_no = #{lectureNo}
 	</select>
+	
 	<!-- 강의 계획서 첨부파일 입력 -->
 	<insert id="insertTeacherSyllabus" parameterType="gd.fintech.lms.vo.Syllabus">
 		INSERT INTO syllabus (
@@ -34,12 +35,14 @@
 			syllabusFileCreatedate
 		)
 	</insert>
+	
 	<!-- 강좌 번호에 따른 첨부 파일 삭제 -->
 	<delete id="delteTeacherSyllabus" parameterType="int">
 		DELETE FROM
 			syllabus
 		WHERE lecture_no = #{lectureNo}
 	</delete>
+	
 	<!-- 다운로드 횟수 증가 -->
 	<update id="updateTeacherSyllabusCountUp" parameterType="gd.fintech.lms.vo.Syllabus">
 		UPDATE

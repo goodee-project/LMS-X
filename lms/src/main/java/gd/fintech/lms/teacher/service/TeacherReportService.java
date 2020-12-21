@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +19,11 @@ import gd.fintech.lms.vo.ReportSubmit;
 public class TeacherReportService {
 	@Autowired private TeacherReportMapper teacherReportMapper;
 	
-	// 강사가 출제한 과제 목록을 출력
-	// 강좌 고유번호(lectureNo)를 이용
+	// Logger 사용
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	// 강사가 출제한 과제 목록
+	// 강좌 고유번호(lectureNo)
 	public List<Report> getTeacherReportListByPage(int lectureNo, int beginRow, int rowPerPage) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("lectureNo", lectureNo);		// 강의실 고유번호
@@ -27,17 +32,20 @@ public class TeacherReportService {
 		
 		List<Report> teacherReportList = teacherReportMapper.selectTeacherReportListByPage(map);
 		
+		// [Logger] 출제 과제 목록(teacherReportList)
+		logger.trace("teacherReportList[" + teacherReportList + "]");
+		
 		return teacherReportList;
 	}
 	
-	// 강사가 출제한 과제의 총 갯수 계산
-	// 강좌 고유번호(lectureNo)를 이용
+	// 강사가 출제한 과제의 총 개수 계산
+	// 강좌 고유번호(lectureNo)
 	public int getCountTeacherReport(int lectureNo) {
 		return teacherReportMapper.selectTeacherReportListCount(lectureNo);
 	}
 	
-	// 강사가 출제한 과제에 대한 정보를 출력
-	// 과제 고유번호(reportNo)를 이용
+	// 강사가 출제한 과제에 대한 정보
+	// 과제 고유번호(reportNo)
 	public Report getTeacherReportOne(int reportNo) {
 		return teacherReportMapper.selectTeacherReportOne(reportNo);
 	}
@@ -47,7 +55,7 @@ public class TeacherReportService {
 		
 		Report returnReport = new Report();
 		
-		// reportNo Autoincrement 번호를 받아온다.
+		// 과제 고유번호(reportNo)
 		returnReport.setReportNo(report.getReportNo());
 		
 		return returnReport;
@@ -57,8 +65,8 @@ public class TeacherReportService {
 		teacherReportMapper.updateTeacherReport(report);
 	}
 	
-	// 학생들이 제출한 과제에 대한 목록을 출력
-	// 과제 고유번호(reportNo)를 이용
+	// 학생들이 제출한 과제에 대한 목록
+	// 과제 고유번호(reportNo)
 	public List<ReportSubmit> getTeacherReportSubmitList(int lectureNo, int reportNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lectureNo", lectureNo);			// 강좌 고유번호

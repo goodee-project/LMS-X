@@ -106,7 +106,7 @@ public class TeacherIndexController {
 		model.addAttribute("prePage", prePage);
 		model.addAttribute("nextPage", nextPage);
 		
-		// view의 /auth/teacher/index.jsp를 이용한다
+		// [View] /auth/teacher/index.jsp
 		return "/auth/teacher/index";
 	}
 }

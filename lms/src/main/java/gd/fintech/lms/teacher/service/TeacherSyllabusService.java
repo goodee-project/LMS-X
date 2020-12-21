@@ -20,23 +20,24 @@ import gd.fintech.lms.vo.SyllabusForm;
 @Service
 @Transactional
 public class TeacherSyllabusService {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired private TeacherSyllabusMapper teacherSyllabusMapper;
 	
-	//첨부 파일 경로
+	// Logger 사용
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	// 첨부파일 경로
 	File file = new File("");
 	String PATH = PathUtil.PATH + "syallbusFile\\";
 	
-	// 계획서 상세보기
+	// 강의계획서 상세보기
 	public Syllabus selectSyllabusOne(int lectureNo) {
 		return teacherSyllabusMapper.selectTeacherSyllabusOne(lectureNo);
 	}
 	
-	// 첨부 파일 등록
+	// 첨부파일 등록
 	public Syllabus insertTeacherSyllabus(SyllabusForm syllabusForm) {
 		Syllabus syllabus = new Syllabus();
-		// [Logger] 강의 계획서 입력 확인
+		// [Logger] 강의계획서 입력 확인
 		logger.trace("syllabus : " + syllabus);
 		
 		//Mapper 를 통해 syllabus의 내용을 입력
@@ -44,7 +45,7 @@ public class TeacherSyllabusService {
 		
 		List<Syllabus> syllabusFileList = null;
 		
-		//첨부파일이 존재하는 경우
+		// 첨부파일이 존재하는 경우
 		if (syllabusForm.getSyllabusFileList() != null) {
 			syllabusFileList = new ArrayList<Syllabus>();
 			
@@ -79,13 +80,14 @@ public class TeacherSyllabusService {
 			}
 		}
 		
-		//파일이 존재하는 경우
+		// 파일이 존재하는 경우
 		if(syllabusFileList != null) {
 			for (Syllabus s : syllabusFileList) {
-				// 데이터 베이스에 파일 정보 저장
+				// 데이터베이스에 파일 정보 저장
 				teacherSyllabusMapper.insertTeacherSyllabus(s);
 			}
 		}
+		
 		return syllabus;
 	}
 }

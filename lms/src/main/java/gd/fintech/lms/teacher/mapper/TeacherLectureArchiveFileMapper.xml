@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherLectureArchiveFileMapper">
+	<!-- 자료 첨부파일 목록 -->
 	<select id="selectTeacherLectureArchiveFileList" parameterType="Integer" resultType="String">
 		SELECT
 			lecture_archive_file_uuid
@@ -10,6 +11,7 @@
 			lecture_archive_no = #{archiveNo}
 	</select>
 	
+	<!-- 자료 첨부파일 입력 -->
 	<insert id="insertTeacherLectureArchiveFile" parameterType="gd.fintech.lms.vo.LectureArchiveFile">
 		INSERT INTO lecture_archive_file (
 			lecture_archive_file_uuid, 
@@ -30,6 +32,7 @@
 		)
 	</insert>
 	
+	<!-- 자료 첨부파일 전체 삭제 -->
 	<delete id="deleteTeacherLectureArchiveFileAll" parameterType="Integer">
 		DELETE FROM
 			lecture_archive_file

@@ -27,7 +27,7 @@ public class TeacherLectureArchiveService {
 	@Autowired private TeacherLectureArchiveMapper teacherLectureArchiveMapper;
 	@Autowired private TeacherLectureArchiveFileMapper teacherLectureArchiveFileMapper;
 	
-	//Logger 사용
+	// Logger 사용
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	// 첨부파일 경로
@@ -42,6 +42,9 @@ public class TeacherLectureArchiveService {
 		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
 		
 		List<LectureArchive> lectureArchiveList = teacherLectureArchiveMapper.selectTeacherLectureArchiveListByPage(map);
+		
+		// [Logger] 자료 목록(lectureArchiveList)
+		logger.trace("lectureArchiveList[" + lectureArchiveList + "]");
 		
 		return lectureArchiveList;
 	}

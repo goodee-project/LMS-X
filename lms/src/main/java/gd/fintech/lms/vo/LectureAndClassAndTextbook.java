@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class LectureAndClassAndTextbook {
-	public Lecture lecture;
-	public Classroom classroom;
-	public Textbook textbook;
+	public Lecture lecture;			// 강좌 Vo
+	public Classroom classroom;		// 강의실 Vo
+	public Textbook textbook;		// 교재 Vo
 }

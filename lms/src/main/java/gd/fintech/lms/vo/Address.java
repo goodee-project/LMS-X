@@ -12,6 +12,6 @@ public class Address {
 	private String	city;		// 시군구
 	private String	town;		// 읍면
 	private String	street;		// 도로명
-	private String	building1;	// 건물번호본번
-	private String	building2;	// 건물번호부번
+	private String	building1;	// 건물번호 본번
+	private String	building2;	// 건물번호 부번
 }

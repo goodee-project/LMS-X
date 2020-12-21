@@ -12,7 +12,6 @@ public class Student {
 	private String	studentName;			// 학생 이름
 	private String	studentGender;			// 학생 성별 (남, 여)
 	private String	studentBirth;			// 학생 생년월일
-	private String	studentPosition;		// 학생 직책
 	private String	studentAddressMain;		// 학생 1차 주소
 	private String	studentAddressSub;		// 학생 2차 주소
 	private String	studentImage;			// 학생 프로필 사진

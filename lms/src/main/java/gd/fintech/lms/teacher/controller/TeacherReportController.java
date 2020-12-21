@@ -22,11 +22,11 @@ public class TeacherReportController {
 	// Logger 사용
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	// 강사가 해당 강의실에서 출제한 과제 목록
+	// 강사 과제 목록
 	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/reportList/{currentPage}")
 	public String reportList(Model model, 
-			@PathVariable(value = "lectureNo") int lectureNo, 
-			@PathVariable(value = "currentPage") int currentPage) {
+			@PathVariable(value = "lectureNo") int lectureNo, 			// 강좌 고유번호
+			@PathVariable(value = "currentPage") int currentPage) {		// 현재 페이지
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
 		
@@ -35,7 +35,7 @@ public class TeacherReportController {
 		
 		List<Report> teacherReportList = teacherReportService.getTeacherReportListByPage(lectureNo, beginRow, rowPerPage);
 		
-		// [Logger] 과제 목록(teacherReportList) 확인
+		// [Logger] 과제 목록(teacherReportList)
 		logger.trace("teacherReportList[" + teacherReportList + "]");
 		
 		// 페이징 코드
@@ -80,8 +80,8 @@ public class TeacherReportController {
 		
 		// 현재 페이지에 대한 다음 페이지
 		int nextPage = currentPage - (currentPage % navPerPage) + 1 + 10;
-		if (nextPage > totalCount) {
-			nextPage = totalCount;
+		if (nextPage > lastPage) {
+			nextPage = lastPage;
 		}
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
@@ -97,11 +97,11 @@ public class TeacherReportController {
 		model.addAttribute("prePage", prePage);
 		model.addAttribute("nextPage", nextPage);
 		
-		// view의 /auth/teacher/lecture/report/reportList.jsp를 이용한다
+		// [View] /auth/teacher/lecture/report/reportList.jsp
 		return "/auth/teacher/lecture/report/reportList";
 	}
 	
-	// 강사가 제출한 과제에 대한 정보 조회
+	// 과제 조회
 	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}")
 	public String reportOne(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 
@@ -122,17 +122,18 @@ public class TeacherReportController {
 		model.addAttribute("report", report);
 		model.addAttribute("reportSubmitList", reportSubmitList);
 		
-		// view의 /auth/teacher/lecture/report/reportOne.jsp를 이용한다
+		// [View] /auth/teacher/lecture/report/reportOne.jsp
 		return "/auth/teacher/lecture/report/reportOne";
 	}
 	
-	// 강좌 고유번호(lectureNo)에 해당하는 강좌에 강사가 새로운 과제를 출제 (Form)
+	// 과제 작성 Form
 	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/insertReport")
 	public String insertReport(@PathVariable(value = "lectureNo") int lectureNo) {
+		// [View] /auth/teacher/lecture/report/insertReport.jsp
 		return "/auth/teacher/lecture/report/insertReport";
 	}
 	
-	// 강좌 고유번호(lectureNo)에 해당하는 강좌에 강사가 새로운 과제를 출제 (Action)
+	// 과제 작성 Action
 	@PostMapping(value="/auth/teacher/lecture/{lectureNo}/report/insertReport")
 	public String insertReport(Report report) {
 		Report returnReport = teacherReportService.insertTeacherReport(report);
@@ -140,18 +141,21 @@ public class TeacherReportController {
 		// [Logger] 과제(report) 확인
 		logger.trace("report[" + report + "]");
 		
+		// [Redirect] 과제 작성 후 과제 고유번호에 해당하는 게시글로 이동
 		return "redirect:/auth/teacher/lecture/" + report.getLectureNo() + "/report/reportOne/" + returnReport.getReportNo();
 	}
 	
-	// 과제 고유번호(reportNo)에 해당하는 과제에 대한 정보를 수정 (Form)
+	// 과제 수정 Form
 	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
 	public String updateReport(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 
 			@PathVariable(value = "reportNo") int reportNo) {
 		// 과제 고유번호(reportNo)에 해당하는 과제의 정보를 데이터베이스에서 가져온다
 		Report report = teacherReportService.getTeacherReportOne(reportNo);
+		
 		// reportStartDate의 String 형태를 yyyy-MM-ddThh:mm 형식으로 변환한다
 		report.setReportStartdate(report.getReportStartdate().replace(" ", "T"));
+		
 		// reportEndDate의 String 형태를 yyyy-MM-ddThh:mm 형식으로 변환한다
 		report.setReportEnddate(report.getReportEnddate().replace(" ", "T"));
 		
@@ -161,10 +165,11 @@ public class TeacherReportController {
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("report", report);
 		
+		// [View] /auth/teacher/lecture/report/updateReport.jsp
 		return "/auth/teacher/lecture/report/updateReport";
 	}
 	
-	// 과제 고유번호(reportNo)에 해당하는 과제에 대한 정보를 수정 (Action)
+	// 과제 수정 Action
 	@PostMapping(value="/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
 	public String updateReport(Report report) {
 		teacherReportService.updateTeacherReport(report);
@@ -172,6 +177,7 @@ public class TeacherReportController {
 		// [Logger] 과제(report) 확인
 		logger.trace("report[" + report + "]");
 		
+		// [Redirect] 과제 수정 후 과제 고유번호에 해당하는 게시글로 이동
 		return "redirect:/auth/teacher/lecture/" + report.getLectureNo() + "/report/reportOne/" + report.getReportNo();
 	}
 }
