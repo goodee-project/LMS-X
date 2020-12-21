@@ -10,7 +10,7 @@ import gd.fintech.lms.vo.QuestionFile;
 public interface StudentQnaFileMapper {
 
 	// 학생 : 질문 게시판 파일 이름 리스트
-	List<String> selectStudentQnaFileNameList(int qestionNo);
+	List<String> selectStudentQnaFileNameList(int questionNo);
 	
 	// 학생: 질문 게시판 파일 추가
 	int insertStudentQnaFile(QuestionFile questionFile);

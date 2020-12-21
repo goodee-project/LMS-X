@@ -138,4 +138,45 @@ public class StudentQnaController {
 		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaList/1";
 		
 	}
+	
+	// Qna 수정 폼
+	@GetMapping("/auth/student/lecture/{lecutreNo}/qna/updateQna/{questionNo}")
+	public String updateQna(Model model,
+			@PathVariable(name = "questionNo") int questionNo,
+			@PathVariable(name = "lectureNo") int lectureNo) {
+		
+		Question question = studentQnaService.getStudentQnaOne(questionNo);
+		model.addAttribute("question", question);
+		return "/auth/student/lecture/qna/updateQna";
+	}
+	
+	// Qna 수정 액션
+	@PostMapping("/auth/student/lecture/{lecutreNo}/qna/updateQna/{questionNo}")
+	public String updateQna(Model model, QuestionForm questionForm,
+			Question question) {
+		studentQnaService.updateStudentQna(questionForm);
+		
+		return "redirect:/auth/student/lecture/" + question.getLectureNo() + "/qna/qnaOne/" + questionForm.getQuestionNo();
+	}
+	
+	// Qna 삭제
+	@GetMapping("/auth/student/lecutre/{lecutreNo}/qna/deleteQna/{questionNo}")
+	public String deleteQuestion(
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionNo") int questionNo) {
+		studentQnaService.deleteStudentQnaByQnaNo(questionNo);
+		
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaList/1";
+	}
+	
+	// 파일 한개 삭제
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/{questionFileUuid}")
+	public String deleteQuestionFileOne(
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionNo") int questionNo,
+			@PathVariable(name = "questionFileUuid") String questionFileUuid) {
+		studentQnaService.deleteStudentQnaFileOne(questionFileUuid);
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/updateQna/" + questionNo;
+		 
+	}
 }
