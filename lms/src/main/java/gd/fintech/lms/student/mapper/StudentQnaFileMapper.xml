@@ -39,13 +39,4 @@
 		WHERE 
 			question_No = #{questionNo}
 	</delete>
-	
-	<!-- 질문 게시판 수정시 파일 한개만 삭제 하는 기능  -->
-	<delete id="deleteStudentQnaFileOne" parameterType="String">
-		DELETE 
-		FROM 
-			question_file
-		WHERE 
-			question_file_uuid = #{questionFileUuid}
-	</delete>
 </mapper>

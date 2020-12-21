@@ -53,7 +53,7 @@
 		</script>
 </head>
 	<body>
-		<h1>공지사항 작성</h1>
+		<h1>질문 작성</h1>
 		<div>
 			<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
 	    </div>

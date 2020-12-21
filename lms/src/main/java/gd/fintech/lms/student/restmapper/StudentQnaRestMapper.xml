@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.restmapper.StudentQnaRestMapper">
+	<!-- 질문 게시판 첨부파일 다운로드 횟수 증가 -->
+	<update id="updateQnaFileCount" parameterType="String">
+		UPDATE 
+			question_file
+		SET
+			question_file_count = question_file_count + 1
+		WHERE
+			question_file_uuid = #{questionFileUuid}
+	</update>
+	
+	<!-- 질문 게시판 첨부파일 다운로드 횟수 가져오기 -->
+	<select id="selectQnaFileCount" parameterType="String" resultType="int">
+		SELECT 
+			question_file_count
+		FROM 
+			question_file
+		WHERE 
+			question_file_uuid = #{questionFileUuid}
+	</select>
+	
+	<!-- 질문 게시판 첨부파일 한개 삭제 -->
+	<delete id="deleteQnaFileOne" parameterType="String"> 
+		DELETE FROM
+			question_file
+		WHERE
+			question_file_uuid = #{questionFileUuid}
+	</delete>
+</mapper>

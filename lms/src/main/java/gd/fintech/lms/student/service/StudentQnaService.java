@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import gd.fintech.lms.pathutil.PathUtil;
 import gd.fintech.lms.student.mapper.StudentQnaFileMapper;
 import gd.fintech.lms.student.mapper.StudentQnaMapper;
 import gd.fintech.lms.vo.Question;
@@ -26,8 +27,7 @@ public class StudentQnaService {
 	// Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	// localhost 서버용
-    File file = new File("");
-	String PATH = file.getAbsolutePath() + "\\src\\main\\webapp\\resource\\questionFile\\";
+	private final String PATH = PathUtil.PATH + "questionFile\\";
 	//	private final String PATH = "/////"
 	@Autowired StudentQnaMapper studentQnaMapper;
 	@Autowired StudentQnaFileMapper studentQnaFileMapper;
@@ -129,31 +129,19 @@ public class StudentQnaService {
 		
 		return;
 	}
-	
-	// questionFile 한개만 삭제
-	public int deleteStudentQnaFileOne(String questionFileUuid) {
-		
-		File f = new File(PATH + questionFileUuid);
-		f.delete();
-		
-		return studentQnaFileMapper.deleteStudentQnaFileOne(questionFileUuid);
-	}
-	
-	// 질문 게시판 게시글 작성
+
+	// 질문 게시판 게시글 수정
 	public void updateStudentQna(QuestionForm questionForm) {
 		//question 변수 생성
 		Question question = new Question();
 		
 		//set -> questionForm.get 질문 내용 추가
-		question.setAccountId(questionForm.getAccountId());
-		question.setQuestionWriter(questionForm.getQuestionWriter());
-		question.setLectureNo(questionForm.getLectureNo());
+		question.setQuestionNo(questionForm.getQuestionNo());
 		question.setQuestionTitle(questionForm.getQuestionTitle());
 		question.setQuestionContent(questionForm.getQuestionContent());
-		question.setQuestionCreatedate(questionForm.getQuestionCreatedate());
 		question.setQuestionUpdatedate(questionForm.getQuestionUpdatedate());
 		question.setQuestionPassword(questionForm.getQuestionPassword());
-		studentQnaMapper.insertStudentQna(question);
+		studentQnaMapper.updateStudentQna(question);
 		
 		// List questionFile = null로 설정
 		List<QuestionFile> questionFile = null;

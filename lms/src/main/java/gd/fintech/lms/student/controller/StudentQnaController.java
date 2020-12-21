@@ -140,23 +140,39 @@ public class StudentQnaController {
 	}
 	
 	// Qna 수정 폼
-	@GetMapping("/auth/student/lecture/{lecutreNo}/qna/updateQna/{questionNo}")
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/updateQna/{questionNo}")
 	public String updateQna(Model model,
 			@PathVariable(name = "questionNo") int questionNo,
 			@PathVariable(name = "lectureNo") int lectureNo) {
 		
 		Question question = studentQnaService.getStudentQnaOne(questionNo);
+		
+		// Map 안에 강좌번호 넣기
+		Map<String, Object> map = new HashMap<>();
+		map.put("lectureNo", lectureNo);
+		
+		model.addAttribute("lectrueNo", lectureNo);
 		model.addAttribute("question", question);
+		System.out.println("폼questionNo" + question.getQuestionNo());
+		
 		return "/auth/student/lecture/qna/updateQna";
 	}
 	
 	// Qna 수정 액션
-	@PostMapping("/auth/student/lecture/{lecutreNo}/qna/updateQna/{questionNo}")
+	@PostMapping("/auth/student/lecture/{lectureNo}/qna/updateQna/{questionNo}")
 	public String updateQna(Model model, QuestionForm questionForm,
-			Question question) {
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionNo") int questionNo) {
+		
+		questionForm.setQuestionNo(questionNo);
 		studentQnaService.updateStudentQna(questionForm);
 		
-		return "redirect:/auth/student/lecture/" + question.getLectureNo() + "/qna/qnaOne/" + questionForm.getQuestionNo();
+		model.addAttribute("lectureNo", lectureNo);
+		model.addAttribute("questionNo", questionNo);
+		
+		System.out.println("액션questionNo" + questionNo);
+		
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo;
 	}
 	
 	// Qna 삭제
@@ -167,16 +183,5 @@ public class StudentQnaController {
 		studentQnaService.deleteStudentQnaByQnaNo(questionNo);
 		
 		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaList/1";
-	}
-	
-	// 파일 한개 삭제
-	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/{questionFileUuid}")
-	public String deleteQuestionFileOne(
-			@PathVariable(name = "lectureNo") int lectureNo,
-			@PathVariable(name = "questionNo") int questionNo,
-			@PathVariable(name = "questionFileUuid") String questionFileUuid) {
-		studentQnaService.deleteStudentQnaFileOne(questionFileUuid);
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/updateQna/" + questionNo;
-		 
 	}
 }

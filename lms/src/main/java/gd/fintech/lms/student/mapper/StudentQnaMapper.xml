@@ -32,7 +32,8 @@
 			question_writer questionWriter,
 			question_title questionTitle,
 			question_createdate questionCreatedate,
-			question_count questionCount
+			question_count questionCount,
+			question_updatedate questionUpdatedate
 		FROM
 			question
 		WHERE 
@@ -110,7 +111,10 @@
 		SET
 			question_title = #{questionTitle},
 			question_content = #{questionContent},
-			question_updatedate = #{questionUpdatedate}
+			question_updatedate = NOW(),
+			question_password = #{questionPassword}
+		WHERE
+			question_no = #{questionNo}	
 	</update>
 	
 	<!-- 질문 게시판 게시글 삭제 -->
