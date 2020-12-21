@@ -57,10 +57,16 @@ public class TeacherLectureArchiveService {
 	
 	// 자료 조회
 	// 자료 고유번호(lectureArchiveNo)를 이용
-	public List<LectureArchive> selectTeacherLectureArchiveOne(int archiveId) {
-		List<LectureArchive> lectureArchiveOne = teacherLectureArchiveMapper.selectTeacherLectureArchiveOne(archiveId);
+	public List<LectureArchive> selectTeacherLectureArchiveOne(int archiveNo) {
+		List<LectureArchive> lectureArchiveOne = teacherLectureArchiveMapper.selectTeacherLectureArchiveOne(archiveNo);
 		
 		return lectureArchiveOne;
+	}
+	
+	// 자료 조회 조회수 증가
+	// 자료 고유번호(lectureArchiveNo)를 이용
+	public int updateTeacherLectureArchiveCountUp(int archiveNo) {
+		return teacherLectureArchiveMapper.updateTeacherLectureArchiveCountUp(archiveNo);
 	}
 	
 	// 자료 입력
@@ -68,7 +74,7 @@ public class TeacherLectureArchiveService {
 	public LectureArchive insertTeacherLectureArchive(LectureArchiveForm lectureArchiveForm) {
 		LectureArchive lectureArchive = new LectureArchive();
 		
-		// lectureArchiveForm의 아이디, 작성자, 제목, 내용을 lectureArchive 객체에 넣어준다
+		// lectureArchiveForm의 강좌 고유번호, 아이디, 작성자, 제목, 내용을 lectureArchive 객체에 넣어준다
 		// 자바스크립트가 데이터베이스에 입력되는 것을 방지
 		lectureArchive.setLectureNo(lectureArchiveForm.getLectureNo());
 		lectureArchive.setAccountId(lectureArchiveForm.getAccountId());
@@ -132,6 +138,75 @@ public class TeacherLectureArchiveService {
 		
 		// lectureArchiveNo를 반환하여 페이지를 이동할 수 있도록 한다
 		return lectureArchive;
+	}
+	
+	// 자료 수정
+	// 자료 Form(LectureArchiveForm)을 이용
+	public void updateTeacherLectureArchive(LectureArchiveForm lectureArchiveForm) {
+		LectureArchive lectureArchive = new LectureArchive();
+		
+		// lectureArchiveForm의 자료 고유번호, 강좌 고유번호, 아이디, 작성자, 제목, 내용을 lectureArchive 객체에 넣어준다
+		// 자바스크립트가 데이터베이스에 입력되는 것을 방지
+		lectureArchive.setLectureArchiveNo(lectureArchiveForm.getLectureArchiveNo());
+		lectureArchive.setLectureNo(lectureArchiveForm.getLectureNo());
+		lectureArchive.setAccountId(lectureArchiveForm.getAccountId());
+		lectureArchive.setLectureArchiveWriter(lectureArchiveForm.getLectureArchiveWriter());
+		lectureArchive.setLectureArchiveTitle(lectureArchiveForm.getLectureArchiveTitle().replaceAll("(?i)<script", "&lt;script"));
+		lectureArchive.setLectureArchiveContent(lectureArchiveForm.getLectureArchiveContent().replaceAll("(?i)<script", "&lt;script"));
+		
+		// [Logger] 강좌 자료 입력 확인
+		logger.trace("lectureArchive - " + lectureArchive);
+		
+		// Mapper를 통해 lectureArchive의 내용을 수정
+		teacherLectureArchiveMapper.updateTeacherLectureArchive(lectureArchive);
+		
+		List<LectureArchiveFile> lectureArchiveFileList = null;
+		
+		// 첨부파일이 존재하는 경우
+		if (lectureArchiveForm.getLectureArchiveFileList() != null) {
+			lectureArchiveFileList = new ArrayList<LectureArchiveFile>();
+			
+			for (MultipartFile mf : lectureArchiveForm.getLectureArchiveFileList()) {
+				LectureArchiveFile laf = new LectureArchiveFile();
+				
+				// lectureArchive 객체에 존재하는 lectureArchiveNo를 이용해 첨부파일의 외래키를 설정한다
+				laf.setLectureArchiveNo(lectureArchive.getLectureArchiveNo());
+				
+				// 랜덤한 파일 이름을 생성 (UUID)
+				String filename = UUID.randomUUID().toString().replace("-", "");
+				// 확장자 점 위치 확인
+				int p = mf.getOriginalFilename().lastIndexOf(".");
+				// 확장자를 잘라내어 소문자로 저장
+				String ext = mf.getOriginalFilename().substring(p).toLowerCase();
+				
+				laf.setLectureArchiveFileUuid(filename + ext);
+				laf.setLectureArchiveFileOriginal(mf.getOriginalFilename());
+				laf.setLectureArchiveFileSize(mf.getSize());
+				laf.setLectureArchiveFileType(mf.getContentType());
+				
+				lectureArchiveFileList.add(laf);
+				
+				// 서버에 파일 저장
+				try {
+					// 파일을 지정된 경로에 저장한다
+					mf.transferTo(new File(PATH + filename + ext));
+				} catch (Exception e) {	// 예외처리
+					// 디버깅 코드 출력
+					e.printStackTrace();
+					
+					// 트랜잭션 중단 및 작업 취소
+					throw new RuntimeException();
+				}
+			}
+		}
+		
+		// 파일이 존재하는 경우
+		if (lectureArchiveFileList != null) {
+			for (LectureArchiveFile laf : lectureArchiveFileList) {
+				// 데이터베이스에 파일 정보 저장
+				teacherLectureArchiveFileMapper.insertTeacherLectureArchiveFile(laf);
+			}
+		}
 	}
 	
 	// 자료 삭제

@@ -74,6 +74,16 @@
   			la.lecture_archive_no = #{lectureArchiveNo}
   	</select>
   	
+  	<!-- 자료 조회 조회수 증가 -->
+  	<update id="updateTeacherLectureArchiveCountUp" parameterType="Integer">
+  		UPDATE
+  			lecture_archive
+  		SET
+  			lecture_archive_count = lecture_archive_count + 1
+  		WHERE
+  			lecture_archive_no = #{lectureArchiveNo}
+  	</update>
+  	
   	<!-- 자료 입력 -->
   	<insert id="insertTeacherLectureArchive" parameterType="gd.fintech.lms.vo.LectureArchive">
   		<selectKey resultType="int" keyProperty="lectureArchiveNo" order="AFTER">
@@ -100,6 +110,18 @@
   			0
   		)
   	</insert>
+  	
+  	<!-- 자료 수정 -->
+  	<update id="updateTeacherLectureArchive" parameterType="gd.fintech.lms.vo.LectureArchive">
+  		UPDATE
+  			lecture_archive
+  		SET
+  			lecture_archive_title = #{lectureArchiveTitle}, 
+  			lecture_archive_content = #{lectureArchiveContent}, 
+  			lecture_archive_updatedate = NOW()
+  		WHERE
+  			lecture_archive_no = #{lectureArchiveNo}
+  	</update>
   	
   	<!-- 자료 삭제 -->
   	<delete id="deleteTeacherLectureArchive" parameterType="Integer">

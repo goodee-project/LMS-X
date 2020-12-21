@@ -107,6 +107,10 @@ public class TeacherLectureArchiveController {
 	public String archiveOne(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 		// 강좌 고유번호
 			@PathVariable(value = "archiveNo") int archiveNo) {		// 자료 고유번호
+		// 자료 조회 조회수 증가
+		teacherLectureArchiveService.updateTeacherLectureArchiveCountUp(archiveNo);
+		
+		// 자료 조회
 		List<LectureArchive> lectureArchive = teacherLectureArchiveService.selectTeacherLectureArchiveOne(archiveNo);
 		
 		// [Logger] 세션에 있는 teacherId, teacherName 확인
@@ -138,13 +142,39 @@ public class TeacherLectureArchiveController {
 		return "/auth/teacher/lecture/archive/insertArchive";
 	}
 	
-	// 자료실 입력 Action
+	// 자료 입력 Action
 	@PostMapping("/auth/teacher/lecture/{lectureNo}/archive/insertArchive")
 	public String insertArchive(LectureArchiveForm lectureArchiveForm) {
 		LectureArchive lectureArchive = teacherLectureArchiveService.insertTeacherLectureArchive(lectureArchiveForm);
 		
 		// [Redirect] 자료 입력 후 새로 생성된 강좌 고유번호(lectureNo)에 해당하는 게시글로 이동
 		return "redirect:/auth/teacher/lecture/" + lectureArchiveForm.getLectureNo() + "/archive/archiveOne/" + lectureArchive.getLectureArchiveNo();
+	}
+	
+	// 자료 수정 Form
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/updateArchive/{archiveNo}")
+	public String updateArchive(Model model, 
+			@PathVariable(value = "lectureNo") int lectureNo, 		// 강좌 고유번호
+			@PathVariable(value = "archiveNo") int archiveNo) {		// 자료 고유번호
+		List<LectureArchive> lectureArchive = teacherLectureArchiveService.selectTeacherLectureArchiveOne(archiveNo);
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("lectureArchive", lectureArchive);
+		
+		// [View] /auth/teacher/lecture/archive/updateArchive.jsp
+		return "/auth/teacher/lecture/archive/updateArchive";
+	}
+	
+	// 자료 수정 Action
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/archive/updateArchive")
+	public String updateArchive(LectureArchiveForm lectureArchiveForm) {
+		// [Logger] 자료 Form(lectureArchiveForm)
+		logger.trace("lectureArchiveForm[ " + lectureArchiveForm + "]");
+		
+		teacherLectureArchiveService.updateTeacherLectureArchive(lectureArchiveForm);
+		
+		// [Redirect] 강좌 고유번호(lectureNo)에 해당하는 게시글로 이동
+		return "redirect:/auth/teacher/lecture/" + lectureArchiveForm.getLectureNo() + "/archive/archiveOne/" + lectureArchiveForm.getLectureArchiveNo();
 	}
 	
 	// 자료 삭제

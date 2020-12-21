@@ -21,9 +21,17 @@ public interface TeacherLectureArchiveMapper {
 	// 자료 고유번호(archiveNo)
 	List<LectureArchive> selectTeacherLectureArchiveOne(int archiveNo);
 	
+	// 자료 조회 조회수 증가
+	// 자료 고유번호(archiveNo)
+	int updateTeacherLectureArchiveCountUp(int archiveNo);
+	
 	// 자료 입력
 	// 자료 객체(lectureArchive)
 	int insertTeacherLectureArchive(LectureArchive lectureArchive);
+	
+	// 자료 수정
+	// 자료 객체(lectureArchive)
+	int updateTeacherLectureArchive(LectureArchive lectureArchive);
 	
 	// 자료 삭제
 	// 자료 고유번호(archiveNo)
