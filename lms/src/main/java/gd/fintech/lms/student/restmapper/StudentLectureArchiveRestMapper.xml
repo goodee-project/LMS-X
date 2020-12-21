@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.restmapper.StudentLectureArchiveRestMapper">
+	<!-- 강좌 첨부파일 다운 횟수 증가 -->
+	<update id="updateLectureArchiveFileCount" parameterType="String">
+		UPDATE 
+			lecture_archive_file
+		SET
+			lecture_archive_file_count = lecture_archive_file_count + 1
+		WHERE 
+			lecture_archive_file_uuid = #{uuid}
+	</update>
+	
+	<!-- 과제 제출 첨부파일 다운로드 횟수 가져오기 -->
+	<select id="selectLectureArchiveFileCount" parameterType="String" resultType="int">
+		SELECT 
+			lecture_archive_file_count
+		FROM 
+			lecture_archive_file
+		WHERE 
+			lecture_archive_file_uuid = #{uuid}
+	</select>
+</mapper>

@@ -104,7 +104,6 @@ public class StudentReportController {
 		model.addAttribute("nextPage", nextPage);
 		
 		model.addAttribute("reportList", reportList);
-		model.addAttribute("lectureNo", lectureNo);
 		return "/auth/student/lecture/report/reportList";
 	}
 	

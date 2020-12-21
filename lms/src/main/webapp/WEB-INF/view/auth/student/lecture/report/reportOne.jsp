@@ -18,11 +18,13 @@
 						// 제출기간이 아닐경우 수정, 삭제 버튼 제거
 						if(!data){
 							$('#navDiv').remove();
+							let submitTitle;
 							return;
 						}
 					}
 				});
 			})
+			
 			// 다운로드 횟수 증가 시키기
 			function fileDownloadCount(paramUuid){
 				let fileId = paramUuid.split('.')[0];
@@ -69,14 +71,14 @@
 	    	<table border="1">
 	    		<tr>
 	    			<th>점수</th>
-	    			<td>
+	    			<td id="resultPoint">
 	    				<c:if test="${reportSubmit.reportSubmitPoint != -1}">
 	    					${reportSubmit.reportSubmitPoint}
 	    				</c:if>
 	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<th>피드백</th>
+	    			<th id="resultFeedback">피드백</th>
 	    			<td>${reportSubmit.reportSubmitFeedback}</td>
 	    		</tr>
 	    	</table>
