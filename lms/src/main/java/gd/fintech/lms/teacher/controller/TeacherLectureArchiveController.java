@@ -143,4 +143,14 @@ public class TeacherLectureArchiveController {
 		
 		return "/auth/teacher/lecture/archive/archiveOne";
 	}
+	
+	// 자료 삭제
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/deleteArchive/{archiveNo}")
+	public String deleteArchive(Model model, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "archiveNo") int archiveNo) {
+		teacherLectureArchiveService.deleteTeacherLectureArchive(archiveNo);
+		
+		return "redirect:/auth/teacher/lecture/" + lectureNo + "/archive/archiveList/1";
+	}	
 }

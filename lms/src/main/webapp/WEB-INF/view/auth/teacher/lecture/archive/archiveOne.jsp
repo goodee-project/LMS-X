@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -41,6 +42,21 @@
 				background-color: #F9F9FB;
 			}
 		</style>
+		
+		<script>
+			// 다운로드 횟수 증가 시키기
+			function fileDownloadCount(paramUuid){
+				let fileId = paramUuid.split('.')[0];
+				$.ajax({
+					url: '${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveSubmitFileCount/' + paramUuid,
+					type:'post',
+					success: function(data){
+						let html = '다운로드 횟수 : ' + data + '회';
+						$('#fileCount' + fileId).html(html);
+					}
+				});
+			}
+		</script>
 	</head>
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
@@ -64,7 +80,11 @@
 			<br>
 			
 			<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveList/1'">목록</button>
-			<button type="button" class="btn btn-sm btn-primary" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/updateArchive/${archiveNo}'">수정</button>
+			
+			<div class="btn-group" style="float: right;">
+				<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/updateArchive/${archiveNo}'">수정</button>
+				<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/deleteArchive/${archiveNo}'">삭제</button>
+			</div>
 			
 			<br><br>
 			
@@ -101,16 +121,20 @@
 					<td>첨부파일</td>
 					<td>
 						<c:forEach var="laf" items="${lectureArchive[0].lectureArchiveFileList}">
+							<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
+							<c:set var="uuid">${laf.lectureArchiveFileUuid}</c:set>
 							<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileOriginal != null}">
 								<div>
-									<a href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}">
+									<a 
+										onclick="fileDownloadCount('${laf.lectureArchiveFileUuid}','${laf.lectureArchiveFileCount}')"
+										href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}" download="${laf.lectureArchiveFileOriginal}">
 										${laf.lectureArchiveFileOriginal}
 									</a>
-									&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, 다운로드 횟수: ${laf.lectureArchiveFileCount})
+									&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, <div id="fileCount${fn:split(uuid, '.')[0]}" style="display: inline;">다운로드 횟수 : ${laf.lectureArchiveFileCount}</div>)
 								</div>
 							</c:if>
 							<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileOriginal == null}">
-								(첨부파일이 없습니다)							
+								(첨부파일이 없습니다)	
 							</c:if>
 						</c:forEach>
 					</td>

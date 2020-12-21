@@ -97,4 +97,11 @@
   		WHERE
   			la.lecture_archive_no = #{lectureArchiveNo}
   	</select>
+  	
+  	<delete id="deleteTeacherLectureArchive" parameterType="Integer">
+		DELETE FROM
+			lecture_archive
+		WHERE
+			lecture_archive_no = #{archiveNo}
+	</delete>
 </mapper>

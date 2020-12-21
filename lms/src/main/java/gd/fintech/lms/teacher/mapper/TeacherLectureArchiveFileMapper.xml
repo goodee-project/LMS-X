@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherLectureArchiveFileMapper">
+	<select id="selectTeacherLectureArchiveFileList" parameterType="Integer" resultType="String">
+		SELECT
+			lecture_archive_file_uuid
+		FROM
+			lecture_archive_file
+		WHERE
+			lecture_archive_no = #{archiveNo}
+	</select>
+	
 	<insert id="insertTeacherLectureArchiveFile" parameterType="gd.fintech.lms.vo.LectureArchiveFile">
 		INSERT INTO lecture_archive_file (
 			lecture_archive_file_uuid, 
@@ -20,4 +29,11 @@
 			NOW()
 		)
 	</insert>
+	
+	<delete id="deleteTeacherLectureArchiveFileAll" parameterType="Integer">
+		DELETE FROM
+			lecture_archive_file
+		WHERE
+			lecture_archive_no = #{archiveNo}
+	</delete>
 </mapper>

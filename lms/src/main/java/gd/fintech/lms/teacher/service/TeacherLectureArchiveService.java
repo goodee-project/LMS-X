@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import gd.fintech.lms.pathutil.PathUtil;
 import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveFileMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveMapper;
 import gd.fintech.lms.vo.LectureArchive;
@@ -30,8 +31,7 @@ public class TeacherLectureArchiveService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	// 첨부파일 경로
-	File file = new File("");
-	private String PATH = file.getAbsoluteFile() + "\\src\\main\\webapp\\resource\\archiveFile\\";
+	private String PATH = PathUtil.PATH + "archiveFile\\";
 	
 	// 강좌 자료실 목록
 	// 강좌 고유번호(lectureNo)를 이용
@@ -129,5 +129,29 @@ public class TeacherLectureArchiveService {
 		
 		// lectureArchiveNo를 반환하여 페이지를 이동할 수 있도록 한다
 		return lectureArchive;
+	}
+	
+	// 자료 삭제
+	public void deleteTeacherLectureArchive(int archiveNo) {
+		// 게시물에 속해있는 첨부파일 목록 조회
+		List<String> teacherLectureArchiveFileList = teacherLectureArchiveFileMapper.selectTeacherLectureArchiveFileList(archiveNo);
+		
+		// 첨부파일 목록에서 파일을 하나씩 불러온다
+		for (String s: teacherLectureArchiveFileList) {
+			// 첨부파일 경로 + 첨부파일 이름
+			File file = new File(PATH + s);
+			
+			// 파일이 존재하는 경우
+			if (file.exists()) {
+				// 파일삭제
+				file.delete();
+			}
+		}
+		
+		// 데이터베이스의 첨부파일 목록 삭제
+		teacherLectureArchiveFileMapper.deleteTeacherLectureArchiveFileAll(archiveNo);
+		
+		// 데이터베이스의 게시물 삭제
+		teacherLectureArchiveMapper.deleteTeacherLectureArchive(archiveNo);
 	}
 }

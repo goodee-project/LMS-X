@@ -20,4 +20,6 @@ public interface TeacherLectureArchiveMapper {
 	int insertTeacherLectureArchive(LectureArchive lectureArchive);
 	
 	List<LectureArchive> selectTeacherLectureArchiveOne(int archiveNo);
+	
+	int deleteTeacherLectureArchive(int archiveNo);
 }

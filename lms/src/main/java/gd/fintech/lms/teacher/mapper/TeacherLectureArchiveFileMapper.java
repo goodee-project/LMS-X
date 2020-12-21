@@ -9,4 +9,8 @@ import gd.fintech.lms.vo.LectureArchiveFile;
 @Mapper
 public interface TeacherLectureArchiveFileMapper {	
 	int insertTeacherLectureArchiveFile(LectureArchiveFile lectureArchiveFile);
+	
+	int deleteTeacherLectureArchiveFileAll(int archiveNo);
+	
+	List<String> selectTeacherLectureArchiveFileList(int archiveNo);
 }

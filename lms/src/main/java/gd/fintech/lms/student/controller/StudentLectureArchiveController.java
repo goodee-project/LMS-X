@@ -101,5 +101,4 @@ public class StudentLectureArchiveController {
 		model.addAttribute("archive", archive);
 		return "/auth/student/lecture/archive/archiveOne";
 	}
-	
 }
