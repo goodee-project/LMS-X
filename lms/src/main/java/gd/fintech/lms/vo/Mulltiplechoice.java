@@ -13,4 +13,5 @@ public class Mulltiplechoice {
 	private String	multiplechoiceAnswer;		// 객관식 문제 답안 (1, 2, 3, 4, 5)
 	private String	multiplechoiceCreatedate;	// 객관식 문제 생성 일시
 	private String	multiplechoiceUpdatedate;	// 객관식 문제 업데이트 일시
+	private String	multiplechoiceScore;	    // 객관식 문제 배점
 }
