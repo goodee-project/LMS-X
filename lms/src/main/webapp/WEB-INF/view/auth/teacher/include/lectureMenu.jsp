@@ -32,6 +32,11 @@
 		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/attendanceCalendarByMonth/-1/-1">출석 관리</a>
 		    </li>
 		    
+		    <!-- 학생 관리 -->
+		    <li class="nav-item">
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/student/studentList/1">학생 관리</a>
+		    </li>
+		    
 		    <!-- 강의계획서 관리 -->
 		    <li class="nav-item">
 		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/syllabus/syllabusOne">강의계획서 관리</a>

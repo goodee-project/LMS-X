@@ -20,4 +20,12 @@
 		WHERE 
 			lecture_archive_file_uuid = #{uuid}
 	</select>
+	
+	<!-- 강좌 자료실 첨부파일 단일 삭제 -->
+	<delete id="deleteArchiveFileOne" parameterType="String">
+		DELETE FROM
+			lecture_archive_file
+		WHERE
+			lecture_archive_file_uuid = #{uuid}
+	</delete>
 </mapper>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -104,6 +105,19 @@
 						alert('선택하지 않은 파일이 있습니다.\n다시 한 번 확인해주세요.');
 					}
 				});
+				
+				// 기존 첨부파일 단일 삭제
+				$('.deleteArchiveFileOneBtn').on('click', function(){
+					let uuid = $(this).val();
+					let fileId = uuid.split('.')[0];
+					$.ajax({
+						url: '${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/deleteArchiveFileOne/' + uuid,
+						type:'get',
+						success: function(){
+							$('#' + fileId).remove();
+						}
+					});
+				});
 			});
 		</script>
 	</head>
@@ -166,10 +180,13 @@
 						<td>
 							<c:forEach var="laf" items="#{lectureArchive[0].lectureArchiveFileList}">
 								<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileUuid != null}">
-									<div class="input-group mb-3">
+									<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
+      								<c:set var="uuid">${laf.lectureArchiveFileUuid}</c:set>
+									
+									<div class="input-group mb-3" id="${fn:split(uuid ,'.')[0]}">
 										<input type="text" class="form-control" value="${laf.lectureArchiveFileOriginal}" readonly="readonly">
 										<div class="input-group-append">
-											<button type="button" class="btn btn-sm btn-danger" onClick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/removeArchiveFile/${laf.lectureArchiveFileUuid}'">파일 삭제</button>
+											<button type="button" class="btn btn-sm btn-danger deleteArchiveFileOneBtn" value="${laf.lectureArchiveFileUuid}">파일 삭제</button>
 										</div>
 									</div>
 								</c:if>
