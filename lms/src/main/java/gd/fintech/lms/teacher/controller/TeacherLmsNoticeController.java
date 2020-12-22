@@ -1,4 +1,4 @@
-package gd.fintech.lms.manager.controller;
+package gd.fintech.lms.teacher.controller;
 
 import java.util.List;
 
@@ -11,21 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.manager.service.ManagerLmsNoticeService;
 import gd.fintech.lms.vo.LmsNotice;
 
 @Controller
-public class ManagerLmsNoticeController {
+public class TeacherLmsNoticeController {
 	@Autowired private ManagerLmsNoticeService managerLmsNoticeService;
 	
-	
-	private static final Logger log = LoggerFactory.getLogger(ManagerLmsNoticeController.class);
+	private static final Logger log = LoggerFactory.getLogger(TeacherLmsNoticeController.class);
 
-	
-	@GetMapping("/auth/manager/lmsNotice/lmsNoticeList/{currentPage}")
-	public String managerLmsNoticeList(Model model, HttpSession session,
+	@GetMapping("/auth/teacher/lmsNotice/lmsNoticeList/{currentPage}")
+	public String teacherLmsNoticeList(Model model, HttpSession session,
 			@PathVariable(name="currentPage") int currentPage){
 	
 		// 한 페이지에 표시할 데이터 수
@@ -93,11 +90,11 @@ public class ManagerLmsNoticeController {
 		model.addAttribute("prePage", prePage);
 		model.addAttribute("nextPage", nextPage);
 		
-		return "auth/manager/lmsNotice/lmsNoticeList";
+		return "auth/teacher/lmsNotice/lmsNoticeList";
 	}
 	
 	// 공지사항 상세보기
-	@GetMapping("/auth/manager/lmsNotice/lmsNoticeOne/{lmsNoticeNo}")
+	@GetMapping("/auth/teacher/lmsNotice/lmsNoticeOne/{lmsNoticeNo}")
 	public String selectLmsNoticeOne(Model model, @PathVariable(name="lmsNoticeNo") int lmsNoticeNo) {
 		
 		managerLmsNoticeService.updateLmsNoticeOneCount(lmsNoticeNo);
@@ -106,52 +103,7 @@ public class ManagerLmsNoticeController {
 		log.debug(lmsNotice.toString());
 		
 		model.addAttribute("lmsNotice",lmsNotice);
-		return "auth/manager/lmsNotice/lmsNoticeOne";
+		return "auth/teacher/lmsNotice/lmsNoticeOne";
 	}
 	
-	// 공지사항 업데이트
-	@GetMapping("/auth/manager/lmsNotice/updateLmsNoticeOne/{lmsNoticeNo}")
-	public String updateLmsNoticeOne(Model model, @PathVariable(name="lmsNoticeNo") int lmsNoticeNo) {
-		
-		LmsNotice lmsNotice = managerLmsNoticeService.getLmsNoitceOne(lmsNoticeNo);
-		
-		model.addAttribute("lmsNotice", lmsNotice);
-		return "auth/manager/lmsNotice/updateLmsNoticeOne";
-	}
-	@PostMapping("/auth/manager/lmsNotice/updateLmsNoticeOne")
-	public String updateLmsNoticeOne(LmsNotice lmsNotice) {
-		
-		log.debug(lmsNotice.toString());
-		managerLmsNoticeService.updateLmsNoticeOne(lmsNotice);
-		
-		return "redirect:/auth/manager/lmsNotice/lmsNoticeOne/"+lmsNotice.getLmsNoticeNo();
-	}
-	
-	// 공지사항 삭제
-	@GetMapping("/auth/manager/lmsNotice/deleteLmsNoticeOne/{lmsNoticeNo}")
-	public String deleteLmsNoticeOne(@PathVariable(name="lmsNoticeNo") int lmsNoticeNo) {
-		
-		managerLmsNoticeService.deleteLmsNoticeOne(lmsNoticeNo);
-		
-		return "redirect:/auth/manager/lmsNotice/lmsNoticeList/1";
-	}
-	
-	// 공지사항 추가
-	@GetMapping("/auth/manager/lmsNotice/insertLmsNoticeOne")
-	public String insertLmsNoticeOne() {
-		
-		return "auth/manager/lmsNotice/insertLmsNoticeOne";
-	}
-	@PostMapping("/auth/manager/lmsNotice/insertLmsNoticeOne")
-	public String insertLmsNoticeOne(HttpSession session, LmsNotice lmsNotice) {
-		
-		lmsNotice.setAccountId((String)session.getAttribute("loginId"));
-		lmsNotice.setLmsNoticeWriter((String)session.getAttribute("loginName"));
-		
-		log.debug(lmsNotice.toString());
-		
-		managerLmsNoticeService.insertLmsNoticeOne(lmsNotice);
-		
-		return "redirect:/auth/manager/lmsNotice/lmsNoticeList/1";
-	}
 }

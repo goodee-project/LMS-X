@@ -25,10 +25,9 @@
 </head>
 <body>
 	<div>
-		<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
+		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
 	</div>
 	<h1>lms공지사항</h1>
-	<a href="${pageContext.request.contextPath}/auth/manager/lmsNotice/insertLmsNoticeOne">추가</a>
 	<table class="table table-boredered text-center" >
 		<thead>
 			<tr>
@@ -43,7 +42,7 @@
 			<c:forEach var="lnl" items="${lmsNoticeList}">
 				<tr>
 					<td>${lnl.lmsNoticeNo}</td>
-					<td><a href="${pageContext.request.contextPath}/auth/manager/lmsNotice/lmsNoticeOne/${lnl.lmsNoticeNo}">${lnl.lmsNoticeTitle}</a></td>
+					<td><a href="${pageContext.request.contextPath}/auth/student/lmsNotice/lmsNoticeOne/${lnl.lmsNoticeNo}">${lnl.lmsNoticeTitle}</a></td>
 					<td>${lnl.lmsNoticeWriter}</td>
 					<td>${lnl.lmsNoticeCreatedate}</td>
 					<td>${lnl.lmsNoticeCount}</td>
@@ -57,7 +56,7 @@
 		<c:choose>
 			<c:when test="${currentPage > 1}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/lmsNotice/lmsNoticeList/1">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lmsNotice/lmsNoticeList/1">
 						<i class='fas fa-angle-double-left'></i>
 					</a>
 				</li>
@@ -75,7 +74,7 @@
 		<c:choose>
 			<c:when test="${currentPage > 1}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/lmsNotice/lmsNoticeList/${prePage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lmsNotice/lmsNoticeList/${prePage}">
 						<i class='fas fa-angle-left'></i>
 					</a>
 				</li>
@@ -102,7 +101,7 @@
 					<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 					<c:otherwise>
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/lmsNotice/lmsNoticeList/${i}">${i}</a>
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lmsNotice/lmsNoticeList/${i}">${i}</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -113,7 +112,7 @@
 		<c:choose>
 			<c:when test="${currentPage < lastPage}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}}/auth/manager/lmsNotice/lmsNoticeList/${nextPage}">
+					<a class="page-link" href="${pageContext.request.contextPath}}/auth/student/lmsNotice/lmsNoticeList/${nextPage}">
 						<i class='fas fa-angle-right'></i>
 					</a>
 				</li>
@@ -131,7 +130,7 @@
 		<c:choose>
 			<c:when test="${currentPage < lastPage}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}}/auth/manager/lmsNotice/lmsNoticeList/${lastPage}">
+					<a class="page-link" href="${pageContext.request.contextPath}}/auth/student/lmsNotice/lmsNoticeList/${lastPage}">
 						<i class='fas fa-angle-double-right'></i>
 					</a>
 				</li>

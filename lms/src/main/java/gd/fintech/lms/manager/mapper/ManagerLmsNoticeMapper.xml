@@ -65,4 +65,32 @@
 		WHERE
 			lms_notice_no = #{lmsNoticeNo}
 	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="deleteLmsNoticeOne" parameterType="int">
+		DELETE FROM
+			lms_notice
+		WHERE
+			lms_notice_no = #{lmsNoticeNo}
+	</delete>
+	
+	<!-- 공지사항 추가 -->
+	<insert id="insertLmsNoticeOne" parameterType="gd.fintech.lms.vo.LmsNotice">
+		INSERT INTO lms_notice(
+			account_id,
+			lms_notice_writer,
+			lms_notice_title,
+			lms_notice_content,
+			lms_notice_createdate,
+			lms_notice_updatedate
+		)VALUES(
+			#{accountId},
+			#{lmsNoticeWriter},
+			#{lmsNoticeTitle},
+			#{lmsNoticeContent},
+			now(),
+			now()
+		)
+	</insert>
+	
 </mapper>

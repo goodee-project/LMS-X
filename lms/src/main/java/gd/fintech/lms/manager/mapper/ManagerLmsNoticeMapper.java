@@ -22,4 +22,10 @@ public interface ManagerLmsNoticeMapper {
 	
 	// 공지사항 수정
 	public int updateLmsNoticeOne(LmsNotice lmsNotice);
+	
+	// 공지사항 삭제
+	public int deleteLmsNoticeOne(int lmsNoticeNo);
+	
+	// 공지사항 추가
+	public int insertLmsNoticeOne(LmsNotice lmsNotice);
 }

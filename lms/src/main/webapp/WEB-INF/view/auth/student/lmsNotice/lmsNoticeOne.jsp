@@ -18,13 +18,9 @@
 </head>
 <body>
 	<div>
-		<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
+		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
 	</div>
 	<h1>공지사항 상세보기</h1>
-	<c:if test="${lmsNotice.accountId == sessionScope.loginId}">
-		<a href="${pageContext.request.contextPath}/auth/manager/lmsNotice/updateLmsNoticeOne/${lmsNotice.lmsNoticeNo}">수정</a>
-	</c:if>
-		<a href="${pageContext.request.contextPath}/auth/manager/lmsNotice/deleteLmsNoticeOne/${lmsNotice.lmsNoticeNo}">삭제</a>
 	<div>
 		${lmsNotice.lmsNoticeTitle}
 	</div>

@@ -39,14 +39,28 @@ public class ManagerLmsNoticeService {
 		
 		return managerLmsNoticeMapper.updateLmsNoticeOneCount(lmsNotice);
 	}
+	
 	// 공지사항 상세보기
 	public LmsNotice getLmsNoitceOne(int lmsNoticeNo) {
 		
 		return managerLmsNoticeMapper.selectLmsNoticeOne(lmsNoticeNo);
 	}
+	
 	// 공지사항 수정
 	public int updateLmsNoticeOne(LmsNotice lmsNotice) {
 		
 		return managerLmsNoticeMapper.updateLmsNoticeOne(lmsNotice);
+	}
+	
+	// 공지사항 삭제
+	public int deleteLmsNoticeOne(int lmsNoticeNo) {
+		
+		return managerLmsNoticeMapper.deleteLmsNoticeOne(lmsNoticeNo);
+	}
+	
+	// 공지사항 추가
+	public int insertLmsNoticeOne(LmsNotice lmsNotice) {
+		
+		return managerLmsNoticeMapper.insertLmsNoticeOne(lmsNotice);
 	}
 }
