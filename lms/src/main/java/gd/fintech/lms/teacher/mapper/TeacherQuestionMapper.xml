@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherQuestionMapper">
+	<!-- 페이징을 적용하여 질문 테이블에서 강좌 고유 번호에 해당하는 데이터 목록을 가져온다. -->
+	<select id="selectTeacherQuestionListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Question">
+		SELECT 
+			question_no questionNo, 
+			question_writer questionWriter, 
+			question_title questionTitle, 
+			question_createdate questionCreatedate, 
+			question_count questionCount
+		FROM 
+			question 
+		WHERE 
+			lecture_no = #{lectureNo}
+		ORDER BY
+			question_no = #{questionNo} DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 강좌 고유번호에 해당하는 총 데이터 수를 출력한다. -->
+	<select id = "selectTeacherQuestionListCount" parameterType="Integer" resultType= "Integer">
+		SELECT
+			COUNt(*)
+		FROM
+			question
+		WHERE
+			lecture_no = #{lectureNo}
+	</select>
+	<!-- select 쿼리 태그에 관계도를 위한 resultMap 속성 추가 -->
+	<!--질문 정보-->
+	<resultMap type="gd.fintech.lms.vo.Question" id="selectTeacherQuestionOneResult">
+		<result property="questionNo" column="question_no"/>
+		<result property="questionWriter" column="question_writer"/>
+		<result property="questionTitle" column="question_title"/>
+		<result property="questionContent" column="question_content"/>
+		<result property="questionCount" column="question_count"/>
+		<result property="questionCreatedate" column="question_createdate"/>
+		<result property="questionUpdatedate" column="question_updatedate"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<!-- 질문 파일 정보  -->  
+		<collection property="questionFileList" ofType="gd.fintech.lms.vo.QuestionFile">
+			<result property="questionFileUuid" column="question_file_uuid"/>
+			<result property="questionFileOriginal" column="question_file_original"/>
+			<result property="questionFileSize" column="question_file_size"/>
+			<result property="questionFileType" column="question_file_type"/>
+			<result property="questionFileCount" column="question_file_count"/>
+			<result property="questionFileCreatedate" column="question_file_createdate"/>
+		</collection>
+	</resultMap>
+	<!-- 질문 게시판 상세보기 -->
+	<select id="selecteTeacherQuestionOne" parameterType="Integer" resultMap="selectTeacherQuestionOneResult">
+		SELECT
+			q.lecture_no,
+			q.question_no,
+			q.question_title,
+			q.question_content,
+			q.question_writer,
+			q.question_count,
+			q.question_createdate,
+			q.question_updatedate,
+			qf.question_file_uuid,
+			qf.question_file_original,
+			qf.question_file_size,
+			qf.question_file_type,
+			qf.question_file_count
+		FROM question AS q
+		LEFT JOIN 
+			question_file AS qf ON
+			q.question_no = qf.question_no
+		WHERE 
+			q.question_no = #{questionNo}
+	</select>
+	
+	<!-- 질문 고유 번호에 해당하는 게시글의 조회수를 1 증가 시킨다. -->
+	<update id="updateTeacherQuestionCountUp" parameterType="gd.fintech.lms.vo.Question">
+		UPDATE
+			question
+		SET
+			question_count = question_count + 1
+		WHERE
+			question_no = #{questionNo}
+	</update>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.restmapper.TeacherSyllabusRestMapper">
+	<!-- 강의 계획서 첨부파일 다운 횟수 증가 -->
+	<update id="updateTeacherSyllabusCountUp" parameterType="string">
+		UPDATE
+			syllabus
+		SET
+			syllabus_file_count = syllabus_file_count + 1
+		WHERE
+			syllabus_file_uuid = #{uuid}
+	</update>
+	
+	<!-- 강의 계획서 첨부파일 다운로드 횟수 가져오기 -->
+	<select id="selectTeacherSyllabusCountUp" parameterType="string" resultType="int">
+		SELECT 
+			syllabus_file_count
+		FROM 
+			syllabus
+		WHERE 
+			syllabus_file_uuid = #{uuid}
+	</select>
+</mapper>

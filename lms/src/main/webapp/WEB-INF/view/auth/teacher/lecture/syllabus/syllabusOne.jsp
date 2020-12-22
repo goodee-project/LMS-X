@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -40,6 +42,20 @@
 				background-color: #F9F9FB;
 			}
 		</style>
+		<script>
+			// 다운로드 횟수 증가 시키기
+			function fileDownloadCount(paramUuid){
+				let fileId = paramUuid.split('.')[0];
+				$.ajax({
+					url: '${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/syllabus/syllabusSubmitFileCount/' + paramUuid,
+					type:'post',
+					success: function(data){
+						let html = '다운로드 횟수 : ' + data + '회';
+						$('#fileCount' + fileId).html(html);
+					}
+				});
+			}
+		</script>
 	</head>
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
@@ -63,13 +79,41 @@
 			</c:if>
 			<br><br>
 			<table class="table">
+				<c:set var="uuid">${syllabus.syllabusFileUuid}</c:set>
 				<c:if test="${!empty syllabus.syllabusFileUuid}">
 					<tr>
 						<td>
-							<a href="${pageContext.request.contextPath}/resource/archiveFile/${syllabus.syllabusFileUuid}">${syllabus.syllabusFileOriginal}</a><br>
+							${syllabus.syllabusFileCreatedate}
+						</td>
+						<td colspan="2">
+							<div id="fileCount${fn:split(uuid, '.')[0]}" style="display: inline;">다운로드 횟수 : ${syllabus.syllabusFileCount}회</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a 
+								onclick="fileDownloadCount('${syllabus.syllabusFileUuid}','${syllabus.syllabusFileCount}')"
+								href="${pageContext.request.contextPath}/resource/syllabusFile/${syllabus.syllabusFileUuid}"
+								download="${syllabus.syllabusFileOriginal}">
+								${syllabus.syllabusFileOriginal} 
+							</a><br>
 						</td>
 						<td>
-							<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/syllabus/deleteFile">삭제</button>
+							<!-- 파일 사이즈 -->
+                            <c:choose>
+                                <c:when test="${syllabus.syllabusFileSize >= (1024 * 1024)}">
+                                    <fmt:formatNumber value="${syllabus.syllabusFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB
+                                </c:when>
+                                <c:when test="${syllabus.syllabusFileSize >= 1024}">
+                                    <fmt:formatNumber value="${syllabus.syllabusFileSize/1024}" type="pattern" pattern="0.00" />B 
+                                </c:when>
+                                <c:otherwise>
+                                    <fmt:formatNumber value="${syllabus.syllabusFileSize}" type="pattern" pattern="0.00" />KB
+                                </c:otherwise>
+                            </c:choose>
+						</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/syllabus/deleteSyllabus'">삭제</button>
 						</td>
 					</tr>
 					<tr>

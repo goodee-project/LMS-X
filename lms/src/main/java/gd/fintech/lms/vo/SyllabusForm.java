@@ -11,6 +11,6 @@ import lombok.Data;
 
 @Data
 public class SyllabusForm {
-	private int					lectureNo;			// 강좌 고유번호
-	private List<MultipartFile> syllabusFileList;	// 강의 계획서 첨부파일 목록
+	private int lectureNo; // 강좌 고유번호
+	private List<MultipartFile> syllabusFileList; // 강의 계획서 첨부파일 목록
 }

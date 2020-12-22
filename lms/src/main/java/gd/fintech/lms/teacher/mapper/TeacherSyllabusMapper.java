@@ -23,4 +23,8 @@ public interface TeacherSyllabusMapper {
 	// 다운로드 횟수 증가
 	// 강좌 번호(lectureNo) 사용
 	int updateTeacherSyllabusCountUp(int lectureNo);
+	
+	// 첨부 파일 목록
+	// 강좌 번호 (lectureNo) 사용
+	List<String> selectTeacherSyllabusFileList(int lectureNo);
 }

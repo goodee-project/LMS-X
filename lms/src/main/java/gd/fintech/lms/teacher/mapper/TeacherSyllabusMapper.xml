@@ -20,6 +20,7 @@
 	<!-- 강의 계획서 첨부파일 입력 -->
 	<insert id="insertTeacherSyllabus" parameterType="gd.fintech.lms.vo.Syllabus">
 		INSERT INTO syllabus (
+			lecture_no,
 			syllabus_file_uuid,
 			syllabus_file_original,
 			syllabus_file_size,
@@ -27,12 +28,13 @@
 			syllabus_file_count,
 			syllabus_file_createdate
 		) VALUES (
-			syllabusFileUuid,
-			syllabusFileOrginal,
-			syllabusFileSize,
-			syllabusFileType,
-			syllabusFileCount
-			syllabusFileCreatedate
+			#{lectureNo},
+			#{syllabusFileUuid},
+			#{syllabusFileOriginal},
+			#{syllabusFileSize},
+			#{syllabusFileType},
+			0,
+			NOW()
 		)
 	</insert>
 	
@@ -52,4 +54,14 @@
 		WHERE
 			lecture_no = #{lectureNo}
 	</update>
+	
+	<!-- 첨부파일 목록 -->
+	<select id="selectTeacherSyllabusFileList" parameterType="Integer" resultType="String">
+		SELECT
+			syllabus_file_uuid
+		FROM
+			syllabus
+		WHERE
+			lecture_no = #{lectureNo}
+	</select>
 </mapper>

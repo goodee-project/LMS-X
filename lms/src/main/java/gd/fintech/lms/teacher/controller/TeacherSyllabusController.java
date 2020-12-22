@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import gd.fintech.lms.teacher.service.TeacherSyllabusService;
 import gd.fintech.lms.vo.Syllabus;
@@ -26,6 +27,7 @@ public class TeacherSyllabusController {
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/syllabus/syllabusOne")
 	public String syllabusOne(Model model,
 			@PathVariable(value = "lectureNo") int lectureNo) {		// 강좌 고유번호
+		
 		Syllabus syllabus = teacherSyllabusService.selectSyllabusOne(lectureNo);
 		
 		// [Logger] 강의계획서(syllabus)
@@ -40,7 +42,7 @@ public class TeacherSyllabusController {
 	
 	// 강의계획서 첨부 Form
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/syllabus/insertSyllabus")
-	public String insertSyllabus() {
+	public String insertSyllabus(@PathVariable(value = "lectureNo")int lectureNo) {
 		// [View] /auth/teacher/lecture/syllabus/insertSyllabus.jsp
 		return "/auth/teacher/lecture/syllabus/insertSyllabus";
 	}
@@ -55,5 +57,13 @@ public class TeacherSyllabusController {
 		
 		// [Redirect] 강의계획서 첨부파일을 업로드 후 강의계획서 조회 페이지로 이동
 		return "redirect:/auth/teacher/lecture/" + syllabusForm.getLectureNo() + "/syllabus/syllabusOne";
+	}
+	
+	// 자료 삭제
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/syllabus/deleteSyllabus")
+	public String deleteSyllabus(@PathVariable(value = "lectureNo") int lectureNo) {
+		teacherSyllabusService.deleteTeacherSyllabus(lectureNo);
+		// [Redirect] 강의 계획서 첨부파일을 삭제 후 강의 계획서 조회 페이지로 이동
+		return "redirect:/auth/teacher/lecture/" + lectureNo + "/syllabus/syllabusOne";
 	}
 }
