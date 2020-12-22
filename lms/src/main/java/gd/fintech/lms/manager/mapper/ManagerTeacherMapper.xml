@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerTeacherMapper"> 
-	<select id="selectTeacherListByPage" resultType="gd.fintech.lms.vo.Teacher">
+	<!-- 강사목록 리스트와 페이징 -->
+	<select id="selectTeacherListByPage" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT 
-			teacher_id teacherId,
-			teacher_name teacherName,
-			teacher_gender teacherGender,
-			teacher_accessdate teacherAccessdate,
-			teacher_updatedate teacherUpdatedate
+			t.teacher_id teacherId,
+			t.teacher_name teacherName,
+			t.teacher_gender teacherGender,
+			a.account_state accountState
 		FROM
-			teacher
+			teacher t
+		INNER JOIN	
+			account a
+		ON
+			t.teacher_id = a.account_id
 		ORDER BY
-			teacher_id DESC
+			t.teacher_id DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>
 	
+	<!-- 강사목록 페이징 카운트 -->
 	<select id="selectTeacherCount" resultType="int">
 		SELECT
 			COUNT(*)
@@ -23,6 +28,7 @@
 			teacher
 	</select>
 	
+	<!-- 강사목록 상세보기 -->
 	<select id="selectTeacherOne" parameterType="String" resultType="gd.fintech.lms.vo.Teacher">
 		SELECT 
 			teacher_id teacherId,
@@ -42,4 +48,106 @@
 		WHERE
 			teacher_id = #{teacherId}
 	</select>
+	
+	<!-- 강사 승인대기 목록 -->
+	<select id="selectTeacherQueueListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.TeacherQueue">
+		SELECT
+			teacher_id teacherId,
+			teacher_email teacherEmail,
+			teacher_name teacherName,
+			teacher_phone teacherPhone,
+			teacher_gender teacherGender,
+			teacher_birth teacherBirth,
+			teacher_address_main teacherAddressMain,
+			teacher_address_sub teacherAddressSub
+		FROM
+			teacher_queue
+		LIMIT 
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 강사 승인대기 페이징 카운트 -->
+	<select id="selectTeacherQueueCount" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			teacher_queue
+	</select>
+	
+	<!-- 강사 승인대기 테이블 삭제 -->
+	<delete id="deleteTeacherQueue" parameterType="String">
+		DELETE FROM
+			teacher_queue
+		WHERE
+			teacher_id = #{accountId}
+	</delete>
+	
+	<!-- 계정 삭제 -->
+	<delete id="deleteAccount" parameterType="String">
+		DELETE FROM
+			account
+		WHERE
+			account_id = #{accountId}
+	</delete>
+	
+	<!-- 계정 상태 업데이트 -->
+	<update id="updateAccountState" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE 
+			account
+		SET 
+			account_state = #{accountState},
+			account_updatedate = now()
+		WHERE
+			account_id = #{accountId}
+	</update>
+	
+	<!-- 강사 승인대기 상세 -->
+	<select id="selectTeacherQueueOne" parameterType="String" resultType="gd.fintech.lms.vo.Teacher">
+		SELECT
+			teacher_id teacherId,
+			teacher_email teacherEmail,
+			teacher_name teacherName,
+			teacher_phone teacherPhone,
+			teacher_gender teacherGender,
+			teacher_birth teacherBirth,
+			teacher_address_main teacherAddressMain,
+			teacher_address_sub teacherAddressSub
+		FROM
+			teacher_queue
+		WHERE
+			teacher_id = #{accountId}
+	</select>
+	
+	<!-- 강사 테이블 추가 -->
+	<insert id="insertTeacher" parameterType="gd.fintech.lms.vo.Teacher">
+		INSERT INTO teacher (
+			teacher_id,
+			teacher_email,
+			teacher_name,
+			teacher_phone,
+			teacher_gender,
+			teacher_birth,
+			teacher_address_main,
+			teacher_address_sub,
+			teacher_image,
+			teacher_accessdate,
+			teacher_updatedate,
+			manager_id_access,
+			teacher_info
+		) VALUES (
+			#{teacherId},
+			#{teacherEmail},
+			#{teacherPhone},
+			#{teacherName},
+			#{teacherGender},
+			#{teacherBirth},
+			#{teacherAddressMain},
+			#{teacherAddressSub},
+			#{teacherImage},
+			now(),
+			now(),
+			#{managerIdAccess},
+			#{teacherInfo}
+		)
+	</insert>
 </mapper>

@@ -7,23 +7,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>강사 index</h1>
 	<div><a href="${pageContext.request.contextPath }/auth/manager/index">홈으로</a></div>
+	<h1>강사 index</h1>
+	<div><a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherQueueList/1">승인대기</a></div>
 	<table border="1">	
 		<tr>
 			<th>강사 ID</th>
 			<th>강사 이름</th>
 			<th>강사 성별</th>
-			<th>강사정보 등록날짜</th>
-			<th>강사정보 수정날짜</th>
+			<th>활성화 여부</th>
 		</tr>
 		<c:forEach items="${teacherList}" var="t">
 			<tr>
-				<td>${t.teacherId}</td>
+				<td><a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherOne/${t.teacherId}">${t.teacherId}</a></td>
 				<td>${t.teacherName}</td>
 				<td>${t.teacherGender}</td>
-				<td>${t.teacherAccessdate}</td>
-				<td>${t.teacherUpdatedate}</td>
+				<td>${t.accountState}</td>
 			</tr>	
 		</c:forEach>
 	</table>
@@ -33,7 +32,7 @@
 		<c:choose>
 			<c:when test="${currentPage > 1}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/1">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/1">
 						<i class='fas fa-angle-double-left'></i>
 					</a>
 				</li>
@@ -51,7 +50,7 @@
 		<c:choose>
 			<c:when test="${currentPage > 1}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/${prePage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${prePage}">
 						<i class='fas fa-angle-left'></i>
 					</a>
 				</li>
@@ -78,7 +77,7 @@
 					<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 					<c:otherwise>
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/${i}">${i}</a>
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${i}">${i}</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -89,7 +88,7 @@
 		<c:choose>
 			<c:when test="${currentPage < lastPage}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/${nextPage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${nextPage}">
 						<i class='fas fa-angle-right'></i>
 					</a>
 				</li>
@@ -107,7 +106,7 @@
 		<c:choose>
 			<c:when test="${currentPage < lastPage}">
 				<li class="page-item">
-					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/${lastPage}">
+					<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${lastPage}">
 						<i class='fas fa-angle-double-right'></i>
 					</a>
 				</li>

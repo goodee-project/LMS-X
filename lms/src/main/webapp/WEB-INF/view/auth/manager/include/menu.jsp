@@ -10,8 +10,6 @@
 	
 	<a href="${pageContext.request.contextPath}/auth/manager/subject/subjectList/1">과목 관리 페이지</a>
 	
-	<a href="${pageContext.request.contextPath}/auth/manager/account/accountList/1">계정 관리 페이지</a>
-	
 	<a href="${pageContext.request.contextPath}/auth/manager/student/studentList/1">학생정보 페이지</a>
 	
 	<a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/1">강사정보 페이지</a>
