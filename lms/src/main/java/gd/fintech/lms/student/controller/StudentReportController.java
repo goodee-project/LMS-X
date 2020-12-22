@@ -38,7 +38,7 @@ public class StudentReportController {
 			@PathVariable(name = "currentPage") int currentPage) {
 
 		int rowPerPage = 10; // 한페이지에 출력할 개수
-		int totalCount = studentReportService.selectStudentReportListEndPage(lectureNo); // 마지막 페이지
+		int totalCount = studentReportService.selectStudentReportListEndPage(lectureNo); // 게시글 총 개수
 		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
 
 		// 마지막 페이지 구하기

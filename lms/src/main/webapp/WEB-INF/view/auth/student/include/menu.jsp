@@ -6,5 +6,7 @@
 	
 	<a href="${pageContext.request.contextPath}/auth/student/lmsNotice/lmsNoticeList/1">LMS 공지사항</a>
 	
+	<a href="${pageContext.request.contextPath}/auth/student/lmsNotice/faq/1">LMS 공지사항</a>
+	
 	<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
 </div>

@@ -4,34 +4,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import gd.fintech.lms.student.service.StudentLectureService;
+import gd.fintech.lms.student.service.StudentFaqService;
+import gd.fintech.lms.vo.Faq;
+import gd.fintech.lms.vo.FaqCategory;
 import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubject;
 
-// 학생 강좌 컨트롤러
 @Controller
-public class StudentIndexController {
-	@Autowired StudentLectureService studentLectureService;
+public class StudentFaqController {
+	@Autowired StudentFaqService studentFaqService;
 	
-	// 학생 인덱스
-	@GetMapping("/auth/student/index/{currentPage}")
-	public String index(Model model,ServletRequest request, 
+	// FAQ 목록 
+	@GetMapping("auth/student/faq/faqList/{currentPage}")
+	public String faqList(Model model, 
 			@PathVariable(name="currentPage") int currentPage) {
-		HttpSession session = ((HttpServletRequest)request).getSession();
 		
-		String studentId = (String)session.getAttribute("loginId");
-		
-		int rowPerPage = 10; // 한페이지에 출력할 개수
-		int totalCount = studentLectureService.selectStudentClassListEndPage(studentId); // 게시글 총 개수
+		int rowPerPage = 10;	// 한 페이지당 출력 개수
+		int totalCount = studentFaqService.selectFaqListCount(); // 게시글 총 개수
 		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
 		
 		// 마지막 페이지 구하기
@@ -43,18 +37,20 @@ public class StudentIndexController {
 			lastPage = totalCount / rowPerPage + 1;			
 		}
 		
+
 		// 전체 페이지가 0개이면 현재 페이지도 0으로 표시
 		if (lastPage == 0) {
 			currentPage = 0;
 		}
 		
-		// 강좌 목록 가져오기
+		// FAQ 목록 가져오기
 		Map<String, Object> map = new HashMap<>();
-		map.put("studentId", studentId);
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
-		List<LectureAndClassRegistrationAndSubject> lectureList = studentLectureService.selectStudentClassListByPage(map);
-
+		List<Faq> faqList = studentFaqService.selectFaqListByPage(map);
+		
+		// FAQ 카테고리 목록 가져오기
+		List<FaqCategory> faqCategoryList = studentFaqService.selectFaqCategoryList();
 		
 		int navPerPage = 10; // 네비에 출력될 페이지 개수
 		int navFirstPage = currentPage - (currentPage % navPerPage) + 1; // 네비의 첫 페이지 
@@ -90,7 +86,9 @@ public class StudentIndexController {
 		model.addAttribute("prePage", prePage);
 		model.addAttribute("nextPage", nextPage);
 		
-		model.addAttribute("lectureList", lectureList);
-		return "/auth/student/index";
+		model.addAttribute("faqList", faqList);
+		model.addAttribute("faqCategoryList", faqCategoryList);
+		
+		return "/auth/student/faq/faqList";
 	}
 }

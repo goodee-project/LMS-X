@@ -58,7 +58,7 @@ public class StudentLectureController {
 	public String lectureList(Model model,
 			@PathVariable(name="currentPage") int currentPage) {
 		int rowPerPage = 10; // 한페이지에 출력할 개수
-		int totalCount = studentLectureService.selectStudentLectureListEndPage(); // 마지막 페이지
+		int totalCount = studentLectureService.selectStudentLectureListEndPage(); // 게시글 총 개수
 		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
 
 		// 마지막 페이지 구하기
