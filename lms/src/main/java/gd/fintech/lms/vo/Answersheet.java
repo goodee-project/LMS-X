@@ -9,6 +9,7 @@ import lombok.Data;
 public class Answersheet {
 	private int		multiplechoiceNo;	// 객관식 문제 고유번호
 	private String	accountId;			// 계정 아이디 (학생)
+	private int		testNo;				// 평가 고유 번호
 	private String	answerSelect;		// 학생이 입력한 정답 보기
 	private int		answerScore;		// 답안지 점수
 }

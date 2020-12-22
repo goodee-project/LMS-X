@@ -14,4 +14,6 @@ public class Test {
 	private String	testContent;		// 시험 내용
 	private String	testCreatedate;		// 시험 생성 일시
 	private String	testUpdatedate;		// 시험 업데이트 일시
+	
+	private int 	total_score;		// 학생의 시험 총 점수
 }
