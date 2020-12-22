@@ -60,7 +60,7 @@
 						<td>${sy.syllabusFileType}</td>
 					</tr>
 					<tr>
-						<td>파일 다울로드 횟수</td>
+						<td>파일 다운로드 횟수</td>
 						<td id="fileCount${fn:split(uuid ,'.')[0]}">다운 횟수 : ${sy.syllabusFileCount}회</td>
 					</tr>
 					<tr>

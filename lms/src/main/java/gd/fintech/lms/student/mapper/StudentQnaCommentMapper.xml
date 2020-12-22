@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentQnaCommentMapper">
+	<!-- 질문 댓글 리스트 페이징 -->
+	<select id="selectStudentQuestionCommentListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.QuestionComment">
+		SELECT
+			account_id accountId,
+			question_comment_no questionCommentNo,
+			question_no questionNo,
+			question_comment_writer questionCommentWriter,
+			question_comment_content questionCommentContent,
+			question_comment_createdate questionCommentCreatedate,
+			question_comment_updatedate questionCommentUpdatedate
+		FROM
+			question_comment
+		WHERE
+			question_no = #{questionNo}
+		ORDER BY
+			question_comment_no DESC
+			
+	</select>
+	
+	<!-- 질문 게시판 내 댓글의 수 -->
+	<select id="selectQnaCommentCount" parameterType="String" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+			question_comment
+	</select>
+	
+	<!-- 질문 게시판 댓글 입력 -->
+	<insert id="insertStudentQuestionComment" parameterType="gd.fintech.lms.vo.QuestionComment">
+		INSERT INTO question_comment(
+			account_id,
+			question_no,
+			question_comment_writer,
+			question_comment_content,
+			question_comment_createdate,
+			question_comment_updatedate
+		) VALUES (
+			#{accountId},
+			#{questionNo},
+			#{questionCommentWriter},
+			#{questionCommentContent},
+			NOW(),
+			NOW() 
+		)
+	</insert>
+	
+	<!-- 질문 게시판 댓글 수정  -->
+	<update id="updateStudentQuestionComment" parameterType="gd.fintech.lms.vo.QuestionComment">
+		UPDATE
+			question_comment
+		SET
+			question_comment_content = #{questionCommentContent},
+			question_comment_updatedate = NOW()
+		WHERE
+			question_comment_no = #{questionCommentNo}
+	</update>
+	
+	<!-- 질문 게시판 댓글 삭제  -->
+	<delete id="deleteStudentQuestionComment" parameterType="int">
+		DELETE FROM
+			question_comment
+		WHERE
+			question_comment_no = #{questionCommentNo}
+	</delete>
+</mapper>

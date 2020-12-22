@@ -92,7 +92,7 @@
 						<td>${qfl.questionFileType}</td>
 					</tr>
 					<tr>
-						<td>파일 다울로드 횟수</td>
+						<td>파일 다운로드 횟수</td>
 						<td id="fileCount${fn:split(uuid ,'.')[0]}">다운 횟수 : ${qfl.questionFileCount}회</td>
 					</tr>
 					<tr>
@@ -103,5 +103,30 @@
 			</c:forEach>
 			<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}">질문 수정</a>
 			<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
+		<hr>
+			<h3>댓글 리스트</h3>
+			<table border="1" >
+				<c:forEach var="qc" items="${questionComment}">
+					<tr>
+						<td>${qc.questionCommentNo}</td>
+						<td>${qc.questionCommentWriter}</td>
+						<td>${qc.questionCommentContent}</td>
+						<td>${qc.questionCommentCreatedate}</td>
+						<td>${qc.questionCommentUpdatedate}</td>
+							<c:if test="${accountId == qc.accountId}">
+								<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}">수정</a></td>
+								<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}">삭제</a></td>
+							</c:if>
+					</tr>
+				</c:forEach>
+			</table>
+			<form action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/insertStduentQuestionComment" method="post">
+			<div>
+				<div>
+					<textarea rows="3" cols="50" name="questionCommentContent"></textarea>
+				</div>
+				<button type="submit">댓글입력</button>
+			</div>
+		</form>
 	</body>
 </html>

@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import gd.fintech.lms.student.service.StudentQnaCommentService;
 import gd.fintech.lms.student.service.StudentQnaService;
 import gd.fintech.lms.vo.Question;
+import gd.fintech.lms.vo.QuestionComment;
 import gd.fintech.lms.vo.QuestionForm;
 
 @Controller
 public class StudentQnaController {
 	// Autowired annotation 사용
 	@Autowired private StudentQnaService studentQnaService;
+	@Autowired private StudentQnaCommentService studentQnaCommentService;
 	// Qna 리스트 페이징
 	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaList/{currentPage}")
 	public String qnaList(Model model,
@@ -95,19 +98,27 @@ public class StudentQnaController {
 	
 	// Qna 상세보기
 	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}")
-	public String qnaOne(Model model,
+	public String qnaOne(Model model, ServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo) {
-		studentQnaService.updateStudentQnaCountUp(questionNo);
-		Question question = studentQnaService.getStudentQnaOne(questionNo);
 		
-		// Map 안에 강좌번호 넣기
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		String accountId = (String)session.getAttribute("loginId");
+		
+		studentQnaService.updateStudentQnaCountUp(questionNo);
+
+		// Map
 		Map<String, Object> map = new HashMap<>();
 		map.put("lectureNo", lectureNo);
-		
+		map.put("questionNo", questionNo);
+
+		List<QuestionComment> questionComment = studentQnaCommentService.getQnaCommentListByPage(map);
+		Question question = studentQnaService.getStudentQnaOne(questionNo);
+				
 		model.addAttribute("lectrueNo", lectureNo);
 		model.addAttribute("question", question);
-		
+		model.addAttribute("questionComment",questionComment);
+		model.addAttribute("accountId", accountId);
 		return "/auth/student/lecture/qna/qnaOne";
 	}
 	
