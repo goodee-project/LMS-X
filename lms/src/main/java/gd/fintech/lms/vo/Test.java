@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 public class Test {
-	private int		testNo;				// 시험 고유번호
 	private int		lectureNo;			// 강좌 고유번호
 	private String	testStartdate;		// 시험 시작 일시
 	private String	testEnddate;		// 시험 종료 일시
