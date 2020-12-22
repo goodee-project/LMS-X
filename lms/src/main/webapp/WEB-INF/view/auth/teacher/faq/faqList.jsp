@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>archiveList</title>
+		<title>faqList</title>
 		
 		<!-- Bootstrap Framework 사용 -->
 		
@@ -45,31 +45,26 @@
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
 		<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
-		
-		<!-- 내비게이션 서브 메뉴 -->
-		<jsp:include page="/WEB-INF/view/auth/teacher/include/lectureMenu.jsp" />
 	
 		<!-- 상단 인터페이스 -->
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
-				<h1>자료실</h1>
-				<p>자료실 목록입니다.</p>
+				<h1>LMS 시스템 FAQ</h1>
+				<p>LMS 시스템 사용에 관련된 자주 묻는 질문 목록입니다.</p>
 			</div>
 		</div>
 		
 		<!-- 본문 -->
 		<div class="container">
-			<div>
-				<h3>자료실 목록</h3>
-				<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/insertArchive'">작성</button>
-			</div>
+			<h3>LMS 시스템 FAQ 목록</h3>
 			
-			<br><br>
+			<br>
 			
 			<table class="table">
 				<thead>
 					<tr>
-						<th>자료 번호</th>
+						<th>번호</th>
+						<th>카테고리</th>
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
@@ -77,22 +72,23 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${teacherLectureArchiveList[0].lectureArchiveNo != null}">
-						<c:forEach var="tlal" items="${teacherLectureArchiveList}">
+					<c:if test="${faqList[0].faqNo != null}">
+						<c:forEach var="fl" items="${faqList}">
 							<tr>
-								<td width="15%">${tlal.lectureArchiveNo}</td>
-								<td width="40%">
-									<a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveOne/${tlal.lectureArchiveNo}">${tlal.lectureArchiveTitle}</a>
+								<td width="10%">${fl.faqNo}</td>
+								<td width="15%">${fl.faqCategory}</td>
+								<td width="30%">
+									<a href="${pageContext.request.contextPath}/auth/teacher/faq/faqOne/${fl.faqNo}">${fl.faqTitle}</a>
 								</td>
-								<td width="15%">${tlal.lectureArchiveWriter}</td>
-								<td width="20%">${tlal.lectureArchiveCreatedate}</td>
-								<td width="10%">${tlal.lectureArchiveCount}</td>
+								<td width="15%">${fl.faqWriter}</td>
+								<td width="20%">${fl.faqCreatedate}</td>
+								<td width="10%">${fl.faqCount}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
-					<c:if test="${teacherLectureArchiveList[0].lectureArchiveNo == null}">
+					<c:if test="${faqList[0].faqNo == null}">
 						<tr>
-							<td colspan="5">(등록된 자료가 없습니다)</td>
+							<td colspan="6">(등록된 LMS 시스템 FAQ가 없습니다)</td>
 						</tr>
 					</c:if>
 				</tbody>
@@ -100,13 +96,13 @@
 			
 			<br>
 						
-			<!-- 페이지 네비게이션 -->
+			<!-- 페이지 내비게이션 -->
 			<ul class="pagination justify-content-center">
 				<!-- 처음으로 버튼 -->
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveList/1">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList/1">
 								<i class='fas fa-angle-double-left'></i>
 							</a>
 						</li>
@@ -124,7 +120,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveList/${prePage}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList/${prePage}">
 								<i class='fas fa-angle-left'></i>
 							</a>
 						</li>
@@ -151,7 +147,7 @@
 							<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 							<c:otherwise>
 								<li class="page-item">
-									<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveList/${i}">${i}</a>
+									<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList/${i}">${i}</a>
 								</li>
 							</c:otherwise>
 						</c:choose>
@@ -162,7 +158,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveList/${nextPage}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList${nextPage}">
 								<i class='fas fa-angle-right'></i>
 							</a>
 						</li>
@@ -180,7 +176,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveList/${lastPage}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList/${lastPage}">
 								<i class='fas fa-angle-double-right'></i>
 							</a>
 						</li>

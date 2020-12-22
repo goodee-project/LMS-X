@@ -25,7 +25,7 @@ public class TeacherIndexController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 강사 Index
-	@GetMapping(value="/auth/teacher/index/{currentPage}")
+	@GetMapping("/auth/teacher/index/{currentPage}")
 	public String index(ServletRequest request, Model model, 
 			@PathVariable(value = "currentPage") int currentPage) {
 		// 세션 정보를 가져온다.
@@ -45,7 +45,7 @@ public class TeacherIndexController {
 		
 		// [Logger] 데이터베이스로부터 강사가 속해있는 강좌 목록을 가져온다
 		List<Lecture> teacherLectureList = teacherLectureService.getTeacherLectureListByPage(teacherId, beginRow, rowPerPage);
-		logger.trace("teacherLectureList - " + teacherLectureList);
+		logger.trace("teacherLectureList[" + teacherLectureList + "]");
 		
 		// 페이징 코드
 		// 전체 데이터 수

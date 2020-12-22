@@ -14,17 +14,17 @@
 		    
 		    <!-- LMS 공지사항 -->
 		    <li class="nav-item">
-		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lmsNoticeList/1">LMS 공지사항</a>
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lmsNotice/lmsNoticeList/1">LMS 공지사항</a>
 		    </li>
 		    
 		    <!-- 개인정보 관리 -->
 		    <li class="nav-item">
-		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/myPageOne">개인정보 관리</a>
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/mypage/myPageOne">개인정보 관리</a>
 		    </li>
 		    
 		    <!-- LMS 시스템 FAQ -->
 		    <li class="nav-item">
-		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/faqList/1">LMS 시스템 FAQ</a>
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/faq/faqList/1">LMS 시스템 FAQ</a>
 		    </li>
 		</ul>
 		

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherFaqMapper">
+	<!-- FAQ 목록 -->
+	<select id="selectTeacherFaqListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Faq">
+		SELECT
+			faq_no faqNo, 
+			faq_writer faqWriter, 
+			faq_title faqTitle, 
+			faq_createdate faqCreatedate, 
+			faq_count faqCount, 
+			faq_category faqCategory
+		FROM
+			faq
+		ORDER BY
+			faq_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- FAQ 총 데이터 수 -->
+	<select id="selectTeacherFaqCount" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			faq
+	</select>
+	
+	<!-- FAQ 조회 -->
+	<select id="selectTeacherFaqOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Faq">
+		SELECT
+			faq_no faqNo, 
+			faq_writer faqWriter, 
+			faq_title faqTitle, 
+			faq_content faqContent, 
+			faq_createdate faqCreatedate, 
+			faq_updatedate faqUpdatedate, 
+			faq_count faqCount, 
+			faq_category faqCategory
+		FROM
+			faq
+		WHERE
+			faq_no = #{faqNo}
+	</select>
+	
+	<!-- FAQ 조회 조회수 증가 -->
+	<update id="updateTeacherFaqCountUp" parameterType="Integer">
+		UPDATE
+			faq
+		SET
+			faq_count = faq_count + 1
+		WHERE
+			faq_no = #{faqNo}
+	</update>
+</mapper>

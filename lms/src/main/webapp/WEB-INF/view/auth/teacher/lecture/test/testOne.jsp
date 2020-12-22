@@ -52,8 +52,8 @@
 		<!-- 상단 인터페이스 -->
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
-				<h1>시험 정보 입력</h1>
-				<p>시험 정보를 입력하는 메뉴입니다.</p>
+				<h1>시험 정보</h1>
+				<p>시험 정보를 조회하는 메뉴입니다.</p>
 			</div>
 		</div>
 		

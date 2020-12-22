@@ -34,7 +34,7 @@ public class TeacherLectureArchiveService {
 	private String PATH = PathUtil.PATH + "archiveFile\\";
 	
 	// 강좌 자료실 목록
-	// 강좌 고유번호(lectureNo)를 이용
+	// 강좌 고유번호(lectureNo)
 	public List<LectureArchive> getTeacherLectureArchiveListByPage(int lectureNo, int beginRow, int rowPerPage) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("lectureNo", lectureNo);		// 강의실 고유번호
@@ -49,14 +49,14 @@ public class TeacherLectureArchiveService {
 		return lectureArchiveList;
 	}
 	
-	// 자료실 총 데이터 수 계산
-	// 강좌 고유번호(lectureNo)를 이용
+	// 자료실 총 데이터 수
+	// 강좌 고유번호(lectureNo)
 	public int getCountTeacherLectureArchive(int lectureNo) {
 		return teacherLectureArchiveMapper.selectTeacherLectureArchiveListCount(lectureNo);
 	}
 	
 	// 자료 조회
-	// 자료 고유번호(lectureArchiveNo)를 이용
+	// 자료 고유번호(lectureArchiveNo)
 	public List<LectureArchive> selectTeacherLectureArchiveOne(int archiveNo) {
 		List<LectureArchive> lectureArchiveOne = teacherLectureArchiveMapper.selectTeacherLectureArchiveOne(archiveNo);
 		
@@ -64,13 +64,13 @@ public class TeacherLectureArchiveService {
 	}
 	
 	// 자료 조회 조회수 증가
-	// 자료 고유번호(lectureArchiveNo)를 이용
+	// 자료 고유번호(lectureArchiveNo)
 	public int updateTeacherLectureArchiveCountUp(int archiveNo) {
 		return teacherLectureArchiveMapper.updateTeacherLectureArchiveCountUp(archiveNo);
 	}
 	
 	// 자료 입력
-	// 자료 Form(LectureArchiveForm)을 이용
+	// 자료 Form(LectureArchiveForm)
 	public LectureArchive insertTeacherLectureArchive(LectureArchiveForm lectureArchiveForm) {
 		LectureArchive lectureArchive = new LectureArchive();
 		
@@ -141,7 +141,7 @@ public class TeacherLectureArchiveService {
 	}
 	
 	// 자료 수정
-	// 자료 Form(LectureArchiveForm)을 이용
+	// 자료 Form(LectureArchiveForm)
 	public void updateTeacherLectureArchive(LectureArchiveForm lectureArchiveForm) {
 		LectureArchive lectureArchive = new LectureArchive();
 		
