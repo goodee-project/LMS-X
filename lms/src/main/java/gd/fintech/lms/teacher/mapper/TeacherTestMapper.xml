@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherTestMapper">
+	<!-- 시험 정보 조회 -->
+	<select id="selectTestOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Test">
+		SELECT
+			test_startdate testStartdate, 
+			test_enddate testEnddate, 
+			test_content testContent, 
+			test_createdate testCreatedate, 
+			test_updatedate testUpdatedate
+		FROM
+			test
+		WHERE
+			lecture_no = #{lectureNo}
+	</select>
+	
+	<!-- 시험 정보 입력 -->
+	<insert id="insertTest" parameterType="gd.fintech.lms.vo.Test">
+		INSERT INTO test (
+			lecture_no, 
+			test_startdate, 
+			test_enddate, 
+			test_content, 
+			test_createdate, 
+			test_updatedate
+		) VALUES (
+			#{lectureNo}, 
+			#{testStartdate}, 
+			#{testEnddate}, 
+			#{testContent}, 
+			NOW(), 
+			NOW()
+		)
+	</insert>
+	
+	<!-- 시험 정보 수정 -->
+	<update id="updateTest" parameterType="gd.fintech.lms.vo.Test">
+		UPDATE
+			test
+		SET
+			test_startdate = #{testStartdate}, 
+			test_enddate = #{testEnddate}, 
+			test_content = #{testContent}, 
+			test_updatedate = NOW()
+		WHERE
+			lecture_no = #{lectureNo}
+	</update>
+</mapper>

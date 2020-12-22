@@ -44,7 +44,7 @@
 		    
 		    <!-- 최종 평가 -->
 		    <li class="nav-item">
-		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/testOne">최종 평가</a>
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/testIndex">최종 평가</a>
 		    </li>
 		</ul>
 	</div>

@@ -1,0 +1,20 @@
+package gd.fintech.lms.teacher.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import gd.fintech.lms.vo.Test;
+
+@Mapper
+public interface TeacherTestMapper {
+	// 시험 정보 조회
+	// 강좌 고유 번호(lectureNo)
+	Test selectTestOne(int lectureNo);
+	
+	// 시험 정보 입력
+	// 시험(Test) Vo 객체
+	int insertTest(Test test);
+	
+	// 시험 정보 수정
+	// 시험(Test) Vo 객체
+	int updateTest(Test test);
+}
