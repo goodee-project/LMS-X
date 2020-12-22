@@ -11,11 +11,52 @@
 			multiplechoice_no = #{multiplechoiceNo} AND
 			account_id = #{accountId}
 	</select>
-	
 	<!-- 해당 답안지를 제출 -->
-	<insert id="insertAnswersheet">
+	<insert id="insertAnswersheet" parameterType="gd.fintech.lms.vo.Answersheet">
+		INSERT INTO answersheet(
+			multiplechoice_no,
+			account_id,
+			answer_select,
+			answer_score
+		) VALUES (
+			#{multiplechoiceNo},
+			#{accountId},
+			#{answerSelect},
+			0
+		)
 	</insert>
 	<!-- 해당 답안지를 수정 -->
-	<update id="updateAnswersheet">
+	<update id="updateAnswersheet" parameterType="gd.fintech.lms.vo.Answersheet">
+		UPDATE 
+			answersheet
+		SET
+			answer_select = #{answerSelect}
+		WHERE 
+			multiplechoice_no = #{multiplechoiceNo} AND
+			account_id = #{accountId}
 	</update>
+	
+	<!-- 문제를 다 풀었는지 -->
+	<!-- 결과가 0일경우 문제를 다 푼것 -->
+	<select id="selectCheckTestFinish" parameterType="java.util.Map" resultType="int">
+		SELECT (
+			SELECT 
+				COUNT(*) 
+			FROM 
+				multiplechoice m
+			WHERE 
+				m.test_no = #{testNo}
+			) - (
+			SELECT 
+				COUNT(*) 
+			FROM 
+				answersheet a 
+			LEFT JOIN 
+				multiplechoice m ON 
+				a.multiplechoice_no = m.multiplechoice_no
+			WHERE 
+				m.test_no = #{testNo} AND 
+				a.account_id = #{accountId}
+			)
+	</select>
 </mapper>

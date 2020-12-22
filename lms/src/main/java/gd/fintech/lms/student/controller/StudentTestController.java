@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,10 +93,14 @@ public class StudentTestController {
 	
 	// 평가 상세보기
 	@GetMapping("auth/student/lecture/{lectureNo}/test/testOne/{testNo}/{currentPage}")
-	public String testOne(Model model,
+	public String testOne(Model model,  ServletRequest request,
 			@PathVariable(name="lectureNo") int lectureNo,
 			@PathVariable(name="testNo") int testNo,
 			@PathVariable(name="currentPage") int currentPage) {
+
+		// 세션에서 아이디 가져오기
+		HttpSession session = ((HttpServletRequest)request).getSession();	
+		String accountId = (String)session.getAttribute("loginId");
 		
 		int rowPerPage = 1;
 		int totalCount = studentTestService.selectMultiplechoiceCount(testNo) / 5;		
@@ -111,6 +119,7 @@ public class StudentTestController {
 		map.put("rowPerPage", rowPerPage * 5); // 한문제당 보기가 5개 있어서 5를 곱해줌
 		map.put("beginRow", beginRow);
 		map.put("testNo", testNo);
+		map.put("accountId", accountId);
 		
 		List<Multiplechoice> multiplechoice = studentTestService.selectTestOne(map);
 		

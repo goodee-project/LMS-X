@@ -15,4 +15,6 @@ public interface StudentTestRestMapper {
 	// 해당 답안지를 수정
 	public int updateAnswersheet(Answersheet answersheet);
 
+	// 문제를 다 풀었는지
+	public int selectCheckTestFinish(Map<String, Object> map);
 }

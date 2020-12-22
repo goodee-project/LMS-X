@@ -46,6 +46,12 @@
              <result property="multiplechoiceExampleId" column="multiplechoice_example_id" />
              <result property="multiplechoiceExampleContent" column="multiplechoice_example_content" />
 		</collection>	
+		<collection property="answersheetList" ofType="gd.fintech.lms.vo.Answersheet">	
+             <result property="multiplechoiceNo" column="multiplechoice_no" />
+             <result property="accountId" column="account_id" />
+             <result property="answerSelect" column="answer_select" />
+             <result property="answerScore" column="answer_score" />
+		</collection>
 	</resultMap>
 	<select id="selectTestOne" parameterType="java.util.Map" resultMap="selectTestOneResult">
 		SELECT 
@@ -59,12 +65,20 @@
 			me.multiplechoice_no,
 			me.multiplechoice_example_no,
 			me.multiplechoice_example_id,
-			me.multiplechoice_example_content
+			me.multiplechoice_example_content,
+			a.multiplechoice_no,
+			a.account_id,
+			a.answer_select,
+			a.answer_score
 		FROM 
 			multiplechoice m
 		LEFT JOIN
 			multiplechoice_example me ON 
 			m.multiplechoice_no = me.multiplechoice_no
+		LEFT JOIN 
+			answersheet a ON
+			a.multiplechoice_no = m.multiplechoice_no AND
+			a.account_id = #{accountId}
 		WHERE
 			m.test_no = #{testNo}
 		ORDER BY 
