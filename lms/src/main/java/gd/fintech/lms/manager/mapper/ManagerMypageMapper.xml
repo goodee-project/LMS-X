@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerMypageMapper">
+	<!-- 운영자 마이페이지 정보  -->
+	<resultMap type="gd.fintech.lms.vo.Manager" id="selectManagerInformation">
+		<result property="managerId" column="manager_id"/>
+		<result property="managerEmail" column="manager_email"/>
+		<result property="managerPhone" column="manager_phone"/>
+		<result property="managerName" column="manager_name"/>
+		<result property="managerGender" column="manager_gender"/>
+		<result property="managerBirth" column="manager_birth"/>
+		<result property="managerPosition" column="manager_position"/>
+		<result property="managerAddressMain" column="manager_address_main"/>
+		<result property="managerAddressSub" column="manager_address_sub"/>
+		<result property="managerImage" column="manager_image"/>
+		<result property="managerAccessdate" column="manager_accessdate"/>
+		<collection property="careerList"  ofType="gd.fintech.lms.vo.Career">
+			<result property="careerNo" column="career_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="careerContent" column="career_content"/>
+			<result property="careerStartdate" column="career_startdate"/>
+			<result property="careerEnddate" column="career_enddate"/>
+		</collection>
+		<collection property="licenseList" ofType="gd.fintech.lms.vo.License">
+			<result property="licenseNo" column="license_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="licenseNumber" column="license_number"/>
+			<result property="licenseName" column="license_name"/>
+			<result property="licenseAgency" column="license_agency"/>
+			<result property="licenseGetdate" column="license_getdate"/>
+		</collection>
+	</resultMap>
+	<select id="selectManagerMypage" parameterType="String" resultMap="selectManagerInformation">
+		SELECT
+			m.manager_id,
+			m.manager_email,
+			m.manager_phone,
+			m.manager_name,
+			m.manager_gender,
+			m.manager_birth,
+			m.manager_position,
+			m.manager_address_main,
+			m.manager_address_sub,
+			m.manager_image,
+			m.manager_accessdate,
+			c.career_content,
+			c.career_startdate,
+			c.career_enddate,
+			l.license_number,
+			l.license_name,
+			l.license_agency,
+			l.license_getdate
+		FROM
+			manager m
+		LEFT JOIN
+			career c ON
+			c.account_id = m.manager_id
+		LEFT JOIN
+			license l ON
+			l.account_id = m.manager_id 
+		WHERE
+			manager_id = #{managerId}
+	</select>
+	
+	<!-- 운영자 마이페이지 정보 수정  -->
+	<update id="updateManagerMypage" parameterType="gd.fintech.lms.vo.Manager" >
+		UPDATE 
+			manager
+		SET 
+			manager_email = #{managerEmail},
+			manager_phone = #{managerPhone},
+			manager_name = #{managerName},
+			manager_gender = #{managerGender},
+			manager_birth = #{managerBirth},
+			manager_address_main = #{managerAddressMain},
+			manager_address_sub = #{managerAddressSub},
+			manager_updatedate = now()
+		WHERE
+			manager_id = #{managerId}
+	</update>
+</mapper>

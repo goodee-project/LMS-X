@@ -32,7 +32,7 @@
 
 	<table class="table table-bordered">
 		<tr>
-			<td rowspan="3" colspan="2">이미지...</td>
+			
 			<td>아이디</td>
 			<td>${manager.managerId}</td>
 			<td>이름</td>
@@ -62,6 +62,7 @@
 					<button  type="submit">직급 수정</button>
 				</form>
 			</td>
+			<td rowspan="3" colspan="2">이미지...</td>
 		</tr>
 		
 		<tr>

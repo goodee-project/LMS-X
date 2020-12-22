@@ -163,16 +163,23 @@
 								for (i = 0; i < data.length; i++) {
 									// building2 데이터가 있으면
 									if (data[i].building2 != 0) {
-										$('#selectAddress').append('<div><input type="radio" class="address" name="teacherAddressMain" value="' + data[i].province + ' ' + data[i].city+' ' + data[i].town+' ' + data[i].street+' ' + data[i].building1+'-' + data[i].building2+'(' + data[i].zipCode + ')">'
-												+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '-' + data[i].building2 +  '('+data[i].zipCode + ')' + '</div>');
+										$('#selectAddress').append('<div><button type="button" class="addressBtn form-control" value="' + data[i].province + ' ' + data[i].city+' ' + data[i].town+' ' + data[i].street+' ' + data[i].building1+'-'+ data[i].building2+'(' + data[i].zipCode + ')">'
+												+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '-' + data[i].building2 + '('+data[i].zipCode + ')' + '</button></div>');
 									}
 									// building2 데이터가 없으면
 									if (data[i].building2 == 0) {
-										$('#selectAddress').append('<div><input type="radio" class="address" name="teacherAddressMain" value="' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '(' + data[i].zipCode + ')">'
-												+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '('+data[i].zipCode + ')' + '</div>');
+										$('#selectAddress').append('<div><button type="button" class="addressBtn form-control" value="' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '(' + data[i].zipCode + ')">'
+												+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '('+data[i].zipCode + ')' + '</button></div>');
 									}
+									
 								}
 								$('#addressWait').html("");
+								$('.addressBtn').click(function(){
+									$('#addressView').html('<input id="teacherAddressMain" class="form-control" style="margin-bottom:5px;" type="text" name="teacherAddressMain" readonly="readonly" > ')
+									document.getElementById("teacherAddressMain").value = $(this).val();
+
+								});
+							
 							}	
 
 						});
@@ -235,8 +242,6 @@
 						$('#teacherPwCheck').html("");
 					}
 	
-	
-					
 					// 이메일 검사
 					if ($('#teacherEmail').val() == "") {
 						$('#teacherEmail').focus();
@@ -297,7 +302,7 @@
 					}
 					
 					// 주소 검사
-					if ($('.address:checked').val() == undefined) {
+					if ($('#teacherAddressMain').val() == "") {
 						$('#addressCheck').html("주소를 검색해주세요")
 						return;
 					} else {
@@ -345,7 +350,7 @@
 		<!-- 본문 -->
 		<div class="container">
 			<form id="teacherForm" method="post" action="${pageContext.request.contextPath}/teacher/signup">
-				<input type="text" hidden="hidden" name="accountLevel" value="2">
+				<input type="text" hidden="hidden" name="accountLevel" value="1">
 				<input type="text" hidden="hidden" name="accountState" value="대기">
 				
 				<table class="table">
@@ -429,8 +434,9 @@
 					<tr>
 						<td>주소</td>
 						<td>
+							<div id="addressView"></div>
 							<span id="addressWait"></span>
-						
+							
 							<div class="input-group">
 								<input type="text" class="form-control" name="street" id="street" placeholder="도로명을 입력하세요.">
 								<div class="input-group-append">
