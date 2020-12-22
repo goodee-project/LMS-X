@@ -92,6 +92,7 @@ public class StudentLectureNoticeController {
 	public String lectureNoticeOne(Model model,
 			@PathVariable(value = "lectureNo") int lectureNo,
 			@PathVariable(value = "lectureNotcieNo") int lectureNoticeNo) {
+		studentLectureNoticeService.getStudentLectureNoticeCountUp(lectureNoticeNo);
 		LectureNotice lectureNotice = studentLectureNoticeService.getStudentLectureNoticeOne(lectureNoticeNo);
 		
 		Map<String, Object> map = new HashMap<>();

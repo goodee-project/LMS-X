@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +22,7 @@ import gd.fintech.lms.vo.QuestionFile;
 import gd.fintech.lms.vo.QuestionForm;
 
 @Service
-@Transactional
+@Transactional(isolation = Isolation.READ_COMMITTED)
 public class StudentQnaService {
 	
 	// Logger
@@ -31,6 +32,11 @@ public class StudentQnaService {
 	//	private final String PATH = "/////"
 	@Autowired StudentQnaMapper studentQnaMapper;
 	@Autowired StudentQnaFileMapper studentQnaFileMapper;
+	
+	// 질문 게시판 상세보기 조회수 증가
+	public int updateStudentQnaCountUp(int questionNo) {
+		return studentQnaMapper.updateQuestionCount(questionNo);
+	}
 	
 	// 학생 : 질문 게시판 상세보기
 	public Question getStudentQnaOne(int questionNo) {
@@ -115,11 +121,12 @@ public class StudentQnaService {
 	}
 	// questionNo에 따라 질문 삭제
 	public void deleteStudentQnaByQnaNo(int questionNo) {
+		
 		List<String> qnaFileList = studentQnaFileMapper.selectStudentQnaFileNameList(questionNo);
 		
 		// 실제 파일 삭제
-		for(String s : qnaFileList) {
-			File f = new File(PATH + s);
+		for(String fn : qnaFileList) {
+			File f = new File(PATH + fn);
 			f.delete();
 		}
 		

@@ -101,7 +101,7 @@
 					</tr>
 				</table>
 			</c:forEach>
-			<a href="${pageContext.request.contextPath}/auth/student/lecture/${question.lectureNo}/qna/updateQna/${question.questionNo}">질문 수정</a>
-			<a href="${pageContext.request.contextPath}/auth/student/lecture/${question.lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
+			<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}">질문 수정</a>
+			<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
 	</body>
 </html>

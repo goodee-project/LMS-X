@@ -88,7 +88,7 @@
     			<div id="fileInput"></div>
     			<!-- 과제 제출 -->   
 			    <div>
-			    	<button id="qnaBtn" type="button">과제 제출</button>
+			    	<button id="qnaBtn" type="button">질문 작성</button>
 			    </div>
 	    	</form>
 	    </div> 

@@ -19,7 +19,7 @@ public class StudentQnaRestController {
 	}
 	
 	// 질문 게시판 첨부파일 한개 삭제
-	@GetMapping("/auth/student/lecture/qna/deleteQnaFileOne/")
+	@GetMapping("/auth/student/lecture/qna/deleteQnaFileOne/{questionFileUuid}")
 	public void deleteQnaFileOne(@PathVariable(name = "questionFileUuid") String questionFileUuid) {
 		studentQnaRestService.deleteStudentQnaFileOne(questionFileUuid);
 	}

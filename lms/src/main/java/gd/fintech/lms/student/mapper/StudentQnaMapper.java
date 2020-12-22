@@ -27,4 +27,7 @@ public interface StudentQnaMapper {
 	
 	// 학생 : 질문 게시판 게시글 수정
 	int updateStudentQna(Question question);
+	
+	// 학생 : 질문 게시판 조회수 증가
+	int updateQuestionCount(int questionNo);
 }

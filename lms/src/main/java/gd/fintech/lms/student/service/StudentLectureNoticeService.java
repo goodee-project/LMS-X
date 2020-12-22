@@ -31,4 +31,9 @@ public class StudentLectureNoticeService {
 	public LectureNotice getStudentLectureNoticeOne(int lectureNoticeNo) {
 		return studentLectureNoticeMapper.selectStudentLectureNoticeOne(lectureNoticeNo);
 	}
+	
+	// 상세보기시 조회수 증가
+	public int getStudentLectureNoticeCountUp(int lectureNoticeNo) {
+		return studentLectureNoticeMapper.updateStudentLectureNoticeCountUp(lectureNoticeNo);
+	}
 }

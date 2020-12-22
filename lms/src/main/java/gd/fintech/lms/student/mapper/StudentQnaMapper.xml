@@ -5,6 +5,7 @@
 	<!-- select 쿼리 태그에 관계도를 위한 resultMap 속성 추가  -->
 	<!--질문 정보-->
 	<resultMap type="gd.fintech.lms.vo.Question" id="selectStudentQnaOneResult">
+		<result property="lectureNo" column="lecture_no"/>
 		<result property="questionNo" column="question_no"/>
 		<result property="questionWriter" column="question_writer"/>
 		<result property="questionTitle" column="question_title"/>
@@ -82,6 +83,7 @@
 	<!--질문 게시판 상세보기-->
 	<select id="selectStudentQnaOne" parameterType="int" resultMap="selectStudentQnaOneResult">
 		SELECT
+			q.lecture_no,
 			q.question_no,
 			q.question_writer,
 			q.question_title,
@@ -124,4 +126,14 @@
 		WHERE 
 			question_no = #{questionNo}
 	</delete>
+	
+	<!--질문 게시판 조회수 증가-->
+	<update id="updateQuestionCount" parameterType="gd.fintech.lms.vo.Question">
+		UPDATE 
+			question
+		SET
+			question_count = question_count + 1
+		WHERE
+			question_no = #{questionNo}
+	</update>
 </mapper>

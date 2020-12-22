@@ -52,7 +52,7 @@
 					// 정상적일 때 submit
 					$('#updateQnaForm').submit();
 				})
-								// 파일 한개 삭제 -- 비동기 요청
+				// 파일 한개 삭제 -- 비동기 요청
 				$('.deleteQnaFileOneBtn').on('click', function(){
 					let uuid = $(this).val();
 					let fileId = uuid.split('.')[0];

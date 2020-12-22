@@ -98,6 +98,7 @@ public class StudentQnaController {
 	public String qnaOne(Model model,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo) {
+		studentQnaService.updateStudentQnaCountUp(questionNo);
 		Question question = studentQnaService.getStudentQnaOne(questionNo);
 		
 		// Map 안에 강좌번호 넣기
@@ -176,7 +177,7 @@ public class StudentQnaController {
 	}
 	
 	// Qna 삭제
-	@GetMapping("/auth/student/lecutre/{lecutreNo}/qna/deleteQna/{questionNo}")
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/deleteQuestion/{questionNo}")
 	public String deleteQuestion(
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo) {
@@ -184,4 +185,5 @@ public class StudentQnaController {
 		
 		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaList/1";
 	}
+	
 }
