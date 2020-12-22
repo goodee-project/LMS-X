@@ -17,4 +17,5 @@ public class Student {
 	private String	studentImage;			// 학생 프로필 사진
 	private String	studentAccessdate;		// 학생 계정 활성화 일시
 	private String	studentUpdatedate;		// 학생 계정 업데이트 일시
+	private String	managerIdAccess;		// 계정을 승인한 운영자의 아이디
 }

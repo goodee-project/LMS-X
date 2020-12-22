@@ -34,6 +34,8 @@
 					<td>${sql.studentGender}</td>
 					<td>${sql.studentBirth}</td>
 					<td>${sql.studentAddressMain} ${sql.studentAddressSub}</td>
+					<td><a href="${pageContext.request.contextPath}/auth/manager/student/accessStudent/${currentPage}/${sql.studentId}">승인</a></td>
+					<td><a href="${pageContext.request.contextPath}/auth/manager/student/negativeStudent/${sql.studentId}">거절</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

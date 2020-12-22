@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -146,5 +148,25 @@ public class ManagerStudentController {
 		model.addAttribute("studentQueueList", studentQueueList);
 
 		return "auth/manager/student/studentQueueList";
+	}
+	
+	// 학생 승인 거절
+	@GetMapping("/auth/manager/student/negativeStudent/{accountId}")
+	public String negativeStudent(
+			@PathVariable(name="accountId") String accountId) {
+		managerStudentService.negativeStudent(accountId);
+		return "redirect:/auth/manager/student/studentQueueList/1";
+	}
+	
+	// 운영자 승인
+	@GetMapping("/auth/manager/student/accessStudent/{currentPage}/{accountId}")
+	public String accessStudent(HttpSession session,
+			@PathVariable(name="currentPage") String currentPage, 
+			@PathVariable(name="accountId") String accountId) {
+		
+		String loginId = (String)session.getAttribute("loginId");
+		
+		managerStudentService.accessStudent(accountId, loginId);
+		return "redirect:/auth/manager/student/studentQueueList/1";
 	}
 }

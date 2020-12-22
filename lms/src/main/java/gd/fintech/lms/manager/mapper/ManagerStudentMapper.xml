@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerStudentMapper"> 
+	<!-- 학생목록 리스트와 페이징 -->
 	<select id="selectStudentListByPage" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT 
 			s.student_id studentId,
@@ -19,6 +20,7 @@
 			#{beginRow}, #{rowPerPage}
 	</select>
 	
+	<!-- 학생목록 페이징 카운트 -->
 	<select id="selectStudentCount" resultType="int">
 		SELECT
 			COUNT(*)
@@ -26,6 +28,7 @@
 			student
 	</select>
 	
+	<!-- 학생목록 상세보기 -->
 	<select id="selectStudentOne" parameterType="String" resultType="gd.fintech.lms.vo.Student">
 		SELECT
 			student_id studentId,
@@ -69,4 +72,79 @@
 		FROM
 			student_queue
 	</select>
+	
+	<!-- 학생 승인대기 테이블 삭제 -->
+	<delete id="deleteStudentQueue" parameterType="String">
+		DELETE FROM
+			student_queue
+		WHERE
+			student_id = #{accountId}
+	</delete>
+	
+	<!-- 계정 삭제 -->
+	<delete id="deleteAccount" parameterType="String">
+		DELETE FROM
+			account
+		WHERE
+			account_id = #{accountId}
+	</delete>
+	
+	<!-- 계정 상태 업데이트 -->
+	<update id="updateAccountState" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE 
+			account
+		SET 
+			account_state = #{accountState},
+			account_updatedate = now()
+		WHERE
+			account_id = #{accountId}
+	</update>
+	
+	<!-- 학생 승인대기 상세 -->
+	<select id="selectStudentQueueOne" parameterType="String" resultType="gd.fintech.lms.vo.Student">
+		SELECT
+			student_id studentId,
+			student_email studentEmail,
+			student_name studentName,
+			student_phone studentPhone,
+			student_gender studentGender,
+			student_birth studentBirth,
+			student_address_main studentAddressMain,
+			student_address_sub studentAddressSub
+		FROM
+			student_queue
+		WHERE
+			student_id = #{accountId}
+	</select>
+	
+	<!-- 학생 테이블 추가 -->
+	<insert id="insertStudent" parameterType="gd.fintech.lms.vo.Student">
+		INSERT INTO student (
+			student_id,
+			student_email,
+			student_name,
+			student_phone,
+			student_gender,
+			student_birth,
+			student_address_main,
+			student_address_sub,
+			student_image,
+			student_accessdate,
+			student_updatedate,
+			manager_id_access
+		) VALUES (
+			#{studentId},
+			#{studentEmail},
+			#{studentPhone},
+			#{studentName},
+			#{studentGender},
+			#{studentBirth},
+			#{studentAddressMain},
+			#{studentAddressSub},
+			#{studentImage},
+			now(),
+			now(),
+			#{managerIdAccess}
+		)
+	</insert>
 </mapper>

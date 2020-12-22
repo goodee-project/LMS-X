@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.StudentQueue;
 
@@ -24,4 +25,17 @@ public interface ManagerStudentMapper {
 	
 	// 학생 승인 대기 페이징 카운트
 	public int selectStudentQueueCount();
+	
+	// 학생 승인 거절
+	public int deleteStudentQueue(String studentId);
+	public int deleteAccount(String accountId);
+	
+	// 학생 승인과 상태 업데이트
+	public int updateAccountState(Account account); 
+	
+	// 학생 승인대기 상세
+	public Student selectStudentQueueOne(String accountId);
+	
+	// 학생 테이블 추가
+	public int insertStudent(Student student);
 }
