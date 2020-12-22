@@ -2,38 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.mapper.StudentTestMapper">
 	<!-- 평가 목록 가져오기 -->
-	<select id="selectTestListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Test">
+	<select id="selectTestListByPage" parameterType="int" resultType="gd.fintech.lms.vo.Test">
 		SELECT 
-			test_no testNo,
-			lecture_no lectureNo,
-			test_startdate testStartdate,
-			test_enddate testEnddate,
-			test_content testContent,
-			test_createdate testCreatedate
+			t.lecture_no lectureNo,
+			t.test_startdate testStartdate,
+			t.test_enddate testEnddate,
+			t.test_content testContent,
+			t.test_createdate testCreatedate,
+			SUM(a.answer_score) totalScore
 		FROM
-			test
+			answersheet a 
+		RIGHT JOIN  
+			test t ON
+			t.lecture_no = a.lecture_no
 		WHERE 
-			lecture_no = #{lectureNo}
-		ORDER BY
-			test_createdate DESC
-		LIMIT
-			#{beginRow}, #{rowPerPage}
-	</select>
-	
-	<!-- 평가 개수 가져오기 -->
-	<select id="selectTestListCount" parameterType="int" resultType="int">
-		SELECT 
-			COUNT(*)
-		FROM
-			test
-		WHERE
-			lecture_no = #{lectureNo}
+			t.lecture_no = #{lectureNo}
+		GROUP BY 
+			a.lecture_no
 	</select>
 	
 	<!-- 평가 문제들 가져오기 -->
 	<resultMap type="gd.fintech.lms.vo.Multiplechoice" id="selectTestOneResult">
         <result property="multiplechoiceNo" column="multiplechoice_no" />
-        <result property="testNo" column="test_no" />
+        <result property="lectureNo" column="lecture_no" />
         <result property="multiplechoiceId" column="multiplechoice_id" />
         <result property="multiplechoiceQuestion" column="multiplechoice_question" />
         <result property="multiplechoiceAnswer" column="multiplechoice_answer" />
@@ -56,7 +47,7 @@
 	<select id="selectTestOne" parameterType="java.util.Map" resultMap="selectTestOneResult">
 		SELECT 
 			m.multiplechoice_no,
-			m.test_no,
+			m.lecture_no,
 			m.multiplechoice_id,
 			m.multiplechoice_question,
 			m.multiplechoice_answer,
@@ -80,7 +71,7 @@
 			a.multiplechoice_no = m.multiplechoice_no AND
 			a.account_id = #{accountId}
 		WHERE
-			m.test_no = #{testNo}
+			m.lecture_no = #{lectureNo}
 		ORDER BY 
 			m.multiplechoice_no ASC, 
 			me.multiplechoice_example_no ASC
@@ -98,6 +89,6 @@
 			multiplechoice_example me ON 
 			m.multiplechoice_no = me.multiplechoice_no
 		WHERE
-			m.test_no = #{testNo}
+			m.lecture_no = #{lectureNo}
 	</select>
 </mapper>

@@ -18,17 +18,24 @@ public class StudentTestRestService {
 		return studentTestRestMapper.selectCheckAnswersheet(answersheet);
 	}
 	// 해당 답안지를 제출
-	public int insertAnswersheet(Answersheet answersheet) {
-		return studentTestRestMapper.insertAnswersheet(answersheet);
+	public void insertAnswersheet(Answersheet answersheet) {
+		studentTestRestMapper.insertAnswersheet(answersheet);
+		studentTestRestMapper.updateAnswerScore(answersheet);
 	}
 	
 	// 해당 답안지를 수정
-	public int updateAnswersheet(Answersheet answersheet) {
-		return studentTestRestMapper.updateAnswersheet(answersheet);
+	public void updateAnswersheet(Answersheet answersheet) {
+		studentTestRestMapper.updateAnswersheet(answersheet);
+		studentTestRestMapper.updateAnswerScore(answersheet);
 	}
 	
 	// 문제를 다 풀었는지
 	public int selectCheckTestFinish(Map<String, Object> map) {
 		return studentTestRestMapper.selectCheckTestFinish(map);
+	}
+	
+	// 시험 제출기간인지
+	public int selectCheckTestDate(int lectureNo) {
+		return studentTestRestMapper.selectCheckTestDate(lectureNo);
 	}
 }

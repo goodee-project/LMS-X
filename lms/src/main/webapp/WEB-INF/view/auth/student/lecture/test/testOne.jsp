@@ -8,21 +8,21 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function(){	
-				/*
+				
 				// 첫 접근시 이미 평가를 완료했는지 체크
 				$.ajax({
-					url: '${pageContext.request.contextPath}/auth/student/lecture/test/selectCheckTestFinish/' + ${testNo},
+					url: '${pageContext.request.contextPath}/auth/student/lecture/test/selectCheckTestFinish/' + ${lectureNo},
 					type:'post',
 					success: function(data){
 						// 완료한 평가인 경우
 						if(data){
 							alert('이미 완료한 평가입니다.');
-							$(location).attr('href', '${pageContext.request.contextPath}/auth/student/lecture/' + ${lectureNo} + '/test/testList/1')
+							$(location).attr('href', '${pageContext.request.contextPath}/auth/student/lecture/' + ${lectureNo} + '/test/testList')
 							return;
 						}
 					}
 				});
-				*/
+				
 				
 				// 정답 체크시
 				$('input[type=radio]').change(function(){	
@@ -39,7 +39,7 @@
 								$.ajax({
 									url: '${pageContext.request.contextPath}/auth/student/lecture/test/updateAnswersheet',
 									type:'post',
-									data: {multiplechoiceNo : paramNo, answerSelect : paramSelect},
+									data: {multiplechoiceNo : paramNo, answerSelect : paramSelect, lectureNo : ${lectureNo}},
 									success: function(data){
 									}
 								});
@@ -49,7 +49,7 @@
 								$.ajax({
 									url: '${pageContext.request.contextPath}/auth/student/lecture/test/insertAnswersheet',
 									type:'post',
-									data: {multiplechoiceNo : paramNo, answerSelect : paramSelect},
+									data: {multiplechoiceNo : paramNo, answerSelect : paramSelect, lectureNo : ${lectureNo}},
 									success: function(data){
 									}
 								});
@@ -63,7 +63,7 @@
 				$('#finishTest').click(function(){
 					// 문제를 다 풀었는지 확인
 					$.ajax({
-						url: '${pageContext.request.contextPath}/auth/student/lecture/test/selectCheckTestFinish/' + ${testNo},
+						url: '${pageContext.request.contextPath}/auth/student/lecture/test/selectCheckTestFinish/' + ${lectureNo},
 						type:'post',
 						success: function(data){
 							// 문제를 다 풀지 않았을 시
@@ -72,7 +72,7 @@
 								return;
 							// 문제를 다 풀었을시
 							} else {
-								$(location).attr('href', '${pageContext.request.contextPath}/auth/student/lecture/' + ${lectureNo} + '/test/testList/1')
+								$(location).attr('href', '${pageContext.request.contextPath}/auth/student/lecture/' + ${lectureNo} + '/test/testList')
 								return;
 							}
 						}
@@ -127,10 +127,10 @@
 	    <div>
 	    	${currentPage}/${lastPage} 페이지
 	    	<c:if test="${currentPage > 1}">
-	    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${testNo}/${currentPage - 1}">이전 페이지</a>
+	    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage - 1}">이전 페이지</a>
 	    	</c:if>
 	    	<c:if test="${currentPage < lastPage}">
-	    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${testNo}/${currentPage + 1}">다음 페이지</a>
+	    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage + 1}">다음 페이지</a>
 	    	</c:if>
 	    </div>
 	    

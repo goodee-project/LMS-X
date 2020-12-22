@@ -17,4 +17,10 @@ public interface StudentTestRestMapper {
 
 	// 문제를 다 풀었는지
 	public int selectCheckTestFinish(Map<String, Object> map);
+	
+	// 답안이 정답일 경우 점수 반영
+	public int updateAnswerScore(Answersheet answersheet);
+	
+	// 시험이 제출일인지
+	public int selectCheckTestDate(int lectureNo);
 }

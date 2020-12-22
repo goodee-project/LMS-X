@@ -11,12 +11,10 @@ import gd.fintech.lms.vo.Test;
 @Mapper
 public interface StudentTestMapper {
 	// 평가 목록 가져오기
-	public List<Test> selectTestListByPage(Map<String, Object> map);
-	// 평가 개수 가져오기
-	public int selectTestListCount(int lectureNo);
+	public Test selectTestListByPage(int lectureNo);
 	
 	// 평가 상세보기
 	public List<Multiplechoice> selectTestOne(Map<String, Object> map);
 	// 평가 - 문제 개수 가져오기
-	public int selectMultiplechoiceCount(int testNo);
+	public int selectMultiplechoiceCount(int lectureNo);
 }

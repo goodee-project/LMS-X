@@ -64,15 +64,15 @@ public class StudentTestRestController {
 	}
 	
 	// 문제를 다 풀었는지
-	@PostMapping("auth/student/lecture/test/selectCheckTestFinish/{testNo}")
+	@PostMapping("auth/student/lecture/test/selectCheckTestFinish/{lectureNo}")
 	public boolean selectCheckTestFinish(ServletRequest request,
-			@PathVariable(name="testNo") int testNo) {
+			@PathVariable(name="lectureNo") int lectureNo) {
 		// 세션에서 id 가져오기		
 		HttpSession session = ((HttpServletRequest)request).getSession();	
 		String accountId = (String)session.getAttribute("loginId");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("testNo", testNo);
+		map.put("lectureNo", lectureNo);
 		map.put("accountId", accountId);
 		
 		// 문제를 다 풀었을시
@@ -82,5 +82,17 @@ public class StudentTestRestController {
 		
 		// 문제를 다 안풀었을시
 		return false;		
+	}
+	
+	// 시험이 제출기간인지
+	@PostMapping("auth/student/lecture/test/selectCheckTestDate/{lectureNo}")
+	public boolean selectCheckTestDate(@PathVariable(name="lectureNo") int lectureNo) {
+		// 제출 기간이 아닐경우
+		if(studentTestRestService.selectCheckTestDate(lectureNo) == 0) {
+			return false;
+		}
+		
+		// 제출 기간일 경우
+		return true;	
 	}
 }

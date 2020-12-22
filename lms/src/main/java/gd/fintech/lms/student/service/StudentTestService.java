@@ -14,21 +14,16 @@ import gd.fintech.lms.vo.Test;
 public class StudentTestService {
 	@Autowired StudentTestMapper studentTestMapper;
 	// 평가 목록 가져오기
-	public List<Test> selectTestListByPage(Map<String, Object> map){
-		return studentTestMapper.selectTestListByPage(map);
+	public Test selectTestListByPage(int lectureNo){
+		return studentTestMapper.selectTestListByPage(lectureNo);
 	}
-	// 평가 목록 개수 가져오기
-	public int selectTestListCount(int lectureNo) {
-		return studentTestMapper.selectTestListCount(lectureNo);
-	}
-	
 	// 평가 상세보기
 	public List<Multiplechoice> selectTestOne(Map<String, Object> map){
 		return studentTestMapper.selectTestOne(map);
 	}
 	
 	// 평가 - 문제 개수 가져오기
-	public int selectMultiplechoiceCount(int testNo) {
-		return studentTestMapper.selectMultiplechoiceCount(testNo);
+	public int selectMultiplechoiceCount(int lectureNo) {
+		return studentTestMapper.selectMultiplechoiceCount(lectureNo);
 	}
 }

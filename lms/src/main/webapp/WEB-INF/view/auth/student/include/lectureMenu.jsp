@@ -11,5 +11,5 @@
 	
 	<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/archive/archiveList/1">자료실</a>
 	
-	<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testList/1">평가</a>
+	<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testList">평가</a>
 </div>
