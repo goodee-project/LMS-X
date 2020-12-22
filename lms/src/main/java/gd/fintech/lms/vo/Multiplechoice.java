@@ -17,5 +17,6 @@ public class Multiplechoice {
 	private String	multiplechoiceUpdatedate;	// 객관식 문제 업데이트 일시
 	private String	multiplechoiceScore;	    // 객관식 문제 배점
 	
-	private List<MultiplechoiceExample> multiplechoiceExampleList;
+	private List<MultiplechoiceExample> multiplechoiceExampleList;	// 객관식 보기 목록
+	private List<Answersheet> answersheetList;						// 학생이 제출한 답안지 목록
 }
