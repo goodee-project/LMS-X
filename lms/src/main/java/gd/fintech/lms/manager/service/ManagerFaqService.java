@@ -38,4 +38,9 @@ public class ManagerFaqService {
 	public Faq getFaqOne(int faqNo) {
 		return managerFaqMapper.selectFaqOne(faqNo);
 	}
+	
+	// FAQ 게시판 상세보기 조회수 증가
+	public int updateFaqCountUp(int faqNo) {
+		return managerFaqMapper.updateFaqCount(faqNo);
+	}
 }

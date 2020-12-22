@@ -79,14 +79,16 @@ public class ManagerQuestionController {
 	public String deleteQuestion(
 			@PathVariable(name = "questionNo") int questionNo) {
 		managerQuestionService.deleteQuestion(questionNo);
-		return "redirect:/auth/manager/question/questionList";
+		return "redirect:/auth/manager/question/questionList/1";
 	}
 	
 	@GetMapping("/auth/manager/question/questionOne/{questionNo}")
 	public String questionOne(Model model,
 			@PathVariable(name = "questionNo") int questionNo) {
+		managerQuestionService.updateQuestionCountUp(questionNo);
 		Question question = managerQuestionService.getQuestionOne(questionNo);
 		model.addAttribute("question", question);
 		return "auth/manager/question/questionOne";
 	}
+	
 }

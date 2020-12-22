@@ -84,4 +84,14 @@
 		WHERE
 			faq_no = #{faqNo}
 	</select>
+	
+	<!--FAQ 게시판 조회수 증가-->
+	<update id="updateFaqCount" parameterType="gd.fintech.lms.vo.Faq">
+		UPDATE 
+			faq
+		SET
+			faq_count = faq_count + 1
+		WHERE
+			faq_no = #{faqNo}
+	</update>
 </mapper>

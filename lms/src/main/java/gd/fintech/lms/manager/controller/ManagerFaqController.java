@@ -96,14 +96,14 @@ public class ManagerFaqController {
 	public String insertFaq(Faq faq) {
 		System.out.println(faq);
 		managerFaqService.insertFaq(faq);
-		return "redirect:/auth/manager/faq/faqList";
+		return "redirect:/auth/manager/faq/faqList/1";
 	}
 	
 	@GetMapping("/auth/manager/faq/deleteFaq/{faqNo}")
 	public String deleteFaq(
 			@PathVariable(name="faqNo") int faqNo) {
 		managerFaqService.deleteFaq(faqNo);
-		return "redirect:/auth/manager/faq/faqList";
+		return "redirect:/auth/manager/faq/faqList/1";
 	}
 	
 	@GetMapping("/auth/manager/faq/updateFaq/{faqNo}")
@@ -119,12 +119,13 @@ public class ManagerFaqController {
 	@PostMapping("/auth/manager/faq/updateFaq")
 	public String updateFaq(Faq faq) {
 		managerFaqService.updateFaq(faq);
-		return "redirect:/auth/manager/faq/faqList";
+		return "redirect:/auth/manager/faq/faqList/1";
 	}
 	
 	@GetMapping("/auth/manager/faq/faqOne/{faqNo}")
 	public String faqOne(Model model,
 			@PathVariable(name = "faqNo") int faqNo) {
+		managerFaqService.updateFaqCountUp(faqNo);
 		Faq faq = managerFaqService.getFaqOne(faqNo);
 		model.addAttribute("faq", faq);
 		return "auth/manager/faq/faqOne";

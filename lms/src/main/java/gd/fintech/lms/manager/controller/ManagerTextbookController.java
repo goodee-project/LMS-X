@@ -84,14 +84,14 @@ public class ManagerTextbookController {
 	@PostMapping("/auth/manager/textbook/insertTextbook")
 	public String insertTextbook(Textbook textbook) {
 		managerTextbookService.insertTextbook(textbook);
-		return "redirect:/auth/manager/textbook/textbookList";
+		return "redirect:/auth/manager/textbook/textbookList/1";
 	}
 	
 	@GetMapping("/auth/manager/textbook/deleteTextbook/{textbookIsbn}")
 	public String deleteTextbook(
 			@PathVariable(name = "textbookIsbn") String textbookIsbn) {
 		managerTextbookService.deleteTextbook(textbookIsbn);
-		return "redirect:/auth/manager/textbook/textbookList";
+		return "redirect:/auth/manager/textbook/textbookList/1";
 	}
 	
 	@GetMapping("/auth/manager/textbook/updateTextbook/{textbookIsbn}")
@@ -106,7 +106,7 @@ public class ManagerTextbookController {
 	@PostMapping("/auth/manager/textbook/updateTextbook")
 	public String updateTextbook(Textbook textbook) {
 		managerTextbookService.updateTextbook(textbook);
-		return "redirect:/auth/manager/textbook/textbookList";
+		return "redirect:/auth/manager/textbook/textbookList/1";
 	}
 	
 	@GetMapping("/auth/manager/textbook/textbookOne/{textbookIsbn}")

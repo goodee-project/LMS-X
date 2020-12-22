@@ -52,4 +52,14 @@
 		WHERE
 			question_no = #{questionNo}
 	</select>
+	
+	<!--질문 게시판 조회수 증가-->
+	<update id="updateQuestionCount" parameterType="gd.fintech.lms.vo.Question">
+		UPDATE 
+			question
+		SET
+			question_count = question_count + 1
+		WHERE
+			question_no = #{questionNo}
+	</update>
 </mapper>

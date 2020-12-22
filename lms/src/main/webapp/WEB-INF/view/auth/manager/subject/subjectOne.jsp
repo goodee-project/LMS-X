@@ -34,11 +34,11 @@
 			<td>${subject.subjectInfo}</td>
 		</tr>
 		<tr>
-			<td>질문게시글 수정</td>
+			<td>과목 수정</td>
 			<td><a href="${pageContext.request.contextPath}/auth/manager/subject/updateSubject/${subject.subjectNo}">수정</a></td>
 		</tr>
 		<tr>
-			<td>질문게시글 삭제</td>
+			<td>과목 삭제</td>
 			<td><a href="${pageContext.request.contextPath}/auth/manager/subject/deleteSubject/${subject.subjectNo}">삭제</a></td>
 		</tr>
 	</table>

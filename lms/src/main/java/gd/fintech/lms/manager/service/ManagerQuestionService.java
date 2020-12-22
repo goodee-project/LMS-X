@@ -30,4 +30,9 @@ public class ManagerQuestionService {
 	public Question getQuestionOne(int questionNo) {
 		return managerQuestionMapper.selectQuestionOne(questionNo);
 	}
+	
+	// 질문 게시판 상세보기 조회수 증가
+	public int updateQuestionCountUp(int questionNo) {
+		return managerQuestionMapper.updateQuestionCount(questionNo);
+	}
 }

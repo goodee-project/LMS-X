@@ -85,13 +85,14 @@ public class ManagerClassroomController {
 	@PostMapping("/auth/manager/classroom/insertClassroom")
 	public String insertClassroom(Classroom classroom) {
 		managerClassroomService.insertClassroom(classroom);
-		return "redirect:/auth/manager/classroom/classroomList";
+		return "redirect:/auth/manager/classroom/classroomList/1";
 	}
 	
-	@GetMapping("/auth/manager/classroom/deleteClassroom")
-	public String deleteClassroom(int classroomNo) {
+	@GetMapping("/auth/manager/classroom/deleteClassroom/{classroomNo}")
+	public String deleteClassroom(
+			@PathVariable(name = "classeoomNo") int classroomNo) {
 		managerClassroomService.deleteClassroom(classroomNo);
-		return "redirect:/auth/manager/classroom/classroomList";
+		return "redirect:/auth/manager/classroom/classroomList/1";
 	}
 	
 	@GetMapping("/auth/manager/classroom/updateClassroom/{classroomNo}")
@@ -105,6 +106,6 @@ public class ManagerClassroomController {
 	@PostMapping("/auth/manager/classroom/updateClassroom")
 	public String updateClassroom(Classroom classroom) {
 		managerClassroomService.updateClassroom(classroom);
-		return "redirect:/auth/manager/classroom/classroomList";
+		return "redirect:/auth/manager/classroom/classroomList/1";
 	}
 }

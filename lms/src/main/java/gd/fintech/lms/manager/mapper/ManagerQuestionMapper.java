@@ -13,4 +13,5 @@ public interface ManagerQuestionMapper {
 	int selectQuestionCount();					// 질문 페이징 카운트
 	int deleteQuestion(int question);			// 질문 삭제
 	Question selectQuestionOne(int question);   // 질문 상세보기
+	int updateQuestionCount(int questionNo);	// 질문 게시판 조회수 증가
 }

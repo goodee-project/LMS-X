@@ -16,8 +16,8 @@
 			</tr>
 			<tr>
 				<td>과목 이름</td>
-				<td><input type="text" name="subjectName" value="${subject.subjectName}"></td>
-			<tr>
+				<td><input type="text" name="subjectName" value="${subject.subjectName}" readonly="readonly"></td>
+			</tr>
 			<tr>
 				<td>과목 총 일수</td>
 				<td><input type="text" name="subjectTotalday" value="${subject.subjectTotalday}"></td>

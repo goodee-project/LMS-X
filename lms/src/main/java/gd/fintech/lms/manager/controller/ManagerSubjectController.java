@@ -84,13 +84,14 @@ public class ManagerSubjectController {
 	@PostMapping("/auth/manager/subject/insertSubject")
 	public String insertSubject(Subject subject) {
 		managerSubjectService.insertSubject(subject);
-		return "redirect:/auth/manager/subject/subjectList";
+		return "redirect:/auth/manager/subject/subjectList/1";
 	}
 	
-	@GetMapping("/auth/manager/subject/deleteSubject")
-	public String deleteSubject(int subjectNo) {
+	@GetMapping("/auth/manager/subject/deleteSubject/{subjectNo}")
+	public String deleteSubject(
+			@PathVariable(name = "subjectNo") int subjectNo) {
 		managerSubjectService.deleteSubject(subjectNo);
-		return "redirect:/auth/manager/subject/subjectList";
+		return "redirect:/auth/manager/subject/subjectList/1";
 	}
 	
 	@GetMapping("/auth/manager/subject/updateSubject/{subjectNo}")
@@ -104,7 +105,7 @@ public class ManagerSubjectController {
 	@PostMapping("/auth/manager/subject/updateSubject")
 	public String updateSubject(Subject subject) {
 		managerSubjectService.updateSubject(subject);
-		return "redirect:/auth/manager/subject/subjectList";
+		return "redirect:/auth/manager/subject/subjectList/1";
 	}
 	
 	@GetMapping("/auth/manager/subject/subjectOne/{subjectNo}")
