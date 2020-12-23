@@ -16,7 +16,7 @@
 			</tr>
 			<tr>
 				<td>FAQ 작성자</td>
-				<td> <input type="text" name="faqWriter"></td>
+				<td> <input type="text" name="faqWriter" value="${sessionScope.loginId}" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>FAQ 제목</td>

@@ -28,23 +28,67 @@
 			teacher
 	</select>
 	
+	<resultMap type="gd.fintech.lms.vo.Teacher" id="selectTeacherOneInfomation">
+		<result property="teacherId" column="teacher_id"/>
+		<result property="teacherEmail" column="teacher_email"/>
+		<result property="teacherName" column="teacher_name"/>
+		<result property="teacherPhone" column="teacher_phone"/>
+		<result property="teacherGender" column="teacher_gender"/>
+		<result property="teacherBirth" column="teacher_birth"/>
+		<result property="teacherAddressMain" column="teacher_address_main"/>
+		<result property="teacherAddressSub" column="teacher_address_sub"/>
+		<result property="teacherImage" column="teacher_image"/>
+		<result property="teacherInfo" column="teacher_info"/>
+		<result property="teacherAccessdate" column="teacher_accessdate"/>
+		<result property="teacherUpdatedate" column="teacher_updatedate"/>
+		<collection property="careerList"  ofType="gd.fintech.lms.vo.Career">
+			<result property="careerNo" column="career_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="careerContent" column="career_content"/>
+			<result property="careerStartdate" column="career_startdate"/>
+			<result property="careerEnddate" column="career_enddate"/>
+		</collection>
+		<collection property="licenseList" ofType="gd.fintech.lms.vo.License">
+			<result property="licenseNo" column="license_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="licenseNumber" column="license_number"/>
+			<result property="licenseName" column="license_name"/>
+			<result property="licenseAgency" column="license_agency"/>
+			<result property="licenseGetdate" column="license_getdate"/>
+		</collection>
+	</resultMap>
 	<!-- 강사목록 상세보기 -->
-	<select id="selectTeacherOne" parameterType="String" resultType="gd.fintech.lms.vo.Teacher">
+	<select id="selectTeacherOne" parameterType="String" resultMap="selectTeacherOneInfomation">
 		SELECT 
-			teacher_id teacherId,
-			teacher_email teacherEmail,
-			teacher_name teacherName,
-			teacher_phone teacherPhone,
-			teacher_gender teacherGender,
-			teacher_birth teacherBirth,
-			teacher_address_main teacherAddressMain,
-			teacher_address_sub teacherAddressSub,
-			teacher_image teacherImage,
-			teacher_accessdate teacherAccessdate,
-			teacher_updatedate teacherUpdatedate,
-			teacher_info teacherInfo
+			t.teacher_id,
+			t.teacher_email,
+			t.teacher_name,
+			t.teacher_phone,
+			t.teacher_gender,
+			t.teacher_birth,
+			t.teacher_address_main,
+			t.teacher_address_sub,
+			t.teacher_image,
+			t.teacher_info,
+			c.career_content,
+			c.career_startdate,
+			c.career_enddate,
+			l.license_number,
+			l.license_name,
+			l.license_agency,
+			l.license_getdate,
+			t.teacher_accessdate,
+			t.teacher_updatedate
 		FROM
-			teacher
+			teacher t 
+		INNER JOIN
+			career c
+		ON
+			t.teacher_id = c.account_id
+		INNER JOIN 
+			license l
+		ON
+			c.account_id = l.account_id
 		WHERE
 			teacher_id = #{teacherId}
 	</select>

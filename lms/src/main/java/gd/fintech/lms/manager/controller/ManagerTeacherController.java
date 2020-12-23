@@ -33,7 +33,7 @@ public class ManagerTeacherController {
 		} else {
 			lastPage = totalCount / rowPerPage + 1;			
 		}
-		Map<String, Object> map = new HashMap<>();	// 교재 목록 출력
+		Map<String, Object> map = new HashMap<>();	// 강사 목록 출력
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		List<Map<String, Object>> teacherList = managerTeacherService.getTeacherListByPage(map); // 강사 목록

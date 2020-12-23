@@ -18,7 +18,7 @@ public interface ManagerTeacherMapper {
 	int selectTeacherCount();		
 	
 	// 강사 정보
-	Teacher selectTeacherOne(String teacherId);	
+	public Teacher selectTeacherOne(String teacherId);	
 	
 	// 강사 승인 대기 목록
 	public List<TeacherQueue> selectTeacherQueueListByPage(Map<String, Object> map);

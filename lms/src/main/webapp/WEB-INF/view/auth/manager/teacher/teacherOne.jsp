@@ -46,17 +46,29 @@
 			<td>${teacher.teacherImage}</td>
 		</tr>
 		<tr>
+			<td>강사 설명</td>
+			<td>${teacher.teacherInfo}</td>
+		</tr>
+		<tr>
+			<td>강사 경력</td>
+			<td>
+				<c:forEach var="c" items="${teacher.careerList}">${c.careerContent}</c:forEach>
+			</td>
+		</tr>
+		<tr>
+			<td>보유 자격증</td>
+			<td>
+				<c:forEach var="l" items="${teacher.licenseList}">${l.licenseName}</c:forEach>
+			</td>
+		</tr>
+		<tr>
 			<td>강사정보 등록날짜</td>
 			<td>${teacher.teacherAccessdate}</td>
 		</tr>
 		<tr>
 			<td>강사정보 수정날짜</td>
 			<td>${teacher.teacherUpdatedate}</td>
-		</tr>
-		<tr>
-			<td>강사 설명</td>
-			<td>${teacher.teacherInfo}</td>
-		</tr>
+		</tr>		
 	</table>
 </body>
 </html>
