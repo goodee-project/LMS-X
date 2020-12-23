@@ -109,8 +109,9 @@
 			#{noteDispatcherName},
 			#{noteReceiverId},
 			#{noteReceiverName},
-			#{noteSendDate},
+			NOW(),
 			'N'
 		)
 	</insert>
+	
 </mapper>

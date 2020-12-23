@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>noticeReceiveList</title>
+	<title>noticeDispatchList</title>
 </head>
 	<body>
 		<h1>강의 공지사항</h1>
@@ -25,7 +25,7 @@
 					<tr>
 						<td>상태</td>
 						<td>제목</td>
-						<td>보낸사람</td>
+						<td>받는 사람</td>
 						<td>보낸 날짜</td>
 					</tr>
 				</thead>
@@ -40,8 +40,8 @@
 									!
 								</c:if>
 							</td>
-							<td><a href="${pageContext.request.contextPath}/auth/student/note/noteReceiveOne/${nl.noteNo}">${nl.noteTitle}</a></td>
-							<td>${nl.noteDispatcherName}(${nl.noteDispatcherId})</td>
+							<td><a href="${pageContext.request.contextPath}/auth/student/note/noteDispatchOne/${nl.noteNo}">${nl.noteTitle}</a></td>
+							<td>${nl.noteReceiverName}(${nl.noteReceiverId})</td>
 							<td>${nl.noteSendDate}</td>
 						</tr>
 					</c:forEach>
@@ -53,7 +53,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/1">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/1">
 								<i class='fas fa-angle-double-left'></i>
 							</a>
 						</li>
@@ -71,7 +71,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li>
-							<a href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${prePage}">
+							<a href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/${prePage}">
 								<i class='fas fa-angle-left'></i>
 							</a>
 						</li>
@@ -98,7 +98,7 @@
 							<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 							<c:otherwise>
 								<li class="page-item">
-									<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${i}">${i}</a>
+									<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/${i}">${i}</a>
 								</li>
 							</c:otherwise>
 						</c:choose>
@@ -109,7 +109,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li >
-							<a href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${nextPage}">
+							<a href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/${nextPage}">
 								<i class='fas fa-angle-right'></i>
 							</a>
 						</li>
@@ -127,7 +127,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${lastPage}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/${lastPage}">
 								<i class='fas fa-angle-double-right'></i>
 							</a>
 						</li>

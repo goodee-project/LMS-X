@@ -33,14 +33,14 @@ public class StudentNoteService {
 		return studentNoteMapper.selectNoteDispatchListCount(accountId);
 	}
 	
-	// 쪽지 상세보기
-	public Note selectNoteOne(int noteNo) {
+	// 쪽지 상세보기 - 수신함에서
+	public Note selectNoteReceiveOne(int noteNo) {
+		studentNoteMapper.updateNoteIsRead(noteNo);
 		return studentNoteMapper.selectNoteOne(noteNo);
 	}
-	
-	// 쪽지 읽음 상태로 변경
-	public int updateNoteIsRead(int noteNo) {
-		return studentNoteMapper.updateNoteIsRead(noteNo);
+	// 쪽지 상세보기 - 발신함에서
+	public Note selectNoteDispatchOne(int noteNo) {
+		return studentNoteMapper.selectNoteOne(noteNo);
 	}
 	
 	// 쪽지 보내기

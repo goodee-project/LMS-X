@@ -29,4 +29,5 @@ public interface StudentNoteMapper {
 	
 	// 쪽지 보내기
 	public int insertNote(Note note);
+	
 }
