@@ -153,29 +153,29 @@
 			</table>
 			<!-- 댓글 리스트 -->
 			<table class="table">
-				<c:forEach var="qc" items="${questionComment}">
-					<c:if test="${!empty qc.questionCommentNo}">
-						<tr>
-							<td>${qc.questionCommentNo}</td>
-							<td>${qc.questionCommentWriter}</td>
-							<td>${qc.questionCommentContent}</td>
-							<td>작성일 : ${qc.questionCommentCreatedate}</td>
-							<td>수정일 : ${qc.questionCommentUpdatedate}</td>
-							<td>
-								<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}'">수정</button>
-								&nbsp;
-								<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
-							</td>
-						</tr>
-					</c:if>
-					<c:if test="${empty qc.questionCommentNo}">
-						<tr>
-							<td>
-								<p>(댓글이 없습니다.)</p>
-							</td>
-						</tr>
-					</c:if>
-				</c:forEach>
+				<c:if test="${!empty questionComment.questionCommentNo}">
+					<c:forEach var="qc" items="${questionComment}">					
+							<tr>
+								<td>${qc.questionCommentNo}</td>
+								<td>${qc.questionCommentWriter}</td>
+								<td>${qc.questionCommentContent}</td>
+								<td>작성일 : ${qc.questionCommentCreatedate}</td>
+								<td>수정일 : ${qc.questionCommentUpdatedate}</td>
+								<td>
+									<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}'">수정</button>
+									&nbsp;
+									<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
+								</td>
+							</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty questionComment.questionCommentNo}">
+					<tr>
+						<td>
+							<p>(댓글이 없습니다.)</p>
+						</td>
+					</tr>
+				</c:if>
 			</table>
 			<form action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/insertTeacherQuestionComment" method="post" id="insertCommentForm">
 				<div>
