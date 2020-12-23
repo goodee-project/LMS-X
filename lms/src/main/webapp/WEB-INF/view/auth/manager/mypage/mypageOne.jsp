@@ -28,6 +28,7 @@
 
 	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp"/>
 	<a href="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">정보 수정</a>
+	<a href="${pageContext.request.contextPath}/auth/manager/mypage/updateMypageCareerAndLicense">경력 자격증 추가</a>
 	<table class="table table-bordered">
 		<tr>
 			<td>아이디</td>
@@ -59,9 +60,6 @@
 			<td colspan="9">
 			<c:forEach var="c" items="${manager.careerList}" >
 				<div>
-					<c:if test="${c >= 2}">
-						<hr>
-					</c:if>
 					<span>${c.careerContent}</span>
 					<span>( ${c.careerStartdate} ~ ${c.careerEnddate} )</span>
 				</div>
@@ -73,9 +71,6 @@
 			<td colspan="9">
 				<c:forEach var="l" items="${manager.licenseList}" >
 					<div>
-						<c:if test="${l >= 2}">
-							<hr>
-						</c:if>
 						<span>${l.licenseNumber}</span>
 						<span>${l.licenseName}</span>
 						<span>${l.licenseAgency}</span>

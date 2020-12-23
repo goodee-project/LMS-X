@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherMypageMapper">
+	<!-- 강사 마이페이지 정보  -->
+	<resultMap type="gd.fintech.lms.vo.Teacher" id="selectTeacherInformation">
+		<result property="teacherId" column="teacher_id"/>
+		<result property="teacherEmail" column="teacher_email"/>
+		<result property="teacherPhone" column="teacher_phone"/>
+		<result property="teacherName" column="teacher_name"/>
+		<result property="teacherGender" column="teacher_gender"/>
+		<result property="teacherBirth" column="teacher_birth"/>
+		<result property="teacherAddressMain" column="teacher_address_main"/>
+		<result property="teacherAddressSub" column="teacher_address_sub"/>
+		<result property="teacherImage" column="teacher_image"/>
+		<result property="teacherAccessdate" column="teacher_accessdate"/>
+		<result property="teacherInfo" column="teacher_info"/>
+		<collection property="careerList"  ofType="gd.fintech.lms.vo.Career">
+			<result property="careerNo" column="career_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="careerContent" column="career_content"/>
+			<result property="careerStartdate" column="career_startdate"/>
+			<result property="careerEnddate" column="career_enddate"/>
+		</collection>
+		<collection property="licenseList" ofType="gd.fintech.lms.vo.License">
+			<result property="licenseNo" column="license_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="licenseNumber" column="license_number"/>
+			<result property="licenseName" column="license_name"/>
+			<result property="licenseAgency" column="license_agency"/>
+			<result property="licenseGetdate" column="license_getdate"/>
+		</collection>
+	</resultMap>
+	<select id="selectTeacherMypage" parameterType="String" resultMap="selectTeacherInformation">
+		SELECT
+			m.teacher_id,
+			m.teacher_email,
+			m.teacher_phone,
+			m.teacher_name,
+			m.teacher_gender,
+			m.teacher_birth,
+			m.teacher_address_main,
+			m.teacher_address_sub,
+			m.teacher_image,
+			m.teacher_accessdate,
+			m.teacher_info,
+			c.career_no,
+			c.account_id,
+			c.career_content,
+			c.career_startdate,
+			c.career_enddate,
+			l.license_no,
+			l.license_number,
+			l.license_name,
+			l.license_agency,
+			l.license_getdate
+		FROM
+			teacher m
+		LEFT JOIN
+			career c ON
+			c.account_id = m.teacher_id
+		LEFT JOIN
+			license l ON
+			l.account_id = m.teacher_id 
+		WHERE
+			Teacher_id = #{TeacherId}
+	</select>
+	
+	<!-- 강사 마이페이지 정보 수정  -->
+	<update id="updateTeacherMypage" parameterType="gd.fintech.lms.vo.Teacher" >
+		UPDATE 
+			teacher
+		SET 
+			teacher_email = #{teacherEmail},
+			teacher_phone = #{teacherPhone},
+			teacher_name = #{teacherName},
+			teacher_gender = #{teacherGender},
+			teacher_birth = #{teacherBirth},
+			teacher_address_main = #{teacherAddressMain},
+			teacher_address_sub = #{teacherAddressSub},
+			teacher_Info = #{teacherInfo},
+			teacher_updatedate = now()
+		WHERE
+			teacher_id = #{teacherId}
+	</update>
+	
+	<!-- 강사 마이페이지 경력 추가 -->
+	<insert id="insertTeacherMypageCareer" parameterType="gd.fintech.lms.vo.Career">
+		INSERT INTO career(
+			account_id,
+			career_content,
+			career_startdate,
+			career_enddate
+		) VALUES (
+			#{accountId},
+			#{careerContent},
+			#{careerStartdate},
+			#{careerEnddate}
+		)
+	</insert>
+	
+	<!-- 경력 및 자격증 추가시 강사 수정시간 변경 -->
+	<update id="updateTeacherUpdatedate" parameterType="String">
+		UPDATE
+			teacher
+		SET
+			teacher_updatedate = now()
+		WHERE
+			teacher_id = #{accountId}
+	</update>
+	
+	<!-- 강사 마이페이지 경력 삭제 -->
+	<delete id="deleteTeacherMypageCareer" parameterType="int">
+		DELETE FROM
+			career
+		WHERE
+			career_no = #{careerNo}
+	</delete>
+	
+	<!-- 강사 마이페이지 자격증 추가 -->
+	<insert id="insertTeacherMypageLicense" parameterType="gd.fintech.lms.vo.License">
+		INSERT INTO license(
+			account_id,
+			license_number,
+			license_name,
+			license_agency,
+			license_getdate
+		) VALUE (
+			#{accountId},
+			#{licenseNumber},		
+			#{licenseName},	
+			#{licenseAgency},	
+			#{licenseGetdate}		
+		)
+	</insert>
+	
+	<!-- 강사 마이페이지 자격증 삭제 -->
+	<delete id="deleteTeacherMypageLicense" parameterType="int">
+		DELETE FROM
+			license
+		WHERE
+			license_no = #{licenseNo}
+	</delete>
+</mapper>

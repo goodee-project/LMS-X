@@ -43,9 +43,12 @@
 			m.manager_address_sub,
 			m.manager_image,
 			m.manager_accessdate,
+			c.career_no,
+			c.account_id,
 			c.career_content,
 			c.career_startdate,
 			c.career_enddate,
+			l.license_no,
 			l.license_number,
 			l.license_name,
 			l.license_agency,
@@ -78,5 +81,63 @@
 		WHERE
 			manager_id = #{managerId}
 	</update>
+	
+	<!-- 운영자 마이페이지 경력 추가 -->
+	<insert id="insertManagerMypageCareer" parameterType="gd.fintech.lms.vo.Career">
+		INSERT INTO career(
+			account_id,
+			career_content,
+			career_startdate,
+			career_enddate
+		) VALUES (
+			#{accountId},
+			#{careerContent},
+			#{careerStartdate},
+			#{careerEnddate}
+		)
+	</insert>
+	
+	<!-- 경력 및 자격증 추가시 운영자 수정시간 변경 -->
+	<update id="updateManagerUpdatedate" parameterType="String">
+		UPDATE
+			manager
+		SET
+			manager_updatedate = now()
+		WHERE
+			manager_id = #{accountId}
+	</update>
+	
+	<!-- 운영자 마이페이지 경력 삭제 -->
+	<delete id="deleteManagerMypageCareer" parameterType="int">
+		DELETE FROM
+			career
+		WHERE
+			career_no = #{careerNo}
+	</delete>
+	
+	<!-- 운영자 마이페이지 자격증 추가 -->
+	<insert id="insertManagerMypageLicense" parameterType="gd.fintech.lms.vo.License">
+		INSERT INTO license(
+			account_id,
+			license_number,
+			license_name,
+			license_agency,
+			license_getdate
+		) VALUE (
+			#{accountId},
+			#{licenseNumber},		
+			#{licenseName},	
+			#{licenseAgency},	
+			#{licenseGetdate}		
+		)
+	</insert>
+	
+	<!-- 운영자 마이페이지 자격증 삭제 -->
+	<delete id="deleteManagerMypageLicense" parameterType="int">
+		DELETE FROM
+			license
+		WHERE
+			license_no = #{licenseNo}
+	</delete>
 	
 </mapper>
