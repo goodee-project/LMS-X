@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerLectureArchiveMapper">
+	<!-- 강의 자료 목록 -->
+	<select id="selectLectureArchiveListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.LectureArchive">
+		SELECT 
+			lecture_archive_no lectureArchiveNo,
+			lecture_no lectureNo,
+			account_id accountId,
+			lecture_archive_writer lectureArchiveWriter,
+			lecture_archive_title lectureArchiveTitle,
+			lecture_archive_content lectureArchiveContent,
+			lecture_archive_createdate lectureArchiveCreatedate,
+			lecture_archive_count lectureArchiveCount
+		FROM 
+			lecture_archive
+		WHERE 
+			lecture_no = #{lectureNo}
+		ORDER BY
+			lecture_archive_createdate DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}	
+	</select> 
+
+	<!-- 강의 자료 카운팅 -->
+	<select id="selectLectureArchiveListCount" parameterType="int" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			lecture_archive
+		WHERE 
+			lecture_no = #{lectureNo}
+	</select>
+
+	<resultMap type="gd.fintech.lms.vo.LectureArchive" id="selectLectureArchiveOneInfomation">
+		<result property="lectureArchiveNo" column="lecture_archive_no" />
+		<result property="lectureNo" column="lecture_no" />
+		<result property="accountId" column="account_id" />
+		<result property="lectureArchiveWriter" column="lecture_archive_writer" />
+		<result property="lectureArchiveTitle" column="lecture_archive_title" />
+		<result property="lectureArchiveContent" column="lecture_archive_content" />
+		<result property="lectureArchiveCreatedate" column="lecture_archive_createdate" />
+		<result property="lectureArchiveUpdatedate" column="lecture_archive_updatedate" />
+		<result property="lectureArchiveCount" column="lecture_archive_count" />
+		<collection property="lectureArchiveFileList" ofType="gd.fintech.lms.vo.LectureArchiveFile">
+			<result property="lectureArchiveFileUuid" column="lecture_archive_file_uuid" />
+			<result property="lectureArchiveFileOriginal" column="lecture_archive_file_original" />
+			<result property="lectureArchiveNo" column="lecture_archive_no" />
+			<result property="lectureArchiveFileSize" column="lecture_archive_file_size" />
+			<result property="lectureArchiveFileType" column="lecture_archive_file_type" />
+			<result property="lectureArchiveFileCount" column="lecture_archive_file_count" />
+		</collection>
+	</resultMap>
+	<!-- 강의 자료 상세보기 -->
+	<select id="selectLectureArchiveOne" parameterType="int" resultType="int">
+		SELECT
+  			la.lecture_archive_no, 
+  			la.lecture_no, 
+  			la.account_id, 
+  			la.lecture_archive_writer, 
+  			la.lecture_archive_title, 
+  			la.lecture_archive_content, 
+  			la.lecture_archive_createdate, 
+  			la.lecture_archive_updatedate, 
+  			la.lecture_archive_count, 
+  			laf.lecture_archive_file_uuid, 
+  			laf.lecture_archive_file_original, 
+  			laf.lecture_archive_file_size, 
+  			laf.lecture_archive_file_type, 
+  			laf.lecture_archive_file_count
+  		FROM
+  			lecture_archive la
+  		LEFT OUTER JOIN
+  			lecture_archive_file laf ON
+  			la.lecture_archive_no = laf.lecture_archive_no
+  		WHERE
+  			la.lecture_archive_no = #{lectureArchiveNo}
+	</select>
+</mapper>

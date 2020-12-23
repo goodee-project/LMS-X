@@ -11,6 +11,7 @@
 	<div>
 		<a href="${pageContext.request.contextPath}/auth/manager/lecture/lectureList/1">뒤로가기</a>
 		<a href="${pageContext.request.contextPath}/auth/manager/lecture/updateLecture/${lectureNo}">수정</a>
+		<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/archive/archiveList/1">강의 자료 게시판</a>
 	</div>
 	<table border="1">
 		<tr>
