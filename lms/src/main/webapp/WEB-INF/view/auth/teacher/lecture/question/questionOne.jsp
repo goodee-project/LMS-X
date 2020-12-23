@@ -153,7 +153,7 @@
 			</table>
 			<!-- 댓글 리스트 -->
 			<table class="table">
-				<c:if test="${!empty questionComment.questionCommentNo}">
+				<c:if test="${!empty questionComment[0].questionCommentNo}">
 					<c:forEach var="qc" items="${questionComment}">					
 							<tr>
 								<td>${qc.questionCommentNo}</td>
@@ -169,7 +169,7 @@
 							</tr>
 					</c:forEach>
 				</c:if>
-				<c:if test="${empty questionComment.questionCommentNo}">
+				<c:if test="${empty questionComment[0].questionCommentNo}">
 					<tr>
 						<td>
 							<p>(댓글이 없습니다.)</p>
