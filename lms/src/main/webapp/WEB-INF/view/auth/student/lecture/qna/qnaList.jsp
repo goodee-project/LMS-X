@@ -29,7 +29,7 @@
 					<c:forEach var="q" items="${question}">
 						<tr>
 							<td>${q.questionNo}</td>
-							<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${q.lectureNo}/qna/qnaOne/${q.questionNo}">${q.questionTitle}</a></td>
+							<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${q.lectureNo}/qna/qnaOne/${q.questionNo}/1">${q.questionTitle}</a></td>
 							<td>${q.questionWriter}</td>
 							<td>${q.questionCreatedate}</td>
 							<td>${q.questionCount}</td>

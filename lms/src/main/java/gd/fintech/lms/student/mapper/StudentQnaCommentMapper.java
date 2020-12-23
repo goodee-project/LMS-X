@@ -22,6 +22,9 @@ public interface StudentQnaCommentMapper {
 	// 질문 댓글 수정
 	int updateStudentQuestionComment(QuestionComment questionComment);
 	
+	// 질문 댓글 하나만 보기(수정)
+	QuestionComment selectStudentQuestionCommmentOne(int questionNo); 
+	
 	// 질문 댓글 수
-	int selectQnaCommentCount();
+	int selectQnaCommentCount(int questionNo);
 }

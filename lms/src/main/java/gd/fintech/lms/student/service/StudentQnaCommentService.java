@@ -21,8 +21,8 @@ public class StudentQnaCommentService {
 	}
 	
 	// 질문 게시판 댓글 수 확인
-	public int getCountQnaCommentList() {
-		return studentQnaCommentMapper.selectQnaCommentCount();
+	public int getCountQnaCommentList(int questionNo) {
+		return studentQnaCommentMapper.selectQnaCommentCount(questionNo);
 	}
 	
 	// 질문 게시판 댓글 입력

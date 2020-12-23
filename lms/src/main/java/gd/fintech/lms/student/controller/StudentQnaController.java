@@ -97,13 +97,32 @@ public class StudentQnaController {
 	}
 	
 	// Qna 상세보기
-	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}")
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/{currentPage}")
 	public String qnaOne(Model model, ServletRequest request,
+			@PathVariable(name = "currentPage", required = true) int currentPage,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo) {
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		String accountId = (String)session.getAttribute("loginId");
+		
+		// 한 페이지에 출력할 게시물의 수
+		int rowPerPage = 10;
+		
+		// 전체 데이터(댓글)의 수
+		int totalCount = studentQnaCommentService.getCountQnaCommentList(questionNo);
+		
+		// 시작 페이지
+		int beginRow = (currentPage - 1) * rowPerPage;
+		
+		// 마지막 페이지
+		int lastPage = 0;
+		if(totalCount % rowPerPage == 0) {
+			lastPage = totalCount / rowPerPage;
+		} else {
+			lastPage = totalCount / rowPerPage + 1;			
+		}
+		
 		
 		studentQnaService.updateStudentQnaCountUp(questionNo);
 
@@ -111,10 +130,49 @@ public class StudentQnaController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("lectureNo", lectureNo);
 		map.put("questionNo", questionNo);
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
 
 		List<QuestionComment> questionComment = studentQnaCommentService.getQnaCommentListByPage(map);
 		Question question = studentQnaService.getStudentQnaOne(questionNo);
-				
+		
+		// 네비에 출력될 페이지 개수
+		int navPerPage = 10; 
+		// 네비의 첫 페이지
+		int navFirstPage = currentPage - (currentPage % navPerPage) + 1;
+		// 네비의 마지막 페이지
+		int navLastPage = navFirstPage + navPerPage - 1; 
+		
+		// 현재 페이지가 10으로 나누어 떨어질 때
+		if (currentPage % navPerPage == 0 && currentPage != 0) {
+			navFirstPage = navFirstPage - navPerPage;
+			navLastPage = navLastPage - navPerPage;
+		}
+		
+		// 현재 페이지에 대한 이전 페이지
+		int prePage;
+		if (currentPage > 10) {
+			prePage = currentPage - (currentPage % navPerPage) + 1 - 10;
+		} else {
+			prePage = 1;
+		}
+
+		// 현재 페이지에 대한 다음 페이지
+		int nextPage = currentPage - (currentPage % navPerPage) + 1 + 10;
+		if (nextPage > totalCount) {
+			nextPage = totalCount;
+		}
+		
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		
+		model.addAttribute("navPerPage", navPerPage);
+		model.addAttribute("navFirstPage", navFirstPage);
+		model.addAttribute("navLastPage", navLastPage);
+		
+		model.addAttribute("prePage", prePage);
+		model.addAttribute("nextPage", nextPage);
+		
 		model.addAttribute("lectrueNo", lectureNo);
 		model.addAttribute("question", question);
 		model.addAttribute("questionComment",questionComment);
@@ -195,6 +253,67 @@ public class StudentQnaController {
 		studentQnaService.deleteStudentQnaByQnaNo(questionNo);
 		
 		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaList/1";
+	}
+	// 댓글 작성 
+	@PostMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/insertStduentQuestionComment")
+	public String insertStduentQuestionComment(QuestionComment questionComment,
+			ServletRequest request,
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionNo") int questionNo) {
+		
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		String accountId = (String)session.getAttribute("loginId");
+		String loginName = (String)session.getAttribute("loginName");
+		
+		questionComment.setAccountId(accountId);
+		questionComment.setQuestionCommentWriter(loginName);
+		
+		studentQnaCommentService.insertQnaComment(questionComment);
+		
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1";
+	}
+	
+	// 댓글 수정 폼
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/updateQuestionComment/{questionCommentNo}")
+	public String updateStudentQuestionComment(Model model,
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionNo") int questionNo,
+			@PathVariable(name = "questionCommentNo") int questionCommentNo) {
+	Question question = studentQnaService.getStudentQnaOne(questionNo);
+	
+	
+	model.addAttribute("lectrueNo", lectureNo);
+	model.addAttribute("questionNo", questionNo);
+	model.addAttribute("question", question);
+	
+	
+	return "/auth/student/lecture/qna/updateQuestionComment";
+	
+	}
+	
+	// 댓글 수정 액션
+	@PostMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/updateStduentQuestionComment")
+	public String updateStduentQuestionComment(QuestionComment questionComment,
+			ServletRequest request,
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionNo") int questionNo) {
+		
+
+		studentQnaCommentService.updateQnaComment(questionComment);
+		
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1";
+	}
+	
+	// 댓글 삭제
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/deleteQuestionComment/{questionCommentNo}")
+	public String deleteQuestionComment(Model model,
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionNo") int questionNo,
+			@PathVariable(name = "questionCommentNo") int questionCommentNo) {
+		
+		studentQnaCommentService.deleteQnaComment(questionCommentNo);
+		
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo +"/1";
 	}
 	
 }
