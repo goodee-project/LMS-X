@@ -22,10 +22,13 @@ public class TeacherFaqService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	// FAQ 목록
-	public List<Faq> selectTeacherFaqListByPage(int beginRow, int rowPerPage) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("beginRow", beginRow);			// 시작 데이터
-		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
+	public List<Faq> selectTeacherFaqListByPage(int beginRow, int rowPerPage, String searchCategory, String searchOption, String searchText) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("beginRow", beginRow);					// 시작 데이터
+		map.put("rowPerPage", rowPerPage);				// 한 페이지당 표시할 데이터 수
+		map.put("searchCategory", searchCategory);		// FAQ 카테고리
+		map.put("searchOption", searchOption);			// 제목 + 내용, 제목, 내용
+		map.put("searchText", searchText);				// 문자열 검색
 		
 		List<Faq> faqList = teacherFaqMapper.selectTeacherFaqListByPage(map);
 		
@@ -36,8 +39,13 @@ public class TeacherFaqService {
 	}
 	
 	// FAQ 총 데이터 수
-	public int selectTeacherFaqCount() {
-		return teacherFaqMapper.selectTeacherFaqCount();
+	public int selectTeacherFaqCount(String searchCategory, String searchOption, String searchText) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchCategory", searchCategory);		// FAQ 카테고리
+		map.put("searchOption", searchOption);			// 제목 + 내용, 제목, 내용
+		map.put("searchText", searchText);				// 문자열 검색
+		
+		return teacherFaqMapper.selectTeacherFaqCount(map);
 	}
 	
 	// FAQ 조회

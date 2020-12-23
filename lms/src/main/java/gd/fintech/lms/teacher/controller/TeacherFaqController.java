@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.teacher.service.TeacherFaqService;
 import gd.fintech.lms.vo.Faq;
@@ -23,7 +25,10 @@ public class TeacherFaqController {
 	// FAQ 목록
 	@GetMapping("/auth/teacher/faq/faqList/{currentPage}")
 	public String faqList(Model model, 
-			@PathVariable(value = "currentPage") int currentPage) {
+			@PathVariable(value = "currentPage") int currentPage, 
+			@RequestParam(value=  "searchCategory", defaultValue = "") String searchCategory,  			// FAQ 카테고리
+			@RequestParam(value=  "searchOption", defaultValue = "titleContent") String searchOption, 	// 제목 + 내용, 제목, 내용
+			@RequestParam(value=  "searchText", defaultValue = "") String searchText) {					// 문자열 검색
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
 		
@@ -31,12 +36,12 @@ public class TeacherFaqController {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		// [Logger] 데이터베이스로부터 FAQ 목록을 가져온다
-		List<Faq> faqList = teacherFaqService.selectTeacherFaqListByPage(beginRow, rowPerPage);
+		List<Faq> faqList = teacherFaqService.selectTeacherFaqListByPage(beginRow, rowPerPage, searchCategory, searchOption, searchText);
 		logger.trace("faqList[" + faqList + "]");
 		
 		// 페이징 코드
 		// 전체 데이터 수
-		int totalCount = teacherFaqService.selectTeacherFaqCount();
+		int totalCount = teacherFaqService.selectTeacherFaqCount(searchCategory, searchOption, searchText);
 		
 		// 마지막 페이지
 		int lastPage = totalCount / rowPerPage;
@@ -92,6 +97,10 @@ public class TeacherFaqController {
 		
 		model.addAttribute("prePage", prePage);
 		model.addAttribute("nextPage", nextPage);
+		
+		model.addAttribute("searchCategory", searchCategory);
+		model.addAttribute("searchOption", searchOption);
+		model.addAttribute("searchText", searchText);
 		
 		// [View] /auth/teacher/faq/faqList.jsp
 		return "/auth/teacher/faq/faqList";

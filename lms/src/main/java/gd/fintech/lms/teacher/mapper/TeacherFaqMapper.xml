@@ -12,17 +12,49 @@
 			faq_category faqCategory
 		FROM
 			faq
+		<where>
+			<if test="searchCategory != ''">
+				AND faq_category = #{searchCategory}
+			</if>
+			<if test="searchText != ''">
+				<if test="searchOption == 'titleContent'">
+					AND (faq_title LIKE CONCAT('%',#{searchText},'%') OR faq_content LIKE CONCAT('%',#{searchText},'%'))
+				</if>
+				<if test="searchOption == 'title'">
+					AND faq_title LIKE CONCAT('%',#{searchText},'%')
+				</if>
+				<if test="searchOption == 'content'">
+					AND faq_content LIKE CONCAT('%',#{searchText},'%')
+				</if>
+			</if>
+		</where>
 		ORDER BY
 			faq_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- FAQ 총 데이터 수 -->
-	<select id="selectTeacherFaqCount" resultType="Integer">
+	<select id="selectTeacherFaqCount" parameterType="java.util.Map" resultType="Integer">
 		SELECT
 			COUNT(*)
 		FROM
 			faq
+		<where>
+			<if test="searchCategory != ''">
+				AND faq_category = #{searchCategory}
+			</if>
+			<if test="searchText != ''">
+				<if test="searchOption == 'titleContent'">
+					AND (faq_title LIKE CONCAT('%',#{searchText},'%') OR faq_content LIKE CONCAT('%',#{searchText},'%'))
+				</if>
+				<if test="searchOption == 'title'">
+					AND faq_title LIKE CONCAT('%',#{searchText},'%')
+				</if>
+				<if test="searchOption == 'content'">
+					AND faq_content LIKE CONCAT('%',#{searchText},'%')
+				</if>
+			</if>
+		</where>
 	</select>
 	
 	<!-- FAQ 조회 -->

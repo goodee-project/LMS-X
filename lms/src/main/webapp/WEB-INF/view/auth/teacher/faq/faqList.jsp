@@ -24,6 +24,11 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 		
 		<style>
+			.center {
+				margin: auto;
+				text-align: center;
+			}
+		
 			.table {
 				text-align: center;
 			}
@@ -102,7 +107,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList/1">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/faq/faqList/1?searchCategory=${searchCategory}&searchOption=${searchOption}&searchText=${searchText}">
 								<i class='fas fa-angle-double-left'></i>
 							</a>
 						</li>
@@ -120,7 +125,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList/${prePage}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/faq/faqList/${prePage}?searchCategory=${searchCategory}&searchOption=${searchOption}&searchText=${searchText}">
 								<i class='fas fa-angle-left'></i>
 							</a>
 						</li>
@@ -147,7 +152,7 @@
 							<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 							<c:otherwise>
 								<li class="page-item">
-									<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList/${i}">${i}</a>
+									<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/faq/faqList/${i}?searchCategory=${searchCategory}&searchOption=${searchOption}&searchText=${searchText}">${i}</a>
 								</li>
 							</c:otherwise>
 						</c:choose>
@@ -158,7 +163,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList${nextPage}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/faq/faqList/${nextPage}?searchCategory=${searchCategory}&searchOption=${searchOption}&searchText=${searchText}">
 								<i class='fas fa-angle-right'></i>
 							</a>
 						</li>
@@ -176,7 +181,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/faq/faqList/${lastPage}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/faq/faqList/${lastPage}?searchCategory=${searchCategory}&searchOption=${searchOption}&searchText=${searchText}">
 								<i class='fas fa-angle-double-right'></i>
 							</a>
 						</li>
@@ -201,6 +206,77 @@
 					</td>
 				</tr>
 			</table>
+			
+			<br>
+			
+			<!-- 검색 -->
+			<form method="get" action="${pageContext.request.contextPath}/auth/teacher/faq/faqList/1" class="form-inline">
+				<div class="input-group mb-3 center" style="width: 70%;">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<label class="form-check-label">
+								카테고리
+							</label>
+						</span>
+					</div>
+					
+					<select class="form-control" name="searchCategory">
+						<c:if test="${searchCategory == ''}">
+							<option value="" selected="selected">== 카테고리 선택 ==</option>
+						</c:if>
+						<c:if test="${searchCategory != ''}">
+							<option value="">== 카테고리 선택 ==</option>
+						</c:if>
+						<c:if test="${searchCategory == '과제 제출'}">
+							<option value="과제 제출" selected="selected">과제 제출</option>
+						</c:if>
+						<c:if test="${searchCategory != '과제 제출'}">
+							<option value="과제 제출">과제 제출</option>
+						</c:if>
+						<c:if test="${searchCategory == '정보 확인'}">
+							<option value="정보 확인" selected="selected">정보 확인</option>
+						</c:if>
+						<c:if test="${searchCategory != '정보 확인'}">
+							<option value="정보 확인">정보 확인</option>
+						</c:if>
+					</select>
+					
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<label class="form-check-label">
+								검색
+							</label>
+						</span>
+					</div>
+					
+					<select class="form-control" name="searchOption">
+						<c:if test="${searchOption == 'titleContent'}">
+							<option value="titleContent" selected="selected">제목 + 내용</option>
+						</c:if>
+						<c:if test="${searchOption != 'titleContent'}">
+							<option value="titleContent">제목 + 내용</option>
+						</c:if>
+						<c:if test="${searchOption == 'title'}">
+							<option value="title" selected="selected">제목</option>
+						</c:if>
+						<c:if test="${searchOption != 'title'}">
+							<option value="title">제목</option>
+						</c:if>
+						<c:if test="${searchOption == 'content'}">
+							<option value="content" selected="selected">내용</option>
+						</c:if>
+						<c:if test="${searchOption != 'content'}">
+							<option value="content">내용</option>
+						</c:if>
+					</select>
+					
+					<input type="text" class="form-control" name="searchText" value="${searchText}">
+					
+					<div class="input-group-append">
+						<button type="submit" class="btn btn-secondary">검색</button>
+					</div>
+				</div>
+			</form>
 		</div>
 		
 		<br><br>

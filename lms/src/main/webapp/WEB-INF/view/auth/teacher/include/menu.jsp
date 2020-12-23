@@ -4,7 +4,7 @@
 		<ul class="navbar-nav mr-auto">
 			<!-- 강사 Navbar Brand -->
 			<li class="nav-item">
-				<a class="navbar-brand" href="${pageContext.request.contextPath}/auth/teacher/index/1">Goodee LMS&nbsp;<font size="2">[강사]</font></a>
+				<a class="navbar-brand title" href="${pageContext.request.contextPath}/auth/teacher/index/1">Goodee LMS&nbsp;<font size="2">[강사]</font></a>
 			</li>
 			
 			<!-- 강사 Index -->
