@@ -43,6 +43,15 @@
 			}
 		</style>
 		<script>
+			$(document).ready(function(){
+				$('#insertBtn').click(function(){
+					if($('#insertCommentText').val().length <= 0){
+						alert('댓글을 입력해주세요.');
+						return;
+						}
+					$('#insertCommentForm').submit();
+					});
+				});
 			// 다운로드 횟수 증가 시키기
 			function fileDownloadCount(paramUuid){
 				let fileId = paramUuid.split('.')[0];
@@ -142,6 +151,147 @@
 					</td>
 				</tr>
 			</table>
+			<!-- 댓글 리스트 -->
+			<table class="table">
+				<c:forEach var="qc" items="${questionComment}">
+					<c:if test="${!empty qc.questionCommentNo}">
+						<tr>
+							<td>${qc.questionCommentNo}</td>
+							<td>${qc.questionCommentWriter}</td>
+							<td>${qc.questionCommentContent}</td>
+							<td>작성일 : ${qc.questionCommentCreatedate}</td>
+							<td>수정일 : ${qc.questionCommentUpdatedate}</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}'">수정</button>
+								&nbsp;
+								<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${empty qc.questionCommentNo}">
+						<tr>
+							<td>
+								<p>(댓글이 없습니다.)</p>
+							</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
+			<form action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/insertTeacherQuestionComment" method="post" id="insertCommentForm">
+				<div>
+					<div>
+						<textarea rows="3" cols="50" name="questionCommentContent" class="form-control" id="insertCommentText"></textarea>
+					</div>
+					<br><br>
+					<button type="button" class="btn btn-sm btn-primary" style="float:right" id="insertBtn">댓글입력</button>
+					<br><br>
+				</div>
+			</form>
+		<!-- 페이지 내비게이션 -->
+		<ul class="pagination justify-content-center">
+			<!-- 처음으로 버튼 -->
+			<c:choose>
+				<c:when test="${currentPage > 1}">
+					<li class="page-item">
+						<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/question/questionOne/${questionNo}/1">
+							<i class='fas fa-angle-double-left'></i>
+						</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item disabled">
+						<a class="page-link" href="#">
+							<i class='fas fa-angle-double-left'></i>
+						</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			
+			<!-- 이전 버튼 -->
+			<c:choose>
+				<c:when test="${currentPage > 1}">
+					<li class="page-item">
+						<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/${prePage}">
+							<i class='fas fa-angle-left'></i>
+						</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item disabled">
+						<a class="page-link" href="#">
+							<i class='fas fa-angle-left'></i>
+						</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			
+			<!-- 현재 페이지 표시 -->
+			<c:forEach var="i" begin="${navFirstPage}" end="${navLastPage}">
+				<c:if test="${i <= lastPage}">
+					<c:choose>
+						<%-- 현재 페이지 --%>
+						<c:when test="${i == currentPage}">
+							<li class="page-item active">
+								<a class="page-link" href="#">${i}</a>
+							</li>
+						</c:when>
+						<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
+						<c:otherwise>
+							<li class="page-item">
+								<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/${i}">${i}</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</c:forEach>
+			
+			<!-- 다음 버튼 -->
+			<c:choose>
+				<c:when test="${currentPage < lastPage}">
+					<li class="page-item">
+						<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/question/questionOne/${questionNo}/${nextPage}">
+							<i class='fas fa-angle-right'></i>
+						</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item disabled">
+						<a class="page-link" href="#">
+							<i class='fas fa-angle-right'></i>
+						</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			
+			<!-- 마지막으로 버튼 -->
+			<c:choose>
+				<c:when test="${currentPage < lastPage}">
+					<li class="page-item">
+						<a class="page-link" href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/${lastPage}">
+							<i class='fas fa-angle-double-right'></i>
+						</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item disabled">
+						<a class="page-link" href="#">
+							<i class='fas fa-angle-double-right'></i>
+						</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+		</ul>
+		
+		<!-- 총 페이지 수 출력 -->
+		<table style="margin: auto;">
+			<tr>
+				<td>
+					<button type="button" class="btn btn-outline-dark btn-sm">
+						${currentPage} / ${lastPage} 페이지
+					</button>
+				</td>
+			</tr>
+		</table>
 		</div>
 	</body>
 </html>

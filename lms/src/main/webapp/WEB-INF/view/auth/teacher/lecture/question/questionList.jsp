@@ -74,7 +74,7 @@
 					<c:forEach items="${teacherQuestList}" var="q">
 						<tr>
 							<td>${q.questionNo}</td>
-							<td><a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${q.questionNo}">${q.questionTitle}</a></td>
+							<td><a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${q.questionNo}/1">${q.questionTitle}</a></td>
 							<td>${q.questionWriter}</td>
 							<td>${q.questionCreatedate}</td>
 							<td>${q.questionCount}</td>
