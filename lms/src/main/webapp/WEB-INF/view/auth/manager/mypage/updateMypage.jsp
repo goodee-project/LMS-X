@@ -249,6 +249,46 @@
 				
 				$('#managerForm').submit();
 			});
+
+			$('#insertCareerBtn').click(function(){
+				let insertCareerHtml = `
+					<form id="careerForm" method="post" action="${pageContext.request.contextPath}/auth/manager/mypage/insertCareer" >
+						<table class="table table-bordered" >
+							<tr>
+								<td>경력 정보</td>
+								<td>
+									<input type="text" name="accountId" hidden="hidden" value="${sessionScope.loginId}">
+									<input id="careerContent" type="text" name="careerContent">
+								</td>
+							</tr>
+							<tr>
+								<td>경력 일자</td>
+								<td>
+								<input id="careerStartdate" type="date" name="careerStartdate"> ~ <input id="careerEnddate" type="date" name="careerEnddate">
+								</td>
+							</tr>
+						</table>
+						<button id="careerBtn" type="button" >등록</button>
+					</form>
+				`;
+				
+				$('#insertCareer').html(insertCareerHtml);
+
+				$('#careerBtn').click(function(){
+					$('#careerForm').submit();
+					/*
+					$.ajax({
+						url : '${pageContext.request.contextPath}/auth/manager/mypage/selectCareer/'+$('#careerContent').val()+'/'+$('#careerStartdate').val()+'/'+$('#careerEnddate').val(),
+						type : 'post',
+						success : function(data) { 
+							alert('1');
+						}
+					});*/
+
+				});
+
+			});
+			
 		});
 	</script>
 </head>
@@ -338,12 +378,16 @@
 			<tr>
 				<td>경력</td>
 				<td colspan="9">
+				
 				<c:forEach var="c" items="${manager.careerList}" >
 					<div>
 						<span>${c.careerContent}</span>
 						<span>( ${c.careerStartdate} ~ ${c.careerEnddate} )</span>
 					</div>
 				</c:forEach>
+				<div id="selectCareer"></div>
+				<div><button id="insertCareerBtn" type="button">추가</button></div>
+				<div id="insertCareer"></div>
 				</td>
 			</tr>
 			<tr>

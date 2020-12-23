@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.manager.service.ManagerMypageService;
+import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.Manager;
-import gd.fintech.lms.vo.ManagerForm;
 
 @Controller
 public class ManagerMyageController {
@@ -42,11 +42,11 @@ public class ManagerMyageController {
 		return "auth/manager/mypage/updateMypage";
 	}
 	@PostMapping("/auth/manager/mypage/updateMypage")
-	public String updateMypage(ManagerForm managerForm) {
+	public String updateMypage(Manager manager) {
 		
-		log.debug(managerForm.toString());
-		
-		managerMypageService.updateManagerMypage(managerForm);
+		managerMypageService.updateManagerMypage(manager);
 		return "redirect:/auth/manager/mypage/mypageOne";
 	}
+		
+	
 }

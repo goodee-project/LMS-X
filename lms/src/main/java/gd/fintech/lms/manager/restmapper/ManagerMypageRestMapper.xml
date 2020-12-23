@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="gd.fintech.lms.manager.restmapper.ManagerMypageRestMapper">
+	<!-- 운영자 마이페이지 정보 검색 -->
+	<select id="selectManagerMypageCareer" parameterType="String" resultType="gd.fintech.lms.vo.Career">
+		SELECT 
+			career_no careerNO,
+			account_id accountId,
+			career_content careerContent,
+			career_startdate careerStartdate,
+			career_enddate careerEnddate
+		FROM 
+			career
+		WHERE
+			account_id = #{accountId}
+	</select>
+
+</mapper>

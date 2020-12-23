@@ -11,4 +11,6 @@ public interface ManagerMypageMapper {
 	
 	// 운영자 마이페이지 수정
 	public int updateManagerMypage(Manager manager);
+	
+	
 }

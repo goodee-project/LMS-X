@@ -78,4 +78,5 @@
 		WHERE
 			manager_id = #{managerId}
 	</update>
+	
 </mapper>
