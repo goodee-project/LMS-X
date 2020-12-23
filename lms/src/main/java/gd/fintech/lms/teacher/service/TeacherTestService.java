@@ -1,5 +1,7 @@
 package gd.fintech.lms.teacher.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
+import gd.fintech.lms.vo.Answersheet;
 import gd.fintech.lms.vo.Test;
 
 @Service
@@ -41,5 +44,12 @@ public class TeacherTestService {
 		logger.trace("test[" + test + "]");
 		
 		teacherTestMapper.updateTest(test);
+	}
+	
+	// 평가 답안지 학생 목록
+	public List<Answersheet> selectAnswersheetList(int lectureNo) {
+		List<Answersheet> answersheetList = teacherTestMapper.selectAnswersheetList(lectureNo);
+				
+		return answersheetList;
 	}
 }

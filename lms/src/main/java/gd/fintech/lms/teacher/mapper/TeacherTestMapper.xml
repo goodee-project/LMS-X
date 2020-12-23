@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherTestMapper">
+	<resultMap type="gd.fintech.lms.vo.Answersheet" id="selectAnswersheetListResult">
+		<result property="accountId" column="account_id" />
+		<result property="answerScore" column="sum_answer_score" />
+		<collection property="student" ofType="gd.fintech.lms.vo.Student">
+			<result property="studentName" column="student_name" />
+			<result property="studentGender" column="student_gender" />
+		</collection>
+	</resultMap>
+	
 	<!-- 시험 정보 조회 -->
 	<select id="selectTestOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Test">
 		SELECT
@@ -46,4 +55,30 @@
 		WHERE
 			lecture_no = #{lectureNo}
 	</update>
+	
+	<!-- 평가 답안지 학생 목록 -->
+	<select id="selectAnswersheetList" parameterType="Integer" resultMap="selectAnswersheetListResult">
+		SELECT
+			cr.account_id, 
+			s.student_name, 
+			s.student_gender, 
+			SUM(ans.answer_score) sum_answer_score
+		FROM
+			class_registration cr
+		LEFT OUTER JOIN
+			student s ON
+			cr.account_id = s.student_id
+		LEFT OUTER JOIN
+			answersheet ans ON
+			cr.account_id = ans.account_id AND
+			cr.lecture_no = ans.lecture_no
+		WHERE
+			(cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료") AND
+			cr.lecture_no = #{lectureNo}
+		GROUP BY
+			cr.account_id
+		ORDER BY
+			s.student_name
+	</select>
 </mapper>

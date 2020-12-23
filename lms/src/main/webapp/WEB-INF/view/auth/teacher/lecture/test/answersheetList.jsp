@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -62,7 +63,30 @@
 			
 			<br>
 			
-			<p>(제작중...)</p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>아이디</th>
+						<th>이름</th>
+						<th>성별</th>
+						<th>총 점수</th>
+						<th>답안지 확인</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="ansl" items="${answersheetList}">
+						<tr>
+							<td>${ansl.accountId}</td>
+							<td>${ansl.student.studentName}</td>
+							<td>${ansl.student.studentGender}</td>
+							<td>${ansl.answerScore}</td>
+							<td>
+								<button class="btn btn-sm btn-primary">답안지 확인</button>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 		
 		<br><br>

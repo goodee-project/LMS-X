@@ -1,5 +1,7 @@
 package gd.fintech.lms.teacher.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherLectureService;
 import gd.fintech.lms.teacher.service.TeacherTestService;
+import gd.fintech.lms.vo.Answersheet;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Test;
 
@@ -106,20 +109,23 @@ public class TeacherTestController {
 	}
 	
 	// 평가 문제 목록
-	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/testList/{currentPage}")
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/testList")
 	public String testList(Model model, 
-			@PathVariable(name = "lectureNo") int lectureNo, 		// 강좌 고유번호
-			@PathVariable(name = "currentPage") int currentPage) {	// 현재 페이지
+			@PathVariable(name = "lectureNo") int lectureNo) { 		// 강좌 고유번호
 		
 		// [View] /auth/teacher/lecture/test/testList.jsp
 		return "/auth/teacher/lecture/test/testList";
 	}
 	
-	// 평가 답안지 목록
-	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/answersheetList/{currentPage}")
+	// 평가 답안지 학생 목록
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/answersheetList")
 	public String answersheetList(Model model, 
-			@PathVariable(name = "lectureNo") int lectureNo, 		// 강좌 고유번호
-			@PathVariable(name = "currentPage") int currentPage) {	// 현재 페이지
+			@PathVariable(name = "lectureNo") int lectureNo) { 		// 강좌 고유번호
+		
+		List<Answersheet> answersheetList = teacherTestService.selectAnswersheetList(lectureNo);
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("answersheetList", answersheetList);
 		
 		// [View] /auth/teacher/lecture/test/answersheetList.jsp
 		return "/auth/teacher/lecture/test/answersheetList";
