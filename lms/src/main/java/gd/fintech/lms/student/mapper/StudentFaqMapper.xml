@@ -4,7 +4,7 @@
 	<!-- FAQ 카테고리 -->
 	<select id="selectFaqCategoryList" resultType="gd.fintech.lms.vo.FaqCategory">
 		SELECT 
-			faq_category
+			faq_category faqCategory
 		FROM
 			faq_category
 	</select>
@@ -22,6 +22,23 @@
 			faq_category faqCategory
 		FROM
 			faq
+		<where>
+			<if test = "searchCategory != ''">
+				AND faq_category = #{searchCategory}
+			</if>
+			<if test="searchText != ''">
+				<if test = "searchOption == 'title'">
+					AND faq_title LIKE CONCAT('%' , #{searchText} , '%')
+				</if>
+				<if test = "searchOption == 'content'">
+					AND faq_content LIKE CONCAT('%' , #{searchText} , '%')
+				</if>
+				<if test = "searchOption == 'titleContent'">
+					AND (faq_title LIKE CONCAT('%' , #{searchText} , '%') OR
+					faq_content LIKE CONCAT('%' , #{searchText} , '%'))
+				</if>
+			</if>
+		</where>
 		ORDER BY
 			faq_createdate DESC
 		LIMIT
@@ -29,11 +46,28 @@
 	</select>
 	
 	<!-- FAQ 게시글 개수 -->
-	<select id="selectFaqListCount" resultType="gd.fintech.lms.vo.Faq">
+	<select id="selectFaqListCount" resultType="int" parameterType="java.util.Map">
 		SELECT
 			COUNT(*)
 		FROM
 			faq
+		<where>
+			<if test = "searchCategory != ''">
+				AND faq_category = #{searchCategory}
+			</if>
+			<if test="searchText != ''">
+				<if test = "searchOption == 'title'">
+					AND faq_title LIKE CONCAT('%' , #{searchText} , '%')
+				</if>
+				<if test = "searchOption == 'content'">
+					AND faq_content LIKE CONCAT('%' , #{searchText} , '%')
+				</if>
+				<if test = "searchOption == 'titleContent'">
+					AND (faq_title LIKE CONCAT('%' , #{searchText} , '%') OR
+					faq_content LIKE CONCAT('%' , #{searchText} , '%'))
+				</if>
+			</if>
+		</where>
 	</select>
 	
 	<!-- FAQ 상세보기 -->

@@ -17,7 +17,7 @@ public interface StudentFaqMapper {
 	public List<Faq> selectFaqListByPage(Map<String, Object> map);
 	
 	// FAQ 게시글 전체 개수 가져오기
-	public int selectFaqListCount();
+	public int selectFaqListCount(Map<String, Object> map);
 	
 	// FAQ 상세보기
 	public Faq selectFaqOne(int faqNo);

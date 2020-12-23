@@ -25,8 +25,8 @@ public class StudentFaqService {
 	}
 	
 	// FAQ 게시글 전체 개수 가져오기
-	public int selectFaqListCount() {
-		return studentFaqMapper.selectFaqListCount();
+	public int selectFaqListCount(Map<String, Object> map) {
+		return studentFaqMapper.selectFaqListCount(map);
 	}
 	
 	// FAQ 상세보기
