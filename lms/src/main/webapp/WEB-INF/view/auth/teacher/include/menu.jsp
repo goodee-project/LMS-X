@@ -17,6 +17,11 @@
 		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/lmsNotice/lmsNoticeList/1">LMS 공지사항</a>
 		    </li>
 		    
+		     <!-- 쪽지 -->
+		    <li class="nav-item">
+		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/note/noteReceiveList/1">쪽지</a>
+		    </li>
+		    
 		    <!-- 개인정보 관리 -->
 		    <li class="nav-item">
 		    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/mypage/myPageOne">개인정보 관리</a>
