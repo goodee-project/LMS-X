@@ -8,5 +8,7 @@
 	
 	<a href="${pageContext.request.contextPath}/auth/student/faq/faqList/1">FAQ</a>
 	
+	<a href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/1">쪽지</a>
+	
 	<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
 </div>

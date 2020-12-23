@@ -14,8 +14,8 @@ import gd.fintech.lms.vo.Test;
 public class StudentTestService {
 	@Autowired StudentTestMapper studentTestMapper;
 	// 평가 목록 가져오기
-	public Test selectTestListByPage(int lectureNo){
-		return studentTestMapper.selectTestListByPage(lectureNo);
+	public Test selectTestListByPage(Map<String, Object> map){
+		return studentTestMapper.selectTestListByPage(map);
 	}
 	// 평가 상세보기
 	public List<Multiplechoice> selectTestOne(Map<String, Object> map){

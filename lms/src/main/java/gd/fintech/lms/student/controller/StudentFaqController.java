@@ -107,4 +107,15 @@ public class StudentFaqController {
 		
 		return "/auth/student/faq/faqList";
 	}
+	// FAQ 상세보기
+	@GetMapping("auth/student/faq/faqOne/{faqNo}")
+	public String faqOne(Model model,
+			@PathVariable(name="faqNo") int faqNo) {
+		
+		Faq faq = studentFaqService.selectFaqOne(faqNo);
+		
+		model.addAttribute("faq", faq);
+		
+		return "/auth/student/faq/faqOne";
+	}
 }

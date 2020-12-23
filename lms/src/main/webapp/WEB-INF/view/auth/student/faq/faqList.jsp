@@ -88,7 +88,7 @@
 					<tr>
 						<td>${f.faqNo}</td>
 						<td>${f.faqCategory}</td>
-						<td><a href="${pageContext.request.contextPath}/auth/student/faq/faqOne">${f.faqTitle}</a></td>
+						<td><a href="${pageContext.request.contextPath}/auth/student/faq/faqOne/${f.faqNo}">${f.faqTitle}</a></td>
 						<td>${f.faqWriter}</td>
 						<td>${f.faqCreatedate}</td>
 						<td>${f.faqCount}</td>

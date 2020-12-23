@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentNoteMapper">
+	<!-- 쪽지 수신 목록 가져오기 -->
+	<select id="selectNoteReceiveListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Note">
+		SELECT
+			note_no noteNo,
+			note_title noteTitle,
+			note_content noteContent,
+			note_dispatcher_id noteDispatcherId,
+			note_dispatcher_name noteDispatcherName,
+			note_receiver_id noteReceiverId,
+			note_receiver_name noteReceiverName,
+			note_send_date noteSendDate,
+			note_is_read noteIsRead
+		FROM
+			note
+		WHERE
+			note_receiver_id = #{accountId}
+		ORDER BY
+			note_send_date DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 쪽지 수신 개수 -->
+	<select id="selectNoteReceiveListCount" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			note
+		WHERE
+			note_receiver_id = #{accountId}
+	</select>
+	
+	<!-- 쪽지 발신 목록 가져오기 -->
+	<select id="selectNoteDispatchListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Note">
+		SELECT
+			note_no noteNo,
+			note_title noteTitle,
+			note_content noteContent,
+			note_dispatcher_id noteDispatcherId,
+			note_dispatcher_name noteDispatcherName,
+			note_receiver_id noteReceiverId,
+			note_receiver_name noteReceiverName,
+			note_send_date noteSendDate,
+			note_is_read noteIsRead
+		FROM
+			note
+		WHERE
+			note_dispatcher_id = #{accountId}
+		ORDER BY
+			note_send_date DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 쪽지 발신 개수 -->
+	<select id="selectNoteDispatchListCount" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			note
+		WHERE
+			note_dispatcher_id = #{accountId}
+	</select>
+	
+	<!-- 쪽지 상세보기 -->
+	<select id="selectNoteOne" parameterType="int" resultType="gd.fintech.lms.vo.Note">
+		SELECT
+			note_no noteNo,
+			note_title noteTitle,
+			note_content noteContent,
+			note_dispatcher_id noteDispatcherId,
+			note_dispatcher_name noteDispatcherName,
+			note_receiver_id noteReceiverId,
+			note_receiver_name noteReceiverName,
+			note_send_date noteSendDate,
+			note_is_read noteIsRead
+		FROM
+			note
+		WHERE
+			note_no = #{noteNo}
+	</select>
+	
+	<!-- 쪽지 읽음 상태로 변경 -->
+	<update id="updateNoteIsRead" parameterType="int">
+		UPDATE
+			note
+		SET
+			note_is_read = 'Y'
+		WHERE
+			note_no = #{noteNo}
+	</update>
+	
+	<!-- 쪽지 보내기 -->
+	<insert id="insertNote" parameterType="gd.fintech.lms.vo.Note">
+		INSERT INTO note(
+			note_title,
+			note_content,
+			note_dispatcher_id,
+			note_dispatcher_name,
+			note_receiver_id,
+			note_receiver_name,
+			note_send_date,
+			note_is_read	
+		) VALUE (
+			#{noteTitle},
+			#{noteContent},
+			#{noteDispatcherId},
+			#{noteDispatcherName},
+			#{noteReceiverId},
+			#{noteReceiverName},
+			#{noteSendDate},
+			'N'
+		)
+	</insert>
+</mapper>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.mapper.StudentTestMapper">
 	<!-- 평가 목록 가져오기 -->
-	<select id="selectTestListByPage" parameterType="int" resultType="gd.fintech.lms.vo.Test">
+	<select id="selectTestListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Test">
 		SELECT 
 			t.lecture_no lectureNo,
 			t.test_startdate testStartdate,
@@ -16,7 +16,8 @@
 			test t ON
 			t.lecture_no = a.lecture_no
 		WHERE 
-			t.lecture_no = #{lectureNo}
+			t.lecture_no = #{lectureNo} AND
+			a.account_id = #{accountId}
 		GROUP BY 
 			a.lecture_no
 	</select>

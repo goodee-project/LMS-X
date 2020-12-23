@@ -24,11 +24,17 @@ public class StudentTestController {
 	
 	// 평가 목록
 	@GetMapping("auth/student/lecture/{lectureNo}/test/testList")
-	public String testList(Model model,
+	public String testList(Model model, ServletRequest request, 
 			@PathVariable(name="lectureNo") int lectureNo) {
+
+		HttpSession session = ((HttpServletRequest)request).getSession();	
+		String accountId = (String)session.getAttribute("loginId");		
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("accountId", accountId);
 		// 평가 목록 가져오기
-		Test test = studentTestService.selectTestListByPage(lectureNo);
+		Test test = studentTestService.selectTestListByPage(map);
 		
 		model.addAttribute("test", test);
 		

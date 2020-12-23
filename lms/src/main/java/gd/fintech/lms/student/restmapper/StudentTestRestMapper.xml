@@ -16,11 +16,13 @@
 		INSERT INTO answersheet(
 			multiplechoice_no,
 			account_id,
+			lecture_no,
 			answer_select,
 			answer_score
 		) VALUES (
 			#{multiplechoiceNo},
 			#{accountId},
+			#{lectureNo},
 			#{answerSelect},
 			0
 		)
