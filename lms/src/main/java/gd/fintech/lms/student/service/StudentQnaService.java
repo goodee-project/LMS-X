@@ -87,7 +87,7 @@ public class StudentQnaService {
 				String ext = mf.getOriginalFilename().substring(p).toLowerCase();  
 				
 				// UUID로 생성
-				String fileName = UUID.randomUUID().toString().replace("-", " ");
+				String fileName = UUID.randomUUID().toString().replace("-", "");
 				
 				// 파일 정보 저장
 				qf.setQuestionNo(question.getQuestionNo());
@@ -169,7 +169,7 @@ public class StudentQnaService {
 				String ext = mf.getOriginalFilename().substring(p).toLowerCase();  
 				
 				// UUID로 생성
-				String fileName = UUID.randomUUID().toString().replace("-", " ");
+				String fileName = UUID.randomUUID().toString().replace("-", "");
 				
 				// 파일 정보 저장
 				qf.setQuestionNo(question.getQuestionNo());
