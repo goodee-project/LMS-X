@@ -16,7 +16,8 @@
 			note_receiver_id = #{teacherId}
 		ORDER BY
 			note_no DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+		LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- 쪽지 수신함 총 데이터 수 -->
@@ -44,7 +45,8 @@
 			note_dispatcher_id = #{teacherId}
 		ORDER BY
 			note_no DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+		LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- 쪽지 발신함 총 데이터 수 -->
@@ -55,5 +57,37 @@
 			note
 		WHERE
 			note_dispatcher_id = #{teacherId}
+	</select>
+	
+	<!-- 쪽지 수신 내용 -->
+	<select id="selectNoteReceiveOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Note">
+		SELECT
+			note_title noteTitle, 
+			note_content noteContent, 
+			note_dispatcher_id noteDispatcherId, 
+			note_dispatcher_name noteDispatcherName, 
+			note_receiver_id noteReceiverId, 
+			note_receiver_name noteReceiverName, 
+			note_send_date noteSendDate
+		FROM
+			note
+		WHERE
+			note_no = #{noteNo}
+	</select>
+	
+	<!-- 쪽지 발신 내용 -->
+	<select id="selectNoteDispatchOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Note">
+		SELECT
+			note_title noteTitle, 
+			note_content noteContent, 
+			note_dispatcher_id noteDispatcherId, 
+			note_dispatcher_name noteDispatcherName, 
+			note_receiver_id noteReceiverId, 
+			note_receiver_name noteReceiverName, 
+			note_send_date noteSendDate
+		FROM
+			note
+		WHERE
+			note_no = #{noteNo}
 	</select>
 </mapper>

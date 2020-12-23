@@ -60,4 +60,14 @@ public class TeacherNoteService {
 	public int selectTeacherNoteDispatchCount(String teacherId) {
 		return teacherNoteMapper.selectTeacherNoteDispatchCount(teacherId);
 	}
+	
+	// 쪽지 수신 내용
+	public Note selectNoteReceiveOne(int noteNo) {
+		return teacherNoteMapper.selectNoteReceiveOne(noteNo);
+	}
+	
+	// 쪽지 발신 내용
+	public Note selectNoteDispatchOne(int noteNo) {
+		return teacherNoteMapper.selectNoteDispatchOne(noteNo);
+	}
 }

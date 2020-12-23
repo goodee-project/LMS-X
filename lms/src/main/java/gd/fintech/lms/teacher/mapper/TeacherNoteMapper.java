@@ -24,4 +24,12 @@ public interface TeacherNoteMapper {
 	// 쪽지 발신함 총 데이터 수
 	// 강사 ID(teacherId)
 	int selectTeacherNoteDispatchCount(String teacherId);
+	
+	// 쪽지 수신 내용
+	// 쪽지 고유 번호(noteNo)
+	Note selectNoteReceiveOne(int noteNo);
+	
+	// 쪽지 발신 내용
+	// 쪽지 고유 번호(noteNo)
+	Note selectNoteDispatchOne(int noteNo);
 }

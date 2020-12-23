@@ -45,9 +45,6 @@
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
 		<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
-		
-		<!-- 내비게이션 서브 메뉴 -->
-		<jsp:include page="/WEB-INF/view/auth/teacher/include/lectureMenu.jsp" />
 	
 		<!-- 상단 인터페이스 -->
 		<div class="jumbotron jumbotron-fluid">

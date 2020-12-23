@@ -195,4 +195,30 @@ public class TeacherNoteController {
 		// [View] /auth/teacher/note/noteDispatchList.jsp
 		return "/auth/teacher/note/noteDispatchList";
 	}
+	
+	// 쪽지 수신 내용
+	@GetMapping("/auth/teacher/note/noteReceiveOne/{noteNo}")
+	public String noteReceiveOne(Model model, 
+			@PathVariable(value = "noteNo") int noteNo) {
+		Note note = teacherNoteService.selectNoteReceiveOne(noteNo);
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("note", note);
+		
+		// [View] /auth/teacher/note/noteReceiveOne.jsp
+		return "/auth/teacher/note/noteReceiveOne";
+	}
+	
+	// 쪽지 발신 내용
+	@GetMapping("/auth/teacher/note/noteDispatchOne/{noteNo}")
+	public String noteDispatchOne(Model model, 
+			@PathVariable(value = "noteNo") int noteNo) {
+		Note note = teacherNoteService.selectNoteDispatchOne(noteNo);
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("note", note);
+		
+		// [View] /auth/teacher/note/noteDispatchOne.jsp
+		return "/auth/teacher/note/noteDispatchOne";
+	}
 }
