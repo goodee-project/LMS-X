@@ -279,26 +279,27 @@ public class StudentQnaController {
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo,
 			@PathVariable(name = "questionCommentNo") int questionCommentNo) {
+		
 	Question question = studentQnaService.getStudentQnaOne(questionNo);
+	
+	QuestionComment questionComment = studentQnaCommentService.QnaCommentOne(questionCommentNo);
 	
 	
 	model.addAttribute("lectrueNo", lectureNo);
 	model.addAttribute("questionNo", questionNo);
 	model.addAttribute("question", question);
-	
+	model.addAttribute("questionCommentNo", questionCommentNo);
+	model.addAttribute("questionComment", questionComment);
 	
 	return "/auth/student/lecture/qna/updateQuestionComment";
-	
 	}
 	
 	// 댓글 수정 액션
 	@PostMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/updateStduentQuestionComment")
 	public String updateStduentQuestionComment(QuestionComment questionComment,
-			ServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo) {
 		
-
 		studentQnaCommentService.updateQnaComment(questionComment);
 		
 		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1";
@@ -313,7 +314,7 @@ public class StudentQnaController {
 		
 		studentQnaCommentService.deleteQnaComment(questionCommentNo);
 		
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo +"/1";
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1";
 	}
 	
 }

@@ -17,6 +17,8 @@
 			question_no = #{questionNo}
 		ORDER BY
 			question_comment_no DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- 질문 게시판 내 댓글의 수 -->
@@ -47,8 +49,18 @@
 			NOW() 
 		)
 	</insert>
+	
 	<!-- 질문 게시판 댓글 하나만 가져오기 -->
-	<select id="selectStudentQuestionCommmentOne"></select>
+	<select id="selectStudentQuestionCommmentOne" resultType="gd.fintech.lms.vo.QuestionComment" parameterType="int">
+		SELECT
+			question_comment_no questionCommentNo,
+			question_comment_writer questionCommentWriter,
+			question_comment_content questionCommentContent
+		FROM
+			question_comment
+		WHERE
+			question_comment_no = #{questionCommentNo}
+	</select>
 	
 	<!-- 질문 게시판 댓글 수정  -->
 	<update id="updateStudentQuestionComment" parameterType="gd.fintech.lms.vo.QuestionComment">

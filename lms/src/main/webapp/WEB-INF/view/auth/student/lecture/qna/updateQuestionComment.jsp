@@ -8,13 +8,23 @@
 </head>
 <body>
 	<h1>댓글 수정</h1>
-	<Form action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateQuestionComment/${questionCommentNo}"  method="post">
-		<div>
-			<div>
-				<textarea rows="3" cols="50" name="questionCommentContent">${questionComment.questionCommentContent}</textarea>
-			</div>
-			<button type="submit">댓글입력</button>
-		</div>
-	</Form>
+	<form method="post" action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateStduentQuestionComment">
+	<input type="hidden" name="questionNo" value="${questionComment.questionNo}"> 
+		<table>
+			<tr>
+				<td>번호</td>
+				<td><input type="text" name="questionCommentNo" value="${questionComment.questionCommentNo}" readonly="readonly" ></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td><input type="text" name="questionCommentWriter" value="${questionComment.questionCommentWriter}" readonly="readonly" ></td>
+			</tr>
+			<tr>
+				<td>댓글 내용</td>
+				<td><textarea rows="3" cols="50" name="questionCommentContent">${questionComment.questionCommentContent}</textarea></td>
+			</tr>
+		</table>
+		<button type="submit">댓글입력</button>
+	</form>
 </body>
 </html>

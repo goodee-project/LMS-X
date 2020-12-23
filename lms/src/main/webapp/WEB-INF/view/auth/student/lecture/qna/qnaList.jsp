@@ -38,13 +38,13 @@
 				</tbody>
 			</table>
 			<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/insertQna">질문 작성</a>
-					<!-- 페이지 네비게이션 -->
+			<!-- 페이지 네비게이션 -->
 			<ul class="pagination justify-content-center">
 				<!-- 처음으로 버튼 -->
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}}/auth/student/lecture/${q.lectureNo}/qna/qnaList/1">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/1">
 								<i class='fas fa-angle-double-left'></i>
 							</a>
 						</li>
@@ -62,7 +62,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li>
-							<a href="${pageContext.request.contextPath}}/auth/student/lecture/${q.lectureNo}/qna/qnaList/${prePage}">
+							<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/${prePage}">
 								<i class='fas fa-angle-left'></i>
 							</a>
 						</li>
@@ -89,7 +89,7 @@
 							<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 							<c:otherwise>
 								<li class="page-item">
-									<a class="page-link" href="${pageContext.request.contextPath}}/auth/student/lecture/${q.lectureNo}/qna/qnaList/${i}">${i}</a>
+									<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/${i}">${i}</a>
 								</li>
 							</c:otherwise>
 						</c:choose>
@@ -100,7 +100,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li >
-							<a href="${pageContext.request.contextPath}}/auth/student/lecture/${q.lectureNo}/qna/qnaList/${nextPage}">
+							<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/${nextPage}">
 								<i class='fas fa-angle-right'></i>
 							</a>
 						</li>
@@ -118,7 +118,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}}/auth/student/lecture/${q.lectureNo}/qna/qnaList/${lastPage}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/${lastPage}">
 								<i class='fas fa-angle-double-right'></i>
 							</a>
 						</li>

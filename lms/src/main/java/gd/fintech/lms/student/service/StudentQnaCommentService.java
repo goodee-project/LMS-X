@@ -43,4 +43,9 @@ public class StudentQnaCommentService {
 		studentQnaCommentMapper.deleteStudentQuestionComment(questionCommentNo);
 		return;
 	}
+	
+	// 질문 게시판 댓글 상세보기-수정
+	public QuestionComment QnaCommentOne(int questionCommentNo) {
+		return studentQnaCommentMapper.selectStudentQuestionCommmentOne(questionCommentNo);
+	}
 }
