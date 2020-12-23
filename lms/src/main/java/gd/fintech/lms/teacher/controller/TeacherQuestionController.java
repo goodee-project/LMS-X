@@ -100,7 +100,7 @@ public class TeacherQuestionController {
 			@PathVariable(value = "questionNo") int questionNo) {
 		
 		// 질문 조회수 증가
-		teacherQuestionService.getCountTeacherQuestion(questionNo);
+		teacherQuestionService.updateQuestionCountUp(questionNo);
 		
 		// 질문 조회
 		List<Question> question = teacherQuestionService.selecteTeacherQuestionOne(questionNo);

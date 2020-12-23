@@ -50,4 +50,10 @@ public class TeacherQuestionService {
 		
 		return questionOne;
 	}
+	
+	// 질문 게시판 상세보기 조회수 증가
+	// 질문 고유 번호(questionNo)
+	public int updateQuestionCountUp(int questionNo) {
+		return teacherQuestionMapper.updateTeacherQuestionCountUp(questionNo);
+	}
 }

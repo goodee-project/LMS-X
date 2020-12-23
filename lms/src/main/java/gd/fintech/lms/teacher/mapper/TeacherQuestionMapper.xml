@@ -14,14 +14,14 @@
 		WHERE 
 			lecture_no = #{lectureNo}
 		ORDER BY
-			question_no = #{questionNo} DESC
+			question_no DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 강좌 고유번호에 해당하는 총 데이터 수를 출력한다. -->
 	<select id = "selectTeacherQuestionListCount" parameterType="Integer" resultType= "Integer">
 		SELECT
-			COUNt(*)
+			COUNT(*)
 		FROM
 			question
 		WHERE
