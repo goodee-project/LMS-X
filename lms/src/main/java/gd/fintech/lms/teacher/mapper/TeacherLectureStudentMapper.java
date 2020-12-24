@@ -5,14 +5,17 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import gd.fintech.lms.vo.Student;
+import gd.fintech.lms.vo.LectureAndStudentAndClassRegistrationAndTeacher;
 
 @Mapper
 public interface TeacherLectureStudentMapper {
 
 	// 강의를 듣는 학생 리스트
-	List<Student> selectTeacherStudentListByLecture(Map<String, Object>map);
+	List<LectureAndStudentAndClassRegistrationAndTeacher> selectTeacherLectureStudentListByPage(Map<String, Object> map);
 	
 	// 강의를 듣는 학생 상세보기
-	Student selectTeacherLectureStudentOne(int StudentId);
+	public LectureAndStudentAndClassRegistrationAndTeacher selectTeacherLectureStudentOne(Map<String, Object> map);
+	
+	// 강의를 듣는 학생 수
+	public int selectTeacherLectureStudentCount();
 }
