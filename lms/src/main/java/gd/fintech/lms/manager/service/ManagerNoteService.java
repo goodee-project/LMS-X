@@ -12,7 +12,7 @@ import gd.fintech.lms.vo.Note;
 
 @Service
 @Transactional
-public class ManagerNoteSerivce {
+public class ManagerNoteService {
 	@Autowired ManagerNoteMapper managerNoteMapper;
 	
 	// 쪽지 수신 목록 가져오기

@@ -20,5 +20,7 @@
 	
 	<a href="${pageContext.request.contextPath}/auth/manager/faq/faqList/1">FAQ 관리 페이지</a>
 	
+	<a href="${pageContext.request.contextPath}/auth/manager/note/noteReceiveList/1">쪽지 페이지</a>
+	
 	<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
 </div>
