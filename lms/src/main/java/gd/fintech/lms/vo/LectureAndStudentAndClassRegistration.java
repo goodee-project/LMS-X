@@ -3,10 +3,10 @@ package gd.fintech.lms.vo;
 import lombok.Data;
 
 @Data
-public class LectureAndStudentAndClassRegistrationAndTeacher {
+public class LectureAndStudentAndClassRegistration {
 
 	private Student student;
 	private ClassRegistration classRegistration;
-	private Teacher teacher;
 	private Lecture lecture;
+	private Teacher teacher;
 }

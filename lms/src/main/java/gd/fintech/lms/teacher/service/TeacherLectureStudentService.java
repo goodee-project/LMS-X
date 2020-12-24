@@ -7,23 +7,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.teacher.mapper.TeacherLectureStudentMapper;
-import gd.fintech.lms.vo.LectureAndStudentAndClassRegistrationAndTeacher;
+import gd.fintech.lms.vo.LectureAndStudentAndClassRegistration;
 
 @Service
 @Transactional
 public class TeacherLectureStudentService {
 	@Autowired TeacherLectureStudentMapper teacherLectureStudentMapper;
 	
-	public List<LectureAndStudentAndClassRegistrationAndTeacher> selectTeacherLecutreStudentListByPage(Map<String, Object> map) {
-		System.out.println(selectTeacherLecutreStudentListByPage(map));
+	public List<LectureAndStudentAndClassRegistration> selectTeacherLecutreStudentListByPage(Map<String, Object> map) {
 		return teacherLectureStudentMapper.selectTeacherLectureStudentListByPage(map);
 	}
 	
-	public LectureAndStudentAndClassRegistrationAndTeacher selectStudentOne(Map<String, Object> map) {
+	public LectureAndStudentAndClassRegistration getStudentOne(Map<String, Object> map) {
 		return teacherLectureStudentMapper.selectTeacherLectureStudentOne(map);
 	}
 	
-	public int getTeacherLectureStudentCount() {
-		return teacherLectureStudentMapper.selectTeacherLectureStudentCount();
+	public int getTeacherLectureStudentCount(Map<String, Object> map) {
+		return teacherLectureStudentMapper.selectTeacherLectureStudentCount(map);
 	}
 }

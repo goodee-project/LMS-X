@@ -9,13 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.teacher.service.TeacherLectureStudentService;
-import gd.fintech.lms.vo.LectureAndStudentAndClassRegistrationAndTeacher;
+import gd.fintech.lms.vo.LectureAndStudentAndClassRegistration;
+import gd.fintech.lms.vo.Student;
 
+@Controller
 public class TeacherLectureStudentController {
 	@Autowired TeacherLectureStudentService teacherLectureStudentService;
 	
@@ -30,8 +33,12 @@ public class TeacherLectureStudentController {
 		HttpSession session =  ((HttpServletRequest)request).getSession();
 		String teacherName = (String)session.getAttribute("loginName");
 		
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("teacherName", teacherName);
+		map2.put("lectureNo", lectureNo);
+		
 		int rowPerPage = 10; // 한페이지에 출력할 개수
-		int totalCount = teacherLectureStudentService.getTeacherLectureStudentCount();
+		int totalCount = teacherLectureStudentService.getTeacherLectureStudentCount(map2);
 		System.out.println(totalCount + "총 갯수");
 		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
 
@@ -53,8 +60,9 @@ public class TeacherLectureStudentController {
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		map.put("teacherName",teacherName);
+		map.put("lectureNo", lectureNo);
 		
-		List<LectureAndStudentAndClassRegistrationAndTeacher> LASACRAT = teacherLectureStudentService.selectTeacherLecutreStudentListByPage(map);
+		List<LectureAndStudentAndClassRegistration> LASACR = teacherLectureStudentService.selectTeacherLecutreStudentListByPage(map);
 		
 		int navPerPage = 10; // 네비에 출력될 페이지 개수
 		int navFirstPage = currentPage - (currentPage % navPerPage) + 1; // 네비의 첫 페이지 
@@ -90,9 +98,36 @@ public class TeacherLectureStudentController {
 		model.addAttribute("prePage", prePage);
 		model.addAttribute("nextPage", nextPage);
 		
-		model.addAttribute("LASACRAT",LASACRAT);
+		model.addAttribute("LASACR",LASACR);
 		
 		return "/auth/teacher/lecture/student/studentList";
-		
 	}
+	
+	// 강의를 듣는 학생의 개인정보
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/student/studentOne/{studentId}")
+	public String teacherLectureStudentOne(Model model,
+			ServletRequest request,
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "studentId") String studentId) {
+		
+		//세션에서 강사의 이름을 가져오기
+		HttpSession session =  ((HttpServletRequest)request).getSession();
+		String teacherName = (String)session.getAttribute("loginName");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("lectureNo",lectureNo);
+		map.put("teacherName", teacherName);
+		map.put("studentId", studentId);
+		
+		
+		LectureAndStudentAndClassRegistration LASACR = teacherLectureStudentService.getStudentOne(map);
+		
+		model.addAttribute("lectureNo",lectureNo);
+		model.addAttribute("studentId", studentId);
+		model.addAttribute("teacherName", teacherName);
+		model.addAttribute("LASACR", LASACR);
+		
+		return "/auth/teacher/lecture/student/studentOne";
+	}
+	
 }
