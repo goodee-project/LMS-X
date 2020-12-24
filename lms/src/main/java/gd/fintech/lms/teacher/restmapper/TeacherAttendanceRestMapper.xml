@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.restmapper.TeacherAttendanceRestMapper">
+	<!-- 학생 출석 상태 입력 -->
+	<insert id="insertAttendance" parameterType="java.util.Map">
+		INSERT INTO attendance (
+			lecture_no, 
+			account_id, 
+			attendance_day, 
+			attendance_createdate, 
+			attendance_updatedate, 
+			attendance_state, 
+			attendance_remark
+		) VALUES (
+			#{lectureNo}, 
+			#{accountId}, 
+			#{attendanceDay}, 
+			NOW(), 
+			NOW(), 
+			#{attendanceState}, 
+			#{attendanceRemark}
+		)
+	</insert>
+
+	<!-- 학생 출석 상태 변경 -->
+	<update id="updateAttendance" parameterType="java.util.Map">
+		UPDATE
+			attendance
+		SET
+			attendance_updatedate = NOW(), 
+			attendance_state = #{attendanceState}, 
+			attendance_remark = #{attendanceRemark}
+		WHERE
+			lecture_no = #{lectureNo} AND
+			YEAR(attendance_day) = #{currentYear} AND
+			MONTH(attendance_day) = #{currentMonth} AND
+			DAY(attendance_day) = #{currentDay} AND
+			account_id = #{accountId}
+	</update>
+</mapper>

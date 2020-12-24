@@ -29,6 +29,8 @@
 			subject s ON
 			l.subject_no = s.subject_no
 		WHERE
+			(l.lecture_startdate != '0000-00-00' OR
+			l.lecture_enddate != '0000-00-00') AND
 			l.account_id = #{teacherId}
 		ORDER BY
 			l.lecture_no DESC

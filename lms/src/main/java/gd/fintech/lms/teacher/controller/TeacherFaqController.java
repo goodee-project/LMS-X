@@ -26,9 +26,9 @@ public class TeacherFaqController {
 	@GetMapping("/auth/teacher/faq/faqList/{currentPage}")
 	public String faqList(Model model, 
 			@PathVariable(value = "currentPage") int currentPage, 
-			@RequestParam(value=  "searchCategory", defaultValue = "") String searchCategory,  			// FAQ 카테고리
-			@RequestParam(value=  "searchOption", defaultValue = "titleContent") String searchOption, 	// 제목 + 내용, 제목, 내용
-			@RequestParam(value=  "searchText", defaultValue = "") String searchText) {					// 문자열 검색
+			@RequestParam(value =  "searchCategory", defaultValue = "") String searchCategory,  			// FAQ 카테고리
+			@RequestParam(value =  "searchOption", defaultValue = "titleContent") String searchOption, 	// 제목 + 내용, 제목, 내용
+			@RequestParam(value =  "searchText", defaultValue = "") String searchText) {					// 문자열 검색
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
 		

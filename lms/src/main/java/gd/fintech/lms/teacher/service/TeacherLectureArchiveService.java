@@ -37,7 +37,7 @@ public class TeacherLectureArchiveService {
 	// 강좌 고유번호(lectureNo)
 	public List<LectureArchive> getTeacherLectureArchiveListByPage(int lectureNo, int beginRow, int rowPerPage) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("lectureNo", lectureNo);		// 강의실 고유번호
+		map.put("lectureNo", lectureNo);		// 강좌 고유번호
 		map.put("beginRow", beginRow);			// 시작 데이터
 		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
 		
@@ -221,7 +221,7 @@ public class TeacherLectureArchiveService {
 			
 			// 파일이 존재하는 경우
 			if (file.exists()) {
-				// 파일삭제
+				// 파일 삭제
 				file.delete();
 			}
 		}
