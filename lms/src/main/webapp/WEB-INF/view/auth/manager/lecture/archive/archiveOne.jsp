@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div>
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/archive/deleteArchive/${archiveNo}'">삭제</button>
+	</div>
 	<h1>자료실 상세 페이지</h1>
 	<table border="1">
 		<tr>
@@ -35,6 +40,28 @@
 		<tr>
 			<td>내용</td>
 			<td>${lectureArchive.lectureArchiveContent}</td>
+		</tr>
+		<tr>
+			<td>첨부파일</td>
+			<td>
+				<c:forEach var="laf" items="${lectureArchive.lectureArchiveFileList}">
+					<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
+					<c:set var="uuid">${laf.lectureArchiveFileUuid}</c:set>
+					<c:if test="${lectureArchive.lectureArchiveFileList[0].lectureArchiveFileOriginal != null}">
+						<div>
+							<a
+								onclick="fileDownloadCount('${laf.lectureArchiveFileUuid}','${laf.lectureArchiveFileCount}')"
+								href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}" download>
+								${laf.lectureArchiveFileOriginal}
+							</a>
+							&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, <div id="fileCount${fn:split(uuid, '.')[0]}" style="display: inline;">다운로드 횟수 : ${laf.lectureArchiveFileCount}</div>
+						</div>
+					</c:if>
+					<c:if test="${lectureArchive.lectureArchiveFileList[0].lectureArchiveFileOriginal == null}">
+						(첨부파일이 없습니다)	
+					</c:if>
+				</c:forEach>
+			</td>
 		</tr>
 	</table>
 </body>

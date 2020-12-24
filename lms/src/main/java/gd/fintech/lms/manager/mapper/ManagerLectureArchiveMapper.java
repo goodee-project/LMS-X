@@ -21,6 +21,6 @@ public interface ManagerLectureArchiveMapper {
 	// 자료실 조회수
 	int updateLectureArchiveCount(int lectureArchiveNo);
 	
-	// 자료실 삭제
+	// 자료 삭제
 	int deleteManagerLectureArchive(int archiveNo);
 }

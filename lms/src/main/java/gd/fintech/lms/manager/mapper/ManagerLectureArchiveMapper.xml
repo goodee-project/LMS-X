@@ -53,7 +53,7 @@
 	</resultMap>
 	<!-- 강의 자료 상세보기 -->
 	<select id="selectLectureArchiveOne" parameterType="int" resultMap="selectLectureArchiveOneInfomation">
-		SELECT
+			SELECT
   			la.lecture_archive_no, 
   			la.lecture_no, 
   			la.account_id, 
@@ -70,9 +70,8 @@
   			laf.lecture_archive_file_count
   		FROM
   			lecture_archive la
-  		INNER JOIN
-  			lecture_archive_file laf 
-  		ON
+  		LEFT OUTER JOIN
+  			lecture_archive_file laf ON
   			la.lecture_archive_no = laf.lecture_archive_no
   		WHERE
   			la.lecture_archive_no = #{lectureArchiveNo}
@@ -87,4 +86,12 @@
 		WHERE
 			lecture_archive_no = #{lectureArchiveNo}
 	</update>
+	
+	<!-- 자료 삭제 -->
+  	<delete id="deleteManagerLectureArchive" parameterType="int">
+		DELETE FROM
+			lecture_archive
+		WHERE
+			lecture_archive_no = #{archiveNo}
+	</delete>
 </mapper>
