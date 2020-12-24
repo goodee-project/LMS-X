@@ -118,4 +118,14 @@
 		WHERE 
 			lecture_no = #{lectureNo}
 	</update>
+	<!--운영자가 선택한 강좌 고유 번호에 따른 강의 상태 변경  -->
+	<update id="updateLectureStat" parameterType="gd.fintech.lms.vo.Lecture">
+		UPDATE
+			lecture
+		SET
+			lecture_startdate = 0000-00-00,
+			lecture_enddate = 0000-00-00
+		WHERE
+			lecture_no = #{lectureNo}
+	</update>
 </mapper>

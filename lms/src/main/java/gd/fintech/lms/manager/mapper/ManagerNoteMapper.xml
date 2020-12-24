@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerNoteMapper">
+	<!-- 쪽지 수신 목록 가져오기 -->
+	<select id="selecteNoteReceiveListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Note">
+		SELECT
+			note_no noteNo,
+			note_title noteTitle,
+			note_content noteContent,
+			note_dispatcher_id noteDispatcherId,
+			note_dispatcher_name noteDispatcherId,
+			note_receiver_id noteReceiverId,
+			note_receiver_name noteReceiverName,
+			note_send_date noteSendDate,
+			note_is_read noteIsRead
+		FROM
+			note
+		WHERE
+			note_receiver_id = #{accountId} AND
+			note_delete != 'receiver'
+		OREDER BY
+			note_send_date DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 사용자 아이디에 해당하는 쪽지 수신 개수 -->
+	<select id="selectNoteReceiveListCount" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			note
+		WHERE
+			note_receiver_id = #{accountId}
+	</select>
+	<!-- 쪽지 발신 목록 가져오기 -->
+	<select id="selectNoteDispatchListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Note">
+		SELECT
+			note_no noteNo,
+			note_title noteTitle,
+			note_content noteContent,
+			note_dispatcher_id noteDispatcherId,
+			note_dispatcher_name noteDispatcherName,
+			note_receiver_id noteReceiverId,
+			note_receiver_name noteReceiverName,
+			note_send_date noteSendDate,
+			note_is_read noteIsRead
+		FROM
+			note
+		WHERE
+			note_dispatcher_id = #{accountId} AND
+			note_delete != 'dispatcher'
+		ORDER BY
+			note_send_date DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 쪽지 발신 개수 -->
+	<select id="selectNoteDispatchListCount" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			note
+		WHERE
+			note_dispathcer_id = #{accountId}
+	</select>
+</mapper>

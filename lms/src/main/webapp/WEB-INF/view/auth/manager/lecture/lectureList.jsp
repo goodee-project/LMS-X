@@ -20,21 +20,35 @@
 			<th>개강일</th>
 			<th>종강일</th>
 			<th>정원</th>
+			<th>상태 변경</th>
 		</tr>
 		<c:forEach items="${lectureList}" var="l">
 			<tr>
 				<td>
-					<a href="${pageContext.request.contextPath}/auth/manager/lecture/lectureOne/${l.lectureNo}">${l.lectureNo}</a>
+					<c:if test="${l.lectureStartdate != '0000-00-00'}">
+						<a href="${pageContext.request.contextPath}/auth/manager/lecture/lectureOne/${l.lectureNo}">${l.lectureNo}</a>
+					</c:if>
+					<c:if test="${l.lectureStartdate == '0000-00-00'}">
+						${l.lectureNo}
+					</c:if>
 				</td>
 				<td>${l.teacherName}</td>
 				<td>${l.lectureName}</td>
 				<td>${l.lectureStartdate}</td>
 				<td>${l.lectureEnddate}</td>
 				<td>${l.lectureTotal}</td>
+				<td>
+					<c:if test="${l.lectureStartdate != '0000-00-00'}">
+					<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/updateLectureStat/${l.lectureNo}'">변경</button>
+					</c:if>
+					<c:if test="${l.lectureStartdate == '0000-00-00'}">
+						<button type="button" class="btn btn-sm btn-dark">폐강</button>
+					</c:if>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
-			<!-- 페이지 네비게이션 -->
+		<!-- 페이지 네비게이션 -->
 		<ul class="pagination justify-content-center">
 			<!-- 처음으로 버튼 -->
 			<c:choose>

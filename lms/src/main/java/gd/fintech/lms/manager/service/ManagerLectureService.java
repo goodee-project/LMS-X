@@ -35,4 +35,8 @@ public class ManagerLectureService {
 	public void updateLecture(Lecture lecture) {
 		managerLectureMapper.updateLecture(lecture);
 	}
+	// 강의 상태 변경
+	public void updateLectureStat(Lecture lecture) {
+		managerLectureMapper.updateLectureStat(lecture);
+	}
 }

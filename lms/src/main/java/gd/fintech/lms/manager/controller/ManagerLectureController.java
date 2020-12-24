@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import gd.fintech.lms.manager.service.ManagerAccountService;
 import gd.fintech.lms.manager.service.ManagerClassroomService;
@@ -157,5 +158,12 @@ public class ManagerLectureController {
 		model.addAttribute("classroomList", classroomList);
 		
 		return "/auth/manager/lecture/updateLecture";
+	}
+	
+	// 강의 상태 변경 액션
+	@RequestMapping("/auth/manager/lecture/updateLectureStat/{lectureNo}")
+	public String updateLectureStat(Lecture lecture, @PathVariable(value = "lectureNo") int lectureNo) {
+		managerLectureService.updateLectureStat(lecture);
+		return "redirect:/auth/manager/lecture/lectureList/1";
 	}
 }
