@@ -6,6 +6,8 @@
 		<meta charset="UTF-8">
 		<title>insertReport</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- NAVER SmartEditor2 스크립트 -->
+		<script src="${pageContext.request.contextPath}/smarteditor2/js/HuskyEZCreator.js"></script>
 		<script>
 			$(document).ready(function(){	
 				// 과제가 제출기간이 맞는지 확인
@@ -43,6 +45,7 @@
 				
 				// 과제 제출 버튼
 				$('#reportSubmitBtn').click(function(){
+					oEditors.getById["reportSubmitContent"].exec("UPDATE_CONTENTS_FIELD", []); // 스마트 에디터 내용 적용
 					// 제목, 내용 유효성 검사
 					if($('#reportSubmitTitle').val().length < 1){
 						alert('제목을 입력해 주세요.');
@@ -69,7 +72,15 @@
 					}
 					
 				})
-		
+				
+				// NAVER SmartEditor2 적용 코드
+				let oEditors = [];				
+				nhn.husky.EZCreator.createInIFrame({
+					oAppRef : oEditors,
+					elPlaceHolder : 'reportSubmitContent',
+					sSkinURI : '${pageContext.request.contextPath}/smarteditor2/SmartEditor2Skin.html',
+					fCreator : 'createSEditor2'
+				});
 			})
 		</script>
 	</head>
@@ -113,7 +124,7 @@
 		    		</tr>
 		    		<tr>
 		    			<th>내용</th>
-		    			<td><textarea rows="3" cols="50" id="reportSubmitContent" name="reportSubmitContent"></textarea></td>
+		    			<td style="width:100%;"><textarea name="reportSubmitContent" id="reportSubmitContent" style="width:100%;"></textarea></td>
 		    		</tr>
 		    	</table>
 		    	
