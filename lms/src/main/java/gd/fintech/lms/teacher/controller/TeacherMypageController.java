@@ -15,6 +15,7 @@ import gd.fintech.lms.teacher.service.TeacherMypageService;
 import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.License;
 import gd.fintech.lms.vo.Teacher;
+import gd.fintech.lms.vo.TeacherForm;
 
 @Controller
 public class TeacherMypageController {
@@ -44,10 +45,12 @@ public class TeacherMypageController {
 		model.addAttribute("teacher",teacher);
 		return "auth/teacher/mypage/updateMypage";
 	}
-	@PostMapping("/auth/Teacher/mypage/updateMypage")
-	public String updateMypage(Teacher teacher) {
+	@PostMapping("/auth/teacher/mypage/updateMypage")
+	public String updateMypage(TeacherForm teacherForm) {
 		
-		teacherMypageService.updateTeacherMypage(teacher);
+		log.debug(teacherForm.toString());
+		
+		teacherMypageService.updateTeacherMypage(teacherForm);
 		return "redirect:/auth/teacher/mypage/mypageOne";
 	}
 	
@@ -59,7 +62,7 @@ public class TeacherMypageController {
 		
 		model.addAttribute("teacher",teacher);
 		
-		return "auth/Teacher/mypage/updateMypageCareerAndLicense";
+		return "auth/teacher/mypage/updateMypageCareerAndLicense";
 	}
 	
 	// 운영자 마이페이지 경력 삭제

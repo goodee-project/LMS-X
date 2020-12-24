@@ -268,9 +268,7 @@
 				<td>아이디</td>
 				<td><input type="text" name="managerId" value="${manager.managerId}"hidden="hidden">${manager.managerId}</td>
 				<td>이름</td>
-				<td>
-				<input type="text" class="form-control" name="managerName" id="managerName" placeholder="이름을 입력하세요" value="${manager.managerName}">
-				
+				<td ><input type="text" class="form-control" name="managerName" id="managerName" placeholder="이름을 입력하세요" value="${manager.managerName}"></td>
 				<td>성별</td>
 				<td>
 					<c:if test="${manager.managerGender == '남'}">
@@ -290,7 +288,7 @@
 			
 			<tr>
 				<td>전화번호</td>
-				<td >
+				<td>
 					<input type="text" class="form-control" name="managerPhone" id="managerPhone" placeholder="000-0000-000" value="${manager.managerPhone}">
 					<div id="managerPhoneCheck"></div>
 				</td>
@@ -306,7 +304,7 @@
 					<div id="managerEmailCheck"></div>
 				</td>
 				<td>생일</td>
-				<td >
+				<td>
 					<div>
 						<input type="date" class="form-control" name="managerBirth" id="managerBirth" value="${manager.managerBirth}">
 					</div>
@@ -315,7 +313,7 @@
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan="8">
+				<td colspan="9">
 					<div id="addressView">
 						<input id="managerAddressMain" class="form-control" style="margin-bottom:5px;" type="text" name="managerAddressMain" value="${manager.managerAddressMain}" readonly="readonly" >
 					</div>
@@ -335,17 +333,19 @@
 			</tr>
 			<tr>
 				<td>상세주소</td>
-				<td colspan="8"><input type="text" class="form-control" id="managerAddressSub" placeholder="상세 주소를 입력하세요" value="${manager.managerAddressSub}" name="managerAddressSub" ></td>
+				<td colspan="9"><input type="text" class="form-control" id="managerAddressSub" placeholder="상세 주소를 입력하세요" value="${manager.managerAddressSub}" name="managerAddressSub" ></td>
 			</tr>
 		
 			<tr>
 				<td>경력</td>
 				<td colspan="9">
 					<c:forEach var="c" items="${manager.careerList}" >
-						<div>
-							<span>${c.careerContent}</span>
-							<span>( ${c.careerStartdate} ~ ${c.careerEnddate} )</span>
-						</div>
+						<c:if test="${c.careerContent != null}">
+							<div>
+								<span>${c.careerContent}</span>
+								<span>( ${c.careerStartdate} ~ ${c.careerEnddate} )</span>
+							</div>
+						</c:if>
 					</c:forEach>
 				</td>
 			</tr>
@@ -353,12 +353,14 @@
 				<td>자격증</td>
 				<td colspan="9">
 					<c:forEach var="l" items="${manager.licenseList}" >
-						<div>
-							<span>${l.licenseNumber}</span>
-							<span>${l.licenseName}</span>
-							<span>${l.licenseAgency}</span>
-							<span>( ${l.licenseGetdate} )</span>
-						</div>
+						<c:if test="${l.licenseNumber != null}">
+							<div>
+								<span>${l.licenseNumber}</span>
+								<span>${l.licenseName}</span>
+								<span>${l.licenseAgency}</span>
+								<span>( ${l.licenseGetdate} )</span>
+							</div>
+						</c:if>
 					</c:forEach>
 				</td>
 			</tr>	

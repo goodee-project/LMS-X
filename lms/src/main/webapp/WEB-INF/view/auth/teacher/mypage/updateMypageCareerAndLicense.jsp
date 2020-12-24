@@ -28,7 +28,7 @@
 			$('#insertCareerBtn').click(function(){
 				let insertCareerHtml = `
 					
-					<form id="careerForm" method="post" action="${pageContext.request.contextPath}/auth/manager/mypage/insertMypageCareer">
+					<form id="careerForm" method="post" action="${pageContext.request.contextPath}/auth/teacher/mypage/insertMypageCareer">
 						<table class="table table-bordered" >
 							<tr>
 								<td>경력 정보</td>
@@ -46,14 +46,16 @@
 							</tr>
 						</table>
 						<button id="careerBtn" type="button" >등록</button>
-						<button id="inserCareerBtnDelete" type="button" >취소</button>
+						<button id="insertCareerBtnDelete" type="button" >취소</button>
 					</form>
 				`;
 				
 				$('#insertCareer').html(insertCareerHtml);
-				$('#inserCareerBtnDelete').click(function(){
+				
+				$('#insertCareerBtnDelete').click(function(){
 					$('#insertCareer').html('');
 				});
+				
 				$('#careerBtn').click(function(){
 			
 					if ($('#careerContent').val() == "" ) {
@@ -72,14 +74,13 @@
 					} else{
 						$('#careerDateCheck').html('');
 					}
-					
 					$('#careerForm').submit();
 				});
 			});
 
 			$('#insertLicenseBtn').click(function(){
 				let insertCareerHtml = `
-					<form id="licenseForm" method="post" action="${pageContext.request.contextPath}/auth/manager/mypage/insertMypageLicense">
+					<form id="licenseForm" method="post" action="${pageContext.request.contextPath}/auth/teacher/mypage/insertMypageLicense">
 						<table class="table table-bordered" >
 							<tr>
 								<td>자격증 번호</td>
@@ -109,10 +110,16 @@
 							</tr>
 						</table>
 						<button id="licenseBtn" type="button" >등록</button>
+						<button id="insertLicenseBtnDelete" type="button" >취소</button>
 					</form>
 				`;
 				
 				$('#insertLicense').html(insertCareerHtml);
+
+				$('#insertLicenseBtnDelete').click(function(){
+					$('#insertLicense').html('');
+				});
+				
 				$('#licenseBtn').click(function(){
 					if ($('#licenseNumber').val() == "") {
 						$('#licenseNumber').focus();
@@ -142,43 +149,45 @@
 </head>
 <body>
 
-	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp"/>
-	<a href="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">정보 수정</a>
+	<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp"/>
+	<a href="${pageContext.request.contextPath}/auth/teacher/mypage/updateMypage">정보 수정</a>
 	<table class="table table-bordered">
 		<tr>
 			<td>아이디</td>
-			<td>${manager.managerId}</td>
+			<td>${teacher.teacherId}</td>
 			<td>이름</td>
-			<td>${manager.managerName}</td>
+			<td colspan="2">${teacher.teacherName}</td>
 			<td>성별</td>
-			<td>${manager.managerGender}</td>
-			<td>직급</td>
-			<td>${manager.managerPosition}</td>
+			<td>${teacher.teacherGender}</td>
 			<td rowspan="2" colspan="2">이미지...</td>
 		</tr>
 		
 		<tr>
 			<td>전화번호</td>
-			<td >${manager.managerPhone}</td>
+			<td >${teacher.teacherPhone}</td>
 			<td>이메일</td>
-			<td colspan="3">${manager.managerEmail}</td>
+			<td colspan="2">${teacher.teacherEmail}</td>
 			<td>생일</td>
-			<td >${manager.managerBirth}</td>
+			<td >${teacher.teacherBirth}</td>
+		</tr>
+		<tr>
+			<td>자기소개</td>
+			<td colspan="8">${teacher.teacherInfo}</td>
 		</tr>
 		<tr>
 			<td>주소</td>
-			<td colspan="9">${manager.managerAddressMain} ${manager.managerAddressSub}</td>
+			<td colspan="8">${teacher.teacherAddressMain} ${teacher.teacherAddressSub}</td>
 		</tr>
 		
 		<tr>
 			<td>경력</td>
-			<td colspan="9">
-				<c:forEach var="c" items="${manager.careerList}" >
+			<td colspan="8">
+				<c:forEach var="c" items="${teacher.careerList}" >
 					<c:if test="${c.careerContent !=null}">
 						<div>
 							<span>${c.careerContent}</span>
 							<span>( ${c.careerStartdate} ~ ${c.careerEnddate} )</span>
-							<span><a href="${pageContext.request.contextPath}/auth/manager/mypage/deleteMypageCareer/${c.careerNo}">x</a></span>
+							<span><a href="${pageContext.request.contextPath}/auth/teacher/mypage/deleteMypageCareer/${c.careerNo}">x</a></span>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -191,15 +200,15 @@
 		</tr>
 		<tr>
 			<td>자격증</td>
-			<td colspan="9">
-				<c:forEach var="l" items="${manager.licenseList}" >
+			<td colspan="8">
+				<c:forEach var="l" items="${teacher.licenseList}" >
 					<c:if test="${l.licenseNumber !=null}">
 						<div>
 							<span>${l.licenseNumber}</span>
 							<span>${l.licenseName}</span>
 							<span>${l.licenseAgency}</span>
 							<span>( ${l.licenseGetdate} )</span>
-							<span><a href="${pageContext.request.contextPath}/auth/manager/mypage/deleteMypageLicense/${l.licenseNo}">x</a></span>
+							<span><a href="${pageContext.request.contextPath}/auth/teacher/mypage/deleteMypageLicense/${l.licenseNo}">x</a></span>
 						</div>
 					</c:if>
 				</c:forEach>

@@ -22,10 +22,8 @@
 	
 	<!-- Bootstrap 4 Icons -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-	
 </head>
 <body>
-
 	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp"/>
 	<a href="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">정보 수정</a>
 	<a href="${pageContext.request.contextPath}/auth/manager/mypage/updateMypageCareerAndLicense">경력 자격증 추가</a>
@@ -48,35 +46,39 @@
 			<td>이메일</td>
 			<td colspan="3">${manager.managerEmail}</td>
 			<td>생일</td>
-			<td >${manager.managerBirth}</td>
+			<td>${manager.managerBirth}</td>
 		</tr>
 		<tr>
 			<td>주소</td>
-			<td colspan="8">${manager.managerAddressMain} ${manager.managerAddressSub}</td>
+			<td colspan="9">${manager.managerAddressMain} ${manager.managerAddressSub}</td>
 		</tr>
 		
 		<tr>
 			<td>경력</td>
 			<td colspan="9">
-			<c:forEach var="c" items="${manager.careerList}" >
-				<div>
-					<span>${c.careerContent}</span>
-					<span>( ${c.careerStartdate} ~ ${c.careerEnddate} )</span>
-				</div>
-			</c:forEach>
+					<c:forEach var="c" items="${manager.careerList}" >
+						<c:if test="${c.careerContent != null}">
+							<div>
+								<span>${c.careerContent}</span>
+								<span>( ${c.careerStartdate} ~ ${c.careerEnddate} )</span>
+							</div>
+						</c:if>
+					</c:forEach>
 			</td>
 		</tr>
 		<tr>
 			<td>자격증</td>
 			<td colspan="9">
-				<c:forEach var="l" items="${manager.licenseList}" >
-					<div>
-						<span>${l.licenseNumber}</span>
-						<span>${l.licenseName}</span>
-						<span>${l.licenseAgency}</span>
-						<span>${l.licenseGetdate}</span>
-					</div>
-				</c:forEach>
+					<c:forEach var="l" items="${manager.licenseList}" >
+						<c:if test="${l.licenseNumber != null}">
+							<div>
+								<span>${l.licenseNumber}</span>
+								<span>${l.licenseName}</span>
+								<span>${l.licenseAgency}</span>
+								<span>${l.licenseGetdate}</span>
+							</div>
+						</c:if>
+					</c:forEach>
 			</td>
 		</tr>	
 	</table>

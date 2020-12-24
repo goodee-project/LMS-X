@@ -11,7 +11,6 @@
 		<result property="teacherBirth" column="teacher_birth"/>
 		<result property="teacherAddressMain" column="teacher_address_main"/>
 		<result property="teacherAddressSub" column="teacher_address_sub"/>
-		<result property="teacherImage" column="teacher_image"/>
 		<result property="teacherAccessdate" column="teacher_accessdate"/>
 		<result property="teacherInfo" column="teacher_info"/>
 		<collection property="careerList"  ofType="gd.fintech.lms.vo.Career">
@@ -40,7 +39,6 @@
 			m.teacher_birth,
 			m.teacher_address_main,
 			m.teacher_address_sub,
-			m.teacher_image,
 			m.teacher_accessdate,
 			m.teacher_info,
 			c.career_no,
