@@ -7,7 +7,7 @@
 	<title>noticeDispatchList</title>
 </head>
 	<body>
-		<h1>강의 공지사항</h1>
+		<h1>발신함</h1>
 		<!-- 메뉴 -->
 		<div>
 			<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />

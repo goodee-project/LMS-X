@@ -60,14 +60,34 @@ public class TeacherNoteService {
 	public int selectTeacherNoteDispatchCount(String teacherId) {
 		return teacherNoteMapper.selectTeacherNoteDispatchCount(teacherId);
 	}
-	
-	// 쪽지 수신 내용
+
+	// 쪽지 상세보기 - 수신함에서
 	public Note selectNoteReceiveOne(int noteNo) {
-		return teacherNoteMapper.selectNoteReceiveOne(noteNo);
+		teacherNoteMapper.updateNoteIsRead(noteNo); 	// 읽음 상태로 변경
+		return teacherNoteMapper.selectNoteOne(noteNo);
 	}
 	
-	// 쪽지 발신 내용
+	// 쪽지 상세보기 - 발신함에서
 	public Note selectNoteDispatchOne(int noteNo) {
-		return teacherNoteMapper.selectNoteDispatchOne(noteNo);
+		return teacherNoteMapper.selectNoteOne(noteNo);
 	}
+
+	// 쪽지 보내기
+	public int insertNote(Note note) {
+		return teacherNoteMapper.insertNote(note);
+	}
+	
+	// 쪽지 삭제하기
+	public void deleteNote(Note note) {
+		// 해당 쪽지의 삭제 상태 가져오기
+		String noteDeleteState = teacherNoteMapper.selectNoteDelete(note);
+		// 미삭제 상태라면
+		if (noteDeleteState.equals("none")) {
+			teacherNoteMapper.updateNoteDelete(note);
+		// 한쪽에서 이미 삭제 상태라면
+		} else {
+			teacherNoteMapper.deleteNote(note);
+		}
+	}
+	
 }

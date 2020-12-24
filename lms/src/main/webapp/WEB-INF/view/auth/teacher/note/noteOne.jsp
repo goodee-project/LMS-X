@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>noteReceiveOne</title>
+		<title>noteOne</title>
 		
 		<!-- Bootstrap Framework 사용 -->
 		
@@ -49,7 +49,7 @@
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
 				<h1>쪽지 내용</h1>
-				<p>쪽지 수신 내용입니다.</p>
+				<p>쪽지 발신 내용입니다.</p>
 			</div>
 		</div>
 		
@@ -72,7 +72,11 @@
 					<td width="70%">${note.noteDispatcherName}</td>
 				</tr>
 				<tr>
-					<td>받은시간</td>
+					<td width="30%">받는사람</td>
+					<td width="70%">${note.noteReceiverName}</td>
+				</tr>
+				<tr>
+					<td>보낸시간</td>
 					<td>${note.noteSendDate}</td>
 				</tr>
 				<tr>
@@ -83,9 +87,11 @@
 					<td>내용</td>
 					<td>${note.noteContent}</td>
 				</tr>
-			</table>	
+			</table>
+			<div>
+				<a href="${pageContext.request.contextPath}/auth/teacher/note/deleteNote/${note.noteNo}/${note.noteDelete}" class="btn btn-outline-danger">삭제</a>
+			</div>	
 		</div>
-		
 		<br><br>
 	</body>
 </html>

@@ -10,7 +10,7 @@
 				// 받는사람 검색 버튼
 				$('#searchAccountBtn').click(function(){
 					$('#selectAccount').html('');	
-					// 연도 리스트 가져오기
+					// 계정 리스트 가져오기
 					$.ajax({
 						url: '${pageContext.request.contextPath}/auth/student/note/accountList/' + $('#searchAccountText').val(),
 						type:'get',
@@ -19,6 +19,7 @@
 								$('#selectAccount').append('<div><button type="button" class="selectAccountBtn" name="selectAccountRadio" id="' + value.accountId + '" value="' + value.accountName + '">'+ value.accountName + '(' + value.accountId + ')' + '</button></div>');
 							});
 
+							// 계정 한개 선택시
 							$('.selectAccountBtn').click(function(){
 								document.getElementById("noteReceiverId").value = this.id;
 								document.getElementById("noteReceiverName").value = this.value;

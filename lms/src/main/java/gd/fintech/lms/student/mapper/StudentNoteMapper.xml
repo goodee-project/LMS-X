@@ -30,7 +30,8 @@
 		FROM
 			note
 		WHERE
-			note_receiver_id = #{accountId}
+			note_receiver_id = #{accountId} AND
+			note_delete != 'receiver'
 	</select>
 	
 	<!-- 쪽지 발신 목록 가져오기 -->
@@ -103,7 +104,8 @@
 			note_receiver_id,
 			note_receiver_name,
 			note_send_date,
-			note_is_read
+			note_is_read,
+			note_delete
 		) VALUE (
 			#{noteTitle},
 			#{noteContent},
@@ -112,7 +114,8 @@
 			#{noteReceiverId},
 			#{noteReceiverName},
 			NOW(),
-			'N'
+			'N',
+			'none'
 		)
 	</insert>
 	

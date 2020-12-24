@@ -13,7 +13,8 @@
 		FROM
 			note
 		WHERE
-			note_receiver_id = #{teacherId}
+			note_receiver_id = #{teacherId} AND
+			note_delete != 'receiver'
 		ORDER BY
 			note_no DESC
 		LIMIT
@@ -27,7 +28,8 @@
 		FROM
 			note
 		WHERE
-			note_receiver_id = #{teacherId}
+			note_receiver_id = #{teacherId} AND
+			note_delete != 'receiver'
 	</select>
 	
 	<!-- 쪽지 발신함 -->
@@ -42,7 +44,8 @@
 		FROM
 			note
 		WHERE
-			note_dispatcher_id = #{teacherId}
+			note_dispatcher_id = #{teacherId} AND
+			note_delete != 'dispatcher'
 		ORDER BY
 			note_no DESC
 		LIMIT
@@ -56,12 +59,14 @@
 		FROM
 			note
 		WHERE
-			note_dispatcher_id = #{teacherId}
+			note_dispatcher_id = #{teacherId} AND
+			note_delete != 'dispatcher'
 	</select>
 	
-	<!-- 쪽지 수신 내용 -->
-	<select id="selectNoteReceiveOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Note">
+	<!-- 쪽지 상세보기 -->
+	<select id="selectNoteOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Note">
 		SELECT
+			note_no noteNo,
 			note_title noteTitle, 
 			note_content noteContent, 
 			note_dispatcher_id noteDispatcherId, 
@@ -75,19 +80,66 @@
 			note_no = #{noteNo}
 	</select>
 	
-	<!-- 쪽지 발신 내용 -->
-	<select id="selectNoteDispatchOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Note">
+	<!-- 쪽지 읽음 상태로 변경 -->
+	<update id="updateNoteIsRead" parameterType="Integer">
+		UPDATE
+			note
+		SET
+			note_is_read = 'Y'
+		WHERE
+			note_no = #{noteNo}
+	</update>
+	
+	<!-- 쪽지 보내기 -->
+	<insert id="insertNote" parameterType="gd.fintech.lms.vo.Note">
+		INSERT INTO note(
+			note_title,
+			note_content,
+			note_dispatcher_id,
+			note_dispatcher_name,
+			note_receiver_id,
+			note_receiver_name,
+			note_send_date,
+			note_is_read,
+			note_delete
+		) VALUE (
+			#{noteTitle},
+			#{noteContent},
+			#{noteDispatcherId},
+			#{noteDispatcherName},
+			#{noteReceiverId},
+			#{noteReceiverName},
+			NOW(),
+			'N',
+			'none'
+		)
+	</insert>
+	
+	<!-- 쪽지 삭제 상태 확인 -->
+	<select id="selectNoteDelete" parameterType="gd.fintech.lms.vo.Note" resultType="String">
 		SELECT
-			note_title noteTitle, 
-			note_content noteContent, 
-			note_dispatcher_id noteDispatcherId, 
-			note_dispatcher_name noteDispatcherName, 
-			note_receiver_id noteReceiverId, 
-			note_receiver_name noteReceiverName, 
-			note_send_date noteSendDate
+			note_delete
 		FROM
 			note
 		WHERE
 			note_no = #{noteNo}
 	</select>
+	
+	<!-- 쪽지 나에게만 삭제 -->
+	<update id="updateNoteDelete" parameterType="gd.fintech.lms.vo.Note">
+		UPDATE
+			note
+		SET
+			note_delete = #{noteDelete}
+		WHERE
+			note_no = #{noteNo}
+	</update>
+	
+	<!-- 양쪽 다 해당 쪽지 삭제시 : 완전 삭제 -->
+	<delete id="deleteNote" parameterType="gd.fintech.lms.vo.Note">
+		DELETE FROM
+			note
+		WHERE 
+			note_no = #{noteNo}
+	</delete>
 </mapper>

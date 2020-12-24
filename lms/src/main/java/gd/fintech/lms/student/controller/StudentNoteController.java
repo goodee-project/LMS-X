@@ -204,6 +204,7 @@ public class StudentNoteController {
 	@PostMapping("auth/student/note/insertNote")
 	public String insertNote(Note note, ServletRequest request) {
 
+		// 세션에서 계정 id, name 가져오기
 		HttpSession session = ((HttpServletRequest)request).getSession();	
 		String accountId = (String)session.getAttribute("loginId");		
 		String accountName = (String)session.getAttribute("loginName");

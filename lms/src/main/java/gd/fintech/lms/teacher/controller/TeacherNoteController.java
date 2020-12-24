@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherNoteService;
 import gd.fintech.lms.vo.Note;
@@ -201,12 +202,13 @@ public class TeacherNoteController {
 	public String noteReceiveOne(Model model, 
 			@PathVariable(value = "noteNo") int noteNo) {
 		Note note = teacherNoteService.selectNoteReceiveOne(noteNo);
+		note.setNoteDelete("receiver");
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("note", note);
 		
 		// [View] /auth/teacher/note/noteReceiveOne.jsp
-		return "/auth/teacher/note/noteReceiveOne";
+		return "/auth/teacher/note/noteOne";
 	}
 	
 	// 쪽지 발신 내용
@@ -214,11 +216,48 @@ public class TeacherNoteController {
 	public String noteDispatchOne(Model model, 
 			@PathVariable(value = "noteNo") int noteNo) {
 		Note note = teacherNoteService.selectNoteDispatchOne(noteNo);
+		note.setNoteDelete("receiver");
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("note", note);
 		
 		// [View] /auth/teacher/note/noteDispatchOne.jsp
-		return "/auth/teacher/note/noteDispatchOne";
+		return "/auth/teacher/note/noteOne";
+	}
+	
+	// 쪽지 보내기 폼
+	@GetMapping("auth/teacher/note/insertNote")
+	public String insertNote() {
+		return "/auth/teacher/note/insertNote";
+	}
+	
+	// 쪽지 보내기 액션
+	@PostMapping("auth/teacher/note/insertNote")
+	public String insertNote(Note note, ServletRequest request) {
+
+		// 세션에서 계정 id, name 가져오기
+		HttpSession session = ((HttpServletRequest)request).getSession();	
+		String accountId = (String)session.getAttribute("loginId");		
+		String accountName = (String)session.getAttribute("loginName");
+		
+		note.setNoteDispatcherId(accountId);
+		note.setNoteDispatcherName(accountName);
+		
+		teacherNoteService.insertNote(note);
+		return "redirect:/auth/teacher/note/noteDispatchList/1";
+	}
+	
+	// 쪽지 삭제하기
+	@GetMapping("auth/teacher/note/deleteNote/{noteNo}/{noteDelete}")
+	public String deleteNote(Note note) {
+		// 쪽지 삭제하기
+		teacherNoteService.deleteNote(note);
+		// 발신목록에서 왔을경우 다시 발신 목록으로 redirect
+		if (note.getNoteDelete().equals("dispatcher")) {
+			return "redirect:/auth/teacher/note/noteDispatchList/1";
+		// 수신 목록에서 왔을경우 다시 수신목록으로 refirect
+		} else {
+			return "redirect:/auth/teacher/note/noteReceiveList/1";		
+		}
 	}
 }
