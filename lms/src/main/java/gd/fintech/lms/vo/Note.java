@@ -13,5 +13,5 @@ public class Note {
 	private String 	noteReceiverName;		// 쪽지 수신자 name
 	private String 	noteSendDate;			// 쪽지 발신 날짜
 	private String	noteIsRead;				// 쪽지를 수신자가 읽었는지
-	private String 	noteDelete;				// 쪽지 삭제 상태 : NULL = 미삭제, dispatcher = 발신자쪽만 삭제, receiver = 수신자쪽만 삭제
+	private String 	noteDelete;				// 쪽지 삭제 상태 : none = 미삭제, dispatcher = 발신자쪽만 삭제, receiver = 수신자쪽만 삭제
 }
