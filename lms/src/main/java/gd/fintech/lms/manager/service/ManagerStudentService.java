@@ -58,7 +58,7 @@ public class ManagerStudentService {
 		// 계정 정보 찾기
 		Student student = managerStudentMapper.selectStudentQueueOne(accountId);
 		student.setManagerIdAccess(loginId);
-		student.setStudentImage("default.jpg");
+		// student.setStudentImage("default.jpg");
 		// 계정 상태 업데이트
 		managerStudentMapper.updateAccountState(account);
 		// 학생 테이블 추가

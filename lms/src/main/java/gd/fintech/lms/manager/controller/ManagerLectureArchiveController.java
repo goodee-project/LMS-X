@@ -77,4 +77,16 @@ public class ManagerLectureArchiveController {
 		
 		return "/auth/manager/lecture/archive/archiveList";
 	}
+	
+	// 강사 상세보기
+	@GetMapping("/auth/manager/lecture/{lectureNo}/archive/archiveOne/{lectureArchiveNo}")
+	public String archiveOne(Model model,
+			@PathVariable(value = "lectureArchiveNo") int lectureArchiveNo) {
+		managerLectureArchiveService.updateLectureArchiveCountUp(lectureArchiveNo);
+		LectureArchive lectureArchive = managerLectureArchiveService.getLectureArchiveOne(lectureArchiveNo);
+		model.addAttribute("lectureArchive", lectureArchive);
+		return "auth/manager/lecture/archive/archiveOne";
+	}
+	
+	
 }

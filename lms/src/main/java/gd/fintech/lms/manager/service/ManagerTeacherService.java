@@ -58,7 +58,7 @@ public class ManagerTeacherService {
 		// 계정 정보 찾기
 		Teacher teacher = managerTeacherMapper.selectTeacherQueueOne(accountId);
 		teacher.setManagerIdAccess(loginId);
-		teacher.setTeacherImage("default.jpg");
+		// teacher.setTeacherImage("default.jpg");
 		// 계정 상태 업데이트
 		managerTeacherMapper.updateAccountState(account);
 		// 강사 테이블 추가

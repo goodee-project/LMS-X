@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<td>강사 이미지</td>
-			<td>${teacher.teacherImage}</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>강사 설명</td>

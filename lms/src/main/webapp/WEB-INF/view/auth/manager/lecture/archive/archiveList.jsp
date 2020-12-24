@@ -18,7 +18,7 @@
 		</tr>
 		<c:forEach var="a" items="${archiveList}">
 			<tr>
-				<td>${a.lectureArchiveNo}</td>
+				<td><a href="${pageContext.request.contextPath}/auth/manager/lecture/${a.lectureNo}/archive/archiveOne/${a.lectureArchiveNo}">${a.lectureArchiveNo}</a></td>
 				<td>${a.lectureArchiveTitle}</td>
 				<td>${a.lectureArchiveWriter}</td>
 				<td>${a.lectureArchiveCreatedate}</td>

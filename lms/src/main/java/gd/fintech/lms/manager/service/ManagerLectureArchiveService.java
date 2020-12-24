@@ -22,4 +22,14 @@ public class ManagerLectureArchiveService {
 	public int selectLectureArchiveCount(int lectureNo) {
 		return managerLectureArchiveMapper.selectLectureArchiveListCount(lectureNo);
 	}
+	
+	// 자료 상세보기
+	public LectureArchive getLectureArchiveOne(int lectureArchiveNo) {
+		return managerLectureArchiveMapper.selectLectureArchiveOne(lectureArchiveNo);
+	}
+	
+	// 자료 게시판 상세보기 조회수 증가
+	public int updateLectureArchiveCountUp(int lectureArchiveNo) {
+		return managerLectureArchiveMapper.updateLectureArchiveCount(lectureArchiveNo);
+	}
 }

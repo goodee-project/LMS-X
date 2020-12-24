@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<td>학생 이미지</td>
-			<td>${student.studentImage}</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>학생정보 등록날짜</td>

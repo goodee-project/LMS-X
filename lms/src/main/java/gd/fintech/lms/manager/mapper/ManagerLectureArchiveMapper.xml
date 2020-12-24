@@ -52,7 +52,7 @@
 		</collection>
 	</resultMap>
 	<!-- 강의 자료 상세보기 -->
-	<select id="selectLectureArchiveOne" parameterType="int" resultType="int">
+	<select id="selectLectureArchiveOne" parameterType="int" resultMap="selectLectureArchiveOneInfomation">
 		SELECT
   			la.lecture_archive_no, 
   			la.lecture_no, 
@@ -70,10 +70,21 @@
   			laf.lecture_archive_file_count
   		FROM
   			lecture_archive la
-  		LEFT OUTER JOIN
-  			lecture_archive_file laf ON
+  		INNER JOIN
+  			lecture_archive_file laf 
+  		ON
   			la.lecture_archive_no = laf.lecture_archive_no
   		WHERE
   			la.lecture_archive_no = #{lectureArchiveNo}
 	</select>
+	
+	<!--FAQ 게시판 조회수 증가-->
+	<update id="updateLectureArchiveCount" parameterType="gd.fintech.lms.vo.LectureArchive">
+		UPDATE 
+			lecture_archive
+		SET
+			lecture_archive_count = lecture_archive_count + 1
+		WHERE
+			lecture_archive_no = #{lectureArchiveNo}
+	</update>
 </mapper>
