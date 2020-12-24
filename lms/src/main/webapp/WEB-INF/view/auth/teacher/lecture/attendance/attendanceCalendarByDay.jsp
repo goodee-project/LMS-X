@@ -46,6 +46,39 @@
 				background-color: #F9F9FB;
 			}
 		</style>
+		
+		<script>
+			$(document).ready(function() {
+				$('.submitBtn').on('click', function() {
+					let accountId = $(this).val();
+					console.log('accountId: ' + accountId);
+					
+					let attendanceState = $('#' + accountId + 'AttendanceState').val();
+					console.log('attendanceState: ' + attendanceState);
+					
+					let attendanceRemark = $('#' + accountId + 'AttendanceRemark').val();
+					console.log('attendanceRemark: ' + attendanceRemark);
+					
+					if (attendanceRemark == '') {
+						alert('출석 상태를 변경해주세요!');
+						return;
+					}
+					
+					console.log('${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/updateAttendance/${currentYear}/${currentMonth}/${currentDay}/' + accountId + '/' + attendanceState + '/' + attendanceRemark);
+					
+					$.ajax({
+						url: '${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/updateAttendance/${currentYear}/${currentMonth}/${currentDay}/' + accountId + '/' + attendanceState + '/' + attendanceRemark, 
+						type: 'get', 
+						success: function() {
+							alert(accountId + ' 학생의 출석 상태가 변경되었습니다.');
+						}, 
+						error: function() {
+							alert('데이터베이스 접근에 실패하였습니다.\n인터넷 연결을 다시 한 번 확인해주세요.');
+						}
+					});
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
@@ -92,12 +125,12 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>학생 아이디</th>
-						<th>학생 이름</th>
-						<th>성별</th>
-						<th>출석 상태</th>
-						<th>비고(사유)</th>
-						<th>출석 상태 변경</th>
+						<th width="12%">학생 아이디</th>
+						<th width="12%">학생 이름</th>
+						<th width="10%">성별</th>
+						<th width="15%">출석 상태</th>
+						<th width="36%">비고(사유)</th>
+						<th width="15%">출석 상태 변경</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -106,10 +139,51 @@
 							<td>${al.accountId}</td>
 							<td>${al.student.studentName}</td>
 							<td>${al.student.studentGender}</td>
-							<td>${al.attendanceState}</td>
-							<td>${al.attendanceRemark}</td>
 							<td>
-								<button type="button" class="btn btn-sm btn-dark" onclick="location.href='#'">변경</button>
+								<select class="form-control" id="${al.accountId}AttendanceState" name="attendanceState">
+									<c:if test="${al.attendanceState == null}">
+										<option value="" selected="selected">미출석</option>
+									</c:if>
+									<c:if test="${al.attendanceState != null}">
+										<option value="">미출석</option>
+									</c:if>
+									<c:if test="${al.attendanceState == '출석'}">
+										<option value="출석" selected="selected">출석</option>
+									</c:if>
+									<c:if test="${al.attendanceState != '출석'}">
+										<option value="출석">출석</option>
+									</c:if>
+									<c:if test="${al.attendanceState == '결석'}">
+										<option value="결석" selected="selected">결석</option>
+									</c:if>
+									<c:if test="${al.attendanceState != '결석'}">
+										<option value="결석">결석</option>
+									</c:if>
+									<c:if test="${al.attendanceState == '외출'}">
+										<option value="외출" selected="selected">외출</option>
+									</c:if>
+									<c:if test="${al.attendanceState != '외출'}">
+										<option value="외출">외출</option>
+									</c:if>
+									<c:if test="${al.attendanceState == '조퇴'}">
+										<option value="조퇴" selected="selected">조퇴</option>
+									</c:if>
+									<c:if test="${al.attendanceState != '조퇴'}">
+										<option value="조퇴">조퇴</option>
+									</c:if>
+									<c:if test="${al.attendanceState == '지각'}">
+										<option value="지각" selected="selected">지각</option>
+									</c:if>
+									<c:if test="${al.attendanceState != '지각'}">
+										<option value="지각">지각</option>
+									</c:if>
+								</select>
+							</td>
+							<td>
+								<input type="text" class="form-control" id="${al.accountId}AttendanceRemark" value="${al.attendanceRemark}">
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-dark submitBtn" value="${al.accountId}">변경</button>
 							</td>
 						</tr>
 					</c:forEach>
