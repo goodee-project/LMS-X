@@ -75,7 +75,7 @@
 			teacher_birth = #{teacherBirth},
 			teacher_address_main = #{teacherAddressMain},
 			teacher_address_sub = #{teacherAddressSub},
-			teacher_Info = #{teacherInfo},
+			teacher_info = #{teacherInfo},
 			teacher_updatedate = now()
 		WHERE
 			teacher_id = #{teacherId}
@@ -137,5 +137,46 @@
 			license
 		WHERE
 			license_no = #{licenseNo}
+	</delete>
+	
+	<!-- 강사 마이페이지 이미지 추가 -->
+	<insert id="insertTeacherMypageImage" parameterType="gd.fintech.lms.vo.MypageImage">
+		INSERT INTO mypage_image(
+			mypage_image_uuid,
+			mypage_image_original,
+			account_id,
+			mypage_image_size,
+			mypage_image_type,
+			mypage_image_createdate
+		) VALUES (
+			#{mypageImageUuid},
+			#{mypageImageOriginal},
+			#{accountId},
+			#{mypageImageSize},
+			#{mypageImageType},
+			now()
+		)
+	</insert>
+	
+	<!-- 이미지 조회 -->
+	<select id="selectMypageImage" parameterType="String" resultType="gd.fintech.lms.vo.MypageImage">
+		SELECT
+			mypage_image_uuid mypageImageUuid,
+			mypage_image_original mypageImageOriginal,
+			account_id accountId,
+			mypage_image_size mypageImageSize,
+			mypage_image_type mypageImageType
+		FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</select>
+	
+	<!-- 이미지 삭제 -->
+	<delete id="deleteMypageImage" parameterType="String" >
+		DELETE FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
 	</delete>
 </mapper>

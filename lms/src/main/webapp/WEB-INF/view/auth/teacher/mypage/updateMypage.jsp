@@ -83,21 +83,24 @@
 					return false;
 				}
 			}
-			// 이미지 파일 확장자, 파일크기 제한
-			var inputImage = document.querySelector("#image");
-
+			
+			// 파일 선택해서 들어온 값을 inputImage 변수에 넣어주기 
+			let imageCheck = null;
+			var inputImage = document.querySelector("#teacherImage");
+			
+			// 이미지 확인해서 imageCheck에 값 넣어주기 
 			inputImage.addEventListener("change", function(evt){
 			  var image = evt.target.files[0];
-			})
 			
+			  imageCheck = ifImage(image);
+			})
 			// 이미지 파일 확인 이미지가 맞으면 true 아니면 false
 			function ifImage(file){
-			  var validity
-			    = (["image/png", "image/jpg", "image/jpeg"].indexOf(file.type) > -1);
-
+			  var validity = (["image/png", "image/jpg", "image/jpeg"].indexOf(file.type) > -1);
+			
 			  return validity;
 			}
-
+		
 			$('#check').click(function() {
 				$('#addressCheck').html("");
 				if ( $('#street').val().length > 1 ) {
@@ -247,9 +250,22 @@
 				} else {
 					$('#teacherBirthCheck').html("")
 				}
+			
+				// 사진 검사
+				if ( $('#teacherImage').val() != "") {
+					if (imageCheck == false) {
+						$('#teacherImageCheck').html("이미지 파일만 올릴 수 있습니다.");
+						return;
+					} else {
+						$('#teacherImageCheck').html("");
+					}
+				} else {
+					$('#teacherImageCheck').html("");
+				}
 				// 자기소개 검사
 				if ($('#teacherInfo').val() == "") {
 					$('#teacherInfo').focus();
+					return;
 				}
 				// 주소 검사
 				if ($('#teacherAddressMain').val() == "") {
@@ -285,7 +301,7 @@
 				<td>아이디</td>
 				<td><input type="text" name="teacherId" value="${teacher.teacherId}"hidden="hidden">${teacher.teacherId}</td>
 				<td>이름</td>
-				<td colspan="2"><input type="text" class="form-control" name="teacherName" id="teacherName" placeholder="이름을 입력하세요" value="${teacher.teacherName}"></td>
+				<td><input type="text" class="form-control" name="teacherName" id="teacherName" placeholder="이름을 입력하세요" value="${teacher.teacherName}"></td>
 				<td>성별</td>
 				<td>
 					<c:if test="${teacher.teacherGender == '남'}">
@@ -298,9 +314,14 @@
 					</c:if>
 					<span id="teacherGenderCheck"></span>
 				</td>
-				<td rowspan="2" colspan="2"><input id="image"type="file" name="teacherImage" accept="image/png, image/jpeg"></td>
+				<td rowspan="3">
+					<div style="width: 150px; height: 199px;">
+						<c:if test="${mypageImage.mypageImageUuid != null}">
+							<img style="width: 150px; height: 199px;" src="${pageContext.request.contextPath}/resource/mypageImage/${mypageImage.mypageImageUuid}">
+						</c:if>
+					</div>
+				</td>
 			</tr>
-			
 			<tr>
 				<td>전화번호</td>
 				<td>
@@ -308,7 +329,7 @@
 					<div id="teacherPhoneCheck"></div>
 				</td>
 				<td>이메일</td>
-				<td colspan="2">
+				<td >
 					<div class="input-group">
 						<input type="email" value="${teacher.teacherEmail}" id="originalteacherEmail" hidden="hidden">
 						<input type="email" class="form-control" name="teacherEmail" id="teacherEmail" value="${teacher.teacherEmail}" placeholder="abc@abc.abc">
@@ -327,12 +348,19 @@
 				</td>
 			</tr>
 			<tr>
+				<td>사진</td>
+				<td colspan="5">
+					<input type="file" id="teacherImage" name="teacherImage" accept="image/png, image/jpeg" >
+					<div id="teacherImageCheck"></div>
+				</td>
+			</tr>
+			<tr>
 				<td>자기소개</td>
-				<td colspan="8"><input type="text" class="form-control" name="teacherInfo" id="teacherInfo" value="${teacher.teacherInfo}"></td>
+				<td colspan="6"><input type="text" class="form-control" name="teacherInfo" id="teacherInfo" value="${teacher.teacherInfo}"></td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan="8">
+				<td colspan="6">
 					<div id="addressView">
 						<input id="teacherAddressMain" class="form-control" style="margin-bottom:5px;" type="text" name="teacherAddressMain" value="${teacher.teacherAddressMain}" readonly="readonly" >
 					</div>
@@ -352,12 +380,12 @@
 			</tr>
 			<tr>
 				<td>상세주소</td>
-				<td colspan="8"><input type="text" class="form-control" id="teacherAddressSub" placeholder="상세 주소를 입력하세요" value="${teacher.teacherAddressSub}" name="teacherAddressSub" ></td>
+				<td colspan="6"><input type="text" class="form-control" id="teacherAddressSub" placeholder="상세 주소를 입력하세요" value="${teacher.teacherAddressSub}" name="teacherAddressSub" ></td>
 			</tr>
 		
 			<tr>
 				<td>경력</td>
-				<td colspan="8">
+				<td colspan="6">
 					<c:forEach var="c" items="${teacher.careerList}" >
 						<c:if test="${c.careerContent != null}">
 							<div>
@@ -370,7 +398,7 @@
 			</tr>
 			<tr>
 				<td>자격증</td>
-				<td colspan="8">
+				<td colspan="6">
 					<c:forEach var="l" items="${teacher.licenseList}" >
 						<c:if test="${l.licenseNumber != null}">
 							<div>
@@ -383,6 +411,7 @@
 					</c:forEach>
 				</td>
 			</tr>	
+			
 		</table>
 	</form>
 </body>

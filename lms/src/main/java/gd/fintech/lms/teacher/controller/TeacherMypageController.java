@@ -1,5 +1,7 @@
 package gd.fintech.lms.teacher.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import gd.fintech.lms.teacher.service.TeacherMypageService;
 import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.License;
+import gd.fintech.lms.vo.MypageImage;
 import gd.fintech.lms.vo.Teacher;
 import gd.fintech.lms.vo.TeacherForm;
 
@@ -29,10 +32,10 @@ public class TeacherMypageController {
 	public String selectTeacherMyPage(Model model, HttpSession session) {
 		
 		String accountId = (String)session.getAttribute("loginId");
-		Teacher teacher = teacherMypageService.selectTeacherMypage(accountId);
-		log.debug(teacher.toString());
-		
-		model.addAttribute("teacher", teacher);
+		Map<String, Object> teacherMypage = teacherMypageService.selectTeacherMypage(accountId);
+	
+		model.addAttribute("teacher",teacherMypage.get("teacher"));
+		model.addAttribute("mypageImage", teacherMypage.get("mypageImage"));
 		return "auth/teacher/mypage/mypageOne";
 	}
 	
@@ -40,9 +43,10 @@ public class TeacherMypageController {
 	@GetMapping("/auth/teacher/mypage/updateMypage")
 	public String updateMypage(Model model, HttpSession session) {
 		String accountId = (String)session.getAttribute("loginId");
-		Teacher teacher = teacherMypageService.selectTeacherMypage(accountId);
+		Map<String, Object> teacherMypage = teacherMypageService.selectTeacherMypage(accountId);
 		
-		model.addAttribute("teacher",teacher);
+		model.addAttribute("teacher",teacherMypage.get("teacher"));
+		model.addAttribute("mypageImage", teacherMypage.get("mypageImage"));
 		return "auth/teacher/mypage/updateMypage";
 	}
 	@PostMapping("/auth/teacher/mypage/updateMypage")
@@ -58,10 +62,10 @@ public class TeacherMypageController {
 	@GetMapping("/auth/teacher/mypage/updateMypageCareerAndLicense") 
 	public String updateMypageCareerAndLicense(Model model, HttpSession session) {
 		String accountId = (String)session.getAttribute("loginId");
-		Teacher teacher = teacherMypageService.selectTeacherMypage(accountId);
+		Map<String, Object> teacherMypage = teacherMypageService.selectTeacherMypage(accountId);
 		
-		model.addAttribute("teacher",teacher);
-		
+		model.addAttribute("teacher",teacherMypage.get("teacher"));
+		model.addAttribute("mypageImage", teacherMypage.get("mypageImage"));
 		return "auth/teacher/mypage/updateMypageCareerAndLicense";
 	}
 	

@@ -82,7 +82,6 @@
 			manager_position,
 			manager_address_main,
 			manager_address_sub,
-			manager_image,
 			manager_accessdate,
 			manager_updatedate
 		) VALUES (
@@ -95,7 +94,6 @@
 			#{managerPosition},
 			#{managerAddressMain},
 			#{managerAddressSub},
-			#{managerImage},
 			now(),
 			now()
 		)
@@ -112,7 +110,6 @@
 		<result property="managerPosition" column="manager_position"/>
 		<result property="managerAddressMain" column="manager_address_main"/>
 		<result property="managerAddressSub" column="manager_address_sub"/>
-		<result property="managerImage" column="manager_image"/>
 		<result property="managerAccessdate" column="manager_accessdate"/>
 		<collection property="careerList"  ofType="gd.fintech.lms.vo.Career">
 			<result property="careerNo" column="career_no"/>
@@ -142,7 +139,6 @@
 			m.manager_position,
 			m.manager_address_main,
 			m.manager_address_sub,
-			m.manager_image,
 			m.manager_accessdate,
 			c.career_content,
 			c.career_startdate,

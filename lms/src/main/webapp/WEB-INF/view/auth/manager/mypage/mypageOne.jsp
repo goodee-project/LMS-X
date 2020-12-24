@@ -37,12 +37,16 @@
 			<td>${manager.managerGender}</td>
 			<td>직급</td>
 			<td>${manager.managerPosition}</td>
-			<td rowspan="2" colspan="2">이미지...</td>
+			<td rowspan="3" colspan="2" style="width: 150px; height: 199px;">
+				<c:if test="${mypageImage.mypageImageUuid != null}">
+					<img style="width: 150px; height: 199px;" id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${mypageImage.mypageImageUuid}">
+				</c:if>
+			</td>
 		</tr>
 		
 		<tr>
 			<td>전화번호</td>
-			<td >${manager.managerPhone}</td>
+			<td>${manager.managerPhone}</td>
 			<td>이메일</td>
 			<td colspan="3">${manager.managerEmail}</td>
 			<td>생일</td>
@@ -50,7 +54,7 @@
 		</tr>
 		<tr>
 			<td>주소</td>
-			<td colspan="9">${manager.managerAddressMain} ${manager.managerAddressSub}</td>
+			<td colspan="7">${manager.managerAddressMain} ${manager.managerAddressSub}</td>
 		</tr>
 		
 		<tr>

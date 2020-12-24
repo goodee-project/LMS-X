@@ -32,32 +32,36 @@
 			<td>아이디</td>
 			<td>${teacher.teacherId}</td>
 			<td>이름</td>
-			<td colspan="2">${teacher.teacherName}</td>
+			<td>${teacher.teacherName}</td>
 			<td>성별</td>
 			<td>${teacher.teacherGender}</td>
-			<td rowspan="2" colspan="2">이미지...</td>
+			<td rowspan="3">
+				<c:if test="${mypageImage.mypageImageUuid != null}">
+					<img style="width: 150px; height: 199px;" id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${mypageImage.mypageImageUuid}">
+				</c:if>
+			</td>
 		</tr>
 		
 		<tr>
 			<td>전화번호</td>
-			<td >${teacher.teacherPhone}</td>
+			<td>${teacher.teacherPhone}</td>
 			<td>이메일</td>
-			<td colspan="2">${teacher.teacherEmail}</td>
+			<td>${teacher.teacherEmail}</td>
 			<td>생일</td>
-			<td >${teacher.teacherBirth}</td>
+			<td>${teacher.teacherBirth}</td>
 		</tr>
 		<tr>
 			<td>자기소개</td>
-			<td colspan="8">${teacher.teacherInfo}</td>
+			<td colspan="5">${teacher.teacherInfo}</td>
 		</tr>
 		<tr>
 			<td>주소</td>
-			<td colspan="8">${teacher.teacherAddressMain} ${teacher.teacherAddressSub}</td>
+			<td colspan="6">${teacher.teacherAddressMain} ${teacher.teacherAddressSub}</td>
 		</tr>
 		
 		<tr>
 			<td>경력</td>
-			<td colspan="8">
+			<td colspan="6">
 				<c:forEach var="c" items="${teacher.careerList}" >
 					<c:if test="${c.careerContent != null}">
 						<div>
@@ -70,7 +74,7 @@
 		</tr>
 		<tr>
 			<td>자격증</td>
-			<td colspan="8">
+			<td colspan="6">
 				<c:forEach var="l" items="${teacher.licenseList}" >
 					<c:if test="${l.licenseNumber != null}">
 						<div>

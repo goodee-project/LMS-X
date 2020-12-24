@@ -1,5 +1,7 @@
 package gd.fintech.lms.manager.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import gd.fintech.lms.manager.service.ManagerMypageService;
 import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.License;
-import gd.fintech.lms.vo.Manager;
+import gd.fintech.lms.vo.ManagerForm;
 
 @Controller
 public class ManagerMyageController {
@@ -27,10 +29,11 @@ public class ManagerMyageController {
 	public String selectManagerMyPage(Model model, HttpSession session) {
 		
 		String accountId = (String)session.getAttribute("loginId");
-		Manager manager = managerMypageService.selectManagerMypage(accountId);
-		log.debug(manager.toString());
+		Map<String, Object> managerMypage = managerMypageService.selectManagerMypage(accountId);
 		
-		model.addAttribute("manager", manager);
+		
+		model.addAttribute("manager",managerMypage.get("manager"));
+		model.addAttribute("mypageImage", managerMypage.get("mypageImage"));
 		return "auth/manager/mypage/mypageOne";
 	}
 	
@@ -38,15 +41,16 @@ public class ManagerMyageController {
 	@GetMapping("/auth/manager/mypage/updateMypage")
 	public String updateMypage(Model model, HttpSession session) {
 		String accountId = (String)session.getAttribute("loginId");
-		Manager manager = managerMypageService.selectManagerMypage(accountId);
+		Map<String, Object> managerMypage = managerMypageService.selectManagerMypage(accountId);
 		
-		model.addAttribute("manager",manager);
+		model.addAttribute("manager",managerMypage.get("manager"));
+		model.addAttribute("mypageImage", managerMypage.get("mypageImage"));
 		return "auth/manager/mypage/updateMypage";
 	}
 	@PostMapping("/auth/manager/mypage/updateMypage")
-	public String updateMypage(Manager manager) {
+	public String updateMypage(ManagerForm managerForm) {
 		
-		managerMypageService.updateManagerMypage(manager);
+		managerMypageService.updateManagerMypage(managerForm);
 		return "redirect:/auth/manager/mypage/mypageOne";
 	}
 	
@@ -54,10 +58,10 @@ public class ManagerMyageController {
 	@GetMapping("/auth/manager/mypage/updateMypageCareerAndLicense") 
 	public String updateMypageCareerAndLicense(Model model, HttpSession session) {
 		String accountId = (String)session.getAttribute("loginId");
-		Manager manager = managerMypageService.selectManagerMypage(accountId);
+		Map<String, Object> managerMypage = managerMypageService.selectManagerMypage(accountId);
 		
-		model.addAttribute("manager",manager);
-		
+		model.addAttribute("manager",managerMypage.get("manager"));
+		model.addAttribute("mypageImage", managerMypage.get("mypageImage"));
 		return "auth/manager/mypage/updateMypageCareerAndLicense";
 	}
 	

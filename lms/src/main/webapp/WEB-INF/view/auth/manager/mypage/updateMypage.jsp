@@ -63,7 +63,6 @@
 				}
 			});
 			
-			let address;
 			// 주소 검색
 			// 공백 체크
 			function checkSpace(str) {
@@ -82,6 +81,23 @@
 				} else {
 					return false;
 				}
+			}
+			
+			// 파일 선택해서 들어온 값을 inputImage 변수에 넣어주기 
+			let imageCheck = null;
+			var inputImage = document.querySelector("#managerImage");
+			
+			// 이미지 확인해서 imageCheck에 값 넣어주기 
+			inputImage.addEventListener("change", function(evt){
+			  var image = evt.target.files[0];
+			
+			  imageCheck = ifImage(image);
+			})
+			// 이미지 파일 확인 이미지가 맞으면 true 아니면 false
+			function ifImage(file){
+			  var validity = (["image/png", "image/jpg", "image/jpeg"].indexOf(file.type) > -1);
+			
+			  return validity;
 			}
 			
 			$('#check').click(function() {
@@ -234,6 +250,18 @@
 					$('#managerBirthCheck').html("")
 				}
 				
+				// 사진 검사
+				if ( $('#managerImage').val() != "") {
+					if (imageCheck == false) {
+						$('#managerImageCheck').html("이미지 파일만 올릴 수 있습니다.");
+						return;
+					} else {
+						$('#managerImageCheck').html("");
+					}
+				} else {
+					$('#managerImageCheck').html("");
+				}
+				
 				// 주소 검사
 				if ($('#managerAddressMain').val() == "") {
 					$('#addressCheck').html("주소를 검색해주세요")
@@ -259,7 +287,7 @@
 
 	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp"/>
 	
-	<form id="managerForm" method="post" action="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">
+	<form id="managerForm" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">
 		<button type="button" class="btn btn-success" id="btn">수정</button>
 		&nbsp;
 		<button type="button" class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/manager/mypage/mypageOne'">취소</button>
@@ -283,7 +311,11 @@
 				</td>
 				<td>직급</td>
 				<td>${manager.managerPosition}</td>
-				<td rowspan="2" colspan="2">이미지...</td>
+				<td rowspan="3" colspan="2" style="width: 150px; height: 199px;">
+					<c:if test="${mypageImage.mypageImageUuid != null}">
+						<img style="width: 150px; height: 199px;" id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${mypageImage.mypageImageUuid}">
+					</c:if>
+				</td>
 			</tr>
 			
 			<tr>
@@ -309,6 +341,13 @@
 						<input type="date" class="form-control" name="managerBirth" id="managerBirth" value="${manager.managerBirth}">
 					</div>
 					<div id="managerBirthCheck"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>사진</td>
+				<td colspan="7">
+					<input id="managerImage" type="file" name="managerImage" accept="image/png, image/jpg, image/jpeg" >
+					<div id="managerImageCheck"></div>
 				</td>
 			</tr>
 			<tr>

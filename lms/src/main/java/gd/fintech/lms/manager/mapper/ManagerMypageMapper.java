@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.License;
 import gd.fintech.lms.vo.Manager;
+import gd.fintech.lms.vo.MypageImage;
 
 @Mapper
 public interface ManagerMypageMapper {
@@ -28,4 +29,13 @@ public interface ManagerMypageMapper {
 	
 	// 운영자 마이페이지 자격증 삭제
 	public int deleteManagerMypageLicense(int licenseNo);
+
+	// 강사 마이페이지 이미지 추가
+	public int insertManagerMypageImage(MypageImage mypageImage);
+		
+	// 이미지 조회
+	public MypageImage selectMypageImage(String accountId);
+		
+	// 이미지 삭제
+	public int deleteMypageImage(String accountId);
 }
