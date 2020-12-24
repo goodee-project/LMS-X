@@ -17,7 +17,6 @@ public class Manager {
 	private String	managerPosition;		// 운영자 직책
 	private String	managerAddressMain;		// 운영자 1차 주소
 	private String	managerAddressSub;		// 운영자 2차 주소
-	private String	managerImage;			// 운영자 프로필 사진
 	private String	managerAccessdate;		// 운영자 계정 활성화 일시
 	private String	managerUpdatedate;		// 운영자 계정 업데이트 일시
 	private List<Career> careerList; 		// 운영자 경력 리스트
