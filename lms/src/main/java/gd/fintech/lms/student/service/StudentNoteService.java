@@ -19,8 +19,8 @@ public class StudentNoteService {
 	}
 	
 	// 쪽지 수신 개수 가져오기
-	public int selectNoteReceiveListCount(String accountId) {
-		return studentNoteMapper.selectNoteReceiveListCount(accountId);
+	public int selectNoteReceiveListCount(Map<String, Object> map) {
+		return studentNoteMapper.selectNoteReceiveListCount(map);
 	}
 	
 	// 쪽지 발신 목록 가져오기
@@ -29,8 +29,8 @@ public class StudentNoteService {
 	}
 	
 	// 쪽지 수신 개수
-	public int selectNoteDispatchListCount(String accountId) {
-		return studentNoteMapper.selectNoteDispatchListCount(accountId);
+	public int selectNoteDispatchListCount(Map<String, Object> map) {
+		return studentNoteMapper.selectNoteDispatchListCount(map);
 	}
 	
 	// 쪽지 상세보기 - 수신함에서

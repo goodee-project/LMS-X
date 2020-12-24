@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.student.service.StudentNoteService;
 import gd.fintech.lms.vo.Note;
@@ -25,7 +26,8 @@ public class StudentNoteController {
 	// 쪽지 수신 목록
 	@GetMapping("auth/student/note/noteReceiveList/{currentPage}")
 	public String noteReceiveList(Model model, ServletRequest request,
-			@PathVariable(name="currentPage") int currentPage) {
+			@PathVariable(name="currentPage") int currentPage,
+			@RequestParam(name="searchText", defaultValue = "") String searchText) {
 
 		int rowPerPage = 10; // 한페이지에 출력할 개수
 		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
@@ -33,8 +35,14 @@ public class StudentNoteController {
 		HttpSession session = ((HttpServletRequest)request).getSession();	
 		String accountId = (String)session.getAttribute("loginId");		
 		
-		int totalCount = studentNoteService.selectNoteReceiveListCount(accountId); // 게시글 총 개수
+		// 쪽지 수신 목록 가져오기
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		map.put("accountId", accountId);
+		map.put("searchText", searchText);
 
+		int totalCount = studentNoteService.selectNoteReceiveListCount(map); // 게시글 총 개수
 		// 마지막 페이지 구하기
 		int lastPage = 0;
 		
@@ -48,13 +56,6 @@ public class StudentNoteController {
 		if (lastPage == 0) {
 			currentPage = 0;
 		}
-		
-		// 쪽지 수신 목록 가져오기
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("beginRow", beginRow);
-		map.put("rowPerPage", rowPerPage);
-		map.put("accountId", accountId);
-		
 		List<Note> noteList = studentNoteService.selectNoteReceiveListByPage(map);
 
 		int navPerPage = 10; // 네비에 출력될 페이지 개수
@@ -98,7 +99,8 @@ public class StudentNoteController {
 	// 쪽지 발신 목록
 	@GetMapping("auth/student/note/noteDispatchList/{currentPage}")
 	public String noteDispatchList(Model model, ServletRequest request,
-			@PathVariable(name="currentPage") int currentPage) {
+			@PathVariable(name="currentPage") int currentPage,
+			@RequestParam(name="searchText", defaultValue = "") String searchText) {
 
 		int rowPerPage = 10; // 한페이지에 출력할 개수
 		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
@@ -106,7 +108,14 @@ public class StudentNoteController {
 		HttpSession session = ((HttpServletRequest)request).getSession();	
 		String accountId = (String)session.getAttribute("loginId");		
 		
-		int totalCount = studentNoteService.selectNoteDispatchListCount(accountId); // 게시글 총 개수
+		// 쪽지 수신 목록 가져오기
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		map.put("accountId", accountId);
+		map.put("searchText", searchText);
+
+		int totalCount = studentNoteService.selectNoteDispatchListCount(map); // 게시글 총 개수
 
 		// 마지막 페이지 구하기
 		int lastPage = 0;
@@ -121,12 +130,6 @@ public class StudentNoteController {
 		if (lastPage == 0) {
 			currentPage = 0;
 		}
-		
-		// 쪽지 수신 목록 가져오기
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("beginRow", beginRow);
-		map.put("rowPerPage", rowPerPage);
-		map.put("accountId", accountId);
 		
 		List<Note> noteList = studentNoteService.selectNoteDispatchListByPage(map);
 

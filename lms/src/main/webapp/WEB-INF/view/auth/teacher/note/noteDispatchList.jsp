@@ -204,8 +204,14 @@
 					</td>
 				</tr>
 			</table>
+			
+			<!-- 검색 -->
+			<form method="get" action="${pageContext.request.contextPath}/auth/teacher/note/noteDispatchList/1" class="form-inline">
+				<input class="form-control" type="text" id="searchText" name="searchText">
+				<button type="submit" class="btn btn-secondary">검색</button>
+			</form>
 		</div>
-				
+		
 		<br><br>
 	</body>
 </html>

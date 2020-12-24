@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.teacher.service.TeacherNoteService;
 import gd.fintech.lms.vo.Note;
@@ -28,7 +29,8 @@ public class TeacherNoteController {
 	// 쪽지 수신함
 	@GetMapping("/auth/teacher/note/noteReceiveList/{currentPage}")
 	public String noteReceiveList(ServletRequest request, Model model,
-			@PathVariable(value = "currentPage") int currentPage) {
+			@PathVariable(value = "currentPage") int currentPage,
+			@RequestParam(name="searchText", defaultValue = "") String searchText) {
 		// 세션 정보를 가져온다.
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
@@ -45,12 +47,12 @@ public class TeacherNoteController {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		// [Logger] 데이터베이스로부터 강사 ID에 해당하는 수신 쪽지 목록을 가져온다
-		List<Note> noteReceiveList = teacherNoteService.selectNoteReceiveListByPage(teacherId, beginRow, rowPerPage);
+		List<Note> noteReceiveList = teacherNoteService.selectNoteReceiveListByPage(teacherId, beginRow, rowPerPage, searchText);
 		logger.trace("noteReceiveList[" + noteReceiveList + "]");
 		
 		// 페이징 코드
 		// 전체 데이터 수
-		int totalCount = teacherNoteService.selectTeacherNoteReceiveCount(teacherId);
+		int totalCount = teacherNoteService.selectTeacherNoteReceiveCount(teacherId, searchText);
 		
 		// 마지막 페이지
 		int lastPage = totalCount / rowPerPage;
@@ -114,7 +116,8 @@ public class TeacherNoteController {
 	// 쪽지 발신함
 	@GetMapping("/auth/teacher/note/noteDispatchList/{currentPage}")
 	public String noteDispatchList(ServletRequest request, Model model,
-			@PathVariable(value = "currentPage") int currentPage) {
+			@PathVariable(value = "currentPage") int currentPage,
+			@RequestParam(name="searchText", defaultValue = "") String searchText) {
 		// 세션 정보를 가져온다.
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
@@ -131,12 +134,12 @@ public class TeacherNoteController {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		// [Logger] 데이터베이스로부터 강사 ID에 해당하는 발신 쪽지 목록을 가져온다
-		List<Note> noteDispatchList = teacherNoteService.selectNoteDispatchListByPage(teacherId, beginRow, rowPerPage);
+		List<Note> noteDispatchList = teacherNoteService.selectNoteDispatchListByPage(teacherId, beginRow, rowPerPage, searchText);
 		logger.trace("noteDispatchList[" + noteDispatchList + "]");
 		
 		// 페이징 코드
 		// 전체 데이터 수
-		int totalCount = teacherNoteService.selectTeacherNoteDispatchCount(teacherId);
+		int totalCount = teacherNoteService.selectTeacherNoteDispatchCount(teacherId, searchText);
 		
 		// 마지막 페이지
 		int lastPage = totalCount / rowPerPage;

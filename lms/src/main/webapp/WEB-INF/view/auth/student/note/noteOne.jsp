@@ -27,7 +27,7 @@
 			<tr>
 				<th>보낸사람</th>
 				<td>${note.noteDispatcherName} (${note.noteDispatcherId})</td>
-				<th>보낸날짜</th>
+				<th>날짜</th>
 				<td>${note.noteSendDate}</td>
 			</tr>
 			<tr>

@@ -53,7 +53,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/1">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteDispatchList/1">
 								<i class='fas fa-angle-double-left'></i>
 							</a>
 						</li>
@@ -71,7 +71,7 @@
 				<c:choose>
 					<c:when test="${currentPage > 1}">
 						<li>
-							<a href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/${prePage}">
+							<a href="${pageContext.request.contextPath}/auth/student/note/noteDispatchList/${prePage}">
 								<i class='fas fa-angle-left'></i>
 							</a>
 						</li>
@@ -98,7 +98,7 @@
 							<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 							<c:otherwise>
 								<li class="page-item">
-									<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/${i}">${i}</a>
+									<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteDispatchList/${i}">${i}</a>
 								</li>
 							</c:otherwise>
 						</c:choose>
@@ -109,7 +109,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li >
-							<a href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/${nextPage}">
+							<a href="${pageContext.request.contextPath}/auth/student/note/noteDispatchList/${nextPage}">
 								<i class='fas fa-angle-right'></i>
 							</a>
 						</li>
@@ -127,7 +127,7 @@
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
 						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noticeDispatchList/${lastPage}">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteDispatchList/${lastPage}">
 								<i class='fas fa-angle-double-right'></i>
 							</a>
 						</li>
@@ -152,6 +152,14 @@
 					</td>
 				</tr>
 			</table>
+		</div>
+		
+		<!-- 검색 -->
+		<div>
+			<form method="get" action="${pageContext.request.contextPath}/auth/student/note/noteDispatchList/1">
+				<input type="text" id="searchText" name="searchText">
+				<button type="submit">검색</button>
+			</form>
 		</div>
 	</body>
 </html>

@@ -17,14 +17,18 @@
 			note
 		WHERE
 			note_receiver_id = #{accountId} AND
-			note_delete != 'receiver'
+			note_delete != 'receiver'	
+			<if test = "searchText != ''">
+				AND (note_title LIKE CONCAT('%' , #{searchText} , '%') OR
+				note_content LIKE CONCAT('%' , #{searchText} , '%'))
+			</if>
 		ORDER BY
 			note_send_date DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 쪽지 수신 개수 -->
-	<select id="selectNoteReceiveListCount" parameterType="String" resultType="int">
+	<select id="selectNoteReceiveListCount" parameterType="java.util.Map" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
@@ -32,6 +36,10 @@
 		WHERE
 			note_receiver_id = #{accountId} AND
 			note_delete != 'receiver'
+			<if test = "searchText != ''">
+				AND (note_title LIKE CONCAT('%' , #{searchText} , '%') OR
+				note_content LIKE CONCAT('%' , #{searchText} , '%'))
+			</if>
 	</select>
 	
 	<!-- 쪽지 발신 목록 가져오기 -->
@@ -50,20 +58,28 @@
 			note
 		WHERE
 			note_dispatcher_id = #{accountId} AND
-			note_delete != 'dispatcher'
+			note_delete != 'dispatcher'	
+			<if test = "searchText != ''">
+				AND (note_title LIKE CONCAT('%' , #{searchText} , '%') OR
+				note_content LIKE CONCAT('%' , #{searchText} , '%'))
+			</if>
 		ORDER BY
 			note_send_date DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 쪽지 발신 개수 -->
-	<select id="selectNoteDispatchListCount" parameterType="String" resultType="int">
+	<select id="selectNoteDispatchListCount" parameterType="java.util.Map" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
 			note
 		WHERE
 			note_dispatcher_id = #{accountId}
+			<if test = "searchText != ''">
+				AND (note_title LIKE CONCAT('%' , #{searchText} , '%') OR
+				note_content LIKE CONCAT('%' , #{searchText} , '%'))
+			</if>
 	</select>
 	
 	<!-- 쪽지 상세보기 -->

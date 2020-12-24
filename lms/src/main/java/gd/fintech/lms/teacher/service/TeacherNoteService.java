@@ -22,11 +22,12 @@ public class TeacherNoteService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	// 쪽지 수신함
-	public List<Note> selectNoteReceiveListByPage(String teacherId, int beginRow, int rowPerPage) {
+	public List<Note> selectNoteReceiveListByPage(String teacherId, int beginRow, int rowPerPage, String searchText) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("teacherId", teacherId);		// 강사 ID
 		map.put("beginRow", beginRow);			// 시작 데이터
 		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
+		map.put("searchText", searchText);		// 검색 키워드
 		
 		List<Note> noteReceiveList = teacherNoteMapper.selectNoteReceiveListByPage(map);
 		
@@ -37,16 +38,20 @@ public class TeacherNoteService {
 	}
 	
 	// 쪽지 수신함 총 데이터 수
-	public int selectTeacherNoteReceiveCount(String teacherId) {
-		return teacherNoteMapper.selectTeacherNoteReceiveCount(teacherId);
+	public int selectTeacherNoteReceiveCount(String teacherId, String searchText) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("teacherId", teacherId);		// 강사 ID
+		map.put("searchText", searchText);		// 검색 키워드
+		return teacherNoteMapper.selectTeacherNoteReceiveCount(map);
 	}
 	
 	// 쪽지 발신함
-	public List<Note> selectNoteDispatchListByPage(String teacherId, int beginRow, int rowPerPage) {
+	public List<Note> selectNoteDispatchListByPage(String teacherId, int beginRow, int rowPerPage, String searchText) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("teacherId", teacherId);		// 강사 ID
 		map.put("beginRow", beginRow);			// 시작 데이터
 		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
+		map.put("searchText", searchText);		// 검색 키워드
 		
 		List<Note> noteDispatchList = teacherNoteMapper.selectNoteDispatchListByPage(map);
 		
@@ -57,8 +62,11 @@ public class TeacherNoteService {
 	}
 	
 	// 쪽지 발신함 총 데이터 수
-	public int selectTeacherNoteDispatchCount(String teacherId) {
-		return teacherNoteMapper.selectTeacherNoteDispatchCount(teacherId);
+	public int selectTeacherNoteDispatchCount(String teacherId, String searchText) {	
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("teacherId", teacherId);		// 강사 ID
+		map.put("searchText", searchText);		// 검색 키워드
+		return teacherNoteMapper.selectTeacherNoteDispatchCount(map);
 	}
 
 	// 쪽지 상세보기 - 수신함에서

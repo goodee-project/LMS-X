@@ -43,7 +43,7 @@
 						return;
 					}
 
-					$('#insertNoteForm').submit();
+					$('#insertNoteForm').submit();											
 				})	
 			})
 		</script>

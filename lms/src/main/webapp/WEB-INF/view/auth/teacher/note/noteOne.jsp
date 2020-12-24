@@ -76,7 +76,7 @@
 					<td width="70%">${note.noteReceiverName}</td>
 				</tr>
 				<tr>
-					<td>보낸시간</td>
+					<td>날짜</td>
 					<td>${note.noteSendDate}</td>
 				</tr>
 				<tr>

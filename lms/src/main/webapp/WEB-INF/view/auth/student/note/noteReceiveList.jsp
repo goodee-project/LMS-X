@@ -153,5 +153,13 @@
 				</tr>
 			</table>
 		</div>
+		
+		<!-- 검색 -->
+		<div>
+			<form method="get" action="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/1">
+				<input type="text" id="searchText" name="searchText">
+				<button type="submit">검색</button>
+			</form>
+		</div>
 	</body>
 </html>

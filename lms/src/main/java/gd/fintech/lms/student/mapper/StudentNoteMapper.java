@@ -13,13 +13,13 @@ public interface StudentNoteMapper {
 	public List<Note> selectNoteReceiveListByPage(Map<String, Object> map);
 	
 	// 쪽지 수신 개수
-	public int selectNoteReceiveListCount(String accountId);
+	public int selectNoteReceiveListCount(Map<String, Object> map);
 	
 	// 쪽지 발신 목록 가져오기
 	public List<Note> selectNoteDispatchListByPage(Map<String, Object> map);
 	
 	// 쪽지 수신 개수
-	public int selectNoteDispatchListCount(String accountId);
+	public int selectNoteDispatchListCount(Map<String, Object> map);
 	
 	// 쪽지 상세보기
 	public Note selectNoteOne(int noteNo);

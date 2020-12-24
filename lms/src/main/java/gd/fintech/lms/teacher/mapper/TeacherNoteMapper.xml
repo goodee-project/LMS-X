@@ -15,6 +15,10 @@
 		WHERE
 			note_receiver_id = #{teacherId} AND
 			note_delete != 'receiver'
+			<if test = "searchText != ''">
+				AND (note_title LIKE CONCAT('%' , #{searchText} , '%') OR
+				note_content LIKE CONCAT('%' , #{searchText} , '%'))
+			</if>
 		ORDER BY
 			note_no DESC
 		LIMIT
@@ -30,6 +34,10 @@
 		WHERE
 			note_receiver_id = #{teacherId} AND
 			note_delete != 'receiver'
+			<if test = "searchText != ''">
+				AND (note_title LIKE CONCAT('%' , #{searchText} , '%') OR
+				note_content LIKE CONCAT('%' , #{searchText} , '%'))
+			</if>
 	</select>
 	
 	<!-- 쪽지 발신함 -->
@@ -46,6 +54,10 @@
 		WHERE
 			note_dispatcher_id = #{teacherId} AND
 			note_delete != 'dispatcher'
+			<if test = "searchText != ''">
+				AND (note_title LIKE CONCAT('%' , #{searchText} , '%') OR
+				note_content LIKE CONCAT('%' , #{searchText} , '%'))
+			</if>
 		ORDER BY
 			note_no DESC
 		LIMIT
@@ -61,6 +73,10 @@
 		WHERE
 			note_dispatcher_id = #{teacherId} AND
 			note_delete != 'dispatcher'
+			<if test = "searchText != ''">
+				AND (note_title LIKE CONCAT('%' , #{searchText} , '%') OR
+				note_content LIKE CONCAT('%' , #{searchText} , '%'))
+			</if>
 	</select>
 	
 	<!-- 쪽지 상세보기 -->
