@@ -57,7 +57,6 @@ public class AdminManagerService {
 		// 계정 정보 찾기
 		Manager manager = adminManagerMapper.selectManagerQueueOne(accountId);
 		manager.setManagerPosition("사원");
-		manager.setManagerImage("default.jpg");
 		// 계정 상태 업데이트
 		adminManagerMapper.updateAccountState(account);
 		// 운영자 테이블 추가
