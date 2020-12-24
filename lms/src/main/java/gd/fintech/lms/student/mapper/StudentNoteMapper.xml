@@ -16,7 +16,8 @@
 		FROM
 			note
 		WHERE
-			note_receiver_id = #{accountId}
+			note_receiver_id = #{accountId} AND
+			note_delete != 'receiver'
 		ORDER BY
 			note_send_date DESC
 		LIMIT
@@ -47,7 +48,8 @@
 		FROM
 			note
 		WHERE
-			note_dispatcher_id = #{accountId}
+			note_dispatcher_id = #{accountId} AND
+			note_delete != 'dispatcher'
 		ORDER BY
 			note_send_date DESC
 		LIMIT
@@ -101,7 +103,7 @@
 			note_receiver_id,
 			note_receiver_name,
 			note_send_date,
-			note_is_read	
+			note_is_read
 		) VALUE (
 			#{noteTitle},
 			#{noteContent},
@@ -114,4 +116,31 @@
 		)
 	</insert>
 	
+	<!-- 쪽지 삭제 상태 확인 -->
+	<select id="selectNoteDelete" parameterType="gd.fintech.lms.vo.Note" resultType="String">
+		SELECT
+			note_delete
+		FROM
+			note
+		WHERE
+			note_no = #{noteNo}
+	</select>
+	
+	<!-- 쪽지 나에게만 삭제 -->
+	<update id="updateNoteDelete" parameterType="gd.fintech.lms.vo.Note">
+		UPDATE
+			note
+		SET
+			note_delete = #{noteDelete}
+		WHERE
+			note_no = #{noteNo}
+	</update>
+	
+	<!-- 양쪽 다 해당 쪽지 삭제시 : 완전 삭제 -->
+	<delete id="deleteNote" parameterType="gd.fintech.lms.vo.Note">
+		DELETE FROM
+			note
+		WHERE 
+			note_no = #{noteNo}
+	</delete>
 </mapper>

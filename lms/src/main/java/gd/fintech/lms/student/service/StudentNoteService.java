@@ -47,4 +47,17 @@ public class StudentNoteService {
 	public int insertNote(Note note) {
 		return studentNoteMapper.insertNote(note);
 	}
+	
+	// 쪽지 삭제하기
+	public void deleteNote(Note note) {
+		// 해당 쪽지의 삭제 상태 가져오기
+		String noteDeleteState = studentNoteMapper.selectNoteDelete(note);
+		// 미삭제 상태라면
+		if (noteDeleteState.equals("none")) {
+			studentNoteMapper.updateNoteDelete(note);
+		// 한쪽에서 이미 삭제 상태라면
+		} else {
+			studentNoteMapper.deleteNote(note);
+		}
+	}
 }

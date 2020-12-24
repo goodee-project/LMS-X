@@ -174,6 +174,7 @@ public class StudentNoteController {
 			@PathVariable(name="noteNo") int noteNo) {
 		
 		Note note = studentNoteService.selectNoteReceiveOne(noteNo);
+		note.setNoteDelete("receiver");
 		
 		model.addAttribute("note", note);
 		
@@ -186,6 +187,7 @@ public class StudentNoteController {
 			@PathVariable(name="noteNo") int noteNo) {
 		
 		Note note = studentNoteService.selectNoteDispatchOne(noteNo);
+		note.setNoteDelete("dispatcher");
 		
 		model.addAttribute("note", note);
 		
@@ -211,5 +213,19 @@ public class StudentNoteController {
 		
 		studentNoteService.insertNote(note);
 		return "redirect:/auth/student/note/noteDispatchList/1";
+	}
+	
+	// 쪽지 삭제하기
+	@GetMapping("auth/student/note/deleteNote/{noteNo}/{noteDelete}")
+	public String deleteNote(Note note) {
+		// 쪽지 삭제하기
+		studentNoteService.deleteNote(note);
+		// 발신목록에서 왔을경우 다시 발신 목록으로 redirect
+		if (note.getNoteDelete().equals("dispatcher")) {
+			return "redirect:/auth/student/note/noteDispatchList/1";
+		// 수신 목록에서 왔을경우 다시 수신목록으로 refirect
+		} else {
+			return "redirect:/auth/student/note/noteReceiveList/1";		
+		}
 	}
 }

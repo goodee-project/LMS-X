@@ -39,6 +39,6 @@
 				<td colspan="3">${note.noteContent}</td>
 			</tr>
 		</table>
-		
+		<a href="${pageContext.request.contextPath}/auth/student/note/deleteNote/${note.noteNo}/${note.noteDelete}">삭제</a>
 	</body>
 </html>
