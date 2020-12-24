@@ -43,4 +43,21 @@
 		WHERE
 			manager_id = #{accountId} 
 	</select>
+	
+	<!-- 로그인시 로그인 기록 남기기 -->
+	<insert id="insertLoginLog" parameterType="gd.fintech.lms.vo.LoginLog">
+		INSERT INTO login_log (
+			account_id,
+			login_log_date,
+			login_log_browser,
+			login_log_ip,
+			login_log_os
+		) VALUES (
+			#{accountId},
+			NOW(),
+			#{loginLogBrowser},
+			#{loginLogIp},
+			#{loginLogOs}
+		)
+	</insert>
 </mapper>

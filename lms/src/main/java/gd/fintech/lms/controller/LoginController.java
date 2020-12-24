@@ -1,5 +1,6 @@
 package gd.fintech.lms.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import gd.fintech.lms.pathutil.LoginLogUtil;
 import gd.fintech.lms.service.LoginService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.LoginLog;
 import gd.fintech.lms.vo.Manager;
 import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.Teacher;
@@ -120,7 +123,7 @@ public class LoginController {
 	}
 	//로그인 시 확인
 	@PostMapping("/login")
-	public String login(Account account, HttpSession session) {
+	public String login(Account account, HttpSession session, HttpServletRequest req) {
 		
 		//db에 있는지 확인
 	
@@ -133,6 +136,15 @@ public class LoginController {
 		//로그인 성공
 		session.setAttribute("loginId", loginAccount.getAccountId());
 		session.setAttribute("loginLevel", loginAccount.getAccountLevel());
+		
+		// 로그인 기록 생성
+		LoginLog loginLog = new LoginLog();
+		loginLog.setAccountId(loginAccount.getAccountId());
+		loginLog.setLoginLogBrowser(LoginLogUtil.getClientBrowser(req));
+		loginLog.setLoginLogIp(LoginLogUtil.getClientIp(req));
+		loginLog.setLoginLogOs(LoginLogUtil.getClientOs(req));
+		
+		loginService.insertLoginLog(loginLog);
 		
 		if ( session.getAttribute("loginLevel").equals(1) ) {
 			

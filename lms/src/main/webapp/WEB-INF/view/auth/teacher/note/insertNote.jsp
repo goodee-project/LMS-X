@@ -45,7 +45,7 @@
 			$(document).ready(function(){
 				// 받는사람 검색 버튼
 				$('#searchAccountBtn').click(function(){
-					$('#selectAccount').html('');	
+					$('#selectAccount').html('');
 					// 계정 리스트 가져오기
 					$.ajax({
 						url: '${pageContext.request.contextPath}/auth/teacher/note/accountList/' + $('#searchAccountText').val(),
@@ -76,6 +76,12 @@
 						return;
 					} else if($('#noteContent').val().length < 1){
 						alert('내용을 작성해 주세요..');
+						return;
+					} else if($('#noteReceiverId').val().length < 1){
+						alert('보낼 계정이 잘못되었습니다.');
+						return;
+					} else if($('#noteReceiverName').val().length < 1){
+						alert('보낼 계정이 잘못되었습니다.');
 						return;
 					}
 

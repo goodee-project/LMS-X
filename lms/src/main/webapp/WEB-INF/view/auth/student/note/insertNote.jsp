@@ -39,7 +39,13 @@
 						alert('받는사람을 선택해 주세요.');
 						return;
 					} else if($('#noteContent').val().length < 1){
-						alert('내용을 작성해 주세요..');
+						alert('내용을 작성해 주세요.');
+						return;
+					} else if($('#noteReceiverId').val().length < 1){
+						alert('보낼 계정이 잘못되었습니다.');
+						return;
+					} else if($('#noteReceiverName').val().length < 1){
+						alert('보낼 계정이 잘못되었습니다.');
 						return;
 					}
 
