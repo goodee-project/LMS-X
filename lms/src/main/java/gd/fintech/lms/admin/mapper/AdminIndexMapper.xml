@@ -14,7 +14,6 @@
 			manager_position managerPosition,
 			manager_address_main managerAddressMain,
 			manager_address_sub managerAddressSub,
-			manager_image managerImage,
 			manager_accessdate managerAccessdate
 		FROM
 			manager
