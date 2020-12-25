@@ -26,7 +26,7 @@ public class TeacherSyllabusService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 첨부파일 경로
-	private String PATH = PathUtil.PATH() + "syllabusFile\\";
+	private String PATH = PathUtil.PATH("syllabusFile");
 	
 	// 강의계획서 상세보기
 	public Syllabus selectSyllabusOne(int lectureNo) {

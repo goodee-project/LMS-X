@@ -18,7 +18,7 @@ public class ManagerLectureArchiveService {
 	@Autowired private ManagerLectureArchiveFileMapper managerLectureArchiveFileMapper;
 	
 	// 첨부파일 경로
-	private String PATH = PathUtil.PATH() + "archiveFile\\";
+	private String PATH = PathUtil.PATH("archiveFile");
 	
 	// 자료 목록
 	public List<LectureArchive> getLectureArchiveListByPage(Map<String, Object> map) {

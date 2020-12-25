@@ -30,7 +30,7 @@ public class StudentReportService {
 	// Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	String PATH = PathUtil.PATH() + "reportSubmitFile\\";  
+	String PATH = PathUtil.PATH("reportSubmitFile");  
 	
 	// 과제 제출 (입력)
 	public void insertReportSubmit(ReportSubmitForm reportSubmitForm) {

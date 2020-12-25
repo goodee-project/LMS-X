@@ -31,7 +31,7 @@ public class TeacherLectureArchiveService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	// 첨부파일 경로
-	private String PATH = PathUtil.PATH() + "archiveFile\\";
+	private String PATH = PathUtil.PATH("archiveFile");
 	
 	// 강좌 자료실 목록
 	// 강좌 고유번호(lectureNo)

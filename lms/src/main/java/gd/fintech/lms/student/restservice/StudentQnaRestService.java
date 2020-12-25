@@ -12,7 +12,7 @@ import gd.fintech.lms.student.restmapper.StudentQnaRestMapper;
 public class StudentQnaRestService {
 	@Autowired StudentQnaRestMapper studentQnaRestMapper;
 	
-	private final String PATH = PathUtil.PATH() + "questionFile\\";
+	private final String PATH = PathUtil.PATH("questionFile");
 	
 	
 	// questionFile 한개만 삭제

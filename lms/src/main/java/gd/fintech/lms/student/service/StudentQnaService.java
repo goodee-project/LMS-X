@@ -28,7 +28,7 @@ public class StudentQnaService {
 	// Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	// localhost 서버용
-	private final String PATH = PathUtil.PATH() + "questionFile\\";
+	private final String PATH = PathUtil.PATH("questionFile");
 	//	private final String PATH = "/////"
 	@Autowired StudentQnaMapper studentQnaMapper;
 	@Autowired StudentQnaFileMapper studentQnaFileMapper;

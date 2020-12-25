@@ -12,7 +12,7 @@ import gd.fintech.lms.student.restmapper.StudentReportRestMapper;
 public class StudentReportRestService {
 	@Autowired StudentReportRestMapper studentReportRestMapper;
 
-	String PATH = PathUtil.PATH() + "reportSubmitFile\\";   
+	String PATH = PathUtil.PATH("reportSubmitFile");   
 	
 	// 과제 제출 첨부파일 다운로드 횟수 증가
 	public int updateReportSubmitFileCount(String uuid) {
