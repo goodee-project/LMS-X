@@ -99,7 +99,7 @@
 				});
 				
 				// 출석 상태 변경
-				$('.submitBtn').on('click', function() {
+				$(document).on("click", ".submitBtn", function() {
 					let accountId = $(this).val();
 					console.log('accountId: ' + accountId);
 					
