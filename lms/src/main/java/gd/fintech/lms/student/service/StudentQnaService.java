@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import gd.fintech.lms.pathutil.PathUtil;
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.student.mapper.StudentQnaFileMapper;
 import gd.fintech.lms.student.mapper.StudentQnaMapper;
 import gd.fintech.lms.vo.Question;
@@ -28,7 +28,7 @@ public class StudentQnaService {
 	// Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	// localhost 서버용
-	private final String PATH = PathUtil.PATH + "questionFile\\";
+	private final String PATH = PathUtil.PATH() + "questionFile\\";
 	//	private final String PATH = "/////"
 	@Autowired StudentQnaMapper studentQnaMapper;
 	@Autowired StudentQnaFileMapper studentQnaFileMapper;

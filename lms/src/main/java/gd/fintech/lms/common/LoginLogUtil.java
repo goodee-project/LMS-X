@@ -1,4 +1,4 @@
-package gd.fintech.lms.pathutil;
+package gd.fintech.lms.common;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,14 +14,14 @@ public class LoginLogUtil {
 		String browser = "";
 		try { 
 			String browserInfo = req.getHeader("User-Agent"); // 사용자 User-Agent 값 얻기 
+			log.debug("getHeader : " + req.getHeader("User-Agent"));
 			log.debug("getClientBrowser : " + browserInfo);
-			log.debug("getClientBrowser : " + browserInfo.indexOf("Chrome"));
 			// 익스플로러
 			if (browserInfo != null) {
 				if (browserInfo.indexOf("Trident") != -1) {
 					browser = "Internet Explorer";
 				// 엣지
-				} else if (browserInfo.indexOf("Edge") != -1) {
+				} else if (browserInfo.indexOf("Edg") != -1) {
 					browser = "Edge";
 				// 크롬
 				} else if (browserInfo.indexOf("Chrome") != -1) {

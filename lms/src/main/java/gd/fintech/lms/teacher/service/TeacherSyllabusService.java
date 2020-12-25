@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import gd.fintech.lms.pathutil.PathUtil;
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.teacher.mapper.TeacherSyllabusMapper;
 import gd.fintech.lms.vo.Syllabus;
 import gd.fintech.lms.vo.SyllabusForm;
@@ -26,7 +26,7 @@ public class TeacherSyllabusService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 첨부파일 경로
-	private String PATH = PathUtil.PATH + "syllabusFile\\";
+	private String PATH = PathUtil.PATH() + "syllabusFile\\";
 	
 	// 강의계획서 상세보기
 	public Syllabus selectSyllabusOne(int lectureNo) {

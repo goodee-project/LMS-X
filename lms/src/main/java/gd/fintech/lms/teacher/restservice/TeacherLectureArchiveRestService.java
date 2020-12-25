@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import gd.fintech.lms.pathutil.PathUtil;
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.teacher.restmapper.TeacherLectureArchiveRestMapper;
 
 @Service
@@ -18,7 +18,7 @@ public class TeacherLectureArchiveRestService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	// 첨부파일 경로
-	private String PATH = PathUtil.PATH + "archiveFile\\";
+	private String PATH = PathUtil.PATH() + "archiveFile\\";
 	
 	// 강좌 자료실 첨부파일 다운로드 횟수 증가
 	public int updateLectureArchiveFileCount(String uuid) {

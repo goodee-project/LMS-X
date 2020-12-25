@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import gd.fintech.lms.pathutil.PathUtil;
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.teacher.mapper.TeacherMypageMapper;
 import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.License;
@@ -28,7 +28,7 @@ public class TeacherMypageService {
 	private static final Logger log = LoggerFactory.getLogger(TeacherMypageService.class);
 	
 	// 첨부파일 경로
-	private String PATH = PathUtil.PATH + "mypageImage\\"; 
+	private String PATH = PathUtil.PATH() + "mypageImage\\"; 
 	
 	// 강사 마이페이지 정보
 	public Map<String,Object> selectTeacherMypage(String accountId) {

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.manager.mapper.ManagerMypageMapper;
-import gd.fintech.lms.pathutil.PathUtil;
 import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.License;
 import gd.fintech.lms.vo.Manager;
@@ -28,7 +28,7 @@ public class ManagerMypageService {
 	private static final Logger log = LoggerFactory.getLogger(ManagerMypageService.class);
 	
 	// 첨부파일 경로
-	private String PATH = PathUtil.PATH + "mypageImage\\"; 
+	private String PATH = PathUtil.PATH() + "mypageImage\\"; 
 	
 	// 운영자 마이페이지 정보
 	public Map<String,Object> selectManagerMypage(String accountId) {

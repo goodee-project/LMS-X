@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import gd.fintech.lms.pathutil.PathUtil;
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveFileMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveMapper;
 import gd.fintech.lms.vo.LectureArchive;
@@ -31,7 +31,7 @@ public class TeacherLectureArchiveService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	// 첨부파일 경로
-	private String PATH = PathUtil.PATH + "archiveFile\\";
+	private String PATH = PathUtil.PATH() + "archiveFile\\";
 	
 	// 강좌 자료실 목록
 	// 강좌 고유번호(lectureNo)

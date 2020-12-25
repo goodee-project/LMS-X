@@ -7,9 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.manager.mapper.ManagerLectureArchiveFileMapper;
 import gd.fintech.lms.manager.mapper.ManagerLectureArchiveMapper;
-import gd.fintech.lms.pathutil.PathUtil;
 import gd.fintech.lms.vo.LectureArchive;
 
 @Service
@@ -18,7 +18,7 @@ public class ManagerLectureArchiveService {
 	@Autowired private ManagerLectureArchiveFileMapper managerLectureArchiveFileMapper;
 	
 	// 첨부파일 경로
-	private String PATH = PathUtil.PATH + "archiveFile\\";
+	private String PATH = PathUtil.PATH() + "archiveFile\\";
 	
 	// 자료 목록
 	public List<LectureArchive> getLectureArchiveListByPage(Map<String, Object> map) {

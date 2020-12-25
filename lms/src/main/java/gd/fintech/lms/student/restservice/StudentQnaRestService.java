@@ -5,14 +5,14 @@ import java.io.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import gd.fintech.lms.pathutil.PathUtil;
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.student.restmapper.StudentQnaRestMapper;
 
 @Service
 public class StudentQnaRestService {
 	@Autowired StudentQnaRestMapper studentQnaRestMapper;
 	
-	private final String PATH = PathUtil.PATH + "questionFile\\";
+	private final String PATH = PathUtil.PATH() + "questionFile\\";
 	
 	
 	// questionFile 한개만 삭제
