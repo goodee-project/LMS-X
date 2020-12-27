@@ -45,5 +45,6 @@ public interface AdminManagerMapper {
 	// 운영자 자격증 삭제 
 	public int deleteManagerLicense(String managerId);
 	
-
+	// 운영자 이미지 조회
+	public String selectManagerImage(String managerId);
 }

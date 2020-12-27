@@ -62,9 +62,7 @@ public class TeacherMypageService {
 		
 		MypageImage mypageImage = new MypageImage();
 		
-			
 		MultipartFile mf = teacherForm.getTeacherImage();
-		System.out.println(mf.getOriginalFilename());
 		
 		// 입력한 첨부파일 이미지가 있다면
 		if(mf.getOriginalFilename() != "") {

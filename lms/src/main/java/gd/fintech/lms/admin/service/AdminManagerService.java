@@ -66,9 +66,14 @@ public class AdminManagerService {
 	}
 	
 	// 운영자 상세보기
-	public Manager getManagerOne(String managerId) {
+	public Map<String,Object> getManagerOne(String managerId) {
+		Manager manager = adminManagerMapper.selectManagerOne(managerId);
+		String managerImage = adminManagerMapper.selectManagerImage(managerId);
 		
-		return adminManagerMapper.selectManagerOne(managerId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("manager", manager);
+		map.put("managerImage", managerImage);
+		return map;
 	}
 	
 

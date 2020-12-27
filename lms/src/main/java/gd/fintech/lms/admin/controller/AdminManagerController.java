@@ -1,6 +1,7 @@
 package gd.fintech.lms.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,9 +114,10 @@ public class AdminManagerController {
 	@GetMapping("/auth/admin/managerOne/{managerId}")
 	public String selectManagerOne(Model model, @PathVariable(name="managerId") String managerId) {
 		
-		Manager manager = adminManagerService.getManagerOne(managerId);
+		Map<String,Object> map  = adminManagerService.getManagerOne(managerId);
 		
-		model.addAttribute("manager", manager);
+		model.addAttribute("manager", map.get("manager"));
+		model.addAttribute("managerImage", map.get("managerImage"));
 		return "/auth/admin/manager/managerOne";
 	}
 	

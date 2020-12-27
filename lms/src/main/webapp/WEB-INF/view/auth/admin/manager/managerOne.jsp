@@ -62,7 +62,11 @@
 					<button  type="submit">직급 수정</button>
 				</form>
 			</td>
-			<td rowspan="3" colspan="2">이미지...</td>
+			<td rowspan="3" colspan="2" style="width: 150px; height: 199px;">
+				<c:if test="${managerImage != null}">
+					<img style="width: 150px; height: 199px;" id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${managerImage}">
+				</c:if>
+			</td>
 		</tr>
 		
 		<tr>

@@ -63,9 +63,7 @@ public class ManagerMypageService {
 		
 		MypageImage mypageImage = new MypageImage();
 		
-		
 		MultipartFile mf = managerForm.getManagerImage();
-		System.out.println(mf.getOriginalFilename());
 		
 		// 입력한 첨부파일 이미지가 있다면
 		if(mf.getOriginalFilename() != "") {

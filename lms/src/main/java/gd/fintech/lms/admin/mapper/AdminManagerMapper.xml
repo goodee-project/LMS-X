@@ -159,6 +159,16 @@
 			manager_id = #{managerId}
 	</select>
 	
+	<!-- 운영자 이미지 -->
+	<select id="selectManagerImage" parameterType="String" resultType="String">
+		SELECT 
+			mypage_image_uuid 
+		FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</select>
+	
 	<!-- 운영자 직급 수정 -->
 	<update id="updateManagerOnePosition" parameterType="gd.fintech.lms.vo.Manager">
 		UPDATE 
