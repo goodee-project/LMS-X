@@ -15,7 +15,6 @@
 		<h3>수강 목록</h3>
 		<table border="1">	
 			<tr>
-				<th>수강 번호</th>
 				<th>강사</th>
 				<th>과목 이름</th>
 				<th>강좌 이름</th>
@@ -27,10 +26,9 @@
 			</tr>
 			<c:forEach items="${lectureList}" var="l">
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/auth/student/lecture/classOne/${l.lecture.lectureNo}">${l.classRegistration.classRegistrationNo}</a></td>
 					<td>${l.lecture.teacherName}</td>
 					<td>${l.subject.subjectName}</td>
-					<td>${l.lecture.lectureName}</td>
+					<td><a href="${pageContext.request.contextPath}/auth/student/lecture/classOne/${l.lecture.lectureNo}">${l.lecture.lectureName}</a></td>					
 					<td>${l.subject.subjectTotalday}일</td>
 					<td>${l.lecture.lectureStartdate}</td>
 					<td>${l.lecture.lectureEnddate}</td>

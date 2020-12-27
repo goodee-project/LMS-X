@@ -17,7 +17,7 @@ public class LoginLogUtil {
 			log.debug("getHeader : " + req.getHeader("User-Agent"));
 			log.debug("getClientBrowser : " + browserInfo);
 			// 익스플로러
-			if (browserInfo != null) {
+			if (browserInfo != null) { 
 				if (browserInfo.indexOf("Trident") != -1) {
 					browser = "Internet Explorer";
 				// 엣지
@@ -35,10 +35,6 @@ public class LoginLogUtil {
 				// 오페라
 				} else if (browserInfo.indexOf("Opera") != -1) {
 					browser = "Opera";
-				} else if (browserInfo.indexOf("iPhone") != -1 && browserInfo.indexOf("Mobile") != -1) {  // 모바일 - 아이폰
-					browser = "iPhone"; 
-				} else if (browserInfo.indexOf("Android") != -1 && browserInfo.indexOf("Mobile") != -1) {  // 모바일 - 안드로이드
-					browser = "Android"; 
 				} else {
 					browser = "알 수 없는 브라우저";
 				}
@@ -74,7 +70,11 @@ public class LoginLogUtil {
 		String clientOs = req.getHeader("User-Agent");
 		log.debug("getClientOs : " + clientOs);
 		try {
-			if (clientOs.indexOf("NT 10.0") != -1) {
+			if (clientOs.indexOf("iPhone") != -1 && clientOs.indexOf("Mobile") != -1) {  // 모바일 - 아이폰
+				os = "iPhone"; 
+			} else if (clientOs.indexOf("Android") != -1 && clientOs.indexOf("Mobile") != -1) {  // 모바일 - 안드로이드
+				os = "Android"; 
+			} else if (clientOs.indexOf("NT 10.0") != -1) {
 			os = "Windows 10";
 			} else if (clientOs.indexOf("NT 7.0") != -1) {
 				os = "Windows 7";
