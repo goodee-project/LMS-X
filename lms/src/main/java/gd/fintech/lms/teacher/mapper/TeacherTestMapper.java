@@ -1,10 +1,12 @@
 package gd.fintech.lms.teacher.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Answersheet;
+import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.Test;
 
 @Mapper
@@ -24,4 +26,12 @@ public interface TeacherTestMapper {
 	// 평가 답안지 학생 목록
 	// 강좌 고유 번호(lectureNo)
 	List<Answersheet> selectAnswersheetList(int lectureNo);
+	
+	// 객관식 문제 목록
+	// 강좌 고유 번호(lectureNo), 시작 데이터 번호(beginRow), 페이지당 표시 데이터 수(rowPerPage)
+	List<Multiplechoice> selectMultiplechoiceList(Map<String, Integer> map);
+	
+	// 객관식 문제 목록 카운트
+	// 강좌 고유번호(lectureNo)
+	int selectMultiplechoiceListCount(int lectureNo);
 }

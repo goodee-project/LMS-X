@@ -81,4 +81,32 @@
 		ORDER BY
 			s.student_name
 	</select>
+	
+	<!-- 객관식 문제 목록 -->
+	<select id="selectMultiplechoiceList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Multiplechoice">
+		SELECT
+			multiplechoice_no multiplechoiceNo, 
+			multiplechoice_id multiplechoiceId, 
+			multiplechoice_question multiplechoiceQuestion, 
+			multiplechoice_answer multiplechoiceAnswer, 
+			multiplechoice_score multiplechoiceScore
+		FROM
+			multiplechoice
+		WHERE
+			lecture_no = #{lectureNo}
+		ORDER BY
+			multiplechoice_id
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 객관식 문제 목록 카운트 -->
+	<select id="selectMultiplechoiceListCount" parameterType="Integer" resultType="Integer">
+		SELECT
+  			COUNT(*)
+  		FROM
+  			multiplechoice
+  		WHERE
+  			lecture_no = #{lectureNo};
+	</select>
 </mapper>

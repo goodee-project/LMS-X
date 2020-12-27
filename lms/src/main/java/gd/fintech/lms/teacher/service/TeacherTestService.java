@@ -1,6 +1,8 @@
 package gd.fintech.lms.teacher.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Answersheet;
+import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.Test;
 
 @Service
@@ -51,5 +54,27 @@ public class TeacherTestService {
 		List<Answersheet> answersheetList = teacherTestMapper.selectAnswersheetList(lectureNo);
 				
 		return answersheetList;
+	}
+	
+	// 객관식 문제 목록
+	// 강좌 고유 번호(lectureNo), 시작 데이터 번호(beginRow), 페이지당 표시 데이터 수(rowPerPage)
+	public List<Multiplechoice> selectMultiplechoiceList(int lectureNo, int beginRow, int rowPerPage) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("lectureNo", lectureNo);		// 강의실 고유번호
+		map.put("beginRow", beginRow);			// 시작 데이터
+		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
+		
+		List<Multiplechoice> multiplechoiceList = teacherTestMapper.selectMultiplechoiceList(map);
+		
+		// [Logger] 객관식 문제 목록(multiplechoiceList)
+		logger.trace("multiplechoiceList[" + multiplechoiceList + "]");
+		
+		return multiplechoiceList;
+	}
+	
+	// 객관식 문제 목록 카운트
+	// 강좌 고유번호(lectureNo)
+	public int selectMultiplechoiceListCount(int lectureNo) {
+		return teacherTestMapper.selectMultiplechoiceListCount(lectureNo);
 	}
 }

@@ -63,7 +63,7 @@
 			<br>
 			
 			<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/testOne'">시험 정보</button>
-			<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/testList'">문제 관리</button>
+			<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">객관식 문제 관리</button>
 			<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/answersheetList'">학생 답안지 관리</button>
 		</div>
 		
