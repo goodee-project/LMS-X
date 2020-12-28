@@ -1,5 +1,6 @@
 package gd.fintech.lms.teacher.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.teacher.service.TeacherLectureStudentService;
 import gd.fintech.lms.vo.LectureAndStudentAndClassRegistration;
-import gd.fintech.lms.vo.Student;
+
 
 @Controller
 public class TeacherLectureStudentController {
@@ -104,30 +105,66 @@ public class TeacherLectureStudentController {
 	}
 	
 	// 강의를 듣는 학생의 개인정보
-	@GetMapping("/auth/teacher/lecture/{lectureNo}/student/studentOne/{studentId}")
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/student/studentOne/{accountId}/{currentYear}/{currentMonth}")
 	public String teacherLectureStudentOne(Model model,
 			ServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo,
-			@PathVariable(name = "studentId") String studentId) {
+			@PathVariable(name = "accountId") String accountId,
+			@PathVariable(name = "currentYear") int currentYear,
+			@PathVariable(name = "currentMonth") int currentMonth) {
 		
 		//세션에서 강사의 이름을 가져오기
 		HttpSession session =  ((HttpServletRequest)request).getSession();
 		String teacherName = (String)session.getAttribute("loginName");
-		
+				
 		Map<String, Object> map = new HashMap<>();
 		map.put("lectureNo",lectureNo);
 		map.put("teacherName", teacherName);
-		map.put("studentId", studentId);
+		map.put("accountId", accountId);
 		
+		List<Map<String, Object>> attendanceList = teacherLectureStudentService.getTeacherAttendanceByStudentAndMonth(lectureNo, currentYear, currentMonth, accountId);
+		// 오늘 날짜
+		Calendar currentDay = Calendar.getInstance();
+		
+		// currentYear와 currentMonth의 값이 모두 넘어왔을 경우
+		if (currentYear != -1 && currentMonth != -1) {
+			if (currentMonth == 0) {
+				currentYear -= 1;
+				currentMonth = 12;
+			}
+			
+			if (currentMonth == 13) {
+				currentYear += 1;
+				currentMonth = 1;
+			}
+			currentDay.set(Calendar.YEAR, currentYear);
+			
+			// Calendar 함수의 값 보정 위해 1만큼 감안하여 설정
+			currentDay.set(Calendar.MONTH, currentMonth - 1);
+		}
+		
+		currentDay.set(Calendar.DATE, 1);								// 오늘 날짜 기준 일을 1로 바꾸어 이번 달 1일의 요일을 구한다.
+		currentYear = currentDay.get(Calendar.YEAR);					// 올해 연도
+		currentMonth = currentDay.get(Calendar.MONTH) + 1;				// Calendar.MONTH에 1을 더해야 실제 월이 나온다.
+		int lastDay = currentDay.getActualMaximum(Calendar.DATE); 		// 월 마지막 날짜
+		int firstDayOfWeek = currentDay.get(Calendar.DAY_OF_WEEK);		// 이번 달 1일의 요일
 		
 		LectureAndStudentAndClassRegistration LASACR = teacherLectureStudentService.getStudentOne(map);
 		
-		model.addAttribute("lectureNo",lectureNo);
-		model.addAttribute("studentId", studentId);
-		model.addAttribute("teacherName", teacherName);
-		model.addAttribute("LASACR", LASACR);
+		model.addAttribute("currentYear", currentYear);					// 년도
+		model.addAttribute("currentMonth", currentMonth);				// 월
+		model.addAttribute("lastDay", lastDay);							// 마지막 날
+		model.addAttribute("firstDayOfWeek", firstDayOfWeek);			// 1일의 요일
+		
+		model.addAttribute("lectureNo",lectureNo);						// 강좌 고유번호
+		model.addAttribute("accountId", accountId);						// 학생 Id
+		model.addAttribute("teacherName", teacherName);					// 강사 이름
+		model.addAttribute("LASACR", LASACR);							// vo
+		model.addAttribute("attendanceList", attendanceList);
 		
 		return "/auth/teacher/lecture/student/studentOne";
 	}
+	
+
 	
 }

@@ -119,7 +119,71 @@
 		LEFT OUTER JOIN teacher t
 			ON t.teacher_name = l.teacher_name
 		WHERE 
-			cr.lecture_no = #{lectureNo} AND t.teacher_name = #{teacherName} AND s.student_id = #{studentId}
+			cr.lecture_no = #{lectureNo} AND 
+			t.teacher_name = #{teacherName} AND 
+			cr.account_id = #{accountId}
+	</select>
+
+	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectTeacherAttendanceStudentResult">
+		<result property="accountId" column="account_id" />
+		<result property="attendanceState" column="attendance_state" />
+		<result property="attendanceRemark" column="attendance_remark" />
+		
+		<collection property="student" ofType="gd.fintech.lms.vo.Student">
+			<result property="studentName" column="student_name" />
+			<result property="studentGender" column="student_gender" />
+		</collection>
+	</resultMap>
+	
+	<!-- 학생의 출석 현황 (월별) -->
+	<select id="selectTeacherAttendanceByStudentAndMonth" parameterType="java.util.Map" resultMap="selectTeacherAttendanceStudentResult">
+		SELECT
+			cr.account_id, 
+		 	s.student_name, 
+			s.student_gender, 
+			a.attendance_state, 
+			a.attendance_remark
+		FROM
+			class_registration cr
+		LEFT OUTER JOIN
+			student s ON
+			cr.account_id = s.student_id
+		LEFT OUTER JOIN
+			attendance a ON
+			cr.account_id = a.account_id AND
+			YEAR(a.attendance_day) = #{currentYear} AND
+			MONTH(a.attendance_day) = #{currentMonth} 
+		WHERE
+			(cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료") AND
+			cr.lecture_no = #{lectureNo} AND
+			cr.account_id = #{accountId}
+	</select>
+	
+		<!-- 학생의 출석 현황 (월별) -->
+	<select id="selectTeacherAttendanceByStudentAndDay" parameterType="java.util.Map" resultMap="selectTeacherAttendanceStudentResult">
+		SELECT
+			cr.account_id, 
+		 	s.student_name, 
+			s.student_gender, 
+			a.attendance_state, 
+			a.attendance_remark
+		FROM
+			class_registration cr
+		LEFT OUTER JOIN
+			student s ON
+			cr.account_id = s.student_id
+		LEFT OUTER JOIN
+			attendance a ON
+			cr.account_id = a.account_id AND
+			YEAR(a.attendance_day) = #{currentYear} AND
+			MONTH(a.attendance_day) = #{currentMonth} AND
+			DAY(a.attendance_day) = #{currentDay}
+		WHERE
+			(cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료") AND
+			cr.lecture_no = #{lectureNo} AND
+			cr.account_id = #{accountId}
 	</select>
 </mapper>
 

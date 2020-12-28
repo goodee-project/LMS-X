@@ -26,7 +26,7 @@
 					<c:forEach items="${LASACR}" var="la">
 						<tr>
 							<td>${la.classRegistration.lectureNo}</td>
-							<td><a href="${pageContext.request.contextPath}/auth/teacher/lecture/${la.lecture.lectureNo}/student/studentOne/${la.student.studentId}">${la.student.studentName}</a></td>
+							<td><a href="${pageContext.request.contextPath}/auth/teacher/lecture/${la.lecture.lectureNo}/student/studentOne/${la.student.studentId}/-1/-1">${la.student.studentName}</a></td>
 							<td>${la.student.studentPhone}</td>
 							<td>${la.student.studentGender}</td>
 							<td>${la.student.studentAddressMain}</td>
