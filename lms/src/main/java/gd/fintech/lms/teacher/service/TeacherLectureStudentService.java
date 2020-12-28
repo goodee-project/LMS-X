@@ -27,22 +27,7 @@ public class TeacherLectureStudentService {
 	public int getTeacherLectureStudentCount(Map<String, Object> map) {
 		return teacherLectureStudentMapper.selectTeacherLectureStudentCount(map);
 	}
-	
-	public List<Attendance> getTeacherAttendanceByStudentAndDay (int lectureNo, int currentYear, int currentMonth, int currentDay, String studentId) {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("lectureNo", lectureNo);			// 강좌 고유번호
-		map.put("currentYear", currentYear);		// 현재 년도
-		map.put("currentMonth", currentMonth);		// 현재 월
-		map.put("currentDay", currentDay);			// 현재 일
-		map.put("studentId", studentId);
-		
-		List<Attendance> attendanceList = teacherLectureStudentMapper.selectTeacherAttendanceByStudentAndDay(map);
-		
-		return attendanceList;
-	}
-	
-	public List<Map<String, Object>> getTeacherAttendanceByStudentAndMonth (int lectureNo, int currentYear, int currentMonth, String accountId) {
+	public List<Attendance> getTeacherAttendanceByStudentAndMonth (int lectureNo, int currentYear, int currentMonth, String accountId) {
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("lectureNo", lectureNo);			// 강좌 고유번호

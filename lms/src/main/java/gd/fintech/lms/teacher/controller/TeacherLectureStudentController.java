@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.teacher.service.TeacherLectureStudentService;
+import gd.fintech.lms.vo.Attendance;
 import gd.fintech.lms.vo.LectureAndStudentAndClassRegistration;
 
 
@@ -122,39 +123,34 @@ public class TeacherLectureStudentController {
 		map.put("teacherName", teacherName);
 		map.put("accountId", accountId);
 		
-		List<Map<String, Object>> attendanceList = teacherLectureStudentService.getTeacherAttendanceByStudentAndMonth(lectureNo, currentYear, currentMonth, accountId);
+		List<Attendance> attendanceList = teacherLectureStudentService.getTeacherAttendanceByStudentAndMonth(lectureNo, currentYear, currentMonth, accountId);
 		// 오늘 날짜
 		Calendar currentDay = Calendar.getInstance();
 		
 		// currentYear와 currentMonth의 값이 모두 넘어왔을 경우
 		if (currentYear != -1 && currentMonth != -1) {
 			if (currentMonth == 0) {
-				currentYear -= 1;
 				currentMonth = 12;
+				currentYear -= 1;
 			}
 			
 			if (currentMonth == 13) {
-				currentYear += 1;
 				currentMonth = 1;
+				currentYear += 1;
 			}
 			currentDay.set(Calendar.YEAR, currentYear);
 			
 			// Calendar 함수의 값 보정 위해 1만큼 감안하여 설정
-			currentDay.set(Calendar.MONTH, currentMonth - 1);
+			currentDay.set(Calendar.MONTH, currentMonth -1);
 		}
 		
-		currentDay.set(Calendar.DATE, 1);								// 오늘 날짜 기준 일을 1로 바꾸어 이번 달 1일의 요일을 구한다.
 		currentYear = currentDay.get(Calendar.YEAR);					// 올해 연도
 		currentMonth = currentDay.get(Calendar.MONTH) + 1;				// Calendar.MONTH에 1을 더해야 실제 월이 나온다.
-		int lastDay = currentDay.getActualMaximum(Calendar.DATE); 		// 월 마지막 날짜
-		int firstDayOfWeek = currentDay.get(Calendar.DAY_OF_WEEK);		// 이번 달 1일의 요일
 		
 		LectureAndStudentAndClassRegistration LASACR = teacherLectureStudentService.getStudentOne(map);
 		
 		model.addAttribute("currentYear", currentYear);					// 년도
 		model.addAttribute("currentMonth", currentMonth);				// 월
-		model.addAttribute("lastDay", lastDay);							// 마지막 날
-		model.addAttribute("firstDayOfWeek", firstDayOfWeek);			// 1일의 요일
 		
 		model.addAttribute("lectureNo",lectureNo);						// 강좌 고유번호
 		model.addAttribute("accountId", accountId);						// 학생 Id
@@ -163,8 +159,5 @@ public class TeacherLectureStudentController {
 		model.addAttribute("attendanceList", attendanceList);
 		
 		return "/auth/teacher/lecture/student/studentOne";
-	}
-	
-
-	
+	}	
 }

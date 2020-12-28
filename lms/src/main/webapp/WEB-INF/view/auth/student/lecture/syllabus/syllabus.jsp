@@ -30,7 +30,7 @@
 		</div>
 
 			<h3>강의 첨부 파일</h3>
-			<c:forEach var="sy" items="${Syllabus}">
+			<c:forEach var="sy" items="${syllabus}">
 			<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
 	   			<c:set var="uuid">${sy.syllabusFileUuid}</c:set>
 				<table border="1">

@@ -21,8 +21,5 @@ public interface TeacherLectureStudentMapper {
 	public int selectTeacherLectureStudentCount(Map<String, Object> map);
 	
 	// 강의를 듣는 학생 상세보기 - 월별 출결 현황
-	List<Map<String, Object>> selectTeacherAttendanceByStudentAndMonth(Map<String, Object> map);
-	
-	// 강의를 듣는 학생 상세보기 - 일별 출결 현황
-	List<Attendance> selectTeacherAttendanceByStudentAndDay(Map<String, Object> map);
+	List<Attendance> selectTeacherAttendanceByStudentAndMonth(Map<String, Object> map);
 }
