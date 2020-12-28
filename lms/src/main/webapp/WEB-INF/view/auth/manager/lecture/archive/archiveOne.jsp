@@ -6,6 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	// 다운로드 횟수 증가 시키기
+	function fileDownloadCount(paramUuid){
+		let fileId = paramUuid.split('.')[0];
+		$.ajax({
+			url: '${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/archive/archiveFileCount/' + paramUuid,
+			type:'post',
+			success: function(data){
+				console.log(data);
+				let html = '다운로드 횟수 : ' + data + '회';
+				$('#fileCount' + fileId).html(html);
+			}
+		});
+	}
+</script>
 </head>
 <body>
 	<div>
@@ -50,11 +65,11 @@
 					<c:if test="${lectureArchive.lectureArchiveFileList[0].lectureArchiveFileOriginal != null}">
 						<div>
 							<a
-								onclick="fileDownloadCount('${laf.lectureArchiveFileUuid}','${laf.lectureArchiveFileCount}')"
+								onclick="fileDownloadCount('${laf.lectureArchiveFileUuid}')"
 								href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}" download>
 								${laf.lectureArchiveFileOriginal}
 							</a>
-							&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, <div id="fileCount${fn:split(uuid, '.')[0]}" style="display: inline;">다운로드 횟수 : ${laf.lectureArchiveFileCount}</div>
+							&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, <div id="fileCount${fn:split(uuid, '.')}" style="display: inline;">다운로드 횟수 : ${laf.lectureArchiveFileCount}</div>
 						</div>
 					</c:if>
 					<c:if test="${lectureArchive.lectureArchiveFileList[0].lectureArchiveFileOriginal == null}">

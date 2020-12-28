@@ -78,7 +78,7 @@ public class ManagerLectureArchiveController {
 		return "/auth/manager/lecture/archive/archiveList";
 	}
 	
-	// 강사 상세보기
+	// 강좌 상세보기
 	@GetMapping("/auth/manager/lecture/{lectureNo}/archive/archiveOne/{lectureArchiveNo}")
 	public String archiveOne(Model model,
 			@PathVariable(value = "lectureArchiveNo") int lectureArchiveNo) {
@@ -89,12 +89,12 @@ public class ManagerLectureArchiveController {
 	}
 	
 	// 자료 삭제
-	@GetMapping("/auth/manager/lecture/{lectureNo}/archive/deleteArchive/{lectureArchiveNo}")
+	@GetMapping("/auth/manager/lecture/{lectureNo}/archive/archiveOne/deleteArchive/{lectureArchiveNo}")
 	public String deleteArchive(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 						// 강의 번호
 			@PathVariable(value = "lectureArchiveNo") int lectureArchiveNo) {		// 자료 번호
 		managerLectureArchiveService.deleteManagerLectureArchive(lectureArchiveNo);
 		
 		return "redirect:/auth/manager/lecture/" + lectureNo + "/archive/archiveList/1";
-	}	
+	}
 }
