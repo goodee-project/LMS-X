@@ -27,34 +27,36 @@
 				// 학생 로그인
 				$('#studentLogin').click(function() {
 					let loginInput = `
-						<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
-							<div class="text-center text-muted mb-4">
-								<h3>학생 로그인</h3>
-							</div>
-							<input id="accountLevel" type="text" name="accountLevel" value="1" hidden="hidden">
-							<div class="form-group mb-3">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i
-											class="ni ni-email-83"></i></span>
-									</div>
-									<input type="text" class="form-control" name="accountId" id="accountId" placeholder="아이디" value="youngi">
+						<div class="card-body px-lg-5 py-lg-5">
+							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
+								<div class="text-center text-muted mb-4">
+									<h3>학생 로그인</h3>
 								</div>
-							</div>
-							<div class="form-group">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i
-											class="ni ni-lock-circle-open"></i></span>
+								<input id="accountLevel" type="text" name="accountLevel" value="1" hidden="hidden">
+								<div class="form-group mb-3">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="ni ni-email-83"></i></span>
+										</div>
+										<input type="text" class="form-control" name="accountId" id="accountId" placeholder="아이디" value="youngi">
 									</div>
-									<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
 								</div>
-							</div>
-							<div class="text-center">
-								<button type="button" class="btn btn-primary my-4" id="loginBtn">로그인</button>
-							</div>
-						</form>
-						<div id="idCheck"></div>`;
+								<div class="form-group">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="ni ni-lock-circle-open"></i></span>
+										</div>
+										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
+									</div>
+								</div>
+								<div class="text-danger" id="idCheck"></div>
+								<div class="text-center">
+									<button type="button" class="btn btn-primary my-4" id="loginBtn">로그인</button>
+								</div>
+							</form>
+						</div> `;
 						
 					$('#login').html(loginInput);
 					
@@ -115,34 +117,36 @@
 				// 강사 로그인
 				$('#teacherLogin').click(function() {
 					let loginInput = `
-						<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
-							<div class="text-center text-muted mb-4">
-								<h3>강사 로그인</h3>
-							</div>
-							<input id="accountLevel" type="text" name="accountLevel" value="2" hidden="hidden">
-							<div class="form-group mb-3">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i
-											class="ni ni-email-83"></i></span>
-									</div>
-									<input type="text" class="form-control" name="accountId" id="accountId" placeholder="아이디" value="sunghyun">
+						<div class="card-body px-lg-5 py-lg-5">
+							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
+								<div class="text-center text-muted mb-4">
+									<h3>강사 로그인</h3>
 								</div>
-							</div>
-							<div class="form-group">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i
-											class="ni ni-lock-circle-open"></i></span>
+								<input id="accountLevel" type="text" name="accountLevel" value="2" hidden="hidden">
+								<div class="form-group mb-3">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="ni ni-email-83"></i></span>
+										</div>
+										<input type="text" class="form-control" name="accountId" id="accountId" placeholder="아이디" value="sunghyun">
 									</div>
-									<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
 								</div>
-							</div>
-							<div class="text-center">
-								<button type="button" class="btn btn-primary my-4" id="loginBtn">로그인</button>
-							</div>
-						</form>
-						<div id="idCheck"></div>`;
+								<div class="form-group">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="ni ni-lock-circle-open"></i></span>
+										</div>
+										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
+									</div>
+								</div>
+								<div class="text-danger" id="idCheck"></div>
+								<div class="text-center">
+									<button type="button" class="btn btn-primary my-4" id="loginBtn">로그인</button>
+								</div>
+							</form>
+						</div> `;
 						
 					$('#login').html(loginInput);
 					
@@ -203,6 +207,7 @@
 				// 운영자 로그인
 				$('#managerLogin').click(function() {
 					let loginInput = `
+						<div class="card-body px-lg-5 py-lg-5">
 						<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
 							<div class="text-center text-muted mb-4">
 								<h3>운영자 로그인</h3>
@@ -226,11 +231,12 @@
 									<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
 								</div>
 							</div>
+							<div class="text-danger" id="idCheck"></div>
 							<div class="text-center">
 								<button type="button" class="btn btn-primary my-4" id="loginBtn">로그인</button>
 							</div>
 						</form>
-						<div id="idCheck"></div>`;
+						</div> `;
 						
 					$('#login').html(loginInput);
 					
@@ -291,34 +297,36 @@
 				// 관리자 로그인
 				$('#adminLogin').click(function() {
 					let loginInput = `
-						<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
-							<div class="text-center text-muted mb-4">
-								<h3>관리자 로그인</h3>
-							</div>
-							<input id="accountLevel" type="text" name="accountLevel" value="4" hidden="hidden">
-							<div class="form-group mb-3">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i
-											class="ni ni-email-83"></i></span>
-									</div>
-									<input type="text" class="form-control" name="accountId" id="accountId" placeholder="아이디" value="admin">
+						<div class="card-body px-lg-5 py-lg-5">
+							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
+								<div class="text-center text-muted mb-4">
+									<h3>관리자 로그인</h3>
 								</div>
-							</div>
-							<div class="form-group">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i
-											class="ni ni-lock-circle-open"></i></span>
+								<input id="accountLevel" type="text" name="accountLevel" value="4" hidden="hidden">
+								<div class="form-group mb-3">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="ni ni-email-83"></i></span>
+										</div>
+										<input type="text" class="form-control" name="accountId" id="accountId" placeholder="아이디" value="admin">
 									</div>
-									<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
 								</div>
-							</div>
-							<div class="text-center">
-								<button type="button" class="btn btn-primary my-4" id="loginBtn">로그인</button>
-							</div>
-						</form>
-						<div id="idCheck"></div>`;
+								<div class="form-group">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="ni ni-lock-circle-open"></i></span>
+										</div>
+										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
+									</div>
+								</div>
+								<div class="text-danger" id="idCheck"></div>
+								<div class="text-center">
+									<button type="button" class="btn btn-primary my-4" id="loginBtn">로그인</button>
+								</div>
+							</form>
+						</div> `;
 					
 					$('#login').html(loginInput);
 	
@@ -414,8 +422,8 @@
 									<div class="btn btn-neutral btn-icon" id="adminLogin"><span class="btn-inner--text">관리자</span></div>
 								</div>
 							</div>
-							<div class="card-body px-lg-5 py-lg-5" id="login">
-								<div class="text-center">(계정을 선택해주세요)</div>
+							<div id="login">
+							
 							</div>
 						</div>
 						<div id="signup"></div>
@@ -427,7 +435,7 @@
 					<div class="row align-items-center justify-content-xl-between">
 						<div class="col-xl-6">
 							<div class="copyright text-center text-xl-left text-muted">
-								© 2020-2021 <span class="nav-link" >Goodee Avengers</span>
+								© 2020-2021 <a href="${pageContext.request.contextPath}/" class="font-weight-bold ml-1" >Goodee Avengers</a>
 							</div>
 						</div>
 						<div class="col-xl-6">
@@ -458,8 +466,7 @@
 		</div>
 		<!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
-		<script
-			src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script	src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 		<!--   Optional JS   -->
 		<!--   Argon JS   -->
 		<script src="${pageContext.request.contextPath}/assets/js/argon-dashboard.min.js?v=1.1.2"></script>

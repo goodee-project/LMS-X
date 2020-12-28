@@ -3,31 +3,23 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>teacherSignup</title>
-		
-		<!-- Bootstrap Framework 사용 -->
-		
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-		
-		<!-- jQuery library -->
+		<!-- Favicon -->
+		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
+		<!-- Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+			rel="stylesheet">
+		<!-- Icons -->
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+		<link
+			href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"
+			rel="stylesheet" />
+		<!-- CSS Files -->
+		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+		<!-- jQuery / Ajax Google CDN -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		
-		<!-- Popper JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		
-		<!-- Bootstrap 4 Icons -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-		
-		<style>
-			.table td {
-				text-align: center;
-				vertical-align: middle;
-			}
-		</style>
 		
 		<script>
 			$(document).ready(function(){
@@ -36,14 +28,14 @@
 				$('#idCheck').click(function() {
 					if ($('#accountId').val() != "") {
 						$.ajax({
-							url : "${pageContext.request.contextPath}/signup/accountIdCheck/"+$('#accountId').val(),
+							url : '${pageContext.request.contextPath}/signup/accountIdCheck/'+$('#accountId').val(),
 							type : 'get',
 							success : function(data) {
 								if (data == "true") {
-									$("#idCheckMs").html("사용 가능한 아이디입니다.");
+									$("#idCheckMs").html('<span class="text-success">사용 가능한 아이디입니다.</span>');
 									idCheck = "true";
 								} else {
-									$("#idCheckMs").html("사용 불가능한 아이디입니다.");
+									$("#idCheckMs").html('<span class="text-danger">사용 불가능한 아이디입니다.</span>');
 								
 									return;
 								}
@@ -60,7 +52,7 @@
 						$('#teacherEmailCheck').html("");
 						if (CheckEmail( $('#teacherEmail').val()) == false) {
 							$('#teacherEmail').focus();
-							$('#teacherEmailCheck').html("이메일 형식이 잘못 되었습니다.");
+							$('#teacherEmailCheck').html('<span class="text-danger">이메일 형식이 잘못 되었습니다.</span>');
 							return;
 						} else {
 							
@@ -68,14 +60,14 @@
 								url : '${pageContext.request.contextPath}/signup/emailCheck/'+$('#teacherEmail').val(),
 								type : 'get',
 								success : function(data) {
-									$('#teacherEmailCheck').html("");
+									$('#teacherEmailCheck').html('');
 									if ( data == "true" ) {
-										$('#teacherEmailCheck').html("사용 가능한 이메일입니다.");
+										$('#teacherEmailCheck').html('<span class="text-success">사용 가능한 이메일입니다.</span>');
 										emailCheck = "ture";
 										return;
 										
 									} else {
-										$('#teacherEmailCheck').html("사용 불가능한 이메일입니다.");
+										$('#teacherEmailCheck').html('<span class="text-danger">사용 불가능한 이메일입니다.</span>');
 										
 										return;
 									}
@@ -109,14 +101,14 @@
 				
 				$('#check').click(function() {
 					$('#addressCheck').html("");
-					if ( $('#street').val().length > 1 ) {
+					if ($('#street').val().length > 1) {
 						$('#addressWait').html("(잠시만 기다려 주세요...)");
 						let street = null;
 						let building1 = null;
 						let building2 = null;
 						// 앞뒤 공백 제거
 						let trimStreet = $('#street').val().trim(); 
-						if ( checkSpace(trimStreet) == true ) {
+						if (checkSpace(trimStreet) == true) {
 							// 연속된 공백을 1개의 공백으로 설정
 							let replaceStreet = trimStreet.replace(/ +/g, " ");
 							
@@ -126,7 +118,7 @@
 							let buildingTotal = afterAddress[1];
 							
 							// 변수 값에 '-' 가 있는지 체크
-							if ( checkSpecial(buildingTotal) == true ) {
+							if (heckSpecial(buildingTotal) == true) {
 								// 모든 공백 제거
 								let allReplaceBuilding = buildingTotal.replace(/(\s*)/g, "") 
 								// 값에 - 가 있으면 나누기
@@ -135,7 +127,7 @@
 								building2 = afterBuilding[1];
 
 								//building2가 공백이면 null
-								if ( building2 == "" ) {
+								if (building2 == "") {
 									building2 = null;
 								}
 							
@@ -175,7 +167,8 @@
 								}
 								$('#addressWait').html("");
 								$('.addressBtn').click(function(){
-									$('#addressView').html('<input id="teacherAddressMain" class="form-control" style="margin-bottom:5px;" type="text" name="teacherAddressMain" readonly="readonly" > ')
+									$('#addressView').html(`<span class="text-primary" style="margin: auto; width: 80px;">주소</span>
+															<input id="teacherAddressMain" class="form-control" style=" background-color: white;" type="text" name="teacherAddressMain" readonly="readonly" >`);
 									document.getElementById("teacherAddressMain").value = $(this).val();
 
 								});
@@ -218,7 +211,7 @@
 						return;
 					} else if ( idCheck == "false" ) {
 						$('#accountId').focus();
-						$('#idCheckMs').html("아이디 중복 확인해주세요.")
+						$('#idCheckMs').html('<span class="text-danger">아이디 중복 확인해주세요.</span>')
 						return;
 					}
 	
@@ -231,31 +224,31 @@
 						return;
 					} else if (isJobPassword($('#teacherPw1').val()) == false) {
 						$('#teacherPw1').focus();
-						$('#teacherPwCheck').html("비밀번호 형식이 맞지 않습니다.");
+						$('#teacherPwCheck').html('<span class="text-danger">비밀번호 형식이 맞지 않습니다.</span>');
 						return;
 						
 					} else if ($('#teacherPw1').val() != $('#teacherPw2').val()) {
 						$('#teacherPw1').focus();
-						$('#teacherPwCheck').html("비밀번호가 일치하지않습니다.");
+						$('#teacherPwCheck').html('<span class="text-danger">비밀번호가 일치하지않습니다.</span>');
 						return;
 					} else {
-						$('#teacherPwCheck').html("");
+						$('#teacherPwCheck').html('');
 					}
-	
+					
 					// 이메일 검사
 					if ($('#teacherEmail').val() == "") {
 						$('#teacherEmail').focus();
 						return;
 					} else if (CheckEmail($('#teacherEmail').val()) == false) {
 						$('#teacherEmail').focus();
-						$('#teacherEmailCheck').html("이메일 형식이 잘못 되었습니다.");
+						$('#teacherEmailCheck').html('<span class="text-danger">이메일 형식이 잘못 되었습니다.</span>');
 						return;
 					} else if (emailCheck == "false") {
 						$('#teacherEmail').focus();
-						$('#teacherEmailCheck').html("이메일 중복 확인해주세요");
+						$('#teacherEmailCheck').html('<span class="text-danger">이메일 중복 확인해주세요</span>');
 						return;
 					} else {
-						$('#teacherEmailCheck').html("");
+						$('#teacherEmailCheck').html('');
 					}
 	
 					// 이름 검사
@@ -277,36 +270,36 @@
 						return;
 					} else if (telValidator($('#teacherPhone').val()) == false) {
 						$('#teacherPhone').focus();
-						$('#teacherPhoneCheck').html("전화번호 형식이 잘못 되었습니다.");
+						$('#teacherPhoneCheck').html('<span class="text-danger">전화번호 형식이 잘못 되었습니다.<span>');
 						return;
 					} else {
-						$('#teacherPhoneCheck').html("");
+						$('#teacherPhoneCheck').html('');
 					}
 					
 					// 성별 검사
 					if ($('.teacherGender:checked').val() == undefined) {
 						$('#teacherGender').focus();
-						$('#teacherGenderCheck').html("성별을 체크해주세요");
+						$('#teacherGenderCheck').html('<span class="text-danger">성별을 체크해주세요</span>');
 						return;
 					} else {
-						$('#teacherGenderCheck').html("");
+						$('#teacherGenderCheck').html('');
 					}
 					
 					// 생년월일 검사
 					if ($('#teacherBirth').val() == "") {
 						$('#teacherBirth').focus();
-						$('#teacherBirthCheck').html("생년월일을 입력해주세요")
+						$('#teacherBirthCheck').html('<span class="text-danger">생년월일을 입력해주세요</span>')
 						return;
 					} else {
-						$('#teacherBirthCheck').html("")
+						$('#teacherBirthCheck').html('')
 					}
 					
 					// 주소 검사
 					if ($('#teacherAddressMain').val() == "") {
-						$('#addressCheck').html("주소를 검색해주세요")
+						$('#addressCheck').html('<span class="text-danger">주소를 검색해주세요</span>')
 						return;
 					} else {
-						$('#addressCheck').html("");
+						$('#addressCheck').html('');
 					}
 					
 					// 상세주소 검사
@@ -320,152 +313,187 @@
 			});	
 		</script>
 	</head>
-	<body>
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-			<div class="container">
-				<ul class="navbar-nav mr-auto">
-					<!-- 강사 Navbar Brand -->
-					<li class="nav-item">
-						<a class="navbar-brand" href="${pageContext.request.contextPath}/auth/teacher/index/1">Goodee LMS</a>
-					</li>
-				</ul>
-				
-				<ul class="navbar-nav mr-right">
-					<!-- 아이디 출력 및 로그아웃 버튼 -->
-					<li class="nav-item">
-						<button type="button" class="btn btn-success btn-sm" onclick="location.href='${pageContext.request.contextPath}/'">로그인</button>
-				    </li>
-				</ul>
+		<body class="bg-default">
+		<div class="main-content">
+			<!-- Navbar -->
+			<nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
+				<div class="container px-4">
+					<a class="navbar-brand" href="${pageContext.request.contextPath}/">
+						<img src="${pageContext.request.contextPath}/assets/img/brand/white.png" />
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbar-collapse-main"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+			        <!-- Navbar items -->
+			        <ul class="navbar-nav ml-auto">
+			            <li class="nav-item">
+			              <a class="nav-link nav-link-icon" href="${pageContext.request.contextPath}/">
+			                <i class="ni ni-key-25"></i>
+			                <span class="nav-link-inner--text">Login</span>
+			              </a>
+			            </li>
+			        </ul>
+		        </div>
+		    </nav>
+			<!-- Header -->
+			<div class="header bg-gradient-primary py-7 py-lg-8">
+				<div class="container">
+					<div class="header-body text-center mb-7">
+						<div class="row justify-content-center">
+							<div class="col-lg-5 col-md-6">
+								<h1 class="text-white">Goodee LMS</h1>
+								<p class="text-lead text-light">강사 회원가입</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="separator separator-bottom separator-skew zindex-100">
+					<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none"
+						version="1.1" xmlns="http://www.w3.org/2000/svg">
+			          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+			        </svg>
+				</div>
 			</div>
-		</nav>
-		
-		<!-- 상단 인터페이스 -->
-		<div class="jumbotron jumbotron-fluid">
-			<div class="container">
-				<h1>강사 회원가입</h1>
-				<p>강사들이 회원가입을 하는 메뉴입니다.</p>
+			<!-- Page content -->
+			<div class="container mt--8 pb-5">
+				<div class="row justify-content-center">
+					<div class="col-lg-7 col-md-7">
+						<div class="card bg-secondary shadow border-0">
+							<div class="card-header bg-transparent pb-5">
+								<form id="teacherForm" method="post" action="${pageContext.request.contextPath}/teacher/signup">
+									<input type="text" hidden="hidden" name="accountLevel" value="2">
+									<input type="text" hidden="hidden" name="accountState" value="대기">
+									<!-- 아이디 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">아이디</span>
+											<input class="form-control" type="text" id="accountId" name="accountId" placeholder="  아이디를 입력하세요">
+											<div class="input-group-append">
+												<button class="btn btn-primary" id="idCheck" type="button">중복 체크</button>
+											</div>
+										</div>
+										<div id="idCheckMs"></div>
+									</div>
+									
+									<!-- 비밀번호 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">비밀번호</span>
+											<input type="password" class="form-control" name="accountPw" id="teacherPw1" placeholder="  8~10자 영문, 숫자">
+										</div>
+									</div>
+									
+									<!-- 비밀번호 확인 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">비밀번호 확인</span>
+											<input type="password" class="form-control" id="teacherPw2" placeholder="  한번 더 비밀번호를 입력하세요">
+										</div>
+										<div id="teacherPwCheck"></div>
+									</div>
+									
+									<!-- 이메일 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">이메일</span>
+											<input type="email" class="form-control" name="teacherEmail" id="teacherEmail" placeholder="  abc@abc.abc">
+											<div class="input-group-append">
+												<button type="button" class="btn btn-primary" id="emailCheck">중복 체크</button>
+											</div>
+										</div>
+										<div id="teacherEmailCheck"></div>
+									</div>
+									<!-- 이름, 성별 -->
+									<div class="row" style="margin: auto;">
+										<div class="btn-wrapper text-center mt-3 ">
+											<div class="input-group input-group-alternative">
+												<span class="text-primary" style="margin: auto; width: 80px;">이름</span>
+												<input type="text" class="form-control" name="teacherName" id="teacherName" placeholder="  이름을 입력하세요">
+											</div>
+										</div>
+										<div class="btn-wrapper text-center mt-3" style="margin: auto; " >
+										
+											<div class="input-group-text input-group-alternative " style="width: 220px; height: 45px; ">
+												<span class="text-primary" style="margin: auto;"><input type="radio" class="teacherGender" name="teacherGender" value="남">&nbsp;남&nbsp;&nbsp;</span>
+												<span class="text-primary" style="margin: auto;"><input type="radio" class="teacherGender" name="teacherGender" value="여">&nbsp;여</span>
+											</div>
+											<div id="teacherGenderCheck"></div>
+										</div>
+									</div>
+									<!-- 핸드폰 번호 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">핸드폰 <br>번호</span>
+											<input type="text" class="form-control" name="teacherPhone" id="teacherPhone" placeholder="  000-0000-000">
+										</div>
+										<div id="teacherPhoneCheck"></div>
+									</div>
+									<!-- 생년월일 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+												<span class="text-primary" style="margin: auto; width: 80px;">생년월일</span>
+											<input type="date" class="form-control" name="teacherBirth" id="teacherBirth">
+										</div>
+									</div>
+									<!-- 주소 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div id="addressView" class="input-group input-group-alternative" >
+											<span class="text-primary" style="margin: auto; width: 80px;">주소</span>
+											<input id="teacherAddressMain" class="form-control" style=" background-color: white;" type="text" placeholder="  주소를 검색해주세요." name="teacherAddressMain" readonly="readonly" >
+										</div>
+									</div>
+									<!-- 상세 주소 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative" >
+											<span class="text-primary" style="margin: auto; width: 80px;">상세 주소</span>
+											<input type="text" class="form-control" id="teacherAddressSub" placeholder="  상세 주소를 입력하세요"	name="teacherAddressSub">
+										</div>
+									</div>
+									<div style="margin-top: 20px;"class = "text-center">
+										<button type="button" class="btn btn-primary" id="btn">회원가입</button>
+									</div>
+								</form>
+							</div>
+							<div class="card-header bg-transparent pb-5">
+								<div class="btn-wrapper text-center mt-3">
+									<div class="input-group input-group-alternative" >
+										<span class="text-primary" style="margin: auto; width: 80px;">주소 검색</span>
+										<input type="text" class="form-control" name="street" id="street" placeholder="  도로명을 입력하세요.">
+										<div class="input-group-append">
+											<button type="button" class="btn btn-primary" id="check">검색</button>
+										</div>
+									</div>
+									<span id="addressCheck"></span>
+									<span id="addressWait"></span>
+									<div class="input-group input-group-alternative" >
+										<div id="teacherAddressMain"></div>
+										<div id="selectAddress" style="overflow: auto; width: 100%; max-height: 200px;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 		</div>
-		
-		<!-- 본문 -->
-		<div class="container">
-			<form id="teacherForm" method="post" action="${pageContext.request.contextPath}/teacher/signup">
-				<input type="text" hidden="hidden" name="accountLevel" value="1">
-				<input type="text" hidden="hidden" name="accountState" value="대기">
-				
-				<table class="table">
-					<tr>
-						<td width="20%">아이디</td>
-						<td width="80%">
-							<div class="input-group">
-								<input class="form-control" type="text" id="accountId" name="accountId" placeholder="아이디를 입력하세요">
-								<div class="input-group-append">
-									<button class="btn btn-primary" id="idCheck" type="button">중복 체크</button>
-								</div>
-							</div>
-							<span id="idCheckMs"></span>
-						</td>
-					</tr>
-					<tr>
-						<td>비밀번호</td>
-						<td>
-							<div class="input password">
-								<input type="password" class="form-control" name="accountPw" id="teacherPw1" placeholder="8~10자 영문, 숫자">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>비밀번호 확인</td>
-						<td>
-							<div class="input password">
-								<input type="password" class="form-control" id="teacherPw2" placeholder="한번 더 비밀번호를 입력하세요">
-							</div>
-							<div id="teacherPwCheck"></div>
-						</td>
-					</tr>
-					<tr>
-						<td>이메일</td>
-						<td>
-							<div class="input-group">
-								<input type="email" class="form-control" name="teacherEmail" id="teacherEmail" placeholder="abc@abc.abc">
-								<div class="input-group-append">
-									<button type="button" class="btn btn-primary" id="emailCheck">중복 체크</button>
-								</div>
-							</div>
-							<div id="teacherEmailCheck"></div>
-						</td>
-					</tr>
-					<tr>
-						<td>이름</td>
-						<td>
-							<div>
-								<input type="text" class="form-control" name="teacherName" id="teacherName" placeholder="이름을 입력하세요">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>휴대전화 번호</td>
-						<td>
-							<div>
-								<input type="text" class="form-control" name="teacherPhone" id="teacherPhone" placeholder="000-0000-000">
-							</div>
-							<div id="teacherPhoneCheck"></div>
-						</td>
-					</tr>
-					<tr>
-						<td>성별</td>
-						<td>
-							<div>
-								<input type="radio" class="teacherGender" name="teacherGender" value="남">&nbsp;남&nbsp;&nbsp;
-								<input type="radio" class="teacherGender" name="teacherGender" value="여">&nbsp;여
-								<span id="teacherGenderCheck"></span>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>생년월일</td>
-						<td>
-							<div>
-								<input type="date" class="form-control" name="teacherBirth" id="teacherBirth">
-							</div>
-							<div id="teacherBirthCheck"></div>
-						</td>
-					</tr>
-					<tr>
-						<td>주소</td>
-						<td>
-							<div id="addressView"></div>
-							<span id="addressWait"></span>
-							
-							<div class="input-group">
-								<input type="text" class="form-control" name="street" id="street" placeholder="도로명을 입력하세요.">
-								<div class="input-group-append">
-									<button type="button" class="btn btn-primary" id="check">검색</button>
-								</div>
-							</div>
-							
-							<span id="addressCheck"></span>
-							<div id="teacherAddressMain"></div>
-							<div id="selectAddress" style="overflow: auto; width: 100%; max-height: 200px;"></div>
-						</td>
-					</tr>
-					<tr>
-						<td>상세 주소</td>
-						<td>
-							<div>
-								<input type="text" class="form-control" id="teacherAddressSub" placeholder="상세 주소를 입력하세요"	name="teacherAddressSub">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<button type="button" class="btn btn-success" id="btn">회원가입</button>
-							&nbsp;
-							<button type="button" class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/'">취소</button>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
+		<!--   Core   -->
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<!--   Optional JS   -->
+		<!--   Argon JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+		<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+		<script>
+		    window.TrackJS &&
+		      TrackJS.install({
+		        token: "ee6fab19c5a04ac1a32a645abde4613a",
+		        application: "argon-dashboard-free"
+		      });
+	 	</script>
 	</body>
 </html>

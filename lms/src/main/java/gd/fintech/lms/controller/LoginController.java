@@ -64,6 +64,10 @@ public class LoginController {
 		session.setAttribute("loginLevel", loginAccount.getAccountLevel());
 		session.setAttribute("loginImage", loginImage);
 		
+		if (session.getAttribute("loginImage")==null) {
+			session.setAttribute("loginImage", "default.png");
+		}
+		System.out.println(session.getAttribute("loginImage"));
 		// 로그인 기록 생성
 		LoginLog loginLog = new LoginLog();
 		loginLog.setAccountId(loginAccount.getAccountId());
