@@ -5,6 +5,19 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>classOne</title>
+		<!-- Favicon -->
+		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
+		<!-- Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+			rel="stylesheet">
+		<!-- Icons -->
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+		<link
+			href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"
+			rel="stylesheet" />
+		<!-- CSS Files -->
+		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function(){
@@ -66,91 +79,191 @@
 		
 			})
 		</script>
-	</head>
-	<body>
-		<h1>수강 상세보기</h1>
+	</head>	
+	<body class="">
+		<!-- 메인 Navbar -->
 		
-		<div>
-			<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
-	    </div>
-		<div>
-			<jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
-	    </div>
-		<table border="1">
-			<tr>
-				<th>강좌 번호</th>
-				<td>${lcstc.lecture.lectureNo}</td>
-				<th>강사 이름</th>
-				<td>${lcstc.lecture.teacherName}</td>
-			</tr>
-			<tr>
-				<th>강좌 기간</th>
-				<td colspan="3">${lcstc.lecture.lectureStartdate} ~ ${lcstc.lecture.lectureEnddate}</td>
-			</tr>
-			<tr>
-				<th>강좌 정원</th>
-				<td>${lcstc.lecture.lectureTotal}명</td>
-				<th>강좌 이름</th>
-				<td>${lcstc.lecture.lectureName}</td>
-			</tr>
-			<tr>
-				<th>수강 상태</th>
-				<td>${lcstc.classRegistration.classRegistrationState}</td>
-				<th>과목 이름</th>
-				<td>${lcstc.subject.subjectName}</td>
-			</tr>
-			<tr>
-				<th>과목 총일수</th>
-				<td>${lcstc.subject.subjectTotalday}일</td>
-				<th>과목 정보</th>
-				<td>${lcstc.subject.subjectInfo}</td>
-			</tr>
-			<tr>
-				<th>교재</th>
-				<td>${lcstc.textbook.textbookTitle}</td>
-				<th>강의실</th>
-				<td>${lcstc.classroom.classroomNumber}</td>
-			</tr>
-		</table>
-		
-		<!-- 수강 후기 -->
-		<form id="classReviewForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/updateClassReview">
-			<input type="hidden" name="classRegistrationPoint" id="classRegistrationPoint" value="${lcstc.classRegistration.classRegistrationPoint}">
-			<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
-			<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
-			<table border="1">	
-				<tr>
-					<th>강좌 별점</th>
-					<td >
-						<button id="minusPoint" type="button">-</button>
-						<p id="classPoint"></p>
-						<button id="plusPoint" type="button">+</button>
-					</td>
-				</tr>
-				<tr>
-					<th>강좌 리뷰</th>
-					<td>
-						<textarea cols="50" rows="3" name="classRegistrationReview">${lcstc.classRegistration.classRegistrationReview}</textarea>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><button id="classReviewBtn" type="button">저장</button></td>
-				</tr>
-			</table>
-		</form>
-		
-		<!-- 수강 대기상태 일시 수강 취소 가능 -->
-		<c:if test="${lcstc.classRegistration.classRegistrationState == '대기'}">	
-			<form id="cancelClassForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/cancelClass">
-				<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
-				<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
-				<div id="cancelClass">
+		<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+			<div class="container-fluid">
+				<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
+		    </div>	
+		</nav>   		
+		<div class="main-content">
+			<!-- 상단 Navbar -->
+			<div class="container-fluid">
+				<jsp:include page="/WEB-INF/view/auth/student/include/topMenu.jsp" />
+	    	</div>
+			<!-- 강좌 Navbar -->
+			<div class="container-fluid">
+				<jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
+	    	</div>
+	    	
+			<!-- Header -->
+			<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+				<div class="container-fluid">
+					<div class="header-body">
+						<!-- Card stats -->
+						<div class="row">
+							<div class="col-xl-3 col-lg-6">
+								<div class="card card-stats mb-4 mb-xl-0">
+									<div class="card-body">
+										<div class="row">
+											<div class="col">
+												<h5 class="card-title text-uppercase text-muted mb-0">접속자 현황</h5>
+												<span class="h2 font-weight-bold mb-0">350,897</span>
+											</div>
+											<div class="col-auto">
+												<div
+													class="icon icon-shape bg-danger text-white rounded-circle shadow">
+													<i class="fas fa-chart-bar"></i>
+												</div>
+											</div>
+										</div>
+										<p class="mt-3 mb-0 text-muted text-sm">
+											<span class="text-nowrap">누적 접속자</span>
+											<span class="text-success mr-2">1,000,000,000</span> 
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<button id="cancelClassBtn" type="button" value="수강 신청 취소">수강 신청 취소</button>
-			</form>
-		</c:if>
-		
-		<!-- 수강 목록으로 -->
-		<a href="${pageContext.request.contextPath}/auth/student/index/1">목록</a>
-	</body>
+			</div>
+   			<div class="container-fluid mt--7">
+				<div class="card shadow">
+					<div class="card-header border-0">
+						<div class="row align-items-center">
+							<div class="col">
+								<h3 class="mb-0">수강 목록</h3>
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center">
+						<div class="col-12">
+							<table class="table">
+								<tr>
+									<th>강좌 번호</th>
+									<td>${lcstc.lecture.lectureNo}</td>
+									<th>강사 이름</th>
+									<td>${lcstc.lecture.teacherName}</td>
+								</tr>
+								<tr>
+									<th>강좌 기간</th>
+									<td>${lcstc.lecture.lectureStartdate} &nbsp;&nbsp; ~  &nbsp;&nbsp; ${lcstc.lecture.lectureEnddate}</td>
+									<th>과목 총일수</th>
+									<td>${lcstc.subject.subjectTotalday}일</td>
+								</tr>
+								<tr>
+									<th>강좌 정원</th>
+									<td>${lcstc.lecture.lectureTotal}명</td>
+									<th>강좌 이름</th>
+									<td>${lcstc.lecture.lectureName}</td>
+								</tr>
+								<tr>
+									<th>수강 상태</th>
+									<td>${lcstc.classRegistration.classRegistrationState}</td>
+									<th>과목 이름</th>
+									<td>${lcstc.subject.subjectName}</td>
+								</tr>
+								<tr>
+									<th>교재</th>
+									<td>${lcstc.textbook.textbookTitle}</td>
+									<th>강의실</th>
+									<td>${lcstc.classroom.classroomNumber}</td>
+								</tr>
+								<tr>
+									<th>과목 정보</th>
+									<td colspan="3">${lcstc.subject.subjectInfo}</td>
+								</tr>
+							</table>
+						</div>
+					</div>			
+				</div>
+				<!-- 수강 후기 -->
+				<div class="row mt-5">
+					<div class="col-xl-8 mb-5 mb-xl-0">
+						<div class="card shadow">
+							<div class="card-header border-0">
+								<div class="row align-items-center">
+									<div class="col">
+										<h3 class="mb-0">수강 후기</h3>
+									</div>
+								</div>
+							</div>
+							<div class="table-responsive">
+								<form id="classReviewForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/updateClassReview">
+									<input type="hidden" name="classRegistrationPoint" id="classRegistrationPoint" value="${lcstc.classRegistration.classRegistrationPoint}">
+									<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
+									<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
+									<table class="table">	
+										<tr>
+											<th>강좌 별점</th>
+											<td >
+												<div class="row">
+													<button id="minusPoint" type="button" style="height:30px" class="btn btn-outline-primary btn-sm">-</button>
+													<p id="classPoint"></p>
+													<button id="plusPoint" type="button" style="height:30px" class="btn btn-outline-primary btn-sm">+</button>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th>강좌 리뷰</th>
+											<td>
+												<textarea class="form-control" cols="50" rows="3" name="classRegistrationReview">${lcstc.classRegistration.classRegistrationReview}</textarea>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2"><button id="classReviewBtn" type="button" class="btn btn-outline-primary">저장</button></td>
+										</tr>
+									</table>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4">
+						<div class="card shadow">
+							<div class="card-header border-0">
+								<div class="row align-items-center">
+									<div class="col">
+										<h3 class="mb-0">수강 취소</h3>
+									</div>
+									<div class="col text-right">
+										<a href="#!" class="btn btn-sm btn-primary">수강 대기시에만 취소가 가능합니다</a>
+									</div>
+								</div><hr>
+								<div>
+									<!-- 수강 대기상태 일시 수강 취소 가능 -->
+									<c:if test="${lcstc.classRegistration.classRegistrationState == '대기'}">	
+										<form id="cancelClassForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/cancelClass">
+											<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
+											<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
+											<div id="cancelClass">
+											</div>
+											<button id="cancelClassBtn" type="button" value="수강 신청 취소" class="btn btn-outline-danger">수강 신청 취소</button>
+										</form>
+									</c:if>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</div>
+		<!--   Core   -->
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<!--   Optional JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+		<!--   Argon JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+		<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+		<script>
+		    window.TrackJS &&
+		      TrackJS.install({
+		        token: "ee6fab19c5a04ac1a32a645abde4613a",
+		        application: "argon-dashboard-free"
+		    });
+  		</script>
 </html>

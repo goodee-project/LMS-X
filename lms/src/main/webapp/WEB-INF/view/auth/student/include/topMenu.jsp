@@ -4,10 +4,7 @@
 <!-- 상단 Navbar -->
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
 	<div class="container-fluid">
-		<!-- Brand -->
-		<a
-			class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-			href="#">MAIN</a>
+		<p class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"></p>
 		<!-- User -->	
         <ul class="navbar-nav align-items-center d-none d-md-flex">
 			<li class="nav-item dropdown">
@@ -15,7 +12,7 @@
 					<div class="media align-items-center">
 						<span class="avatar avatar-sm rounded-circle"> 
 							<c:if test="${!empty accountImage}">
-								<img src="${pageContext.request.contextPath}/resource/mypageImage/${accountImage}">
+								<img src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
 							</c:if>
 							<c:if test="${empty accountImage}">
 								<img src="${pageContext.request.contextPath}/resource/mypageImage/default.png">
@@ -23,7 +20,7 @@
 						</span>
 						<div class="media-body ml-2 d-none d-lg-block">
 							<span class="mb-0 text-sm  font-weight-bold">
-								${accountName}
+								${sessionScope.loginName}
 							</span>
 						</div>
 					</div>
