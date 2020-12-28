@@ -10,7 +10,6 @@
 	<h1>강의 관리 목록</h1>
 	<div>
 		<a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a>
-		<a href="${pageContext.request.contextPath}/auth/manager/lecture/insertLecture">강의 개설</a>
 	</div>
 	<table border="1">
 		<tr>

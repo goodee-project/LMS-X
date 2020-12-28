@@ -41,6 +41,8 @@
 			}
 		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- NAVER SmartEditor2 스크립트 -->
+		<script src="${pageContext.request.contextPath}/smarteditor2/js/HuskyEZCreator.js"></script>
 		<script>
 			$(document).ready(function(){
 				$('#insertBtn').click(function(){
@@ -48,11 +50,19 @@
 						alert('제목을 입력해주세요.');
 						return;
 						}
-					if($('#noticeContentText').val().length <= 0){
+					if($('#lectureNoticeContent').val().length <= 0){
 						alert('내용을 입력해주세요.');
 						return;
 						}
 					$('#insertNoticeForm').submit();
+					});
+					// NAVER SmartEditor2 적용 코드
+					let oEditors = [];				
+					nhn.husky.EZCreator.createInIFrame({
+						oAppRef : oEditors,
+						elPlaceHolder : 'lectureNoticeContent',
+						sSkinURI : '${pageContext.request.contextPath}/smarteditor2/SmartEditor2Skin.html',
+						fCreator : 'createSEditor2'
 					});
 				});
 		</script>
@@ -93,7 +103,7 @@
 					<tr>
 						<td>내용</td>
 						<td>
-							<textarea class="form-control" name="lectureNoticeContent" id="noticeContentText"></textarea>
+							<textarea class="form-control" name="lectureNoticeContent" id="lectureNoticeContent" style="width:100%"></textarea>
 						</td>
 					</tr>
 				</table>
