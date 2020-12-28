@@ -33,4 +33,8 @@ public interface TeacherReportMapper {
 	// 강사 과제 수정
 	// Report 객체에 담겨있는 정보를 이용
 	int updateTeacherReport(Report report);
+	
+	// 학생 과제 제출 조회
+	// 과제 제출 고유번호(reportSubmitNo)를 이용
+	List<ReportSubmit> selectTeacherReportSubmitOne(int reportSubmitNo);
 }

@@ -23,7 +23,7 @@ public class TeacherReportController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 강사 과제 목록
-	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/reportList/{currentPage}")
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/report/reportList/{currentPage}")
 	public String reportList(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 			// 강좌 고유번호
 			@PathVariable(value = "currentPage") int currentPage) {		// 현재 페이지
@@ -102,7 +102,7 @@ public class TeacherReportController {
 	}
 	
 	// 과제 조회
-	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}")
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}")
 	public String reportOne(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 
 			@PathVariable(value = "reportNo") int reportNo) {
@@ -127,14 +127,14 @@ public class TeacherReportController {
 	}
 	
 	// 과제 작성 Form
-	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/insertReport")
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/report/insertReport")
 	public String insertReport(@PathVariable(value = "lectureNo") int lectureNo) {
 		// [View] /auth/teacher/lecture/report/insertReport.jsp
 		return "/auth/teacher/lecture/report/insertReport";
 	}
 	
 	// 과제 작성 Action
-	@PostMapping(value="/auth/teacher/lecture/{lectureNo}/report/insertReport")
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/report/insertReport")
 	public String insertReport(Report report) {
 		Report returnReport = teacherReportService.insertTeacherReport(report);
 		
@@ -146,7 +146,7 @@ public class TeacherReportController {
 	}
 	
 	// 과제 수정 Form
-	@GetMapping(value="/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
 	public String updateReport(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 
 			@PathVariable(value = "reportNo") int reportNo) {
@@ -170,7 +170,7 @@ public class TeacherReportController {
 	}
 	
 	// 과제 수정 Action
-	@PostMapping(value="/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/report/updateReport/{reportNo}")
 	public String updateReport(Report report) {
 		teacherReportService.updateTeacherReport(report);
 		
@@ -179,5 +179,61 @@ public class TeacherReportController {
 		
 		// [Redirect] 과제 수정 후 과제 고유번호에 해당하는 게시글로 이동
 		return "redirect:/auth/teacher/lecture/" + report.getLectureNo() + "/report/reportOne/" + report.getReportNo();
+	}
+	
+	// 학생 과제 제출 조회
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}/reportSubmitOne/{reportSubmitNo}")
+	public String reportSubmitOne(Model model, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "reportNo") int reportNo, 
+			@PathVariable(value = "reportSubmitNo") int reportSubmitNo) {
+		// 과제 제출 고유번호(reportSubmitNo)에 해당하는 과제의 정보를 데이터베이스에서 가져온다
+		List<ReportSubmit> reportSubmit = teacherReportService.selectTeacherReportSubmitOne(reportSubmitNo);
+		
+		// [Logger] 과제 제출(reportSubmit) 확인
+		logger.trace("reportSubmit[" + reportSubmit + "]");
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("reportSubmit", reportSubmit);
+		
+		// [View] /auth/teacher/lecture/report/reportSubmitOne.jsp
+		return "/auth/teacher/lecture/report/reportSubmitOne";
+	}
+	
+	// 학생 과제 평가 입력 Form
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}/insertReportSubmit/{reportSubmitNo}")
+	public String insertReportSubmit(Model model, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "reportNo") int reportNo, 
+			@PathVariable(value = "reportSubmitNo") int reportSubmitNo) {
+		
+		
+		// [View] /auth/teacher/lecture/report/insertReportSubmit.jsp
+		return "/auth/teacher/lecture/report/insertReportSubmit";
+	}
+	
+	// 학생 과제 평가 입력 Action
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}/insertReportSubmit/{reportSubmitNo}")
+	public String insertReportSubmit() {
+		
+		return "redirect:/";
+	}
+	
+	// 학생 과제 평가 수정 Form
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}/updateReportSubmit/{reportSubmitNo}")
+	public String updateReportSubmit(Model model, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "reportNo") int reportNo, 
+			@PathVariable(value = "reportSubmitNo") int reportSubmitNo) {
+		
+		// [View] /auth/teacher/lecture/report/updateReportSubmit.jsp
+		return "/auth/teacher/lecture/report/updateReportSubmit";
+	}
+	
+	// 학생 과제 평가 입력 Action
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}/updateReportSubmit/{reportSubmitNo}")
+	public String updateReportSubmit(ReportSubmit reportSubmit) {
+		
+		return "redirect:/";
 	}
 }

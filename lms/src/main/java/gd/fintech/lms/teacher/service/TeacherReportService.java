@@ -75,4 +75,12 @@ public class TeacherReportService {
 		List<ReportSubmit> reportSubmitList = teacherReportMapper.selectTeacherReportSubmitList(map);
 		return reportSubmitList;
 	}
+	
+	// 학생 과제 제출 조회
+	// 과제 제출 고유번호(reportSubmitNo)를 이용
+	public List<ReportSubmit> selectTeacherReportSubmitOne(int reportSubmitNo) {
+		List<ReportSubmit> reportSubmit = teacherReportMapper.selectTeacherReportSubmitOne(reportSubmitNo);
+		
+		return reportSubmit;
+	}
 }

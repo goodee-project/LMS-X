@@ -12,6 +12,26 @@
 		</collection>
 	</resultMap>
 	
+	<resultMap type="gd.fintech.lms.vo.ReportSubmit" id="selectTeacherReportSubmitOneResult">
+		<result property="reportSubmitNo" column="report_submit_no" />
+		<result property="reportNo" column="report_no" />
+		<result property="accountId" column="account_id" />
+		<result property="reportSubmitWriter" column="report_submit_writer" />
+		<result property="reportSubmitCreatedate" column="report_submit_createdate" />
+		<result property="reportSubmitUpdatedate" column="report_submit_updatedate" />
+		<result property="reportSubmitTitle" column="report_submit_title" />
+		<result property="reportSubmitContent" column="report_submit_content" />
+		<result property="reportSubmitPoint" column="report_submit_point" />
+		<result property="reportSubmitFeedback" column="report_submit_feedback" />
+		<collection property="reportSubmitFileList" ofType="gd.fintech.lms.vo.ReportSubmitFile">
+			<result property="reportSubmitFileUuid" column="report_submit_file_uuid" />
+			<result property="reportSubmitFileOriginal" column="report_submit_file_original" />
+			<result property="reportSubmitFileSize" column="report_submit_file_size" />
+			<result property="reportSubmitFileType" column="report_submit_file_type" />
+			<result property="reportSubmitFileCount" column="report_submit_file_count" />
+		</collection>
+	</resultMap>
+	
 	<!-- 페이징을 적용하여 과제(report) 테이블에서 강좌 고유번호(lectureNo)에 해당하는 데이터 목록을 가져온다 -->
 	<select id="selectTeacherReportListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Report">
 		SELECT
@@ -123,4 +143,31 @@
   		WHERE
   			report_no = #{reportNo}
   	</update>
+  	
+  	<!-- 학생 과제 제출 조회 -->
+  	<select id="selectTeacherReportSubmitOne" parameterType="Integer" resultMap="selectTeacherReportSubmitOneResult">
+  		SELECT
+  			rs.report_submit_no, 
+  			rs.report_no, 
+  			rs.account_id, 
+  			rs.report_submit_writer, 
+  			rs.report_submit_createdate, 
+  			rs.report_submit_updatedate, 
+  			rs.report_submit_title, 
+  			rs.report_submit_content, 
+  			rs.report_submit_point, 
+  			rs.report_submit_feedback,  
+  			rsf.report_submit_file_uuid, 
+  			rsf.report_submit_file_original, 
+  			rsf.report_submit_file_size, 
+  			rsf.report_submit_file_type, 
+  			rsf.report_submit_file_count
+  		FROM
+  			report_submit rs
+  		LEFT OUTER JOIN
+  			report_submit_file rsf ON
+  			rs.report_submit_no = rsf.report_submit_no
+  		WHERE
+  			rs.report_submit_no = #{reportSubmitNo}
+  	</select>
 </mapper>
