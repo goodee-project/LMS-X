@@ -34,4 +34,8 @@ public interface TeacherTestMapper {
 	// 객관식 문제 목록 카운트
 	// 강좌 고유번호(lectureNo)
 	int selectMultiplechoiceListCount(int lectureNo);
+	
+	// 평가 학생 답안지 조회
+	// 강좌 고유번호(lectureNo)
+	List<Multiplechoice> selectMultiplechoiceOne(int lectureNo);
 }

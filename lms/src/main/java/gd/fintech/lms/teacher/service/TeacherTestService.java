@@ -60,7 +60,7 @@ public class TeacherTestService {
 	// 강좌 고유 번호(lectureNo), 시작 데이터 번호(beginRow), 페이지당 표시 데이터 수(rowPerPage)
 	public List<Multiplechoice> selectMultiplechoiceList(int lectureNo, int beginRow, int rowPerPage) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("lectureNo", lectureNo);		// 강의실 고유번호
+		map.put("lectureNo", lectureNo);		// 강좌 고유번호
 		map.put("beginRow", beginRow);			// 시작 데이터
 		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
 		
@@ -76,5 +76,16 @@ public class TeacherTestService {
 	// 강좌 고유번호(lectureNo)
 	public int selectMultiplechoiceListCount(int lectureNo) {
 		return teacherTestMapper.selectMultiplechoiceListCount(lectureNo);
+	}
+	
+	// 평가 학생 답안지 조회
+	// 강좌 고유번호(lectureNo)
+	public List<Multiplechoice> selectMultiplechoiceOne(int lectureNo) {
+		List<Multiplechoice> multiplechoiceList = teacherTestMapper.selectMultiplechoiceOne(lectureNo);
+		
+		// [Logger] 객관식 문제 목록(multiplechoiceList)
+		logger.trace("multiplechoiceList[" + multiplechoiceList + "]");
+		
+		return multiplechoiceList;
 	}
 }

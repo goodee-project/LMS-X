@@ -126,7 +126,7 @@
 			
 			<table class="table">
 				<tr>
-					<td>점수</td>
+					<td width="20%">점수</td>
 					<!-- 점수 입력이 되지 않은 경우 -->
 					<c:if test="${reportSubmit[0].reportSubmitPoint == -1}">
 						<td>(미입력)</td>
@@ -137,7 +137,7 @@
 					</c:if>
 				</tr>
 				<tr>
-					<td>평가 내용</td>
+					<td width="20%">평가 내용</td>
 					<!-- 평가 내용 입력이 되지 않은 경우 -->
 					<c:if test="${reportSubmit[0].reportSubmitFeedback == null}">
 						<td>(평가 내용이 없습니다)</td>
@@ -147,20 +147,7 @@
 						<td>${reportSubmit[0].reportSubmitFeedback}</td>
 					</c:if>
 				</tr>
-			
-			
-				<c:if test="${reportSubmit[0].reportSubmitNo != null}">
-					<tr>
-						<td></td>
-					</tr>
-				</c:if>
-				<c:if test="${reportSubmit[0].reportSubmitNo == null}">
-					<tr>
-						<td colspan="7">(평가 내용이 없습니다)</td>
-					</tr>
-				</c:if>
 			</table>
-			
 		</div>
 		
 		<br><br>

@@ -10,6 +10,20 @@
 		</collection>
 	</resultMap>
 	
+	<resultMap type="gd.fintech.lms.vo.Multiplechoice" id="selectMultiplechoiceOneResult">
+		<result property="multiplechoiceNo" column="multiplechoice_no" />
+		<result property="lectureNo" column="lecture_no" />
+		<result property="multiplechoiceId" column="multiplechoice_id" />
+		<result property="multiplechoiceQuestion" column="multiplechoice_question" />
+		<result property="multiplechoiceAnswer" column="multiplechoice_answer" />
+		<result property="multiplechoiceScore" column="multiplechoice_score" />
+		<collection property="multiplechoiceExampleList" ofType="gd.fintech.lms.vo.MultiplechoiceExample">
+			<result property="multiplechoiceExampleNo" column="multiplechoice_example_no" />
+			<result property="multiplechoiceExampleId" column="multiplechoice_example_id" />
+			<result property="multiplechoiceExampleContent" column="multiplechoice_example_content" />
+		</collection>
+	</resultMap>
+	
 	<!-- 시험 정보 조회 -->
 	<select id="selectTestOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Test">
 		SELECT
@@ -108,5 +122,28 @@
   			multiplechoice
   		WHERE
   			lecture_no = #{lectureNo};
+	</select>
+	
+	<!-- 평가 학생 답안지 조회 -->
+	<select id="selectMultiplechoiceOne" parameterType="Integer" resultMap="selectMultiplechoiceOneResult">
+		SELECT
+			mc.multiplechoice_no, 
+			mc.lecture_no, 
+			mc.multiplechoice_id, 
+			mc.multiplechoice_question, 
+			mc.multiplechoice_answer, 
+			mc.multiplechoice_score, 
+			mce.multiplechoice_example_no, 
+			mce.multiplechoice_example_id, 
+			mce.multiplechoice_example_content
+		FROM
+			multiplechoice mc
+		LEFT OUTER JOIN
+			multiplechoice_example mce ON
+			mc.multiplechoice_no = mce.multiplechoice_no
+		WHERE
+			mc.lecture_no = #{lectureNo}
+		ORDER BY
+			mc.multiplechoice_id
 	</select>
 </mapper>

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>answersheetList</title>
+		<title>answersheetOne</title>
 		
 		<!-- Bootstrap Framework 사용 -->
 		
@@ -52,43 +52,47 @@
 		<!-- 상단 인터페이스 -->
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
-				<h1>학생 답안지 목록</h1>
-				<p>학생들이 제출한 답안지를 관리하는 메뉴입니다.</p>
+				<h1>학생 답안지 조회</h1>
+				<p>학생이 제출한 답안지를 조회합니다.</p>
 			</div>
 		</div>
 	
 		<!-- 본문 -->
 		<div class="container">
-			<h3>학생 답안지 목록</h3>
+			<h3>학생 답안지 조회</h3>
 			
 			<br>
 			
-			<table class="table">
-				<thead>
-					<tr>
-						<th>아이디</th>
-						<th>이름</th>
-						<th>성별</th>
-						<th>총 점수</th>
-						<th>답안지 확인</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="ansl" items="${answersheetList}">
+			<button class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/answersheetList'">목록</button>
+			
+			<br><br>
+			
+			<c:forEach var="mcl" items="${multiplechoiceList}">
+				<table class="table">
+					<thead>
 						<tr>
-							<td>${ansl.accountId}</td>
-							<td>${ansl.student.studentName}</td>
-							<td>${ansl.student.studentGender}</td>
-							<td>${ansl.answerScore}</td>
-							<td>
-								<button class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/answersheetOne/${ansl.accountId}'">답안지 확인</button>
-							</td>
+							<th width="30%">${mcl.multiplechoiceId}</th>
+							<th width="70%">${mcl.multiplechoiceQuestion}</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach var="mcel" items="${mcl.multiplechoiceExampleList}">
+							<tr>
+								<td>
+									<c:if test="${mcel.multiplechoiceExampleId == 1}">①</c:if>
+									<c:if test="${mcel.multiplechoiceExampleId == 2}">②</c:if>
+									<c:if test="${mcel.multiplechoiceExampleId == 3}">③</c:if>
+									<c:if test="${mcel.multiplechoiceExampleId == 4}">④</c:if>
+									<c:if test="${mcel.multiplechoiceExampleId == 5}">⑤</c:if>
+								</td>
+								<td>
+									${mcel.multiplechoiceExampleContent}
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:forEach>
 		</div>
-		
-		<br><br>
 	</body>
 </html>

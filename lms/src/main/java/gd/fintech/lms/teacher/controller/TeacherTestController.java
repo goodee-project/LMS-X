@@ -189,7 +189,7 @@ public class TeacherTestController {
 		return "/auth/teacher/lecture/test/multiplechoiceList";
 	}
 	
-	// 평가 답안지 학생 목록
+	// 평가 학생 답안지 목록
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/answersheetList")
 	public String answersheetList(Model model, 
 			@PathVariable(name = "lectureNo") int lectureNo) { 		// 강좌 고유번호
@@ -201,5 +201,20 @@ public class TeacherTestController {
 		
 		// [View] /auth/teacher/lecture/test/answersheetList.jsp
 		return "/auth/teacher/lecture/test/answersheetList";
+	}
+	
+	// 평가 학생 답안지 조회
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/answersheetOne/{studentId}")
+	public String answersheetOne(Model model, 
+			@PathVariable(name = "lectureNo") int lectureNo, 		// 강좌 고유번호
+			@PathVariable(name = "studentId") String studentId) {	// 학생 아이디
+		
+		List<Multiplechoice> multiplechoiceList = teacherTestService.selectMultiplechoiceOne(lectureNo);
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("multiplechoiceList", multiplechoiceList);
+		
+		// [View] /auth/teacher/lecture/test/answersheetOne.jsp
+		return "/auth/teacher/lecture/test/answersheetOne";
 	}
 }
