@@ -132,10 +132,12 @@ public class LoginController {
 		if ( loginAccount==null ) {
 			return "redirect:/login";
 		}
-		
+		String loginImage = loginService.getLoginImage(loginAccount.getAccountId());
+	
 		//로그인 성공
 		session.setAttribute("loginId", loginAccount.getAccountId());
 		session.setAttribute("loginLevel", loginAccount.getAccountLevel());
+		session.setAttribute("loginImage", loginImage);
 		
 		// 로그인 기록 생성
 		LoginLog loginLog = new LoginLog();
@@ -146,10 +148,12 @@ public class LoginController {
 		
 		loginService.insertLoginLog(loginLog);
 		
+		System.out.println(session.getAttribute("loginImage"));
 		if ( session.getAttribute("loginLevel").equals(1) ) {
 			
 			//session에 이름 추가
 			Student student = loginService.getStudentName(loginAccount.getAccountId());
+			
 			session.setAttribute("loginName", student.getStudentName());
 			
 			return "redirect:/auth/student/index/1";

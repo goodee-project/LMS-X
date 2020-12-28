@@ -24,4 +24,7 @@ public interface LoginMapper {
 	
 	// 로그인시 로그 기록 생성
 	public int insertLoginLog(LoginLog loginLog);
+	
+	// 로그인시 이미지 조회
+	public String selectLoginImage(String accountId);
 }

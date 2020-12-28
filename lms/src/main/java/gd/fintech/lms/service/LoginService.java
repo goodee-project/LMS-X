@@ -50,4 +50,9 @@ public class LoginService {
 	public int insertLoginLog(LoginLog loginLog) {
 		return loginMapper.insertLoginLog(loginLog);
 	}
+	
+	// 로그인시 이미지 조회
+	public String getLoginImage(String accountId) {
+		return loginMapper.selectLoginImage(accountId);
+	}
 }

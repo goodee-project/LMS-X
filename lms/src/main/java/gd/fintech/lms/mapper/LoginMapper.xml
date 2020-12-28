@@ -60,4 +60,14 @@
 			#{loginLogOs}
 		)
 	</insert>
+	
+	<!-- 로그인 이미지 사진  -->
+	<select id="selectLoginImage" parameterType="String" resultType="String">
+		SELECT
+			mypage_image_uuid
+		FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</select>
 </mapper>
