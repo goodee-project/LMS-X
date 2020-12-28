@@ -14,6 +14,16 @@
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
+		<!-- CSS Files -->
+		<link
+			href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2"
+			rel="stylesheet" />
+		
+		<!-- Icons -->
+		<link
+			href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css"
+			rel="stylesheet" />
+		
 		<!-- Popper JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		
@@ -42,10 +52,15 @@
 			}
 		</style>
 	</head>
-	<body>
-		<!-- 내비게이션 메인 메뉴 -->
-		<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
-	
+	<body class="">
+		<nav
+			class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white"
+			id="sidenav-main">
+			<div class="container-fluid">
+			<!-- 내비게이션 메인 메뉴 -->
+			<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
+			</div>
+		</nav>
 		<!-- 상단 인터페이스 -->
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
