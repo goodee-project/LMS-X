@@ -17,7 +17,6 @@ import gd.fintech.lms.teacher.service.TeacherMypageService;
 import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.License;
 import gd.fintech.lms.vo.MypageImage;
-import gd.fintech.lms.vo.Teacher;
 import gd.fintech.lms.vo.TeacherForm;
 
 @Controller
@@ -27,19 +26,22 @@ public class TeacherMypageController {
 	
 	private static final Logger log = LoggerFactory.getLogger(TeacherMypageController.class);
 
-	// 운영자 마이페이지
+	// 강사 마이페이지
 	@GetMapping("/auth/teacher/mypage/mypageOne")
 	public String selectTeacherMyPage(Model model, HttpSession session) {
 		
 		String accountId = (String)session.getAttribute("loginId");
 		Map<String, Object> teacherMypage = teacherMypageService.selectTeacherMypage(accountId);
-	
+		
+		MypageImage mypageImage = (MypageImage)teacherMypage.get("mypageImage");
+		session.setAttribute("loginImage", mypageImage.getMypageImageUuid());
+		
 		model.addAttribute("teacher",teacherMypage.get("teacher"));
 		model.addAttribute("mypageImage", teacherMypage.get("mypageImage"));
 		return "auth/teacher/mypage/mypageOne";
 	}
 	
-	// 운영자 마이페이지 수정
+	// 강사 마이페이지 수정
 	@GetMapping("/auth/teacher/mypage/updateMypage")
 	public String updateMypage(Model model, HttpSession session) {
 		String accountId = (String)session.getAttribute("loginId");
@@ -58,7 +60,7 @@ public class TeacherMypageController {
 		return "redirect:/auth/teacher/mypage/mypageOne";
 	}
 	
-	// 운영자 마이페이지 경력및 자격증 수정페이지
+	// 강사 마이페이지 경력및 자격증 수정페이지
 	@GetMapping("/auth/teacher/mypage/updateMypageCareerAndLicense") 
 	public String updateMypageCareerAndLicense(Model model, HttpSession session) {
 		String accountId = (String)session.getAttribute("loginId");
@@ -69,7 +71,7 @@ public class TeacherMypageController {
 		return "auth/teacher/mypage/updateMypageCareerAndLicense";
 	}
 	
-	// 운영자 마이페이지 경력 삭제
+	// 강사 마이페이지 경력 삭제
 	@GetMapping("/auth/teacher/mypage/deleteMypageCareer/{careerNo}")
 	public String deleteMypageCareer(HttpSession session, @PathVariable(name="careerNo") int careerNo) {
 		String accountId = (String)session.getAttribute("loginId");
@@ -78,7 +80,7 @@ public class TeacherMypageController {
 		return "redirect:/auth/teacher/mypage/updateMypageCareerAndLicense";
 	}
 	
-	// 운영자 마이페이지 경력 추가
+	// 강사 마이페이지 경력 추가
 	@PostMapping("/auth/teacher/mypage/insertMypageCareer")
 	public String insertMypageCareer(Career career) {
 		
@@ -86,7 +88,7 @@ public class TeacherMypageController {
 		return "redirect:/auth/teacher/mypage/updateMypageCareerAndLicense";
 	}
 	
-	// 운영자 마이페이지 자격증 추가
+	// 강사 마이페이지 자격증 추가
 	@PostMapping("/auth/teacher/mypage/insertMypageLicense")
 	public String insertMypageLicense(License license) { 
 		
@@ -95,7 +97,7 @@ public class TeacherMypageController {
 		return "redirect:/auth/teacher/mypage/updateMypageCareerAndLicense";
 		
 	}
-	// 운영자 마이페이지 자격증 삭제
+	// 강사 마이페이지 자격증 삭제
 	@GetMapping("/auth/teacher/mypage/deleteMypageLicense/{licenseNo}")
 	public String deleteMypageLicense(HttpSession session, @PathVariable(name="licenseNo") int licenseNo) { 
 		

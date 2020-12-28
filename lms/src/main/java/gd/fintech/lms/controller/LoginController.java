@@ -45,82 +45,7 @@ public class LoginController {
 		}
 		return "login";
 	}
-	//학생 로그인 페이지 이동
-	@GetMapping("/studentLogin")
-	public String studentLogin(HttpSession session) {
-		if ( session.getAttribute("loginId") != null ) {
-			if ( session.getAttribute("loginLevel").equals(1) ) {
-				return "redirect:/auth/student/index/1";
-			}
-			if ( session.getAttribute("loginLevel").equals(2) ) {
-				return "redirect:/auth/teacher/index/1";
-			}
-			if ( session.getAttribute("loginLevel").equals(3) ) {
-				return "redirect:/auth/manager/index";
-			}
-			if ( session.getAttribute("loginLevel").equals(4) ) {
-				return "redirect:/auth/admin/index/1";
-			}
-		}
-		return "studentLogin";
-	}
-	//강사 로그인 페이지 이동
-	@GetMapping("/teacherLogin")
-	public String teacherLogin(HttpSession session) {
-		if ( session.getAttribute("loginId") != null ) {
-			if ( session.getAttribute("loginLevel").equals(1) ) {
-				return "redirect:/auth/student/index/1";
-			}
-			if ( session.getAttribute("loginLevel").equals(2) ) {
-				return "redirect:/auth/teacher/index/1";
-			}
-			if ( session.getAttribute("loginLevel").equals(3) ) {
-				return "redirect:/auth/manager/index";
-			}
-			if ( session.getAttribute("loginLevel").equals(4) ) {
-				return "redirect:/auth/admin/index/1";
-			}
-		}
-		return "teacherLogin";
-	}
-	//운영자 로그인 페이지 이동
-	@GetMapping("/managerLogin")
-	public String managerLogin(HttpSession session) {
-		if ( session.getAttribute("loginId") != null ) {
-			if ( session.getAttribute("loginLevel").equals(1) ) {
-				return "redirect:/auth/student/index/1";
-			}
-			if ( session.getAttribute("loginLevel").equals(2) ) {
-				return "redirect:/auth/teacher/index/1";
-			}
-			if ( session.getAttribute("loginLevel").equals(3) ) {
-				return "redirect:/auth/manager/index";
-			}
-			if ( session.getAttribute("loginLevel").equals(4) ) {
-				return "redirect:/auth/admin/index/1";
-			}
-		}
-		return "managerLogin";
-	}
-	//관리자 로그인 페이지 이동
-	@GetMapping("/adminLogin")
-	public String adminLogin(HttpSession session) {
-		if ( session.getAttribute("loginId") != null ) {
-			if ( session.getAttribute("loginLevel").equals(1) ) {
-				return "redirect:/auth/student/index/1";
-			}
-			if ( session.getAttribute("loginLevel").equals(2) ) {
-				return "redirect:/auth/teacher/index/1";
-			}
-			if ( session.getAttribute("loginLevel").equals(3) ) {
-				return "redirect:/auth/manager/index";
-			}
-			if ( session.getAttribute("loginLevel").equals(4) ) {
-				return "redirect:/auth/admin/index/1";
-			}
-		}
-		return "adminLogin";
-	}
+	
 	//로그인 시 확인
 	@PostMapping("/login")
 	public String login(Account account, HttpSession session, HttpServletRequest req) {
@@ -148,7 +73,6 @@ public class LoginController {
 		
 		loginService.insertLoginLog(loginLog);
 		
-		System.out.println(session.getAttribute("loginImage"));
 		if ( session.getAttribute("loginLevel").equals(1) ) {
 			
 			//session에 이름 추가

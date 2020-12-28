@@ -3,8 +3,7 @@
 <html lang="ko">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>login</title>
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
@@ -58,6 +57,19 @@
 						<div id="idCheck"></div>`;
 						
 					$('#login').html(loginInput);
+					
+					// 회원가입 및 아이디,비밀번호 찾기
+					let signup = `
+						<div class="row mt-3">
+				            <div class="col-6">
+				            	<a href="#" class="text-light"><small>Forgot password?</small></a>
+				            </div>
+				            <div class="col-6 text-right">
+				            	<a href="${pageContext.request.contextPath}/student/signup" class="text-light"><small>Create new account</small></a>
+				            </div>
+		        		</div>
+						`;
+					$('#signup').html(signup);
 					
 					$('#loginBtn').click(function(){
 						// 아이디 입력 체크
@@ -134,6 +146,19 @@
 						
 					$('#login').html(loginInput);
 					
+					// 회원가입 및 아이디,비밀번호 찾기
+					let signup = `
+						<div class="row mt-3">
+				            <div class="col-6">
+				            	<a href="#" class="text-light"><small>Forgot password?</small></a>
+				            </div>
+				            <div class="col-6 text-right">
+				            	<a href="${pageContext.request.contextPath}/teacher/signup" class="text-light"><small>Create new account</small></a>
+				            </div>
+		        		</div>
+						`;
+					$('#signup').html(signup);
+					
 					$('#loginBtn').click(function(){
 						// 아이디 입력 체크
 						if ( $('#accountId').val() == "" ) {
@@ -208,7 +233,20 @@
 						<div id="idCheck"></div>`;
 						
 					$('#login').html(loginInput);
-	
+					
+					// 회원가입 및 아이디,비밀번호 찾기
+					let signup = `
+						<div class="row mt-3">
+				            <div class="col-6">
+				            	<a href="#" class="text-light"><small>Forgot password?</small></a>
+				            </div>
+				            <div class="col-6 text-right">
+				            	<a href="${pageContext.request.contextPath}/manager/signup" class="text-light"><small>Create new account</small></a>
+				            </div>
+		        		</div>
+						`;
+					$('#signup').html(signup);
+					
 					$('#loginBtn').click(function(){
 						// 아이디 입력 체크
 						if ( $('#accountId').val() == "" ) {
@@ -326,15 +364,13 @@
 			});
 		</script>
 	</head>
-	
 	<body class="bg-default">
 		<div class="main-content">
 			<!-- Navbar -->
-			<nav
-				class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
+			<nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
 				<div class="container px-4">
-					<a class="navbar-brand" href="${pageContext.request.contextPath}/index.html"> <img
-						src="${pageContext.request.contextPath}/assets/img/brand/white.png" />
+					<a class="navbar-brand" href="${pageContext.request.contextPath}/">
+						<img src="${pageContext.request.contextPath}/assets/img/brand/white.png" />
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbar-collapse-main"
@@ -342,33 +378,6 @@
 						aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-					<div class="collapse navbar-collapse" id="navbar-collapse-main">
-						<!-- Collapse header -->
-						<div class="navbar-collapse-header d-md-none">
-							<div class="row">
-								<div class="col-6 collapse-brand">
-									<a href="${pageContext.request.contextPath}/index.html"> <img
-										src="${pageContext.request.contextPath}/assets/img/brand/blue.png">
-									</a>
-								</div>
-								<div class="col-6 collapse-close">
-									<button type="button" class="navbar-toggler"
-										data-toggle="collapse" data-target="#navbar-collapse-main"
-										aria-controls="sidenav-main" aria-expanded="false"
-										aria-label="Toggle sidenav">
-										<span></span> <span></span>
-									</button>
-								</div>
-							</div>
-						</div>
-						<!-- Navbar items -->
-						<ul class="navbar-nav ml-auto">
-							<li class="nav-item"><a class="nav-link nav-link-icon"
-								href="${pageContext.request.contextPath}/examples/register.html"> <i class="ni ni-circle-08"></i>
-									<span class="nav-link-inner--text">회원가입</span>
-							</a></li>
-						</ul>
-					</div>
 				</div>
 			</nav>
 			<!-- Header -->
@@ -386,8 +395,8 @@
 				<div class="separator separator-bottom separator-skew zindex-100">
 					<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none"
 						version="1.1" xmlns="http://www.w3.org/2000/svg">
-	          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-	        </svg>
+			          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+			        </svg>
 				</div>
 			</div>
 			<!-- Page content -->
@@ -397,8 +406,8 @@
 						<div class="card bg-secondary shadow border-0">
 							<div class="card-header bg-transparent pb-5">
 								<div class="btn-wrapper text-center mt-3">
-									<div class="btn btn-neutral btn-icon" id="studentLogin"><span class="btn-inner--text">학생</span></div>
-									<div class="btn btn-neutral btn-icon" id="teacherLogin"><span class="btn-inner--text">강사</span></div>
+									<div class="btn btn-neutral btn-icon" id="studentLogin"><span class="btn-inner--text">&nbsp;&nbsp;학생&nbsp;&nbsp;</span></div>
+									<div class="btn btn-neutral btn-icon" id="teacherLogin"><span class="btn-inner--text">&nbsp;&nbsp;강사&nbsp;&nbsp;</span></div>
 								</div>
 								<div class="btn-wrapper text-center mt-3">
 									<div class="btn btn-neutral btn-icon" id="managerLogin"><span class="btn-inner--text">운영자</span></div>
@@ -409,6 +418,7 @@
 								<div class="text-center">(계정을 선택해주세요)</div>
 							</div>
 						</div>
+						<div id="signup"></div>
 					</div>
 				</div>
 			</div>
@@ -417,29 +427,29 @@
 					<div class="row align-items-center justify-content-xl-between">
 						<div class="col-xl-6">
 							<div class="copyright text-center text-xl-left text-muted">
-								© 2020-2021 <a href="https://www.creative-tim.com"
-									class="font-weight-bold ml-1" target="_blank">Goodee Avengers</a>
+								© 2020-2021 <span class="nav-link" >Goodee Avengers</span>
 							</div>
 						</div>
 						<div class="col-xl-6">
 							<ul
 								class="nav nav-footer justify-content-center justify-content-xl-end">
-								<li class="nav-item"><a href="https://www.creative-tim.com"
-									class="nav-link" target="_blank">장지운</a></li>
-								<li class="nav-item"><a
-									href="https://www.creative-tim.com/presentation"
-									class="nav-link" target="_blank">김덕인</a></li>
-								<li class="nav-item"><a href="http://blog.creative-tim.com"
-									class="nav-link" target="_blank">한재용</a></li>
-								<li class="nav-item"><a
-									href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
-									class="nav-link" target="_blank">조성현</a></li>
-								<li class="nav-item"><a
-									href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
-									class="nav-link" target="_blank">김주성</a></li>
-								<li class="nav-item"><a
-									href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
-									class="nav-link" target="_blank">최형철</a></li>
+								<li class="nav-item">
+									<span class="nav-link" >장지운</span>
+								</li>
+								<li class="nav-item">
+									<span class="nav-link" >김덕인</span>
+								<li class="nav-item">
+									<span class="nav-link" >한재용</span>	
+								</li>
+								<li class="nav-item">
+									<span class="nav-link" >조성현</span>
+								</li>
+								<li class="nav-item">
+									<span class="nav-link" >김주성</span>
+								</li>
+								<li class="nav-item">
+									<span class="nav-link" >최형철</span>
+								</li>
 							</ul>
 						</div>
 					</div>

@@ -17,6 +17,7 @@ import gd.fintech.lms.manager.service.ManagerMypageService;
 import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.License;
 import gd.fintech.lms.vo.ManagerForm;
+import gd.fintech.lms.vo.MypageImage;
 
 @Controller
 public class ManagerMyageController {
@@ -31,6 +32,8 @@ public class ManagerMyageController {
 		String accountId = (String)session.getAttribute("loginId");
 		Map<String, Object> managerMypage = managerMypageService.selectManagerMypage(accountId);
 		
+		MypageImage mypageImage = (MypageImage)managerMypage.get("mypageImage");
+		session.setAttribute("loginImage", mypageImage.getMypageImageUuid());
 		
 		model.addAttribute("manager",managerMypage.get("manager"));
 		model.addAttribute("mypageImage", managerMypage.get("mypageImage"));

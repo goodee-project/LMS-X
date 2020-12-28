@@ -3,31 +3,23 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>managerSignup</title>
-		
-		<!-- Bootstrap Framework 사용 -->
-		
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-		
-		<!-- jQuery library -->
+		<!-- Favicon -->
+		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
+		<!-- Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+			rel="stylesheet">
+		<!-- Icons -->
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+		<link
+			href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"
+			rel="stylesheet" />
+		<!-- CSS Files -->
+		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+		<!-- jQuery / Ajax Google CDN -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		
-		<!-- Popper JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		
-		<!-- Bootstrap 4 Icons -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-		
-		<style>
-			.table td {
-				text-align: center;
-				vertical-align: middle;
-			}
-		</style>
 		
 		<script>
 			$(document).ready(function(){
@@ -175,7 +167,8 @@
 								}
 								$('#addressWait').html("");
 								$('.addressBtn').click(function(){
-									$('#addressView').html('<input id="managerAddressMain" class="form-control" style="margin-bottom:5px;" type="text" name="managerAddressMain" readonly="readonly" > ')
+									$('#addressView').html(`<span class="text-primary" style="margin: auto; width: 80px;">주소</span>
+															<input id="managerAddressMain" class="form-control" style=" background-color: white;" type="text" name="managerAddressMain" readonly="readonly" >`);
 									document.getElementById("managerAddressMain").value = $(this).val();
 
 								});
@@ -322,7 +315,213 @@
 			});	
 		</script>
 	</head>
-	<body>
+		<body class="bg-default">
+		<div class="main-content">
+			<!-- Navbar -->
+			<nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
+				<div class="container px-4">
+					<a class="navbar-brand" href="${pageContext.request.contextPath}/">
+						<img src="${pageContext.request.contextPath}/assets/img/brand/white.png" />
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbar-collapse-main"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+			        <!-- Navbar items -->
+			        <ul class="navbar-nav ml-auto">
+			            <li class="nav-item">
+			              <a class="nav-link nav-link-icon" href="${pageContext.request.contextPath}/">
+			                <i class="ni ni-key-25"></i>
+			                <span class="nav-link-inner--text">Login</span>
+			              </a>
+			            </li>
+			        </ul>
+		        </div>
+		    </nav>
+			<!-- Header -->
+			<div class="header bg-gradient-primary py-7 py-lg-8">
+				<div class="container">
+					<div class="header-body text-center mb-7">
+						<div class="row justify-content-center">
+							<div class="col-lg-5 col-md-6">
+								<h1 class="text-white">Goodee LMS</h1>
+								<p class="text-lead text-light">운영자 회원가입</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="separator separator-bottom separator-skew zindex-100">
+					<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none"
+						version="1.1" xmlns="http://www.w3.org/2000/svg">
+			          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+			        </svg>
+				</div>
+			</div>
+			<!-- Page content -->
+			<div class="container mt--8 pb-5">
+				<div class="row justify-content-center">
+					<div class="col-lg-7 col-md-7">
+						<div class="card bg-secondary shadow border-0">
+							<div class="card-header bg-transparent pb-5">
+								<form id="managerForm" method="post" action="${pageContext.request.contextPath}/manager/signup">
+									<input type="text" hidden="hidden" name="accountLevel" value="3">
+									<input type="text" hidden="hidden" name="accountState" value="대기">
+									<!-- 아이디 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">아이디</span>
+											<input class="form-control" type="text" id="accountId" name="accountId" placeholder="  아이디를 입력하세요">
+											<div class="input-group-append">
+												<button class="btn btn-primary" id="idCheck" type="button">중복 체크</button>
+											</div>
+										</div>
+										<div id="idCheckMs"></div>
+									</div>
+									
+									<!-- 비밀번호 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">비밀번호</span>
+											<input type="password" class="form-control" name="accountPw" id="managerPw1" placeholder="  8~10자 영문, 숫자">
+										</div>
+									</div>
+									
+									<!-- 비밀번호 확인 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">비밀번호 확인</span>
+											<input type="password" class="form-control" id="managerPw2" placeholder="  한번 더 비밀번호를 입력하세요">
+										</div>
+										<div id="managerPwCheck"></div>
+									</div>
+									
+									<!-- 이메일 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">이메일</span>
+											<input type="email" class="form-control" name="managerEmail" id="managerEmail" placeholder="  abc@abc.abc">
+											<div class="input-group-append">
+												<button type="button" class="btn btn-primary" id="emailCheck">중복 체크</button>
+											</div>
+										</div>
+										<div id="managerEmailCheck"></div>
+									</div>
+									<!-- 이름, 성별 -->
+									<div class="row" style="margin: auto;">
+										<div class="btn-wrapper text-center mt-3 ">
+											<div class="input-group input-group-alternative">
+												<span class="text-primary" style="margin: auto; width: 80px;">이름</span>
+												<input type="text" class="form-control" name="managerName" id="managerName" placeholder="  이름을 입력하세요">
+											</div>
+										</div>
+										<div class="btn-wrapper text-center mt-3" style="margin: auto; " >
+											<div class="input-group input-group-alternative " style="width: 220px; height: 45px; ">
+												<span class="text-primary" style="margin: auto;"><input type="radio" class="managerGender" name="managerGender" value="남">&nbsp;남&nbsp;&nbsp;</span>
+												<span class="text-primary" style="margin: auto;"><input type="radio" class="managerGender" name="managerGender" value="여">&nbsp;여</span>
+											</div>
+											<div id="managerGenderCheck"></div>
+										</div>
+									</div>
+									<!-- 핸드폰 번호 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+											<span class="text-primary" style="margin: auto; width: 80px;">핸드폰 <br>번호</span>
+											<input type="text" class="form-control" name="managerPhone" id="managerPhone" placeholder="  000-0000-000">
+										</div>
+										<div id="managerPhoneCheck"></div>
+									</div>
+									<!-- 생년월일 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative">
+												<span class="text-primary" style="margin: auto; width: 80px;">생년월일</span>
+											<input type="date" class="form-control" name="managerBirth" id="managerBirth">
+										</div>
+									</div>
+									<!-- 주소 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div id="addressView" class="input-group input-group-alternative" >
+											<span class="text-primary" style="margin: auto; width: 80px;">주소</span>
+											<input id="managerAddressMain" class="form-control" style=" background-color: white;" type="text" placeholder="  주소를 검색해주세요." name="managerAddressMain" readonly="readonly" >
+										</div>
+									</div>
+									<!-- 상세 주소 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative" >
+											<span class="text-primary" style="margin: auto; width: 80px;">상세 주소</span>
+											<input type="text" class="form-control" id="managerAddressSub" placeholder="  상세 주소를 입력하세요"	name="managerAddressSub">
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="card-header bg-transparent pb-5">
+								<div class="btn-wrapper text-center mt-3">
+									<div class="input-group input-group-alternative" >
+										<span class="text-primary" style="margin: auto; width: 80px;">주소 검색</span>
+										<input type="text" class="form-control" name="street" id="street" placeholder="  도로명을 입력하세요.">
+										<div class="input-group-append">
+											<button type="button" class="btn btn-primary" id="check">검색</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="signup"></div>
+					</div>
+				</div>
+			</div>
+			<footer class="py-5">
+				<div class="container">
+					<div class="row align-items-center justify-content-xl-between">
+						<div class="col-xl-6">
+							<div class="copyright text-center text-xl-left text-muted">
+								© 2020-2021 <span class="nav-link" >Goodee Avengers</span>
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<ul
+								class="nav nav-footer justify-content-center justify-content-xl-end">
+								<li class="nav-item">
+									<span class="nav-link" >장지운</span>
+								</li>
+								<li class="nav-item">
+									<span class="nav-link" >김덕인</span>
+								<li class="nav-item">
+									<span class="nav-link" >한재용</span>	
+								</li>
+								<li class="nav-item">
+									<span class="nav-link" >조성현</span>
+								</li>
+								<li class="nav-item">
+									<span class="nav-link" >김주성</span>
+								</li>
+								<li class="nav-item">
+									<span class="nav-link" >최형철</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<!--   Core   -->
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<!--   Optional JS   -->
+		<!--   Argon JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+		<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+		<script>
+	    window.TrackJS &&
+	      TrackJS.install({
+	        token: "ee6fab19c5a04ac1a32a645abde4613a",
+	        application: "argon-dashboard-free"
+	      });
+	  </script>
+	</body>
+	
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<div class="container">
 				<ul class="navbar-nav mr-auto">
@@ -351,19 +550,13 @@
 		
 		<!-- 본문 -->
 		<div class="container">
-			<form id="managerForm" method="post" action="${pageContext.request.contextPath}/manager/signup">
-				<input type="text" hidden="hidden" name="accountLevel" value="1">
-				<input type="text" hidden="hidden" name="accountState" value="대기">
+			
 				
 				<table class="table">
 					<tr>
 						<td width="20%">아이디</td>
 						<td width="80%">
 							<div class="input-group">
-								<input class="form-control" type="text" id="accountId" name="accountId" placeholder="아이디를 입력하세요">
-								<div class="input-group-append">
-									<button class="btn btn-primary" id="idCheck" type="button">중복 체크</button>
-								</div>
 							</div>
 							<span id="idCheckMs"></span>
 						</td>
@@ -388,13 +581,7 @@
 					<tr>
 						<td>이메일</td>
 						<td>
-							<div class="input-group">
-								<input type="email" class="form-control" name="managerEmail" id="managerEmail" placeholder="abc@abc.abc">
-								<div class="input-group-append">
-									<button type="button" class="btn btn-primary" id="emailCheck">중복 체크</button>
-								</div>
-							</div>
-							<div id="managerEmailCheck"></div>
+							
 						</td>
 					</tr>
 					<tr>
