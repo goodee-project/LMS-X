@@ -81,6 +81,7 @@ public class ManagerLectureArchiveController {
 	// 강좌 상세보기
 	@GetMapping("/auth/manager/lecture/{lectureNo}/archive/archiveOne/{lectureArchiveNo}")
 	public String archiveOne(Model model,
+			@PathVariable(name="lectureNo") int lectureNo,
 			@PathVariable(value = "lectureArchiveNo") int lectureArchiveNo) {
 		managerLectureArchiveService.updateLectureArchiveCountUp(lectureArchiveNo);
 		LectureArchive lectureArchive = managerLectureArchiveService.getLectureArchiveOne(lectureArchiveNo);

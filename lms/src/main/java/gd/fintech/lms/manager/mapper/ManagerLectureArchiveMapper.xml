@@ -53,7 +53,7 @@
 	</resultMap>
 	<!-- 강의 자료 상세보기 -->
 	<select id="selectLectureArchiveOne" parameterType="int" resultMap="selectLectureArchiveOneInfomation">
-			SELECT
+		SELECT
   			la.lecture_archive_no, 
   			la.lecture_no, 
   			la.account_id, 

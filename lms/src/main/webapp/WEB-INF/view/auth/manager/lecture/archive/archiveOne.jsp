@@ -6,13 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	// 다운로드 횟수 증가 시키기
 	function fileDownloadCount(paramUuid){
 		let fileId = paramUuid.split('.')[0];
+		console.log(fileId);
+		console.log(paramUuid);
 		$.ajax({
 			url: '${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/archive/archiveFileCount/' + paramUuid,
-			type:'post',
+			type:'get',
 			success: function(data){
 				console.log(data);
 				let html = '다운로드 횟수 : ' + data + '회';
@@ -24,12 +28,12 @@
 </head>
 <body>
 	<div>
-		<button type="button" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/archive/deleteArchive/${archiveNo}'">삭제</button>
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/archive/archiveOne/deleteArchive/${lectureArchiveNo}'">삭제</button>
 	</div>
 	<h1>자료실 상세 페이지</h1>
 	<table border="1">
 		<tr>
-			<td>게시글 번호</td>
+			<td>게시글 번호${lectureNo}</td>
 			<td>${lectureArchive.lectureArchiveNo}</td>
 		</tr>
 		<tr>
@@ -66,10 +70,10 @@
 						<div>
 							<a
 								onclick="fileDownloadCount('${laf.lectureArchiveFileUuid}')"
-								href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}" download>
+								href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}" download="${laf.lectureArchiveFileOriginal}">
 								${laf.lectureArchiveFileOriginal}
 							</a>
-							&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, <div id="fileCount${fn:split(uuid, '.')}" style="display: inline;">다운로드 횟수 : ${laf.lectureArchiveFileCount}</div>
+							&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, <div id="fileCount${fn:split(uuid, '.')[0]}" style="display: inline;">다운로드 횟수 : ${laf.lectureArchiveFileCount}회</div>
 						</div>
 					</c:if>
 					<c:if test="${lectureArchive.lectureArchiveFileList[0].lectureArchiveFileOriginal == null}">
