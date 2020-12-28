@@ -28,10 +28,12 @@ public class StudentIndexController {
 			@PathVariable(name="currentPage") int currentPage) {
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
-		String studentId = (String)session.getAttribute("loginId");
-		
+		String accountId = (String)session.getAttribute("loginId");
+		String accountName = (String)session.getAttribute("loginName");
+		String accountImage = (String)session.getAttribute("loginImage");
+		System.out.println(accountImage);
 		int rowPerPage = 10; // 한페이지에 출력할 개수
-		int totalCount = studentLectureService.selectStudentClassListEndPage(studentId); // 게시글 총 개수
+		int totalCount = studentLectureService.selectStudentClassListEndPage(accountId); // 게시글 총 개수
 		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
 		
 		// 마지막 페이지 구하기
@@ -50,7 +52,7 @@ public class StudentIndexController {
 		
 		// 강좌 목록 가져오기
 		Map<String, Object> map = new HashMap<>();
-		map.put("studentId", studentId);
+		map.put("studentId", accountId);
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		List<LectureAndClassRegistrationAndSubject> lectureList = studentLectureService.selectStudentClassListByPage(map);
@@ -91,6 +93,10 @@ public class StudentIndexController {
 		model.addAttribute("nextPage", nextPage);
 		
 		model.addAttribute("lectureList", lectureList);
+		
+		model.addAttribute("accountId", accountId);
+		model.addAttribute("accountName", accountName);
+		model.addAttribute("accountImage", accountImage);
 		return "/auth/student/index";
 	}
 }
