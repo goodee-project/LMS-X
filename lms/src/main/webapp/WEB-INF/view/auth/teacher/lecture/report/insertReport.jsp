@@ -2,68 +2,44 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
 		<title>insertReport</title>
 		
-		<!-- Bootstrap Framework 사용 -->
+		<!-- Favicon -->
+		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 		
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+		
+		<!-- Icons -->
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+		
+		<!-- CSS Files -->
+		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
-		<!-- CSS Files -->
-		<link
-			href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2"
-			rel="stylesheet" />
-		<!-- Icons -->
-		<link
-			href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css"
-			rel="stylesheet" />
-		
-		<!-- Popper JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		
 		<!-- Bootstrap 4 Icons -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-	
-		<style>
-			.table {
-				text-align: center;
-			}
-			
-			.table td {
-				vertical-align: middle;
-			}
-			
-			.table a {
-				color: #000000;
-			}
-			
-			th {
-				text-align: center;
-				background-color: #F9F9FB;
-			}
-		</style>
+		
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	</head>
-	<body class="">
-		<nav
-			class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white"
-			id="sidenav-main">
-			<div class="container-fluid">
-				<!-- 내비게이션 메인 메뉴 -->
-				<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
-			</div>
-		</nav>
+	
+	<body>
+		<!-- 내비게이션 메인 메뉴 -->
+		<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
+		
 		<div class="main-content">
 			<!-- 내비게이션 상단 메뉴 -->
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/teacher/include/lectureMenu.jsp" />
 			</div>
+			
 			<!-- Header -->
 			<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 				<div class="container-fluid">
@@ -75,8 +51,7 @@
 									<div class="card-body">
 										<div class="row">
 											<div class="col">
-												<h5 class="card-title text-uppercase text-muted mb-0">접속자
-													현황</h5>
+												<h5 class="card-title text-uppercase text-muted mb-0">접속자 현황</h5>
 												<span class="h2 font-weight-bold mb-0">350,897</span>
 											</div>
 											<div class="col-auto">
@@ -97,6 +72,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- Page content -->
 			<div class="container-fluid mt--7">
 				<!-- Form -->
 				<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/insertReport">
@@ -108,7 +85,7 @@
 									<div class="row align-items-center">
 										<br>
 										<div class="col-8">
-											<h3 class="mb-0">과제 작성</h3>
+											<h3 class="mb-0">과제 출제</h3>
 										</div>
 										<div class="col-4 text-right">
 											<button type="button" class="btn btn-sm btn-dark"
@@ -123,8 +100,8 @@
 									<input type="hidden" name="lectureNo" value="${lectureNo}">
 									<table class="table align-items-center table-flush">
 										<tr>
-											<td>과제 이름</td>
-											<td>
+											<td width="20%">과제 이름</td>
+											<td width="80%">
 												<input type="text" class="form-control" name="reportTitle">
 											</td>
 										</tr>
@@ -152,24 +129,27 @@
 						</div>
 					</div>
 				</form>
-				<footer class="footer"></footer>
-			</div> 
+				
+				<!-- Footer -->
+				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
+			</div>
 		</div>
 		<!--   Core   -->
-		<script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 		<script
-			src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+			src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 		<!--   Optional JS   -->
-		<script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
-		<script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
 		<!--   Argon JS   -->
-		<script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
 		<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
 		<script>
-			window.TrackJS && TrackJS.install({
-				token : "ee6fab19c5a04ac1a32a645abde4613a",
-				application : "argon-dashboard-free"
-			});
-		</script>
+	    window.TrackJS &&
+	      TrackJS.install({
+	        token: "ee6fab19c5a04ac1a32a645abde4613a",
+	        application: "argon-dashboard-free"
+	      });
+	  </script>
 	</body>
 </html>

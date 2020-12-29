@@ -10,10 +10,10 @@
 				<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<div class="media align-items-center">
 						<span class="avatar avatar-sm rounded-circle"> 
-							<c:if test="${!empty loginImage}">
-								<img src="${pageContext.request.contextPath}/resource/mypageImage/${loginImage}">
+							<c:if test="${!empty sessionScope.loginImage}">
+								<img src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
 							</c:if>
-							<c:if test="${empty loginImage}">
+							<c:if test="${empty sessionScope.loginImage}">
 								<img src="${pageContext.request.contextPath}/resource/mypageImage/default.png">
 							</c:if>
 						</span>
@@ -28,11 +28,13 @@
 					<div class=" dropdown-header noti-title">
 						<h6 class="text-overflow m-0">환영합니다!</h6>
 					</div>
-					<a href="${pageContext.request.contextPath}/auth/teacher/mypage/mypageOne" class="dropdown-item"> <i
-						class="ni ni-single-02"></i> <span>마이 페이지</span>
+					<a href="${pageContext.request.contextPath}/auth/teacher/mypage/mypageOne" class="dropdown-item">
+						<i class="ni ni-single-02"></i>
+						<span>마이페이지</span>
 					</a>
 					<div class="dropdown-divider"></div>
-					<a href="${pageContext.request.contextPath}/auth/logout" class="dropdown-item"> <i class="ni ni-user-run"></i>
+					<a href="${pageContext.request.contextPath}/auth/logout" class="dropdown-item">
+						<i class="ni ni-user-run"></i>
 						<span>로그아웃</span>
 					</a>
 				</div>

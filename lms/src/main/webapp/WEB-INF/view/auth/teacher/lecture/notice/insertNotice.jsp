@@ -1,60 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>insertNotice</title>
-		<!-- Bootstrap Framework 사용 -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<title>insertNotice</title>
+		
+		<!-- Favicon -->
+		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
+		
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+		
+		<!-- Icons -->
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+		
+		<!-- CSS Files -->
+		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
-		<!-- CSS Files -->
-		<link
-			href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2"
-			rel="stylesheet" />
-		<!-- Icons -->
-		<link
-			href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css"
-			rel="stylesheet" />
-	
-		<!-- Popper JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		
 		<!-- Bootstrap 4 Icons -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-	
-		<style>
-			.table {
-				text-align: center;
-			}
-			
-			.table td {
-				vertical-align: middle;
-			}
-			
-			.table a {
-				color: #000000;
-			}
-			
-			th {
-				text-align: center;
-				background-color: #F9F9FB;
-			}
-		</style>
+		
+		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
 		<!-- NAVER SmartEditor2 스크립트 -->
 		<script src="${pageContext.request.contextPath}/smarteditor2/js/HuskyEZCreator.js"></script>
 		<script>
 			$(document).ready(function(){
-				$('#insertBtn').click(function(){
+				$('#insertBtn').click(function() {
 					// 스마트 에디터 내용 적용
 					oEditors.getById["lectureNoticeContent"].exec("UPDATE_CONTENTS_FIELD", []);
 					if($('#noticeTitleText').val().length <= 0){
@@ -66,26 +45,30 @@
 						return;
 						}
 					$('#insertNoticeForm').submit();
-					});
-					// NAVER SmartEditor2 적용 코드
-					let oEditors = [];				
-					nhn.husky.EZCreator.createInIFrame({
-						oAppRef : oEditors,
-						elPlaceHolder : 'lectureNoticeContent',
-						sSkinURI : '${pageContext.request.contextPath}/smarteditor2/SmartEditor2Skin.html',
-						fCreator : 'createSEditor2'
-					});
 				});
+				
+				// NAVER SmartEditor2 적용 코드
+				let oEditors = [];				
+				nhn.husky.EZCreator.createInIFrame({
+					oAppRef : oEditors,
+					elPlaceHolder : 'lectureNoticeContent',
+					sSkinURI : '${pageContext.request.contextPath}/smarteditor2/SmartEditor2Skin.html',
+					fCreator : 'createSEditor2'
+				});
+			});
 		</script>
 	</head>
-	<body class="">
+	
+	<body>
 		<!-- 내비게이션 메인 메뉴 -->
 		<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
+		
 		<div class="main-content">
 			<!-- 내비게이션 상단 메뉴 -->
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/teacher/include/lectureMenu.jsp" />
 			</div>
+			
 			<!-- Header -->
 			<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 				<div class="container-fluid">
@@ -97,8 +80,7 @@
 									<div class="card-body">
 										<div class="row">
 											<div class="col">
-												<h5 class="card-title text-uppercase text-muted mb-0">접속자
-													현황</h5>
+												<h5 class="card-title text-uppercase text-muted mb-0">접속자 현황</h5>
 												<span class="h2 font-weight-bold mb-0">350,897</span>
 											</div>
 											<div class="col-auto">
@@ -119,6 +101,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- Page content -->
 			<div class="container-fluid mt--7">
 				<!-- Form -->
 				<form method="post" action="${PageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/insertNotice" id="insertNoticeForm">
@@ -135,51 +119,52 @@
 										<div class="col-4 text-right">
 											<button type="submit" class="btn btn-sm btn-dark"
 												onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1'">목록</button>
-											<button type="button" class="btn btn-sm btn-success" style="float: right;" id="insertBtn">입력</button>
+											<button type="button" class="btn btn-sm btn-success" style="float: right;" id="insertBtn">작성</button>
 										</div>
 										<br>
 									</div>
 								</div>
 								<div class="table-responsive">
 									<table class="table align-items-center table-flush">
-										<tbody>
-											<tr>
-												<td>제목</td>
-												<td>
-													<input type="text" class="form-control" name="lectureNoticeTitle" id="noticeTitleText">
-												</td>
-											</tr>
-											<tr>
-												<td>내용</td>
-												<td>
-													<textarea rows="22" class="form-control" name="lectureNoticeContent" id="lectureNoticeContent" style="width:100%"></textarea>
-												</td>
-											</tr>
-										</tbody>
+										<tr>
+											<td width="20%">제목</td>
+											<td width="80%">
+												<input type="text" class="form-control" name="lectureNoticeTitle" id="noticeTitleText">
+											</td>
+										</tr>
+										<tr>
+											<td>내용</td>
+											<td>
+												<textarea rows="22" class="form-control" name="lectureNoticeContent" id="lectureNoticeContent" style="width:100%"></textarea>
+											</td>
+										</tr>
 									</table>
 								</div>
 							</div>
 						</div>
 					</div>
 				</form>
+				
+				<!-- Footer -->
+				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 			</div>
-			<footer class="footer"></footer>
 		</div>
 		<!--   Core   -->
-  		<script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
-	 	 <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	 	 <!--   Optional JS   -->
-		  <script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
-		  <script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
-		  <!--   Argon JS   -->
-		  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
-		  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-		  <script>
-		    window.TrackJS &&
-		      TrackJS.install({
-		        token: "ee6fab19c5a04ac1a32a645abde4613a",
-		        application: "argon-dashboard-free"
-		      });
-		  </script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<!--   Optional JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+		<!--   Argon JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+		<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+		<script>
+	    window.TrackJS &&
+	      TrackJS.install({
+	        token: "ee6fab19c5a04ac1a32a645abde4613a",
+	        application: "argon-dashboard-free"
+	      });
+	  </script>
 	</body>
 </html>
