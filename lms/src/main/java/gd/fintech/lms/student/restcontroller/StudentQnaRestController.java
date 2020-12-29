@@ -23,4 +23,10 @@ public class StudentQnaRestController {
 	public void deleteQnaFileOne(@PathVariable(name = "questionFileUuid") String questionFileUuid) {
 		studentQnaRestService.deleteStudentQnaFileOne(questionFileUuid);
 	}
+	
+	// 질문 비밀글 비밀번호 확인
+	@PostMapping("auth/student/lecture/qna/checkQnaPassword/{questionNo}")
+	public String checkQnaPassword(@PathVariable(name = "questionNo") int questionNo) {
+		return studentQnaRestService.selectQnaPassword(questionNo);
+	}
 }

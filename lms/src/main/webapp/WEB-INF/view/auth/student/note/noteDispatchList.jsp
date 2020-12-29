@@ -21,15 +21,15 @@
 	</head>
 	<body class="">
 		<!-- 메인 Navbar -->	
-		<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
-			<div class="container-fluid">
-				<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
-		    </div>	
-		</nav>   		
+		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
 		<div class="main-content">
 			<!-- 상단 Navbar -->
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/student/include/topMenu.jsp" />
+	    	</div>
+			<!-- 쪽지 Navbar -->
+			<div class="container-fluid">
+				<jsp:include page="/WEB-INF/view/auth/student/include/noteMenu.jsp" />
 	    	</div>
 	    	
 			<!-- Header -->

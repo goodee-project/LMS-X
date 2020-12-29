@@ -14,4 +14,6 @@ public interface StudentQnaRestMapper {
 	// 질문 게시판 첨부파일 한개 삭제
 	int deleteQnaFileOne(String questionFileUuid);
 	
+	// 질문 비밀글 비밀번호 확인
+	String selectQnaPassword(int questionNo);
 }

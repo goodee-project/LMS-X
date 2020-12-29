@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>noteOne</title>
+		<title>qnaPassword</title>
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 		<!-- Fonts -->
@@ -17,22 +20,40 @@
 			rel="stylesheet" />
 		<!-- CSS Files -->
 		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
-	</head>	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('#questionPasswordBtn').click(function(){
+					// 비밀번호가 맞는지 확인
+					$.ajax({
+						url: '${pageContext.request.contextPath}/auth/student/lecture/qna/checkQnaPassword/' +  ${questionNo},
+						type:'post',
+						success: function(data){
+							console.log(data);
+							// 제출기간이 아닐경우
+							if(data != $('#questionPassword').val()){
+								alert('비밀번호가 다릅니다.');
+								document.getElementById('questionPassword').value = '';
+								return;
+							}
+							$(location).attr('href', '${pageContext.request.contextPath}/auth/student/lecture/' + ${lectureNo} + '/qna/qnaOne/' + ${questionNo} + '/1/' + $('#questionPassword').val());
+						}
+					});
+				})
+			})
+		</script>
+	</head>
 	<body class="">
 		<!-- 메인 Navbar -->	
-		<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
-			<div class="container-fluid">
-				<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
-		    </div>	
-		</nav>   	
+		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
 		<div class="main-content">
 			<!-- 상단 Navbar -->
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/student/include/topMenu.jsp" />
 	    	</div>
-			<!-- 쪽지 Navbar -->
+			<!-- 강좌 Navbar -->
 			<div class="container-fluid">
-				<jsp:include page="/WEB-INF/view/auth/student/include/noteMenu.jsp" />
+				<jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
 	    	</div>
 	    	
 			<!-- Header -->
@@ -50,7 +71,8 @@
 												<span class="h2 font-weight-bold mb-0">350,897</span>
 											</div>
 											<div class="col-auto">
-												<div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+												<div
+													class="icon icon-shape bg-danger text-white rounded-circle shadow">
 													<i class="fas fa-chart-bar"></i>
 												</div>
 											</div>
@@ -66,42 +88,31 @@
 					</div>
 				</div>
 			</div>
-   			<div class="container-fluid mt--7">
+   			<div class="container-fluid mt--7" style="width:50%">
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
 							<div class="col">
-								<h3 class="mb-0">쪽지 상세보기</h3>
 							</div>
 						</div>
 					</div>
 					<div class="row align-items-center">
-						<div class="col-12">
-							<table class="table">
+						<div class="col-12 align-items-center">
+							<table class="table table-borderless" style="text-align:center;">
 								<tr>
-									<th>제목</th>
-									<td colspan="3">${note.noteTitle}</td>
+									<th><h2>비밀글입니다</h2></th>
 								</tr>
 								<tr>
-									<th>보낸사람</th>
-									<td>${note.noteDispatcherName} (${note.noteDispatcherId})</td>
-									<th>날짜</th>
-									<td>${note.noteSendDate}</td>
+			    					<td><input class="form-control" id="questionPassword" type="text" name="questionPassword"></td>
 								</tr>
 								<tr>
-									<th>받는사람</th>
-									<td colspan="3">${note.noteReceiverName} (${note.noteReceiverId})</td>
+			    					<td><button id="questionPasswordBtn" type="button" class="btn btn-outline-primary">확인</button></td>
 								</tr>
-								<tr>
-									<th>내용</th>
-									<td colspan="3">${note.noteContent}</td>
-								</tr>
-								</tbody>
 							</table>
 						</div>
 					</div>	
-				</div>		
-			</div>
+				</div>
+			</div>		
 		</div>
 		<!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
@@ -119,5 +130,4 @@
 		        application: "argon-dashboard-free"
 		    });
   		</script>
-  	</body>
 </html>

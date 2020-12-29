@@ -28,4 +28,14 @@
 		WHERE
 			question_file_uuid = #{questionFileUuid}
 	</delete>
+	
+	<!-- 비밀글 비밀번호 확인 -->
+	<select id="selectQnaPassword" parameterType="int" resultType="String">
+		SELECT 
+			question_password
+		FROM
+			question
+		WHERE
+			question_no = #{questionNo}	
+	</select>
 </mapper>

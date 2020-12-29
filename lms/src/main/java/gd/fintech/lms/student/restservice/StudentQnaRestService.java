@@ -32,5 +32,9 @@ public class StudentQnaRestService {
 		return studentQnaRestMapper.selectQnaFileCount(questionFileUuid);
 	}
 	
+	// 질문 비밀글 비밀번호 확인
+	public String selectQnaPassword(int questionNo) {
+		return studentQnaRestMapper.selectQnaPassword(questionNo);
+	}
 	
 }

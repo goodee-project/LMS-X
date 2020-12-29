@@ -13,6 +13,7 @@
 		<result property="questionCount" column="question_count"/>
 		<result property="questionCreatedate" column="question_createdate"/>
 		<result property="questionUpdatedate" column="question_updatedate"/>
+		<result property="questionPassword" column="question_password"/>
 		
 		<!-- 질문 파일 정보  -->  
 		<collection property="questionFileList" ofType="gd.fintech.lms.vo.QuestionFile">
@@ -91,6 +92,7 @@
 			q.question_count,
 			q.question_createdate,
 			q.question_updatedate,
+			q.question_password,
 			qf.question_file_uuid,
 			qf.question_file_original,
 			qf.question_file_size,

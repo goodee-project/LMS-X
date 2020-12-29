@@ -97,11 +97,12 @@ public class StudentQnaController {
 	}
 	
 	// Qna 상세보기
-	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/{currentPage}")
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/{currentPage}/{questionPassword}")
 	public String qnaOne(Model model, ServletRequest request,
 			@PathVariable(name = "currentPage", required = true) int currentPage,
 			@PathVariable(name = "lectureNo") int lectureNo,
-			@PathVariable(name = "questionNo") int questionNo) {
+			@PathVariable(name = "questionNo") int questionNo,
+			@PathVariable(name = "questionPassword") String questionPassword) {
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		String accountId = (String)session.getAttribute("loginId");
@@ -135,6 +136,13 @@ public class StudentQnaController {
 
 		List<QuestionComment> questionComment = studentQnaCommentService.getQnaCommentListByPage(map);
 		Question question = studentQnaService.getStudentQnaOne(questionNo);
+		// 비밀글일 경우
+		if (!question.getQuestionPassword().equals("")) {
+			// 비밀번호가 다르면 비밀번호 입력창으로 이동
+			if(!question.getQuestionPassword().equals(questionPassword)) {
+				return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaPassword/" + questionNo;
+			}
+		}
 		
 		// 네비에 출력될 페이지 개수
 		int navPerPage = 10; 
@@ -178,6 +186,14 @@ public class StudentQnaController {
 		model.addAttribute("questionComment",questionComment);
 		model.addAttribute("accountId", accountId);
 		return "/auth/student/lecture/qna/qnaOne";
+	}
+
+	// Qna 비밀글일시 비밀번호 입력폼
+	@GetMapping("auth/student/lecture/{lectureNo}/qna/qnaPassword/{questionNo}")
+	public String qnaPassword(
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionNo") int questionNo) {
+		return "/auth/student/lecture/qna/qnaPassword";
 	}
 	
 	// Qna 작성 폼
