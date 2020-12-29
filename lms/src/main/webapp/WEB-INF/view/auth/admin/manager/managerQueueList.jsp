@@ -40,29 +40,29 @@
 							<table class="table align-items-center table-flush text-center">
 								<thead class="thead-light">
 									<tr>
-										<th scope="col" style="font-size: 15px;">아이디</th>
-										<th scope="col" style="font-size: 15px;">이메일</th>
-										<th scope="col" style="font-size: 15px;">핸드폰번호</th>
-										<th scope="col" style="font-size: 15px;">이름</th>
-										<th scope="col" style="font-size: 15px;">성별</th>
-										<th scope="col" style="font-size: 15px;">생일</th>
-										<th scope="col" style="font-size: 15px;">주소</th>
-										<th scope="col" style="font-size: 15px;">승인</th>
-										<th scope="col" style="font-size: 15px;">거절</th>
+										<th scope="col" style="font-size: 15px; width: 15%;">아이디</th>
+										<th scope="col" style="font-size: 15px; width: 18%;">이메일</th>
+										<th scope="col" style="font-size: 15px; width: 13%;">핸드폰번호</th>
+										<th scope="col" style="font-size: 15px; width: 10%;">이름</th>
+										<th scope="col" style="font-size: 15px; width: 7%;">성별</th>
+										<th scope="col" style="font-size: 15px; width: 11%;">생일</th>
+										<th scope="col" style="font-size: 15px; width: 15%;">주소</th>
+										<th scope="col" style="font-size: 15px; width: 8%;">승인</th>
+										<th scope="col" style="font-size: 15px; width: 8%;">거절</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="mql" items="${managerQueueList}">
 										<tr>
-											<td>${mql.managerId}</td>
-											<td>${mql.managerEmail}</td>
-											<td>${mql.managerPhone}</td>
-											<td>${mql.managerName}</td>
-											<td>${mql.managerGender}</td>
-											<td>${mql.managerBirth}</td>
-											<td>${mql.managerAddressMain} ${mql.managerAddressSub}</td>
-											<td><a href="${pageContext.request.contextPath}/auth/admin/accessManager/${currentPage}/${mql.managerId}">승인</a></td>
-											<td><a href="${pageContext.request.contextPath}/auth/admin/negativeManager/${mql.managerId}">거절</a></td>
+											<td style="font-size: 13px;">${mql.managerId}</td>
+											<td style="font-size: 13px;">${mql.managerEmail}</td>
+											<td style="font-size: 13px;">${mql.managerPhone}</td>
+											<td style="font-size: 13px;">${mql.managerName}</td>
+											<td style="font-size: 13px;">${mql.managerGender}</td>
+											<td style="font-size: 13px;">${mql.managerBirth}</td>
+											<td style="font-size: 10px;">${mql.managerAddressMain} ${mql.managerAddressSub}</td>
+											<td style="font-size: 13px;"><a href="${pageContext.request.contextPath}/auth/admin/accessManager/${currentPage}/${mql.managerId}">승인</a></td>
+											<td style="font-size: 13px;"><a href="${pageContext.request.contextPath}/auth/admin/negativeManager/${mql.managerId}">거절</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>

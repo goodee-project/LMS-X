@@ -82,29 +82,31 @@
 							<table class="table align-items-center table-flush text-center">
 								<thead class="thead-light">
 									<tr>
-										<th scope="col" style="font-size: 15px;">아이디</th>
-										<th scope="col" style="font-size: 15px;">직책</th>
-										<th scope="col" style="font-size: 15px;">이름</th>
-										<th scope="col" style="font-size: 15px;">성별</th>
-										<th scope="col" style="font-size: 15px;">생일</th>
-										<th scope="col" style="font-size: 15px;">이메일</th>
-										<th scope="col" style="font-size: 15px;">핸드폰번호</th>
-										<th scope="col" style="font-size: 15px;">승인날짜</th>
-										<th scope="col" style="font-size: 15px;">탈퇴</th>
+										<th scope="col" style="font-size: 15px; width: 15%;">아이디</th>
+										<th scope="col" style="font-size: 15px; width: 8%;">직책</th>
+										<th scope="col" style="font-size: 15px; width: 10%;">이름</th>
+										<th scope="col" style="font-size: 15px; width: 7%;" >성별</th>
+										<th scope="col" style="font-size: 15px; width: 11%;" >생일</th>
+										<th scope="col" style="font-size: 15px; width: 18%;">이메일</th>
+										<th scope="col" style="font-size: 15px; width: 13%;">핸드폰번호</th>
+										<th scope="col" style="font-size: 15px; width: 13%;">승인날짜</th>
+										<th scope="col" style="font-size: 15px; width: 8%;">탈퇴</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="m" items="${managerList}">
 										<tr>
-											<td><a href="${pageContext.request.contextPath}/auth/admin/managerOne/${m.managerId}">${m.managerId}</a></td>
-											<td>${m.managerPosition}</td>
-											<td>${m.managerName}</td>
-											<td>${m.managerGender}</td>
-											<td>${m.managerBirth}</td>
-											<td>${m.managerEmail}</td>
-											<td>${m.managerPhone}</td>
-											<td>${m.managerAccessdate}</td>
-											<th><a href="${pageContext.request.contextPath}/auth/admin/deleteManager/${currentPage}/${m.managerId}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">탈퇴</a></th>
+											<td style="font-size: 13px;"><a href="${pageContext.request.contextPath}/auth/admin/managerOne/${m.managerId}">${m.managerId}</a></td>
+											<td style="font-size: 13px;">${m.managerPosition}</td>
+											<td style="font-size: 13px;">${m.managerName}</td>
+											<td style="font-size: 13px;">${m.managerGender}</td>
+											<td style="font-size: 13px;">${m.managerBirth}</td>
+											<td style="font-size: 13px;">${m.managerEmail}</td>
+											<td style="font-size: 13px;">${m.managerPhone}</td>
+											<td style="font-size: 13px;">${m.managerAccessdate}</td>
+											<td style="font-size: 13px;">
+												<a href="${pageContext.request.contextPath}/auth/admin/deleteManager/${currentPage}/${m.managerId}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">탈퇴</a>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
