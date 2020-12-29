@@ -7,8 +7,8 @@
 	<span class="navbar-toggler-icon"></span>
 </button>
 <!-- Brand -->
-<a class="navbar-brand pt-0" href="#"> <img
-	src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+<a class="navbar-brand pt-0" href="${PageContext.request.contextPath}/auth/teacher/index/1"> <img
+	src="${PageContext.request.contextPath}/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
 </a>
 <!-- User -->
 <ul class="nav align-items-center d-md-none">
@@ -66,12 +66,7 @@
 		</div>
 	</form>
 	<ul class="navbar-nav mr-auto">
-		<!-- 강사 Navbar Brand -->
-		<li class="nav-item"><a class="navbar-brand title"
-			href="${pageContext.request.contextPath}/auth/teacher/index/1">Goodee
-				LMS&nbsp;<font size="2">[강사]</font>
-		</a></li>
-
+		
 		<!-- 강사 Index -->
 		<li class="nav-item"><a class="nav-link"
 			href="${pageContext.request.contextPath}/auth/teacher/index/1"><i class="ni ni-tv-2 text-primary"></i>Index</a>
