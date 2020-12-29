@@ -22,7 +22,7 @@
 	<jsp:include page="/WEB-INF/view/auth/admin/include/menu.jsp"/>
 		<div class="main-content">
 		<!-- Header -->
-		<div class="header bg-gradient-primary pt-5 pt-md-8" >
+		<div class="header bg-gradient-primary  pt-5 pt-md-8" >
 		</div>
 
 		<div class=" container-fluid mt--5">
