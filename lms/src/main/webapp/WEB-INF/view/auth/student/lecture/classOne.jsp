@@ -141,9 +141,9 @@
 						<div class="col-12">
 							<table class="table">
 								<tr>
-									<th>강좌 번호</th>
+									<th width="20%">강좌 번호</th>
 									<td>${lcstc.lecture.lectureNo}</td>
-									<th>강사 이름</th>
+									<th width="20%">강사 이름</th>
 									<td>${lcstc.lecture.teacherName}</td>
 								</tr>
 								<tr>
@@ -196,8 +196,8 @@
 									<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
 									<table class="table">	
 										<tr>
-											<th>강좌 별점</th>
-											<td >
+											<th width="20%">강좌 별점</th>
+											<td>
 												<div class="row">
 													<button id="minusPoint" type="button" style="height:30px" class="btn btn-outline-primary btn-sm">-</button>
 													<p id="classPoint"></p>

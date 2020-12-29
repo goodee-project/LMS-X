@@ -14,10 +14,10 @@
 			answersheet a 
 		RIGHT JOIN  
 			test t ON
-			t.lecture_no = a.lecture_no
-		WHERE 
-			t.lecture_no = #{lectureNo} AND
+			t.lecture_no = a.lecture_no AND
 			a.account_id = #{accountId}
+		WHERE 
+			t.lecture_no = #{lectureNo} 
 		GROUP BY 
 			a.lecture_no
 	</select>

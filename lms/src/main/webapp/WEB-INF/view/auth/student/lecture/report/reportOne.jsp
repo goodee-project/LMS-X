@@ -116,7 +116,7 @@
 						<div class="col-12">
 							<table class="table">
 					    		<tr>
-					    			<th>제목</th>
+					    			<th width="20%">제목</th>
 					    			<td>${report.reportTitle}</td>
 					    		</tr>
 					    		<tr>
@@ -135,8 +135,10 @@
 				    	<table class="table">
 				    		<thead class="thead-light">	
 				    			<tr>
-				    				<th colspan="2">
+				    				<th style="width:20%">
 				    					결과
+				    				</th>
+				    				<th>
 				    				</th>
 				    			</tr>
 				    		</thead>
@@ -169,7 +171,7 @@
 							<div class="table-responsive">	
 						    	<table class="table">
 						    		<tr>
-						    			<th>제목</th>
+						    			<th style="width:20%">제목</th>
 						    			<td>${reportSubmit.reportSubmitTitle}</td>
 						    		</tr>
 						    		<tr>
@@ -205,7 +207,7 @@
 						    				</td>
 						    				<td id="fileCount${fn:split(uuid ,'.')[0]}">다운 횟수 : ${rsf.reportSubmitFileCount}회</td>
 						    			</tr>
-						    			</c:forEach>
+						    		</c:forEach>
 					    			<tr>
 					    				<td colspan="3">
 							    			<div id="navDiv">

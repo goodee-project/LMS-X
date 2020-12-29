@@ -226,10 +226,11 @@ public class StudentQnaController {
 	}
 	
 	// Qna 수정 폼
-	@GetMapping("/auth/student/lecture/{lectureNo}/qna/updateQna/{questionNo}")
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/updateQna/{questionNo}/{questionPassword}")
 	public String updateQna(Model model,
 			@PathVariable(name = "questionNo") int questionNo,
-			@PathVariable(name = "lectureNo") int lectureNo) {
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "questionPassword") String questionPassword)  {
 		
 		Question question = studentQnaService.getStudentQnaOne(questionNo);
 		
@@ -258,7 +259,7 @@ public class StudentQnaController {
 		
 		System.out.println("액션questionNo" + questionNo);
 		
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo +"/1";
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo + "/1/" + questionForm.getQuestionPassword();
 		
 	}
 	

@@ -45,11 +45,12 @@
 				
 				// 질문 작성 버튼
 				$('#updateQnaBtn').click(function(){
+					oEditors.getById["questionContent"].exec("UPDATE_CONTENTS_FIELD", []); // 스마트 에디터 내용 추가
 					// 제목, 내용 유효성 검사
 					if($('#qnaTitle').val().length < 1){
 						alert('제목을 입력해 주세요.');
 						return;
-					} else if($('#qnaContent').val().length < 1){
+					} else if($('#questionContent').val().length < 1){
 						alert('내용을 입력해 주세요.');
 						return;
 					} 
@@ -159,7 +160,7 @@
 		    		</tr>
 		    		<tr>
 		    			<th>비밀번호(선택)</th>
-		    			<td><input id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword" class="form-control"></td>
+		    			<td><input id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword" class="form-control" value="${question.questionPassword}"></td>
 		    		</tr>
 		    		<tr>
 		    			<th>내용</th>

@@ -87,7 +87,7 @@
 						<div class="col-12">
 							<table class="table">
 								<tr>
-									<td>제목</td>
+									<td width="20%">제목</td>
 									<td>${lmsNotice.lmsNoticeTitle}</td>
 								</tr>
 								<tr>

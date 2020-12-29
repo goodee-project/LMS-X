@@ -77,9 +77,9 @@
 						<div class="col-12">
 							<table class="table">
 					    		<tr>
-					    			<th>제목</th>
+					    			<th width="20%">제목</th>
 					    			<td>${faq.faqTitle}</td>
-					    			<th>조회수</th>
+					    			<th width="20%">조회수</th>
 					    			<td>${faq.faqCount}</td>
 					    		</tr>
 					    		<tr>

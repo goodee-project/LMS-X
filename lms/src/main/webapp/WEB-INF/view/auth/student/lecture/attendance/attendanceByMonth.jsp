@@ -93,18 +93,18 @@
 					<div class="row align-items-center">
 						<div class="col-12">
 						<!-- 본문 -->						
-						<div style="width:250px; margin:0 auto">
+						<div style="width:300px; margin:0 auto">
 							<table class="table">
 								<tr>
-									<td>
+									<td width="50">
 										<h2>
 											<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/attendance/attendanceByMonth/${currentYear}/${currentMonth-1}">
 												<i class='fas fa-angle-double-left' style='font-size:24px'></i>
 											</a>
 										</h2>
 									</td>
-									<td><h2>&nbsp; ${currentYear}년 ${currentMonth} 월 &nbsp;</h2></td>
-									<td>
+									<td width="200" style="text-align:center"><h2>&nbsp; ${currentYear}년 ${currentMonth} 월 &nbsp;</h2></td>
+									<td width="50">
 										<h2>
 											<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/attendance/attendanceByMonth/${currentYear}/${currentMonth+1}">
 												<i class='fas fa-angle-double-right' style='font-size:24px'></i>

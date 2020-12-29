@@ -182,7 +182,7 @@
 			</div>
 			<div style="text-align: right;">
 				<c:if test="${accountId == accountId}">
-					<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}">질문 수정</a>
+					<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}/${questionPassword}">질문 수정</a>
 					<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
 				</c:if>
 			</div>
