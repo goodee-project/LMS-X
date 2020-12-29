@@ -6,25 +6,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>updateMypage</title>
-	<!-- Bootstrap Framework 사용 -->
-		
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	
-	<!-- Bootstrap 4 Icons -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<!-- Favicon -->
+	<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"	rel="stylesheet">
+	<!-- Icons -->
+	<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css"	rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"	rel="stylesheet" />
+	<!-- CSS Files -->
+	<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+	<!-- jQuery / Ajax Google CDN -->
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			
 			// 이메일 중복검사
 			let emailCheck ="false" ; // 이메일 체크
 			$('#emailCheck').click(function(){
@@ -33,7 +27,7 @@
 					$('#managerEmailCheck').html("");
 					if (CheckEmail( $('#managerEmail').val()) == false) {
 						$('#managerEmail').focus();
-						$('#managerEmailCheck').html("이메일 형식이 잘못 되었습니다.");
+						$('#managerEmailCheck').html('<span class="text-danger">이메일 형식이 잘못 되었습니다.</span>');
 						return;
 					} else {
 						if ($('#managerEmail').val() != $('#originalManagerEmail').val()) {
@@ -43,12 +37,12 @@
 								success : function(data) {
 									$('#managerEmailCheck').html("");
 									if ( data == "true" ) {
-										$('#managerEmailCheck').html("사용 가능한 이메일입니다.");
+										$('#managerEmailCheck').html('<span class="text-success">사용 가능한 이메일입니다.</span>');
 										emailCheck = "ture";
 										return;
 										
 									} else {
-										$('#managerEmailCheck').html("사용 불가능한 이메일입니다.");
+										$('#managerEmailCheck').html('<span class="text-danger">사용 불가능한 이메일입니다.</span>');
 										
 										return;
 									}
@@ -56,7 +50,7 @@
 								}
 							});
 						}else{
-							$('#managerEmailCheck').html("동일한 이메일 입니다. 사용 가능 이메일입니다.");
+							$('#managerEmailCheck').html('<span class="text-success">동일한 이메일 입니다. 사용 가능 이메일입니다.</span>');
 							emailCheck = "ture";
 						}
 					}
@@ -103,7 +97,7 @@
 			$('#check').click(function() {
 				$('#addressCheck').html("");
 				if ( $('#street').val().length > 1 ) {
-					$('#addressWait').html("(잠시만 기다려 주세요...)");
+					$('#addressWait').html('(잠시만 기다려 주세요...)');
 					let street = null;
 					let building1 = null;
 					let building2 = null;
@@ -145,31 +139,30 @@
 						url : '${pageContext.request.contextPath}/signup/address/' + street + '/' + building1 + '/' + building2,
 						type :'get',
 						success : function(data) {
-							$('#selectAddress').html("");
+							$('#selectAddress').html('');
 
 							// 데이터가 없으면
 							if (data.length == 0) {
-								$('#selectAddress').html("등록된 주소가 없습니다.");
+								$('#selectAddress').html('<span class="text-danger">등록된 주소가 없습니다.</span>');
 							}
 							
 							for (i = 0; i < data.length; i++) {
 								// building2 데이터가 있으면
 								if (data[i].building2 != 0) {
-									$('#selectAddress').append('<div><button type="button" class="addressBtn form-control" value="' + data[i].province + ' ' + data[i].city+' ' + data[i].town+' ' + data[i].street+' ' + data[i].building1+'-'+ data[i].building2+'(' + data[i].zipCode + ')">'
-											+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '-' + data[i].building2 + '('+data[i].zipCode + ')' + '</button></div>');
+									$('#selectAddress').append('<div><button type="button" class="addressBtn form-control" value="' + '(' + data[i].zipCode + ')' + data[i].province + ' ' + data[i].city+' ' + data[i].town+' ' + data[i].street+' ' + data[i].building1+'-'+ data[i].building2+'">'
+											+  '('+data[i].zipCode + ')' +  data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '-' + data[i].building2 +'</button></div>');
 								}
 								// building2 데이터가 없으면
 								if (data[i].building2 == 0) {
-									$('#selectAddress').append('<div><button type="button" class="addressBtn form-control" value="' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '(' + data[i].zipCode + ')">'
-											+ data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '('+data[i].zipCode + ')' + '</button></div>');
+									$('#selectAddress').append('<div><button type="button" class="addressBtn form-control" value="' + '(' + data[i].zipCode + ')' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 +'">'
+											+ '('+data[i].zipCode + ')' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '</button></div>');
 								}
 								
 							}
-							$('#addressWait').html("");
+							$('#addressWait').html('');
 							$('.addressBtn').click(function(){
-								$('#addressView').html('<input id="managerAddressMain" class="form-control" style="margin-bottom:5px;" type="text" name="managerAddressMain" disabled="disabled" > ')
+								$('#addressView').html('<input id="managerAddressMain" class="form-control form-control-alternative" style="margin-bottom:5px; background-color: white;" type="text" name="managerAddressMain" readonly="readonly" > ')
 								document.getElementById("managerAddressMain").value = $(this).val();
-
 							});
 						
 						}	
@@ -197,14 +190,14 @@
 					return;
 				} else if (CheckEmail($('#managerEmail').val()) == false) {
 					$('#managerEmail').focus();
-					$('#managerEmailCheck').html("이메일 형식이 잘못 되었습니다.");
+					$('#managerEmailCheck').html('<span class="text-danger">이메일 형식이 잘못 되었습니다.</span>');
 					return;
 				} else if (emailCheck == "false") {
 					$('#managerEmail').focus();
-					$('#managerEmailCheck').html("이메일 중복 확인해주세요");
+					$('#managerEmailCheck').html('<span class="text-danger">이메일 중복 확인해주세요.</span>');
 					return;
 				} else {
-					$('#managerEmailCheck').html("");
+					$('#managerEmailCheck').html('');
 				}
 
 				// 이름 검사
@@ -226,25 +219,25 @@
 					return;
 				} else if (telValidator($('#managerPhone').val()) == false) {
 					$('#managerPhone').focus();
-					$('#managerPhoneCheck').html("전화번호 형식이 잘못 되었습니다.");
+					$('#managerPhoneCheck').html('<span class="text-danger">전화번호 형식이 잘못 되었습니다.</span>');
 					return;
 				} else {
-					$('#managerPhoneCheck').html("");
+					$('#managerPhoneCheck').html('');
 				}
 				
 				// 성별 검사
 				if ($('.managerGender:checked').val() == undefined) {
 					$('#managerGender').focus();
-					$('#managerGenderCheck').html("성별을 체크해주세요");
+					$('#managerGenderCheck').html('<span class="text-danger">성별을 체크해주세요</span>');
 					return;
 				} else {
-					$('#managerGenderCheck').html("");
+					$('#managerGenderCheck').html('');
 				}
 				
 				// 생년월일 검사
 				if ($('#managerBirth').val() == "") {
 					$('#managerBirth').focus();
-					$('#managerBirthCheck').html("생년월일을 입력해주세요")
+					$('#managerBirthCheck').html('<span class="text-danger">생년월일을 입력해주세요')
 					return;
 				} else {
 					$('#managerBirthCheck').html("")
@@ -253,7 +246,7 @@
 				// 사진 검사
 				if ( $('#managerImage').val() != "") {
 					if (imageCheck == false) {
-						$('#managerImageCheck').html("이미지 파일만 올릴 수 있습니다.");
+						$('#managerImageCheck').html('<span class="text-danger">이미지 파일만 올릴 수 있습니다.<span class="text-danger">');
 						return;
 					} else {
 						$('#managerImageCheck').html("");
@@ -264,7 +257,7 @@
 				
 				// 주소 검사
 				if ($('#managerAddressMain').val() == "") {
-					$('#addressCheck').html("주소를 검색해주세요")
+					$('#addressCheck').html('<span class="text-danger">주소를 검색해주세요')
 					return;
 				} else {
 					$('#addressCheck').html("");
@@ -284,8 +277,266 @@
 	</script>
 </head>
 <body>
-
+	<!-- 내비게이션 메인 메뉴 -->
 	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp"/>
+	<div class="main-content">
+		<div class="container-fluid">
+			<jsp:include page="/WEB-INF/view/auth/manager/include/noLectureMenu.jsp" />
+		</div>
+		<!-- Header -->
+		<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8"></div>
+		<!-- Page content -->
+		<div class="container-fluid mt--7">
+			<div class="row">
+				<div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+					<div class="card card-profile shadow">
+						<div class="row justify-content-center">
+							<div class="col-lg-3 order-lg-2">
+								<div class="card-profile-image">
+									<img id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
+								</div>
+							</div>
+						</div>
+						<div class="card-body pt-0 pt-md-4" style="margin-top: 50px;">
+							<div class="row">
+								<div class="col">
+									<div class="card-profile-stats justify-content-center mt-md-5 ">
+									</div>
+								</div>
+							</div>
+							<div class="text-center">
+								<h3>
+									${manager.managerName}<span class="font-weight-light">,	${manager.managerGender}</span>
+								</h3>
+								<div class="h5 font-weight-300">
+									<i class="ni location_pin mr-2"></i>${manager.managerEmail}
+								</div>
+								<div class="h5 font-weight-300">
+									<i class="ni location_pin mr-2"></i>${manager.managerPhone}
+								</div>
+								<div class="h5 mt-4">
+									<i class="ni business_briefcase-24 mr-2"></i>${manager.managerAddressMain}
+								</div>
+								<div>
+									<i class="ni education_hat mr-2"></i>${manager.managerAddressSub}
+								</div>
+								<hr class="my-4" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-8 order-xl-1">
+					<div class="card bg-secondary shadow">
+						<div class="card-header bg-white border-0">
+							<div class="row align-items-center">
+								<div class="col-8">
+									<h3 class="mb-0">마이페이지</h3>
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<h6 class="heading-small text-muted mb-4">개인정보 <button type="button" style="float: right" class="btn btn-sm btn-primary" id="btn">수정</button> </h6> 
+							<form id="managerForm" method="post" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">
+								<div class="pl-lg-4">
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label class="form-control-label">아이디</label>
+												<input type="text" name="managerId" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerId}" readonly="readonly">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label class="form-control-label">생년월일</label>
+												<input type="date" class="form-control form-control-alternative" name="managerBirth" id="managerBirth" value="${manager.managerBirth}">
+											</div>
+											<div id="managerBirthCheck"></div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label class="form-control-label">이름</label>
+												<input type="text" class="form-control form-control-alternative" name="managerName" id="managerName" placeholder="이름을 입력하세요" value="${manager.managerName}">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label class="form-control-label">성별</label>
+												<c:if test="${manager.managerGender == '남'}">
+													<div class="row" style=" margin-top: 10px; margin-left: 50px;">
+														<div class="col-lg-3">
+															<input type="radio" class="managerGender  form-control-alternative" name="managerGender" value="남" checked="checked" ><label class="form-control-label">&nbsp;남</label>
+														</div>
+														<div class="col-lg-3">
+															<input type="radio" class="managerGender  form-control-alternative" name="managerGender" value="여"><label class="form-control-label">&nbsp;여</label>
+														</div>
+													</div>
+												</c:if>
+												<c:if test="${manager.managerGender == '여'}">
+													<div class="row" style=" margin: auto; ">
+														<div class="col-lg-3">
+															<input type="radio" class="managerGender  form-control-alternative" name="managerGender" value="남"><label class="form-control-label">&nbsp;남</label>
+														</div>
+														<div class="col-lg-3">
+															<input type="radio" class="managerGender  form-control-alternative" name="managerGender" value="여" checked="checked"><label class="form-control-label">&nbsp;여</label>
+														</div>
+													</div>
+												</c:if>
+												<span id="managerGenderCheck"></span>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label class="form-control-label" >전화번호</label>
+												<input type="text" class="form-control form-control-alternative" name="managerPhone" id="managerPhone" placeholder="000-0000-000" value="${manager.managerPhone}">
+												<div id="managerPhoneCheck"></div>
+											</div>
+										</div>
+											<div class="col-lg-6">
+											<div class="form-group">
+												<label class="form-control-label" >직급</label>
+												<input type="text" class="form-control form-control-alternative" style="background-color: white;"  value="${manager.managerPosition}" readonly="readonly">
+												<div id="managerPhoneCheck"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="form-group">
+												<label class="form-control-label">이메일</label>
+													<input type="email" class="form-control form-control-alternative" value="${manager.managerEmail}" id="originalmanagerEmail" hidden="hidden">
+												<div class="input-group">
+													<input type="email" class="form-control form-control-alternative" name="managerEmail" id="managerEmail" value="${manager.managerEmail}" placeholder="  abc@abc.abc">
+													<div class="input-group-append">
+														<button type="button" class="btn btn-primary" id="emailCheck">중복 체크</button>
+													</div>
+												</div>
+												<div id="managerEmailCheck"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="form-group">
+												<label class="form-control-label">사진</label>
+												<div class="input-group">
+													<input type="file" class="form-control form-control-alternative" id="managerImage" name="managerImage" accept="image/png, image/jpeg" >
+													<div id="managerImageCheck"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label class="form-control-label">주소</label>
+												<div id="addressView">
+													<input id="managerAddressMain" class="form-control form-control-alternative" style="margin-bottom:5px; background-color: white;" type="text" name="managerAddressMain"  value="${manager.managerAddressMain}" readonly="readonly" >
+												</div>
+											</div>
+											<span id="addressWait"></span>
+										</div>
+											<div class="col-lg-6">
+											<div class="form-group">
+												<label class="form-control-label">상세 주소</label>
+												<input type="text" class="form-control form-control-alternative" id="managerAddressSub" placeholder="상세 주소를 입력하세요" value="${manager.managerAddressSub}" name="managerAddressSub" >
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="form-group">
+												<label class="form-control-label">주소 검색</label>
+												<div class="input-group">
+													<input type="text" class="form-control form-control-alternative" name="street" id="street" placeholder="도로명을 입력하세요.">
+													<div class="input-group-append">
+														<button type="button" class="btn btn-primary" id="check">검색</button>
+													</div>
+												</div>
+												<span id="addressWait"></span>
+												<span id="addressCheck"></span>
+												<div id="selectAddress" style="overflow: auto; width: 100%; max-height: 200px;"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<hr class="my-4" />
+							<h6 class="heading-small text-muted mb-4">부가정보 <a href="${pageContext.request.contextPath}/auth/manager/mypage/updateMypageCareerAndLicense">( 부가정보 수정 )</a></h6>
+							<div class="pl-lg-4">
+								<div class="form-group">
+									<label class="form-control-label">경력</label>
+									<c:forEach var="c" items="${manager.careerList}">
+										<div class="row">
+											<div class="col-lg-8">
+												<div class="form-group ">
+													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${c.careerContent}" readonly="readonly">
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group ">
+													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="( ${c.careerStartdate} ~ ${c.careerEnddate} )"	readonly="readonly">
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+							<div class="pl-lg-4">
+								<div class="form-group">
+									<label class="form-control-label">자격증</label>
+									<c:forEach var="l" items="${manager.licenseList}">
+										<c:if test="${l.licenseNumber != null}">
+											<div class="row">
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseNumber}" readonly="readonly">
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseName}" readonly="readonly">
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseAgency}" readonly="readonly">
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseGetdate}" readonly="readonly">
+													</div>
+												</div>
+											</div>
+										</c:if>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer -->
+			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
+		</div>
+	</div>
+	<!--   Core   -->
+	<script	src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<!--   Optional JS   -->
+	<!--   Argon JS   -->
+	<script	src="${pageContext.request.contextPath}/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+	<script>
+		window.TrackJS && TrackJS.install({
+			token : "ee6fab19c5a04ac1a32a645abde4613a",
+			application : "argon-dashboard-free"
+		});
+	</script>
 	
 	<form id="managerForm" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">
 		<button type="button" class="btn btn-success" id="btn">수정</button>

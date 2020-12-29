@@ -14,14 +14,16 @@
 	<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css"	rel="stylesheet" />
 	<link href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"	rel="stylesheet" />
 	<!-- CSS Files -->
-	<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2"
-		rel="stylesheet" />
+	<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 	<!-- jQuery / Ajax Google CDN -->
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/auth/admin/include/menu.jsp" />
 	<div class="main-content">
+		<div class="container-fluid">
+			<jsp:include page="/WEB-INF/view/auth/teacher/include/noLectureMenu.jsp" />
+		</div>
 		<!-- Header -->
 		<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8"></div>
 		<!-- Page content -->
@@ -128,15 +130,15 @@
 								</form>
 							</div>
 							<hr class="my-4" />
+							<h6 class="heading-small text-muted mb-4">부가정보</h6>
 							<div class="pl-lg-4">
 								<div class="form-group">
-									<label>경력</label>
+									<label class="form-control-label" for="input-username">경력</label>
 									<c:forEach var="c" items="${manager.careerList}">
 										<div class="row">
 											<div class="col-lg-6">
 												<div class="form-group ">
-													<input type="text"
-														class="form-control form-control-alternative" style="background-color: white;" value="${c.careerContent}" disabled="disabled">
+													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${c.careerContent}" disabled="disabled">
 												</div>
 											</div>
 											<div class="col-lg-6">
@@ -148,10 +150,10 @@
 									</c:forEach>
 								</div>
 							</div>
-							<hr class="my-4" />
+						
 							<div class="pl-lg-4">
 								<div class="form-group">
-									<label>자격증</label>
+									<label class="form-control-label" for="input-username">자격증</label>
 									<c:forEach var="l" items="${manager.licenseList}">
 										<div class="row">
 											<div class="col-lg-3">

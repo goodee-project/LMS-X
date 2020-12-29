@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.mapper.LoginMapper;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Admin;
 import gd.fintech.lms.vo.LoginLog;
 import gd.fintech.lms.vo.Manager;
 import gd.fintech.lms.vo.Student;
@@ -44,6 +45,12 @@ public class LoginService {
 	public Manager getManagerName(String accountId) {
 		
 		return loginMapper.selectManagerName(accountId);
+	}
+	
+	// 관리자 이름 찾기
+	public Admin getAdminName(String accountId) {
+		
+		return loginMapper.selectAdminName(accountId);
 	}
 	
 	// 로그인시 로그인 기록 생성

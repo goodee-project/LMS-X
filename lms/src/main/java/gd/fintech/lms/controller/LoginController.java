@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import gd.fintech.lms.common.LoginLogUtil;
 import gd.fintech.lms.service.LoginService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Admin;
 import gd.fintech.lms.vo.LoginLog;
 import gd.fintech.lms.vo.Manager;
 import gd.fintech.lms.vo.Student;
@@ -79,7 +80,7 @@ public class LoginController {
 		
 		if ( session.getAttribute("loginLevel").equals(1) ) {
 			
-			//session에 이름 추가
+			// session에 이름 추가
 			Student student = loginService.getStudentName(loginAccount.getAccountId());
 			
 			session.setAttribute("loginName", student.getStudentName());
@@ -87,29 +88,33 @@ public class LoginController {
 			return "redirect:/auth/student/index/1";
 		} else if ( session.getAttribute("loginLevel").equals(2) ) {
 			
-			//session에 이름 추가
+			// session에 이름 추가
 			Teacher teacher = loginService.getTeacherName(loginAccount.getAccountId());
 			session.setAttribute("loginName", teacher.getTeacherName());
 			
 			return "redirect:/auth/teacher/index/1";
 		} else if ( session.getAttribute("loginLevel").equals(3) ) {
 			
-			//session에 이름 추가
+			// session에 이름 추가
 			Manager manager = loginService.getManagerName(loginAccount.getAccountId());
 			session.setAttribute("loginName", manager.getManagerName());
-		
+			
 			return "redirect:/auth/manager/index";
 		} else {
+			
+			// session에 이름 추가
+			Admin admin = loginService.getAdminName(loginAccount.getAccountId());
+			session.setAttribute("loginName", admin.getAdminName());
 			return "redirect:/auth/admin/index/1";
 		}
 	}
 	//로그아웃
 	@GetMapping("/auth/logout")
 	public String logout(HttpSession session) {
-		//System.out.println("로그아웃");
+		// System.out.println("로그아웃");
 		log.debug("로그아웃");
 		
-		//session데이터 삭제
+		// session데이터 삭제
 		session.invalidate(); 
 		return "redirect:/login";
 	}

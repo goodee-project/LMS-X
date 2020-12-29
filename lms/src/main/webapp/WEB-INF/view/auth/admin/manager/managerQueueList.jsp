@@ -20,7 +20,10 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/auth/admin/include/menu.jsp"/>
-		<div class="main-content">
+	<div class="main-content">
+		<div class="container-fluid">
+			<jsp:include page="/WEB-INF/view/auth/admin/include/noLectureMenu.jsp" />
+		</div>
 		<!-- Header -->
 		<div class="header bg-gradient-primary  pt-5 pt-md-8" >
 		</div>

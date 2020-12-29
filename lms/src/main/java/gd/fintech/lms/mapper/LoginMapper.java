@@ -3,6 +3,7 @@ package gd.fintech.lms.mapper;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Admin;
 import gd.fintech.lms.vo.LoginLog;
 import gd.fintech.lms.vo.Manager;
 import gd.fintech.lms.vo.Student;
@@ -21,6 +22,9 @@ public interface LoginMapper {
 	
 	// 운영자 이름 찾기
 	public Manager selectManagerName(String accountId);
+	
+	// 관리자 이름 찾기
+	public Admin selectAdminName(String accountId);
 	
 	// 로그인시 로그 기록 생성
 	public int insertLoginLog(LoginLog loginLog);

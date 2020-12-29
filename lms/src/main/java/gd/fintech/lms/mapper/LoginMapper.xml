@@ -34,7 +34,7 @@
 			teacher_id = #{accountId} 
 	</select>
 	
-	<!--  학생 이름 찾기 -->
+	<!--  운영자 이름 찾기 -->
 	<select id="selectManagerName" parameterType="String" resultType="gd.fintech.lms.vo.Manager">
 		SELECT
 			manager_name managerName
@@ -44,6 +44,15 @@
 			manager_id = #{accountId} 
 	</select>
 	
+	<!--  관리자 이름 찾기 -->
+	<select id="selectAdminName" parameterType="String" resultType="gd.fintech.lms.vo.Admin">
+		SELECT
+			admin_name adminName
+		FROM 
+			admin
+		WHERE
+			admin_id = #{accountId} 
+	</select>
 	<!-- 로그인시 로그인 기록 남기기 -->
 	<insert id="insertLoginLog" parameterType="gd.fintech.lms.vo.LoginLog">
 		INSERT INTO login_log (

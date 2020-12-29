@@ -21,6 +21,9 @@
 <body>
 	<jsp:include page="/WEB-INF/view/auth/admin/include/menu.jsp" />
 	<div class="main-content">
+		<div class="container-fluid">
+			<jsp:include page="/WEB-INF/view/auth/admin/include/noLectureMenu.jsp" />
+		</div>
 		<!-- Header -->
 		<div class="header bg-gradient-primary pt-5 pt-md-8" >
 		</div>
@@ -32,7 +35,7 @@
 					<div class="card shadow" style="margin-top: 10px;">
 						<div class="card-header border-0"  >
 							<div class="mb-0" style="float: left; margin-top: 10px;">운영자 목록</div>
-							<div class="container-fluid" style="width: 50%; float: right;">
+							<div class="container-fluid" style="width: 50%; ">
 								<form method="get"	action="${pageContext.request.contextPath}/auth/admin/index/1">
 									<div class="input-group-prepend" >
 										<select style="width: 200px;" class="form-control" name="managerPosition">
