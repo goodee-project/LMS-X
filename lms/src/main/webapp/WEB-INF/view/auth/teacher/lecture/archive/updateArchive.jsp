@@ -189,7 +189,7 @@
 								<div class="row align-items-center">
 									<br>
 									<div class="col-8">
-										<h3 class="mb-0">&nbsp;&nbsp;&nbsp;자료 수정</h3>
+										<h3 class="mb-0">자료 수정</h3>
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveList/1'">목록</button>

@@ -116,7 +116,7 @@ th {
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">&nbsp;&nbsp;&nbsp;공지사항 목록</h3>
+									<h3 class="mb-0">공지사항 목록</h3>
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-success"

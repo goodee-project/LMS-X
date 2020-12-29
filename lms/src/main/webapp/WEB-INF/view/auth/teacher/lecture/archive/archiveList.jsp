@@ -105,11 +105,17 @@
 			<div class="row">
 				<div class="col">
 					<div class="card shadow">
-						<div class="card-header-border-0">
-							<br>
-							<h3 class="mb-0">&nbsp;&nbsp;&nbsp;자료실</h3>
-							<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/insertArchive'">작성</button>
-							<br>
+						<div class="card-header bg-white border-0">
+							<div class="row align-items-center">
+								<br>
+								<div class="col-8">
+									<h3 class="mb-0">자료실</h3>
+								</div>
+								<div class="col-4 text-right">
+									<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/insertArchive'">작성</button>
+								</div>
+								<br>
+							</div>
 						</div>
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">

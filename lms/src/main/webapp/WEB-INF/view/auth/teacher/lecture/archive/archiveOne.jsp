@@ -125,7 +125,7 @@
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">&nbsp;&nbsp;&nbsp;자료 조회</h3>
+									<h3 class="mb-0">자료 조회</h3>
 								</div>
 								<div class="col-4 text-right">
 									<div style="float: right;">
