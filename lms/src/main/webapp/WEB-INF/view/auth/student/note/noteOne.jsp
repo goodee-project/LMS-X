@@ -80,7 +80,7 @@
 							<table class="table">
 								<tr>
 									<th>제목</th>
-									<td colspan="3">${note.noteTitle}</td>
+									<td colspan="3" class="td-fix">${note.noteTitle}</td>
 								</tr>
 								<tr>
 									<th>보낸사람</th>

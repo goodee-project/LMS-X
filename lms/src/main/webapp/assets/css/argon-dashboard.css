@@ -51,10 +51,10 @@
   --font-family-sans-serif: Open Sans, sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
-.table-fix {
+table {
       table-layout: fixed;
 }
-.td-fix {
+td {
       white-space: normal !important;
       word-wrap: break-word;
 }
