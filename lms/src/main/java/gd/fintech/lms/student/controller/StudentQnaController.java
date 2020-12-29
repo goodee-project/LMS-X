@@ -242,7 +242,8 @@ public class StudentQnaController {
 		
 		System.out.println("액션questionNo" + questionNo);
 		
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo;
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo +"/1";
+		
 	}
 	
 	// Qna 삭제

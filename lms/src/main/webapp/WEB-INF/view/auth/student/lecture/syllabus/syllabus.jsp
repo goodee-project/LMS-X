@@ -34,7 +34,7 @@
 				<table border="1">
 					<tr>
 						<td>파일 이름</td>
-						<td><a onclick="fileDownloadCount('${syllabus.syllabusFileUuid}','${syllabus.syllabusFileCount}')" download="${sy.syllabusFileOriginal}" href="${pageContext.request.contextPath}/resource/syllabusFile/${syllabus.syllabusFileUuid}">${syllabus.syllabusFileOriginal}</a></td>
+						<td><a onclick="fileDownloadCount('${syllabus.syllabusFileUuid}','${syllabus.syllabusFileCount}')" download="${syllabus.syllabusFileOriginal}" href="${pageContext.request.contextPath}/resource/syllabusFile/${syllabus.syllabusFileUuid}">${syllabus.syllabusFileOriginal}</a></td>
 					</tr>
 					<tr>
 						<td>파일 사이즈</td>
