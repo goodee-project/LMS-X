@@ -106,8 +106,9 @@
 									<h3 class="mb-0">학생 과제 제출 조회</h3>
 								</div>
 								<div class="col-4 text-right">
-									
-								</div>
+										<button type="button" class="btn btn-sm btn-dark"
+											onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}'">목록</button>
+									</div>
 								<br>
 							</div>
 						</div>
@@ -136,29 +137,33 @@
 							</table>
 						</div>
 						<div class="card-footer py-4">
-							<nav aria-label="...">
+							<div class="row align-items-center">
 								<br>
-			
-								<h3>첨부파일</h3>
-								
+								<div class="col-8">
+									<h3 class="mb-0">첨부파일</h3>
+								</div>
+								<div class="col-4 text-right">
+									
+								</div>
 								<br>
-								
-								<table class="table">
-									<c:forEach var="rsf" items="${reportSubmit[0].reportSubmitFileList}">
-										<tr>
-											<td>
-												<c:if test="${reportSubmit[0].reportSubmitFileList[0].reportSubmitFileOriginal != null}">
-													<a href="${pageContext.request.contextPath}/resource/reportSubmitFile/${rsf.reportSubmitFileUuid}" download="${rsf.reportSubmitFileOriginal}">${rsf.reportSubmitFileOriginal}</a>
-													&nbsp;(${rsf.reportSubmitFileType}, ${rsf.reportSubmitFileSize}KByte)
-												</c:if>
-												<c:if test="${reportSubmit[0].reportSubmitFileList[0].reportSubmitFileOriginal == null}">
-													(첨부파일이 없습니다)	
-												</c:if>
-											</td>
-										</tr>
-									</c:forEach>
-								</table>
-							</nav>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table align-items-center table-flush">
+								<c:forEach var="rsf" items="${reportSubmit[0].reportSubmitFileList}">
+									<tr>
+										<td>
+											<c:if test="${reportSubmit[0].reportSubmitFileList[0].reportSubmitFileOriginal != null}">
+												<a href="${pageContext.request.contextPath}/resource/reportSubmitFile/${rsf.reportSubmitFileUuid}" download="${rsf.reportSubmitFileOriginal}">${rsf.reportSubmitFileOriginal}</a>
+												&nbsp;(${rsf.reportSubmitFileType}, ${rsf.reportSubmitFileSize}KByte)
+											</c:if>
+											<c:if test="${reportSubmit[0].reportSubmitFileList[0].reportSubmitFileOriginal == null}">
+												(첨부파일이 없습니다)	
+											</c:if>
+										</td>
+									</tr>
+								</c:forEach>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -172,51 +177,51 @@
 								<br>
 								<div class="col-8">
 									<h3 class="mb-0">과제 평가</h3>
-									<br>
 								</div>
 								<div class="col-4 text-right">
 								<!-- 점수 입력이 되지 않은 경우 -->
 									<c:if test="${reportSubmit[0].reportSubmitPoint == -1}">
-										<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/insertReportSubmit/${reportSubmit[0].reportSubmitNo}'">평가 입력</button>
+										<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}/insertReportSubmit/${reportSubmit[0].reportSubmitNo}'">평가 입력</button>
 									</c:if>
 									<!-- 점수 입력이 되어 있는 경우 -->
 									<c:if test="${reportSubmit[0].reportSubmitPoint != -1}">
-										<button type="button" class="btn btn-sm btn-primary" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/updateReportSubmit/${reportSubmit[0].reportSubmitNo}'">평가 수정</button>
+										<button type="button" class="btn btn-sm btn-primary" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}/updateReportSubmit/${reportSubmit[0].reportSubmitNo}'">평가 수정</button>
 									</c:if>
 								</div>
 								<br>
 							</div>
-							<div class="table-responsive">
-								<table class="table align-items-center table-flush">
-									<tr>
-										<td width="20%">점수</td>
-										<!-- 점수 입력이 되지 않은 경우 -->
-										<c:if test="${reportSubmit[0].reportSubmitPoint == -1}">
-											<td>(미입력)</td>
-										</c:if>
-										<!-- 점수 입력이 되어 있는 경우 -->
-										<c:if test="${reportSubmit[0].reportSubmitPoint != -1}">
-											<td>${reportSubmit[0].reportSubmitPoint}</td>
-										</c:if>
-									</tr>
-									<tr>
-										<td width="20%">평가 내용</td>
-										<!-- 평가 내용 입력이 되지 않은 경우 -->
-										<c:if test="${reportSubmit[0].reportSubmitFeedback == null}">
-											<td>(평가 내용이 없습니다)</td>
-										</c:if>
-										<!-- 평가 내용 입력이 되어 있는 경우 -->
-										<c:if test="${reportSubmit[0].reportSubmitFeedback != null}">
-											<td>${reportSubmit[0].reportSubmitFeedback}</td>
-										</c:if>
-									</tr>
-								</table>
-							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table align-items-center table-flush">
+								<tr>
+									<td width="20%">점수</td>
+									<!-- 점수 입력이 되지 않은 경우 -->
+									<c:if test="${reportSubmit[0].reportSubmitPoint == -1}">
+										<td>(미입력)</td>
+									</c:if>
+									<!-- 점수 입력이 되어 있는 경우 -->
+									<c:if test="${reportSubmit[0].reportSubmitPoint != -1}">
+										<td>${reportSubmit[0].reportSubmitPoint}</td>
+									</c:if>
+								</tr>
+								<tr>
+									<td width="20%">평가 내용</td>
+									<!-- 평가 내용 입력이 되지 않은 경우 -->
+									<c:if test="${reportSubmit[0].reportSubmitFeedback == null}">
+										<td>(평가 내용이 없습니다)</td>
+									</c:if>
+									<!-- 평가 내용 입력이 되어 있는 경우 -->
+									<c:if test="${reportSubmit[0].reportSubmitFeedback != null}">
+										<td>${reportSubmit[0].reportSubmitFeedback}</td>
+									</c:if>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<footer class="footer"></footer>
 	</div>
 	<!--   Core   -->
 	<script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>

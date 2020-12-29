@@ -104,34 +104,33 @@
 								<br>
 								<div class="col-8">
 									<h3 class="mb-0">강좌 정보</h3>
-									<br>
 								</div>
 								<div class="col-4 text-right">
 								</div>
 								<br>
 							</div>
-							<div class="table-responsive">
-								<table class="table align-items-center table-flush">
-									<thead class="thead-light">
-										<tr>
-											<th scope="col">과목</th>
-											<th scope="col">강좌</th>
-											<th scope="col">강사</th>
-											<th scope="col">개강일</th>
-											<th scope="col">종강일</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>${lecture.subject.subjectName}</td>
-											<td>${lecture.lectureName}</td>
-											<td>${lecture.teacherName}</td>
-											<td>${lecture.lectureStartdate}</td>
-											<td>${lecture.lectureEnddate}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table align-items-center table-flush">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">과목</th>
+										<th scope="col">강좌</th>
+										<th scope="col">강사</th>
+										<th scope="col">개강일</th>
+										<th scope="col">종강일</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>${lecture.subject.subjectName}</td>
+										<td>${lecture.lectureName}</td>
+										<td>${lecture.teacherName}</td>
+										<td>${lecture.lectureStartdate}</td>
+										<td>${lecture.lectureEnddate}</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -144,48 +143,50 @@
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">공지사항 목록</h3>
-									<br>
+									<h3 class="mb-0">강좌 공지사항</h3>
 								</div>
 								<div class="col-4 text-right">
+									<button type="button" class="btn btn-sm btn-dark"
+										onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1'">더 보기</button>
 								</div>
 								<br>
 							</div>
-							<div class="table-responsive">
-								<table class="table align-items-center table-flush">
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>제목</th>
-											<th>작성일시</th>
-											<th>조회수</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:if test="${lectureNoticeList[0].lectureNoticeNo != null}">
-											<c:forEach var="lnl" items="${lectureNoticeList}">
-												<tr>
-													<td width="15%">${lnl.lectureNoticeNo}</td>
-													<td width="45%">
-														<a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lnl.lectureNo}/notice/noticeOne/${lnl.lectureNoticeNo}">${lnl.lectureNoticeTitle}</a>
-													</td>
-													<td width="20%">${lnl.lectureNoticeCreatedate}</td>
-													<td width="20%">${lnl.lectureNoticeCount}</td>
-												</tr>
-											</c:forEach>
-										</c:if>
-										<c:if test="${lectureNoticeList[0].lectureNoticeNo == null}">
+						</div>
+						<div class="table-responsive">
+							<table class="table align-items-center table-flush">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>제목</th>
+										<th>작성일시</th>
+										<th>조회수</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${lectureNoticeList[0].lectureNoticeNo != null}">
+										<c:forEach var="lnl" items="${lectureNoticeList}">
 											<tr>
-												<td colspan="7">(공지사항이 없습니다)</td>
+												<td width="15%">${lnl.lectureNoticeNo}</td>
+												<td width="45%">
+													<a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lnl.lectureNo}/notice/noticeOne/${lnl.lectureNoticeNo}">${lnl.lectureNoticeTitle}</a>
+												</td>
+												<td width="20%">${lnl.lectureNoticeCreatedate}</td>
+												<td width="20%">${lnl.lectureNoticeCount}</td>
 											</tr>
-										</c:if>
-									</tbody>						
-								</table>
-							</div>
-						</div>		
+										</c:forEach>
+									</c:if>
+									<c:if test="${lectureNoticeList[0].lectureNoticeNo == null}">
+										<tr>
+											<td colspan="7">(공지사항이 없습니다)</td>
+										</tr>
+									</c:if>
+								</tbody>						
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
+			<footer class="footer"></footer>
 		</div>
 	</div>
 	<!--   Core   -->

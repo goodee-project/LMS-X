@@ -120,28 +120,28 @@
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
 								<tr>
-									<td width="20%">번호</td>
-									<td width="80%">${lectureNoticeNo}</td>
+									<td width="20%">과제 제목</td>
+									<td width="80%">${report.reportTitle}</td>
 								</tr>
 								<tr>
-									<td>제목</td>
-									<td>${lectureNotice.lectureNoticeTitle}</td>
+									<td>과제 내용</td>
+									<td>${report.reportContent}</td>
 								</tr>
 								<tr>
-									<td>내용</td>
-									<td>${lectureNotice.lectureNoticeContent}</td>
+									<td>과제 출제일시</td>
+									<td>${report.reportCreatedate}</td>
 								</tr>
 								<tr>
-									<td>작성일시</td>
-									<td>${lectureNotice.lectureNoticeCreatedate}</td>
+									<td>과제 수정일시</td>
+									<td>${report.reportUpdatedate}</td>
 								</tr>
 								<tr>
-									<td>수정일시</td>
-									<td>${lectureNotice.lectureNoticeUpdatedate}</td>				
+									<td>과제 시작일시</td>
+									<td>${report.reportStartdate}</td>
 								</tr>
 								<tr>
-									<td>조회수</td>
-									<td>${lectureNotice.lectureNoticeCount}</td>
+									<td>과제 마감일시</td>
+									<td>${report.reportEnddate}</td>
 								</tr>
 							</table>
 						</div>
@@ -198,6 +198,7 @@
 					</div>
 				</div>
 			</div>
+			<footer class="footer"></footer>
 		</div>
 	</div>
 	<!--   Core   -->
