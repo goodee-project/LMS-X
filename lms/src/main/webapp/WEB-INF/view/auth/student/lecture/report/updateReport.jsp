@@ -222,7 +222,7 @@
 							    	</table>
 							    	<!-- 첨부파일 -->
 							    	<table class="table">
-							    		<thead>
+						    			<thead class="thead-light">
 								    		<tr>
 								    			<th colspan="4">첨부파일</th>
 								    		</tr>

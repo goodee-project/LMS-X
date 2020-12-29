@@ -11,10 +11,10 @@
 				<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<div class="media align-items-center">
 						<span class="avatar avatar-sm rounded-circle"> 
-							<c:if test="${!empty accountImage}">
+							<c:if test="${!empty sessionScope.loginImage}">
 								<img src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
 							</c:if>
-							<c:if test="${empty accountImage}">
+							<c:if test="${empty sessionScope.loginImage}">
 								<img src="${pageContext.request.contextPath}/resource/mypageImage/default.png">
 							</c:if>
 						</span>
@@ -27,20 +27,14 @@
 				</a>
 				<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
 					<div class=" dropdown-header noti-title">
-						<h6 class="text-overflow m-0">Welcome!</h6>
+						<h6 class="text-overflow m-0">환영합니다!</h6>
 					</div>
 					<a href="./examples/profile.html" class="dropdown-item"> <i
-						class="ni ni-single-02"></i> <span>My profile</span>
-					</a> <a href="./examples/profile.html" class="dropdown-item"> <i
-						class="ni ni-settings-gear-65"></i> <span>Settings</span>
-					</a> <a href="./examples/profile.html" class="dropdown-item"> <i
-						class="ni ni-calendar-grid-58"></i> <span>Activity</span>
-					</a> <a href="./examples/profile.html" class="dropdown-item"> <i
-						class="ni ni-support-16"></i> <span>Support</span>
+						class="ni ni-single-02"></i> <span>마이 페이지</span>
 					</a>
 					<div class="dropdown-divider"></div>
 					<a href="${pageContext.request.contextPath}/auth/logout" class="dropdown-item"> <i class="ni ni-user-run"></i>
-						<span>Logout</span>
+						<span>로그아웃</span>
 					</a>
 				</div>
 			</li>

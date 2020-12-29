@@ -7,8 +7,8 @@
 	<span class="navbar-toggler-icon"></span>
 </button>
 <!-- Brand -->
-<a class="navbar-brand pt-0" href="#"> <img
-	src="./assets/img/brand/blue.png" class="navbar-brand-img">
+<a class="navbar-brand pt-0" href="${pageContext.request.contextPath}/auth/student/index/1"> <img
+	src="${pageContext.request.contextPath}/assets/img/brand/blue.png" class="navbar-brand-img">
 </a>
 <!-- Collapse -->
 <div class="collapse navbar-collapse" id="sidenav-collapse-main">

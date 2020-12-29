@@ -51,7 +51,7 @@ public class StudentTestController {
 		HttpSession session = ((HttpServletRequest)request).getSession();	
 		String accountId = (String)session.getAttribute("loginId");
 		
-		int rowPerPage = 1;
+		int rowPerPage = 5;
 		int totalCount = studentTestService.selectMultiplechoiceCount(lectureNo) / 5;		
 		int beginRow = (currentPage - 1) * rowPerPage * 5; // 시작 페이지
 

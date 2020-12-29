@@ -179,9 +179,11 @@
 						    	</table>
 						    	<!-- 첨부파일 -->
 						    	<table class="table">
-						    		<tr>
-						    			<th colspan="3">첨부파일</th>
-						    		</tr>
+						    		<thead class="thead-light">
+							    		<tr>
+							    			<th colspan="3">첨부파일</th>
+							    		</tr>
+						    		</thead>
 						    		<c:forEach items="${reportSubmit.reportSubmitFileList}" var="rsf">
 						    			<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
 						   				<c:set var="uuid">${rsf.reportSubmitFileUuid}</c:set>

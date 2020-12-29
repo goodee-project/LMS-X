@@ -14,6 +14,9 @@
 					<a class="nav-link active" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/1">강의 질문게시판</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link active" href="${pageContext.request.contextPath}/auth/student/lecture/syllabus/syllabus/${lectureNo}">강의 계획</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link active" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/report/reportList/1">과제</a>
 				</li>
 				<li class="nav-item">

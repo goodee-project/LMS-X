@@ -13,9 +13,7 @@
 			rel="stylesheet">
 		<!-- Icons -->
 		<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-		<link
-			href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"
-			rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
 		<!-- CSS Files -->
 		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -266,4 +264,5 @@
 		        application: "argon-dashboard-free"
 		    });
   		</script>
+  	</body>
 </html>

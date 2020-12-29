@@ -5,6 +5,17 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>testOne</title>
+		<!-- Favicon -->
+		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
+		<!-- Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+			rel="stylesheet">
+		<!-- Icons -->
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+		<!-- CSS Files -->
+		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function(){	
@@ -83,62 +94,138 @@
 			})
 		</script>
 	</head>
-	<body>
-		<h1>평가</h1>
-		<div>
-			<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
-	    </div>
-		<div>
-			<jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
-	    </div>
-	    
-	    <!-- 평가 내용 -->
-	    <div>
-	    	<c:forEach items="${multiplechoice}" var="m">
-		    	<table border="1">
-		    		<tr>
-		    			<th>문제${m.multiplechoiceId} - </th>
-		    			<th>내용</th>
-		    			<td>${m.multiplechoiceQuestion}</td>
-		    			<th>배점</th>
-		    			<td>${m.multiplechoiceScore}</td>
-		    		</tr>
-			    	<c:forEach items="${m.multiplechoiceExampleList}" var="me">
-				    	<tr>	
-				    		<!-- when = 학생이 체크한 정답일 경우 -->
-				    		<!-- c:otherwise = 학생이 체크한 정답이 아닐경우 -->
-				    		<c:choose>
-				    			<c:when test="${m.answersheetList[0].answerSelect == me.multiplechoiceExampleId}">
-			    					<td><input checked="checked" type="radio" name="submit${me.multiplechoiceNo}" class="submit${me.multiplechoiceNo}" id="${me.multiplechoiceNo}" value="${me.multiplechoiceExampleId}"></td>			    			
-				    			</c:when>
-				    			<c:otherwise>
-			    					<td><input type="radio" name="submit${me.multiplechoiceNo}" class="submit${me.multiplechoiceNo}" id="${me.multiplechoiceNo}" value="${me.multiplechoiceExampleId}"></td>			    							    		
-				    			</c:otherwise>
-				    		</c:choose>
-				    		<td>${me.multiplechoiceExampleId}번. </td>
-			    			<td colspan="3">${me.multiplechoiceExampleContent}</td>
-				   		</tr>
-			    	</c:forEach>
-		    	</table>
-	    	</c:forEach>
-	    </div>
-	    
-	    <!-- 페이징 -->
-	    <div>
-	    	${currentPage}/${lastPage} 페이지
-	    	<c:if test="${currentPage > 1}">
-	    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage - 1}">이전 페이지</a>
-	    	</c:if>
-	    	<c:if test="${currentPage < lastPage}">
-	    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage + 1}">다음 페이지</a>
-	    	</c:if>
-	    </div>
-	    
-	    <!-- 평가 제출 -->
-	    <div>
-	    	<c:if test="${currentPage == lastPage}">
-	    		<button type="button" id="finishTest">평가 종료</button>
-	    	</c:if>
-	    </div>
-	</body>
+	<body class="">
+		<!-- 메인 Navbar -->
+		
+		<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+			<div class="container-fluid">
+				<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
+		    </div>	
+		</nav>   		
+		<div class="main-content">
+			<!-- 상단 Navbar -->
+			<div class="container-fluid">
+				<jsp:include page="/WEB-INF/view/auth/student/include/topMenu.jsp" />
+	    	</div>
+			<!-- 강좌 Navbar -->
+			<div class="container-fluid">
+				<jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
+	    	</div>
+	    	
+			<!-- Header -->
+			<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+				<div class="container-fluid">
+					<div class="header-body">
+						<!-- Card stats -->
+						<div class="row">
+							<div class="col-xl-3 col-lg-6">
+								<div class="card card-stats mb-4 mb-xl-0">
+									<div class="card-body">
+										<div class="row">
+											<div class="col">
+												<h5 class="card-title text-uppercase text-muted mb-0">접속자 현황</h5>
+												<span class="h2 font-weight-bold mb-0">350,897</span>
+											</div>
+											<div class="col-auto">
+												<div
+													class="icon icon-shape bg-danger text-white rounded-circle shadow">
+													<i class="fas fa-chart-bar"></i>
+												</div>
+											</div>
+										</div>
+										<p class="mt-3 mb-0 text-muted text-sm">
+											<span class="text-nowrap">누적 접속자</span>
+											<span class="text-success mr-2">1,000,000,000</span> 
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+   			<div class="container-fluid mt--7 col-7 ">
+				<div class="card shadow">
+					<div class="card-header border-0">
+						<div class="row align-items-center">
+							<div class="col">
+								<h3 class="mb-0">평가 문제</h3>
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center">
+						<div class="col-12">
+						    <!-- 평가 내용 -->
+						    <div>
+						    	<c:forEach items="${multiplechoice}" var="m">
+							    	<table class="table">
+							    		<thead class="thead-light">
+								    		<tr>
+								    			<th>문제${m.multiplechoiceId} - </th>
+								    			<th>내용</th>
+								    			<th>${m.multiplechoiceQuestion}</th>
+								    			<th>배점</th>
+								    			<th>${m.multiplechoiceScore}</th>
+								    		</tr>
+							    		</thead>
+								    	<c:forEach items="${m.multiplechoiceExampleList}" var="me">
+									    	<tr>	
+									    		<!-- when = 학생이 체크한 정답일 경우 -->
+									    		<!-- c:otherwise = 학생이 체크한 정답이 아닐경우 -->
+									    		<c:choose>
+									    			<c:when test="${m.answersheetList[0].answerSelect == me.multiplechoiceExampleId}">
+								    					<td><input checked="checked" type="radio" name="submit${me.multiplechoiceNo}" class="submit${me.multiplechoiceNo}" id="${me.multiplechoiceNo}" value="${me.multiplechoiceExampleId}"></td>			    			
+									    			</c:when>
+									    			<c:otherwise>
+								    					<td><input type="radio" name="submit${me.multiplechoiceNo}" class="submit${me.multiplechoiceNo}" id="${me.multiplechoiceNo}" value="${me.multiplechoiceExampleId}"></td>			    							    		
+									    			</c:otherwise>
+									    		</c:choose>
+									    		<td>${me.multiplechoiceExampleId}번. </td>
+								    			<td colspan="3">${me.multiplechoiceExampleContent}</td>
+									   		</tr>
+								    	</c:forEach>
+							    	</table>
+						    	</c:forEach>
+						    </div>
+						    <!-- 페이징 -->
+						    <div class="col-12">
+							    <div class="mt-3 col-12">
+							    	${currentPage}/${lastPage} 페이지
+							    	<c:if test="${currentPage > 1}">
+							    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage - 1}">이전 페이지</a>
+							    	</c:if>
+							    	<c:if test="${currentPage < lastPage}">
+							    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage + 1}">다음 페이지</a>
+							    	</c:if>
+							    </div>
+							    
+							    <!-- 평가 제출 -->
+							    <div class="mt-4 col-12">
+							    	<c:if test="${currentPage == lastPage}">
+							    		<button type="button" id="finishTest" class="btn btn-outline-primary">평가 종료</button>
+							    	</c:if>
+							    </div>
+						    </div>
+						</div>
+					</div>	
+				</div>
+			</div>		
+		</div>
+		<!--   Core   -->
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<!--   Optional JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+		<!--   Argon JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+		<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+		<script>
+		    window.TrackJS &&
+		      TrackJS.install({
+		        token: "ee6fab19c5a04ac1a32a645abde4613a",
+		        application: "argon-dashboard-free"
+		    });
+  		</script>
+  	</body>
 </html>
