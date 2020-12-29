@@ -55,6 +55,8 @@
 		<script>
 			$(document).ready(function(){
 				$('#insertBtn').click(function(){
+					// 스마트 에디터 내용 적용
+					oEditors.getById["lectureNoticeContent"].exec("UPDATE_CONTENTS_FIELD", []);
 					if($('#noticeTitleText').val().length <= 0){
 						alert('제목을 입력해주세요.');
 						return;
@@ -77,14 +79,8 @@
 		</script>
 	</head>
 	<body class="">
-		<nav
-			class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white"
-			id="sidenav-main">
-			<div class="container-fluid">
-				<!-- 내비게이션 메인 메뉴 -->
-				<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
-			</div>
-		</nav>
+		<!-- 내비게이션 메인 메뉴 -->
+		<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
 		<div class="main-content">
 			<!-- 내비게이션 상단 메뉴 -->
 			<div class="container-fluid">
@@ -137,6 +133,8 @@
 											<h3 class="mb-0">공지사항 작성</h3>
 										</div>
 										<div class="col-4 text-right">
+											<button type="submit" class="btn btn-sm btn-dark"
+												onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1'">목록</button>
 											<button type="button" class="btn btn-sm btn-success" style="float: right;" id="insertBtn">입력</button>
 										</div>
 										<br>

@@ -52,15 +52,9 @@
 			}
 		</style>
 	</head>
-	<body class="">
-		<nav
-		class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white"
-		id="sidenav-main">
-		<div class="container-fluid">
-			<!-- 내비게이션 메인 메뉴 -->
-			<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
-		</div>
-	</nav>
+	<body class="">	
+		<!-- 내비게이션 메인 메뉴 -->
+		<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
 	<div class="main-content">
 		<!-- 내비게이션 상단 메뉴 -->
 		<div class="container-fluid">
@@ -193,21 +187,22 @@
 				</div>
 			</div>
 		</div>
-		 <!--   Core   -->
-		  <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
-		  <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-		  <!--   Optional JS   -->
-		  <script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
-		  <script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
-		  <!--   Argon JS   -->
-		  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
-		  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-		  <script>
-		    window.TrackJS &&
-		      TrackJS.install({
-		        token: "ee6fab19c5a04ac1a32a645abde4613a",
-		        application: "argon-dashboard-free"
-		      });
-		  </script>
+	</div>
+	<!--   Core   -->
+	<script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
+	<script
+		src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<!--   Optional JS   -->
+	<script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+	<script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+	<!--   Argon JS   -->
+	<script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+	<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+	<script>
+		window.TrackJS && TrackJS.install({
+			token : "ee6fab19c5a04ac1a32a645abde4613a",
+			application : "argon-dashboard-free"
+		});
+	</script>
 	</body>
 </html>
