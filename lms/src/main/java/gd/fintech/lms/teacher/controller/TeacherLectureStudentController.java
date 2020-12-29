@@ -123,7 +123,6 @@ public class TeacherLectureStudentController {
 		map.put("teacherName", teacherName);
 		map.put("accountId", accountId);
 		
-		List<Attendance> attendanceList = teacherLectureStudentService.getTeacherAttendanceByStudentAndMonth(lectureNo, currentYear, currentMonth, accountId);
 		// 오늘 날짜
 		Calendar currentDay = Calendar.getInstance();
 		
@@ -135,8 +134,8 @@ public class TeacherLectureStudentController {
 			}
 			
 			if (currentMonth == 13) {
-				currentMonth = 1;
 				currentYear += 1;
+				currentMonth = 1;
 			}
 			currentDay.set(Calendar.YEAR, currentYear);
 			
@@ -144,9 +143,11 @@ public class TeacherLectureStudentController {
 			currentDay.set(Calendar.MONTH, currentMonth -1);
 		}
 		
+		
 		currentYear = currentDay.get(Calendar.YEAR);					// 올해 연도
 		currentMonth = currentDay.get(Calendar.MONTH) + 1;				// Calendar.MONTH에 1을 더해야 실제 월이 나온다.
 		
+		List<Attendance> attendanceList = teacherLectureStudentService.getTeacherAttendanceByStudentAndMonth(lectureNo, currentYear, currentMonth, accountId);
 		LectureAndStudentAndClassRegistration LASACR = teacherLectureStudentService.getStudentOne(map);
 		
 		model.addAttribute("currentYear", currentYear);					// 년도
