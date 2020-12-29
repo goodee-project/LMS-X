@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.manager.service.ManagerLoginLogService;
 import gd.fintech.lms.vo.LoginLog;
@@ -19,7 +20,8 @@ public class ManagerLoginLogController {
 	
 	@GetMapping("/auth/manager/access/accessList/{currentPage}")
 	public String managerLoginLogList(Model model, HttpSession session,
-		@PathVariable(name="currentPage") int currentPage) {
+			@PathVariable(name="currentPage") int currentPage,
+			@RequestParam(name="searchText", defaultValue = "") String searchText) {
 	
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
@@ -27,7 +29,7 @@ public class ManagerLoginLogController {
 		// 시작 페이지 계산
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
-		List<LoginLog> loginLogList = managerLoginLogService.getLoginLogList(beginRow, rowPerPage);
+		List<LoginLog> loginLogList = managerLoginLogService.getLoginLogList(beginRow, rowPerPage, searchText);
 		
 		int totalCount = managerLoginLogService.getLoginLogCount();
 		// 페이징 코드
@@ -85,6 +87,8 @@ public class ManagerLoginLogController {
 		
 		model.addAttribute("prePage", prePage);
 		model.addAttribute("nextPage", nextPage);
+		
+		model.addAttribute("searchText", searchText);
 		
 		return "auth/manager/access/accessList";
 	}

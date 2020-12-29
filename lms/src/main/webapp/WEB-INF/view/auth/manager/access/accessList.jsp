@@ -134,5 +134,22 @@
 			</td>
 		</tr>
 	</table>
+	
+	<div class="card-footer py-4">
+		<!-- 검색 -->
+		<form method="get" action="${pageContext.request.contextPath}/auth/manager/access/accessList/1" class="form-inline">
+			<div class="input-group" style="width: 70%; margin: auto;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">검색</span>
+				</div>
+				
+				<input type="text" class="form-control" name="searchText" value="${searchText}">
+				
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-outline-primary">검색</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

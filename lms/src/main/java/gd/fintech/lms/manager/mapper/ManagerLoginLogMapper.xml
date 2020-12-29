@@ -13,6 +13,11 @@
 			login_log_os loginLogOs
 		FROM
 			login_log
+		<where>
+			<if test="searchText != ''">
+				AND account_id LIKE CONCAT('%',#{searchText},'%')
+			</if>
+		</where>
 		ORDER BY
 			login_log_date DESC
 		LIMIT 

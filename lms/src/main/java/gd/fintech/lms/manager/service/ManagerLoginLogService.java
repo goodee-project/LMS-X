@@ -17,13 +17,12 @@ public class ManagerLoginLogService {
 	@Autowired private ManagerLoginLogMapper managerLoginLogMapper;
 	
 	// 로그인 로그 목록 출력
-	public List<LoginLog> getLoginLogList(int beginRow, int rowPerPage) {
-	
-	Map<String,Object> map = new HashMap<String, Object>();
-	map.put("beginRow", beginRow);
-	map.put("rowPerPage", rowPerPage);
-	
-	return managerLoginLogMapper.selectLoginLogList(map);
+	public List<LoginLog> getLoginLogList(int beginRow, int rowPerPage, String searchText) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		map.put("searchText", searchText);
+		return managerLoginLogMapper.selectLoginLogList(map);
 	}
 	
 	//  로그인 로그 목록 페이징 카운트
