@@ -183,6 +183,7 @@ th {
 					</div>
 				</div>
 			</form>
+			<footer class="footer"></footer>
 		</div>
 	</div>
 	<!--   Core   -->

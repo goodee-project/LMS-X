@@ -174,68 +174,69 @@ th {
 								<div class="col-4 text-right"></div>
 								<br>
 							</div>
-							<div class="table-responsive">
-								<table
-									class="table align-items-center table-flush attendanceTableMenu">
+						</div>
+						<div class="table-responsive">
+							<table
+								class="table align-items-center table-flush attendanceTableMenu">
+								<tr>
+									<td width="35%" style="text-align: right;">
+										<button type="button" class="btn btn-secondary"
+											onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentOne/${LASACR.classRegistration.accountId}/${currentYear}/${currentMonth - 1}'">
+											<i class='fas fa-angle-double-left' style='font-size: 36px'></i>
+										</button>
+									</td>
+									<td width="30%">
+										<h3>${currentYear}년${currentMonth}월</h3>
+									</td>
+									<td width="35%" style="text-align: left;">
+										<button type="button" class="btn btn-secondary"
+											onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentOne/${LASACR.classRegistration.accountId}/${currentYear}/${currentMonth + 1}'">
+											<i class='fas fa-angle-double-right' style='font-size: 36px'></i>
+										</button>
+									</td>
+								</tr>
+							</table>
+							<table class="table align-items-center table-flush">
+								<thead>
 									<tr>
-										<td width="35%" style="text-align: right;">
-											<button type="button" class="btn btn-secondary"
-												onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentOne/${LASACR.classRegistration.accountId}/${currentYear}/${currentMonth - 1}'">
-												<i class='fas fa-angle-double-left' style='font-size: 36px'></i>
-											</button>
-										</td>
-										<td width="30%">
-											<h3>${currentYear}년${currentMonth}월</h3>
-										</td>
-										<td width="35%" style="text-align: left;">
-											<button type="button" class="btn btn-secondary"
-												onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentOne/${LASACR.classRegistration.accountId}/${currentYear}/${currentMonth + 1}'">
-												<i class='fas fa-angle-double-right' style='font-size: 36px'></i>
-											</button>
-										</td>
+										<th>날짜</th>
+										<th>출결 여부</th>
+										<th>비고 혹은 사유</th>
 									</tr>
-								</table>
-								<table class="table align-items-center table-flush">
-									<thead>
+								</thead>
+								<tbody>
+									<c:forEach var="at" items="${attendanceList}">
 										<tr>
-											<th>날짜</th>
-											<th>출결 여부</th>
-											<th>비고 혹은 사유</th>
+											<c:if test="${at.attendanceDay != null}">
+												<td>${at.attendanceDay}</td>
+											</c:if>
+											<c:if test="${at.attendanceDay == null}">
+												<td style="text-align: center">x</td>
+											</c:if>
+
+
+											<c:if test="${at.attendanceState != null}">
+												<td>${at.attendanceState}</td>
+											</c:if>
+											<c:if test="${at.attendanceState == null}">
+												<td style="text-align: center">x</td>
+											</c:if>
+
+											<c:if test="${at.attendanceRemark != null}">
+												<td>${at.attendanceRemark}</td>
+											</c:if>
+											<c:if test="${at.attendanceRemark == null}">
+												<td style="text-align: center">x</td>
+											</c:if>
 										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="at" items="${attendanceList}">
-											<tr>
-												<c:if test="${at.attendanceDay != null}">
-													<td>${at.attendanceDay}</td>
-												</c:if>
-												<c:if test="${at.attendanceDay == null}">
-													<td style="text-align: center">x</td>
-												</c:if>
-
-
-												<c:if test="${at.attendanceState != null}">
-													<td>${at.attendanceState}</td>
-												</c:if>
-												<c:if test="${at.attendanceState == null}">
-													<td style="text-align: center">x</td>
-												</c:if>
-
-												<c:if test="${at.attendanceRemark != null}">
-													<td>${at.attendanceRemark}</td>
-												</c:if>
-												<c:if test="${at.attendanceRemark == null}">
-													<td style="text-align: center">x</td>
-												</c:if>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
+									</c:forEach>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
+			<footer class="footer"></footer>
 		</div>
 	</div>
 	<!--   Core   -->

@@ -144,28 +144,30 @@
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
 								<tr>
-									<td>
-										번호:${questionNo}
-									</td>
+									<td>번호:</td>
+									<td>${questionNo}</td>
 								</tr>
 								<tr>
-									<td>
-										${question[0].questionTitle}
-									</td>
+									<td>제목:</td>
+									<td>${question[0].questionTitle}</td>
 								</tr>
 								<tr>
 								</tr>
 								<tr>
+									<td>작성자:</td>
 									<td>${question[0].questionWriter}</td>
 								</tr>
 								<tr>
-									<td>조회수:${question[0].questionCount}</td>
+									<td>조회수:</td>
+									<td>${question[0].questionCount}</td>
 								</tr>
 								<tr>
-									<td>작성일:${question[0].questionCreatedate}</td>
+									<td>작성일:</td>
+									<td>${question[0].questionCreatedate}</td>
 								</tr>
 								<tr>
-									<td>수정일:${question[0].questionUpdatedate}</td>
+									<td>수정일:</td>
+									<td>${question[0].questionUpdatedate}</td>
 								</tr>
 								<tr>
 									<td colspan="2">
@@ -200,12 +202,12 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2">조회수:${question[0].questionCount}</td>
+									<td>조회수:</td>
+									<td>${question[0].questionCount}</td>
 								</tr>
 								<tr>
-									<td colspan="2">
-										<textarea class="form-control" readonly="readonly">${question[0].questionContent}</textarea>
-									</td>
+									<td>내용:</td>
+									<td>${question[0].questionContent}</td>
 								</tr>
 							</table>
 						</div>
@@ -380,6 +382,7 @@
 				</div>
 			</div>
 		</div>
+		<footer class="footer"></footer>
 	</div>
 	<!--   Core   -->
 	<script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>

@@ -143,6 +143,7 @@
 					</div>
 				</div>
 			</div>
+			<footer class="footer"></footer>
 		</div>
 	</div>
 	 <!--   Core   -->
