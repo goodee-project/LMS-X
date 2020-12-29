@@ -42,6 +42,7 @@
 				
 				// 질문 작성 버튼
 				$('#qnaBtn').click(function(){
+					oEditors.getById["questionContent"].exec("UPDATE_CONTENTS_FIELD", []); // 스마트 에디터 내용 추가
 					// 제목, 내용 유효성 검사
 					if($('#qnaTitle').val().length < 1){
 						alert('제목을 입력해 주세요.');
@@ -91,7 +92,6 @@
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
 	    	</div>
-	    	
 	    	<!-- Header -->
 			<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 				<div class="container-fluid">
@@ -121,6 +121,13 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-header border-0">
+				<div class="row align-items-center">
+					<div class="col">
+						<h3 class="mb-0">질문 작성</h3>
 					</div>
 				</div>
 			</div>

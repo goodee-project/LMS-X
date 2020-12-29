@@ -128,8 +128,8 @@
 							<!-- 이전 버튼 -->
 							<c:choose>
 								<c:when test="${currentPage > 1}">
-									<li>
-										<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/${prePage}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/${prePage}">
 											<i class='fas fa-angle-left'></i>
 										</a>
 									</li>
@@ -166,8 +166,8 @@
 							<!-- 다음 버튼 -->
 							<c:choose>
 								<c:when test="${currentPage < lastPage}">
-									<li >
-										<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/${nextPage}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/${nextPage}">
 											<i class='fas fa-angle-right'></i>
 										</a>
 									</li>

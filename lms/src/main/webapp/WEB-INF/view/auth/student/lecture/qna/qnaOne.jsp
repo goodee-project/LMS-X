@@ -180,11 +180,12 @@
 					</c:forEach>
 				</div>
 			</div>
-			<c:if test="${accountId == accountId}">
-				<td><a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}">질문 수정</a></td>
-				<td><a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a></td>
-			</c:if>
-			
+			<div style="text-align: right;">
+				<c:if test="${accountId == accountId}">
+					<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}">질문 수정</a>
+					<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
+				</c:if>
+			</div>
 		<hr>
 			<div class="card-header border-0">
 				<div class="row align-items-center">
@@ -212,14 +213,17 @@
 					</table>
 				</div>
 			</div>
+			</br>
 			<form action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/insertStduentQuestionComment" method="post">
 			<div>
 				<div>
-					<textarea style="width: 100%;" rows="8px" name="questionCommentContent"></textarea>
+					<textarea style="width: 100%;" rows="8px" name="questionCommentContent" class="form-control"></textarea>
 				</div>
-				<button class="btn btn-outline-primary" style="text-align: right; margin-right: 10%;" type="submit">댓글입력</button>
+				<div style="float: right"><button class="btn btn-outline-primary" style="text-align: right; margin-right: 10%;" type="submit">댓글입력</button></div>
 			</div>
 		</form>
+				<div class="row align-items-center mt-5">	
+			<div class="col-12">		
 			<!-- 페이지 네비게이션 -->
 			<ul class="pagination justify-content-center">
 				<!-- 처음으로 버튼 -->
@@ -243,8 +247,8 @@
 				<!-- 이전 버튼 -->
 				<c:choose>
 					<c:when test="${currentPage > 1}">
-						<li>
-							<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${prePage}">
+						<li class="page-item">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${prePage}">
 								<i class='fas fa-angle-left'></i>
 							</a>
 						</li>
@@ -281,8 +285,8 @@
 				<!-- 다음 버튼 -->
 				<c:choose>
 					<c:when test="${currentPage < lastPage}">
-						<li >
-							<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${nextPage}">
+						<li class="page-item">
+							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${nextPage}">
 								<i class='fas fa-angle-right'></i>
 							</a>
 						</li>
@@ -318,7 +322,7 @@
 		<table style="margin: auto;">
 			<tr>
 				<td>
-					<button type="button" class="btn btn-outline-dark btn-sm">
+					<button type="button" class="btn-outline-primary">
 						${currentPage} / ${lastPage} 페이지
 					</button>
 				</td>
