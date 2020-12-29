@@ -37,4 +37,12 @@ public interface TeacherReportMapper {
 	// 학생 과제 제출 조회
 	// 과제 제출 고유번호(reportSubmitNo)를 이용
 	List<ReportSubmit> selectTeacherReportSubmitOne(int reportSubmitNo);
+	
+	// 학생 과제 평가 입력
+	// 과제 제출 고유번호(reportSubmitNo)
+	int insertTeacherReportSubmit(Map<String, Object> map);
+	
+	// 학생 과제 평가 수정
+	// 과제 제출 고유번호(reportSubmitNo)
+	int updateTeacherReportSubmit(Map<String, Object> map);
 }

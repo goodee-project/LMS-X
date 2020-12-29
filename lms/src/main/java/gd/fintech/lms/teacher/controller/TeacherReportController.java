@@ -207,16 +207,22 @@ public class TeacherReportController {
 			@PathVariable(value = "reportNo") int reportNo, 
 			@PathVariable(value = "reportSubmitNo") int reportSubmitNo) {
 		
-		
 		// [View] /auth/teacher/lecture/report/insertReportSubmit.jsp
 		return "/auth/teacher/lecture/report/insertReportSubmit";
 	}
 	
 	// 학생 과제 평가 입력 Action
 	@PostMapping("/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}/insertReportSubmit/{reportSubmitNo}")
-	public String insertReportSubmit() {
+	public String insertReportSubmit(ReportSubmit reportSubmit, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "reportNo") int reportNo, 
+			@PathVariable(value = "reportSubmitNo") int reportSubmitNo) {
+		// [Logger] 과제 제출(reportSubmit) 확인
+		logger.trace("reportSubmit[" + reportSubmit + "]");
 		
-		return "redirect:/";
+		teacherReportService.insertTeacherReportSubmit(reportSubmit, reportSubmitNo);
+		
+		return "redirect:/auth/teacher/lecture/" + lectureNo + "/report/reportOne/" + reportNo + "/reportSubmitOne/" + reportSubmitNo;
 	}
 	
 	// 학생 과제 평가 수정 Form
@@ -225,6 +231,14 @@ public class TeacherReportController {
 			@PathVariable(value = "lectureNo") int lectureNo, 
 			@PathVariable(value = "reportNo") int reportNo, 
 			@PathVariable(value = "reportSubmitNo") int reportSubmitNo) {
+		// 과제 제출 고유번호(reportSubmitNo)에 해당하는 과제의 정보를 데이터베이스에서 가져온다
+		List<ReportSubmit> reportSubmit = teacherReportService.selectTeacherReportSubmitOne(reportSubmitNo);
+		
+		// [Logger] 과제 제출(reportSubmit) 확인
+		logger.trace("reportSubmit[" + reportSubmit + "]");
+		
+		// model을 통해 View에 다음과 같은 정보들을 보내준다
+		model.addAttribute("reportSubmit", reportSubmit);
 		
 		// [View] /auth/teacher/lecture/report/updateReportSubmit.jsp
 		return "/auth/teacher/lecture/report/updateReportSubmit";
@@ -232,8 +246,15 @@ public class TeacherReportController {
 	
 	// 학생 과제 평가 입력 Action
 	@PostMapping("/auth/teacher/lecture/{lectureNo}/report/reportOne/{reportNo}/updateReportSubmit/{reportSubmitNo}")
-	public String updateReportSubmit(ReportSubmit reportSubmit) {
+	public String updateReportSubmit(ReportSubmit reportSubmit, 
+			@PathVariable(value = "lectureNo") int lectureNo, 
+			@PathVariable(value = "reportNo") int reportNo, 
+			@PathVariable(value = "reportSubmitNo") int reportSubmitNo) {
+		// [Logger] 과제 제출(reportSubmit) 확인
+		logger.trace("reportSubmit[" + reportSubmit + "]");
 		
-		return "redirect:/";
+		teacherReportService.updateTeacherReportSubmit(reportSubmit, reportSubmitNo);
+		
+		return "redirect:/auth/teacher/lecture/" + lectureNo + "/report/reportOne/" + reportNo + "/reportSubmitOne/" + reportSubmitNo;
 	}
 }
