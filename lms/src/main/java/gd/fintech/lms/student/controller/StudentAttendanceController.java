@@ -22,34 +22,36 @@ import gd.fintech.lms.vo.Attendance;
 public class StudentAttendanceController {
 	@Autowired StudentAttendanceService studentAttendanceService;
 
-	@GetMapping(value="auth/student/lecture/{lectureNo}/attendance/attendanceByMonth/{target}/{currentYear}/{currentMonth}")
+	@GetMapping(value="auth/student/lecture/{lectureNo}/attendance/attendanceByMonth/{currentYear}/{currentMonth}")
 	public String cashbookByMonth(Model model, ServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo, 
-			@PathVariable(name = "target") String target, 
 			@PathVariable(name = "currentYear") int currentYear,
 			@PathVariable(name = "currentMonth") int currentMonth) { 
 
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
 		String accountId = (String)session.getAttribute("loginId");
-		String accountName = (String)session.getAttribute("loginName");
-		String accountImage = (String)session.getAttribute("loginImage");
-		
-		// 달력 생성
-		Calendar currentDay = Calendar.getInstance(); // 2020년 11월 2일	
-		
-		// currentYear 넘어오고, currentMonth도 넘어면
-	   if (currentYear != -1 && currentMonth != -1) {	
-			currentDay.set(Calendar.YEAR, currentYear);
-			currentDay.set(Calendar.MONTH , currentMonth -1);
-			// 이전 선택 시
-			if(target.equals("pre")) {
-				currentDay.add(Calendar.MONTH, -1);
-			// 다음 선택 시
-			}else if (target.equals("next")) {
-				currentDay.add(Calendar.MONTH, +1);		
+
+		// 현재 날짜
+		Calendar currentDay = Calendar.getInstance();
+
+		// currentYear와 currentMonth의 값이 모두 넘어왔을 경우
+		if (currentYear != -1 && currentMonth != -1) {
+			if (currentMonth == 0) {
+				currentYear -= 1;
+				currentMonth = 12;
 			}
-		}	
+			
+			if (currentMonth == 13) {
+				currentYear += 1;
+				currentMonth = 1;
+			}
+			
+			currentDay.set(Calendar.YEAR, currentYear);
+			
+			// Calendar 함수의 값 보정 위해 1만큼 감안하여 설정
+			currentDay.set(Calendar.MONTH, currentMonth - 1);
+		}
 
 		currentDay.set(Calendar.DATE, 1); // 2020년 11월 1일
 		
@@ -72,8 +74,6 @@ public class StudentAttendanceController {
 		model.addAttribute("firstDayOfWeek", firstDayOfWeek);
 		model.addAttribute("attendanceList", attendanceList);
 		model.addAttribute("accountId", accountId);
-		model.addAttribute("accountName", accountName);
-		model.addAttribute("accountImage", accountImage);
 		
 		return "auth/student/lecture/attendance/attendanceByMonth";
 	}

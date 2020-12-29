@@ -197,7 +197,7 @@
 								    		</tr>
 								    		<tr>
 								    			<th>내용</th>
-								    			<td style="width:100%;"><textarea name="reportSubmitContent" id="reportSubmitContent" style="width:100%;" rows="22px"></textarea></td>
+								    			<td style="width:100%;"><textarea name="reportSubmitContent" id="reportSubmitContent" style="width:100%;" rows="22" cols="10" wrap="hard"></textarea></td>
 								    		</tr>
 								    	</table>
 								    	

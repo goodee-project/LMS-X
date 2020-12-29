@@ -217,7 +217,7 @@
 							    		</tr>
 							    		<tr>
 							    			<th>내용</th>
-							    			<td style="width:100%;"><textarea rows="22px" name="reportSubmitContent" id="reportSubmitContent" style="width:100%;">${reportSubmit.reportSubmitContent}</textarea></td>
+							    			<td style="width:100%;"><textarea rows="22" cols="10" wrap="hard" name="reportSubmitContent" id="reportSubmitContent" style="width:100%;">${reportSubmit.reportSubmitContent}</textarea></td>
 							    		</tr>
 							    	</table>
 							    	<!-- 첨부파일 -->

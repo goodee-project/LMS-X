@@ -147,7 +147,7 @@
 							    		</tr>
 							    		<tr>
 							    			<th>내용</th>
-							    			<td><textarea rows="3" cols="50" id="noteContent" name="noteContent" class="form-control"></textarea></td>
+							    			<td><textarea rows="22" cols="10" wrap="hard" id="noteContent" name="noteContent" class="form-control"></textarea></td>
 							    		</tr>
 							    		<tr>
 							    			<td colspan="2">						    				

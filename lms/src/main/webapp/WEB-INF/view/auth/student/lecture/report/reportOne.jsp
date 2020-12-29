@@ -156,7 +156,7 @@
 				    </div>		
 				</div>
 				<!-- 과제 제출 -->
-				<div class="row mt-5">
+				<div class="row mt-5" style="word-wrap : break-word;">
 					<div class="col-xl-12 mb-5 mb-xl-0">
 						<div class="card shadow">
 							<div class="card-header border-0">

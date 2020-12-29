@@ -26,7 +26,7 @@
 					<a class="nav-link active" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testList">평가</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/attendance/attendanceByMonth/now/-1/-1">출석 현황</a>
+					<a class="nav-link active" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/attendance/attendanceByMonth/-1/-1">출석 현황</a>
 				</li>
 			</ul>
 		</div>
