@@ -138,16 +138,16 @@
 		    		<!-- 내용 -->
 			    	<table class="table">
 			    		<tr>
-			    			<th>제목</th>
+			    			<th width="10%">제목</th>
 			    			<td><input class="form-control" id="qnaTitle" type="text" name="questionTitle"></td>
 			    		</tr>
 						<tr>
 			    			<th>비밀 글 설정</th>
-			    			<td ><input class="form-control" id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword"></td>
+			    			<td><input class="form-control" id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword"></td>
 			    		</tr>
 			    		<tr>
 			    			<th>내용</th>
-			    			<td style="width:100%;"><textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px"></textarea></td>
+			    			<td><textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px"></textarea></td>
 			    		</tr>
 			    	</table>
 		    	
@@ -172,7 +172,7 @@
     				<table class="table">    
 			    		<tr>
 			    			<th>
-			  	  				<div><button id="qnaBtn" type="button" class="btn btn-outline-primary">질문 작성</button></div>
+			  	  				<div style="float: right"><button id="qnaBtn" type="button" class="btn btn-outline-primary">질문 작성</button></div>
 			 	   			</th>
 			 	   		</tr>
 			 	   	</table>

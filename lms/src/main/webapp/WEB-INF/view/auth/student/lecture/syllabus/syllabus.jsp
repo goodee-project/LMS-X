@@ -86,18 +86,20 @@
 					</div>
 				</div>
 			</div>
-				<div class="card-header border-0">
-					<div class="row align-items-center">
-						<div class="col">
-							<h2 class="mb-0">강의 계획서</h2>
+		   	<div class="container-fluid mt--7">
+				<div class="card shadow">
+					<div class="card-header border-0">
+						<div class="row align-items-center">
+							<div class="col">
+								<h2 class="mb-0">강의 계획서</h2>
+							</div>
 						</div>
 					</div>
-				</div>	
 				</br>
-			<h3 class="container">강의 첨부 파일</h3>
+			<h3>&nbsp; 강의 첨부 파일</h3>
 			<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
 	   			<c:set var="uuid">${syllabus.syllabusFileUuid}</c:set>
-				<table class="table container">
+				<table class="table">
 					<tr>
 						<td>파일 이름</td>
 						<td><a onclick="fileDownloadCount('${syllabus.syllabusFileUuid}','${syllabus.syllabusFileCount}')" download="${syllabus.syllabusFileOriginal}" href="${pageContext.request.contextPath}/resource/syllabusFile/${syllabus.syllabusFileUuid}">${syllabus.syllabusFileOriginal}</a></td>
@@ -132,5 +134,7 @@
 						<td>${syllabus.syllabusFileCreatedate}</td>
 					</tr>
 				</table>
+			</div>
+		</div>	
 	</body>
 </html>

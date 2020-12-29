@@ -154,7 +154,7 @@
 	    		<!-- 내용 -->
 		    	<table class="table">
 		    		<tr>
-		    			<th>제목</th>
+		    			<th width="10%">제목</th>
 		    			<td><input id="qnaTitle" type="text" name="questionTitle" value="${question.questionTitle}" class="form-control"></td>
 		    		</tr>
 		    		<tr>
@@ -163,7 +163,7 @@
 		    		</tr>
 		    		<tr>
 		    			<th>내용</th>
-		    			<td style="width:100%;"><textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px">${question.questionContent}</textarea></td>
+		    			<td><textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px">${question.questionContent}</textarea></td>
 		    		</tr>
 		    		 <c:forEach var="qf" items="${question.questionFileList}">
 						<tr>
@@ -196,7 +196,7 @@
 		    			<table class="table">
 			    				<tr>
 			    					<th>
-						    		<div><button id="updateQnaBtn" type="button" class="btn btn-outline-primary">과제 제출</button></div>
+						    		<div><button id="updateQnaBtn" type="button" class="btn btn-outline-primary">질문 수정</button></div>
 						    		</th>
 								</tr>
 						</table>
