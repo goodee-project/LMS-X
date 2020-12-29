@@ -113,7 +113,7 @@
 								<div class="row align-items-center">
 									<br>
 									<div class="col-8">
-										<h3 class="mb-0">&nbsp;&nbsp;&nbsp;공지사항 목록</h3>
+										<h3 class="mb-0">공지사항 목록</h3>
 									</div>
 									<div class="col-4 text-right">
 									</div>
@@ -265,13 +265,9 @@
 							<div class="card-footer py-4">
 								<!-- 검색 -->
 								<form method="get" action="${pageContext.request.contextPath}/auth/teacher/faq/faqList/1" class="form-inline">
-									<div class="input-group mb-3 center" style="width: 70%;">
+									<div class="input-group" style="width: 70%; margin: auto;">
 										<div class="input-group-prepend">
-											<span class="input-group-text">
-												<label class="form-check-label">
-													카테고리
-												</label>
-											</span>
+											<span class="input-group-text">카테고리</span>
 										</div>
 										
 										<select class="form-control" name="searchCategory">
@@ -296,11 +292,7 @@
 										</select>
 										
 										<div class="input-group-prepend">
-											<span class="input-group-text">
-												<label class="form-check-label">
-													검색
-												</label>
-											</span>
+											<span class="input-group-text">검색</span>
 										</div>
 										
 										<select class="form-control" name="searchOption">
@@ -327,7 +319,7 @@
 										<input type="text" class="form-control" name="searchText" value="${searchText}">
 										
 										<div class="input-group-append">
-											<button type="submit" class="btn btn-secondary">검색</button>
+											<button type="submit" class="btn btn-outline-primary">검색</button>
 										</div>
 									</div>
 								</form>
