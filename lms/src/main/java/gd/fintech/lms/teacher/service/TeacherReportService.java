@@ -83,4 +83,26 @@ public class TeacherReportService {
 		
 		return reportSubmit;
 	}
+	
+	// 학생 과제 평가 입력
+	// 과제 제출 고유번호(reportSubmitNo)
+	public void insertTeacherReportSubmit(ReportSubmit reportSubmit, int reportSubmitNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reportSubmitPoint", reportSubmit.getReportSubmitPoint());
+		map.put("reportSubmitFeedback", reportSubmit.getReportSubmitFeedback());
+		map.put("reportSubmitNo", reportSubmitNo);
+		
+		teacherReportMapper.insertTeacherReportSubmit(map);
+	}
+	
+	// 학생 과제 평가 수정
+	// 과제 제출 고유번호(reportSubmitNo)
+	public void updateTeacherReportSubmit(ReportSubmit reportSubmit, int reportSubmitNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reportSubmitPoint", reportSubmit.getReportSubmitPoint());
+		map.put("reportSubmitFeedback", reportSubmit.getReportSubmitFeedback());
+		map.put("reportSubmitNo", reportSubmitNo);
+		
+		teacherReportMapper.updateTeacherReportSubmit(map);
+	}
 }

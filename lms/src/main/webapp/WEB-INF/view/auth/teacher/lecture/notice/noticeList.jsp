@@ -60,14 +60,8 @@ th {
 </style>
 </head>
 <body class="">
-	<nav
-		class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white"
-		id="sidenav-main">
-		<div class="container-fluid">
-			<!-- 내비게이션 메인 메뉴 -->
-			<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
-		</div>
-	</nav>
+	<!-- 내비게이션 메인 메뉴 -->
+	<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
 	<div class="main-content">
 		<!-- 내비게이션 상단 메뉴 -->
 		<div class="container-fluid">
@@ -120,7 +114,6 @@ th {
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-success"
-										style="float: right;"
 										onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/insertNotice'">작성</button>
 								</div>
 								<br>

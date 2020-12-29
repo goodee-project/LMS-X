@@ -52,14 +52,8 @@
 		</style>
 	</head>
 	<body class="">
-		<nav
-			class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white"
-			id="sidenav-main">
-			<div class="container-fluid">
-				<!-- 내비게이션 메인 메뉴 -->
-				<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
-			</div>
-		</nav>
+	<!-- 내비게이션 메인 메뉴 -->
+	<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
 		<div class="main-content">
 			<!-- 내비게이션 상단 메뉴 -->
 			<div class="container-fluid">

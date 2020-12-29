@@ -170,4 +170,26 @@
   		WHERE
   			rs.report_submit_no = #{reportSubmitNo}
   	</select>
+  	
+  	<!-- 학생 과제 평가 입력 -->
+  	<update id="insertTeacherReportSubmit" parameterType="java.util.Map">
+  		UPDATE
+  			report_submit
+  		SET
+			report_submit_point = #{reportSubmitPoint}, 
+			report_submit_feedback = #{reportSubmitFeedback}
+		WHERE
+			report_submit_no = #{reportSubmitNo}
+  	</update>
+  	
+  	<!-- 학생 과제 평가 수정 -->
+ 	<update id="updateTeacherReportSubmit" parameterType="java.util.Map">
+  		UPDATE
+  			report_submit
+  		SET
+			report_submit_point = #{reportSubmitPoint}, 
+			report_submit_feedback = #{reportSubmitFeedback}
+		WHERE
+			report_submit_no = #{reportSubmitNo}
+  	</update>
 </mapper>
