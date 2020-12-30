@@ -78,8 +78,15 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<h6 class="heading-small text-muted mb-4">개인정보 <a href="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">( 정보 수정 )</a></h6> 
-							
+							<div class="row align-items-center mb-4">
+								<br>
+								<div class="col-8">
+									<h6 class="heading-small text-muted">개인정보</h6>
+								</div>
+								<div class="col-4 text-right">
+									<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/manager/mypage/updateMypage'">개인정보 수정</button>
+								</div>
+							</div>
 							<div class="pl-lg-4">
 								<div class="row">
 									<div class="col-lg-6">
@@ -144,31 +151,48 @@
 								</div>
 							</div>
 							<hr class="my-4" />
-							<h6 class="heading-small text-muted mb-4">부가정보 <a href="${pageContext.request.contextPath}/auth/manager/mypage/updateMypageCareerAndLicense">( 부가정보 수정 )</a></h6>
+							<div class="row align-items-center mb-4">
+								<br>
+								<div class="col-8">
+									<h6 class="heading-small text-muted">부가정보</h6>
+								</div>
+								<div class="col-4 text-right">
+									<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/manager/mypage/updateMypageCareerAndLicense'">부가정보 수정</button>
+								</div>
+							</div>
 							<div class="pl-lg-4">
 								<div class="form-group">
 									<label class="form-control-label" >경력</label>
-									<c:forEach var="c" items="${manager.careerList}">
-										<div class="row">
-											<div class="col-lg-8">
-												<div class="form-group ">
-													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${c.careerContent}" disabled="disabled">
+									<c:if test="${manager.careerList[0].careerContent != null}">
+										<c:forEach var="c" items="${manager.careerList}">
+											<div class="row">
+												<div class="col-lg-8">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${c.careerContent}" disabled="disabled">
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="( ${c.careerStartdate} ~ ${c.careerEnddate} )"	disabled="disabled">
+													</div>
 												</div>
 											</div>
-											<div class="col-lg-4">
-												<div class="form-group ">
-													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="( ${c.careerStartdate} ~ ${c.careerEnddate} )"	disabled="disabled">
-												</div>
+										</c:forEach>
+									</c:if>
+									<c:if test="${manager.careerList[0].careerContent == null}">
+										<div class="row">
+											<div class="col-lg-3">
+												<h5>(경력이 없습니다)</h5>
 											</div>
 										</div>
-									</c:forEach>
+									</c:if>
 								</div>
 							</div>
 							<div class="pl-lg-4">
 								<div class="form-group">
 									<label class="form-control-label" >자격증</label>
-									<c:forEach var="l" items="${manager.licenseList}">
-										<c:if test="${l.licenseNumber != null}">
+									<c:if test="${manager.licenseList[0].licenseNumber != null}">
+										<c:forEach var="l" items="${manager.licenseList}">
 											<div class="row">
 												<div class="col-lg-3">
 													<div class="form-group ">
@@ -191,8 +215,15 @@
 													</div>
 												</div>
 											</div>
-										</c:if>
-									</c:forEach>
+										</c:forEach>
+									</c:if>
+									<c:if test="${manager.licenseList[0].licenseNumber == null}">
+										<div class="row">
+											<div class="col-lg-3">
+												<h5>(자격증이 없습니다)</h5>
+											</div>
+										</div>
+									</c:if>
 								</div>
 							</div>
 						</div>

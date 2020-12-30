@@ -1,5 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.mapper.StudentMypageMapper">
+	<!-- 강사 마이페이지 정보  -->
+	<resultMap type="gd.fintech.lms.vo.Student" id="selectStudentInformation">
+		<result property="studentId" column="student_id"/>
+		<result property="studentEmail" column="student_email"/>
+		<result property="studentPhone" column="student_phone"/>
+		<result property="studentName" column="student_name"/>
+		<result property="studentGender" column="student_gender"/>
+		<result property="studentBirth" column="student_birth"/>
+		<result property="studentAddressMain" column="student_address_main"/>
+		<result property="studentAddressSub" column="student_address_sub"/>
+		<result property="studentAccessdate" column="student_accessdate"/>
+		<collection property="licenseList" ofType="gd.fintech.lms.vo.License">
+			<result property="licenseNo" column="license_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="licenseNumber" column="license_number"/>
+			<result property="licenseName" column="license_name"/>
+			<result property="licenseAgency" column="license_agency"/>
+			<result property="licenseGetdate" column="license_getdate"/>
+		</collection>
+	</resultMap>
+	<select id="selectStudentMypage" parameterType="String" resultMap="selectStudentInformation">
+		SELECT
+			m.student_id,
+			m.student_email,
+			m.student_phone,
+			m.student_name,
+			m.student_gender,
+			m.student_birth,
+			m.student_address_main,
+			m.student_address_sub,
+			m.student_accessdate,
+			m.student_info,
+			l.license_no,
+			l.license_number,
+			l.license_name,
+			l.license_agency,
+			l.license_getdate
+		FROM
+			student m
+		LEFT JOIN
+			license l ON
+			l.account_id = m.student_id 
+		WHERE
+			student_id = #{studentId}
+	</select>
 	
+	<!-- 강사 마이페이지 정보 수정  -->
+	<update id="updateStudentMypage" parameterType="gd.fintech.lms.vo.Student" >
+		UPDATE 
+			student
+		SET 
+			student_email = #{studentEmail},
+			student_phone = #{studentPhone},
+			student_name = #{studentName},
+			student_gender = #{studentGender},
+			student_birth = #{studentBirth},
+			student_address_main = #{studentAddressMain},
+			student_address_sub = #{studentAddressSub},
+			student_info = #{studentInfo},
+			student_updatedate = now()
+		WHERE
+			student_id = #{studentId}
+	</update>
+	
+	<!-- 자격증 추가시 강사 수정시간 변경 -->
+	<update id="updateStudentUpdatedate" parameterType="String">
+		UPDATE
+			student
+		SET
+			student_updatedate = now()
+		WHERE
+			student_id = #{accountId}
+	</update>
+	
+	<!-- 강사 마이페이지 자격증 추가 -->
+	<insert id="insertStudentMypageLicense" parameterType="gd.fintech.lms.vo.License">
+		INSERT INTO license(
+			account_id,
+			license_number,
+			license_name,
+			license_agency,
+			license_getdate
+		) VALUE (
+			#{accountId},
+			#{licenseNumber},		
+			#{licenseName},	
+			#{licenseAgency},	
+			#{licenseGetdate}		
+		)
+	</insert>
+	
+	<!-- 강사 마이페이지 자격증 삭제 -->
+	<delete id="deleteStudentMypageLicense" parameterType="int">
+		DELETE FROM
+			license
+		WHERE
+			license_no = #{licenseNo}
+	</delete>
+	
+	<!-- 강사 마이페이지 이미지 추가 -->
+	<insert id="insertStudentMypageImage" parameterType="gd.fintech.lms.vo.MypageImage">
+		INSERT INTO mypage_image(
+			mypage_image_uuid,
+			mypage_image_original,
+			account_id,
+			mypage_image_size,
+			mypage_image_type,
+			mypage_image_createdate
+		) VALUES (
+			#{mypageImageUuid},
+			#{mypageImageOriginal},
+			#{accountId},
+			#{mypageImageSize},
+			#{mypageImageType},
+			now()
+		)
+	</insert>
+	
+	<!-- 이미지 조회 -->
+	<select id="selectMypageImage" parameterType="String" resultType="gd.fintech.lms.vo.MypageImage">
+		SELECT
+			mypage_image_uuid mypageImageUuid,
+			mypage_image_original mypageImageOriginal,
+			account_id accountId,
+			mypage_image_size mypageImageSize,
+			mypage_image_type mypageImageType
+		FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</select>
+	
+	<!-- 이미지 삭제 -->
+	<delete id="deleteMypageImage" parameterType="String" >
+		DELETE FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</delete>
 </mapper>

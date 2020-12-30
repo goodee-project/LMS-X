@@ -1,8 +1,6 @@
 package gd.fintech.lms.teacher.service;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -31,16 +29,15 @@ public class TeacherMypageService {
 	private String PATH = PathUtil.PATH("mypageImage"); 
 	
 	// 강사 마이페이지 정보
-	public Map<String,Object> selectTeacherMypage(String accountId) {
-		// 강사 정보
-		Teacher teacher = teacherMypageMapper.selectTeacherMypage(accountId);
-		// 강사 이미지
-		MypageImage mypageImage = teacherMypageMapper.selectMypageImage(accountId);
-		Map<String, Object> map = new HashMap<String, Object>();
+	public Teacher selectTeacherMypage(String accountId) {
 		
-		map.put("teacher", teacher);
-		map.put("mypageImage", mypageImage);
-		return map;
+		return teacherMypageMapper.selectTeacherMypage(accountId);
+	}
+	
+	// 강사 이미지 조회
+	public MypageImage selectManagerImage(String accountId) {
+		
+		return teacherMypageMapper.selectMypageImage(accountId);
 	}
 	
 	// 강사 마이페이지 정보 수정

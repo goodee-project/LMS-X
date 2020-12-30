@@ -31,19 +31,14 @@ public class ManagerMypageService {
 	private String PATH = PathUtil.PATH("mypageImage"); 
 	
 	// 운영자 마이페이지 정보
-	public Map<String,Object> selectManagerMypage(String accountId) {
+	public Manager selectManagerMypage(String accountId) {
 		
-		// 운영자 정보
-		Manager manager = managerMypageMapper.selectManagerMypage(accountId);
+		return managerMypageMapper.selectManagerMypage(accountId);
+	}
+	// 운영자 이미지 조회
+	public MypageImage selectManagerImage(String accountId) {
 		
-		// 강사 이미지
-		MypageImage mypageImage = managerMypageMapper.selectMypageImage(accountId);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("manager", manager);
-		map.put("mypageImage", mypageImage);
-		
-		return map;
+		return managerMypageMapper.selectMypageImage(accountId);
 	}
 	
 	// 운영자 마이페이지 정보 수정

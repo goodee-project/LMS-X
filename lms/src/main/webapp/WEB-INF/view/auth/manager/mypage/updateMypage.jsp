@@ -335,7 +335,15 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<h6 class="heading-small text-muted mb-4">개인정보 <button type="button" style="float: right" class="btn btn-sm btn-primary" id="btn">수정</button> </h6> 
+							<div class="row align-items-center mb-4">
+								<br>
+								<div class="col-8">
+									<h6 class="heading-small text-muted">개인정보</h6>
+								</div>
+								<div class="col-4 text-right">
+									<button type="button" style="float: right" class="btn btn-sm btn-primary" id="btn">수정</button>
+								</div>
+							</div>
 							<form id="managerForm" method="post" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">
 								<div class="pl-lg-4">
 									<div class="row">
@@ -465,55 +473,79 @@
 								</div>
 							</form>
 							<hr class="my-4" />
-							<h6 class="heading-small text-muted mb-4">부가정보 <a href="${pageContext.request.contextPath}/auth/manager/mypage/updateMypageCareerAndLicense">( 부가정보 수정 )</a></h6>
+							<div class="row align-items-center mb-4">
+								<br>
+								<div class="col-8">
+									<h6 class="heading-small text-muted">부가정보</h6>
+								</div>
+								<div class="col-4 text-right">
+									<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/manager/mypage/updateMypageCareerAndLicense'">부가정보 수정</button>
+								</div>
+							</div>
 							<div class="pl-lg-4">
 								<div class="form-group">
 									<label class="form-control-label">경력</label>
-									<c:forEach var="c" items="${manager.careerList}">
-										<div class="row">
-											<div class="col-lg-8">
-												<div class="form-group ">
-													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${c.careerContent}" readonly="readonly">
+									<c:if test="${manager.careerList[0].careerContent != null}">
+										<c:forEach var="c" items="${manager.careerList}">
+											<div class="row">
+												<div class="col-lg-8">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${c.careerContent}" disabled="disabled">
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="( ${c.careerStartdate} ~ ${c.careerEnddate} )"	disabled="disabled">
+													</div>
 												</div>
 											</div>
-											<div class="col-lg-4">
-												<div class="form-group ">
-													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="( ${c.careerStartdate} ~ ${c.careerEnddate} )"	readonly="readonly">
-												</div>
+										</c:forEach>
+									</c:if>
+									<c:if test="${manager.careerList[0].careerContent == null}">
+										<div class="row">
+											<div class="col-lg-3">
+												<h5>(경력이 없습니다)</h5>
 											</div>
 										</div>
-									</c:forEach>
+									</c:if>
 								</div>
 							</div>
 							<div class="pl-lg-4">
 								<div class="form-group">
 									<label class="form-control-label">자격증</label>
-									<c:forEach var="l" items="${manager.licenseList}">
-										<c:if test="${l.licenseNumber != null}">
+									<c:if test="${manager.licenseList[0].licenseNumber != null}">
+										<c:forEach var="l" items="${manager.licenseList}">
 											<div class="row">
 												<div class="col-lg-3">
 													<div class="form-group ">
-														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseNumber}" readonly="readonly">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseNumber}" disabled="disabled">
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group ">
-														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseName}" readonly="readonly">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseName}" disabled="disabled">
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group ">
-														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseAgency}" readonly="readonly">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseAgency}" disabled="disabled">
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group ">
-														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseGetdate}" readonly="readonly">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseGetdate}" disabled="disabled">
 													</div>
 												</div>
 											</div>
-										</c:if>
-									</c:forEach>
+										</c:forEach>
+									</c:if>
+									<c:if test="${manager.licenseList[0].licenseNumber == null}">
+										<div class="row">
+											<div class="col-lg-3">
+												<h5>(자격증이 없습니다)</h5>
+											</div>
+										</div>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -537,124 +569,5 @@
 			application : "argon-dashboard-free"
 		});
 	</script>
-	
-	<form id="managerForm" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/auth/manager/mypage/updateMypage">
-		<button type="button" class="btn btn-success" id="btn">수정</button>
-		&nbsp;
-		<button type="button" class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/manager/mypage/mypageOne'">취소</button>
-		<table class="table table-bordered">
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" name="managerId" value="${manager.managerId}"hidden="hidden">${manager.managerId}</td>
-				<td>이름</td>
-				<td ><input type="text" class="form-control" name="managerName" id="managerName" placeholder="이름을 입력하세요" value="${manager.managerName}"></td>
-				<td>성별</td>
-				<td>
-					<c:if test="${manager.managerGender == '남'}">
-						<input type="radio" class="managerGender" name="managerGender" value="남" checked="checked" >&nbsp;남&nbsp;&nbsp;
-						<input type="radio" class="managerGender" name="managerGender" value="여">&nbsp;여
-					</c:if>
-					<c:if test="${manager.managerGender == '여'}">
-						<input type="radio" class="managerGender" name="managerGender" value="남">&nbsp;남&nbsp;&nbsp;
-						<input type="radio" class="managerGender" name="managerGender" value="여" checked="checked" >&nbsp;여
-					</c:if>
-					<span id="managerGenderCheck"></span>
-				</td>
-				<td>직급</td>
-				<td>${manager.managerPosition}</td>
-				<td rowspan="3" colspan="2" style="width: 150px; height: 199px;">
-					<c:if test="${mypageImage.mypageImageUuid != null}">
-						<img style="width: 150px; height: 199px;" id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${mypageImage.mypageImageUuid}">
-					</c:if>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>전화번호</td>
-				<td>
-					<input type="text" class="form-control" name="managerPhone" id="managerPhone" placeholder="000-0000-000" value="${manager.managerPhone}">
-					<div id="managerPhoneCheck"></div>
-				</td>
-				<td>이메일</td>
-				<td colspan="3">
-					<div class="input-group">
-						<input type="email" value="${manager.managerEmail}" id="originalManagerEmail" hidden="hidden">
-						<input type="email" class="form-control" name="managerEmail" id="managerEmail" value="${manager.managerEmail}" placeholder="abc@abc.abc">
-						<div class="input-group-append">
-							<button type="button" class="btn btn-primary" id="emailCheck">중복 체크</button>
-						</div>
-					</div>
-					<div id="managerEmailCheck"></div>
-				</td>
-				<td>생일</td>
-				<td>
-					<div>
-						<input type="date" class="form-control" name="managerBirth" id="managerBirth" value="${manager.managerBirth}">
-					</div>
-					<div id="managerBirthCheck"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>사진</td>
-				<td colspan="7">
-					<input id="managerImage" type="file" name="managerImage" accept="image/png, image/jpg, image/jpeg" >
-					<div id="managerImageCheck"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>주소</td>
-				<td colspan="9">
-					<div id="addressView">
-						<input id="managerAddressMain" class="form-control" style="margin-bottom:5px;" type="text" name="managerAddressMain" value="${manager.managerAddressMain}" readonly="readonly" >
-					</div>
-						<span id="addressWait"></span>
-						
-						<div class="input-group">
-							<input type="text" class="form-control" name="street" id="street" placeholder="도로명을 입력하세요.">
-							<div class="input-group-append">
-								<button type="button" class="btn btn-primary" id="check">검색</button>
-							</div>
-						</div>
-						
-						<span id="addressCheck"></span>
-						<div id="selectAddress" style="overflow: auto; width: 100%; max-height: 200px;"></div>
-				
-				 </td>
-			</tr>
-			<tr>
-				<td>상세주소</td>
-				<td colspan="9"><input type="text" class="form-control" id="managerAddressSub" placeholder="상세 주소를 입력하세요" value="${manager.managerAddressSub}" name="managerAddressSub" ></td>
-			</tr>
-		
-			<tr>
-				<td>경력</td>
-				<td colspan="9">
-					<c:forEach var="c" items="${manager.careerList}" >
-						<c:if test="${c.careerContent != null}">
-							<div>
-								<span>${c.careerContent}</span>
-								<span>( ${c.careerStartdate} ~ ${c.careerEnddate} )</span>
-							</div>
-						</c:if>
-					</c:forEach>
-				</td>
-			</tr>
-			<tr>
-				<td>자격증</td>
-				<td colspan="9">
-					<c:forEach var="l" items="${manager.licenseList}" >
-						<c:if test="${l.licenseNumber != null}">
-							<div>
-								<span>${l.licenseNumber}</span>
-								<span>${l.licenseName}</span>
-								<span>${l.licenseAgency}</span>
-								<span>( ${l.licenseGetdate} )</span>
-							</div>
-						</c:if>
-					</c:forEach>
-				</td>
-			</tr>	
-		</table>
-	</form>
 </body>
 </html>

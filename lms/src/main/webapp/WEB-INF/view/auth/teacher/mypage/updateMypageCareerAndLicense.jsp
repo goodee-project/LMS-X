@@ -242,7 +242,15 @@
 								</div>
 							</div>
 							<div class="card-body">
-								<h6 class="heading-small text-muted mb-4">개인정보 <a href="${pageContext.request.contextPath}/auth/teacher/mypage/updateMypage">( 정보 수정 )</a></h6> 
+								<div class="row align-items-center mb-4">
+									<br>
+									<div class="col-8">
+										<h6 class="heading-small text-muted">개인정보</h6>
+									</div>
+									<div class="col-4 text-right">
+										<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/mypage/updateMypage'">개인정보 수정</button>
+									</div>
+								</div>
 								<div class="pl-lg-4">
 									<div class="row">
 										<div class="col-lg-6">
@@ -312,27 +320,36 @@
 											<button id="insertCareerBtn" class="btn btn-sm btn-primary" type="button">추가</button>
 										</span>
 										<label class="form-control-label" style="margin-bottom: 20px;" >경력</label>
-										<c:forEach var="c" items="${teacher.careerList}">
+										<c:if test="${teacher.careerList[0].careerContent != null}">
+											<c:forEach var="c" items="${teacher.careerList}">
+												<div class="row">
+													<div class="col-lg-7">
+														<div class="form-group ">
+															<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${c.careerContent}" disabled="disabled">
+														</div>
+													</div>
+													<div class="col-lg-4">
+														<div class="form-group ">
+															<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="( ${c.careerStartdate} ~ ${c.careerEnddate} )"	disabled="disabled">
+														</div>
+													</div>
+													<div class="col-lg-1">
+														<div class="form-group ">
+															<span style="font-size: 25px;" >
+																<a class="text-danger" href="${pageContext.request.contextPath}/auth/teacher/mypage/deleteMypageCareer/${c.careerNo}">x</a>
+															</span>
+														</div>
+													</div>
+												</div>
+											</c:forEach>
+										</c:if>
+										<c:if test="${teacher.careerList[0].careerContent == null}">
 											<div class="row">
-												<div class="col-lg-7">
-													<div class="form-group ">
-														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${c.careerContent}" disabled="disabled">
-													</div>
-												</div>
-												<div class="col-lg-4">
-													<div class="form-group ">
-														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="( ${c.careerStartdate} ~ ${c.careerEnddate} )"	disabled="disabled">
-													</div>
-												</div>
-												<div class="col-lg-1">
-													<div class="form-group ">
-														<span style="font-size: 25px;" >
-															<a class="text-danger" href="${pageContext.request.contextPath}/auth/teacher/mypage/deleteMypageCareer/${c.careerNo}">x</a>
-														</span>
-													</div>
+												<div class="col-lg-3">
+													<h5>(경력이 없습니다)</h5>
 												</div>
 											</div>
-										</c:forEach>
+										</c:if>
 									</div>
 								</div>
 								<div class="pl-lg-4">
@@ -346,8 +363,8 @@
 										<div style="float: right;">
 											<button id="insertLicenseBtn"  class="btn btn-sm btn-primary" type="button">추가</button>
 										</div>
-										<c:forEach var="l" items="${teacher.licenseList}">
-											<c:if test="${l.licenseNumber != null}">
+										<c:if test="${teacher.licenseList[0].licenseNumber != null}">
+											<c:forEach var="l" items="${teacher.licenseList}">
 												<div class="row">
 													<div class="col-lg-2">
 														<div class="form-group ">
@@ -377,8 +394,15 @@
 														</div>
 													</div>
 												</div>
-											</c:if>
-										</c:forEach>
+											</c:forEach>
+										</c:if>
+										<c:if test="${teacher.licenseList[0].licenseNumber == null}">
+											<div class="row">
+												<div class="col-lg-3">
+													<h5>(자격증이 없습니다)</h5>
+												</div>
+											</div>
+										</c:if>
 									</div>
 								</div>
 								<div class="pl-lg-4">

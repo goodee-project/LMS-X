@@ -1,7 +1,5 @@
 package gd.fintech.lms.manager.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import gd.fintech.lms.manager.service.ManagerMypageService;
 import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.License;
+import gd.fintech.lms.vo.Manager;
 import gd.fintech.lms.vo.ManagerForm;
 import gd.fintech.lms.vo.MypageImage;
 
@@ -30,13 +29,15 @@ public class ManagerMyageController {
 	public String selectManagerMyPage(Model model, HttpSession session) {
 		
 		String accountId = (String)session.getAttribute("loginId");
-		Map<String, Object> managerMypage = managerMypageService.selectManagerMypage(accountId);
+		Manager manager = managerMypageService.selectManagerMypage(accountId);
 		
-		MypageImage mypageImage = (MypageImage)managerMypage.get("mypageImage");
+		log.debug(manager.toString());
+		
+		//운영자 이미지 찾기
+		MypageImage mypageImage = managerMypageService.selectManagerImage(accountId);
 		session.setAttribute("loginImage", mypageImage.getMypageImageUuid());
 		
-		model.addAttribute("manager",managerMypage.get("manager"));
-		model.addAttribute("mypageImage", managerMypage.get("mypageImage"));
+		model.addAttribute("manager", manager);
 		return "auth/manager/mypage/mypageOne";
 	}
 	
@@ -44,10 +45,9 @@ public class ManagerMyageController {
 	@GetMapping("/auth/manager/mypage/updateMypage")
 	public String updateMypage(Model model, HttpSession session) {
 		String accountId = (String)session.getAttribute("loginId");
-		Map<String, Object> managerMypage = managerMypageService.selectManagerMypage(accountId);
+		Manager manager = managerMypageService.selectManagerMypage(accountId);
 		
-		model.addAttribute("manager",managerMypage.get("manager"));
-		model.addAttribute("mypageImage", managerMypage.get("mypageImage"));
+		model.addAttribute("manager", manager);
 		return "auth/manager/mypage/updateMypage";
 	}
 	@PostMapping("/auth/manager/mypage/updateMypage")
@@ -61,10 +61,9 @@ public class ManagerMyageController {
 	@GetMapping("/auth/manager/mypage/updateMypageCareerAndLicense") 
 	public String updateMypageCareerAndLicense(Model model, HttpSession session) {
 		String accountId = (String)session.getAttribute("loginId");
-		Map<String, Object> managerMypage = managerMypageService.selectManagerMypage(accountId);
+		Manager manager = managerMypageService.selectManagerMypage(accountId);
 		
-		model.addAttribute("manager",managerMypage.get("manager"));
-		model.addAttribute("mypageImage", managerMypage.get("mypageImage"));
+		model.addAttribute("manager", manager);
 		return "auth/manager/mypage/updateMypageCareerAndLicense";
 	}
 	
