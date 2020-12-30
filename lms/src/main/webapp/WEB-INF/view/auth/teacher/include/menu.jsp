@@ -8,7 +8,7 @@
 		</button>
 		
 		<!-- Brand -->
-		<a class="navbar-brand pt-0" href="${PageContext.request.contextPath}/auth/teacher/index/1">
+		<a class="navbar-brand pt-0" href="${pageContext.request.contextPath}/auth/teacher/index/1">
 			<img src="${pageContext.request.contextPath}/assets/img/brand/blue.png" class="navbar-brand-img">
 		</a>
 		
