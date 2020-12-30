@@ -78,7 +78,6 @@
 					}
 				});
 				
-				let address;
 				// 주소 검색
 				// 공백 체크
 				function checkSpace(str) {
@@ -478,7 +477,7 @@
 					</div>
 				</div>
 			</div>
-			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/view/include/footer.jsp"></jsp:include>
 		</div>
 		<!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>

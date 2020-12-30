@@ -34,7 +34,13 @@
 		    <artifactId>jstl</artifactId>
 		</dependency>
 		
-		
+		<!-- 이메일을 사용하기 위한 Dependency  -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
 		<!-- Default Dependency -->
 		<!-- Spring Web -->
 		<dependency>
