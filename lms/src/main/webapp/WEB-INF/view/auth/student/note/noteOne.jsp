@@ -51,18 +51,19 @@
 						<div class="col-12">
 							<table class="table">
 								<tr>
-									<th>제목</th>
-									<td colspan="3" class="td-fix">${note.noteTitle}</td>
-								</tr>
-								<tr>
 									<th>보낸사람</th>
 									<td>${note.noteDispatcherName} (${note.noteDispatcherId})</td>
-									<th>날짜</th>
-									<td>${note.noteSendDate}</td>
+									<th>받는사람</th>
+									<td>${note.noteReceiverName} (${note.noteReceiverId})</td>
+									
 								</tr>
 								<tr>
-									<th>받는사람</th>
-									<td colspan="3">${note.noteReceiverName} (${note.noteReceiverId})</td>
+									<th>날짜</th>
+									<td colspan="3">${note.noteSendDate}</td>
+								</tr>
+								<tr>
+									<th>제목</th>
+									<td colspan="3" class="td-fix">${note.noteTitle}</td>
 								</tr>
 								<tr>
 									<th>내용</th>

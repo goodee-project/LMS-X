@@ -61,16 +61,17 @@
 											<td style="font-size: 13px;">${mql.managerGender}</td>
 											<td style="font-size: 13px;">${mql.managerBirth}</td>
 											<td style="font-size: 10px;">${mql.managerAddressMain} ${mql.managerAddressSub}</td>
-											<td style="font-size: 13px;"><a href="${pageContext.request.contextPath}/auth/admin/accessManager/${currentPage}/${mql.managerId}">승인</a></td>
-											<td style="font-size: 13px;"><a href="${pageContext.request.contextPath}/auth/admin/negativeManager/${mql.managerId}">거절</a></td>
+											<td style="font-size: 13px;"><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/admin/accessManager/${currentPage}/${mql.managerId}">승인</a></td>
+											<td style="font-size: 13px;"><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/admin/negativeManager/${mql.managerId}">거절</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 						</div>
-						<div class="card-footer py-4 " style="margin: auto;">
+						
+						<div class="card-footer py-4">
 							<nav>
-								<ul class="pagination justify-content-end mb-0">
+								<ul class="pagination justify-content-center">
 									<!-- 처음으로 버튼 -->
 									<c:choose>
 										<c:when test="${currentPage > 1}">
@@ -168,7 +169,7 @@
 								<table style="margin: auto;">
 									<tr>
 										<td>
-											<button type="button" class="btn btn-outline-dark btn-sm">
+											<button type="button" class="btn btn-sm btn-outline-primary">
 												${currentPage} / ${lastPage} 페이지
 											</button>
 										</td>

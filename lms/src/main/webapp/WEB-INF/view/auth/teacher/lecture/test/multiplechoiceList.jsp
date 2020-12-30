@@ -32,10 +32,6 @@
 				vertical-align: middle;
 			}
 			
-			.table a {
-				color: #000000;
-			}
-			
 			th {
 				text-align: center;
 				background-color: #F9F9FB;

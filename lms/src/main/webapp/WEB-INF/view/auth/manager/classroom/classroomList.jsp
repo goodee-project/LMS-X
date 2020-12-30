@@ -95,26 +95,30 @@ th {
 
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
-								<tr>
-									<th>강의실 번호</th>
-									<th>강의실 호실</th>
-									<th>강의실 사이즈</th>
-									<th>강의실 총 인원</th>
-									<th>수정</th>
-									<th>삭제</th>
-								</tr>
-								<c:forEach items="${classroomList}" var="cr">
+								<thead class="thead-light">
 									<tr>
-										<td>${cr.classroomNo}</td>
-										<td>${cr.classroomNumber}</td>
-										<td>${cr.classroomSize}</td>
-										<td>${cr.classroomTotal}</td>
-										<td><a
-											href="${pageContext.request.contextPath }/auth/manager/classroom/updateClassroom/${cr.classroomNo}">수정</a></td>
-										<td><a
-											href="${pageContext.request.contextPath}/auth/manager/classroom/deleteClassroom?classroomNo=${cr.classroomNo}">삭제</a></td>
+										<th>강의실 번호</th>
+										<th>강의실 호실</th>
+										<th>강의실 사이즈</th>
+										<th>강의실 총 인원</th>
+										<th>수정</th>
+										<th>삭제</th>
 									</tr>
-								</c:forEach>
+								</thead>
+								<tbody>
+									<c:forEach items="${classroomList}" var="cr">
+										<tr>
+											<td>${cr.classroomNo}</td>
+											<td>${cr.classroomNumber}</td>
+											<td>${cr.classroomSize}</td>
+											<td>${cr.classroomTotal}</td>
+											<td><a
+												href="${pageContext.request.contextPath }/auth/manager/classroom/updateClassroom/${cr.classroomNo}">수정</a></td>
+											<td><a
+												href="${pageContext.request.contextPath}/auth/manager/classroom/deleteClassroom?classroomNo=${cr.classroomNo}">삭제</a></td>
+										</tr>
+									</c:forEach>
+								</tbody>
 							</table>
 						</div>
 						<!-- Page Navigation -->
@@ -206,7 +210,7 @@ th {
 								<table style="margin: auto;">
 									<tr>
 										<td>
-											<button type="button" class="btn btn-outline-dark btn-sm">
+											<button type="button" class="btn btn-sm btn-outline-primary">
 												${currentPage} / ${lastPage} 페이지</button>
 										</td>
 									</tr>

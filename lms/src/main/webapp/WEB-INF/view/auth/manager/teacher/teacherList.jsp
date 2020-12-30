@@ -17,6 +17,20 @@
 		rel="stylesheet" />
 	<!-- CSS Files -->
 	<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+
+	<style>
+		.table {
+			text-align: center;
+		}
+		
+		.table td {
+			vertical-align: middle;
+		}
+		
+		th {
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
@@ -30,144 +44,149 @@
             <jsp:include page="/WEB-INF/view/auth/manager/include/connector.jsp" />
 			<div class="container-fluid mt--7">
 				<div class="card shadow">
-					<div class="card-header border-0">
+					<div class="card-header bg-white border-0">
 						<div class="row align-items-center">
-							<div class="col">
-								<h2 class="mb-0">강사 목록</h2>
-								<div style="text-align: right;"><a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherQueueList/1">승인대기 목록</a></div>
+							<div class="col-8">
+								<h3 class="mb-0">강사 목록</h3>
+							</div>
+							<div class="col-4 text-right">
+								<a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherQueueList/1">승인대기 목록</a>
 							</div>
 						</div>
 					</div>
-					<div class="row align-items-center">
-						<div class="col-12">
-							<table class="table">
-								<thead class="thead-light">
-									<tr>
-										<th>강사 ID</th>
-										<th>강사 이름</th>
-										<th>강사 성별</th>
-										<th>활성화 여부</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${teacherList}" var="t">
-										<tr>
-											<td><a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherOne/${t.teacherId}">${t.teacherId}</a></td>
-											<td>${t.teacherName}</td>
-											<td>${t.teacherGender}</td>
-											<td>${t.accountState}</td>
-										</tr>	
-									</c:forEach>
-								</tbody>
-							</table>
-							<!-- 페이지 네비게이션 -->
-							<ul class="pagination justify-content-center">
-								<!-- 처음으로 버튼 -->
-								<c:choose>
-									<c:when test="${currentPage > 1}">
-										<li class="page-item">
-											<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/1">
-												<i class='fas fa-angle-double-left'></i>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item disabled">
-											<a class="page-link" href="#">
-												<i class='fas fa-angle-double-left'></i>
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-								
-								<!-- 이전 버튼 -->
-								<c:choose>
-									<c:when test="${currentPage > 1}">
-										<li class="page-item">
-											<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${prePage}">
-												<i class='fas fa-angle-left'></i>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item disabled">
-											<a class="page-link" href="#">
-												<i class='fas fa-angle-left'></i>
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-								
-								<!-- 현재 페이지 표시 -->
-								<c:forEach var="i" begin="${navFirstPage}" end="${navLastPage}">
-									<c:if test="${i <= lastPage}">
-										<c:choose>
-											<%-- 현재 페이지 --%>
-											<c:when test="${i == currentPage}">
-												<li class="page-item active">
-													<a class="page-link" href="#">${i}</a>
-												</li>
-											</c:when>
-											<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
-											<c:otherwise>
-												<li class="page-item">
-													<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${i}">${i}</a>
-												</li>
-											</c:otherwise>
-										</c:choose>
-									</c:if>
-								</c:forEach>
-								
-								<!-- 다음 버튼 -->
-								<c:choose>
-									<c:when test="${currentPage < lastPage}">
-										<li class="page-item">
-											<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${nextPage}">
-												<i class='fas fa-angle-right'></i>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item disabled">
-											<a class="page-link" href="#">
-												<i class='fas fa-angle-right'></i>
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-								
-								<!-- 마지막으로 버튼 -->
-								<c:choose>
-									<c:when test="${currentPage < lastPage}">
-										<li class="page-item">
-											<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${lastPage}">
-												<i class='fas fa-angle-double-right'></i>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item disabled">
-											<a class="page-link" href="#">
-												<i class='fas fa-angle-double-right'></i>
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-							</ul>
-							
-							<!-- 총 페이지 수 출력 -->
-							<table style="margin: auto;">
+					
+					<div class="table-responsive">
+						<table class="table">
+							<thead class="thead-light">
 								<tr>
-									<td>
-										<button type="button" class="btn btn-outline-primary btn-sm">
-											${currentPage} / ${lastPage} 페이지
-										</button>
-									</td>
+									<th>강사 ID</th>
+									<th>강사 이름</th>
+									<th>강사 성별</th>
+									<th>활성화 여부</th>
 								</tr>
-							</table>
-						</div>
+							</thead>
+							<tbody>
+								<c:forEach items="${teacherList}" var="t">
+									<tr>
+										<td><a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherOne/${t.teacherId}">${t.teacherId}</a></td>
+										<td>${t.teacherName}</td>
+										<td>${t.teacherGender}</td>
+										<td>${t.accountState}</td>
+									</tr>	
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+					
+					<div class="card-footer py-4">
+						<!-- 페이지 내비게이션 -->
+						<ul class="pagination justify-content-center">
+							<!-- 처음으로 버튼 -->
+							<c:choose>
+								<c:when test="${currentPage > 1}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/1">
+											<i class='fas fa-angle-double-left'></i>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item disabled">
+										<a class="page-link" href="#">
+											<i class='fas fa-angle-double-left'></i>
+										</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+							
+							<!-- 이전 버튼 -->
+							<c:choose>
+								<c:when test="${currentPage > 1}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${prePage}">
+											<i class='fas fa-angle-left'></i>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item disabled">
+										<a class="page-link" href="#">
+											<i class='fas fa-angle-left'></i>
+										</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+							
+							<!-- 현재 페이지 표시 -->
+							<c:forEach var="i" begin="${navFirstPage}" end="${navLastPage}">
+								<c:if test="${i <= lastPage}">
+									<c:choose>
+										<%-- 현재 페이지 --%>
+										<c:when test="${i == currentPage}">
+											<li class="page-item active">
+												<a class="page-link" href="#">${i}</a>
+											</li>
+										</c:when>
+										<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
+										<c:otherwise>
+											<li class="page-item">
+												<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${i}">${i}</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+								</c:if>
+							</c:forEach>
+							
+							<!-- 다음 버튼 -->
+							<c:choose>
+								<c:when test="${currentPage < lastPage}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${nextPage}">
+											<i class='fas fa-angle-right'></i>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item disabled">
+										<a class="page-link" href="#">
+											<i class='fas fa-angle-right'></i>
+										</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+							
+							<!-- 마지막으로 버튼 -->
+							<c:choose>
+								<c:when test="${currentPage < lastPage}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/${lastPage}">
+											<i class='fas fa-angle-double-right'></i>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item disabled">
+										<a class="page-link" href="#">
+											<i class='fas fa-angle-double-right'></i>
+										</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+						
+						<!-- 총 페이지 수 출력 -->
+						<table style="margin: auto;">
+							<tr>
+								<td>
+									<button type="button" class="btn btn-sm btn-outline-primary">
+										${currentPage} / ${lastPage} 페이지
+									</button>
+								</td>
+							</tr>
+						</table>
 					</div>
 				</div>
+								
 				<!-- Footer -->
 				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 			</div>

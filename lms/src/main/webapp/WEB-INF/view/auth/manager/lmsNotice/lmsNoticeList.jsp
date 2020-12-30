@@ -52,10 +52,6 @@
 	vertical-align: middle;
 }
 
-.table a {
-	color: #000000;
-}
-
 th {
 	text-align: center;
 }
@@ -86,8 +82,7 @@ th {
 									<h3 class="mb-0">LMS 공지사항 목록</h3>
 								</div>
 								<div class="col-4 text-right">
-									<button type="button" class="btn btn-sm btn-success"
-										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lmsNotice/insertLmsNoticeOne'">추가</button>
+									<button type="button" class="btn btn-sm btn-success" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lmsNotice/insertLmsNoticeOne'">작성</button>
 								</div>
 								<br>
 							</div>
@@ -95,13 +90,13 @@ th {
 
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
-								<thead>
+								<thead class="thead-light">
 									<tr>
-										<th>공지번호</th>
-										<th>제목</th>
-										<th>작성자</th>
-										<th>작성날짜</th>
-										<th>조회수</th>
+										<th width="10%">번호</th>
+										<th width="45%">제목</th>
+										<th width="15%">작성자</th>
+										<th width="20%">작성일시</th>
+										<th width="10%">조회수</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -206,7 +201,7 @@ th {
 								<table style="margin: auto;">
 									<tr>
 										<td>
-											<button type="button" class="btn btn-outline-dark btn-sm">
+											<button type="button" class="btn btn-sm btn-outline-primary">
 												${currentPage} / ${lastPage} 페이지</button>
 										</td>
 									</tr>

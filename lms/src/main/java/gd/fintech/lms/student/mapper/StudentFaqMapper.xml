@@ -40,7 +40,7 @@
 			</if>
 		</where>
 		ORDER BY
-			faq_createdate DESC
+			faq_no DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>

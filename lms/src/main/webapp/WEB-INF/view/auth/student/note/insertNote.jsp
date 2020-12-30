@@ -85,18 +85,22 @@
 			
    			<div class="container-fluid mt--7">
 				<div class="card shadow">
-					<div class="card-header border-0">
-						<div class="row align-items-center">
-							<div class="col">
-								<h3 class="mb-0">쪽지 보내기</h3>
+					<form id="insertNoteForm" method="post" action="${pageContext.request.contextPath}/auth/student/note/insertNote">      		
+						<div class="card-header border-0">
+							<div class="row align-items-center">
+								<div class="col">
+									<h3 class="mb-0">쪽지 보내기</h3>
+								</div>
+								<div class="col-4 text-right">
+									<button type="button" class="btn btn-sm btn-success" id="insertNoteBtn">보내기</button>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row align-items-center">
-						<div class="col-12">
-						    <!-- 쪽지 보내기 폼 -->
-						    <div>
-						    	<form id="insertNoteForm" method="post" action="${pageContext.request.contextPath}/auth/student/note/insertNote">      		
+						
+						<div class="row align-items-center">
+							<div class="col-12">
+							    <!-- 쪽지 보내기 폼 -->
+							    <div>
 								    <input type="hidden" id="noteReceiverId" name="noteReceiverId" value="${accountId}">
 								    <input type="hidden" id="noteReceiverName" name="noteReceiverName" value="${accountName}">
 						    		<!-- 내용 -->
@@ -115,7 +119,10 @@
 								    				<c:if test="${!empty accountId}">
 								    					<input class="form-control" type="text" id="searchAccountText" value="${accountId}(${accountName})">
 								    				</c:if>
-								    				<button style="width:10%" class="btn-outline-primary" type="button" id="searchAccountBtn">검색</button>
+								    				
+								    				<div class="input-group-append">
+								    					<button type="button" class="btn btn-primary" id="searchAccountBtn">검색</button>
+							    					</div>
 							    				</div>
 							    				<div id="selectAccount" style="overflow: auto; width: 100%; max-height: 200px;">
 							    					
@@ -126,19 +133,13 @@
 							    			<th>내용</th>
 							    			<td><textarea rows="22" cols="10" wrap="hard" id="noteContent" name="noteContent" class="form-control"></textarea></td>
 							    		</tr>
-							    		<tr>
-							    			<td colspan="2">						    				
-											    <div>
-											    	<button id="insertNoteBtn" class="btn btn-outline-primary" type="button">보내기</button>
-											    </div>
-							    			</td>
-							    		</tr>
 							    	</table>
-						    	</form>
-						    </div> 
+							    </div> 
+							</div>
 						</div>
-					</div>	
+					</form>	
 				</div>
+				
 				<!-- Footer -->
 				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>		
 			</div>

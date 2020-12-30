@@ -52,10 +52,6 @@
 	vertical-align: middle;
 }
 
-.table a {
-	color: #000000;
-}
-
 th {
 	text-align: center;
 }
@@ -83,11 +79,11 @@ th {
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">FaQ 목록</h3>
+									<h3 class="mb-0">FAQ 목록</h3>
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-success"
-										onclick="location.href='${pageContext.request.contextPath}/auth/manager/faq/insertFaq'">추가</button>
+										onclick="location.href='${pageContext.request.contextPath}/auth/manager/faq/insertFaq'">입력</button>
 								</div>
 								<br>
 							</div>
@@ -95,23 +91,28 @@ th {
 
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
-								<tr>
-									<th>FAQ 번호</th>
-									<th>FAQ 작성자</th>
-									<th>FAQ 제목</th>
-									<th>FAQ 조회수</th>
-									<th>FAQ 카테고리</th>
-								</tr>
-								<c:forEach items="${faqList}" var="f">
+								<thead class="thead-light">
 									<tr>
-										<td><a
-											href="${pageContext.request.contextPath}/auth/manager/faq/faqOne/${f.faqNo}">${f.faqNo}</a></td>
-										<td>${f.faqWriter}</td>
-										<td>${f.faqTitle}</td>
-										<td>${f.faqCount}</td>
-										<td>${f.faqCategory}</td>
+										<th width="10%">번호</th>
+										<th width="10%">카테고리</th>
+										<th width="40%">제목</th>
+										<th width="15%">작성자</th>
+										<th width="20%">작성일</th>
+										<th width="10%">조회수</th>
 									</tr>
-								</c:forEach>
+								</thead>
+								<tbody>
+									<c:forEach items="${faqList}" var="f">
+										<tr>
+											<td>${f.faqNo}</td>
+											<td>${f.faqCategory}</td>
+											<td><a href="${pageContext.request.contextPath}/auth/manager/faq/faqOne/${f.faqNo}">${f.faqTitle}</a></td>
+											<td>${f.faqWriter}</td>
+											<td>${f.faqCreatedate}</td>
+											<td>${f.faqCount}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
 							</table>
 						</div>
 						<!-- Page Navigation -->
@@ -203,7 +204,7 @@ th {
 								<table style="margin: auto;">
 									<tr>
 										<td>
-											<button type="button" class="btn btn-outline-dark btn-sm">
+											<button type="button" class="btn btn-sm btn-outline-primary">
 												${currentPage} / ${lastPage} 페이지</button>
 										</td>
 									</tr>

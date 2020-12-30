@@ -128,8 +128,8 @@ th {
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td>강사 계정</td>
-										<td><select name="accountId">
+										<td width="20%">강사 계정</td>
+										<td width="80%"><select class="form-control" name="accountId">
 												<c:forEach var="a" items="${accountList}">
 													<option value="${a.accountId}">${a.accountId}</option>
 												</c:forEach>
@@ -137,7 +137,7 @@ th {
 									</tr>
 									<tr>
 										<td>과목</td>
-										<td><select name="subjectNo">
+										<td><select class="form-control" name="subjectNo">
 												<c:forEach var="s" items="${subjectList}">
 													<option value="${s.subjectNo}">${s.subjectName}</option>
 												</c:forEach>
@@ -145,17 +145,17 @@ th {
 									</tr>
 									<tr>
 										<td>강사 명</td>
-										<td><input type="text" name="teacherName"
+										<td><input type="text" class="form-control" name="teacherName"
 											id="teacherNametext" placeholder="강사 명을 입력해주세요."></td>
 									</tr>
 									<tr>
 										<td>강의 명</td>
-										<td><input type="text" name="lectureName"
+										<td><input type="text" class="form-control" name="lectureName"
 											id="lectureNametext" placeholder="강의 명을 입력해주세요."></td>
 									</tr>
 									<tr>
 										<td>교재</td>
-										<td><select name="textbookIsbn">
+										<td><select class="form-control" name="textbookIsbn">
 												<c:forEach var="t" items="${textbookList}">
 													<option value="${t.textbookIsbn}">${t.textbookTitle}:${t.textbookIsbn}</option>
 												</c:forEach>
@@ -163,23 +163,22 @@ th {
 									</tr>
 									<tr>
 										<td>개강일</td>
-										<td><input type="date" name="lectureStartdate"
+										<td><input type="date" class="form-control" name="lectureStartdate"
 											id="lectureStartdate"></td>
 									</tr>
 									<tr>
 										<td>종강일</td>
-										<td><input type="date" name="lectureEnddate"
+										<td><input type="date" class="form-control" name="lectureEnddate"
 											id="lectureEnddate"></td>
 									</tr>
 									<tr>
 										<td>정원</td>
-
-										<td><input type="number" name="lectureTotal"
+										<td><input type="number" class="form-control" name="lectureTotal"
 											id="lectureTotaltext"></td>
 									</tr>
 									<tr>
 										<td>강의실</td>
-										<td><select name="classroomNo">
+										<td><select class="form-control" name="classroomNo">
 												<c:forEach var="c" items="${classroomList}">
 													<option value="${c.classroomNo}">${c.classroomNo}:${c.classroomNumber}</option>
 												</c:forEach>

@@ -43,8 +43,11 @@
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
-							<div class="col">
-								<h3 class="mb-0">강의 공지사항 상세보기</h3>
+							<div class="col-8">
+								<h3 class="mb-0">공지사항 조회</h3>
+							</div>
+							<div class="col-4 text-right">
+								<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/notice/noticeList/1">목록</a>
 							</div>
 						</div>
 					</div>	
@@ -52,35 +55,26 @@
 						<div class="col-12">
 							<table class="table">
 								<tr>
-									<td width="10%">강좌 번호</td>
-									<td>${lectureNotice.lectureNo}</td>
+									<th width="10%">번호</th>
+									<td width="40%">${lectureNotice.lectureNoticeNo}</td>
+									<th width="10%">조회수</th>
+									<td width="40%">${lectureNotice.lectureNoticeCount}</td>
 								</tr>
 								<tr>
-									<td>공지사항 번호</td>
-									<td>${lectureNotice.lectureNoticeNo}</td>
-								</tr>
-								<tr>
-									<td>제목</td>
-									<td>${lectureNotice.lectureNoticeTitle}</td>
-								</tr>
-								<tr>
-									<td >내용</td>
-									<td >${lectureNotice.lectureNoticeContent}</td>
-								</tr>
-								<tr>
-									<td>작성일</td>
+									<th>작성일시</th>
 									<td >${lectureNotice.lectureNoticeCreatedate}</td>
-								</tr>
-								<tr>
-									<td>수정일</td>
+									<th>수정일시</th>
 									<td >${lectureNotice.lectureNoticeUpdatedate}</td>
 								</tr>
 								<tr>
-									<td>조회수</td>
-									<td >${lectureNotice.lectureNoticeCount}</td>
+									<th>제목</th>
+									<td colspan="3">${lectureNotice.lectureNoticeTitle}</td>
+								</tr>
+								<tr>
+									<th>내용</th>
+									<td colspan="3">${lectureNotice.lectureNoticeContent}</td>
 								</tr>
 							</table>
-							<div style="float: right"><a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/notice/noticeList/1">뒤로가기</a></div>
 						</div>
 					</div>
 				</div>

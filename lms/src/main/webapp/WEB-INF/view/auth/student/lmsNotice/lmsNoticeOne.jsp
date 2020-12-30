@@ -50,7 +50,10 @@
 					<div class="card-header border-0">
 						<div class="row align-items-center">
 							<div class="col">
-								<h3 class="mb-0">LMS 공지사항</h3>
+								<h3 class="mb-0">LMS 공지사항 조회</h3>
+							</div>
+							<div class="col-4 text-right">
+								<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/student/lmsNotice/lmsNoticeList/1'">목록</button>
 							</div>
 						</div>
 					</div>
@@ -58,24 +61,24 @@
 						<div class="col-12">
 							<table class="table">
 								<tr>
-									<td width="20%">제목</td>
-									<td>${lmsNotice.lmsNoticeTitle}</td>
+									<td width="10%">작성자</td>
+									<td width="40%">${lmsNotice.lmsNoticeWriter}</td>
+									<td width="10%">조회수</td>
+									<td width="40%">${lmsNotice.lmsNoticeCount}</td>
+								</tr>	
+								<tr>
+									<td>작성일시</td>
+									<td>${lmsNotice.lmsNoticeCreatedate}</td>
+									<td>수정일시</td>
+									<td>${lmsNotice.lmsNoticeUpdatedate}</td>
 								</tr>
 								<tr>
-									<td>작성자</td>
-									<td>${lmsNotice.lmsNoticeWriter}</td>
-								</tr>	
-								<tr>
-									<td>작성일</td>
-									<td>${lmsNotice.lmsNoticeCreatedate}}</td>
-								</tr>	
-								<tr>
-									<td>조회수</td>
-									<td>${lmsNotice.lmsNoticeCount}</td>
-								</tr>	
+									<td>제목</td>
+									<td colspan="3">${lmsNotice.lmsNoticeTitle}</td>
+								</tr>
 								<tr>
 									<td>내용</td>
-									<td><textarea rows="20px" cols="100px" readonly="readonly" style="background-color:white; border-color:white" disabled>${lmsNotice.lmsNoticeContent}</textarea></td>
+									<td colspan="3">${lmsNotice.lmsNoticeContent}</td>
 								</tr>	
 							</table>
 						</div>

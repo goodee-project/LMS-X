@@ -39,10 +39,6 @@
 				vertical-align: middle;
 			}
 			
-			.attendanceTable a {
-				color: #000000;
-			}
-			
 			.attendanceTable th {
 				text-align: center;
 			}

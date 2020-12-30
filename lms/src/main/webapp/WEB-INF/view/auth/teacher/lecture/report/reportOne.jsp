@@ -41,10 +41,6 @@
 				vertical-align: middle;
 			}
 			
-			.reportListTable a {
-				color: #000000;
-			}
-			
 			.reportListTable th {
 				text-align: center;
 			}

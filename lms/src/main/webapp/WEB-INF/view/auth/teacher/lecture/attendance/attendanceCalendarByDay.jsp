@@ -48,6 +48,7 @@
 				vertical-align: middle;
 				height: 120px;
 			}
+			
 			th {
 				text-align: center;
 				background-color: #F9F9FB;

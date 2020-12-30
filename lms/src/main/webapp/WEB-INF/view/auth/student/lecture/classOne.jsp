@@ -110,16 +110,16 @@
 					</div>
 					<div class="row align-items-center">
 						<div class="col-12">
-							<table class="table">
+							<table class="table align-items-center">
 								<tr>
-									<th width="20%">강좌 번호</th>
-									<td>${lcstc.lecture.lectureNo}</td>
-									<th width="20%">강사 이름</th>
-									<td>${lcstc.lecture.teacherName}</td>
+									<th width="10%">강좌 번호</th>
+									<td width="40%">${lcstc.lecture.lectureNo}</td>
+									<th width="10%">강사 이름</th>
+									<td width="40%">${lcstc.lecture.teacherName}</td>
 								</tr>
 								<tr>
 									<th>강좌 기간</th>
-									<td>${lcstc.lecture.lectureStartdate} &nbsp;&nbsp; ~  &nbsp;&nbsp; ${lcstc.lecture.lectureEnddate}</td>
+									<td>${lcstc.lecture.lectureStartdate} &nbsp; ~ &nbsp; ${lcstc.lecture.lectureEnddate}</td>
 									<th>과목 총일수</th>
 									<td>${lcstc.subject.subjectTotalday}일</td>
 								</tr>
@@ -153,41 +153,42 @@
 				<div class="row mt-5">
 					<div class="col-xl-8 mb-5 mb-xl-0">
 						<div class="card shadow">
-							<div class="card-header border-0">
-								<div class="row align-items-center">
-									<div class="col">
-										<h3 class="mb-0">수강 후기</h3>
+							<form id="classReviewForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/updateClassReview">
+								<div class="card-header bg-white border-0">
+									<div class="row align-items-center">
+										<div class="col-8">
+											<h3 class="mb-0">수강 후기</h3>
+										</div>
+										<div class="col-4 text-right">
+											<button id="classReviewBtn" type="button" class="btn btn-sm btn-primary">저장</button>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="table-responsive">
-								<form id="classReviewForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/updateClassReview">
+								
+								<div class="table-responsive">
 									<input type="hidden" name="classRegistrationPoint" id="classRegistrationPoint" value="${lcstc.classRegistration.classRegistrationPoint}">
 									<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
 									<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
-									<table class="table">	
+									<table class="table align-items-center">
 										<tr>
 											<th width="20%">강좌 별점</th>
-											<td>
+											<td width="80%">
 												<div class="row">
-													<button id="minusPoint" type="button" style="height:30px" class="btn btn-outline-primary btn-sm">-</button>
+													<button id="minusPoint" type="button" style="height:30px;" class="btn btn-sm btn-outline-primary">&nbsp;-&nbsp;</button>
 													<p id="classPoint"></p>
-													<button id="plusPoint" type="button" style="height:30px" class="btn btn-outline-primary btn-sm">+</button>
+													<button id="plusPoint" type="button" style="height:30px; margin-left: 9px;" class="btn btn-sm btn-outline-primary">&nbsp;+&nbsp;</button>
 												</div>
 											</td>
 										</tr>
 										<tr>
 											<th>강좌 리뷰</th>
-											<td>
+											<td style="padding-left: 9px;">
 												<textarea class="form-control" cols="50" rows="3" name="classRegistrationReview">${lcstc.classRegistration.classRegistrationReview}</textarea>
 											</td>
 										</tr>
-										<tr>
-											<td colspan="2"><button id="classReviewBtn" type="button" class="btn btn-outline-primary">저장</button></td>
-										</tr>
 									</table>
-								</form>
-							</div>
+								</div>
+							</form>
 						</div>
 					</div>
 					<div class="col-xl-4">
@@ -198,21 +199,22 @@
 										<h3 class="mb-0">수강 취소</h3>
 									</div>
 									<div class="col text-right">
-										<a href="#!" class="btn btn-sm btn-primary">수강 대기시에만 취소가 가능합니다</a>
 									</div>
-								</div><hr>
-								<div>
-									<!-- 수강 대기상태 일시 수강 취소 가능 -->
-									<c:if test="${lcstc.classRegistration.classRegistrationState == '대기'}">	
-										<form id="cancelClassForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/cancelClass">
-											<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
-											<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
-											<div id="cancelClass">
-											</div>
-											<button id="cancelClassBtn" type="button" value="수강 신청 취소" class="btn btn-outline-danger">수강 신청 취소</button>
-										</form>
-									</c:if>
 								</div>
+							</div>
+							<div class="card-footer py-4">
+								<!-- 수강 대기상태 일시 수강 취소 가능 -->
+								<c:if test="${lcstc.classRegistration.classRegistrationState == '대기'}">	
+									<form id="cancelClassForm" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/cancelClass">
+										<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
+										<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
+										<div id="cancelClass"></div>
+										<button type="button" class="btn btn-sm btn-block btn-danger" id="cancelClassBtn" value="수강 신청 취소">수강 신청 취소</button>
+									</form>
+								</c:if>
+								<c:if test="${lcstc.classRegistration.classRegistrationState != '대기'}">	
+									<button type="button" class="btn btn-sm btn-block btn-primary">수강 대기시에만 취소가 가능합니다</button>
+								</c:if>
 							</div>
 						</div>
 					</div>

@@ -28,56 +28,57 @@
 		<div class="header bg-gradient-primary pt-5 pt-md-8" >
 		</div>
 
-		<div class=" container-fluid mt--5">
+		<div class="container-fluid mt--5">
 			<!-- Table -->
 			<div class="row">
 				<div class="col">
-					<div class="card shadow" style="margin-top: 10px;">
-						<div class="card-header border-0"  >
-							<div class="mb-0" style="float: left; margin-top: 10px;">운영자 목록</div>
-							<div class="container-fluid" style="width: 50%; ">
-								<form method="get"	action="${pageContext.request.contextPath}/auth/admin/index/1">
-									<div class="input-group-prepend" >
-										<select style="width: 200px;" class="form-control" name="managerPosition">
-											<c:if test="${manager.managerPosition == null}">
-												<option value="" selected="selected">==전체==</option>
-												<option value="사원">사원</option>
-												<option value="대리">대리</option>
-												<option value="팀장">팀장</option>
-											</c:if>
-											<c:if test="${manager.managerPosition == '사원'}">
-												<option value="">==전체==</option>
-												<option value="사원" selected="selected">사원</option>
-												<option value="대리">대리</option>
-												<option value="팀장">팀장</option>
-											</c:if>
-											<c:if test="${manager.managerPosition == '대리'}">
-												<option value="">==전체==</option>
-												<option value="사원">사원</option>
-												<option value="대리" selected="selected">대리</option>
-												<option value="팀장">팀장</option>
-											</c:if>
-											<c:if test="${manager.managerPosition == '팀장'}">
-												<option value="" selected="selected">==전체==</option>
-												<option value="사원">사원</option>
-												<option value="대리">대리</option>
-												<option value="팀장" selected="selected">팀장</option>
-											</c:if>
-										</select>
-										
-										<c:if test="${manager.managerName == null}">
-											<input type="text" class="form-control" name="managerName" placeholder="이름을 검색해주세요.">
-										</c:if>
-										
-										<c:if test="${manager.managerName != null }">
-											<input type="text" class="form-control" name="managerName" value="${manager.managerName}">
-										</c:if>
-										
-										<button type="submit" class="btn btn-primary">검색</button>
-									</div>
-								</form>
+					<div class="card shadow">
+						<div class="card-header bg-white border-0">
+							<div class="row align-items-center">
+								<div class="col-6">
+									<h3 class="mb-0">운영자 목록</h3>
+								</div>
+								<div class="col-6 text-right">
+									<form method="get" action="${pageContext.request.contextPath}/auth/admin/index/1">
+										<div class="input-group">
+											<select class="form-control" name="managerPosition">
+												<c:if test="${manager.managerPosition == null}">
+													<option value="" selected="selected">==전체==</option>
+													<option value="사원">사원</option>
+													<option value="대리">대리</option>
+													<option value="팀장">팀장</option>
+												</c:if>
+												<c:if test="${manager.managerPosition == '사원'}">
+													<option value="">==전체==</option>
+													<option value="사원" selected="selected">사원</option>
+													<option value="대리">대리</option>
+													<option value="팀장">팀장</option>
+												</c:if>
+												<c:if test="${manager.managerPosition == '대리'}">
+													<option value="">==전체==</option>
+													<option value="사원">사원</option>
+													<option value="대리" selected="selected">대리</option>
+													<option value="팀장">팀장</option>
+												</c:if>
+												<c:if test="${manager.managerPosition == '팀장'}">
+													<option value="" selected="selected">==전체==</option>
+													<option value="사원">사원</option>
+													<option value="대리">대리</option>
+													<option value="팀장" selected="selected">팀장</option>
+												</c:if>
+											</select>
+											
+											<input type="text" class="form-control" name="managerName" placeholder="이름을 검색해주세요." value="${manager.managerName}">
+											
+											<div class="input-group-append" style="z-index:0;">
+												<button type="submit" class="btn btn-primary">검색</button>
+											</div>
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
+						
 						<div class="table-responsive" style="min-height: 480px;">
 							<table class="table align-items-center table-flush text-center">
 								<thead class="thead-light">
@@ -88,7 +89,7 @@
 										<th scope="col" style="font-size: 15px; width: 7%;" >성별</th>
 										<th scope="col" style="font-size: 15px; width: 11%;" >생일</th>
 										<th scope="col" style="font-size: 15px; width: 18%;">이메일</th>
-										<th scope="col" style="font-size: 15px; width: 13%;">핸드폰번호</th>
+										<th scope="col" style="font-size: 15px; width: 13%;">연락처</th>
 										<th scope="col" style="font-size: 15px; width: 13%;">승인날짜</th>
 										<th scope="col" style="font-size: 15px; width: 8%;">탈퇴</th>
 									</tr>
@@ -105,119 +106,119 @@
 											<td style="font-size: 13px;">${m.managerPhone}</td>
 											<td style="font-size: 13px;">${m.managerAccessdate}</td>
 											<td style="font-size: 13px;">
-												<a href="${pageContext.request.contextPath}/auth/admin/deleteManager/${currentPage}/${m.managerId}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">탈퇴</a>
+												<a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/admin/deleteManager/${currentPage}/${m.managerId}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">탈퇴</a>
 											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 						</div>
-						<div class="card-footer py-4 " style="margin: auto;">
-							<nav>
-								<ul class="pagination justify-content-end mb-0">
-									<!-- 처음으로 버튼 -->
-									<c:choose>
-										<c:when test="${currentPage > 1}">
-											<li class="page-item">
-												<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/1?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
-													<i class='fas fa-angle-double-left'></i>
-												</a>
-											</li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item disabled">
-												<a class="page-link" href="#">
-													<i class='fas fa-angle-double-left'></i>
-												</a>
-											</li>
-										</c:otherwise>
-									</c:choose>
+						
+						<div class="card-footer py-4">
+							<!-- 페이지 내비게이션 -->
+							<ul class="pagination justify-content-center">
+								<!-- 처음으로 버튼 -->
+								<c:choose>
+									<c:when test="${currentPage > 1}">
+										<li class="page-item">
+											<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/1?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
+												<i class='fas fa-angle-double-left'></i>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item disabled">
+											<a class="page-link" href="#">
+												<i class='fas fa-angle-double-left'></i>
+											</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+						
+								<!-- 이전 버튼 -->
+								<c:choose>
+									<c:when test="${currentPage > 1}">
+										<li class="page-item">
+											<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${prePage}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
+												<i class='fas fa-angle-left'></i>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item disabled">
+											<a class="page-link" href="#">
+												<i class='fas fa-angle-left'></i>
+											</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+						
+								<!-- 현재 페이지 표시 -->
+								<c:forEach var="i" begin="${navFirstPage}" end="${navLastPage}">
+									<c:if test="${i <= lastPage}">
+										<c:choose>
+											<%-- 현재 페이지 --%>
+											<c:when test="${i == currentPage}">
+												<li class="page-item active">
+													<a class="page-link" href="#">${i}</a>
+												</li>
+											</c:when>
+											<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
+											<c:otherwise>
+												<li class="page-item">
+													<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${i}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">${i}</a>
+												</li>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+								</c:forEach>
+						
+								<!-- 다음 버튼 -->
+								<c:choose>
+									<c:when test="${currentPage < lastPage}">
+										<li class="page-item">
+											<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${nextPage}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
+												<i class='fas fa-angle-right'></i>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item disabled">
+											<a class="page-link" href="#">
+												<i class='fas fa-angle-right'></i>
+											</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+						
+								<!-- 마지막으로 버튼 -->
+								<c:choose>
+									<c:when test="${currentPage < lastPage}">
+										<li class="page-item">
+											<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${lastPage}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
+												<i class='fas fa-angle-double-right'></i>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item disabled">
+											<a class="page-link"  href="#" >
+												<i class='fas fa-angle-double-right'></i>
+											</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</ul>
 							
-									<!-- 이전 버튼 -->
-									<c:choose>
-										<c:when test="${currentPage > 1}">
-											<li class="page-item">
-												<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${prePage}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
-													<i class='fas fa-angle-left'></i>
-												</a>
-											</li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item disabled">
-												<a class="page-link" href="#">
-													<i class='fas fa-angle-left'></i>
-												</a>
-											</li>
-										</c:otherwise>
-									</c:choose>
-							
-									<!-- 현재 페이지 표시 -->
-									<c:forEach var="i" begin="${navFirstPage}" end="${navLastPage}">
-										<c:if test="${i <= lastPage}">
-											<c:choose>
-												<%-- 현재 페이지 --%>
-												<c:when test="${i == currentPage}">
-													<li class="page-item active">
-														<a class="page-link" href="#">${i}</a>
-													</li>
-												</c:when>
-												<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
-												<c:otherwise>
-													<li class="page-item">
-														<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${i}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">${i}</a>
-													</li>
-												</c:otherwise>
-											</c:choose>
-										</c:if>
-									</c:forEach>
-							
-									<!-- 다음 버튼 -->
-									<c:choose>
-										<c:when test="${currentPage < lastPage}">
-											<li class="page-item">
-												<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${nextPage}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
-													<i class='fas fa-angle-right'></i>
-												</a>
-											</li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item disabled">
-												<a class="page-link" href="#">
-													<i class='fas fa-angle-right'></i>
-												</a>
-											</li>
-										</c:otherwise>
-									</c:choose>
-							
-									<!-- 마지막으로 버튼 -->
-									<c:choose>
-										<c:when test="${currentPage < lastPage}">
-											<li class="page-item">
-												<a class="page-link" href="${pageContext.request.contextPath}/auth/admin/index/${lastPage}?managerPosition=${managerSearch.managerPosition}&managerName=${managerSearch.managerName}">
-													<i class='fas fa-angle-double-right'></i>
-												</a>
-											</li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item disabled">
-												<a class="page-link"  href="#" >
-													<i class='fas fa-angle-double-right'></i>
-												</a>
-											</li>
-										</c:otherwise>
-									</c:choose>
-								</ul>
-							
-								<!-- 총 페이지 수 출력 -->
-								<table style="margin: auto; margin-top: 20px;">
-									<tr>
-										<td>
-											<button type="button" class="btn btn-outline-dark btn-sm">
-												${currentPage} / ${lastPage} 페이지</button>
-										</td>
-									</tr>
-								</table>
-							</nav>
+							<!-- 총 페이지 수 출력 -->
+							<table style="margin: auto; margin-top: 20px;">
+								<tr>
+									<td>
+										<button type="button" class="btn btn-sm btn-outline-primary">
+											${currentPage} / ${lastPage} 페이지</button>
+									</td>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>

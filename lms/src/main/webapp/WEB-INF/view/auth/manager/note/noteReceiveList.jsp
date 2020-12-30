@@ -52,10 +52,6 @@
 	vertical-align: middle;
 }
 
-.table a {
-	color: #000000;
-}
-
 th {
 	text-align: center;
 }
@@ -92,33 +88,35 @@ th {
 
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
-								<thead>
+								<thead class="thead-light">
 									<tr>
-										<td>상태</td>
-										<td>제목</td>
-										<td>보낸 사람</td>
-										<td>날짜</td>
+										<th width="15%">보낸사람</th>
+										<th width="55%">제목</th>
+										<th width="10%">상태</th>
+										<th width="20%">날짜</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:if test="${!empty noteList[0].noteNo}">
 										<c:forEach var="nl" items="${noteList}">
 											<tr>
-												<td><c:if test="${nl.noteIsRead == 'Y'}">
-														읽음
-													</c:if> <c:if test="${nl.noteIsRead == 'N'}">
-														!
-													</c:if></td>
-												<td><a
-													href="${pageContext.request.contextPath}/auth/manager/note/noteReceiveOne/${nl.noteNo}">${nl.noteTitle}</a></td>
 												<td>${nl.noteDispatcherName}(${nl.noteDispatcherId})</td>
+												<td><a href="${pageContext.request.contextPath}/auth/manager/note/noteReceiveOne/${nl.noteNo}">${nl.noteTitle}</a></td>
+												<td>
+													<c:if test="${nl.noteIsRead == 'Y'}">
+														읽음
+													</c:if>
+													<c:if test="${nl.noteIsRead == 'N'}">
+														!
+													</c:if>
+												</td>
 												<td>${nl.noteSendDate}</td>
 											</tr>
 										</c:forEach>
 									</c:if>
 									<c:if test="${empty noteList[0].noteNo}">
 										<tr>
-											<td colspan="4">(현재 받은 쪽지가 없습니다.)</td>
+											<td colspan="4">(받은 쪽지가 없습니다)</td>
 										</tr>
 									</c:if>
 								</tbody>
@@ -127,7 +125,7 @@ th {
 						<!-- Page Navigation -->
 						<div class="card-footer py-4">
 							<nav aria-label="...">
-								<!-- 페이지 네비게이션 -->
+								<!-- 페이지 내비게이션 -->
 								<ul class="pagination justify-content-center">
 									<!-- 처음으로 버튼 -->
 									<c:choose>
@@ -213,7 +211,7 @@ th {
 								<table style="margin: auto;">
 									<tr>
 										<td>
-											<button type="button" class="btn btn-outline-dark btn-sm">
+											<button type="button" class="btn btn-sm btn-outline-primary">
 												${currentPage} / ${lastPage} 페이지</button>
 										</td>
 									</tr>

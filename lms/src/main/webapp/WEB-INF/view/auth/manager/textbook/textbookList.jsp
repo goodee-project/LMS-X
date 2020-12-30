@@ -17,7 +17,21 @@
 			rel="stylesheet" />
 		<!-- CSS Files -->
 		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
-</head>
+	
+		<style>
+			.table {
+				text-align: center;
+			}
+			
+			.table td {
+				vertical-align: middle;
+			}
+			
+			th {
+				text-align: center;
+			}
+		</style>
+	</head>
 	<body>
 	<!-- 내비게이션 메인 메뉴 -->
 	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
@@ -32,35 +46,39 @@
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
-							<div class="col">
-								<h2 class="mb-0">교재 목록</h2>
+							<div class="col-8">
+								<h3 class="mb-0">교재 목록</h3>
+							</div>
+							<div class="col-4 text-right">
+								<a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/manager/textbook/insertTextbook">교재 추가</a>
 							</div>
 						</div>
 					</div>
-					<div class="row align-items-center">
-						<div class="col-12">
-							<table class="table">
-								<thead class="thead-light">
+					
+					<div class="table-responsive">
+						<table class="table align-items-center table-flush">
+							<thead class="thead-light">
+								<tr>
+									<th>교재 번호</th>
+									<th>교재 이름</th>
+									<th>교재 저자</th>
+									<th>교재 출판일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${textbookList}" var="t">
 									<tr>
-										<th>교재 번호</th>
-										<th>교재 이름</th>
-										<th>교재 저자</th>
-										<th>교재 출판일</th>
+										<td>${t.textbookIsbn}</td>
+										<td><a href="${pageContext.request.contextPath}/auth/manager/textbook/textbookOne/${t.textbookIsbn}">${t.textbookTitle}</a></td>
+										<td>${t.textbookWriter}</td>
+										<td>${t.textbookPublishdate}</td>
 									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${textbookList}" var="t">
-										<tr>
-											<td>${t.textbookIsbn}</td>
-											<td><a href="${pageContext.request.contextPath}/auth/manager/textbook/textbookOne/${t.textbookIsbn}">${t.textbookTitle}</a></td>
-											<td>${t.textbookWriter}</td>
-											<td>${t.textbookPublishdate}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						<div style="text-align: right"><a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/manager/textbook/insertTextbook">교재 추가</a></div>
-						<hr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+						
+					<div class="card-footer py-4">
 						<!-- 페이지 네비게이션 -->
 						<ul class="pagination justify-content-center">
 							<!-- 처음으로 버튼 -->
@@ -168,11 +186,11 @@
 						</table>
 					</div>
 				</div>
+				
+				<!-- Footer -->
+				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 			</div>
-			<!-- Footer -->
-			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 		</div>
-	</div>
 		<!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

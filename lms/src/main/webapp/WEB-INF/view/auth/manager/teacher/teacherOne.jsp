@@ -42,59 +42,62 @@
 									<div class="col-8">
 										<h3 class="mb-0">강사 정보</h3>
 									</div>
+									<div class="col-4 text-right">
+										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/1">목록</a>
+									</div>
 									<br>
 								</div>
 							</div>
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">ID</td>
+										<th width="10%">아이디</th>
 										<td width="40%">${teacher.teacherId}</td>
-										<td width="10%">Email</td>
+										<th width="10%">이메일</th>
 										<td width="40%">${teacher.teacherEmail}</td>
 									</tr>
 									<tr>
-										<td>이름</td>
+										<th>이름</th>
 										<td>${teacher.teacherName}</td>
-										<td>성별</td>
+										<th>성별</th>
 										<td>${teacher.teacherGender}</td>
 									</tr>
 									<tr>
-										<td>전화번호</td>
+										<th>연락처</th>
 										<td>${teacher.teacherPhone}</td>
-										<td>생일</td>
+										<th>생일</th>
 										<td>${teacher.teacherBirth}</td>
 									</tr>
 									<tr>
-										<td>주소</td>
+										<th>주소</th>
 										<td colspan="3">${teacher.teacherAddressMain}</td>
 									</tr>
 									<tr>
-										<td>상세주소</td>
+										<th>상세주소</th>
 										<td colspan="3">${teacher.teacherAddressSub}</td>
 									</tr>
 									<tr>
-										<td>강사 설명</td>
+										<th>강사 자기소개</th>
 										<td>${teacher.teacherInfo}</td>
-										<td>이미지</td>
+										<th>프로필<br>이미지</th>
 										<td></td>
 									</tr>
 									<tr>
-										<td>강사 경력</td>
+										<th>강사 경력</th>
 										<td>
 											<c:forEach var="c" items="${teacher.careerList}">${c.careerContent}</c:forEach>
 										</td>
 									</tr>
 									<tr>
-										<td>보유 자격증</td>
+										<th>보유 자격증</th>
 										<td>
 											<c:forEach var="l" items="${teacher.licenseList}">${l.licenseName}</c:forEach>
 										</td>
 									</tr>
 									<tr>
-										<td>강사정보 등록날짜</td>
+										<th>강사정보<br>등록날짜</th>
 										<td>${teacher.teacherAccessdate}</td>
-										<td>강사정보 수정날짜</td>
+										<th>강사정보<br>수정날짜</th>
 										<td>${teacher.teacherUpdatedate}</td>
 									</tr>
 								</table>

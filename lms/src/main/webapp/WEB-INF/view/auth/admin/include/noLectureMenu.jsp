@@ -23,7 +23,6 @@
 					<div class=" dropdown-header noti-title">
 						<h6 class="text-overflow m-0">환영합니다!</h6>
 					</div>
-					<div class="dropdown-divider"></div>
 					<a href="${pageContext.request.contextPath}/auth/logout" class="dropdown-item"> <i class="ni ni-user-run"></i>
 						<span>로그아웃</span>
 					</a>

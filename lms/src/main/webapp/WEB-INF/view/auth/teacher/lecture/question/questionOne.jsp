@@ -41,10 +41,6 @@
 				vertical-align: middle;
 			}
 			
-			.commentTable a {
-				color: #000000;
-			}
-			
 			.commentTable th {
 				text-align: center;
 			}
@@ -344,7 +340,7 @@
 												<textarea rows="3" cols="50" name="questionCommentContent" class="form-control" id="insertCommentText"></textarea>
 											</div>
 											<br>
-											<button type="button" class="btn btn-sm btn-success" style="float:right" id="insertBtn">댓글 입력</button>
+											<button type="submit" class="btn btn-sm btn-success" style="float:right" id="insertBtn">댓글 입력</button>
 										</div>
 									</form>
 								</nav>

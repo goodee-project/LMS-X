@@ -29,24 +29,6 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		
-		<style>
-			.reportListTable {
-				text-align: center;
-			}
-			
-			.reportListTable td {
-				vertical-align: middle;
-			}
-			
-			.reportListTable a {
-				color: #000000;
-			}
-			
-			.reportListTable th {
-				text-align: center;
-			}
-		</style>
 	</head>
 	
 	<body>
@@ -147,7 +129,7 @@
 							</div>
 							
 							<div class="table-responsive">
-								<table class="table reportListTable align-items-center table-flush">
+								<table class="table align-items-center table-flush">
 									<tr>
 										<td width="20%">점수</td>
 										<!-- 점수 입력이 되지 않은 경우 -->

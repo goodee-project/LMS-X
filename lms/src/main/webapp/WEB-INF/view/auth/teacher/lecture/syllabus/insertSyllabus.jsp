@@ -60,6 +60,7 @@
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/teacher/include/lectureMenu.jsp" />
 			</div>
+			
 			<!-- 접속자 -->
 			<jsp:include page="/WEB-INF/view/auth/teacher/include/connector.jsp" />
 			

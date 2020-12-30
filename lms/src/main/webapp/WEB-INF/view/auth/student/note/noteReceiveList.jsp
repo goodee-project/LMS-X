@@ -18,7 +18,22 @@
 			rel="stylesheet" />
 		<!-- CSS Files -->
 		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+	
+		<style>
+			.table {
+				text-align: center;
+			}
+			
+			.table td {
+				vertical-align: middle;
+			}
+			
+			th {
+				text-align: center;
+			}
+		</style>
 	</head>
+	
 	<body class="">
 		<!-- 메인 Navbar -->	
 		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
@@ -32,163 +47,169 @@
 				<jsp:include page="/WEB-INF/view/auth/student/include/noteMenu.jsp" />
 	    	</div>
 	    	
-			
 	    	<!-- 접속자 -->
 			<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
+			
+			<!-- Page content -->
    			<div class="container-fluid mt--7">
-				<div class="card shadow">
-					<div class="card-header border-0">
-						<div class="row align-items-center">
-							<div class="col">
-								<h3 class="mb-0">수신함</h3>
+   				<!-- Table -->
+				<div class="row">
+					<div class="col">
+						<div class="card shadow">
+							<div class="card-header border-0">
+								<div class="row align-items-center">
+									<div class="col">
+										<h3 class="mb-0">쪽지 수신함</h3>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row align-items-center">
-						<div class="col-12">
-							<table class="table">
-								<thead class="thead-light">
-									<tr>
-										<th>상태</th>
-										<th>제목</th>
-										<th>보낸사람</th>
-										<th>보낸 날짜</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="nl" items="${noteList}">
-										<tr>
-											<td>
-												<c:if test="${nl.noteIsRead == 'Y'}">
-													읽음
-												</c:if>
-												<c:if test="${nl.noteIsRead == 'N'}">
-													!
-												</c:if>
-											</td>
-											<td><a href="${pageContext.request.contextPath}/auth/student/note/noteReceiveOne/${nl.noteNo}">${nl.noteTitle}</a></td>
-											<td>${nl.noteDispatcherName}(${nl.noteDispatcherId})</td>
-											<td>${nl.noteSendDate}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>							
-					<div class="row align-items-center mt-5">	
-						<div class="col-12">				
-							<!-- 페이지 네비게이션 -->
-							<ul class="pagination justify-content-center">
-								<!-- 처음으로 버튼 -->
-								<c:choose>
-									<c:when test="${currentPage > 1}">
-										<li class="page-item">
-											<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteDispatchList/1">
-												<i class='fas fa-angle-double-left'></i>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item disabled">
-											<a class="page-link" href="#">
-												<i class='fas fa-angle-double-left'></i>
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-								
-								<!-- 이전 버튼 -->
-								<c:choose>
-									<c:when test="${currentPage > 1}">
-										<li class="page-item">
-											<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${prePage}">
-												<i class='fas fa-angle-left'></i>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item disabled">
-											<a class="page-link" href="#">
-												<i class='fas fa-angle-left'></i>
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-								
-								<!-- 현재 페이지 표시 -->
-								<c:forEach var="i" begin="${navFirstPage}" end="${navLastPage}">
-									<c:if test="${i <= lastPage}">
-										<c:choose>
-											<%-- 현재 페이지 --%>
-											<c:when test="${i == currentPage}">
-												<li class="page-item active">
-													<a class="page-link" href="#">${i}</a>
-												</li>
-											</c:when>
-											<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
-											<c:otherwise>
-												<li class="page-item">
-													<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${i}">${i}</a>
-												</li>
-											</c:otherwise>
-										</c:choose>
-									</c:if>
-								</c:forEach>
-								
-								<!-- 다음 버튼 -->
-								<c:choose>
-									<c:when test="${currentPage < lastPage}">
-										<li class="page-item">
-											<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${nextPage}">
-												<i class='fas fa-angle-right'></i>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item disabled">
-											<a class="page-link" href="#">
-												<i class='fas fa-angle-right'></i>
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-								
-								<!-- 마지막으로 버튼 -->
-								<c:choose>
-									<c:when test="${currentPage < lastPage}">
-										<li class="page-item">
-											<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${lastPage}">
-												<i class='fas fa-angle-double-right'></i>
-											</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item disabled">
-											<a class="page-link" href="#">
-												<i class='fas fa-angle-double-right'></i>
-											</a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-							</ul>
 							
-							<!-- 총 페이지 수 출력 -->
-							<table style="margin: auto;">
-								<tr>
-									<td>
-										<button type="button" class="btn btn-outline-primary btn-sm">
-											${currentPage} / ${lastPage} 페이지
-										</button>
-									</td>
-								</tr>
-							</table>
-							<!-- 검색 -->
-							<div class="card-footer py-4 form-group">
+							<div class="table-responsive">
+								<table class="table align-items-center table-flush">
+									<thead class="thead-light">
+										<tr>
+											<th width="20%">보낸사람</th>
+											<th width="50%">제목</th>
+											<th width="10%">읽음여부</th>
+											<th width="20%">날짜</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="nl" items="${noteList}">
+											<tr>
+												<td>${nl.noteDispatcherName}(${nl.noteDispatcherId})</td>
+												<td><a href="${pageContext.request.contextPath}/auth/student/note/noteReceiveOne/${nl.noteNo}">${nl.noteTitle}</a></td>
+												<td>
+													<c:if test="${nl.noteIsRead == 'Y'}">
+														읽음
+													</c:if>
+													<c:if test="${nl.noteIsRead == 'N'}">
+														!
+													</c:if>
+												</td>
+												<td>${nl.noteSendDate}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							
+							<div class="card-footer py-4">
+								<!-- 페이지 네비게이션 -->
+								<ul class="pagination justify-content-center">
+									<!-- 처음으로 버튼 -->
+									<c:choose>
+										<c:when test="${currentPage > 1}">
+											<li class="page-item">
+												<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteDispatchList/1">
+													<i class='fas fa-angle-double-left'></i>
+												</a>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item disabled">
+												<a class="page-link" href="#">
+													<i class='fas fa-angle-double-left'></i>
+												</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+									
+									<!-- 이전 버튼 -->
+									<c:choose>
+										<c:when test="${currentPage > 1}">
+											<li class="page-item">
+												<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${prePage}">
+													<i class='fas fa-angle-left'></i>
+												</a>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item disabled">
+												<a class="page-link" href="#">
+													<i class='fas fa-angle-left'></i>
+												</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+									
+									<!-- 현재 페이지 표시 -->
+									<c:forEach var="i" begin="${navFirstPage}" end="${navLastPage}">
+										<c:if test="${i <= lastPage}">
+											<c:choose>
+												<%-- 현재 페이지 --%>
+												<c:when test="${i == currentPage}">
+													<li class="page-item active">
+														<a class="page-link" href="#">${i}</a>
+													</li>
+												</c:when>
+												<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
+												<c:otherwise>
+													<li class="page-item">
+														<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${i}">${i}</a>
+													</li>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+									</c:forEach>
+									
+									<!-- 다음 버튼 -->
+									<c:choose>
+										<c:when test="${currentPage < lastPage}">
+											<li class="page-item">
+												<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${nextPage}">
+													<i class='fas fa-angle-right'></i>
+												</a>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item disabled">
+												<a class="page-link" href="#">
+													<i class='fas fa-angle-right'></i>
+												</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+									
+									<!-- 마지막으로 버튼 -->
+									<c:choose>
+										<c:when test="${currentPage < lastPage}">
+											<li class="page-item">
+												<a class="page-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/${lastPage}">
+													<i class='fas fa-angle-double-right'></i>
+												</a>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item disabled">
+												<a class="page-link" href="#">
+													<i class='fas fa-angle-double-right'></i>
+												</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+								</ul>
+								
+								<!-- 총 페이지 수 출력 -->
+								<table style="margin: auto;">
+									<tr>
+										<td>
+											<button type="button" class="btn btn-outline-primary btn-sm">
+												${currentPage} / ${lastPage} 페이지
+											</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+							
+							<div class="card-footer py-4">
+								<!-- 검색 -->
 								<form method="get" action="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/1">
-									<div class="input-group input-group-prepend" style="width: 70%; margin: auto;">
-										<div class="input-group">
-											<input type="text" class="form-control" id="searchText" name="searchText">
-											<button type="submit" class="btn btn-outline-primary">검색</button>
+									<div class="input-group" style="width: 40%; margin: auto;">
+										<input type="text" class="form-control" id="searchText" name="searchText">
+										
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-primary">검색</button>
 										</div>
 									</div>
 								</form>
@@ -196,6 +217,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<!-- Footer -->
 				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>		
 			</div>

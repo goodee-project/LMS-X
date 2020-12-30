@@ -74,7 +74,7 @@
 				<li class="nav-item">
 					<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/index/1">
 						<i class="ni ni-tv-2 text-primary"></i>
-						Index
+						LMS 홈
 					</a>
 				</li>
 		
@@ -94,22 +94,23 @@
 					</a>
 				</li>
 		
-				<!-- 개인정보 관리 -->
+				<!-- 마이페이지 -->
 				<li class="nav-item">
 					<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/mypage/mypageOne">
 						<i class="ni ni-circle-08 text-pink"></i>
-						개인정보 관리
+						마이페이지
 					</a>
 				</li>
 		
-				<!-- LMS 시스템 FAQ -->
+				<!-- 시스템 FAQ -->
 				<li class="nav-item">
 					<a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/faq/faqList/1">
 						<i class="far fa-question-circle"></i>
-						LMS 시스템 FAQ
+						시스템 FAQ
 					</a>
 				</li>
 			</ul>
+			<hr class="my-3">
 		</div>
 	</div>
 </nav>

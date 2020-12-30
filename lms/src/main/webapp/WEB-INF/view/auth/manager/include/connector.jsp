@@ -37,9 +37,10 @@
 																<img src="${pageContext.request.contextPath}/resource/mypageImage/default.png">
 															</c:if>
 														</span>
+														&nbsp;
 														<span style="font-size:13px">${con.value.accountName}</span>
 														<span style="font-size:13px">(${con.value.accountId})</span>
-														<span>&nbsp;&nbsp;<i class="far fa-envelope"></i></span>
+														<span>&nbsp;<i class="far fa-envelope"></i></span>
 													</div>
 												</a>
 												<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">

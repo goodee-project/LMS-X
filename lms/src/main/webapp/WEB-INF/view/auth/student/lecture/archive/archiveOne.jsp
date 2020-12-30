@@ -61,32 +61,40 @@
 					<div class="card-header border-0">
 						<div class="row align-items-center">
 							<div class="col">
-								<h3 class="mb-0">과제 목록</h3>
+								<h3 class="mb-0">자료 조회</h3>
+							</div>
+							<div class="col-4 text-right">
+								<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/archive/archiveList/1'">목록</button>
 							</div>
 						</div>
 					</div>
 					<div class="row align-items-center">
 						<div class="col-12">
 							<div>
-								<table class="table">
+								<table class="table align-items-center table-flush">
 						    		<tr>
-						    			<th>제목</th>
-						    			<td>${archive.lectureArchiveTitle}</td>
-						    			<th>조회수</th>
-						    			<td>${archive.lectureArchiveCount}</td>
+						    			<th width="10%">작성자</th>
+						    			<td width="40%">${archive.lectureArchiveWriter}</td>
+						    			<th width="10%">조회수</th>
+						    			<td width="40%">${archive.lectureArchiveCount}</td>
 						    		</tr>
 						    		<tr>
-						    			<th>작성자</th>
-						    			<td>${archive.lectureArchiveWriter}</td>
-						    			<th>작성일</th>
+						    			<th>작성일시</th>
 						    			<td>${archive.lectureArchiveCreatedate}</td>
+						    			<th>수정일시</th>
+						    			<td>${archive.lectureArchiveUpdatedate}</td>
+						    		</tr>
+						    		<tr>
+						    			<th>제목</th>
+						    			<td colspan="3">${archive.lectureArchiveTitle}</td>
 						    		</tr>
 						    		<tr>
 						    			<th>내용</th>
 						    			<td colspan="3">${archive.lectureArchiveContent}</td>
 						    		</tr>
 								</table>
-							</div>							
+							</div>
+							
 						    <div>
 						    	<!-- 첨부파일 -->
 						    	<table class="table">
