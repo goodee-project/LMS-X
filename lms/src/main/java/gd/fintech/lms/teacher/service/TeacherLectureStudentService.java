@@ -27,8 +27,8 @@ public class TeacherLectureStudentService {
 	public int getTeacherLectureStudentCount(Map<String, Object> map) {
 		return teacherLectureStudentMapper.selectTeacherLectureStudentCount(map);
 	}
+	
 	public List<Attendance> getTeacherAttendanceByStudentAndMonth (int lectureNo, int currentYear, int currentMonth, String accountId) {
-		
 		Map<String, Object> map = new HashMap<>();
 		map.put("lectureNo", lectureNo);			// 강좌 고유번호
 		map.put("currentYear", currentYear);		// 현재 년도
@@ -36,7 +36,5 @@ public class TeacherLectureStudentService {
 		map.put("accountId", accountId);			// 학생 아이디
 		
 		return teacherLectureStudentMapper.selectTeacherAttendanceByStudentAndMonth(map);
-		
-		 
 	}
 }

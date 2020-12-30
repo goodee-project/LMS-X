@@ -114,7 +114,7 @@ public class TeacherLectureStudentController {
 			@PathVariable(name = "currentYear") int currentYear,
 			@PathVariable(name = "currentMonth") int currentMonth) {
 		
-		//세션에서 강사의 이름을 가져오기
+		// 세션에서 강사의 이름을 가져오기
 		HttpSession session =  ((HttpServletRequest)request).getSession();
 		String teacherName = (String)session.getAttribute("loginName");
 				
@@ -143,19 +143,20 @@ public class TeacherLectureStudentController {
 			currentDay.set(Calendar.MONTH, currentMonth -1);
 		}
 		
-		
+		currentDay.set(Calendar.DATE, 1);								// 오늘 날짜 기준 일을 1로 바꾸어 이번 달 1일의 요일을 구한다.
 		currentYear = currentDay.get(Calendar.YEAR);					// 올해 연도
 		currentMonth = currentDay.get(Calendar.MONTH) + 1;				// Calendar.MONTH에 1을 더해야 실제 월이 나온다.
+		int lastDay = currentDay.getActualMaximum(Calendar.DATE); 		// 월 마지막 날짜
+		int firstDayOfWeek = currentDay.get(Calendar.DAY_OF_WEEK);		// 이번 달 1일의 요일
 		
 		List<Attendance> attendanceList = teacherLectureStudentService.getTeacherAttendanceByStudentAndMonth(lectureNo, currentYear, currentMonth, accountId);
 		LectureAndStudentAndClassRegistration LASACR = teacherLectureStudentService.getStudentOne(map);
 		
 		model.addAttribute("currentYear", currentYear);					// 년도
 		model.addAttribute("currentMonth", currentMonth);				// 월
+		model.addAttribute("lastDay", lastDay);							// 마지막 날
+		model.addAttribute("firstDayOfWeek", firstDayOfWeek);			// 1일의 요일
 		
-		model.addAttribute("lectureNo",lectureNo);						// 강좌 고유번호
-		model.addAttribute("accountId", accountId);						// 학생 Id
-		model.addAttribute("teacherName", teacherName);					// 강사 이름
 		model.addAttribute("LASACR", LASACR);							// vo
 		model.addAttribute("attendanceList", attendanceList);
 		

@@ -189,7 +189,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:if test="${!empty attendanceList}">
+										<c:if test="${!empty attendanceList[0].attendanceState}">
 											<c:forEach var="at" items="${attendanceList}">
 												<tr>
 													<c:if test="${at.attendanceDay != null}">
@@ -215,7 +215,7 @@
 												</tr>
 											</c:forEach>
 										</c:if>
-										<c:if test="${empty attendanceList}">
+										<c:if test="${empty attendanceList[0].attendanceState}">
 											<tr>
 												<td colspan="3">
 													(출결 기록이 없습니다)
