@@ -139,11 +139,10 @@
 		<!-- 검색 -->
 		<form method="get" action="${pageContext.request.contextPath}/auth/manager/access/accessList/1" class="form-inline">
 			<div class="input-group" style="width: 70%; margin: auto;">
-				<div class="input-group-prepend">
-					<span class="input-group-text">검색</span>
-				</div>
-				
+				<!-- 계정검색 -->
 				<input type="text" class="form-control" name="searchText" value="${searchText}">
+				<!-- 날짜선택 -->
+				<input type="date" class="form-control" name="searchDate" value="${searchDate}">
 				
 				<div class="input-group-append">
 					<button type="submit" class="btn btn-outline-primary">검색</button>

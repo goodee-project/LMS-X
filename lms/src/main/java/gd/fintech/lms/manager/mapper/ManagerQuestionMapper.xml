@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerQuestionMapper"> 
-	<select id="selectQuestionListByPage" resultType="gd.fintech.lms.vo.Question">
+	<select id="selectManagerQuestionListByPage" resultType="gd.fintech.lms.vo.Question">
 		SELECT 
 			question_no questionNo,
 			lecture_no lectureNo,
@@ -21,40 +21,68 @@
 			#{beginRow}, #{rowPerPage}
 	</select>
 	
-	<select id="selectQuestionCount" resultType="int">
+	<select id="selectManagerQuestionCount" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
 			question
 	</select>
 	
-	<delete id="deleteQuestion" parameterType="int">
+	<delete id="deleteManagerQuestion" parameterType="int">
 		DELETE FROM
 			question
 		WHERE
 			question_no = #{questionNo}
 	</delete>
 	
-	<select id="selectQuestionOne" parameterType="int" resultType="gd.fintech.lms.vo.Question">
+	<!--질문 정보-->
+	<resultMap type="gd.fintech.lms.vo.Question" id="selectManagerQuestionOneResult">
+		<result property="questionNo" column="question_no"/>
+		<result property="questionWriter" column="question_writer"/>
+		<result property="questionTitle" column="question_title"/>
+		<result property="questionContent" column="question_content"/>
+		<result property="questionCount" column="question_count"/>
+		<result property="questionCreatedate" column="question_createdate"/>
+		<result property="questionUpdatedate" column="question_updatedate"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<!-- 질문 파일 정보  -->  
+		<collection property="questionFileList" ofType="gd.fintech.lms.vo.QuestionFile">
+			<result property="questionFileUuid" column="question_file_uuid"/>
+			<result property="questionFileOriginal" column="question_file_original"/>
+			<result property="questionFileSize" column="question_file_size"/>
+			<result property="questionFileType" column="question_file_type"/>
+			<result property="questionFileCount" column="question_file_count"/>
+			<result property="questionFileCreatedate" column="question_file_createdate"/>
+		</collection>
+	</resultMap>
+	<!-- 질문 게시판 상세보기 -->
+	<select id="selectManagerQuestionOne" parameterType="int" resultMap="selectManagerQuestionOneResult">
 		SELECT 
-			question_no questionNo,
-			lecture_no lectureNo,
-			account_id accountId,
-			question_writer questionWriter,
-			question_title questionTitle,
-			question_content questionContent,
-			question_createdate questionCreatedate,
-			question_updatedate questionUpdatedate,
-			question_count questionCount,
-			question_password questionPassword
+			q.question_no,
+			q.lecture_no,
+			q.account_id,
+			q.question_writer,
+			q.question_title,
+			q.question_content,
+			q.question_createdate,
+			q.question_updatedate,
+			q.question_count,
+			qf.question_file_uuid,
+			qf.question_file_original,
+			qf.question_file_size,
+			qf.question_file_type,
+			qf.question_file_count
 		FROM
-			question
+			question AS q
+		LEFT JOIN 
+			question_file AS qf ON
+			q.question_no = qf.question_no
 		WHERE
-			question_no = #{questionNo}
+			q.question_no = #{questionNo}
 	</select>
 	
 	<!--질문 게시판 조회수 증가-->
-	<update id="updateQuestionCount" parameterType="gd.fintech.lms.vo.Question">
+	<update id="updateManagerQuestionCount" parameterType="gd.fintech.lms.vo.Question">
 		UPDATE 
 			question
 		SET

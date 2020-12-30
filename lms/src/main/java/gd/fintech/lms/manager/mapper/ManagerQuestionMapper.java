@@ -9,9 +9,18 @@ import gd.fintech.lms.vo.Question;
 
 @Mapper
 public interface ManagerQuestionMapper {
-	public List<Question> selectQuestionListByPage(Map<String, Object> map); // 질문 리스트
-	int selectQuestionCount();					// 질문 페이징 카운트
-	int deleteQuestion(int question);			// 질문 삭제
-	Question selectQuestionOne(int question);   // 질문 상세보기
-	int updateQuestionCount(int questionNo);	// 질문 게시판 조회수 증가
+	// 질문 리스트
+	public List<Question> selectManagerQuestionListByPage(Map<String, Object> map);
+	
+	// 질문 페이징 카운트
+	int selectManagerQuestionCount();					
+	
+	// 질문 삭제
+	int deleteManagerQuestion(int questionNo);			
+	
+	// 질문 상세보기
+	List<Question> selectManagerQuestionOne(int questionNo);   
+	
+	// 질문 게시판 조회수 증가
+	int updateManagerQuestionCount(int questionNo);
 }

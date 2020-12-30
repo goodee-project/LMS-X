@@ -13,26 +13,31 @@ import gd.fintech.lms.vo.Question;
 @Service
 @Transactional
 public class ManagerQuestionService {
-	@Autowired ManagerQuestionMapper managerQuestionMapper;
+	@Autowired private ManagerQuestionMapper managerQuestionMapper;
 	
-	public List<Question> getQuestionListByPage(Map<String, Object> map) {
-		return managerQuestionMapper.selectQuestionListByPage(map);
+	// 질문 게시판 목록
+	public List<Question> getManagerQuestionListByPage(Map<String, Object> map) {
+		return managerQuestionMapper.selectManagerQuestionListByPage(map);
 	}
 	
-	public int getCountQuestion(int rowPerPage) {
-		return managerQuestionMapper.selectQuestionCount();
+	// 질문 게시판 페이징 카운팅
+	public int getManagerCountQuestion(int rowPerPage) {
+		return managerQuestionMapper.selectManagerQuestionCount();
 	}
 	
-	public int deleteQuestion(int questionNo) {
-		return managerQuestionMapper.deleteQuestion(questionNo);
+	// 질문 게시판 삭제
+	public int deleteManagerQuestion(int questionNo) {
+		return managerQuestionMapper.deleteManagerQuestion(questionNo);
 	}
 	
-	public Question getQuestionOne(int questionNo) {
-		return managerQuestionMapper.selectQuestionOne(questionNo);
+	// 질문 게시판 상세보기
+	public List<Question> getManagerQuestionOne(int questionNo) {
+		List<Question> questionOne = managerQuestionMapper.selectManagerQuestionOne(questionNo);
+		return questionOne;
 	}
 	
 	// 질문 게시판 상세보기 조회수 증가
-	public int updateQuestionCountUp(int questionNo) {
-		return managerQuestionMapper.updateQuestionCount(questionNo);
+	public int updateManagerQuestionCountUp(int questionNo) {
+		return managerQuestionMapper.updateManagerQuestionCount(questionNo);
 	}
 }

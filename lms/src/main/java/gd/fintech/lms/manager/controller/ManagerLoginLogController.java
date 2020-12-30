@@ -1,5 +1,6 @@
 package gd.fintech.lms.manager.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,15 +22,20 @@ public class ManagerLoginLogController {
 	@GetMapping("/auth/manager/access/accessList/{currentPage}")
 	public String managerLoginLogList(Model model, HttpSession session,
 			@PathVariable(name="currentPage") int currentPage,
-			@RequestParam(name="searchText", defaultValue = "") String searchText) {
-	
+			@RequestParam(name="searchText", defaultValue = "") String searchText,
+			@RequestParam(name="searchDate", defaultValue = "date") String searchDate) {
+		
+		if(searchDate == null) {
+		}
+		
+		
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
 		
 		// 시작 페이지 계산
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
-		List<LoginLog> loginLogList = managerLoginLogService.getLoginLogList(beginRow, rowPerPage, searchText);
+		List<LoginLog> loginLogList = managerLoginLogService.getLoginLogList(beginRow, rowPerPage, searchText, searchDate);
 		
 		int totalCount = managerLoginLogService.getLoginLogCount();
 		// 페이징 코드
@@ -89,6 +95,7 @@ public class ManagerLoginLogController {
 		model.addAttribute("nextPage", nextPage);
 		
 		model.addAttribute("searchText", searchText);
+		model.addAttribute("searchDate", searchDate);
 		
 		return "auth/manager/access/accessList";
 	}

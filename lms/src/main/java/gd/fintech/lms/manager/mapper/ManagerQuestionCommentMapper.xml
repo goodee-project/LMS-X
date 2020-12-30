@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerQuestionCommentMapper">
+	<!-- 페이징을 적용하여 질문 댓글 테이블에서 질문 고유 번호에 해당하는 데이터 목록을 가져온다 -->
+	<select id="selectManagerQuestionCommentList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.QuestionComment">
+		SELECT
+			question_no questionNo,
+			question_comment_no questionCommentNo,
+			question_comment_writer questionCommentWriter,
+			question_comment_content questionCommentContent,
+			question_comment_createdate questionCommentCreatedate,
+			question_comment_updatedate questionCommentUpdatedate,
+			account_id accountId
+		FROM 
+			question_comment
+		WHERE
+			question_no = #{questionNo}
+		ORDER BY
+			question_comment_no DESC
+	</select>
+	
+	<!-- 댓글 테이블에 있는 데이터 삭제 -->
+	<delete id="deleteManagerQuestionComment" parameterType="int">
+		DELETE FROM 
+			question_comment
+		WHERE 
+			question_comment_no = #{questionCommentNo}
+	</delete>
+	
+	<!-- 댓글 고유 번호에 해당하는 데이터를 출력한다 -->
+	<select id="selectManagerQuestionCommentOne" parameterType="int" resultType="gd.fintech.lms.vo.QuestionComment">
+		SELECT
+			question_no questionNo,
+			question_comment_no questionCommentNo,
+			question_comment_writer questionCommentWriter,
+			question_comment_content questionCommentContent,
+			question_comment_createdate questionCommentCreatedate,
+			question_comment_updatedate questionCommentUpdatedate,
+			account_id accountId
+		FROM
+			question_comment
+		WHERE
+			question_comment_no = #{questionCommentNo}
+	</select>
+</mapper>

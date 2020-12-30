@@ -18,7 +18,7 @@
 	
 	<a href="${pageContext.request.contextPath}/auth/manager/chart/chartList">통계 페이지</a>
 	
-	<a href="${pageContext.request.contextPath}/auth/manager/question/questionList/1">질문 목록 페이지</a>
+	<a href="${pageContext.request.contextPath}/auth/manager/question/questionLectureList/1">강의 질문 목록 페이지</a>
 	
 	<a href="${pageContext.request.contextPath}/auth/manager/faq/faqList/1">FAQ 관리 페이지</a>
 	

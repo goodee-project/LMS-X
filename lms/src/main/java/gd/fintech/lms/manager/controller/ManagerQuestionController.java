@@ -10,18 +10,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import gd.fintech.lms.manager.service.ManagerQuestionCommentService;
 import gd.fintech.lms.manager.service.ManagerQuestionService;
 import gd.fintech.lms.vo.Question;
+import gd.fintech.lms.vo.QuestionComment;
 
 @Controller
 public class ManagerQuestionController {
 	@Autowired private ManagerQuestionService managerQuestionService;
+	@Autowired private ManagerQuestionCommentService managerQuestionCommentService;
+	
 	
 	@GetMapping("/auth/manager/question/questionList/{currentPage}")
 	public String questionList(Model model,
 			@PathVariable(name = "currentPage") int currentPage) {
 		int rowPerPage = 10;	// 한 페이지에 출력할 개수
-		int totalCount = managerQuestionService.getCountQuestion(rowPerPage);	// 총 페이지
+		int totalCount = managerQuestionService.getManagerCountQuestion(rowPerPage);	// 총 페이지
 		int beginRow = (currentPage -1) * rowPerPage;	// 시작페이지
 		int lastPage = 0; 		// 마지막 페이지	
 		if(totalCount % rowPerPage == 0) {
@@ -32,7 +36,7 @@ public class ManagerQuestionController {
 		Map<String, Object> map = new HashMap<>();	// 질문 목록 출력
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
-		List<Question> questionList = managerQuestionService.getQuestionListByPage(map); // 질문 목록
+		List<Question> questionList = managerQuestionService.getManagerQuestionListByPage(map); // 질문 목록
 
 		int navPerPage = 10; 											// 네비에 출력할 페이지 개수
 		
@@ -78,17 +82,32 @@ public class ManagerQuestionController {
 	@GetMapping("/auth/manager/question/deleteQuestion/{questionNo}")
 	public String deleteQuestion(
 			@PathVariable(name = "questionNo") int questionNo) {
-		managerQuestionService.deleteQuestion(questionNo);
+		managerQuestionService.deleteManagerQuestion(questionNo);
 		return "redirect:/auth/manager/question/questionList/1";
 	}
 	
 	@GetMapping("/auth/manager/question/questionOne/{questionNo}")
 	public String questionOne(Model model,
 			@PathVariable(name = "questionNo") int questionNo) {
-		managerQuestionService.updateQuestionCountUp(questionNo);
-		Question question = managerQuestionService.getQuestionOne(questionNo);
+		
+		System.out.println("조회수증가 실행");
+		// 조회수 증가
+		managerQuestionService.updateManagerQuestionCountUp(questionNo);
+		System.out.println("조회수증가 종료");
+		
+		System.out.println("질문조회 실행");
+		// 질문 조회
+		List<Question> question = managerQuestionService.getManagerQuestionOne(questionNo);
+		System.out.println("질문조회 종료");
+		
+		System.out.println("댓글 실행");
+		// 댓글 목록
+		List<QuestionComment> questionComment = managerQuestionCommentService.getManagerQuestionCommentList(questionNo);
+		System.out.println("댓글 종료");
+		
 		model.addAttribute("question", question);
+		model.addAttribute("questionComment",questionComment);
+		
 		return "auth/manager/question/questionOne";
 	}
-	
 }
