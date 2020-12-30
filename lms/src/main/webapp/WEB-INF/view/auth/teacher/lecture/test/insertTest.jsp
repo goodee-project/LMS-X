@@ -116,8 +116,8 @@
 									
 									<table class="table align-items-center table-flush">
 										<tr>
-											<td width="30%">시험 시작</td>
-											<td width="70%">
+											<td width="20%">시험 시작</td>
+											<td width="80%">
 												<input type="datetime-local" class="form-control" name="testStartdate">
 											</td>
 										</tr>
