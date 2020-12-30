@@ -53,7 +53,10 @@
 					} else if($('#questionContent').val().length < 1){
 						alert('내용을 입력해 주세요.');
 						return;
-					} 
+					} else if($('#qnaPassword').val() == '0'){
+						alert('0은 비밀번호로 설정이 불가능합니다.');
+						return;
+					}
 					// 첨부 파일 유효성 검사
 					let submitCk = true;
 					$('.questionFile').each(function(index, item){

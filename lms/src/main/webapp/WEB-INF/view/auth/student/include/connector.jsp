@@ -34,7 +34,7 @@
 																<img src="${pageContext.request.contextPath}/resource/mypageImage/${con.value.accountImage}">
 															</c:if>
 															<c:if test="${empty con.value.accountImage}">
-																<img src="${pageContext.request.contextPath}/resource/mypageImage/default">
+																<img src="${pageContext.request.contextPath}/resource/mypageImage/default.png">
 															</c:if>
 														</span>
 														<span style="font-size:13px">${con.value.accountName}</span>

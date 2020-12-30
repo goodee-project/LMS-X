@@ -259,6 +259,10 @@ public class StudentQnaController {
 		
 		System.out.println("액션questionNo" + questionNo);
 		
+		if(questionForm.getQuestionPassword().equals("")) {
+			questionForm.setQuestionPassword("0");
+		}
+		
 		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo + "/1/" + questionForm.getQuestionPassword();
 		
 	}
