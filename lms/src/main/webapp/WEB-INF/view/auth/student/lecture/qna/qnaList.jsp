@@ -36,7 +36,7 @@
 	    	</div>
 	    	
 	    	<!-- 접속자 -->
-			<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
+			<jsp:include page="/WEB-INF/view/auth/teacher/include/connector.jsp" />
 		   	<div class="container-fluid mt--7">
 				<div class="card shadow">
 					<div class="card-header border-0">

@@ -22,7 +22,7 @@
 									</div>
 								</div>	
 							</div>	
-							<div style="overflow: auto; width: 100%; max-height: 100px;">	
+							<div style="height:120px; overflow: auto; width: 100%; max-height: 120px;">
 								<c:forEach var="con" items="${connector}">
 									<div>
 								        <ul class="navbar-nav d-none d-md-flex">

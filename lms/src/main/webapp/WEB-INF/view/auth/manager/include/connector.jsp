@@ -22,7 +22,7 @@
 									</div>
 								</div>	
 							</div>	
-							<div style="height:120px; overflow: auto; width: 100%; max-height: 120px;">	
+							<div style="height:120px; overflow: auto; width: 100%; max-height: 120px;">
 								<c:forEach var="con" items="${connector}">
 									<div>
 								        <ul class="navbar-nav d-none d-md-flex">
@@ -42,7 +42,7 @@
 													</div>
 												</a>
 												<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-													<a href="${pageContext.request.contextPath}/auth/teacher/note/insertNote/${con.value.accountId}/${con.value.accountName}" class="dropdown-item">
+													<a href="${pageContext.request.contextPath}/auth/manager/note/insertNote/${con.value.accountId}/${con.value.accountName}" class="dropdown-item">
 													 	<i	class="ni ni-single-02"></i> <span>쪽지 보내기</span>
 													</a>
 												</div>
