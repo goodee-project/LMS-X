@@ -15,6 +15,10 @@ import gd.fintech.lms.vo.Subject;
 public class ManagerSubjectService {
 	@Autowired ManagerSubjectMapper managerSubjectMapper;
 	
+	public List<Subject> getSubjectList(Subject subject) {
+		return managerSubjectMapper.selectSubjectList(subject);
+	}
+	
 	public List<Subject> getSubjectListByPage(Map<String, Object> map) {
 		return managerSubjectMapper.selectSubjectListByPage(map);
 	}
