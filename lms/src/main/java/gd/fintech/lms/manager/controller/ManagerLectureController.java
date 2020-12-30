@@ -110,11 +110,11 @@ public class ManagerLectureController {
 		//강사 계정 리스트
 		List<Account> accountList = managerAccountService.getAccountList();
 		//교과목 리스트
-		List<Subject> subjectList = managerSubjectService.getSubjectListByPage(null);
+		List<Subject> subjectList = managerSubjectService.getSubjectList();
 		//교재 리스트
-		List<Textbook> textbookList = managertextbookService.getTextbookListByPage(null);
+		List<Textbook> textbookList = managertextbookService.getTextbookList();
 		//강의실 리스트
-		List<Classroom> classroomList = managerClassroomService.getClassroomListByPage(null);
+		List<Classroom> classroomList = managerClassroomService.getClassroomList();
 		model.addAttribute("accountList", accountList);
 		model.addAttribute("subjectList", subjectList);
 		model.addAttribute("textbookList", textbookList);
@@ -146,11 +146,11 @@ public class ManagerLectureController {
 		//강사 계정 리스트
 		List<Account> accountList = managerAccountService.getAccountList();
 		//교과목 리스트
-		List<Subject> subjectList = managerSubjectService.getSubjectListByPage(null);
+		List<Subject> subjectList = managerSubjectService.getSubjectList();
 		//교재 리스트
-		List<Textbook> textbookList = managertextbookService.getTextbookListByPage(null);
+		List<Textbook> textbookList = managertextbookService.getTextbookList();
 		//강의실 리스트
-		List<Classroom> classroomList = managerClassroomService.getClassroomListByPage(null);
+		List<Classroom> classroomList = managerClassroomService.getClassroomList();
 		model.addAttribute("lct",LectureAndClassAndTextbook);
 		model.addAttribute("accountList", accountList);
 		model.addAttribute("subjectList", subjectList);
