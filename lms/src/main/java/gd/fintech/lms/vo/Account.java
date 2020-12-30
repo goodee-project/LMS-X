@@ -12,4 +12,7 @@ public class Account {
 	private int		accountLevel;		// 계정 권한 (1: 학생, 2: 강사, 3: 운영자, 4: 관리자)
 	private String	accountCreatedate;	// 계정 정보 생성 일시
 	private String	accountUpdatedate;	// 계정 정보 업데이트 일시
+	
+	private String accountName;
+	private String accountImage;
 }

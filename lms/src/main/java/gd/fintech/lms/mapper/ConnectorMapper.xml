@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.mapper.ConnectorMapper">
+	<!-- 계정 id 로 이름과 이미지 가져오기 -->
+	<select id="selectAccountNameAndImage" parameterType="String" resultType="gd.fintech.lms.vo.Account">
+		SELECT 
+			a.account_id accountId,
+			case when s.student_name IS NOT NULL then s.student_name
+			when t.teacher_name IS NOT NULL then t.teacher_name
+			when m.manager_name IS NOT NULL then m.manager_name END
+			accountName,
+			mi.mypage_image_uuid accountImage
+		FROM 
+			account a
+		LEFT JOIN student s ON
+			a.account_id = s.student_id
+		LEFT JOIN teacher t ON
+			a.account_id = t.teacher_id
+		LEFT JOIN manager m ON
+			a.account_id = m.manager_id
+		LEFT JOIN mypage_image mi ON
+			a.account_id = mi.account_id	
+		WHERE 
+		!(
+			s.student_name IS NULL AND 
+			t.teacher_name IS NULL AND 
+			m.manager_name IS NULL
+		) AND 
+			a.account_id = #{accountId}
+	</select>
+</mapper>

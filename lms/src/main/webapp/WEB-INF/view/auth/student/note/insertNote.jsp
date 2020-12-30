@@ -80,37 +80,9 @@
 				<jsp:include page="/WEB-INF/view/auth/student/include/noteMenu.jsp" />
 	    	</div>
 	    	
-			<!-- Header -->
-			<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
-				<div class="container-fluid">
-					<div class="header-body">
-						<!-- Card stats -->
-						<div class="row">
-							<div class="col-xl-3 col-lg-6">
-								<div class="card card-stats mb-4 mb-xl-0">
-									<div class="card-body">
-										<div class="row">
-											<div class="col">
-												<h5 class="card-title text-uppercase text-muted mb-0">접속자 현황</h5>
-												<span class="h2 font-weight-bold mb-0">350,897</span>
-											</div>
-											<div class="col-auto">
-												<div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-													<i class="fas fa-chart-bar"></i>
-												</div>
-											</div>
-										</div>
-										<p class="mt-3 mb-0 text-muted text-sm">
-											<span class="text-nowrap">누적 접속자</span>
-											<span class="text-success mr-2">1,000,000,000</span> 
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			
+	    	<!-- 접속자 -->
+			<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
    			<div class="container-fluid mt--7">
 				<div class="card shadow">
 					<div class="card-header border-0">
@@ -125,8 +97,8 @@
 						    <!-- 쪽지 보내기 폼 -->
 						    <div>
 						    	<form id="insertNoteForm" method="post" action="${pageContext.request.contextPath}/auth/student/note/insertNote">      		
-								    <input type="hidden" id="noteReceiverId" name="noteReceiverId">
-								    <input type="hidden" id="noteReceiverName" name="noteReceiverName">
+								    <input type="hidden" id="noteReceiverId" name="noteReceiverId" value="${accountId}">
+								    <input type="hidden" id="noteReceiverName" name="noteReceiverName" value="${accountName}">
 						    		<!-- 내용 -->
 							    	<table class="table">
 							    		<tr>
@@ -137,7 +109,7 @@
 							    			<th>받는사람</th>
 							    			<td>
 								    			<div class="input-group mb-3">
-								    				<input class="form-control" type="text" id="searchAccountText">
+								    				<input class="form-control" type="text" id="searchAccountText" value="${accountId}(${accountName})">
 								    				<button style="width:10%" class="btn-outline-primary" type="button" id="searchAccountBtn">검색</button>
 							    				</div>
 							    				<div id="selectAccount" style="overflow: auto; width: 100%; max-height: 200px;">
