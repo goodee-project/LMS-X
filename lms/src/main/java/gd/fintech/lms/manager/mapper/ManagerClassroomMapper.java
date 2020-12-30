@@ -9,7 +9,7 @@ import gd.fintech.lms.vo.Classroom;
 
 @Mapper
 public interface ManagerClassroomMapper {
-	public List<Classroom> selectClassroomList(Classroom classroom); // 강의실 리스트
+	public List<Classroom> selectClassroomList(); // 강의실 리스트
 	public List<Classroom> selectClassroomListByPage(Map<String, Object> map);	// 강의실 리스트(페이징)
 	int selectClassroomCount();						// 강의실 페이징 카운트
 	int insertClassroom(Classroom classroom);		// 강의실 추가

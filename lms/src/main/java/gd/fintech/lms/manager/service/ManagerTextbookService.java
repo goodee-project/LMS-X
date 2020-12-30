@@ -15,8 +15,8 @@ import gd.fintech.lms.vo.Textbook;
 public class ManagerTextbookService {
 	@Autowired ManagerTextbookMapper managerTextbookMapper;
 	
-	public List<Textbook> getTextbookList(Textbook textbook) {
-		return managerTextbookMapper.selectTextbookList(textbook);
+	public List<Textbook> getTextbookList() {
+		return managerTextbookMapper.selectTextbookList();
 	}
 	
 	public List<Textbook> getTextbookListByPage(Map<String, Object> map) {
