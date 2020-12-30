@@ -9,7 +9,7 @@
 		</button>
 		
 		<!-- Brand -->
-		<a class="navbar-brand pt-0" href="${PageContext.request.contextPath}/auth/manager/index">
+		<a class="navbar-brand pt-0" href="${pageContext.request.contextPath}/auth/manager/index">
 			<img src="${pageContext.request.contextPath}/assets/img/brand/blue.png" class="navbar-brand-img">
 		</a>
 		
