@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -28,6 +29,24 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<style>
+			.attendanceTable {
+				text-align: center;
+			}
+			
+			.attendanceTable td {
+				vertical-align: middle;
+			}
+			
+			.attendanceTable a {
+				color: #000000;
+			}
+			
+			.attendanceTable th {
+				text-align: center;
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -75,7 +94,7 @@
 			
 			<!-- Page content -->
 			<div class="container-fluid mt--7">
-				<!-- Table -->
+				<!-- Table 1 -->
 				<div class="row">
 					<div class="col">
 						<div class="card shadow">
@@ -120,6 +139,81 @@
 										<td>상세 주소</td>
 										<td colspan="3">${LASACR.student.studentAddressSub}</td>
 									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Table 2 -->
+				<div class="row mt-5">
+					<div class="col">
+						<div class="card shadow">
+							<div class="card-header bg-white border-0">
+								<div class="row align-items-center">
+									<div class="col-8">
+										<h3 class="mb-0">출결 정보</h3>
+									</div>
+									<div class="col-4 text-right">
+									</div>
+								</div>
+							</div>
+							
+							<div class="table-responsive">
+								<table class="table attendanceTable align-items-center table-flush attendanceTableMenu">
+									<tr>
+										<td width="35%" style="text-align: right;">
+											<button type="button" class="btn btn-secondary"
+												onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentOne/${LASACR.classRegistration.accountId}/${currentYear}/${currentMonth - 1}'">
+												<i class='fas fa-angle-double-left' style='font-size: 36px'></i>
+											</button>
+										</td>
+										<td width="30%">
+											<h3>${currentYear}년 ${currentMonth}월</h3>
+										</td>
+										<td width="35%" style="text-align: left;">
+											<button type="button" class="btn btn-secondary"
+												onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentOne/${LASACR.classRegistration.accountId}/${currentYear}/${currentMonth + 1}'">
+												<i class='fas fa-angle-double-right' style='font-size: 36px'></i>
+											</button>
+										</td>
+									</tr>
+								</table>
+								
+								<table class="table attendanceTable align-items-center table-flush">
+									<thead class="thead-light">
+										<tr>
+											<th>날짜</th>
+											<th>출결 여부</th>
+											<th>비고 혹은 사유</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="at" items="${attendanceList}">
+											<tr>
+												<c:if test="${at.attendanceDay != null}">
+													<td>${at.attendanceDay}</td>
+												</c:if>
+												<c:if test="${at.attendanceDay == null}">
+													<td></td>
+												</c:if>
+	
+												<c:if test="${at.attendanceState != null}">
+													<td>${at.attendanceState}</td>
+												</c:if>
+												<c:if test="${at.attendanceState == null}">
+													<td></td>
+												</c:if>
+	
+												<c:if test="${at.attendanceRemark != null}">
+													<td>${at.attendanceRemark}</td>
+												</c:if>
+												<c:if test="${at.attendanceRemark == null}">
+													<td></td>
+												</c:if>
+											</tr>
+										</c:forEach>
+									</tbody>
 								</table>
 							</div>
 						</div>

@@ -24,6 +24,7 @@
 						</div>
 					</div>
 				</a>
+				
 				<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
 					<div class=" dropdown-header noti-title">
 						<h6 class="text-overflow m-0">환영합니다!</h6>

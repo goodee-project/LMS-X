@@ -74,7 +74,7 @@
 						<h6 class="text-overflow m-0">환영합니다!</h6>
 					</div>
 					<a href="${pageContext.request.contextPath}/auth/teacher/mypage/mypageOne" class="dropdown-item"> <i
-						class="ni ni-single-02"></i> <span>마이 페이지</span>
+						class="ni ni-single-02"></i> <span>마이페이지</span>
 					</a>
 					<div class="dropdown-divider"></div>
 					<a href="${pageContext.request.contextPath}/auth/logout" class="dropdown-item"> <i class="ni ni-user-run"></i>
