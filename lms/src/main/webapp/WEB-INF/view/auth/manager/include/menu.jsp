@@ -110,7 +110,66 @@
 						LMS 시스템 FAQ
 					</a>
 				</li>
-				
+			</ul>
+			
+			<!-- 구분 선 -->
+			<hr class="my-3">
+			
+			<ul class="navbar-nav mr-auto">
+				<!-- 강의 관리 -->
+			    <li class="nav-item">
+			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/lecture/lectureList/1">
+			    		<i class="fas fa-chalkboard-teacher text-yellow"></i>
+			    		강의 관리</a>
+			    </li>
+			    
+			    <!-- 강의실 관리 -->
+			    <li class="nav-item">
+			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/classroom/classroomList/1">
+			    		<i class="fas fa-school"></i>
+			    		강의실 관리</a>
+			    </li>
+			    
+			    <!-- 교재 관리 -->
+			    <li class="nav-item">
+			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/textbook/textbookList/1">
+			    		<i class="fas fa-book text-red"></i>
+			    		교재 관리</a>
+			    </li>
+			    
+			    <!-- 과목 관리 -->
+			    <li class="nav-item">
+			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/subject/subjectList/1">
+			    		<i class="fas fa-book-open text-orange"></i>
+			    		과목 관리</a>
+			    </li>
+			    
+			    <!-- 학생 정보 관리 -->
+			    <li class="nav-item">
+			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/student/studentList/1">
+			    		<i class="far fa-id-card text-primary"></i>
+			    		학생 정보 관리</a>
+			    </li>
+			    
+			    <!-- 강사 정보  관리-->
+			    <li class="nav-item">
+			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/1">
+			    		<i class="far fa-id-card text-primary"></i>
+			    		강사 정보 관리</a>
+			    </li>
+			    
+			    <!-- 통계 페이지 -->
+			    <li class="nav-item">
+			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/chart/chartList">
+			    		<i class="fas fa-chart-pie text-pink"></i>
+			    		통계</a>
+			    </li>
+			</ul>
+			
+			<!-- 구분 선 -->
+			<hr class="my-3">
+			
+			<ul class="navbar-nav mr-auto">
 				<!-- 운영자 접속 기록 -->
 				<li class="nav-item">
 					<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/access/accessList/1">
