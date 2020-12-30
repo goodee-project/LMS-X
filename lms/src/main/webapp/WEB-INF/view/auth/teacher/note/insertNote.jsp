@@ -160,9 +160,9 @@
 										<br>
 									</div>
 								</div>
-								<div class="table-responsive">
-									<input type="hidden" id="noteReceiverId" name="noteReceiverId">
-		    						<input type="hidden" id="noteReceiverName" name="noteReceiverName">
+								<div class="table-responsive"> 		
+								    <input type="hidden" id="noteReceiverId" name="noteReceiverId" value="${accountId}">
+								    <input type="hidden" id="noteReceiverName" name="noteReceiverName" value="${accountName}">
 								
 									<table class="table align-items-center table-flush">
 										<tr>
@@ -173,7 +173,7 @@
 							    			<td>받는사람</td>
 							    			<td>
 							    				<div class="input-group">
-								    				<input type="text" id="searchAccountText" class="form-control">
+								    				<input type="text" id="searchAccountText" class="form-control" value="${accountId}(${accountName})">
 								    				<div class="input-group-append">
 														<button type="button" id="searchAccountBtn" class="btn btn-primary">검색</button>
 													</div>

@@ -42,7 +42,7 @@
 													</div>
 												</a>
 												<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-													<a href="${pageContext.request.contextPath}/auth/student/note/insertNote/${con.value.accountId}/${con.value.accountName}" class="dropdown-item">
+													<a href="${pageContext.request.contextPath}/auth/teacher/note/insertNote/${con.value.accountId}/${con.value.accountName}" class="dropdown-item">
 													 	<i	class="ni ni-single-02"></i> <span>쪽지 보내기</span>
 													</a>
 												</div>

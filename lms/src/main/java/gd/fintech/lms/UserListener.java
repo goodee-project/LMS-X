@@ -11,18 +11,25 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 import gd.fintech.lms.service.ConnectorService;
 import gd.fintech.lms.vo.Account;
 
 
 @WebListener
-public class UserListener implements HttpSessionAttributeListener {
+public class UserListener extends SpringBootServletInitializer implements HttpSessionAttributeListener {
 	@Autowired ConnectorService connectorService;
 	public ServletContext context;
 	HashMap<String, Account> map = new HashMap<>();
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(UserListener.class); 
+	}
 	
 	// 세션에 값이 추가될때
     public void attributeAdded(HttpSessionBindingEvent se)  { 
@@ -32,6 +39,7 @@ public class UserListener implements HttpSessionAttributeListener {
 	         String sessionName = (String)se.getName();		// 추가된 세션의 이름
 	         String sessionValue = (String)se.getValue();	// 추가된 세션의 값
 	         // map = (HashMap<String, Account>)context.getAttribute("connector");
+	         
 	         // 세션에서 가져온 loginId 값으로 해당 계정의 이름과 이미지 uuid를 가져옴
 	         Account a = connectorService.selectAccountNameAndImage(sessionValue);	
 	         
@@ -45,7 +53,8 @@ public class UserListener implements HttpSessionAttributeListener {
          }
          
     }
-
+    
+    // 세션 삭제시
     public void attributeRemoved(HttpSessionBindingEvent se)  { 
         if(se.getName() == "loginId") {   	        	
 	         String sessionValue = (String)se.getValue();	// 추가된 세션의 값
