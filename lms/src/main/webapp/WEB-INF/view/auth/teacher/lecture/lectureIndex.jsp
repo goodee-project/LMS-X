@@ -123,7 +123,7 @@
 							</div>
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
-									<thead>
+									<thead class="thead-light">
 										<tr>
 											<th>번호</th>
 											<th>제목</th>
