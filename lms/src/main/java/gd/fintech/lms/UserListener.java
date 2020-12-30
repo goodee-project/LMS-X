@@ -21,15 +21,17 @@ import gd.fintech.lms.vo.Account;
 @WebListener
 public class UserListener extends SpringBootServletInitializer implements HttpSessionAttributeListener {
 	@Autowired ConnectorService connectorService;
-	public ServletContext context;
-	HashMap<String, Account> map = new HashMap<>();
-	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	// aws에 배포를 위한 코드
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(UserListener.class); 
 	}
+	
+	public ServletContext context;
+	HashMap<String, Account> map = new HashMap<>();
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 세션에 값이 추가될때
     public void attributeAdded(HttpSessionBindingEvent se)  { 
@@ -42,7 +44,13 @@ public class UserListener extends SpringBootServletInitializer implements HttpSe
 	         
 	         // 세션에서 가져온 loginId 값으로 해당 계정의 이름과 이미지 uuid를 가져옴
 	         Account a = connectorService.selectAccountNameAndImage(sessionValue);	
-	         
+
+        	 // 관리자의 아이디는 0으로 받아옴
+	         // 관리자는 접속자 현황에 표시 안되게 함
+        	 if(a.getAccountId().equals("0")) {
+        		 return;
+        	 }
+        	 
 	         // 사용자의 정보를 map에 추가
 	         map.put(sessionValue, a);
 	
@@ -57,7 +65,7 @@ public class UserListener extends SpringBootServletInitializer implements HttpSe
     // 세션 삭제시
     public void attributeRemoved(HttpSessionBindingEvent se)  { 
         if(se.getName() == "loginId") {   	        	
-	         String sessionValue = (String)se.getValue();	// 추가된 세션의 값
+	         String sessionValue = (String)se.getValue();	// 삭제된 세션의 값
 	         
 	         logger.trace("Session Removed : " + sessionValue + " 로그아웃");
 	         

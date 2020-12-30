@@ -30,15 +30,16 @@
 												<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 													<div class="media align-items-center">
 														<span class="avatar avatar-sm rounded-circle" style="width:18px; height:18px"> 
-															<c:if test="${!empty sessionScope.loginImage}">
+															<c:if test="${!empty con.value.accountImage}">
 																<img src="${pageContext.request.contextPath}/resource/mypageImage/${con.value.accountImage}">
 															</c:if>
-															<c:if test="${empty sessionScope.loginImage}">
-																<img src="${pageContext.request.contextPath}/resource/mypageImage/">
+															<c:if test="${empty con.value.accountImage}">
+																<img src="${pageContext.request.contextPath}/resource/mypageImage/default">
 															</c:if>
 														</span>
 														<span style="font-size:13px">${con.value.accountName}</span>
 														<span style="font-size:13px">(${con.value.accountId})</span>
+														<span>&nbsp;&nbsp;<i class="far fa-envelope"></i></span>
 													</div>
 												</a>
 												<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">

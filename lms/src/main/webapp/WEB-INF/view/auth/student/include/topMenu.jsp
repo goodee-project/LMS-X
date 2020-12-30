@@ -11,12 +11,7 @@
 				<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<div class="media align-items-center">
 						<span class="avatar avatar-sm rounded-circle"> 
-							<c:if test="${!empty sessionScope.loginImage}">
-								<img src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
-							</c:if>
-							<c:if test="${empty sessionScope.loginImage}">
-								<img src="${pageContext.request.contextPath}/resource/mypageImage/default.png">
-							</c:if>
+							<img src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">							
 						</span>
 						<div class="media-body ml-2 d-none d-lg-block">
 							<span class="mb-0 text-sm  font-weight-bold">

@@ -54,15 +54,19 @@
 				</a></li>
 				<li class="nav-item"><a class="nav-link "
 					href="${pageContext.request.contextPath}/auth/student/lmsNotice/lmsNoticeList/1">
-						<i class="ni ni-single-02 text-yellow"></i> LMS 공지사항
-				</a></li>
-				<li class="nav-item"><a class="nav-link "
-					href="${pageContext.request.contextPath}/auth/student/faq/faqList/1">
-						<i class="ni ni-single-02 text-yellow"></i> 시스템 FAQ
+						<i class="ni ni-bullet-list-67 text-red"></i> LMS 공지사항
 				</a></li>
 				<li class="nav-item"><a class="nav-link "
 					href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/1">
-						<i class="ni ni-single-02 text-yellow"></i> 쪽지
+						<i class="far fa-envelope"></i> 쪽지
+				</a></li>
+				<li class="nav-item"><a class="nav-link "
+					href="${pageContext.request.contextPath}/auth/student/mypage/mypageOne">
+						<i class="ni ni-circle-08 text-pink"></i> 개인정보 관리
+				</a></li>
+				<li class="nav-item"><a class="nav-link "
+					href="${pageContext.request.contextPath}/auth/student/faq/faqList/1">
+						<i class="far fa-question-circle"></i> 시스템 FAQ
 				</a></li>
 			</ul>
 			<hr class="my-3">

@@ -143,7 +143,12 @@
 							    			<td>받는사람</td>
 							    			<td>
 							    				<div class="input-group">
-								    				<input type="text" id="searchAccountText" class="form-control" value="${accountId}(${accountName})">
+								    				<c:if test="${empty accountId}">
+								    					<input class="form-control" type="text" id="searchAccountText">
+								    				</c:if>
+								    				<c:if test="${!empty accountId}">
+								    					<input class="form-control" type="text" id="searchAccountText" value="${accountId}(${accountName})">
+								    				</c:if>
 								    				<div class="input-group-append">
 														<button type="button" id="searchAccountBtn" class="btn btn-primary">검색</button>
 													</div>

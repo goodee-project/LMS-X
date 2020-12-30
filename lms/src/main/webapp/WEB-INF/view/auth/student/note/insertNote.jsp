@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -78,17 +79,16 @@
 			<!-- 쪽지 Navbar -->
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/student/include/noteMenu.jsp" />
-	    	</div>
-	    	
-			
+	    	</div>	
 	    	<!-- 접속자 -->
 			<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
+			
    			<div class="container-fluid mt--7">
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
 							<div class="col">
-								<h3 class="mb-0">발신함</h3>
+								<h3 class="mb-0">쪽지 보내기</h3>
 							</div>
 						</div>
 					</div>
@@ -109,7 +109,12 @@
 							    			<th>받는사람</th>
 							    			<td>
 								    			<div class="input-group mb-3">
-								    				<input class="form-control" type="text" id="searchAccountText" value="${accountId}(${accountName})">
+								    				<c:if test="${empty accountId}">
+								    					<input class="form-control" type="text" id="searchAccountText">
+								    				</c:if>
+								    				<c:if test="${!empty accountId}">
+								    					<input class="form-control" type="text" id="searchAccountText" value="${accountId}(${accountName})">
+								    				</c:if>
 								    				<button style="width:10%" class="btn-outline-primary" type="button" id="searchAccountBtn">검색</button>
 							    				</div>
 							    				<div id="selectAccount" style="overflow: auto; width: 100%; max-height: 200px;">

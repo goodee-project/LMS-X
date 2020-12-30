@@ -227,6 +227,14 @@ public class ManagerNoteController {
 		return "auth/manager/note/insertNote";
 	}
 	
+	// 쪽지 보내기 폼 - 아이디와 이름을 파라미터로 받는 경우
+	@GetMapping("auth/manager/note/insertNote/{accountId}/{accountName}")
+	public String insertNote(
+			@PathVariable(name="accountId") String accountId,
+			@PathVariable(name="accountName") String accountName) {
+		return "auth/manager/note/insertNote";
+	}
+	
 	// 쪽지 보내기 Action
 	@PostMapping("auth/manager/note/insertNote")
 	public String insertNote(Note note, ServletRequest request) {
