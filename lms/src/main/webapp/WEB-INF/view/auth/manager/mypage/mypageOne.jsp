@@ -24,7 +24,7 @@
 	
 	<div class="main-content">
 		<div class="container-fluid">
-			<jsp:include page="/WEB-INF/view/auth/manager/include/noLectureMenu.jsp" />
+			<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
 		</div>
 		<!-- Header -->
 		<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8"></div>
