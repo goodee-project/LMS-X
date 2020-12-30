@@ -85,5 +85,8 @@
 			</table>
 			<button type="submit" class="btn btn-outline-primary">댓글입력</button>
 		</form>
+		<!-- Footer -->
+		<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
+	</div>
 </body>
 </html>

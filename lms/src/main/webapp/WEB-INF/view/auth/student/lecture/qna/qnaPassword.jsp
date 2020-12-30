@@ -112,6 +112,8 @@
 						</div>
 					</div>	
 				</div>
+				<!-- Footer -->
+				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 			</div>		
 		</div>
 		<!--   Core   -->

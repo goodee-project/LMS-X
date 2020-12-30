@@ -206,6 +206,10 @@
 				</div>
 			</div>		
 		</div>
+		<!-- Footer -->
+		<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
+	</div>
+	</div>
 		<!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

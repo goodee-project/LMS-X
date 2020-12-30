@@ -138,197 +138,202 @@
 					</div>
 				</div>	
 				<div class="row align-items-center">
-				<div class="col-12">
-					<c:forEach var="qfl" items="${question.questionFileList}">
-					<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
-	   				<c:set var="uuid">${qfl.questionFileUuid}</c:set>
-						<table class="table">
-							<tr>
-								<td>파일 이름</td>
-								<td><a onclick="fileDownloadCount('${qfl.questionFileUuid}','${qfl.questionFileCount}')" download="${qfl.questionFileOriginal}" href="${pageContext.request.contextPath}/resource/questionFile/${qfl.questionFileUuid}">${qfl.questionFileOriginal}</a></td>
-							</tr>
-							<tr>
-								<td>파일 사이즈</td>
-								<!-- 파일 사이즈 -->
-								<td>
-			    					<c:choose>
-			    						<c:when test="${qfl.questionFileSize >= (1024 * 1024)}">
-			    							<fmt:formatNumber value="${qfl.questionFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
-			    						</c:when>
-			    						<c:when test="${qfl.questionFileSize >= 1024}">
-			    							<fmt:formatNumber value="${qfl.questionFileSize/1024}" type="pattern" pattern="0.00" />B 
-			    						</c:when>
-			    						<c:otherwise>
-			    							<fmt:formatNumber value="${qfl.questionFileSize}" type="pattern" pattern="0.00" />KB 	
-			    						</c:otherwise>
-			    					</c:choose>
-			    				</td>
-							</tr>
-							<tr>
-								<td>파일 타입</td>
-								<td>${qfl.questionFileType}</td>
-							</tr>
-							<tr>
-								<td>파일 다운로드 횟수</td>
-								<td id="fileCount${fn:split(uuid ,'.')[0]}">다운 횟수 : ${qfl.questionFileCount}회</td>
-							</tr>
-							<tr>
-								<td>파일 업로드 날짜</td>
-								<td>${qfl.questionFileCreatedate}</td>
-							</tr>
-						</table>
-					</c:forEach>
-				</div>
-			</div>
-			<div style="text-align: right;">
-				<c:if test="${accountId == accountId}">
-					<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}/${questionPassword}">질문 수정</a>
-					<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
-				</c:if>
-			</div>
-		<hr>
-			<div class="card-header border-0">
-				<div class="row align-items-center">
-					<div class="col">
-						<h3 class="mb-0">댓글</h3>
+					<div class="col-12">
+						<c:forEach var="qfl" items="${question.questionFileList}">
+						<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
+		   				<c:set var="uuid">${qfl.questionFileUuid}</c:set>
+							<table class="table">
+								<tr>
+									<td>파일 이름</td>
+									<td><a onclick="fileDownloadCount('${qfl.questionFileUuid}','${qfl.questionFileCount}')" download="${qfl.questionFileOriginal}" href="${pageContext.request.contextPath}/resource/questionFile/${qfl.questionFileUuid}">${qfl.questionFileOriginal}</a></td>
+								</tr>
+								<tr>
+									<td>파일 사이즈</td>
+									<!-- 파일 사이즈 -->
+									<td>
+				    					<c:choose>
+				    						<c:when test="${qfl.questionFileSize >= (1024 * 1024)}">
+				    							<fmt:formatNumber value="${qfl.questionFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
+				    						</c:when>
+				    						<c:when test="${qfl.questionFileSize >= 1024}">
+				    							<fmt:formatNumber value="${qfl.questionFileSize/1024}" type="pattern" pattern="0.00" />B 
+				    						</c:when>
+				    						<c:otherwise>
+				    							<fmt:formatNumber value="${qfl.questionFileSize}" type="pattern" pattern="0.00" />KB 	
+				    						</c:otherwise>
+				    					</c:choose>
+				    				</td>
+								</tr>
+								<tr>
+									<td>파일 타입</td>
+									<td>${qfl.questionFileType}</td>
+								</tr>
+								<tr>
+									<td>파일 다운로드 횟수</td>
+									<td id="fileCount${fn:split(uuid ,'.')[0]}">다운 횟수 : ${qfl.questionFileCount}회</td>
+								</tr>
+								<tr>
+									<td>파일 업로드 날짜</td>
+									<td>${qfl.questionFileCreatedate}</td>
+								</tr>
+							</table>
+						</c:forEach>
 					</div>
 				</div>
-			</div>	
-			<div class="row align-items-center">
-				<div class="col-12">
-					<table class="table">
-						<c:forEach var="qc" items="${questionComment}">
-							<tr>
-								<td>${qc.questionCommentNo}</td>
-								<td>${qc.questionCommentWriter}</td>
-								<td>${qc.questionCommentContent}</td>
-								<td>${qc.questionCommentCreatedate}</td>
-								<td>${qc.questionCommentUpdatedate}</td>
-									<c:if test="${accountId == qc.accountId}">
-										<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}">수정</a></td>
-										<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}">삭제</a></td>
-									</c:if>
-							</tr>
-						</c:forEach>
-					</table>
+				<div style="text-align: right;">
+					<c:if test="${accountId == accountId}">
+						<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}/${questionPassword}">질문 수정</a>
+						<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
+					</c:if>
 				</div>
-			</div>
-			</br>
-			<form action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/insertStduentQuestionComment" method="post">
-			<div>
-				<div>
-					<textarea style="width: 100%;" rows="8px" name="questionCommentContent" class="form-control"></textarea>
+			<hr>
+				<div class="card-header border-0">
+					<div class="row align-items-center">
+						<div class="col">
+							<h3 class="mb-0">댓글</h3>
+						</div>
+					</div>
+				</div>	
+				<div class="row align-items-center">
+					<div class="col-12">
+						<table class="table">
+							<c:forEach var="qc" items="${questionComment}">
+								<tr>
+									<td>${qc.questionCommentNo}</td>
+									<td>${qc.questionCommentWriter}</td>
+									<td>${qc.questionCommentContent}</td>
+									<td>${qc.questionCommentCreatedate}</td>
+									<td>${qc.questionCommentUpdatedate}</td>
+										<c:if test="${accountId == qc.accountId}">
+											<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}">수정</a></td>
+											<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}">삭제</a></td>
+										</c:if>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
 				</div>
-				<div style="float: right"><button class="btn btn-outline-primary" style="text-align: right; margin-right: 10%;" type="submit">댓글입력</button></div>
-			</div>
-		</form>
-				<div class="row align-items-center mt-5">	
-			<div class="col-12">		
-			<!-- 페이지 네비게이션 -->
-			<ul class="pagination justify-content-center">
-				<!-- 처음으로 버튼 -->
-				<c:choose>
-					<c:when test="${currentPage > 1}">
-						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/1">
-								<i class='fas fa-angle-double-left'></i>
-							</a>
-						</li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item disabled">
-							<a class="page-link" href="#">
-								<i class='fas fa-angle-double-left'></i>
-							</a>
-						</li>
-					</c:otherwise>
-				</c:choose>
-				
-				<!-- 이전 버튼 -->
-				<c:choose>
-					<c:when test="${currentPage > 1}">
-						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${prePage}">
-								<i class='fas fa-angle-left'></i>
-							</a>
-						</li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item disabled">
-							<a class="page-link" href="#">
-								<i class='fas fa-angle-left'></i>
-							</a>
-						</li>
-					</c:otherwise>
-				</c:choose>
-				
-				<!-- 현재 페이지 표시 -->
-				<c:forEach var="i" begin="${navFirstPage}" end="${navLastPage}">
-					<c:if test="${i <= lastPage}">
+				</br>
+					<form action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/insertStduentQuestionComment" method="post">
+					<div>
+						<div>
+							<textarea style="width: 100%;" rows="8px" name="questionCommentContent" class="form-control"></textarea>
+						</div>
+						<div style="float: right"><button class="btn btn-outline-primary" style="text-align: right; margin-right: 10%;" type="submit">댓글입력</button></div>
+					</div>
+				</form>
+						<div class="row align-items-center mt-5">	
+					<div class="col-12">		
+					<!-- 페이지 네비게이션 -->
+					<ul class="pagination justify-content-center">
+						<!-- 처음으로 버튼 -->
 						<c:choose>
-							<%-- 현재 페이지 --%>
-							<c:when test="${i == currentPage}">
-								<li class="page-item active">
-									<a class="page-link" href="#">${i}</a>
+							<c:when test="${currentPage > 1}">
+								<li class="page-item">
+									<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/1">
+										<i class='fas fa-angle-double-left'></i>
+									</a>
 								</li>
 							</c:when>
-							<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 							<c:otherwise>
-								<li class="page-item">
-									<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${i}">${i}</a>
+								<li class="page-item disabled">
+									<a class="page-link" href="#">
+										<i class='fas fa-angle-double-left'></i>
+									</a>
 								</li>
 							</c:otherwise>
 						</c:choose>
-					</c:if>
-				</c:forEach>
-				
-				<!-- 다음 버튼 -->
-				<c:choose>
-					<c:when test="${currentPage < lastPage}">
-						<li class="page-item">
-							<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${nextPage}">
-								<i class='fas fa-angle-right'></i>
-							</a>
-						</li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item disabled">
-							<a class="page-link" href="#">
-								<i class='fas fa-angle-right'></i>
-							</a>
-						</li>
-					</c:otherwise>
-				</c:choose>
-								
-			<!-- 마지막으로 버튼 -->
-			<c:choose>
-				<c:when test="${currentPage < lastPage}">
-					<li class="page-item">
-						<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${lastPage}">
-							<i class='fas fa-angle-double-right'></i>
-						</a>
-					</li>
-				</c:when>
-				<c:otherwise>
-					<li class="page-item disabled">
-						<a class="page-link" href="#">
-							<i class='fas fa-angle-double-right'></i>
-						</a>
-					</li>
-				</c:otherwise>
-			</c:choose>
-		</ul>
-		<!-- 총 페이지 수 출력 -->
-		<table style="margin: auto;">
-			<tr>
-				<td>
-					<button type="button" class="btn-outline-primary">
-						${currentPage} / ${lastPage} 페이지
-					</button>
-				</td>
-			</tr>
-		</table>
-	</div>
+						
+						<!-- 이전 버튼 -->
+						<c:choose>
+							<c:when test="${currentPage > 1}">
+								<li class="page-item">
+									<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${prePage}">
+										<i class='fas fa-angle-left'></i>
+									</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item disabled">
+									<a class="page-link" href="#">
+										<i class='fas fa-angle-left'></i>
+									</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
+						
+						<!-- 현재 페이지 표시 -->
+						<c:forEach var="i" begin="${navFirstPage}" end="${navLastPage}">
+							<c:if test="${i <= lastPage}">
+								<c:choose>
+										<%-- 현재 페이지 --%>
+										<c:when test="${i == currentPage}">
+											<li class="page-item active">
+												<a class="page-link" href="#">${i}</a>
+											</li>
+										</c:when>
+										<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
+										<c:otherwise>
+											<li class="page-item">
+												<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${i}">${i}</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+								</c:if>
+							</c:forEach>
+							
+							<!-- 다음 버튼 -->
+							<c:choose>
+								<c:when test="${currentPage < lastPage}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${nextPage}">
+											<i class='fas fa-angle-right'></i>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item disabled">
+										<a class="page-link" href="#">
+											<i class='fas fa-angle-right'></i>
+										</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+											
+							<!-- 마지막으로 버튼 -->
+							<c:choose>
+								<c:when test="${currentPage < lastPage}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${lastPage}">
+											<i class='fas fa-angle-double-right'></i>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item disabled">
+										<a class="page-link" href="#">
+											<i class='fas fa-angle-double-right'></i>
+										</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+						<!-- 총 페이지 수 출력 -->
+						<table style="margin: auto;">
+							<tr>
+								<td>
+									<button type="button" class="btn-outline-primary">
+										${currentPage} / ${lastPage} 페이지
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- Footer -->
+			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
+		</div>
 	</div>
 	</body>
 </html>

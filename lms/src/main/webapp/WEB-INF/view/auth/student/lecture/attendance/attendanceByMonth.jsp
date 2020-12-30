@@ -166,7 +166,9 @@
 						</div>
 					</div>
 				</div>
-			</div>		
+			</div>
+			<!-- Footer -->
+			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include> 		
 		</div>
 		<!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>

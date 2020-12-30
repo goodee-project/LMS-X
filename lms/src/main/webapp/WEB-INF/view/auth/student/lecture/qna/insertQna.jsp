@@ -124,61 +124,70 @@
 					</div>
 				</div>
 			</div>
-			<div class="card-header border-0">
-				<div class="row align-items-center">
-					<div class="col">
-						<h3 class="mb-0">질문 작성</h3>
+			<div class="container-fluid mt--7">
+				<div class="card shadow">
+				<div class="card-header border-0">
+					<div class="row align-items-center">
+						<div class="col">
+							<h3 class="mb-0">질문 작성</h3>
+						</div>
 					</div>
 				</div>
-			</div>
-	    <!-- 질문 작성 폼 -->
-	   		 <div>
-		    	<form id="qnaForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/insertQna">   	
-		    		<input id="lectureNo" type="hidden" name="lectureNo" value="${lectureNo}"> 
-		    		<!-- 내용 -->
-			    	<table class="table">
-			    		<tr>
-			    			<th width="10%">제목</th>
-			    			<td><input class="form-control" id="qnaTitle" type="text" name="questionTitle"></td>
-			    		</tr>
-						<tr>
-			    			<th>비밀 글 설정</th>
-			    			<td><input class="form-control" id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword"></td>
-			    		</tr>
-			    		<tr>
-			    			<th>내용</th>
-			    			<td><textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px"></textarea></td>
-			    		</tr>
-			    	</table>
-		    	
-		    		<!-- 첨부파일 -->
-		    		<table class="table">
-		    			<tr>
-		    				<th><h3>첨부파일</h3></th>
-		    			</tr>
-		    			<tr>
-		    				<td>
-		    					<div>
-				   					<button id="addFileBtn" type="button" class="btn btn-outline-primary">파일 추가</button>
-			   						<button id="delFileBtn" type="button" class="btn btn-outline-danger">파일 삭제</button>
-	   							</div>
-	   						</td>
-	   					</tr>
-   						<tr>
-    						<td><div id="fileInput"></div></td>
-    					</tr>
-    				</table>
-    				<!-- 과제 제출 -->
-    				<table class="table">    
-			    		<tr>
-			    			<th>
-			  	  				<div style="float: right"><button id="qnaBtn" type="button" class="btn btn-outline-primary">질문 작성</button></div>
-			 	   			</th>
-			 	   		</tr>
-			 	   	</table>
-	    		</form>
-	    	</div> 
+		    <!-- 질문 작성 폼 -->
+		   		 <div>
+		   		 	<div class="row align-items-center">
+						<div class="col-12">
+				    	<form id="qnaForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/insertQna">   	
+				    		<input id="lectureNo" type="hidden" name="lectureNo" value="${lectureNo}"> 
+				    		<!-- 내용 -->
+					    	<table class="table">
+					    		<tr>
+					    			<th width="10%">제목</th>
+					    			<td><input class="form-control" id="qnaTitle" type="text" name="questionTitle"></td>
+					    		</tr>
+								<tr>
+					    			<th>비밀 글 설정</th>
+					    			<td><input class="form-control" id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword"></td>
+					    		</tr>
+					    		<tr>
+					    			<th>내용</th>
+					    			<td><textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px" class="form-control"></textarea></td>
+					    		</tr>
+					    	</table>
+				    	
+				    		<!-- 첨부파일 -->
+				    		<table class="table">
+				    			<tr>
+				    				<th><h3>첨부파일</h3></th>
+				    			</tr>
+				    			<tr>
+				    				<td>
+				    					<div>
+						   					<button id="addFileBtn" type="button" class="btn btn-outline-primary">파일 추가</button>
+					   						<button id="delFileBtn" type="button" class="btn btn-outline-danger">파일 삭제</button>
+			   							</div>
+			   						</td>
+			   					</tr>
+		   						<tr>
+		    						<td><div id="fileInput"></div></td>
+		    					</tr>
+		    				</table>
+		    				<!-- 과제 제출 -->
+		    				<table class="table">    
+					    		<tr>
+					    			<th>
+					  	  				<div style="float: right"><button id="qnaBtn" type="button" class="btn btn-outline-primary">질문 작성</button></div>
+					 	   			</th>
+					 	   		</tr>
+					 	   	</table>
+			    		</form>
+			    	</div>
+		    	</div>
+	    	</div>
 	    </div>
+		<!-- Footer -->
+		<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include> 
+	</div>
 	    <!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
