@@ -37,6 +37,9 @@
 			}
 		</style>
 		
+		<!-- NAVER SmartEditor2 스크립트 -->
+		<script src="${pageContext.request.contextPath}/smarteditor2/js/HuskyEZCreator.js"></script>
+		
 		<!-- jQuery를 이용하여 제목, 내용 검사 -->
 		<script>
 			$(document).ready(function() {	// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
@@ -55,6 +58,9 @@
 				
 				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
 				$("#submitBtn").click(function() {
+					// 스마트 에디터 내용 적용
+					oEditors.getById["lectureArchiveContent"].exec("UPDATE_CONTENTS_FIELD", []);
+				
 					if ($("#lectureArchiveTitle").val() == "") {	// lectureArchiveTitle이 공백인 경우 수행
 						$("#lectureArchiveTitleMsg").html('');		// 메시지 초기화
 						$('#lectureArchiveTitleMsg').append('<div style="margin-top: 10px;">제목을 입력하세요<div>');
@@ -107,6 +113,15 @@
 							$('#' + fileId).remove();
 						}
 					});
+				});
+				
+				// NAVER SmartEditor2 적용 코드
+				let oEditors = [];				
+				nhn.husky.EZCreator.createInIFrame({
+					oAppRef : oEditors,
+					elPlaceHolder : 'lectureArchiveContent',
+					sSkinURI : '${pageContext.request.contextPath}/smarteditor2/SmartEditor2Skin.html',
+					fCreator : 'createSEditor2'
 				});
 			});
 		</script>
@@ -199,7 +214,7 @@
 										<tr>
 											<td>내용</td>
 											<td>
-												<textarea class="form-control" name="lectureArchiveContent" id="lectureArchiveContent">${lectureArchive[0].lectureArchiveContent}</textarea>
+												<textarea class="form-control" name="lectureArchiveContent" id="lectureArchiveContent" style="width:100%">${lectureArchive[0].lectureArchiveContent}</textarea>
 												<div class="msgDiv" id="lectureArchiveContentMsg"></div>
 											</td>
 										</tr>

@@ -112,7 +112,7 @@
 							</div>
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
-									<thead>
+									<thead class="thead-light">
 										<tr>
 											<th width="20%">받는사람</th>
 											<th width="50%">제목</th>

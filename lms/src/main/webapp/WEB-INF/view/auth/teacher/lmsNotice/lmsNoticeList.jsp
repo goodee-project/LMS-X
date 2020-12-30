@@ -113,7 +113,7 @@
 								<table class="table align-items-center table-flush">
 									<thead class="thead-light">
 										<tr>
-											<th width="10%">공지번호</th>
+											<th width="10%">번호</th>
 											<th width="45%">제목</th>
 											<th width="15%">작성자</th>
 											<th width="20%">작성날짜</th>
