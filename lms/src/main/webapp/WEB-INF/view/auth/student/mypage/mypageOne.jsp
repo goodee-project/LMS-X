@@ -52,7 +52,7 @@
 							<div class="row justify-content-center">
 								<div class="col-lg-3 order-lg-2">
 									<div class="card-profile-image">
-										<img id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
+										<img id="img" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
 									</div>
 								</div>
 							</div>
@@ -80,7 +80,6 @@
 										<i class="ni education_hat mr-2"></i>${student.studentAddressSub}
 									</div>
 									<hr class="my-4" />
-									<p>${student.studentInfo}</p>
 								</div>
 							</div>
 						</div>

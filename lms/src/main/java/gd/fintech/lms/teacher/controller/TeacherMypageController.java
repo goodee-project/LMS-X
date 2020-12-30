@@ -35,8 +35,9 @@ public class TeacherMypageController {
 		log.debug(teacher.toString());
 		
 		MypageImage mypageImage = teacherMypageService.selectManagerImage(accountId);
-		session.setAttribute("loginImage", mypageImage.getMypageImageUuid());
-		
+		if (mypageImage != null) {
+			session.setAttribute("loginImage", mypageImage.getMypageImageUuid());
+		}
 		model.addAttribute("teacher", teacher);
 		return "auth/teacher/mypage/mypageOne";
 	}

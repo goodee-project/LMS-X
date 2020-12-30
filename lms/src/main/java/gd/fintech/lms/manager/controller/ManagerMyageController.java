@@ -35,8 +35,9 @@ public class ManagerMyageController {
 		
 		//운영자 이미지 찾기
 		MypageImage mypageImage = managerMypageService.selectManagerImage(accountId);
-		session.setAttribute("loginImage", mypageImage.getMypageImageUuid());
-		
+		if (mypageImage != null) {
+			session.setAttribute("loginImage", mypageImage.getMypageImageUuid());
+		}
 		model.addAttribute("manager", manager);
 		return "auth/manager/mypage/mypageOne";
 	}

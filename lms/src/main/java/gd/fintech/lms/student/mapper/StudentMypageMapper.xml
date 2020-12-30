@@ -32,7 +32,6 @@
 			m.student_address_main,
 			m.student_address_sub,
 			m.student_accessdate,
-			m.student_info,
 			l.license_no,
 			l.license_number,
 			l.license_name,
@@ -59,7 +58,6 @@
 			student_birth = #{studentBirth},
 			student_address_main = #{studentAddressMain},
 			student_address_sub = #{studentAddressSub},
-			student_info = #{studentInfo},
 			student_updatedate = now()
 		WHERE
 			student_id = #{studentId}

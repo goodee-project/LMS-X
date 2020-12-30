@@ -19,7 +19,6 @@
 	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			let insertCareerBtn = 0;
 			$('#insertCareerBtn').click(function(){
 				let insertCareerHtml = `
 					<form id="careerForm" method="post" action="${pageContext.request.contextPath}/auth/manager/mypage/insertMypageCareer">
@@ -180,7 +179,7 @@
 						<div class="row justify-content-center">
 							<div class="col-lg-3 order-lg-2">
 								<div class="card-profile-image">
-									<img id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
+									<img id="img" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
 								</div>
 							</div>
 						</div>

@@ -149,12 +149,12 @@
 							for (i = 0; i < data.length; i++) {
 								// building2 데이터가 있으면
 								if (data[i].building2 != 0) {
-									$('#selectAddress').append('<div><button type="button" class="addressBtn form-control" value="' + '(' + data[i].zipCode + ')' + data[i].province + ' ' + data[i].city+' ' + data[i].town+' ' + data[i].street+' ' + data[i].building1+'-'+ data[i].building2+'">'
+									$('#selectAddress').append('<div><button type="button" class="addressBtn form-control form-control-alternative" value="' + '(' + data[i].zipCode + ')' + data[i].province + ' ' + data[i].city+' ' + data[i].town+' ' + data[i].street+' ' + data[i].building1+'-'+ data[i].building2+'">'
 											+  '('+data[i].zipCode + ')' +  data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '-' + data[i].building2 +'</button></div>');
 								}
 								// building2 데이터가 없으면
 								if (data[i].building2 == 0) {
-									$('#selectAddress').append('<div><button type="button" class="addressBtn form-control" value="' + '(' + data[i].zipCode + ')' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 +'">'
+									$('#selectAddress').append('<div><button type="button" class="addressBtn form-control form-control-alternative" value="' + '(' + data[i].zipCode + ')' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 +'">'
 											+ '('+data[i].zipCode + ')' + data[i].province + ' ' + data[i].city + ' ' + data[i].town + ' ' + data[i].street + ' ' + data[i].building1 + '</button></div>');
 								}
 								
@@ -237,7 +237,7 @@
 				// 생년월일 검사
 				if ($('#managerBirth').val() == "") {
 					$('#managerBirth').focus();
-					$('#managerBirthCheck').html('<span class="text-danger">생년월일을 입력해주세요')
+					$('#managerBirthCheck').html('<span class="text-danger">생년월일을 입력해주세요</span>')
 					return;
 				} else {
 					$('#managerBirthCheck').html("")
@@ -246,7 +246,7 @@
 				// 사진 검사
 				if ( $('#managerImage').val() != "") {
 					if (imageCheck == false) {
-						$('#managerImageCheck').html('<span class="text-danger">이미지 파일만 올릴 수 있습니다.<span class="text-danger">');
+						$('#managerImageCheck').html('<span class="text-danger">이미지 파일만 올릴 수 있습니다.</span>');
 						return;
 					} else {
 						$('#managerImageCheck').html("");
@@ -257,7 +257,7 @@
 				
 				// 주소 검사
 				if ($('#managerAddressMain').val() == "") {
-					$('#addressCheck').html('<span class="text-danger">주소를 검색해주세요')
+					$('#addressCheck').html('<span class="text-danger">주소를 검색해주세요</span>')
 					return;
 				} else {
 					$('#addressCheck').html("");
@@ -293,7 +293,7 @@
 						<div class="row justify-content-center">
 							<div class="col-lg-3 order-lg-2">
 								<div class="card-profile-image">
-									<img id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
+									<img id="img" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/resource/mypageImage/${sessionScope.loginImage}">
 								</div>
 							</div>
 						</div>
