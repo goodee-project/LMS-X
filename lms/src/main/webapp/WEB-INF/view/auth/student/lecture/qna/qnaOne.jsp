@@ -129,20 +129,15 @@
 					</table>
 				</div>
 			</div>
-			<hr>
-				<div class="card-header border-0">
-					<div class="row align-items-center">
-						<div class="col">
-							<h3 class="mb-0">첨부파일 상세보기</h3>
-						</div>
-					</div>
-				</div>	
-				<div class="row align-items-center">
-					<div class="col-12">
+				<table class="table">
+		    		<thead class="thead-light">
+			    		<tr>
+			    			<th colspan="3">첨부파일</th>
+			    		</tr>
+		    		</thead>
 						<c:forEach var="qfl" items="${question.questionFileList}">
 						<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
 		   				<c:set var="uuid">${qfl.questionFileUuid}</c:set>
-							<table class="table">
 								<tr>
 									<td>파일 이름</td>
 									<td><a onclick="fileDownloadCount('${qfl.questionFileUuid}','${qfl.questionFileCount}')" download="${qfl.questionFileOriginal}" href="${pageContext.request.contextPath}/resource/questionFile/${qfl.questionFileUuid}">${qfl.questionFileOriginal}</a></td>
@@ -176,24 +171,27 @@
 									<td>파일 업로드 날짜</td>
 									<td>${qfl.questionFileCreatedate}</td>
 								</tr>
-							</table>
 						</c:forEach>
-					</div>
-				</div>
+					</table>
+				</div>	
 				<div style="text-align: right;">
 					<c:if test="${accountId == accountId}">
-						<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}/${questionPassword}">질문 수정</a>
-						<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
+						<td colspan="3">
+							<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}/${questionPassword}">질문 수정</a>
+							<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
+						</td>	
 					</c:if>
 				</div>
 			<hr>
-				<div class="card-header border-0">
-					<div class="row align-items-center">
-						<div class="col">
-							<h3 class="mb-0">댓글</h3>
+			<div class="col-xl-12 mb-5 mb-xl-0">
+				<div class="card shadow">
+					<div class="card-header border-0">
+						<div class="row align-items-center">
+							<div class="col">
+								<h3 class="mb-0">댓글</h3>
+							</div>
 						</div>
-					</div>
-				</div>	
+					</div>	
 				<div class="row align-items-center">
 					<div class="col-12">
 						<table class="table">
@@ -330,7 +328,6 @@
 						</table>
 					</div>
 				</div>
-			</div>
 			<!-- Footer -->
 			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 		</div>
