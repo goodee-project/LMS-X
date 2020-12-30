@@ -10,7 +10,10 @@ import gd.fintech.lms.vo.QuestionComment;
 @Mapper
 public interface ManagerQuestionCommentMapper {
 	// 질문 댓글 리스트
-	List<QuestionComment> selectManagerQuestionCommentList(Map<String, Integer> map);
+	List<QuestionComment> selectManagerQuestionCommentListByPage(Map<String, Integer> map);
+	
+	// 질문 댓글 수
+	int selectManagerQuestionCommentCount(int questionNo);
 	
 	// 질문 댓글 삭제
 	int deleteManagerQuestionComment(int questionCommentNo);

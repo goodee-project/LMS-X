@@ -10,7 +10,7 @@ import gd.fintech.lms.vo.Question;
 @Mapper
 public interface ManagerQuestionMapper {
 	// 질문 리스트
-	public List<Question> selectManagerQuestionListByPage(Map<String, Object> map);
+	public List<Question> selectManagerQuestionListByPage(Map<String, Integer> map);
 	
 	// 질문 페이징 카운트
 	int selectManagerQuestionCount();					
