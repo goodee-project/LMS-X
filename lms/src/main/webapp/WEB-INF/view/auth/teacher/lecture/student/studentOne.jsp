@@ -189,30 +189,39 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="at" items="${attendanceList}">
+										<c:if test="${!empty attendanceList}">
+											<c:forEach var="at" items="${attendanceList}">
+												<tr>
+													<c:if test="${at.attendanceDay != null}">
+														<td>${at.attendanceDay}</td>
+													</c:if>
+													<c:if test="${at.attendanceDay == null}">
+														<td></td>
+													</c:if>
+		
+													<c:if test="${at.attendanceState != null}">
+														<td>${at.attendanceState}</td>
+													</c:if>
+													<c:if test="${at.attendanceState == null}">
+														<td></td>
+													</c:if>
+		
+													<c:if test="${at.attendanceRemark != null}">
+														<td>${at.attendanceRemark}</td>
+													</c:if>
+													<c:if test="${at.attendanceRemark == null}">
+														<td></td>
+													</c:if>
+												</tr>
+											</c:forEach>
+										</c:if>
+										<c:if test="${empty attendanceList}">
 											<tr>
-												<c:if test="${at.attendanceDay != null}">
-													<td>${at.attendanceDay}</td>
-												</c:if>
-												<c:if test="${at.attendanceDay == null}">
-													<td></td>
-												</c:if>
-	
-												<c:if test="${at.attendanceState != null}">
-													<td>${at.attendanceState}</td>
-												</c:if>
-												<c:if test="${at.attendanceState == null}">
-													<td></td>
-												</c:if>
-	
-												<c:if test="${at.attendanceRemark != null}">
-													<td>${at.attendanceRemark}</td>
-												</c:if>
-												<c:if test="${at.attendanceRemark == null}">
-													<td></td>
-												</c:if>
+												<td colspan="3">
+													(출결 기록이 없습니다)
+												</td>
 											</tr>
-										</c:forEach>
+										</c:if>
 									</tbody>
 								</table>
 							</div>
