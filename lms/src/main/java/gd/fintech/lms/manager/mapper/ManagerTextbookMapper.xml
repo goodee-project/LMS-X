@@ -14,6 +14,19 @@
 			textbook
 	</select>
 	
+	<select id="selectTextbookListByPage" resultType="gd.fintech.lms.vo.Textbook">
+ 		SELECT 
+			textbook_isbn textbookIsbn,
+			textbook_title textbookTitle,
+			textbook_writer textbookWriter,
+			textbook_publisher textbookPublisher,
+			textbook_publishdate textbookPublishdate,
+			textbook_info textbookInfo,
+			textbook_price textbookPrice
+		FROM
+			textbook
+	</select>
+	
 	<select id="selectTextbookCount" resultType="int">
 		SELECT
 			COUNT(*)

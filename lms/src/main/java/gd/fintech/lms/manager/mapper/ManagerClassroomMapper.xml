@@ -11,6 +11,16 @@
 			classroom
 	</select>
 	
+	<select id="selectClassroomListByPage" resultType="gd.fintech.lms.vo.Classroom">
+		SELECT 
+			classroom_no classroomNo,
+			classroom_number classroomNumber,
+			classroom_size classroomSize,
+			classroom_total classroomTotal
+		FROM
+			classroom
+	</select>
+	
 	<select id="selectClassroomCount" resultType="int">
 		SELECT
 			COUNT(*)

@@ -4,18 +4,13 @@
 	<!-- 강사목록 리스트와 페이징 -->
 	<select id="selectTeacherListByPage" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT 
-			t.teacher_id teacherId,
-			t.teacher_name teacherName,
-			t.teacher_gender teacherGender,
-			a.account_state accountState
+			teacher_id teacherId,
+			teacher_name teacherName,
+			teacher_gender teacherGender
 		FROM
 			teacher t
-		INNER JOIN	
-			account a
-		ON
-			t.teacher_id = a.account_id
 		ORDER BY
-			t.teacher_id DESC
+			teacher_id DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>

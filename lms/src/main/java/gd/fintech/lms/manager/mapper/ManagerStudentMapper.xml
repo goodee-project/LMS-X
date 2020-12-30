@@ -4,18 +4,13 @@
 	<!-- 학생목록 리스트와 페이징 -->
 	<select id="selectStudentListByPage" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT 
-			s.student_id studentId,
-			s.student_name studentName,
-			s.student_gender studentGender,
-			a.account_state accountState
+			student_id studentId,
+			student_name studentName,
+			student_gender studentGender
 		FROM
 			student s
-		INNER JOIN 
-			account a 
-		ON
-			s.student_id = a.account_id
 		ORDER BY
-			s.student_id DESC
+			student_id DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>
