@@ -33,10 +33,7 @@
 		<script>
 			$(document).ready(function(){
 				$('#updateBtn').click(function(){
-					// 스마트 에디터 내용 적용
-					oEditors.getById["updateCommentText"].exec("UPDATE_CONTENTS_FIELD", []);
-					
-					if($('#updateCommentText').val().length <= 0){
+					if($('#questionCommentContent').val().length <= 0){
 						alert('댓글을 입력해주세요.');
 						return;
 					}
@@ -93,7 +90,7 @@
 			<!-- Page content -->
 			<div class="container-fluid mt--7">
 				<!-- Form -->
-				<form method="post" action="${PageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/insertNotice" id="insertNoticeForm">
+				<form method="post" action="${PageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/updateQuestionComment/${questionCommentNo}" id="updateForm">
 					<!-- Table -->
 					<div class="row">
 						<div class="col">
@@ -114,7 +111,7 @@
 										<tr>
 											<td>
 												<input type="hidden" name="questionCommentWriter" value="${questionComment.questionCommentWriter}">
-												<textarea cols="50" rows="10" class="form-control" id="updateCommentText" name="questionCommentContent">${questionComment.questionCommentContent}</textarea>
+												<textarea cols="50" rows="10" class="form-control" id="questionCommentContent" name="questionCommentContent">${questionComment.questionCommentContent}</textarea>
 											</td>
 										</tr>
 									</table>
