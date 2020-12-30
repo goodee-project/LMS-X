@@ -91,6 +91,8 @@ th {
 										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/updateLecture/${lectureNo}'">수정</button>
 									<button type="button" class="btn btn-sm btn-info"
 										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/archive/archiveList/1'">자료실</button>
+									<button type="button" class="btn btn-sm btn-info"
+										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/1'">질문 게시판</button>
 								</div>
 								<br>
 							</div>
