@@ -78,14 +78,12 @@
 			t.teacher_accessdate,
 			t.teacher_updatedate
 		FROM
-			teacher t 
-		INNER JOIN
-			career c
-		ON
+			teacher AS t 
+		LEFT JOIN
+			career AS c ON
 			t.teacher_id = c.account_id
-		INNER JOIN 
-			license l
-		ON
+		LEFT JOIN
+			license  AS l ON
 			c.account_id = l.account_id
 		WHERE
 			teacher_id = #{teacherId}
