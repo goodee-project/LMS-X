@@ -171,7 +171,7 @@ public class ManagerStudentController {
 		return "redirect:/auth/manager/student/studentQueueList/1";
 	}
 	
-	// 운영자 승인
+	// 학생 승인
 	@GetMapping("/auth/manager/student/accessStudent/{currentPage}/{accountId}")
 	public String accessStudent(HttpSession session,
 			@PathVariable(name="currentPage") String currentPage, 
@@ -181,5 +181,14 @@ public class ManagerStudentController {
 		
 		managerStudentService.accessStudent(accountId, loginId);
 		return "redirect:/auth/manager/student/studentQueueList/1";
+	}
+	
+	// 학생 탈퇴
+	@GetMapping("/auth/manager/student/deleteStudent/{currentPage}/{studentId}")
+	public String deleteManager(
+			@PathVariable(name="currentPage") String currentPage,
+			@PathVariable(name="studentId") String studentId) {
+		managerStudentService.deleteStudentAll(studentId);
+		return "redirect:/auth/manager/student/studentList/1";
 	}
 }

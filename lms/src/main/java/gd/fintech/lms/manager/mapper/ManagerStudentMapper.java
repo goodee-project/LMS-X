@@ -42,4 +42,17 @@ public interface ManagerStudentMapper {
 	
 	// 학생 테이블 추가
 	public int insertStudent(Student student);
+	
+	// 학생 탈퇴
+	// 학생 계정 비활성화
+	public int updateStudentAccount(Account account);
+	
+	// 학생 정보 삭제
+	public int deleteStudentOne(String studentId);
+	
+	// 학생 자격증 삭제
+	public int deleteStudentLicense(String studentId);
+	
+	// 학생 이미지 삭제
+	public int deleteStudentImage(String studentId);
 }

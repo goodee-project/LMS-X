@@ -1,5 +1,6 @@
 package gd.fintech.lms.manager.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.manager.mapper.ManagerStudentMapper;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.MypageImage;
@@ -17,6 +19,8 @@ import gd.fintech.lms.vo.StudentQueue;
 @Transactional
 public class ManagerStudentService {
 	@Autowired ManagerStudentMapper managerStudentMapper;
+	// 첨부파일 경로
+	private String PATH = PathUtil.PATH("mypageImage"); 
 	
 	// 학생 목록 페이징
 	public List<Student> getStudentListByPage(Map<String, Object> map) {
@@ -71,5 +75,37 @@ public class ManagerStudentService {
 		managerStudentMapper.insertStudent(student);
 		// 학생 승인대기 테이블 삭제
 		managerStudentMapper.deleteStudentQueue(accountId);
+	}
+	
+
+	// 학생 계정 탈퇴
+	public void deleteStudentAll(String studentId) {
+			
+		Account account = new Account();
+		account.setAccountId(studentId);
+		account.setAccountState("탈퇴");
+		
+		// 이미지 파일 조회
+		MypageImage mi = managerStudentMapper.selectStudentImage(studentId);
+		
+		// 데이터베이스에 기존에 있던 이미지가 있으면 파일삭제
+		if(mi != null) {
+			// 이미지 경로 + 이미지 이름
+			File file = new File(PATH + mi.getMypageImageUuid());
+			
+			// 이미지가 존재하는 경우
+			if (file.exists()) {
+				// 이미지 삭제
+				file.delete();
+			}
+			// 데이터베이스의 이미지 파일 삭제
+			managerStudentMapper.selectStudentImage(studentId);
+		}
+		// 학생 계정(탈퇴) 업데이트
+		managerStudentMapper.updateStudentAccount(account);
+		// 학생 정보 삭제
+		managerStudentMapper.deleteStudentOne(studentId);
+		// 학생 자격증 삭제
+		managerStudentMapper.deleteStudentLicense(studentId);
 	}
 }

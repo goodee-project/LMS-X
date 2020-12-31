@@ -153,4 +153,40 @@
 			#{managerIdAccess}
 		)
 	</insert>
+	
+	<!-- 학생 탈퇴 -->
+	<!-- 학생 계정 비활성화 -->
+	<update id="updateStudentAccount" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE
+			account
+		SET
+			account_state = #{accountState},
+			account_updatedate = now()
+		WHERE
+			account_id = #{accountId}
+	</update>
+	
+	<!-- 학생 정보 삭제 -->
+	<delete id="deleteStudentOne" parameterType="String">
+		DELETE FROM
+			student
+		WHERE
+			student_id = #{studentId}
+	</delete>
+	
+	<!-- 학생 자격증 삭제 -->
+	<delete id="deleteStudentLicense" parameterType="String">
+		DELETE FROM
+			license
+		WHERE
+			account_id = #{accountId}
+	</delete>
+	
+	<!-- 학생 이미지 삭제 -->
+	<delete id="deleteStudentImage" parameterType="String">
+		DELETE FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</delete>
 </mapper>
