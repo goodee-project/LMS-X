@@ -43,7 +43,7 @@
 									<h3 class="mb-0">과목 상세 페이지</h3>
 								</div>
 								<div class="col-4 text-right">
-									<button type="button" class="btn btn-sm btn-dark"  onclick="location.href='${pageContext.request.contextPath}/auth/manager/index'">목록</button>
+									<button type="button" class="btn btn-sm btn-dark"  onclick="location.href='${pageContext.request.contextPath}/auth/manager/subject/subjectList/1'">목록</button>
 									<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/manager/subject/updateSubject/${subject.subjectNo}'">수정</button>
 									<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/manager/subject/deleteSubject/${subject.subjectNo}'">삭제</button>
 								</div>
@@ -77,6 +77,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		<!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 		<script

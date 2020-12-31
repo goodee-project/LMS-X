@@ -42,7 +42,7 @@
 									<h3 class="mb-0">교재 상세 페이지</h3>
 								</div>
 								<div class="col-4 text-right">
-									<button type="button" class="btn btn-sm btn-dark"  onclick="location.href='${pageContext.request.contextPath}/auth/manager/index'">목록</button>
+									<button type="button" class="btn btn-sm btn-dark"  onclick="location.href='${pageContext.request.contextPath}/auth/manager/textbook/textbookList/1'">목록</button>
 									<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/manager/textbook/updateTextbook/${textbook.textbookIsbn}'">수정</button>
 									<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/manager/textbook/deleteTextbook/${textbook.textbookIsbn}'">삭제</button>
 								</div>
@@ -65,14 +65,12 @@
 									<tr>
 										<td>교재 출판일</td>
 										<td>${textbook.textbookPublishdate}</td>
+										<td>교재 가격</td>
+										<td>${textbook.textbookPrice}원</td>
 									</tr>
 									<tr>
 										<td>교재 정보</td>
 										<td>${textbook.textbookInfo}</td>
-									</tr>
-									<tr>
-										<td>교재 가격</td>
-										<td>${textbook.textbookPrice}</td>
 									</tr>
 								</table>
 							</div>

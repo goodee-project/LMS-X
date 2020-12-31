@@ -51,6 +51,7 @@
 								<h3 class="mb-0">강사 승인대기 목록</h3>
 							</div>
 							<div class="col-4 text-right">
+								<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/teacher/teacherList/1">목록</a>
 							</div>
 						</div>
 					</div>
