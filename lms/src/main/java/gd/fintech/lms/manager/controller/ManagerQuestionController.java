@@ -28,26 +28,21 @@ public class ManagerQuestionController {
 		
 		// 한 페이지에 출력할 개수
 		int rowPerPage = 10;
-		
+		// 현재 페이지 수
+		int totalCount = managerQuestionService.getManagerCountQuestion(lectureNo);
 		// 시작 페이지 계산
 		int beginRow = (currentPage - 1) * rowPerPage;
+		//마지막 페이지
+		int lastPage = 0;
+		// 10 미만의 개수의 데이터가 있는 페이지 표시
+		if(totalCount % rowPerPage == 0) {
+			lastPage = totalCount / rowPerPage;
+		} else {
+			lastPage = totalCount / rowPerPage + 1;			
+		}
 		
 		// 강좌 질문 게시판 목록
 		List<Question> managerQuestionList = managerQuestionService.getManagerQuestionListByPage(lectureNo, beginRow, rowPerPage);
-		
-		// 페이징 코드
-		// 현재 페이지 수
-		int totalCount = managerQuestionService.getManagerCountQuestion(lectureNo);
-		//마지막 페이지
-		int lastPage = totalCount / rowPerPage;
-		// 10 미만의 개수의 데이터가 있는 페이지 표시
-		if (totalCount % rowPerPage != 0) {
-			lastPage += 1;
-		}
-		// 전체 페이지가 0개이면 현재 페이지도 0으로 표시
-		if (lastPage == 0) {
-			currentPage = 0;
-		}
 		
 		// 내비게이션에 표시할 페이지 수
 		int navPerPage = 10;
@@ -58,7 +53,7 @@ public class ManagerQuestionController {
 		// 내비게이션 마지막 페이지
 		int navLastPage = navFirstPage + navPerPage - 1;
 		
-		// 10으로 나누어 떨어지는 경우 처리하는 코드
+		//현재 페이지가 10으로 나누어 떨어질 때
 		if (currentPage % navPerPage == 0 && currentPage != 0) {
 			navFirstPage = navFirstPage - navPerPage;
 			navLastPage = navLastPage - navPerPage;
@@ -71,6 +66,7 @@ public class ManagerQuestionController {
 		} else {
 			prePage = 1;
 		}
+
 		// 현재 페이지에 대한 다음 페이지
 		int nextPage = currentPage - (currentPage % navPerPage) + 1 + 10;
 		if (nextPage > lastPage) {

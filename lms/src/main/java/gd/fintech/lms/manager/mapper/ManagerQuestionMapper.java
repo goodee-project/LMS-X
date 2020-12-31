@@ -13,7 +13,7 @@ public interface ManagerQuestionMapper {
 	public List<Question> selectManagerQuestionListByPage(Map<String, Integer> map);
 	
 	// 질문 페이징 카운트
-	int selectManagerQuestionCount();					
+	int selectManagerQuestionCount(int lectureNo);					
 	
 	// 질문 삭제
 	int deleteManagerQuestion(int questionNo);			

@@ -67,7 +67,7 @@ th {
 		let fileId = paramUuid.split('.')[0];
 		$
 				.ajax({
-					url : '${pageContext.request.contextPath}/auth/manager/question/questionSubmitFileCount/'
+					url : '${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionSubmitFileCount/'
 							+ paramUuid,
 					type : 'post',
 					success : function(data) {
@@ -107,7 +107,7 @@ th {
 									<button type="button" class="btn btn-sm btn-dark"
 										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/1'">추가</button>
 									<button type="button" class="btn btn-sm btn-danger"
-										onclick="location.href='${pageContext.request.contextPath}/auth/manager/question/deleteQuestion/${question.questionNo}'">삭제</button>
+										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/deleteQuestion/${question.questionNo}'">삭제</button>
 								</div>
 								<br>
 							</div>
@@ -195,7 +195,7 @@ th {
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-danger"
-										onclick="location.href='${pageContext.request.contextPath}/auth/manager/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
+										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
 								</div>
 								<br>
 							</div>
@@ -213,7 +213,7 @@ th {
 											<td>수정일 : ${qc.questionCommentUpdatedate}</td>
 											<td>
 												<button type="button" class="btn btn-sm btn-danger"
-													onclick="location.href='${pageContext.request.contextPath}/auth/manager/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
+													onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -236,7 +236,7 @@ th {
 									<c:choose>
 										<c:when test="${currentPage > 1}">
 											<li class="page-item"><a class="page-link"
-												href="${pageContext.request.contextPath}/auth/manager/lecture/question/questionOne/${questionNo}/1">
+												href="${pageContext.request.contextPath}/auth/manager//lecture/${lectureNo}/question/questionOne/${questionNo}/1">
 													<i class='fas fa-angle-double-left'></i>
 											</a></li>
 										</c:when>
@@ -285,7 +285,7 @@ th {
 									<c:choose>
 										<c:when test="${currentPage < lastPage}">
 											<li class="page-item"><a class="page-link"
-												href="${pageContext.request.contextPath}/auth/manager/lecture/question/questionOne/${questionNo}/${nextPage}">
+												href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionOne/${questionNo}/${nextPage}">
 													<i class='fas fa-angle-right'></i>
 											</a></li>
 										</c:when>

@@ -97,17 +97,15 @@ th {
 									<th>질문 작성자</th>
 									<th>질문 제목</th>
 									<th>질문 작성날짜</th>
-									<th>질문 수정날짜</th>
 									<th>질문 조회수</th>
 								</tr>
 								<c:forEach items="${managerQuestionList}" var="q">
 									<tr>
-										<td><a
-											href="${pageContext.request.contextPath}/auth/manager/question/questionOne/${q.questionNo}">${q.questionNo}</a></td>
+										<td>${q.questionNo}</td>
 										<td>${q.questionWriter}</td>
-										<td>${q.questionTitle}</td>
+										<td><a
+											href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionOne/${q.questionNo}/1">${q.questionTitle}</a></td>
 										<td>${q.questionCreatedate}</td>
-										<td>${q.questionUpdatedate}</td>
 										<td>${q.questionCount}</td>
 									</tr>
 								</c:forEach>
@@ -123,7 +121,7 @@ th {
 									<c:choose>
 										<c:when test="${currentPage > 1}">
 											<li class="page-item"><a class="page-link"
-												href="${pageContext.request.contextPath}/auth/manager/question/questionList/1">
+												href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/1">
 													<i class='fas fa-angle-double-left'></i>
 											</a></li>
 										</c:when>
@@ -138,7 +136,7 @@ th {
 									<c:choose>
 										<c:when test="${currentPage > 1}">
 											<li class="page-item"><a class="page-link"
-												href="${pageContext.request.contextPath}/auth/manager/question/questionList/${prePage}">
+												href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/${prePage}">
 													<i class='fas fa-angle-left'></i>
 											</a></li>
 										</c:when>
@@ -161,7 +159,7 @@ th {
 												<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 												<c:otherwise>
 													<li class="page-item"><a class="page-link"
-														href="${pageContext.request.contextPath}/auth/manager/question/questionList/${i}">${i}</a>
+														href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/${i}">${i}</a>
 													</li>
 												</c:otherwise>
 											</c:choose>
@@ -172,7 +170,7 @@ th {
 									<c:choose>
 										<c:when test="${currentPage < lastPage}">
 											<li class="page-item"><a class="page-link"
-												href="${pageContext.request.contextPath}/auth/manager/question/questionList/${nextPage}">
+												href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/${nextPage}">
 													<i class='fas fa-angle-right'></i>
 											</a></li>
 										</c:when>
@@ -187,7 +185,7 @@ th {
 									<c:choose>
 										<c:when test="${currentPage < lastPage}">
 											<li class="page-item"><a class="page-link"
-												href="${pageContext.request.contextPath}/auth/manager/question/questionList/${lastPage}">
+												href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/${lastPage}">
 													<i class='fas fa-angle-double-right'></i>
 											</a></li>
 										</c:when>
