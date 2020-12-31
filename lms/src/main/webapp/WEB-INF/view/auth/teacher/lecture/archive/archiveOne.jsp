@@ -39,7 +39,7 @@
 					url: '${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/archive/archiveSubmitFileCount/' + paramUuid,
 					type:'post',
 					success: function(data){
-						let html = '다운로드 횟수 : ' + data + '회';
+						let html = '다운로드 : ' + data + '회';
 						$('#fileCount' + fileId).html(html);
 					}
 				});
@@ -116,7 +116,7 @@
 															href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}" download="${laf.lectureArchiveFileOriginal}">
 															${laf.lectureArchiveFileOriginal}
 														</a>
-														&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, <div id="fileCount${fn:split(uuid, '.')[0]}" style="display: inline;">다운로드 횟수 : ${laf.lectureArchiveFileCount}</div>)
+														&nbsp;(${laf.lectureArchiveFileType}, ${laf.lectureArchiveFileSize}KByte, <div id="fileCount${fn:split(uuid, '.')[0]}" style="display: inline;">다운로드 : ${laf.lectureArchiveFileCount}회</div>)
 													</div>
 												</c:if>
 												<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileOriginal == null}">

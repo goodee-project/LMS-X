@@ -80,10 +80,10 @@
 									<thead class="thead-light">
 										<tr>
 											<th width="10%">문제 번호</th>
-											<th width="40%">문제</th>
+											<th width="50%">문제</th>
 											<th width="10%">정답 번호</th>
 											<th width="10%">문항 점수</th>
-											<th width="10%">보기 관리</th>
+											<th width="10%">문제/보기 수정</th>
 											<th width="10%">삭제</th>
 										</tr>
 									</thead>
@@ -98,7 +98,7 @@
 													<td>${mcl.multiplechoiceAnswer}</td>
 													<td>${mcl.multiplechoiceScore}</td>
 													<td>
-														<button type="button" class="btn btn-sm btn-success" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/updateMultiplechoice/${mcl.multiplechoiceNo}'">수정</button>
+														<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/updateMultiplechoice/${mcl.multiplechoiceNo}'">수정</button>
 													</td>
 													<td>
 														<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/deleteMultiplechoice/${mcl.multiplechoiceNo}'">삭제</button>
@@ -108,7 +108,7 @@
 										</c:if>
 										<c:if test="${multiplechoiceList[0].multiplechoiceNo == null}">
 											<tr>
-												<td colspan="7">(출제한 문제가 없습니다)</td>
+												<td colspan="6">(출제한 문제가 없습니다)</td>
 											</tr>
 										</c:if>
 									</tbody>

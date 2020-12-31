@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
-		<title>multiplechoiceExampleList</title>
+		<title>updateMultiplechoice</title>
 		
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
@@ -87,11 +87,11 @@
 								<div class="card-header bg-white border-0">
 									<div class="row align-items-center">
 										<div class="col-8">
-											<h3 class="mb-0">문제 - 보기 관리</h3>
+											<h3 class="mb-0">문제/보기 수정</h3>
 										</div>
 										<div class="col-4 text-right">
-											<button type="button" id="updateMultiplechoiceExampleBtn" class="btn btn-primary">저장</button>									
-											<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
+											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
+											<button type="button" class="btn btn-sm btn-primary" id="updateMultiplechoiceExampleBtn">저장</button>									
 										</div>
 									</div>
 								</div>

@@ -30,7 +30,8 @@
 		</where>
 		ORDER BY
 			faq_no DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+		LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- FAQ 총 데이터 수 -->
