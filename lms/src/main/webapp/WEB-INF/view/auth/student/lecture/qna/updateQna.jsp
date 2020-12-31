@@ -46,13 +46,16 @@
 				// 질문 작성 버튼
 				$('#updateQnaBtn').click(function(){
 					oEditors.getById["questionContent"].exec("UPDATE_CONTENTS_FIELD", []); // 스마트 에디터 내용 추가
+					var qc = $("#questionContent").val();
 					// 제목, 내용 유효성 검사
 					if($('#qnaTitle').val().length < 1){
 						alert('제목을 입력해 주세요.');
 						return;
-					} else if($('#questionContent').val().length < 1){
+						
+					} else if(qc == "" || qc == null || qc == '&nbsp;' || qc == '<p>&nbsp;</p>'){
 						alert('내용을 입력해 주세요.');
-						return;
+						oEditors.getById["qc"].exec("FOCUS");
+						
 					} else if($('#qnaPassword').val() == '0'){
 						alert('0은 비밀번호로 설정이 불가능합니다.');
 						return;

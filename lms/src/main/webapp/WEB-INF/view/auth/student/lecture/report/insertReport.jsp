@@ -60,12 +60,14 @@
 				// 과제 제출 버튼
 				$('#reportSubmitBtn').click(function(){
 					oEditors.getById["reportSubmitContent"].exec("UPDATE_CONTENTS_FIELD", []); // 스마트 에디터 내용 적용
+					var rsc = $("reportSubmitContent").val();
 					// 제목, 내용 유효성 검사
 					if($('#reportSubmitTitle').val().length < 1){
 						alert('제목을 입력해 주세요.');
 						return;
-					} else if($('#reportSubmitContent').val().length < 1){
+					} else if(rsc == "" || rsc == null || rsc == '&nbsp;' || rsc == '<p>&nbsp;</p>'){
 						alert('내용을 입력해 주세요.');
+						oEditors.getById["rsc"].exec("FOCUS");
 						return;
 					}
 		

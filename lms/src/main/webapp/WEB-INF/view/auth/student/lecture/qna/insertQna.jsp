@@ -43,12 +43,14 @@
 				// 질문 작성 버튼
 				$('#qnaBtn').click(function(){
 					oEditors.getById["questionContent"].exec("UPDATE_CONTENTS_FIELD", []); // 스마트 에디터 내용 추가
+					var qc = $("#questionContent").val();
 					// 제목, 내용 유효성 검사
 					if($('#qnaTitle').val().length < 1){
 						alert('제목을 입력해 주세요.');
 						return;
-					} else if($('#questionContent').val().length < 1){
+					} else if(qc == "" || qc == null || qc == '&nbsp;' || qc == '<p>&nbsp;</p>'){
 						alert('내용을 입력해 주세요.');
+						oEditors.getById["qc"].exec("FOCUS");
 						return;
 					} else if($('#qnaPassword').val() == '0'){
 						alert('0은 비밀번호로 설정이 불가능합니다.');
@@ -162,6 +164,7 @@
 		<!-- Footer -->
 		<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include> 
 	</div>
+</div>
 	    <!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
