@@ -192,8 +192,8 @@
 				
 				//비밀번호 형식 검사
 				function isJobPassword(str) {
-					// 8 ~ 10자 영문, 숫자 조합
-					var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/; 
+					// 8 ~ 18자 영문, 숫자 조합
+					var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,18}$/; 
 					// 형식에 맞는 경우 true 리턴
 					if (regExp.test(str)) {
 						return true;
