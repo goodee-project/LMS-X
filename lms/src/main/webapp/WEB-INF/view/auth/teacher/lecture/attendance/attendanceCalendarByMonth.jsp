@@ -102,11 +102,11 @@
 										<h3 class="mb-0">월별 출석부</h3>
 									</div>
 									<div class="col-4 text-right">
-										<div style="float: right;">
-										</div>
+										<button type="button" class="btn btn-sm btn-success" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/attendanceToday'">오늘 날짜 이동</button>
 									</div>
 								</div>
 							</div>
+							
 							<div class="table-responsive">
 								<!-- 날짜 출력 및 이동 -->
 					            <table class="attendanceTableMenu">
@@ -126,12 +126,10 @@
 					                  </td>
 					               </tr>
 					            </table>
-								
-								<button type="button" class="btn btn-sm btn-success" style="float: right;" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/attendanceToday'">오늘 날짜 이동</button>
-								
-								<br><br>
-								
-								<table class="table table-bordered attendanceTable">
+					            
+					            <br>
+					            		
+								<table class="table attendanceTable">
 									<thead>
 										<tr>
 											<th class="sunday">일</th>
