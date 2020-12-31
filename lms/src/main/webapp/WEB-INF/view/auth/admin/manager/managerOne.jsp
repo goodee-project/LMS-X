@@ -34,12 +34,7 @@
 						<div class="row justify-content-center">
 							<div class="col-lg-3 order-lg-2">
 								<div class="card-profile-image">
-									<c:if test="${managerImage != null}">
-										<img id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${managerImage}">
-									</c:if>
-									<c:if test="${managerImage == null}">
-										<img id="img" src="${pageContext.request.contextPath}/resource/mypageImage/default.png">
-									</c:if>
+									<img id="img" src="${pageContext.request.contextPath}/resource/mypageImage/${managerImage}">
 								</div>
 							</div>
 						</div>

@@ -80,7 +80,7 @@
 										<td style="font-size: 13px;">${t.teacherPhone}</td>
 										<td style="font-size: 13px;">${t.teacherAccessdate}</td>
 										<td style="font-size: 13px;">
-											<a class="btn btn-sm btn-danger" href="">탈퇴</a>
+											<a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/manager/teacher/deleteTeacher/${currentPage}/${t.teacherId}">탈퇴</a>
 										</td>
 									</tr>	
 								</c:forEach>

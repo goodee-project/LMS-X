@@ -197,4 +197,34 @@
 			#{teacherInfo}
 		)
 	</insert>
+	
+	<!-- 강사 탈퇴 -->
+	<!-- 강사 정보 삭제  -->
+	<delete id="deleteTeacher" parameterType="String">
+		DELETE FROM
+			teacher 
+		WHERE
+			teacher_id = #{accountId}
+	</delete>
+	<!-- 강사 경력 삭제 -->
+	<delete id="deleteTeacherCareer" parameterType="String">
+		DELETE FROM
+			career
+		WHERE
+			account_id = #{accountId}
+	</delete>
+	<!-- 강사 자격증 삭제 -->
+	<delete id="delteTeacherLicense" parameterType="String">
+		DELETE FROM
+			license
+		WHERE
+			account_id = #{accountId}
+	</delete>
+	<!-- 강사 이미지 삭제 -->
+	<delete id="deleteTeacherImage" parameterType="String">
+		DELTE FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</delete>
 </mapper>

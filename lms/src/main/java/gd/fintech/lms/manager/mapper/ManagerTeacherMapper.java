@@ -34,7 +34,7 @@ public interface ManagerTeacherMapper {
 	public int deleteTeacherQueue(String teacherId);
 	public int deleteAccount(String accountId);
 	
-	// 강사 승인과 상태 업데이트
+	// 강사 승인과 탈퇴 상태 업데이트
 	public int updateAccountState(Account account);
 	
 	// 강사 승인대기 상세
@@ -42,4 +42,14 @@ public interface ManagerTeacherMapper {
 	
 	// 강사 테이블 추가
 	public int insertTeacher(Teacher teacher);
+	
+	// 강사 탈퇴
+	// 강사 정보 삭제
+	public int deleteTeacher(String accountId);
+	// 강사 경력 삭제
+	public int deleteTeacherCareer(String accountId);
+	// 강사 자격증 삭제
+	public int delteTeacherLicense(String accountId);
+	// 강사 이미지 삭제
+	public int deleteTeacherImage(String accountId);
 }

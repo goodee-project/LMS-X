@@ -1,7 +1,6 @@
 package gd.fintech.lms.admin.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import gd.fintech.lms.admin.service.AdminManagerService;
 import gd.fintech.lms.vo.Manager;
 import gd.fintech.lms.vo.ManagerQueue;
+import gd.fintech.lms.vo.MypageImage;
 
 @Controller
 public class AdminManagerController {
@@ -114,10 +114,18 @@ public class AdminManagerController {
 	@GetMapping("/auth/admin/managerOne/{managerId}")
 	public String selectManagerOne(Model model, @PathVariable(name="managerId") String managerId) {
 		
-		Map<String,Object> map  = adminManagerService.getManagerOne(managerId);
+		Manager manager = adminManagerService.getManagerOne(managerId);
+		MypageImage mypageImage = adminManagerService.getManagerImage(managerId);
+		System.out.println(mypageImage);
+		String managerImage = null;
+		if (mypageImage == null) {
+			managerImage = "default.png";
+		} else {
+			managerImage = mypageImage.getMypageImageUuid();
+		}
 		
-		model.addAttribute("manager", map.get("manager"));
-		model.addAttribute("managerImage", map.get("managerImage"));
+		model.addAttribute("manager", manager);
+		model.addAttribute("managerImage", managerImage);
 		return "/auth/admin/manager/managerOne";
 	}
 	

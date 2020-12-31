@@ -160,9 +160,9 @@
 	</select>
 	
 	<!-- 운영자 이미지 -->
-	<select id="selectManagerImage" parameterType="String" resultType="String">
+	<select id="selectManagerImage" parameterType="String" resultType="gd.fintech.lms.vo.MypageImage">
 		SELECT 
-			mypage_image_uuid 
+			mypage_image_uuid mypageImageUuid
 		FROM
 			mypage_image
 		WHERE

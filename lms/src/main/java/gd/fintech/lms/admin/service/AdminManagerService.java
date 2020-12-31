@@ -71,19 +71,14 @@ public class AdminManagerService {
 	}
 	
 	// 운영자 상세보기
-	public Map<String,Object> getManagerOne(String managerId) {
-		Manager manager = adminManagerMapper.selectManagerOne(managerId);
-		MypageImage mypageImage = adminManagerMapper.selectManagerImage(managerId);
-		
-		String managerImage = mypageImage.getMypageImageUuid();
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("manager", manager);
-		map.put("managerImage", managerImage);
-		return map;
+	public Manager getManagerOne(String managerId) {
+		return adminManagerMapper.selectManagerOne(managerId);
+	}
+	// 운영자 이미지 조회
+	public MypageImage getManagerImage(String managerId) {
+		return adminManagerMapper.selectManagerImage(managerId);
 	}
 	
-
 	// 운영자 직급수정
 	public int updateManagerPosition(Manager manager) {
 		
