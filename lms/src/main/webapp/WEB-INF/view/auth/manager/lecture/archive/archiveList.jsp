@@ -101,9 +101,9 @@ th {
 								</tr>
 								<c:forEach var="a" items="${archiveList}">
 									<tr>
+										<td>${a.lectureArchiveNo}</td>
 										<td><a
-											href="${pageContext.request.contextPath}/auth/manager/lecture/${a.lectureNo}/archive/archiveOne/${a.lectureArchiveNo}">${a.lectureArchiveNo}</a></td>
-										<td>${a.lectureArchiveTitle}</td>
+											href="${pageContext.request.contextPath}/auth/manager/lecture/${a.lectureNo}/archive/archiveOne/${a.lectureArchiveNo}">${a.lectureArchiveTitle}</a></td>
 										<td>${a.lectureArchiveWriter}</td>
 										<td>${a.lectureArchiveCreatedate}</td>
 										<td>${a.lectureArchiveCount}</td>

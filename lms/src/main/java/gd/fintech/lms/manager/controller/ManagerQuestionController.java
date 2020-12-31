@@ -22,7 +22,7 @@ public class ManagerQuestionController {
 	
 	// 강의에 대한 질문 게시판 목록
 	@GetMapping("/auth/manager/lecture/{lectureNo}/question/questionList/{currentPage}")
-	public String qnaList(Model model,
+	public String questionList(Model model,
 			@PathVariable(value = "lectureNo") int lectureNo,		// 강좌 고유번호
 			@PathVariable(value = "currentPage") int currentPage) {	// 현재 페이지
 		
@@ -33,7 +33,7 @@ public class ManagerQuestionController {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		// 강좌 질문 게시판 목록
-		List<Question> managerQuestList = managerQuestionService.getManagerQuestionListByPage(lectureNo, beginRow, rowPerPage);
+		List<Question> managerQuestionList = managerQuestionService.getManagerQuestionListByPage(lectureNo, beginRow, rowPerPage);
 		
 		// 페이징 코드
 		// 현재 페이지 수
@@ -78,7 +78,7 @@ public class ManagerQuestionController {
 		}
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다.
-		model.addAttribute("managerQuestList",managerQuestList);
+		model.addAttribute("managerQuestionList",managerQuestionList);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
 		
@@ -93,11 +93,11 @@ public class ManagerQuestionController {
 	}
 	
 	// 질문 삭제
-	@GetMapping("/auth/manager/question/deleteQuestion/{questionNo}")
+	@GetMapping("/auth/manager/lecture/{lectureNo}/question/deleteQuestion/{questionNo}")
 	public String deleteQuestion(
 			@PathVariable(name = "questionNo") int questionNo) {
 		managerQuestionService.deleteManagerQuestion(questionNo);
-		return "redirect:/auth/manager/question/questionList/1";
+		return "redirect:/auth/manager/lecture/question/questionList/1";
 	}
 	
 	

@@ -100,7 +100,7 @@ th {
 									<th>질문 수정날짜</th>
 									<th>질문 조회수</th>
 								</tr>
-								<c:forEach items="${questionList}" var="q">
+								<c:forEach items="${managerQuestionList}" var="q">
 									<tr>
 										<td><a
 											href="${pageContext.request.contextPath}/auth/manager/question/questionOne/${q.questionNo}">${q.questionNo}</a></td>

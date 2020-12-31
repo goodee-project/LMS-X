@@ -109,14 +109,14 @@ th {
 								<tbody>
 									<c:forEach items="${lectureList}" var="l">
 										<tr>
+											<td>${l.lectureNo}</td>
+											<td>${l.teacherName}</td>
 											<td><c:if test="${l.lectureStartdate != '0000-00-00'}">
 													<a
-														href="${pageContext.request.contextPath}/auth/manager/lecture/lectureOne/${l.lectureNo}">${l.lectureNo}</a>
+														href="${pageContext.request.contextPath}/auth/manager/lecture/lectureOne/${l.lectureNo}">${l.lectureName}</a>
 												</c:if> <c:if test="${l.lectureStartdate == '0000-00-00'}">
 													${l.lectureNo}
 												</c:if></td>
-											<td>${l.teacherName}</td>
-											<td>${l.lectureName}</td>
 											<td>${l.lectureStartdate}</td>
 											<td>${l.lectureEnddate}</td>
 											<td>${l.lectureTotal}</td>
