@@ -295,7 +295,7 @@ public class StudentQnaController {
 		
 		studentQnaCommentService.insertQnaComment(questionComment);
 		
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1";
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo + "/1/0";
 	}
 	
 	// 댓글 수정 폼
@@ -327,7 +327,7 @@ public class StudentQnaController {
 		
 		studentQnaCommentService.updateQnaComment(questionComment);
 		
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1";
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo + "/1/0";
 	}
 	
 	// 댓글 삭제
@@ -339,7 +339,7 @@ public class StudentQnaController {
 		
 		studentQnaCommentService.deleteQnaComment(questionCommentNo);
 		
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1";
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1/0";
 	}
 	
 }

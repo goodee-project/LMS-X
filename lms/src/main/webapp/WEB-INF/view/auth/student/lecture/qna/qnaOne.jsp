@@ -46,7 +46,7 @@
 			}
 		</style>
 		
-		<script>			
+		<script>		
 			// 다운로드 횟수 증가 시키기
 			function fileDownloadCount(paramUuid){
 				let fileId = paramUuid.split('.')[0];
@@ -59,6 +59,18 @@
 					}
 				});
 			}
+			//댓글 작성
+			$(document).ready(function(){
+				var qcc = $("questionCommentContent").val();
+				//댓글 작성 버튼
+				$('#insertCommentBtn').click(function(){
+					if($('#questionCommentContent').val().length < 1) {
+						alert('댓글 내용을 입력해주세요.');
+						return;
+					}
+					$('#insertCommentForm').submit();
+				});
+			});
 		</script>
 	</head>
 	
@@ -331,13 +343,13 @@
 							
 							<div class="card-footer py-4">
 								<nav aria-label="...">
-									<form action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/insertStduentQuestionComment" method="post">
+									<form action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/insertStduentQuestionComment" method="post" id="insertCommentForm">
 										<div>
 											<div>
-												<textarea rows="3" cols="50" name="questionCommentContent" class="form-control" id="insertCommentText"></textarea>
+												<textarea rows="3" cols="50" name="questionCommentContent" class="form-control" id="questionCommentContent"></textarea>
 											</div>
 											<br>
-											<button type="submit" class="btn btn-sm btn-success" style="float:right" id="insertBtn">댓글 입력</button>
+											<button type="button" class="btn btn-sm btn-success" style="float:right" id="insertCommentBtn">댓글 입력</button>
 										</div>
 									</form>
 								</nav>
