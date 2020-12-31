@@ -37,7 +37,11 @@
 		<script>
 			$(document).ready(function(){
 				$('.classRegistrationBtn').on('click', function(){
-					let paramLectureNo = $(this).val();
+					let paramSplit = $(this).val().split(',');
+					let paramLectureNo = paramSplit[0];	// 강좌 no
+					let paramStudentTotal = paramSplit[1];	// 강좌 신청 인원
+					let paramLectureTotal = paramSplit[2];	// 강좌 최대 인원
+					// 이미 수강 신청한 강좌인지, 정원초과된 강좌인지
 					$.ajax({
 						url: '${pageContext.request.contextPath}/auth/student/lecture/checkClassRegistration',
 						type: 'post',
@@ -46,12 +50,16 @@
 							if(data == false){
 								alert('이미 수강신청한 강좌입니다.');
 								return;
-							}else{
+							} else if(paramStudentTotal >= paramLectureTotal){
+								alert('정원이 초과된 강좌입니다.');
+								return;
+							} else{
 								$('#classRegistrationForm' + paramLectureNo).submit();
 								return;
 							}
 						}
 					})
+					
 				});
 			})
 		</script>
@@ -93,7 +101,7 @@
 										<th>강좌 총일수</th>
 										<th>강좌 시작일</th>
 										<th>강좌 종료일</th>
-										<th>강좌 총원</th>
+										<th>강좌 정원</th>
 										<th>수강 신청</th>
 									</tr>
 								</thead>
@@ -105,11 +113,11 @@
 										<td>${l.subject.subjectTotalday}일</td>
 										<td>${l.lectureStartdate}</td>
 										<td>${l.lectureEnddate}</td>
-										<td>${l.lectureTotal}명</td>
+										<td>${l.studentTotal}/${l.lectureTotal}명</td>
 										<td>
 											<form id="classRegistrationForm${l.lectureNo}" action="${pageContext.request.contextPath}/auth/student/lecture/registrationClass" method="post">
 												<input type="hidden" name="lectureNo" value="${l.lectureNo}">
-												<button type="button" class="classRegistrationBtn btn btn-sm btn-primary" value="${l.lectureNo}">수강 신청</button>
+												<button type="button" class="classRegistrationBtn btn btn-sm btn-primary" value="${l.lectureNo},${l.studentTotal},${l.lectureTotal}">수강 신청</button>
 											</form>
 										</td>
 									</tr>	

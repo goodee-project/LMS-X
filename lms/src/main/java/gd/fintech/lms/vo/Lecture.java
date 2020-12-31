@@ -19,4 +19,6 @@ public class Lecture {
 	private int		classroomNo;		// 강의실 고유번호
 	private String	lectureCreatedate;	// 강좌 정보 생성 일시
 	private String	lectureUpdatedate;	// 강좌 정보 업데이트 일시
+	
+	private int		studentTotal;		// 해당 강좌를 수강중인 학생 수
 }

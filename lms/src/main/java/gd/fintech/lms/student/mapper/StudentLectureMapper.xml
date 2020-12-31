@@ -162,6 +162,7 @@
 		<result property="lectureStartdate" column="lecture_startdate" />
 		<result property="lectureEnddate" column="lecture_enddate" />
 		<result property="lectureTotal" column="lecture_total" />
+		<result property="studentTotal" column="student_total" />
 		<association property="subject" javaType="gd.fintech.lms.vo.Subject">
 			<result property="subjectName" column="subject_name" />
 			<result property="subjectTotalday" column="subject_totalday" />
@@ -177,14 +178,20 @@
 			l.lecture_enddate,
 			l.lecture_total,
 			s.subject_name, 
-			s.subject_totalday
+			s.subject_totalday,
+			COUNT(cr.lecture_no) student_total
 		FROM 
 			lecture l
 		JOIN 
 			subject s ON 
 			l.subject_no = s.subject_no
+		LEFT JOIN
+			class_registration cr ON
+			cr.lecture_no = l.lecture_no
 		WHERE 
 			l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
+		GROUP BY 
+			l.lecture_no
 		ORDER BY 
 			l.lecture_no DESC
 		LIMIT 

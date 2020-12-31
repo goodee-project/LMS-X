@@ -83,22 +83,29 @@ th {
 				}
 			});
 		})
-		
+
 		// 쪽지 보내기 버튼
 		$('#insertNoteBtn').click(function(){
 			if($('#noteTitle').val().length < 1){
 				alert('제목을 작성해 주세요.');
-					return;
-				} else if($('#searchAccountText').val().length < 1){
-					alert('받는사람을 선택해 주세요.');
-					return;
-				} else if($('#noteContent').val().length < 1){
-					alert('내용을 작성해 주세요..');
-					return;
-				}
-					$('#insertNoteForm').submit();
-				})	
-		})
+				return;
+			} else if($('#searchAccountText').val().length < 1){
+				alert('받는사람을 선택해 주세요.');
+				return;
+			} else if($('#noteContent').val().length < 1){
+				alert('내용을 작성해 주세요.');
+				return;
+			} else if($('#noteReceiverId').val().length < 1){
+				alert('보낼 계정이 잘못되었습니다.');
+				return;
+			} else if($('#noteReceiverName').val().length < 1){
+				alert('보낼 계정이 잘못되었습니다.');
+				return;
+			}
+
+			$('#insertNoteForm').submit();											
+		})	
+	})
 </script>
 </head>
 <body>
