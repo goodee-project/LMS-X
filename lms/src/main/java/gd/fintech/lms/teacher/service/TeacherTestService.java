@@ -14,7 +14,7 @@ import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Answersheet;
 import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.MultiplechoiceExample;
-import gd.fintech.lms.vo.MultiplechoiceExampleForm;
+import gd.fintech.lms.vo.MultiplechoiceForm;
 import gd.fintech.lms.vo.Test;
 
 @Service
@@ -96,16 +96,72 @@ public class TeacherTestService {
 		return teacherTestMapper.selectMultiplechoiceExampleList(multiplechoiceNo);
 	}
 	
-	// 객관식 문제 보기 수정
-	public void updateMultiplechoiceExampleList(MultiplechoiceExampleForm multiplechoiceExampleForm, int multiplechoiceNo) {
+	// 객관식 문제 수정
+	public void updateMultiplechoiceExampleList(MultiplechoiceForm multiplechoiceForm) {
+		Multiplechoice multiplechoice = new Multiplechoice();
 		MultiplechoiceExample multiplechoiceExample = new MultiplechoiceExample();
+		// 객관식 문제 수정
+		multiplechoice.setMultiplechoiceNo(multiplechoiceForm.getMultiplechoiceNo());
+		multiplechoice.setMultiplechoiceQuestion(multiplechoiceForm.getMultiplechoiceQuestion());
+		multiplechoice.setMultiplechoiceAnswer(multiplechoiceForm.getMultiplechoiceAnswer());
+		multiplechoice.setMultiplechoiceScore(multiplechoiceForm.getMultiplechoiceScore());
 		
-		multiplechoiceExample.setMultiplechoiceNo(multiplechoiceNo);
+		teacherTestMapper.updateMultiplechoice(multiplechoice);
+		
+		// 객관식 문제 보기 수정
+		multiplechoiceExample.setMultiplechoiceNo(multiplechoiceExample.getMultiplechoiceNo());
 		for(int i = 0; i < 5; i++) {
-			multiplechoiceExample.setMultiplechoiceExampleId(multiplechoiceExampleForm.getMultiplechoiceExampleId().get(i));
-			multiplechoiceExample.setMultiplechoiceExampleContent(multiplechoiceExampleForm.getMultiplechoiceExampleContent().get(i));
+			multiplechoiceExample.setMultiplechoiceExampleId(multiplechoiceForm.getMultiplechoiceExampleId().get(i));
+			multiplechoiceExample.setMultiplechoiceExampleContent(multiplechoiceForm.getMultiplechoiceExampleContent().get(i));
 
 			teacherTestMapper.updateMultiplechoiceExample(multiplechoiceExample);
+		}
+		
+	}
+	
+	// 객관식 문제 추가
+	public void insertMultiplechoice(MultiplechoiceForm multiplechoiceForm) {
+		Multiplechoice multiplechoice = new Multiplechoice();
+		MultiplechoiceExample multiplechoiceExample = new MultiplechoiceExample();
+		// 객관식 문제 추가
+		multiplechoice.setMultiplechoiceNo(multiplechoiceForm.getMultiplechoiceNo());
+		multiplechoice.setMultiplechoiceQuestion(multiplechoiceForm.getMultiplechoiceQuestion());
+		multiplechoice.setMultiplechoiceAnswer(multiplechoiceForm.getMultiplechoiceAnswer());
+		multiplechoice.setMultiplechoiceScore(multiplechoiceForm.getMultiplechoiceScore());
+		multiplechoice.setLectureNo(multiplechoiceForm.getLectureNo());
+		// 객관식 문제 번호 자동으로 추가
+		multiplechoice.setMultiplechoiceId(teacherTestMapper.selectMultiplechoiceListCount(multiplechoiceForm.getLectureNo()) + 1);
+		teacherTestMapper.insertMultiplechoice(multiplechoice);
+		
+		// 객관식 문제 보기 수정
+		multiplechoiceExample.setMultiplechoiceNo(multiplechoice.getMultiplechoiceNo());
+		for(int i = 0; i < 5; i++) {
+			multiplechoiceExample.setMultiplechoiceExampleId(multiplechoiceForm.getMultiplechoiceExampleId().get(i));
+			multiplechoiceExample.setMultiplechoiceExampleContent(multiplechoiceForm.getMultiplechoiceExampleContent().get(i));
+
+			teacherTestMapper.insertMultiplechoiceExample(multiplechoiceExample);
+		}
+		
+	}
+	
+	// 객관식 문제 삭제
+	public void deleteMultiplechoice(int multiplechoiceNo, int lectureNo) {
+		teacherTestMapper.deleteMultiplechoiceExample(multiplechoiceNo);
+		teacherTestMapper.deleteMultiplechoice(multiplechoiceNo);
+		
+		List<Integer> multiplechoiceIdList = teacherTestMapper.selectMultiplechoiceIdList(lectureNo);
+		
+		// 객관식 문제 하나를 삭제하면 그에 맞게 id(번호)를 순서에 맞게 다시 정렬해줘야함.
+		int newId = 0;	// 새로운 id
+		for(int oldId : multiplechoiceIdList) {
+			newId++;
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("oldId", oldId);	// 이전 id
+			map.put("newId", newId);	// 새로운 id
+			map.put("lectureNo", lectureNo);
+			
+			teacherTestMapper.updateMultiplechoiceId(map);
 		}
 		
 	}

@@ -29,7 +29,26 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		
+		<script>
+			$(document).ready(function(){
+				$('#updateMultiplechoiceExampleBtn').click(function(){
+					let submitCk = true;
+					$('.multiplechoiceExampleContent').each(function(index, item){
+						if($(item).val().length < 1 && submitCk){
+							alert('보기 내용을 작성해주세요.');
+							submitCk = false;
+							return;
+						} 
+					})
+					
+					if(submitCk){
+						alert('저장이 완료되었습니다.');		
+						$('#updateMultiplechoiceExampleForm').submit();
+					}
+					
+				})
+			})
+		</script>
 		<style>
 			.table {
 				text-align: center;
@@ -64,14 +83,14 @@
 				<div class="row">
 					<div class="col">
 						<div class="card shadow">
-							<form action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceExampleList/${multiplechoiceNo}" method="post">
+							<form id="updateMultiplechoiceExampleForm" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/updateMultiplechoice/${multiplechoiceNo}" method="post">
 								<div class="card-header bg-white border-0">
 									<div class="row align-items-center">
 										<div class="col-8">
 											<h3 class="mb-0">문제 - 보기 관리</h3>
 										</div>
 										<div class="col-4 text-right">
-											<button type="submit" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/'">저장</button>									
+											<button type="button" id="updateMultiplechoiceExampleBtn" class="btn btn-primary">저장</button>									
 											<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
 										</div>
 									</div>
@@ -81,14 +100,40 @@
 										<table class="table align-items-center table-flush">
 											<thead class="thead-light">
 												<tr>
-													<th width="20%">객관식 문제 ${exampleList.multiplechoiceId}번.</th>
-													<th style="text-align:left">${exampleList.multiplechoiceQuestion}</th>
+													<th width="10%"><input type="hidden" name="multiplechoiceId" class="form-control" value="${exampleList.multiplechoiceId}">객관식 문제 ${exampleList.multiplechoiceId}번.</th>
+													<th width="50%" style="text-align:left">문제<input type="text" name="multiplechoiceQuestion" class="form-control" value="${exampleList.multiplechoiceQuestion}"></th>
+													<th style="text-align:left">
+														정답
+														<select class="form-control" name="multiplechoiceAnswer">
+															<option value="1">1</option>
+															<c:if test="${exampleList.multiplechoiceAnswer == 1}">
+																<option selected="selected" value="1">1</option>
+															</c:if>
+															<option value="2">2</option>
+															<c:if test="${exampleList.multiplechoiceAnswer == 2}">
+																<option selected="selected" value="2">2</option>
+															</c:if>
+															<option value="3">3</option>
+															<c:if test="${exampleList.multiplechoiceAnswer == 3}">
+																<option selected="selected" value="3">3</option>
+															</c:if>
+															<option value="4">4</option>
+															<c:if test="${exampleList.multiplechoiceAnswer == 4}">
+																<option selected="selected" value="4">4</option>
+															</c:if>
+															<option value="5">5</option>
+															<c:if test="${exampleList.multiplechoiceAnswer == 5}">
+																<option selected="selected" value="5">5</option>
+															</c:if>
+														</select>
+													</th>
+													<th style="text-align:left">점수<input type="text" name="multiplechoiceScore" class="form-control" value="${exampleList.multiplechoiceScore}"></th>
 												</tr>
 											</thead>
 											<c:forEach var="me" items="${exampleList.multiplechoiceExampleList}">
 												<tr>
 													<td><input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${me.multiplechoiceExampleId}">${me.multiplechoiceExampleId}번.</td>
-													<td><input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent" value="${me.multiplechoiceExampleContent}"></td>
+													<td colspan="3"><input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent" value="${me.multiplechoiceExampleContent}"></td>
 												</tr>
 											</c:forEach>
 										</table>

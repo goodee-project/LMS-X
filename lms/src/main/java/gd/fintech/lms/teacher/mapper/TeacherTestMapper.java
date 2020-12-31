@@ -45,4 +45,25 @@ public interface TeacherTestMapper {
 	
 	// 객관식 문제 보기 수정
 	int updateMultiplechoiceExample(MultiplechoiceExample multiplechoiceExample);
+	
+	// 객관식 문제 수정
+	int updateMultiplechoice(Multiplechoice multiplechoice);
+	
+	// 객관식 문제 추가
+	int insertMultiplechoice(Multiplechoice multiplechoice);
+	
+	// 객관식 문제 보기 추가
+	int insertMultiplechoiceExample(MultiplechoiceExample multiplechoiceExample);
+	
+	// 객관식 문제 보기 삭제
+	int deleteMultiplechoiceExample(int multiplechoiceNo);
+	
+	// 객관식 문제 삭제
+	int deleteMultiplechoice(int multiplechoiceNo);
+	
+	// 객관식 문제들의 번호 가져오기
+	List<Integer> selectMultiplechoiceIdList(int lectureNo);
+	
+	// 객관식 문제 번호 변경
+	int updateMultiplechoiceId(Map<String, Object> map);
 }

@@ -5,12 +5,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.student.mapper.StudentFaqMapper;
 import gd.fintech.lms.vo.Faq;
 import gd.fintech.lms.vo.FaqCategory;
 
 @Service
+@Transactional
 public class StudentFaqService {
 	@Autowired StudentFaqMapper studentFaqMapper;
 	

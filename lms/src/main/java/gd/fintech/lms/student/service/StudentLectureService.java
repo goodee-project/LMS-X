@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.student.mapper.StudentLectureMapper;
 import gd.fintech.lms.vo.ClassRegistration;
@@ -15,6 +16,7 @@ import gd.fintech.lms.vo.LectureAndClassRegistrationAndSubjectAndTextbookAndClas
 
 // 학생 강좌 서비스
 @Service
+@Transactional
 public class StudentLectureService {
 	@Autowired StudentLectureMapper studentLectureMapper;
 	

@@ -17,7 +17,7 @@ import gd.fintech.lms.vo.Answersheet;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.MultiplechoiceExample;
-import gd.fintech.lms.vo.MultiplechoiceExampleForm;
+import gd.fintech.lms.vo.MultiplechoiceForm;
 import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.Test;
 
@@ -220,8 +220,8 @@ public class TeacherTestController {
 		return "/auth/teacher/lecture/test/answersheetOne";
 	}
 	
-	// 객관식 문제 보기 조회 
-	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/multiplechoiceExampleList/{multiplechoiceNo}")
+	// 객관식 문제 보기 수정 폼 
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/updateMultiplechoice/{multiplechoiceNo}")
 	public String multiplechoiceExampleList(Model model,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "multiplechoiceNo") int multiplechoiceNo) {
@@ -230,17 +230,46 @@ public class TeacherTestController {
 		
 		model.addAttribute("exampleList", exampleList);
 		
-		return "/auth/teacher/lecture/test/multiplechoiceExampleList";
+		return "/auth/teacher/lecture/test/updateMultiplechoice";
 	}
 	
 	// 객관식 문제 보기 수정
-	@PostMapping("/auth/teacher/lecture/{lectureNo}/test/multiplechoiceExampleList/{multiplechoiceNo}")
-	public String multiplechoiceExampleList(MultiplechoiceExampleForm multiplechoiceExampleForm,
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/test/updateMultiplechoice/{multiplechoiceNo}")
+	public String updateMultiplechoice(MultiplechoiceForm multiplechoiceForm,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "multiplechoiceNo") int multiplechoiceNo) {
 		
-		teacherTestService.updateMultiplechoiceExampleList(multiplechoiceExampleForm, multiplechoiceNo);
+		multiplechoiceForm.setMultiplechoiceNo(multiplechoiceNo);
+		teacherTestService.updateMultiplechoiceExampleList(multiplechoiceForm);
 		
-		return "redirect:/auth/teacher/lecture/" + lectureNo + "/test/multiplechoiceExampleList/" + multiplechoiceNo;
+		return "redirect:/auth/teacher/lecture/" + lectureNo + "/test/updateMultiplechoice/" + multiplechoiceNo;
+	}
+	
+	// 객관식 문제 추가 폼
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/insertMultiplechoice")
+	public String insertMultiplechoice(
+			@PathVariable(name = "lectureNo") int lectureNo) {
+		return "/auth/teacher/lecture/test/insertMultiplechoice";
+	}
+	
+	// 객관식 문제 추가 액션
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/test/insertMultiplechoice")
+	public String insertMultiplechoice(MultiplechoiceForm multiplechoiceForm,
+			@PathVariable(name = "lectureNo") int lectureNo) {
+		multiplechoiceForm.setLectureNo(lectureNo);
+		teacherTestService.insertMultiplechoice(multiplechoiceForm);
+		
+		return "redirect:/auth/teacher/lecture/" + lectureNo + "/test/multiplechoiceList/1";
+	}
+	
+	// 객관식 문제 삭제
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/deleteMultiplechoice/{multiplechoiceNo}")
+	public String deleteMultiplechoice(
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "multiplechoiceNo") int multiplechoiceNo) {
+		
+		teacherTestService.deleteMultiplechoice(multiplechoiceNo, lectureNo);
+
+		return "redirect:/auth/teacher/lecture/" + lectureNo + "/test/multiplechoiceList/1";
 	}
 }

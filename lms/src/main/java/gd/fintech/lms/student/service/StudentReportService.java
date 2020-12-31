@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import gd.fintech.lms.common.PathUtil;
@@ -23,6 +24,7 @@ import gd.fintech.lms.vo.ReportSubmitFile;
 import gd.fintech.lms.vo.ReportSubmitForm;
 
 @Service
+@Transactional
 public class StudentReportService {
 	@Autowired StudentReportMapper studentReportMapper;
 	@Autowired StudentReportFileMapper studentReportFileMapper;

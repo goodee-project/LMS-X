@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
-		<title>multiplechoiceList</title>
+		<title>insertMultiplechoice</title>
 		
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
@@ -29,7 +29,25 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		
+		<script>
+			$(document).ready(function(){
+				$('#insertMultiplechoiceExampleBtn').click(function(){
+					let submitCk = true;
+					$('.multiplechoiceExampleContent').each(function(index, item){
+						if($(item).val().length < 1 && submitCk){
+							alert('보기 내용을 작성해주세요.');
+							submitCk = false;
+							return;
+						} 
+					})
+					
+					if(submitCk){	
+						$('#insertMultiplechoiceExampleForm').submit();
+					}
+					
+				})
+			})
+		</script>
 		<style>
 			.table {
 				text-align: center;
@@ -64,56 +82,48 @@
 				<div class="row">
 					<div class="col">
 						<div class="card shadow">
-							<div class="card-header bg-white border-0">
-								<div class="row align-items-center">
-									<div class="col-8">
-										<h3 class="mb-0">문제 목록</h3>
-									</div>
-									<div class="col-4 text-right">
-										<button type="button" class="btn btn-sm btn-success" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/insertMultiplechoice'">신규 문제 출제</button>
+							<form id="insertMultiplechoiceExampleForm" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/insertMultiplechoice" method="post">
+								<div class="card-header bg-white border-0">
+									<div class="row align-items-center">
+										<div class="col-8">
+											<h3 class="mb-0">문제 - 보기 관리</h3>
+										</div>
+										<div class="col-4 text-right">
+											<button type="button" id="insertMultiplechoiceExampleBtn" class="btn btn-primary">저장</button>									
+											<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
+										</div>
 									</div>
 								</div>
-							</div>
-							
-							<div class="table-responsive">
-								<table class="table align-items-center table-flush">
-									<thead class="thead-light">
-										<tr>
-											<th width="10%">문제 번호</th>
-											<th width="40%">문제</th>
-											<th width="10%">정답 번호</th>
-											<th width="10%">문항 점수</th>
-											<th width="10%">보기 관리</th>
-											<th width="10%">삭제</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:if test="${multiplechoiceList[0].multiplechoiceNo != null}">
-											<c:forEach var="mcl" items="${multiplechoiceList}">
+								
+								<div class="table-responsive">
+										<table class="table align-items-center table-flush">
+											<thead class="thead-light">
 												<tr>
-													<td>${mcl.multiplechoiceId}</td>
-													<td>
-														<a href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceOne/${mcl.multiplechoiceNo}">${mcl.multiplechoiceQuestion}</a>
-													</td>
-													<td>${mcl.multiplechoiceAnswer}</td>
-													<td>${mcl.multiplechoiceScore}</td>
-													<td>
-														<button type="button" class="btn btn-sm btn-success" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/updateMultiplechoice/${mcl.multiplechoiceNo}'">수정</button>
-													</td>
-													<td>
-														<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/deleteMultiplechoice/${mcl.multiplechoiceNo}'">삭제</button>
-													</td>
+													<th></th>
+													<th width="50%" style="text-align:left">문제<input type="text" name="multiplechoiceQuestion" class="form-control"></th>
+													<th style="text-align:left">
+														정답
+														<select class="form-control" name="multiplechoiceAnswer">
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>	
+															<option value="4">4</option>
+															<option value="5">5</option>
+														</select>
+													</th>
+													<th style="text-align:left">점수<input type="text" name="multiplechoiceScore" class="form-control"></th>
+												</tr>
+											</thead>
+											<c:forEach var="i" begin="1" end="5">
+												<tr>
+													<td><input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${i}">${i}</td>
+													<td colspan="3"><input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent"></td>
+													
 												</tr>
 											</c:forEach>
-										</c:if>
-										<c:if test="${multiplechoiceList[0].multiplechoiceNo == null}">
-											<tr>
-												<td colspan="7">(출제한 문제가 없습니다)</td>
-											</tr>
-										</c:if>
-									</tbody>
-								</table>
-							</div>
+										</table>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
