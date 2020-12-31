@@ -19,7 +19,7 @@ public interface ManagerQuestionMapper {
 	int deleteManagerQuestion(int questionNo);			
 	
 	// 질문 상세보기
-	List<Question> selectManagerQuestionOne(int questionNo);   
+	Question selectManagerQuestionOne(int questionNo);   
 	
 	// 질문 게시판 조회수 증가
 	int updateManagerQuestionCount(int questionNo);

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
@@ -157,7 +156,7 @@ th {
 											items="${question.questionFileList}">
 											<!-- 태그 id에 .이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
 											<c:set var="uuid">${qfl.questionFileUuid}</c:set>
-											<c:if test="${!empty questionComment.questionCommentNo}">
+											<c:if test="${!empty question.questionFileList[0].questionFileOriginal}">
 												<div>
 													<a
 														onclick="fileDownloadCount('${qfl.questionFileUuid}','${qfl.questionFileCount}')"
@@ -194,8 +193,6 @@ th {
 									<br>
 								</div>
 								<div class="col-4 text-right">
-									<button type="button" class="btn btn-sm btn-danger"
-										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
 								</div>
 								<br>
 							</div>

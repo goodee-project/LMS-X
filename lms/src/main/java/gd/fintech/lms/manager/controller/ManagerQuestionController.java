@@ -23,8 +23,8 @@ public class ManagerQuestionController {
 	// 강의에 대한 질문 게시판 목록
 	@GetMapping("/auth/manager/lecture/{lectureNo}/question/questionList/{currentPage}")
 	public String questionList(Model model,
-			@PathVariable(value = "lectureNo") int lectureNo,		// 강좌 고유번호
-			@PathVariable(value = "currentPage") int currentPage) {	// 현재 페이지
+			@PathVariable(name = "lectureNo") int lectureNo,		// 강좌 고유번호
+			@PathVariable(name = "currentPage") int currentPage) {	// 현재 페이지
 		
 		// 한 페이지에 출력할 개수
 		int rowPerPage = 10;
@@ -91,22 +91,23 @@ public class ManagerQuestionController {
 	// 질문 삭제
 	@GetMapping("/auth/manager/lecture/{lectureNo}/question/deleteQuestion/{questionNo}")
 	public String deleteQuestion(
+			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo) {
 		managerQuestionService.deleteManagerQuestion(questionNo);
-		return "redirect:/auth/manager/lecture/question/questionList/1";
+		return "redirect:/auth/manager/lecture/" + lectureNo + "/question/questionList/1";
 	}
 	
 	
 	// 질문 상세 보기
 	@GetMapping("/auth/manager/lecture/{lectureNo}/question/questionOne/{questionNo}/{currentPage}")
 	public String questionOne(Model model,
-			@PathVariable(value = "lectureNo") int lectureNo,
+			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo,
-			@PathVariable(value = "currentPage") int currentPage) {
+			@PathVariable(name = "currentPage") int currentPage) {
 		
 		// 한 페이지에 출력할 개수
 		int rowPerPage = 10;
-				
+
 		// 시작 페이지 계산
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
@@ -117,7 +118,7 @@ public class ManagerQuestionController {
 		
 		System.out.println("질문조회 실행");
 		// 질문 조회
-		List<Question> question = managerQuestionService.getManagerQuestionOne(questionNo);
+		Question question = managerQuestionService.getManagerQuestionOne(questionNo);
 		System.out.println("질문조회 종료");
 		
 		System.out.println("댓글목록 실행");
@@ -128,6 +129,8 @@ public class ManagerQuestionController {
 		// 페이징 코드
 		// 현재 페이지 수
 		int totalCount = managerQuestionCommentService.getManagerCountQuestionComment(questionNo);
+		System.out.println(totalCount);
+		
 		// 마지막 페이지
 		int lastPage = totalCount / rowPerPage;
 		// 10 미만의 개수의 데이터가 있는 페이지 표시

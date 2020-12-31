@@ -39,8 +39,8 @@ public class ManagerQuestionService {
 	}
 	
 	// 질문 게시판 상세보기
-	public List<Question> getManagerQuestionOne(int questionNo) {
-		List<Question> questionOne = managerQuestionMapper.selectManagerQuestionOne(questionNo);
+	public Question getManagerQuestionOne(int questionNo) {
+		Question questionOne = managerQuestionMapper.selectManagerQuestionOne(questionNo);
 		return questionOne;
 	}
 	
