@@ -59,19 +59,29 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th>강사 ID</th>
-									<th>강사 이름</th>
-									<th>강사 성별</th>
-									<th>활성화 여부</th>
+									<th scope="col" style="font-size: 15px; width: 15%;">아이디</th>
+									<th scope="col" style="font-size: 15px; width: 10%;">이름</th>
+									<th scope="col" style="font-size: 15px; width: 7%;" >성별</th>
+									<th scope="col" style="font-size: 15px; width: 11%;" >생일</th>
+									<th scope="col" style="font-size: 15px; width: 18%;">이메일</th>
+									<th scope="col" style="font-size: 15px; width: 13%;">연락처</th>
+									<th scope="col" style="font-size: 15px; width: 13%;">승인날짜</th>
+									<th scope="col" style="font-size: 15px; width: 8%;">탈퇴</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${teacherList}" var="t">
+								<c:forEach var="t" items="${teacherList}" >
 									<tr>
-										<td><a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherOne/${t.teacherId}">${t.teacherId}</a></td>
-										<td>${t.teacherName}</td>
-										<td>${t.teacherGender}</td>
-										<td>${t.accountState}</td>
+										<td style="font-size: 13px;"><a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherOne/${t.teacherId}">${t.teacherId}</a></td>
+										<td style="font-size: 13px;">${t.teacherName}</td>
+										<td style="font-size: 13px;">${t.teacherGender}</td>
+										<td style="font-size: 13px;">${t.teacherBirth}</td>
+										<td style="font-size: 13px;">${t.teacherEmail}</td>
+										<td style="font-size: 13px;">${t.teacherPhone}</td>
+										<td style="font-size: 13px;">${t.teacherAccessdate}</td>
+										<td style="font-size: 13px;">
+											<a class="btn btn-sm btn-danger" href="">탈퇴</a>
+										</td>
 									</tr>	
 								</c:forEach>
 							</tbody>

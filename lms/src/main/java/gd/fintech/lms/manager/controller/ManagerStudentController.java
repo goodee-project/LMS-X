@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.manager.service.ManagerStudentService;
+import gd.fintech.lms.vo.MypageImage;
 import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.StudentQueue;
 
@@ -36,7 +37,7 @@ public class ManagerStudentController {
 		Map<String, Object> map = new HashMap<>();	// 교재 목록 출력
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
-		List<Map<String, Object>> studentList = managerStudentService.getStudentListByPage(map); // 학생 목록
+		List<Student> studentList = managerStudentService.getStudentListByPage(map); // 학생 목록
 		
 		int navPerPage = 10; 											// 네비에 출력할 페이지 개수
 		
@@ -85,7 +86,19 @@ public class ManagerStudentController {
 	public String studentOne(Model model,
 			@PathVariable(name = "studentId") String studentId) {
 		Student student = managerStudentService.getStudentOne(studentId);
+		
+		MypageImage mypageImage = managerStudentService.getTeacherImage(studentId);
+		
+		String studentImage = null;
+		
+		if (mypageImage == null) {
+			studentImage = "default.png";
+		} else {
+			studentImage = mypageImage.getMypageImageUuid();
+		}
+		
 		model.addAttribute("student", student);
+		model.addAttribute("studentImage",studentImage);
 		return "auth/manager/student/studentOne";
 	}
 	

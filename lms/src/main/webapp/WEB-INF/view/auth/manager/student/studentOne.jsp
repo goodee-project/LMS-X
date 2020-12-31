@@ -28,61 +28,167 @@
 	</div>
 		<!-- 접속자 -->
 		<jsp:include page="/WEB-INF/view/auth/manager/include/connector.jsp" />
-			<div class="container-fluid mt--7">
-				<div class="row">
-					<div class="col">
-						<div class="card shadow">
-							<div class="card-header bg-white border-0">
-								<div class="row align-items-center">
-									<div class="col-8">
-										<h3 class="mb-0">강사 승인대기 목록</h3>
-									</div>
-										<div class="col-4 text-right">
-											<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/student/studentList/1">목록</a>
-										</div>
+		<!-- Page content -->
+		<div class="container-fluid mt--7">
+			<div class="row">
+				<div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+					<div class="card card-profile shadow">
+						<div class="row justify-content-center">
+							<div class="col-lg-3 order-lg-2">
+								<div class="card-profile-image">
+									<img id="img" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/resource/mypageImage/${studentImage}">
+								</div>
+							</div>
+						</div>
+						<div class="card-body pt-0 pt-md-4" style="margin-top: 50px;">
+							<div class="row">
+								<div class="col">
+									<div class="card-profile-stats justify-content-center mt-md-5 ">
 									</div>
 								</div>
-							<div class="table-responsive">
-								<table class="table align-items-center table-flush">
-									<tr>
-										<td width="10%">학생 ID</td>
-										<td width="40%">${student.studentId}</td>
-										<td width="10%">학생 Email</td>
-										<td width="40%">${student.studentEmail}</td>
-									</tr>
-									<tr>
-										<td>학생 이름</td>
-										<td>${student.studentName}</td>
-										<td>학생 전화번호</td>
-										<td>${student.studentPhone}</td>
-									</tr>
-									<tr>
-										<td>학생 성별</td>
-										<td>${student.studentGender}</td>
-										<td>학생 생일</td>
-										<td>${student.studentBirth}</td>
-									</tr>
-									<tr>
-										<td>학생 주소</td>
-										<td>${student.studentAddressMain}</td>
-									</tr>
-									<tr>
-										<td>학생 상세주소</td>
-										<td>${student.studentAddressSub}</td>
-										<td>학생 이미지</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td>학생정보 등록날짜</td>
-										<td>${student.studentAccessdate}</td>
-										<td>학생정보 수정날짜</td>
-										<td>${student.studentUpdatedate}</td>
-									</tr>
-								</table>
+							</div>
+							<div class="text-center">
+								<h3>
+									${student.studentName}<span class="font-weight-light">,	${student.studentGender}</span>
+								</h3>
+								<div class="h5 font-weight-300">
+									<i class="ni location_pin mr-2"></i>${student.studentEmail}
+								</div>
+								<div class="h5 font-weight-300">
+									<i class="ni location_pin mr-2"></i>${student.studentPhone}
+								</div>
+								<div class="h5 mt-4">
+									<i class="ni business_briefcase-24 mr-2"></i>${student.studentAddressMain}
+								</div>
+								<div>
+									<i class="ni education_hat mr-2"></i>${student.studentAddressSub}
+								</div>
+								<hr class="my-4" />
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="col-xl-8 order-xl-1">
+					<div class="card bg-secondary shadow">
+						<div class="card-header bg-white border-0">
+							<div class="row align-items-center">
+								<div class="col-8">
+									<h3 class="mb-0">학생 상세보기</h3>
+								</div>
+								<div class="col-4 text-right">
+									<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/student/studentList/1">목록</a>
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="row align-items-center mb-4">
+								<br>
+								<div class="col-8">
+									<h6 class="heading-small text-muted">개인정보</h6>
+								</div>
+							</div>
+							<div class="pl-lg-4">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >아이디</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${student.studentId}" disabled="disabled">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >생년월일</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${student.studentBirth}" disabled="disabled">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >이름</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${student.studentName}" disabled="disabled">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >성별</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${student.studentGender}" disabled="disabled">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >이메일</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${student.studentEmail}" disabled="disabled">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >전화번호</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${student.studentPhone}" disabled="disabled">
+										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label class="form-control-label" >주소</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${student.studentAddressMain} ${student.studentAddressSub}" disabled="disabled">
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr class="my-4" />
+							<div class="row align-items-center mb-4">
+								<br>
+								<div class="col-8">
+									<h6 class="heading-small text-muted">부가정보</h6>
+								</div>
+							</div>
+							<div class="pl-lg-4">
+								<div class="form-group">
+									<label class="form-control-label" >자격증</label>
+									<c:if test="${student.licenseList[0].licenseNumber != null}">
+										<c:forEach var="l" items="${student.licenseList}">
+											<div class="row">
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseNumber}" disabled="disabled">
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseName}" disabled="disabled">
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseAgency}" disabled="disabled">
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseGetdate}" disabled="disabled">
+													</div>
+												</div>
+											</div>
+										</c:forEach>
+									</c:if>
+									<c:if test="${student.licenseList[0].licenseNumber == null}">
+										<div class="row">
+											<div class="col-lg-3">
+												<h5>(자격증이 없습니다)</h5>
+											</div>
+										</div>
+									</c:if>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- Footer -->
 			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 		</div>

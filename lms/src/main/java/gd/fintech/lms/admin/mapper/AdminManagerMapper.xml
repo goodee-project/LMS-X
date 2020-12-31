@@ -212,5 +212,11 @@
 		WHERE
 			account_id = #{accountId}
 	</delete>
-	
+	<!-- 이미지 삭제 -->
+	<delete id="deleteManagerImage" parameterType="String">
+		DELETE FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</delete>
 </mapper>

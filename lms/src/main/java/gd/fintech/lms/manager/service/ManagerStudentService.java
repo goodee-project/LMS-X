@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.manager.mapper.ManagerStudentMapper;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.MypageImage;
 import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.StudentQueue;
 
@@ -18,7 +19,7 @@ public class ManagerStudentService {
 	@Autowired ManagerStudentMapper managerStudentMapper;
 	
 	// 학생 목록 페이징
-	public List<Map<String, Object>> getStudentListByPage(Map<String, Object> map) {
+	public List<Student> getStudentListByPage(Map<String, Object> map) {
 		return managerStudentMapper.selectStudentListByPage(map);
 	}
 	
@@ -30,6 +31,11 @@ public class ManagerStudentService {
 	// 학생 목록 상세보기
 	public Student getStudentOne(String studentId) {
 		return managerStudentMapper.selectStudentOne(studentId);
+	}
+	
+	// 강사 이미지 조회
+	public MypageImage getTeacherImage(String teacherId) {
+		return managerStudentMapper.selectStudentImage(teacherId);
 	}
 	
 	// 학생 승인 대기 목록

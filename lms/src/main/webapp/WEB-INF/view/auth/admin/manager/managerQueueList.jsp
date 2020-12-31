@@ -60,7 +60,7 @@
 											<td style="font-size: 13px;">${mql.managerName}</td>
 											<td style="font-size: 13px;">${mql.managerGender}</td>
 											<td style="font-size: 13px;">${mql.managerBirth}</td>
-											<td style="font-size: 10px;">${mql.managerAddressMain} ${mql.managerAddressSub}</td>
+											<td style="font-size: 10px;">${mql.managerAddressMain}<br> ${mql.managerAddressSub}</td>
 											<td style="font-size: 13px;"><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/admin/accessManager/${currentPage}/${mql.managerId}">승인</a></td>
 											<td style="font-size: 13px;"><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/admin/negativeManager/${mql.managerId}">거절</a></td>
 										</tr>

@@ -2,15 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerTeacherMapper"> 
 	<!-- 강사목록 리스트와 페이징 -->
-	<select id="selectTeacherListByPage" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="selectTeacherListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Teacher">
 		SELECT 
 			teacher_id teacherId,
+			teacher_email teacherEmail,
 			teacher_name teacherName,
-			teacher_gender teacherGender
+			teacher_phone teacherPhone,
+			teacher_gender teacherGender,
+			teacher_birth teacherBirth,
+			teacher_accessdate teacherAccessdate
 		FROM
-			teacher t
+			teacher
 		ORDER BY
-			teacher_id DESC
+			teacher_accessdate DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>
@@ -83,6 +87,16 @@
 		WHERE
 			teacher_id = #{teacherId}
 	</select>
+	
+	<!-- 이미지 조회 -->
+	<select id="selectTeacherImage" parameterType="String" resultType="gd.fintech.lms.vo.MypageImage">
+		SELECT
+			mypage_image_uuid mypageImageUuid
+		FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</select> 
 	
 	<!-- 강사 승인대기 목록 -->
 	<select id="selectTeacherQueueListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.TeacherQueue">

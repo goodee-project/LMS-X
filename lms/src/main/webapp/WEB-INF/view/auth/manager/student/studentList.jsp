@@ -63,19 +63,29 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th>학생 ID</th>
-									<th>학생 이름</th>
-									<th>학생 성별</th>
-									<th>활성화 여부</th>
+									<th scope="col" style="font-size: 15px; width: 15%;">아이디</th>
+									<th scope="col" style="font-size: 15px; width: 10%;">이름</th>
+									<th scope="col" style="font-size: 15px; width: 7%;" >성별</th>
+									<th scope="col" style="font-size: 15px; width: 11%;" >생일</th>
+									<th scope="col" style="font-size: 15px; width: 18%;">이메일</th>
+									<th scope="col" style="font-size: 15px; width: 13%;">연락처</th>
+									<th scope="col" style="font-size: 15px; width: 13%;">승인날짜</th>
+									<th scope="col" style="font-size: 15px; width: 8%;">탈퇴</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${studentList}" var="s">
+								<c:forEach var="s" items="${studentList}" >
 									<tr>
-										<td><a href="${pageContext.request.contextPath}/auth/manager/student/studentOne/${s.studentId}">${s.studentId}</a></td>
-										<td>${s.studentName}</td>
-										<td>${s.studentGender}</td>
-										<td>${s.accountState}</td>
+										<td style="font-size: 13px;"><a href="${pageContext.request.contextPath}/auth/manager/student/studentOne/${s.studentId}">${s.studentId}</a></td>
+										<td style="font-size: 13px;">${s.studentName}</td>
+										<td style="font-size: 13px;">${s.studentGender}</td>
+										<td style="font-size: 13px;">${s.studentBirth}</td>
+										<td style="font-size: 13px;">${s.studentEmail}</td>
+										<td style="font-size: 13px;">${s.studentPhone}</td>
+										<td style="font-size: 13px;">${s.studentAccessdate}</td>
+										<td style="font-size: 13px;">
+											<a class="btn btn-sm btn-danger" href="">탈퇴</a>
+										</td>
 									</tr>	
 								</c:forEach>
 							</tbody>

@@ -2,15 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerStudentMapper"> 
 	<!-- 학생목록 리스트와 페이징 -->
-	<select id="selectStudentListByPage" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="selectStudentListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Student">
 		SELECT 
 			student_id studentId,
+			student_email studentEmail,
 			student_name studentName,
-			student_gender studentGender
+			student_phone studentPhone,
+			student_gender studentGender,
+			student_birth studentBirth,
+			student_accessdate studentAccessdate
 		FROM
-			student s
+			student 
 		ORDER BY
-			student_id DESC
+			student_accessdate DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>
@@ -41,6 +45,16 @@
 		WHERE
 			student_id = #{studentId}
 	</select>
+	
+	<!-- 이미지 조회 -->
+	<select id="selectStudentImage" parameterType="String" resultType="gd.fintech.lms.vo.MypageImage">
+		SELECT
+			mypage_image_uuid mypageImageUuid
+		FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</select> 
 	
 	<!-- 학생 승인 대기 목록 -->
 	<select id="selectStudentQueueListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.StudentQueue">

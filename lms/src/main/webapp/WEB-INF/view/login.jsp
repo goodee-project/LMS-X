@@ -329,7 +329,9 @@
 					</div> `;
 				
 				$('#login').html(loginInput);
-
+				
+				$('#signup').html('');
+				
 				$('#loginBtn').click(function(){
 					// 아이디 입력 체크
 					if ( $('#accountId').val() == "" ) {

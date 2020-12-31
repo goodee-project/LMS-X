@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Manager;
 import gd.fintech.lms.vo.ManagerQueue;
+import gd.fintech.lms.vo.MypageImage;
 
 @Mapper
 public interface AdminManagerMapper {
@@ -44,7 +45,8 @@ public interface AdminManagerMapper {
 	public int deleteManagerCareer(String managerId);
 	// 운영자 자격증 삭제 
 	public int deleteManagerLicense(String managerId);
-	
+	// 운영자 이미지 삭제
+	public int deleteManagerImage(String managerId);
 	// 운영자 이미지 조회
-	public String selectManagerImage(String managerId);
+	public MypageImage selectManagerImage(String managerId);
 }

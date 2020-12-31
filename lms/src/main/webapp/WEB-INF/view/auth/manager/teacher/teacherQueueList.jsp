@@ -60,29 +60,29 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th>아이디</th>
-									<th>이메일</th>
-									<th>핸드폰번호</th>
-									<th>이름</th>
-									<th>성별</th>
-									<th>생일</th>
-									<th>주소</th>
-									<th>승인</th>
-									<th>거절</th>
+									<th scope="col" style="font-size: 15px; width: 15%;">아이디</th>
+									<th scope="col" style="font-size: 15px; width: 18%;">이메일</th>
+									<th scope="col" style="font-size: 15px; width: 13%;">핸드폰번호</th>
+									<th scope="col" style="font-size: 15px; width: 10%;">이름</th>
+									<th scope="col" style="font-size: 15px; width: 7%;">성별</th>
+									<th scope="col" style="font-size: 15px; width: 11%;">생일</th>
+									<th scope="col" style="font-size: 15px; width: 15%;">주소</th>
+									<th scope="col" style="font-size: 15px; width: 8%;">승인</th>
+									<th scope="col" style="font-size: 15px; width: 8%;">거절</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="tql" items="${teacherQueueList}">
 									<tr>
-										<td>${tql.teacherId}</td>
-										<td>${tql.teacherEmail}</td>
-										<td>${tql.teacherPhone}</td>
-										<td>${tql.teacherName}</td>
-										<td>${tql.teacherGender}</td>
-										<td>${tql.teacherBirth}</td>
-										<td>${tql.teacherAddressMain} ${tql.teacherAddressSub}</td>
-										<td><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/manager/teacher/accessTeacher/${currentPage}/${tql.teacherId}">승인</a></td>
-										<td><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/manager/teacher/negativeTeacher/${tql.teacherId}">거절</a></td>
+										<td style="font-size: 13px;">${tql.teacherId}</td>
+										<td style="font-size: 13px;">${tql.teacherEmail}</td>
+										<td style="font-size: 13px;">${tql.teacherPhone}</td>
+										<td style="font-size: 13px;">${tql.teacherName}</td>
+										<td style="font-size: 13px;">${tql.teacherGender}</td>
+										<td style="font-size: 13px;">${tql.teacherBirth}</td>
+										<td style="font-size: 10px;">${tql.teacherAddressMain}<br>${tql.teacherAddressSub}</td>
+										<td style="font-size: 13px;"><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/manager/teacher/accessTeacher/${currentPage}/${tql.teacherId}">승인</a></td>
+										<td style="font-size: 13px;"><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/manager/teacher/negativeTeacher/${tql.teacherId}">거절</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -6,19 +6,23 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.MypageImage;
 import gd.fintech.lms.vo.Teacher;
 import gd.fintech.lms.vo.TeacherQueue;
 
 @Mapper
 public interface ManagerTeacherMapper {
 	// 강사 리스트
-	public List<Map<String, Object>> selectTeacherListByPage(Map<String, Object> map);
+	public List<Teacher> selectTeacherListByPage(Map<String, Object> map);
 	
 	// 강사 페이징 카운트
 	int selectTeacherCount();		
 	
 	// 강사 정보
 	public Teacher selectTeacherOne(String teacherId);	
+	
+	// 강사 이미지 조회
+	public MypageImage selectTeacherImage(String teacherId);
 	
 	// 강사 승인 대기 목록
 	public List<TeacherQueue> selectTeacherQueueListByPage(Map<String, Object> map);

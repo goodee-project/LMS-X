@@ -6,19 +6,23 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.MypageImage;
 import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.StudentQueue;
 
 @Mapper
 public interface ManagerStudentMapper {
 	// 학생 리스트
-	public List<Map<String, Object>> selectStudentListByPage(Map<String, Object> map);
+	public List<Student> selectStudentListByPage(Map<String, Object> map);
 	
 	// 학생 페이징 카운트
 	int selectStudentCount();						
 	
 	// 학생 상세정보
 	Student selectStudentOne(String steudentId);	
+	
+	// 강사 이미지 조회
+	public MypageImage selectStudentImage(String teacherId);
 	
 	// 학생 승인 대기 목록
 	public List<StudentQueue> selectStudentQueueListByPage(Map<String,Object> map);

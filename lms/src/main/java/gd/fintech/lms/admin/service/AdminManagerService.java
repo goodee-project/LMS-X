@@ -1,5 +1,6 @@
 package gd.fintech.lms.admin.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +12,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.admin.mapper.AdminManagerMapper;
+import gd.fintech.lms.common.PathUtil;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Manager;
 import gd.fintech.lms.vo.ManagerQueue;
+import gd.fintech.lms.vo.MypageImage;
 
 @Service
 @Transactional
 public class AdminManagerService {
 	@Autowired private AdminManagerMapper adminManagerMapper;
+	// 첨부파일 경로
+	private String PATH = PathUtil.PATH("mypageImage"); 
 	
 	private static final Logger log = LoggerFactory.getLogger(AdminManagerService.class);
 
@@ -68,7 +73,9 @@ public class AdminManagerService {
 	// 운영자 상세보기
 	public Map<String,Object> getManagerOne(String managerId) {
 		Manager manager = adminManagerMapper.selectManagerOne(managerId);
-		String managerImage = adminManagerMapper.selectManagerImage(managerId);
+		MypageImage mypageImage = adminManagerMapper.selectManagerImage(managerId);
+		
+		String managerImage = mypageImage.getMypageImageUuid();
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("manager", manager);
@@ -90,9 +97,25 @@ public class AdminManagerService {
 		account.setAccountId(managerId);
 		account.setAccountState("탈퇴");
 		
+		// 이미지 파일 조회
+		MypageImage mi = adminManagerMapper.selectManagerImage(managerId);
+		
+		// 데이터베이스에 기존에 있던 이미지가 있으면 파일삭제
+		if(mi != null) {
+			// 이미지 경로 + 이미지 이름
+			File file = new File(PATH + mi.getMypageImageUuid());
+			
+			// 이미지가 존재하는 경우
+			if (file.exists()) {
+				// 이미지 삭제
+				file.delete();
+			}
+			
+			// 데이터베이스의 이미지 파일 삭제
+			adminManagerMapper.selectManagerImage(managerId);
+		}
 		// 운영자 계정(탈퇴) 업데이트
 		adminManagerMapper.updateManagerAccount(account);
-		
 		// 운영자 정보 삭제
 		adminManagerMapper.deleteManagerOne(managerId);
 		// 운영자 경력 삭제

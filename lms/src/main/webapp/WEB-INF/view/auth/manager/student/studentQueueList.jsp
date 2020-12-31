@@ -17,6 +17,19 @@
 		rel="stylesheet" />
 	<!-- CSS Files -->
 	<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+	<style>
+		.table {
+			text-align: center;
+		}
+		
+		.table td {
+			vertical-align: middle;
+		}
+		
+		th {
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
@@ -44,29 +57,29 @@
 					<table class="table">
 						<thead class="thead-light">
 							<tr>
-								<th>아이디</th>
-								<th>이메일</th>
-								<th>핸드폰번호</th>
-								<th>이름</th>
-								<th>성별</th>
-								<th>생일</th>
-								<th>주소</th>
-								<th>승인</th>
-								<th>거절</th>
+								<th scope="col" style="font-size: 15px; width: 15%;">아이디</th>
+									<th scope="col" style="font-size: 15px; width: 18%;">이메일</th>
+									<th scope="col" style="font-size: 15px; width: 13%;">핸드폰번호</th>
+									<th scope="col" style="font-size: 15px; width: 10%;">이름</th>
+									<th scope="col" style="font-size: 15px; width: 7%;">성별</th>
+									<th scope="col" style="font-size: 15px; width: 11%;">생일</th>
+									<th scope="col" style="font-size: 15px; width: 15%;">주소</th>
+									<th scope="col" style="font-size: 15px; width: 8%;">승인</th>
+									<th scope="col" style="font-size: 15px; width: 8%;">거절</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="sql" items="${studentQueueList}">
 								<tr>
-									<td>${sql.studentId}</td>
-									<td>${sql.studentEmail}</td>
-									<td>${sql.studentPhone}</td>
-									<td>${sql.studentName}</td>
-									<td>${sql.studentGender}</td>
-									<td>${sql.studentBirth}</td>
-									<td>${sql.studentAddressMain} ${sql.studentAddressSub}</td>
-									<td><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/manager/student/accessStudent/${currentPage}/${sql.studentId}">승인</a></td>
-									<td><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/manager/student/negativeStudent/${sql.studentId}">거절</a></td>
+									<td style="font-size: 13px;">${sql.studentId}</td>
+									<td style="font-size: 13px;">${sql.studentEmail}</td>
+									<td style="font-size: 13px;">${sql.studentPhone}</td>
+									<td style="font-size: 13px;">${sql.studentName}</td>
+									<td style="font-size: 13px;">${sql.studentGender}</td>
+									<td style="font-size: 13px;">${sql.studentBirth}</td>
+									<td style="font-size: 10px;">${sql.studentAddressMain} <br> ${sql.studentAddressSub}</td>
+									<td style="font-size: 13px;"><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/manager/student/accessStudent/${currentPage}/${sql.studentId}">승인</a></td>
+									<td style="font-size: 13px;"><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/manager/student/negativeStudent/${sql.studentId}">거절</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
