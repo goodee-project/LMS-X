@@ -146,12 +146,14 @@ public class TeacherTestService {
 	
 	// 객관식 문제 삭제
 	public void deleteMultiplechoice(int multiplechoiceNo, int lectureNo) {
+		teacherTestMapper.deleteAnswersheetList(multiplechoiceNo);
 		teacherTestMapper.deleteMultiplechoiceExample(multiplechoiceNo);
 		teacherTestMapper.deleteMultiplechoice(multiplechoiceNo);
 		
+		// 남은 객관식 문제들의 번호를 가져옴
 		List<Integer> multiplechoiceIdList = teacherTestMapper.selectMultiplechoiceIdList(lectureNo);
 		
-		// 객관식 문제 하나를 삭제하면 그에 맞게 id(번호)를 순서에 맞게 다시 정렬해줘야함.
+		// 객관식 문제 하나를 삭제하면 그에 맞게 남은 객관식 문제들의 id(번호)를 순서에 맞게 다시 정렬해줘야함.
 		int newId = 0;	// 새로운 id
 		for(int oldId : multiplechoiceIdList) {
 			newId++;

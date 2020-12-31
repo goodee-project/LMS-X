@@ -61,6 +61,9 @@ public interface TeacherTestMapper {
 	// 객관식 문제 삭제
 	int deleteMultiplechoice(int multiplechoiceNo);
 	
+	// 학생 답안지들 삭제
+	int deleteAnswersheetList(int multiplechoiceNo);
+	
 	// 객관식 문제들의 번호 가져오기
 	List<Integer> selectMultiplechoiceIdList(int lectureNo);
 	

@@ -250,6 +250,14 @@
 			multiplechoice_no = #{multiplechoiceNo}
 	</delete>
 	
+	<!-- 학생 답안지 삭제 -->
+	<delete id="deleteAnswersheetList" parameterType="Integer">
+		DELETE FROM
+			answersheet
+		WHERE
+			multiplechoice_no = #{multiplechoiceNo}		
+	</delete>
+	
 	<!-- 객관식 문제들의 id(번호) 얻어오기 -->
 	<select id="selectMultiplechoiceIdList" parameterType="Integer" resultType="Integer">
 		SELECT 
