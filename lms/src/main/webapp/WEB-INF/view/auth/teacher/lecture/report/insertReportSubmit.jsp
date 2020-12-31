@@ -65,13 +65,13 @@
 								<div class="table-responsive">
 									<table class="table align-items-center table-flush">
 										<tr>
-											<td width="20%">점수</td>
+											<th width="20%">점수</th>
 											<td width="80%">
 												<input type="text" class="form-control" name="reportSubmitPoint">
 											</td>
 										</tr>
 										<tr>
-											<td>평가 내용</td>
+											<th>평가 내용</th>
 											<td>
 												<input type="text" class="form-control" name="reportSubmitFeedback">
 											</td>

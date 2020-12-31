@@ -70,25 +70,25 @@
 									<input type="hidden" name="lectureNo" value="${lectureNo}">
 									<table class="table align-items-center table-flush">
 										<tr>
-											<td width="20%">과제 이름</td>
+											<th width="20%">과제 이름</th>
 											<td width="80%">
 												<input type="text" class="form-control" name="reportTitle">
 											</td>
 										</tr>
 										<tr>
-											<td>과제 내용</td>
+											<th>과제 내용</th>
 											<td>
 												<textarea class="form-control" name="reportContent"></textarea>
 											</td>
 										</tr>
 										<tr>
-											<td>과제 시작일시</td>
+											<th>과제 시작일시</th>
 											<td>
 												<input type="datetime-local" class="form-control" name="reportStartdate">
 											</td>
 										</tr>
 										<tr>
-											<td>과제 종료일시</td>
+											<th>과제 종료일시</th>
 											<td>
 												<input type="datetime-local" class="form-control" name="reportEnddate">
 											</td>

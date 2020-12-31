@@ -162,21 +162,21 @@
 										value="${teacherName}">
 									<table class="table align-items-center table-flush">
 										<tr>
-											<td width="20%">제목</td>
+											<th width="20%">제목</th>
 											<td width="80%">
 												<input type="text" class="form-control" name="lectureArchiveTitle" id="lectureArchiveTitle">
 												<div class="msgDiv" id="lectureArchiveTitleMsg"></div>
 											</td>
 										</tr>
 										<tr>
-											<td>내용</td>
+											<th>내용</th>
 											<td>
 												<textarea class="form-control" name="lectureArchiveContent" id="lectureArchiveContent" style="width:100%"></textarea>
 												<div class="msgDiv" id="lectureArchiveContentMsg"></div>
 											</td>
 										</tr>
 										<tr>
-											<td>첨부파일</td>
+											<th>첨부파일</th>
 											<td>
 												<div>
 													<button type="button" class="btn btn-sm btn-dark" id="addBtn">파일 추가</button>

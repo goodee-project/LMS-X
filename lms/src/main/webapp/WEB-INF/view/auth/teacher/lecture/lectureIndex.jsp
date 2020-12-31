@@ -78,11 +78,11 @@
 								<table class="table align-items-center table-flush">
 									<thead class="thead-light">
 										<tr>
-											<th scope="col">과목</th>
-											<th scope="col">강좌</th>
-											<th scope="col">강사</th>
-											<th scope="col">개강일</th>
-											<th scope="col">종강일</th>
+											<th>과목</th>
+											<th>강좌</th>
+											<th>강사</th>
+											<th>개강일</th>
+											<th>종강일</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -121,10 +121,10 @@
 								<table class="table align-items-center table-flush">
 									<thead class="thead-light">
 										<tr>
-											<th>번호</th>
-											<th>제목</th>
-											<th>작성일시</th>
-											<th>조회수</th>
+											<th width="10%">번호</th>
+											<th width="60%">제목</th>
+											<th width="20%">작성일시</th>
+											<th width="10%">조회수</th>
 										</tr>
 									</thead>
 									<tbody>

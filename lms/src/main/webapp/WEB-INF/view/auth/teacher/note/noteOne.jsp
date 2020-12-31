@@ -67,21 +67,21 @@
 							
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">보낸사람</td>
+										<th width="10%">보낸사람</th>
 										<td width="40%">${note.noteDispatcherName}</td>
-										<td width="10%">받는사람</td>
+										<th width="10%">받는사람</th>
 										<td width="40%">${note.noteReceiverName}</td>
 									</tr>
 									<tr>
-										<td width="10%">날짜</td>
+										<th width="10%">날짜</th>
 										<td width="40%" colspan="3">${note.noteSendDate}</td>
 									</tr>
 									<tr>
-										<td>제목</td>
+										<th>제목</th>
 										<td colspan="3">${note.noteTitle}</td>
 									</tr>
 									<tr>
-										<td>내용</td>
+										<th>내용</th>
 										<td colspan="3">${note.noteContent}</td>
 									</tr>
 								</table>

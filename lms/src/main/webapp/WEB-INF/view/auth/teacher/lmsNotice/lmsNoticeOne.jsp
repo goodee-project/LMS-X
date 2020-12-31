@@ -64,23 +64,23 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">작성자</td>
+										<th width="10%">작성자</th>
 										<td width="40%">${lmsNotice.lmsNoticeWriter}</td>
-										<td width="10%">조회수</td>
+										<th width="10%">조회수</th>
 										<td width="40%">${lmsNotice.lmsNoticeCount}</td>
 									</tr>
 									<tr>
-										<td>작성일시</td>
+										<th>작성일시</th>
 										<td>${lmsNotice.lmsNoticeCreatedate}</td>
-										<td>수정일시</td>
+										<th>수정일시</th>
 										<td>${lmsNotice.lmsNoticeUpdatedate}</td>
 									</tr>
 									<tr>
-										<td>제목</td>
+										<th>제목</th>
 										<td colspan="3">${lmsNotice.lmsNoticeTitle}</td>
 									</tr>
 									<tr>
-										<td>내용</td>
+										<th>내용</th>
 										<td colspan="3">${lmsNotice.lmsNoticeContent}</td>
 									</tr>
 								</table>

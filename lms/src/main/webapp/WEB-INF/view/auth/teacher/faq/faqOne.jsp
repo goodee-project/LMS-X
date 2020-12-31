@@ -64,29 +64,29 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">번호</td>
+										<th width="10%">번호</th>
 										<td width="40%">${faq.faqNo}</td>
-										<td width="10%">카테고리</td>
+										<th width="10%">카테고리</th>
 										<td width="40%">${faq.faqCategory}</td>
 									</tr>
 									<tr>
-										<td>작성자</td>
+										<th>작성자</th>
 										<td>${faq.faqWriter}</td>
-										<td>조회수</td>
+										<th>조회수</th>
 										<td>${faq.faqCount}</td>
 									</tr>
 									<tr>
-										<td>작성일시</td>
+										<th>작성일시</th>
 										<td>${faq.faqCreatedate}</td>
-										<td>수정일시</td>
+										<th>수정일시</th>
 										<td>${faq.faqUpdatedate}</td>
 									</tr>
 									<tr>
-										<td>제목</td>
+										<th>제목</th>
 										<td colspan="3">${faq.faqTitle}</td>
 									</tr>
 									<tr>
-										<td>내용</td>
+										<th>내용</th>
 										<td colspan="3">${faq.faqContent}</td>
 									</tr>
 								</table>

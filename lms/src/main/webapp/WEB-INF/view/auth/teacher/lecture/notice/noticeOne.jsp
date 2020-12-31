@@ -66,23 +66,23 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">번호</td>
+										<th width="10%">번호</th>
 										<td width="40%">${lectureNoticeNo}</td>
-										<td width="10%">조회수</td>
+										<th width="10%">조회수</th>
 										<td width="40%">${lectureNotice.lectureNoticeCount}</td>
 									</tr>
 									<tr>
-										<td>작성일시</td>
+										<th>작성일시</th>
 										<td>${lectureNotice.lectureNoticeCreatedate}</td>
-										<td>수정일시</td>
+										<th>수정일시</th>
 										<td>${lectureNotice.lectureNoticeUpdatedate}</td>				
 									</tr>
 									<tr>
-										<td>제목</td>
+										<th>제목</th>
 										<td colspan="3">${lectureNotice.lectureNoticeTitle}</td>
 									</tr>
 									<tr>
-										<td>내용</td>
+										<th>내용</th>
 										<td colspan="3">${lectureNotice.lectureNoticeContent}</td>
 									</tr>
 								</table>

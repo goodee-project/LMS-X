@@ -66,25 +66,25 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">제출 시간</td>
+										<th width="10%">제출 시간</th>
 										<td width="40%">${reportSubmit[0].reportSubmitCreatedate}</td>
-										<td width="10%">수정 시간</td>
+										<th width="10%">수정 시간</th>
 										<td width="40%">${reportSubmit[0].reportSubmitUpdatedate}</td>
 									</tr>
 									<tr>
-										<td>제출 학생</td>
+										<th>제출 학생</th>
 										<td colspan="3">${reportSubmit[0].reportSubmitWriter}&#40;${reportSubmit[0].accountId}&#41;</td>
 									</tr>
 									<tr>
-										<td>제목</td>
+										<th>제목</th>
 										<td colspan="3">${reportSubmit[0].reportSubmitTitle}</td>
 									</tr>
 									<tr>
-										<td>내용</td>
+										<th>내용</th>
 										<td colspan="3">${reportSubmit[0].reportSubmitContent}</td>
 									</tr>
 									<tr>
-										<td>첨부파일</td>
+										<th>첨부파일</th>
 										<td colspan="3">
 											<c:forEach var="rsf" items="${reportSubmit[0].reportSubmitFileList}">
 												<div>
@@ -131,7 +131,7 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="20%">점수</td>
+										<th width="20%">점수</th>
 										<!-- 점수 입력이 되지 않은 경우 -->
 										<c:if test="${reportSubmit[0].reportSubmitPoint == -1}">
 											<td width="80%">(미입력)</td>
@@ -142,7 +142,7 @@
 										</c:if>
 									</tr>
 									<tr>
-										<td>평가 내용</td>
+										<th>평가 내용</th>
 										<!-- 평가 내용 입력이 되지 않은 경우 -->
 										<c:if test="${reportSubmit[0].reportSubmitFeedback == null}">
 											<td>(평가 내용이 없습니다)</td>

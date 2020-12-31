@@ -90,27 +90,22 @@
 										</div>
 										<div class="col-4 text-right">
 											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeOne/${lectureNoticeNo}'">목록</button>
-											<button type="button" class="btn btn-sm btn-success" id="updateBtn">수정</button>
+											<button type="button" class="btn btn-sm btn-primary" id="updateBtn">수정</button>
 										</div>
 										<br>
 									</div>
 								</div>
 								<div class="table-responsive">
+									<input type="hidden" class="form-control" value="${lectureNotice.lectureNoticeNo}" readonly="readonly">
 									<table class="table align-items-center table-flush">
 										<tr>
-											<td width="20%">번호</td>
+											<th width="20%">제목</th>
 											<td width="80%">
-												<input type="text" class="form-control" value="${lectureNotice.lectureNoticeNo}" readonly="readonly">
-											</td>
-										</tr>
-										<tr>
-											<td>제목</td>
-											<td>
 												<input type="text" class="form-control" value="${lectureNotice.lectureNoticeTitle}" name="lectureNoticeTitle" id="noticeTitleText">
 											</td>
 										</tr>
 										<tr>
-											<td>내용</td>
+											<th>내용</th>
 											<td>
 												<textarea class="form-control" rows="22" name="lectureNoticeContent" id="lectureNoticeContent" style="width:100%">
 													${lectureNotice.lectureNoticeContent}

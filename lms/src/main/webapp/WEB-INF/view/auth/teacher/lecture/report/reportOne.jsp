@@ -83,28 +83,24 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="20%">과제 제목</td>
-										<td width="80%">${report.reportTitle}</td>
+										<th width="10%">과제<br>시작일시</th>
+										<td width="40%">${report.reportStartdate}</td>
+										<th width="10%">과제<br>마감일시</th>
+										<td width="40%">${report.reportEnddate}</td>
 									</tr>
 									<tr>
-										<td>과제 내용</td>
-										<td>${report.reportContent}</td>
-									</tr>
-									<tr>
-										<td>과제 출제일시</td>
+										<th>과제<br>출제일시</th>
 										<td>${report.reportCreatedate}</td>
-									</tr>
-									<tr>
-										<td>과제 수정일시</td>
+										<th>과제<br>수정일시</th>
 										<td>${report.reportUpdatedate}</td>
 									</tr>
 									<tr>
-										<td>과제 시작일시</td>
-										<td>${report.reportStartdate}</td>
+										<th>제목</th>
+										<td colspan="3">${report.reportTitle}</td>
 									</tr>
 									<tr>
-										<td>과제 마감일시</td>
-										<td>${report.reportEnddate}</td>
+										<th>내용</th>
+										<td colspan="3">${report.reportContent}</td>
 									</tr>
 								</table>
 							</div>
