@@ -117,7 +117,7 @@
 							let buildingTotal = afterAddress[1];
 							
 							// 변수 값에 '-' 가 있는지 체크
-							if (heckSpecial(buildingTotal) == true) {
+							if (checkSpecial(buildingTotal) == true) {
 								// 모든 공백 제거
 								let allReplaceBuilding = buildingTotal.replace(/(\s*)/g, "") 
 								// 값에 - 가 있으면 나누기
