@@ -16,6 +16,8 @@ import gd.fintech.lms.teacher.service.TeacherTestService;
 import gd.fintech.lms.vo.Answersheet;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Multiplechoice;
+import gd.fintech.lms.vo.MultiplechoiceExample;
+import gd.fintech.lms.vo.MultiplechoiceExampleForm;
 import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.Test;
 
@@ -216,5 +218,29 @@ public class TeacherTestController {
 		
 		// [View] /auth/teacher/lecture/test/answersheetOne.jsp
 		return "/auth/teacher/lecture/test/answersheetOne";
+	}
+	
+	// 객관식 문제 보기 조회 
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/multiplechoiceExampleList/{multiplechoiceNo}")
+	public String multiplechoiceExampleList(Model model,
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "multiplechoiceNo") int multiplechoiceNo) {
+		
+		Multiplechoice exampleList = teacherTestService.selectMultiplechoiceExampleList(multiplechoiceNo);
+		
+		model.addAttribute("exampleList", exampleList);
+		
+		return "/auth/teacher/lecture/test/multiplechoiceExampleList";
+	}
+	
+	// 객관식 문제 보기 수정
+	@PostMapping("/auth/teacher/lecture/{lectureNo}/test/multiplechoiceExampleList/{multiplechoiceNo}")
+	public String multiplechoiceExampleList(MultiplechoiceExampleForm multiplechoiceExampleForm,
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "multiplechoiceNo") int multiplechoiceNo) {
+		
+		teacherTestService.updateMultiplechoiceExampleList(multiplechoiceExampleForm, multiplechoiceNo);
+		
+		return "redirect:/auth/teacher/lecture/" + lectureNo + "/test/multiplechoiceExampleList/" + multiplechoiceNo;
 	}
 }

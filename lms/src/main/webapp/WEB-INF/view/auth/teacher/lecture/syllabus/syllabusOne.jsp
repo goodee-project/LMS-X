@@ -89,15 +89,15 @@
 									<c:set var="uuid">${syllabus.syllabusFileUuid}</c:set>
 									<c:if test="${!empty syllabus.syllabusFileUuid}">
 										<tr>
-											<td width="15%">업로드 날짜</td>
+											<th width="15%">업로드 날짜</th>
 											<td width="35%">${syllabus.syllabusFileCreatedate}</td>
-											<td width="15%">다운로드 횟수</td>
+											<th width="15%">다운로드 횟수</th>
 											<td width="35%">
 												<div id="fileCount${fn:split(uuid, '.')[0]}" style="display: inline;">${syllabus.syllabusFileCount}회</div>
 											</td>
 										</tr>
 										<tr>
-											<td>다운로드</td>
+											<th>다운로드</th>
 											<td>
 												<a onclick="fileDownloadCount('${syllabus.syllabusFileUuid}','${syllabus.syllabusFileCount}')"
 													href="${pageContext.request.contextPath}/resource/syllabusFile/${syllabus.syllabusFileUuid}"
@@ -106,7 +106,7 @@
 												</a>
 												<br>
 											</td>
-											<td>파일 크기</td>
+											<th>파일 크기</th>
 											<td>
 												<!-- 파일 사이즈 --> <c:choose>
 													<c:when test="${syllabus.syllabusFileSize >= (1024 * 1024)}">

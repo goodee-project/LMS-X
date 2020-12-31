@@ -64,10 +64,10 @@
 				let signup = `
 					<div class="row mt-3">
 			            <div class="col-6">
-			            	<a href="${pageContext.request.contextPath}/student/forgotIdAndPassword" class="text-light"><small>Forgot ID/Password?</small></a>
+			            	<a href="${pageContext.request.contextPath}/student/forgotIdAndPassword" class="text-light"><small>아이디/비밀번호 찾기</small></a>
 			            </div>
 			            <div class="col-6 text-right">
-			            	<a href="${pageContext.request.contextPath}/student/signup" class="text-light"><small>Create new account</small></a>
+			            	<a href="${pageContext.request.contextPath}/student/signup" class="text-light"><small>회원가입</small></a>
 			            </div>
 	        		</div>
 					`;
@@ -154,10 +154,10 @@
 				let signup = `
 					<div class="row mt-3">
 			            <div class="col-6">
-			            	<a href="${pageContext.request.contextPath}/teacher/forgotIdAndPassword" class="text-light"><small>Forgot ID/Password?</small></a>
+			            	<a href="${pageContext.request.contextPath}/teacher/forgotIdAndPassword" class="text-light"><small>아이디/비밀번호 찾기</small></a>
 			            </div>
 			            <div class="col-6 text-right">
-			            	<a href="${pageContext.request.contextPath}/teacher/signup" class="text-light"><small>Create new account</small></a>
+			            	<a href="${pageContext.request.contextPath}/teacher/signup" class="text-light"><small>회원가입</small></a>
 			            </div>
 	        		</div>
 					`;
@@ -244,10 +244,10 @@
 				let signup = `
 					<div class="row mt-3">
 			            <div class="col-6">
-			            	<a href="${pageContext.request.contextPath}/manager/forgotIdAndPassword" class="text-light"><small>Forgot ID/Password?</small></a>
+			            	<a href="${pageContext.request.contextPath}/manager/forgotIdAndPassword" class="text-light"><small>아이디/비밀번호 찾기</small></a>
 			            </div>
 			            <div class="col-6 text-right">
-			            	<a href="${pageContext.request.contextPath}/manager/signup" class="text-light"><small>Create new account</small></a>
+			            	<a href="${pageContext.request.contextPath}/manager/signup" class="text-light"><small>회원가입</small></a>
 			            </div>
 	        		</div>
 					`;

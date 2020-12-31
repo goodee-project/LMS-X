@@ -106,27 +106,27 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">작성자</td>
+										<th width="10%">작성자</th>
 										<td width="40%">${question[0].questionWriter}</td>
-										<td width="10%">조회수</td>
+										<th width="10%">조회수</th>
 										<td width="40%">${question[0].questionCount}</td>
 									</tr>
 									<tr>
-										<td>작성일시</td>
+										<th>작성일시</th>
 										<td>${question[0].questionCreatedate}</td>
-										<td>수정일시</td>
+										<th>수정일시</th>
 										<td>${question[0].questionUpdatedate}</td>
 									</tr>
 									<tr>
-										<td>제목</td>
+										<th>제목</th>
 										<td colspan="3">${question[0].questionTitle}</td>
 									</tr>
 									<tr>
-										<td>내용</td>
+										<th>내용</th>
 										<td colspan="3">${question[0].questionContent}</td>
 									</tr>
 									<tr>
-										<td>첨부파일</td>
+										<th>첨부파일</th>
 										<td colspan="3">
 											<c:forEach var="qfl" items="${question[0].questionFileList}">
 											<!-- 태그 id에 .이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
@@ -185,30 +185,32 @@
 							<div class="table-responsive">
 								<table class="table commentTable align-items-center table-flush">
 									<thead class="thead-light">
-										<th width="10%">번호</th>
-										<th width="10%">작성자</th>
-										<th width="24%">내용</th>
-										<th width="15%">작성일시</th>
-										<th width="15%">수정일시</th>
-										<th width="8%">수정</th>
-										<th width="8%">삭제</th>
+										<tr>
+											<th width="10%">번호</th>
+											<th width="10%">작성자</th>
+											<th width="24%">내용</th>
+											<th width="15%">작성일시</th>
+											<th width="15%">수정일시</th>
+											<th width="8%">수정</th>
+											<th width="8%">삭제</th>
+										<tr>
 									</thead>
 									<tbody>
 										<c:if test="${!empty questionComment[0].questionCommentNo}">
 											<c:forEach var="qc" items="${questionComment}">					
-													<tr>
-														<td>${qc.questionCommentNo}</td>
-														<td>${qc.questionCommentWriter}</td>
-														<td>${qc.questionCommentContent}</td>
-														<td>${qc.questionCommentCreatedate}</td>
-														<td>${qc.questionCommentUpdatedate}</td>
-														<td>
-															<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}'">수정</button>
-														</td>
-														<td>
-															<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
-														</td>
-													</tr>
+												<tr>
+													<td>${qc.questionCommentNo}</td>
+													<td>${qc.questionCommentWriter}</td>
+													<td>${qc.questionCommentContent}</td>
+													<td>${qc.questionCommentCreatedate}</td>
+													<td>${qc.questionCommentUpdatedate}</td>
+													<td>
+														<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}'">수정</button>
+													</td>
+													<td>
+														<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
+													</td>
+												</tr>
 											</c:forEach>
 										</c:if>
 										<c:if test="${empty questionComment[0].questionCommentNo}">

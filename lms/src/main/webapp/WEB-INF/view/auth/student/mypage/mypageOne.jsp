@@ -29,8 +29,89 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				
+				// 비밀번호 형식 검사
+				function isJobPassword(str) {
+					// 8 ~ 18자 영문, 숫자 조합
+					var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,18}$/; 
+					// 형식에 맞는 경우 true 리턴
+					if (regExp.test(str)) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+				$('#insertUpdatePwBtn').click(function(){
+					$('#pwBtn').html('');
+					let insertPw = `
+							<div style="margin-bottom : 10px;">
+								<input type="password" id="nowPw" class="form-control form-control-alternative" placeholder="현재 비밀번호를 입력하세요.">
+							</div>
+							<div style="margin-bottom : 10px;">
+								<input type="password" id="nextPw1" class="form-control form-control-alternative" placeholder="새로운 비밀번호를 입력하세요." >
+							</div>
+							<div style="margin-bottom : 10px;">
+								<input type="password" id="nextPw2" class="form-control form-control-alternative" placeholder="새로운 비밀번호를 다시 입력하세요">
+							</div>
+							<div id="pwCheck"></div>
+							<button type="button" class="btn btn-sm btn-primary" id="updatePw">비밀번호 수정</button>
+						 `;
+					$('#insertUpdatePW').html(insertPw);
+					$('#updatePw').click(function(){
+						// 유효성 체크
+						if ($('#nowPw').val() == "") {
+							$('#nowPw').focus();
+							return;
+						}
+						
+						// 비밀번호검사
+						if ($('#nextPw1').val() == "") {
+							$('#nextPw1').focus();
+							return;
+						}
+						if ($('#nextPw2').val() == "") {
+							$('#nextPw2').focus();
+							return;
+						}
+						if (isJobPassword($('#nextPw1').val()) == false) {
+							$('#studentPw1').focus();
+							$('#pwCheck').html('<span style="font-size:12px;" class="text-danger">8자 이상 영문,숫자 조합으로 입력해주세요.</span>');
+							return;
+						}else if ($('#nextPw1').val() != $('#nextPw2').val()) {
+							$('#nextPw1').focus();
+							$('#pwCheck').html('<span class="text-danger">비밀번호가 일치하지않습니다.</span>');
+							return;
+						} else {
+							$('#pwCheck').html('');
+						}
+						
+						
+						$.ajax({
+							url : '${pageContext.request.contextPath}/auth/pwUpdate/selectPw/'+$('#nowPw').val(),
+							type : 'get',
+							success : function(data){
+									if (data == 'false') {
+										$('#nowPw').focus();
+										$('#pwCheck').html('<span class="text-danger">현재 비밀번호를 확인해주세요</span>')
+									} else {
+										$.ajax({
+											url : '${pageContext.request.contextPath}/auth/pwUpdate/updatePw/'+$('#nextPw1').val(),
+											type : 'get',
+											success : function(data) {
+												$('#insertUpdatePW').html('');
+											}
+										});
+									}
+							}
+						});
+					});
+						 
+				});
+			});
+		</script>
 	</head>
-	
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
 		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
@@ -80,6 +161,10 @@
 										<i class="ni education_hat mr-2"></i>${student.studentAddressSub}
 									</div>
 									<hr class="my-4" />
+									<div id="pwBtn">
+										<button type="button" class="btn btn-sm btn-primary" id="insertUpdatePwBtn">비밀번호 수정</button>
+									</div>
+									<div id="insertUpdatePW"></div>
 								</div>
 							</div>
 						</div>

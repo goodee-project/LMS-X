@@ -84,27 +84,27 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">작성자</td>
+										<th width="10%">작성자</th>
 										<td width="40%">${lectureArchive[0].lectureArchiveWriter}</td>
-										<td width="10%">조회수</td>
+										<th width="10%">조회수</th>
 										<td width="40%">${lectureArchive[0].lectureArchiveCount}</td>
 									</tr>
 									<tr>
-										<td>작성일시</td>
+										<th>작성일시</th>
 										<td>${lectureArchive[0].lectureArchiveCreatedate}</td>
-										<td>수정일시</td>
+										<th>수정일시</th>
 										<td>${lectureArchive[0].lectureArchiveUpdatedate}</td>
 									</tr>
 									<tr>
-										<td>제목</td>
+										<th>제목</th>
 										<td colspan="3">${lectureArchive[0].lectureArchiveTitle}</td>
 									</tr>
 									<tr>
-										<td>내용</td>
+										<th>내용</th>
 										<td colspan="3">${lectureArchive[0].lectureArchiveContent}</td>
 									</tr>
 									<tr>
-										<td>첨부파일</td>
+										<th>첨부파일</th>
 										<td>
 											<c:forEach var="laf" items="${lectureArchive[0].lectureArchiveFileList}">
 												<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->

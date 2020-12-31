@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
-		<title>updateReportSubmit</title>
+		<title>multiplechoiceExampleList</title>
 		
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
@@ -28,6 +29,20 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<style>
+			.table {
+				text-align: center;
+			}
+			
+			.table td {
+				vertical-align: middle;
+			}
+			
+			th {
+				text-align: center;
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -39,6 +54,7 @@
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/teacher/include/lectureMenu.jsp" />
 			</div>
+			
 			<!-- 접속자 -->
 			<jsp:include page="/WEB-INF/view/auth/teacher/include/connector.jsp" />
 			
@@ -48,36 +64,34 @@
 				<div class="row">
 					<div class="col">
 						<div class="card shadow">
-							<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}/updateReportSubmit/${reportSubmitNo}">
+							<form action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceExampleList/${multiplechoiceNo}" method="post">
 								<div class="card-header bg-white border-0">
 									<div class="row align-items-center">
-										<br>
 										<div class="col-8">
-											<h3 class="mb-0">과제 평가 수정</h3>
+											<h3 class="mb-0">문제 - 보기 관리</h3>
 										</div>
 										<div class="col-4 text-right">
-												<button type="button" class="btn btn-sm btn-dark"
-													onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}/reportSubmitOne/${reportSubmitNo}'">목록</button>
-												<button type="submit" class="btn btn-sm btn-primary">수정</button>
-											</div>
-										<br>
+											<button type="submit" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/'">저장</button>									
+											<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
+										</div>
 									</div>
 								</div>
+								
 								<div class="table-responsive">
-									<table class="table align-items-center table-flush">
-										<tr>
-											<th width="20%">점수</th>
-											<td width="80%">
-												<input type="text" class="form-control" name="reportSubmitPoint" value="${reportSubmit[0].reportSubmitPoint}">
-											</td>
-										</tr>
-										<tr>
-											<th>평가 내용</th>
-											<td>
-												<input type="text" class="form-control" name="reportSubmitFeedback" value="${reportSubmit[0].reportSubmitFeedback}">
-											</td>
-										</tr>
-									</table>
+										<table class="table align-items-center table-flush">
+											<thead class="thead-light">
+												<tr>
+													<th width="20%">객관식 문제 ${exampleList.multiplechoiceId}번.</th>
+													<th style="text-align:left">${exampleList.multiplechoiceQuestion}</th>
+												</tr>
+											</thead>
+											<c:forEach var="me" items="${exampleList.multiplechoiceExampleList}">
+												<tr>
+													<td><input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${me.multiplechoiceExampleId}">${me.multiplechoiceExampleId}번.</td>
+													<td><input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent" value="${me.multiplechoiceExampleContent}"></td>
+												</tr>
+											</c:forEach>
+										</table>
 								</div>
 							</form>
 						</div>

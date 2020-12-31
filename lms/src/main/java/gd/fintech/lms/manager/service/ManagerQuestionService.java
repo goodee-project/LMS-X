@@ -29,8 +29,8 @@ public class ManagerQuestionService {
 	}
 	
 	// 질문 게시판 페이징 카운팅
-	public int getManagerCountQuestion(int rowPerPage) {
-		return managerQuestionMapper.selectManagerQuestionCount();
+	public int getManagerCountQuestion(int lectureNo) {
+		return managerQuestionMapper.selectManagerQuestionCount(lectureNo);
 	}
 	
 	// 질문 게시판 삭제

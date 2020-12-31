@@ -79,29 +79,29 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">ID</td>
+										<th width="10%">아이디</th>
 										<td width="40%">${LASACR.classRegistration.accountId}</td>
-										<td width="10%">이름</td>
+										<th width="10%">이름</th>
 										<td width="40%">${LASACR.student.studentName}</td>
 									</tr>
 									<tr>
-										<td>생년월일</td>
+										<th>생년월일</th>
 										<td>${LASACR.student.studentBirth}</td>
-										<td>성별</td>
+										<th>성별</th>
 										<td>${LASACR.student.studentGender}</td>
 									</tr>
 									<tr>
-										<td>이메일</td>
+										<th>이메일</th>
 										<td>${LASACR.student.studentEmail}</td>
-										<td>전화번호</td>
+										<th>연락처</th>
 										<td>${LASACR.student.studentPhone}</td>
 									</tr>
 									<tr>
-										<td>주소</td>
+										<th>주소</th>
 										<td colspan="3">${LASACR.student.studentAddressMain}</td>
 									</tr>
 									<tr>
-										<td>상세 주소</td>
+										<th>상세 주소</th>
 										<td colspan="3">${LASACR.student.studentAddressSub}</td>
 									</tr>
 								</table>
@@ -148,9 +148,9 @@
 								<table class="table attendanceTable align-items-center table-flush">
 									<thead class="thead-light">
 										<tr>
-											<th>날짜</th>
-											<th>출결 여부</th>
-											<th>비고 혹은 사유</th>
+											<th width="20%">날짜</th>
+											<th width="20%">출결 여부</th>
+											<th width="60%">비고 혹은 사유</th>
 										</tr>
 									</thead>
 									<tbody>

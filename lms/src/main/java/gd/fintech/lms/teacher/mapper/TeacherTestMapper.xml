@@ -146,4 +146,35 @@
 		ORDER BY
 			mc.multiplechoice_id
 	</select>
+	<!-- 객관식 문제 보기 조회 -->
+	<select id="selectMultiplechoiceExampleList" parameterType="Integer" resultMap="selectMultiplechoiceOneResult">
+		SELECT
+			mc.multiplechoice_no, 
+			mc.lecture_no, 
+			mc.multiplechoice_id, 
+			mc.multiplechoice_question, 
+			mc.multiplechoice_answer, 
+			mc.multiplechoice_score, 
+			mce.multiplechoice_example_no, 
+			mce.multiplechoice_example_id, 
+			mce.multiplechoice_example_content
+		FROM
+			multiplechoice mc
+		LEFT OUTER JOIN
+			multiplechoice_example mce ON
+			mc.multiplechoice_no = mce.multiplechoice_no
+		WHERE 
+			mc.multiplechoice_no = #{multiplechoiceExampleNo}
+	</select>
+	
+	<!-- 객관식 문제 보기 수정 -->
+	<update id="updateMultiplechoiceExample" parameterType="gd.fintech.lms.vo.MultiplechoiceExample">
+		UPDATE
+			multiplechoice_example
+		SET
+			multiplechoice_example_content = #{multiplechoiceExampleContent}
+		WHERE
+			multiplechoice_example_id = #{multiplechoiceExampleId} AND
+			multiplechoice_no = #{multiplechoiceNo}	
+	</update>
 </mapper>

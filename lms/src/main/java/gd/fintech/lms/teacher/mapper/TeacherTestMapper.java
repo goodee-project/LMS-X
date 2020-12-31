@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Answersheet;
 import gd.fintech.lms.vo.Multiplechoice;
+import gd.fintech.lms.vo.MultiplechoiceExample;
 import gd.fintech.lms.vo.Test;
 
 @Mapper
@@ -38,4 +39,10 @@ public interface TeacherTestMapper {
 	// 평가 학생 답안지 조회
 	// 강좌 고유번호(lectureNo)
 	List<Multiplechoice> selectMultiplechoiceOne(int lectureNo);
+	
+	// 객관식 문제 보기
+	Multiplechoice selectMultiplechoiceExampleList(int multiplechoiceNo);
+	
+	// 객관식 문제 보기 수정
+	int updateMultiplechoiceExample(MultiplechoiceExample multiplechoiceExample);
 }

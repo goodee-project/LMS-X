@@ -97,13 +97,13 @@
 								<div class="table-responsive">
 									<table class="table align-items-center table-flush">
 										<tr>
-											<td width="20%">제목</td>
+											<th width="20%">제목</th>
 											<td width="80%">
 												<input type="text" class="form-control" name="lectureNoticeTitle" id="noticeTitleText">
 											</td>
 										</tr>
 										<tr>
-											<td>내용</td>
+											<th>내용</th>
 											<td>
 												<textarea rows="22" class="form-control" name="lectureNoticeContent" id="lectureNoticeContent" style="width:100%"></textarea>
 											</td>

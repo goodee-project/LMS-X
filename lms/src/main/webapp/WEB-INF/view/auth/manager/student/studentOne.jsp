@@ -47,8 +47,8 @@
 									<tr>
 										<td width="10%">학생 ID</td>
 										<td width="40%">${student.studentId}</td>
-										<td>학생 Email</td>
-										<td>${student.studentEmail}</td>
+										<td width="10%">학생 Email</td>
+										<td width="40%">${student.studentEmail}</td>
 									</tr>
 									<tr>
 										<td>학생 이름</td>
