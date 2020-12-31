@@ -227,7 +227,7 @@
 										<c:choose>
 											<c:when test="${currentPage > 1}">
 												<li class="page-item">
-													<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/1">
+													<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/1/${questionPassword}">
 														<i class='fas fa-angle-double-left'></i>
 													</a>
 												</li>
@@ -245,7 +245,7 @@
 										<c:choose>
 											<c:when test="${currentPage > 1}">
 												<li class="page-item">
-													<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${prePage}">
+													<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${prePage}/${questionPassword}">
 														<i class='fas fa-angle-left'></i>
 													</a>
 												</li>
@@ -272,7 +272,7 @@
 													<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 													<c:otherwise>
 														<li class="page-item">
-															<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${i}">${i}</a>
+															<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${i}/${questionPassword}">${i}</a>
 														</li>
 													</c:otherwise>
 												</c:choose>
@@ -283,7 +283,7 @@
 										<c:choose>
 											<c:when test="${currentPage < lastPage}">
 												<li class="page-item">
-													<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${nextPage}">
+													<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${nextPage}/${questionPassword}">
 														<i class='fas fa-angle-right'></i>
 													</a>
 												</li>
@@ -301,7 +301,7 @@
 										<c:choose>
 											<c:when test="${currentPage < lastPage}">
 												<li class="page-item">
-													<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${lastPage}">
+													<a class="page-link" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/${lastPage}/${questionPassword}">
 														<i class='fas fa-angle-double-right'></i>
 													</a>
 												</li>

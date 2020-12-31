@@ -164,7 +164,10 @@ public class StudentQnaController {
 		} else {
 			prePage = 1;
 		}
-
+		// 전체 페이지가 0개이면 현재 페이지도 0으로 표시
+		if (lastPage == 0) {
+			currentPage = 0;
+		}
 		// 현재 페이지에 대한 다음 페이지
 		int nextPage = currentPage - (currentPage % navPerPage) + 1 + 10;
 		if (nextPage > totalCount) {

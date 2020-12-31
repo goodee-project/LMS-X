@@ -22,13 +22,13 @@
 	</select>
 	
 	<!-- 질문 게시판 내 댓글의 수 -->
-	<select id="selectQnaCommentCount" parameterType="String" resultType="int">
+	<select id="selectQnaCommentCount" parameterType="int" resultType="int">
 		SELECT
-		COUNT(*)
+			COUNT(*)
 		FROM
 			question_comment
 		WHERE
-			question_no
+			question_no = #{questionNo}
 	</select>
 	
 	<!-- 질문 게시판 댓글 입력 -->

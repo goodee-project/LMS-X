@@ -40,6 +40,12 @@ public class UserListener extends SpringBootServletInitializer implements HttpSe
          if(se.getName() == "loginId") {
 	         String sessionName = (String)se.getName();		// 추가된 세션의 이름
 	         String sessionValue = (String)se.getValue();	// 추가된 세션의 값
+	         
+	         // 해당 계정이 로그인 되어있는 개수
+	         int sessionCount = 0;	        
+	         if(context.getAttribute(sessionValue) != null) {
+	        	 sessionCount = (int)context.getAttribute(sessionValue);
+	         }
 	         // map = (HashMap<String, Account>)context.getAttribute("connector");
 	         
 	         // 세션에서 가져온 loginId 값으로 해당 계정의 이름과 이미지 uuid를 가져옴
@@ -53,28 +59,38 @@ public class UserListener extends SpringBootServletInitializer implements HttpSe
         	 
 	         // 사용자의 정보를 map에 추가
 	         map.put(sessionValue, a);
-	
-	    	 logger.trace("Session Added : " + sessionName + " : " + sessionValue);
 	         
 	    	 // 전역 변수에 map을 넣어줌
 	         context.setAttribute("connector", map);
+	         // 로그인 횟수를 추가함
+	         context.setAttribute(sessionValue, sessionCount + 1);
+	
+	    	 logger.trace("Session Added : " + sessionName + " : " + sessionValue + "-" + context.getAttribute(sessionValue));
          }
          
     }
     
     // 세션 삭제시
-    public void attributeRemoved(HttpSessionBindingEvent se)  { 
-        if(se.getName() == "loginId") {   	        	
-	         String sessionValue = (String)se.getValue();	// 삭제된 세션의 값
-	         
-	         logger.trace("Session Removed : " + sessionValue + " 로그아웃");
-	         
-	         map.remove(sessionValue);		// 맵에서 해당 사용자를 삭제함
+    public void attributeRemoved(HttpSessionBindingEvent se)  {  
+        if(se.getName() == "loginId" ) {    
+        	String sessionValue = (String)se.getValue();	// 삭제된 세션의 값
+	        // 해당 계정의 로그인되어있는 개수
+	        int sessionCount = 0;	     
+	        if(context.getAttribute(sessionValue) != null) {
+	        	sessionCount = (int)context.getAttribute(sessionValue);
+	        }
+	        // 로그인 횟수를 차감함
+	        context.setAttribute(sessionValue, sessionCount - 1);
+	        
+	        // 해당 계정이 모두 로그아웃 되면 - 로그아웃 처리
+			if((int)context.getAttribute(sessionValue) < 1) {
+				map.remove(sessionValue);		// 맵에서 해당 사용자를 삭제함
+			}
+			logger.trace("Session Removed : " + sessionValue + " 로그아웃 : " + context.getAttribute(sessionValue));
         }
     }
 
     public void attributeReplaced(HttpSessionBindingEvent se)  { 
-         // TODO Auto-generated method stub
     }
 	
 }
