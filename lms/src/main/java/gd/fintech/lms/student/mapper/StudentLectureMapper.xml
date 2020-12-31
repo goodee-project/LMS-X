@@ -48,7 +48,9 @@
 			subject s ON 
 			s.subject_no = l.subject_no
 		WHERE 
-			cr.account_id = #{studentId}
+			cr.account_id = #{studentId} AND
+			!(lecture_startdate = '0000-00-00' AND
+			lecture_enddate = '0000-00-00')
 		ORDER BY 
 			cr.class_registration_no DESC 
 		LIMIT 
