@@ -128,7 +128,7 @@
 						<div class="col-12">
 							<table class="table">
 					    		<tr>
-					    			<th>제목</th>
+					    			<th width="20%">제목</th>
 					    			<td>${report.reportTitle}</td>
 					    		</tr>
 					    		<tr>
@@ -163,7 +163,7 @@
 							    		<!-- 내용 -->
 								    	<table class="table">
 								    		<tr>
-								    			<th>제목</th>
+								    			<th width="20%">제목</th>
 								    			<td><input class="form-control" id="reportSubmitTitle" type="text" name="reportSubmitTitle"></td>
 								    		</tr>
 								    		<tr>

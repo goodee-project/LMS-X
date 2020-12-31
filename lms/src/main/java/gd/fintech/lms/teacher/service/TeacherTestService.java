@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Answersheet;
 import gd.fintech.lms.vo.Multiplechoice;
+import gd.fintech.lms.vo.MultiplechoiceExample;
+import gd.fintech.lms.vo.MultiplechoiceExampleForm;
 import gd.fintech.lms.vo.Test;
 
 @Service
@@ -88,4 +90,24 @@ public class TeacherTestService {
 		
 		return multiplechoiceList;
 	}
+	
+	// 객관식 문제 보기
+	public Multiplechoice selectMultiplechoiceExampleList(int multiplechoiceNo){
+		return teacherTestMapper.selectMultiplechoiceExampleList(multiplechoiceNo);
+	}
+	
+	// 객관식 문제 보기 수정
+	public void updateMultiplechoiceExampleList(MultiplechoiceExampleForm multiplechoiceExampleForm, int multiplechoiceNo) {
+		MultiplechoiceExample multiplechoiceExample = new MultiplechoiceExample();
+		
+		multiplechoiceExample.setMultiplechoiceNo(multiplechoiceNo);
+		for(int i = 0; i < 5; i++) {
+			multiplechoiceExample.setMultiplechoiceExampleId(multiplechoiceExampleForm.getMultiplechoiceExampleId().get(i));
+			multiplechoiceExample.setMultiplechoiceExampleContent(multiplechoiceExampleForm.getMultiplechoiceExampleContent().get(i));
+
+			teacherTestMapper.updateMultiplechoiceExample(multiplechoiceExample);
+		}
+		
+	}
+	
 }
