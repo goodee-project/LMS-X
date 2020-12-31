@@ -1,5 +1,6 @@
 package gd.fintech.lms.manager.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,9 +26,20 @@ public class ManagerLoginLogController {
 			@RequestParam(name="searchText", defaultValue = "") String searchText,
 			@RequestParam(name="searchDate", defaultValue = "date") String searchDate) {
 		
-		if(searchDate == null) {
-		}
 		
+		// 오늘 날짜을 구하기 위한 코드
+		Calendar logDay = Calendar.getInstance();
+		
+		int currentYear = logDay.get(Calendar.YEAR);		// 년
+		int currentMonth = logDay.get(Calendar.MONTH) + 1;	// 월
+		int currentDay = logDay.get(Calendar.DATE); 		// 일
+		
+		
+		
+		// View에서 오늘 날짜 로그 기록 출력을 위한 if 문	
+		if (searchDate.equals("date")) {
+			searchDate = currentYear + "-" + currentMonth + "-" + currentDay;
+		}
 		
 		// 한 페이지에 표시할 데이터 수
 		int rowPerPage = 10;
@@ -37,10 +49,10 @@ public class ManagerLoginLogController {
 		
 		List<LoginLog> loginLogList = managerLoginLogService.getLoginLogList(beginRow, rowPerPage, searchText, searchDate);
 		
-		int totalCount = managerLoginLogService.getLoginLogCount();
 		// 페이징 코드
 		// 전체 데이터 수
-
+		int totalCount = managerLoginLogService.getLoginLogCount(searchText, searchDate);
+		
 		int lastPage = totalCount / rowPerPage;
 		
 		// 10 미만의 개수의 데이터가 있는 페이지를 표시
@@ -97,6 +109,7 @@ public class ManagerLoginLogController {
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchDate", searchDate);
 		
+		// [View] /auth/manager/access/accessList.jsp
 		return "auth/manager/access/accessList";
 	}
 }

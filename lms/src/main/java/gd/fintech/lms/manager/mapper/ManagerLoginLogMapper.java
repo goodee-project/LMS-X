@@ -14,5 +14,6 @@ public interface ManagerLoginLogMapper {
 	public List<LoginLog> selectLoginLogList(Map<String,Object> map);
 	
 	// 로그인 로그 목록 페이징 카운트
-	public int selectLoginLogCount();
+	// 로그인 계정 (accountId), 로그인 날짜(loginLogDate)
+	public int selectLoginLogCount(Map<String, Object> map);
 }

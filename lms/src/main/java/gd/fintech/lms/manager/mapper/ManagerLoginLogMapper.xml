@@ -33,5 +33,13 @@
 			COUNT(*)
 		FROM
 			login_log
+		<where>
+			<if test="searchText != ''">
+				AND account_id LIKE CONCAT('%',#{searchText},'%')
+			</if>
+			<if test="searchDate != ''">
+				AND login_log_date LIKE CONCAT('%',#{searchDate},'%')
+			</if>
+		</where>
 	</select>
 </mapper>

@@ -127,7 +127,7 @@ th {
 								<c:choose>
 									<c:when test="${currentPage > 1}">
 										<li class="page-item"><a class="page-link"
-											href="${pageContext.request.contextPath}/auth/manager/access/accessList/1">
+											href="${pageContext.request.contextPath}/auth/manager/access/accessList/1?searchText=${searchText}&searchDate=${searchDate}">
 												<i class='fas fa-angle-double-left'></i>
 										</a></li>
 									</c:when>
@@ -142,7 +142,7 @@ th {
 								<c:choose>
 									<c:when test="${currentPage > 1}">
 										<li class="page-item"><a class="page-link"
-											href="${pageContext.request.contextPath}/auth/manager/access/accessList/${prePage}">
+											href="${pageContext.request.contextPath}/auth/manager/access/accessList/${prePage}?searchText=${searchText}&searchDate=${searchDate}">
 												<i class='fas fa-angle-left'></i>
 										</a></li>
 									</c:when>
@@ -165,7 +165,7 @@ th {
 											<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link"
-													href="${pageContext.request.contextPath}/auth/manager/access/accessList/${i}">${i}</a>
+													href="${pageContext.request.contextPath}/auth/manager/access/accessList/${i}?searchText=${searchText}&searchDate=${searchDate}">${i}</a>
 												</li>
 											</c:otherwise>
 										</c:choose>
@@ -176,7 +176,7 @@ th {
 								<c:choose>
 									<c:when test="${currentPage < lastPage}">
 										<li class="page-item"><a class="page-link"
-											href="${pageContext.request.contextPath}/auth/manager/access/accessList/${nextPage}">
+											href="${pageContext.request.contextPath}/auth/manager/access/accessList/${nextPage}?searchText=${searchText}&searchDate=${searchDate}">
 												<i class='fas fa-angle-right'></i>
 										</a></li>
 									</c:when>
@@ -191,7 +191,7 @@ th {
 								<c:choose>
 									<c:when test="${currentPage < lastPage}">
 										<li class="page-item"><a class="page-link"
-											href="${pageContext.request.contextPath}/auth/manager/access/accessList/${lastPage}">
+											href="${pageContext.request.contextPath}/auth/manager/access/accessList/${lastPage}?searchText=${searchText}&searchDate=${searchDate}">
 												<i class='fas fa-angle-double-right'></i>
 										</a></li>
 									</c:when>
