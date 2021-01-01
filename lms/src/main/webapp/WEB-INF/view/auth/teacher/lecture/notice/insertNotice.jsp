@@ -87,9 +87,8 @@
 											<h3 class="mb-0">공지사항 작성</h3>
 										</div>
 										<div class="col-4 text-right">
-											<button type="submit" class="btn btn-sm btn-dark"
-												onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1'">목록</button>
-											<button type="button" class="btn btn-sm btn-success" style="float: right;" id="insertBtn">작성</button>
+											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1'">목록</button>
+											<button type="button" class="btn btn-sm btn-success" id="insertBtn">작성</button>
 										</div>
 										<br>
 									</div>
