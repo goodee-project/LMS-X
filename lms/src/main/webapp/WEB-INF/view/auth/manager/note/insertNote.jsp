@@ -42,23 +42,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 <script>
 	$(document).ready(function(){
 		// 받는사람 검색 버튼
@@ -132,7 +115,7 @@ th {
 								<div class="row align-items-center">
 									<br>
 									<div class="col-8">
-										<h3 class="mb-0">쪽지 작성</h3>
+										<h3 class="mb-0">쪽지 보내기</h3>
 									</div>
 									<div class="col-4 text-right">
 										<button id="insertNoteBtn" class="btn btn-sm btn-success"
@@ -148,11 +131,11 @@ th {
 								
 								<table class="table align-items-center table-flush">
 									<tr>
-							    		<td width="20%">제목</td>
+							    		<th width="20%">제목</th>
 							    		<td width="80%"><input id="noteTitle" type="text" name="noteTitle" class="form-control"></td>
 							    	</tr>
 							    	<tr>
-										<td>받는사람</td>
+										<th>받는사람</th>
 										<td>
 											<div class="input-group">
 												<c:if test="${empty accountId}">
@@ -176,7 +159,7 @@ th {
 										</td>
 									</tr>
 							    	<tr>
-							    		<td>내용</td>
+							    		<th>내용</th>
 							    		<td><textarea rows="3" cols="50" id="noteContent" name="noteContent" class="form-control"></textarea></td>
 							    	</tr>
 								</table>

@@ -40,7 +40,7 @@
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">과목 상세 페이지</h3>
+									<h3 class="mb-0">과목 정보 조회</h3>
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-dark"  onclick="location.href='${pageContext.request.contextPath}/auth/manager/subject/subjectList/1'">목록</button>
@@ -52,24 +52,24 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">과목 번호</td>
+										<th width="10%">과목 번호</th>
 										<td width="40%">${subject.subjectNo}</td>
-										<td width="10%">과목 생성날짜</td>
+										<th width="10%">과목 생성일시</th>
 										<td width="40%">${subject.subjectCreatedate}</td>
 									</tr>
 									<tr>
-										<td>과목 이름</td>
+										<th>과목 이름</th>
 										<td>${subject.subjectName}</td>
-										<td>과목 수정날짜</td>
+										<th>과목 수정일시</th>
 										<td>${subject.subjectUpdatedate}</td>
 									</tr>
 									<tr>
-										<td>과목 총 일수</td>
-										<td>${subject.subjectTotalday}</td>
+										<th>과목 총 일수</th>
+										<td colspan="3">${subject.subjectTotalday}</td>
 									</tr>
 									<tr>
-										<td>과목 정보</td>
-										<td>${subject.subjectInfo}</td>
+										<th>과목 정보</th>
+										<td colspan="3">${subject.subjectInfo}</td>
 									</tr>
 								</table>
 							</div>

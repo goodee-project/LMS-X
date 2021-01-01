@@ -47,10 +47,23 @@
 				
 			})
 		</script>
-	</head>
-	<body class="">
-		<!-- 메인 Navbar -->
 		
+		<style>
+			.table {
+				text-align: center;
+			}
+			
+			.table td {
+				vertical-align: middle;
+			}
+			
+			th {
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 메인 Navbar -->
 		<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
@@ -77,6 +90,7 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="row align-items-center">
 						<div class="col-12">
 						    <!-- 평가 내용 -->

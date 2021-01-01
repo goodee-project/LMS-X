@@ -86,11 +86,11 @@
 								<div class="card-header bg-white border-0">
 									<div class="row align-items-center">
 										<div class="col-8">
-											<h3 class="mb-0">문제 - 보기 관리</h3>
+											<h3 class="mb-0">문제/보기 입력</h3>
 										</div>
 										<div class="col-4 text-right">
-											<button type="button" id="insertMultiplechoiceExampleBtn" class="btn btn-primary">저장</button>									
-											<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
+											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
+											<button type="button" class="btn btn-sm btn-success" id="insertMultiplechoiceExampleBtn">입력</button>
 										</div>
 									</div>
 								</div>

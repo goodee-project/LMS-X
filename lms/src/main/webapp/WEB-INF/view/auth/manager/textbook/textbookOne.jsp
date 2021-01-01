@@ -39,7 +39,7 @@
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">교재 상세 페이지</h3>
+									<h3 class="mb-0">교재 정보 조회</h3>
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-dark"  onclick="location.href='${pageContext.request.contextPath}/auth/manager/textbook/textbookList/1'">목록</button>
@@ -51,26 +51,26 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="10%">교재 번호</td>
+										<th width="10%">교재 번호</th>
 										<td width="40%">${textbook.textbookIsbn}</td>
-										<td width="10%">교재 출판사</td>
+										<th width="10%">교재 출판사</th>
 										<td width="40%">${textbook.textbookPublisher}</td>
 									</tr>
 									<tr>
-										<td>교재 이름</td>
+										<th>교재 이름</th>
 										<td>${textbook.textbookTitle}</td>
-										<td>교재 저자</td>
+										<th>교재 저자</th>
 										<td>${textbook.textbookWriter}</td>
 									</tr>
 									<tr>
-										<td>교재 출판일</td>
+										<th>교재 출판일</th>
 										<td>${textbook.textbookPublishdate}</td>
-										<td>교재 가격</td>
+										<th>교재 가격</th>
 										<td>${textbook.textbookPrice}원</td>
 									</tr>
 									<tr>
-										<td>교재 정보</td>
-										<td>${textbook.textbookInfo}</td>
+										<th>교재 정보</th>
+										<td colspan="3">${textbook.textbookInfo}</td>
 									</tr>
 								</table>
 							</div>

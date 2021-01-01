@@ -42,23 +42,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 </head>
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
@@ -82,7 +65,7 @@ th {
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">쪽지 보내기</h3>
+									<h3 class="mb-0">쪽지 조회</h3>
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-danger"
@@ -95,19 +78,20 @@ th {
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
 								<tr>
+									<th width="10%">보낸사람</th>
+									<td width="40%">${note.noteDispatcherName}(${note.noteDispatcherId})</td>
+									<th width="10%">받는사람</th>
+									<td width="40%">${note.noteReceiverName}
+										(${note.noteReceiverId})</td>
+									
+								</tr>
+								<tr>
+									<th>날짜</th>
+									<td colspan="3">${note.noteSendDate}</td>
+								</tr>
+								<tr>
 									<th>제목</th>
 									<td colspan="3">${note.noteTitle}</td>
-								</tr>
-								<tr>
-									<th>보낸 사람</th>
-									<td>${note.noteDispatcherName}(${note.noteDispatcherId})</td>
-									<th>날짜</th>
-									<td>${note.noteSendDate}</td>
-								</tr>
-								<tr>
-									<th>받는 사람</th>
-									<td colspan="3">${note.noteReceiverName}
-										(${note.noteReceiverId})</td>
 								</tr>
 								<tr>
 									<th>내용</th>

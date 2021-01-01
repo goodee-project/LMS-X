@@ -105,12 +105,12 @@ th {
 								<div class="row align-items-center">
 									<br>
 									<div class="col-8">
-										<h3 class="mb-0">공지사항 수정</h3>
+										<h3 class="mb-0">LMS 공지사항 수정</h3>
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark"
 											onclick="location.href='${pageContext.request.contextPath}/auth/manager/faq/faqList/1'">목록</button>
-										<button id="updateBtn" class="btn btn-sm btn-success"
+										<button id="updateBtn" class="btn btn-sm btn-primary"
 											type="button">수정</button>
 									</div>
 									<br>
@@ -124,8 +124,8 @@ th {
 								</div>
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td>제목</td>
-										<td><input id="lmsNoticeTitle" type="text"
+										<td width="20%">제목</td>
+										<td width="80%"><input id="lmsNoticeTitle" type="text"
 											class="form-control" name="lmsNoticeTitle"
 											value="${lmsNotice.lmsNoticeTitle}" placeholder="제목을 입력해주세요."></td>
 									</tr>

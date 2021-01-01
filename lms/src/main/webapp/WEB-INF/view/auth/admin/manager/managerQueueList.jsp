@@ -34,21 +34,28 @@
 				<div class="col">
 					<div class="card shadow" style="margin-top: 10px;">
 						<div class="card-header border-0">
-							<div class="mb-0" style="float: left;">운영자 승인 목록</div>
+							<div class="row align-items-center">
+								<div class="col-8">
+									<h3 class="mb-0">운영자 승인 목록</h3>
+								</div>
+								<div class="col-4 text-right">
+								</div>
+							</div>
 						</div>
+						
 						<div class="table-responsive" style="min-height: 480px;">
 							<table class="table align-items-center table-flush text-center">
 								<thead class="thead-light">
 									<tr>
-										<th scope="col" style="font-size: 15px; width: 15%;">아이디</th>
-										<th scope="col" style="font-size: 15px; width: 18%;">이메일</th>
-										<th scope="col" style="font-size: 15px; width: 13%;">핸드폰번호</th>
-										<th scope="col" style="font-size: 15px; width: 10%;">이름</th>
-										<th scope="col" style="font-size: 15px; width: 7%;">성별</th>
-										<th scope="col" style="font-size: 15px; width: 11%;">생일</th>
-										<th scope="col" style="font-size: 15px; width: 15%;">주소</th>
-										<th scope="col" style="font-size: 15px; width: 8%;">승인</th>
-										<th scope="col" style="font-size: 15px; width: 8%;">거절</th>
+										<th width="15%">아이디</th>
+										<th width="18%">이메일</th>
+										<th width="13%">핸드폰번호</th>
+										<th width="10%">이름</th>
+										<th width="7%">성별</th>
+										<th width="11%">생일</th>
+										<th width="15%">주소</th>
+										<th width="8%">승인</th>
+										<th width="8%">거절</th>
 									</tr>
 								</thead>
 								<tbody>

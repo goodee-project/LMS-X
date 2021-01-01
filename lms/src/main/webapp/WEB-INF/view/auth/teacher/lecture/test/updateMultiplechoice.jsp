@@ -49,6 +49,7 @@
 				})
 			})
 		</script>
+		
 		<style>
 			.table {
 				text-align: center;
@@ -91,7 +92,7 @@
 										</div>
 										<div class="col-4 text-right">
 											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
-											<button type="button" class="btn btn-sm btn-primary" id="updateMultiplechoiceExampleBtn">저장</button>									
+											<button type="button" class="btn btn-sm btn-primary" id="updateMultiplechoiceExampleBtn">수정</button>									
 										</div>
 									</div>
 								</div>

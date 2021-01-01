@@ -46,23 +46,6 @@
 <!-- textArea자동조절 라이브러리 -->
 <script
 	src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 <script>
 	$(document).ready(function() {
 		//textarea 크기 자동 조정
@@ -92,7 +75,7 @@ th {
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">공지사항 상세보기</h3>
+									<h3 class="mb-0">LMS 공지사항 조회</h3>
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-dark"
@@ -110,26 +93,30 @@ th {
 
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
+								
 								<tr>
-									<td>제목</td>
-									<td>${lmsNotice.lmsNoticeTitle}</td>
+									<th width="10%">작성자</th>
+									<td width="40%">${lmsNotice.lmsNoticeWriter}</td>
+									<th width="10%">조회수</th>
+									<td width="40%">${lmsNotice.lmsNoticeCount}</td>
 								</tr>
 								<tr>
-									<td>작성자</td>
-									<td>${lmsNotice.lmsNoticeWriter}</td>
-								</tr>
-								<tr>
-									<td>조회수</td>
-									<td>${lmsNotice.lmsNoticeCount}</td>
-								</tr>
-								<tr>
-									<td>작성일</td>
+									<th>작성일시</th>
 									<td>${lmsNotice.lmsNoticeCreatedate}</td>
+									<th>수정일시</th>
+									<td>${lmsNotice.lmsNoticeUpdatedate}</td>
 								</tr>
 								<tr>
-									<td>내용</td>
-									<td><textarea rows="20px" cols="100px" readonly="readonly"
-											disabled>${lmsNotice.lmsNoticeContent}</textarea></td>
+									<th>제목</th>
+									<td colspan="3">
+										${lmsNotice.lmsNoticeTitle}
+									</td>
+								</tr>
+								<tr>
+									<th>내용</th>
+									<td colspan="3">
+										${lmsNotice.lmsNoticeContent}
+									</td>
 								</tr>
 							</table>
 						</div>

@@ -52,10 +52,6 @@
 	vertical-align: middle;
 }
 
-.table a {
-	color: #000000;
-}
-
 th {
 	text-align: center;
 }
@@ -92,26 +88,30 @@ th {
 
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
-								<thead>
+								<thead class="thead-light">
 									<tr>
-										<td>상태</td>
-										<td>제목</td>
-										<td>받는 사람</td>
-										<td>날짜</td>
+										<th width="15%">받는사람</th>
+										<th width="55%">제목</th>
+										<th width="10%">상태</th>
+										<th width="20%">날짜</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:if test="${!empty noteList[0].noteNo}">
 										<c:forEach var="nl" items="${noteList}">
 											<tr>
-												<td><c:if test="${nl.noteIsRead == 'Y'}">
-																읽음
-															</c:if> <c:if test="${nl.noteIsRead == 'N'}">
-																!
-															</c:if></td>
-												<td><a
-													href="${pageContext.request.contextPath}/auth/manager/note/noteDispatchOne/${nl.noteNo}">${nl.noteTitle}</a></td>
-												<td>${nl.noteReceiverName}(${nl.noteReceiverName})</td>
+												<td>${nl.noteReceiverName}(${nl.noteReceiverId})</td>
+												<td>
+													<a href="${pageContext.request.contextPath}/auth/manager/note/noteDispatchOne/${nl.noteNo}">${nl.noteTitle}</a>
+												</td>
+												<td>
+													<c:if test="${nl.noteIsRead == 'Y'}">
+														읽음
+													</c:if>
+													<c:if test="${nl.noteIsRead == 'N'}">
+														!
+													</c:if>
+												</td>
 												<td>${nl.noteSendDate}</td>
 											</tr>
 										</c:forEach>
@@ -124,6 +124,7 @@ th {
 								</tbody>
 							</table>
 						</div>
+						
 						<!-- Page Navigation -->
 						<div class="card-footer py-4">
 							<nav aria-label="...">
@@ -213,7 +214,7 @@ th {
 								<table style="margin: auto;">
 									<tr>
 										<td>
-											<button type="button" class="btn btn-outline-dark btn-sm">
+											<button type="button" class="btn btn-sm btn-outline-primary">
 												${currentPage} / ${lastPage} 페이지</button>
 										</td>
 									</tr>
