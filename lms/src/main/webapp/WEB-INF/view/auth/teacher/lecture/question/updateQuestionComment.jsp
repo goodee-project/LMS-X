@@ -59,7 +59,7 @@
 			<!-- Page content -->
 			<div class="container-fluid mt--7">
 				<!-- Form -->
-				<form method="post" action="${PageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/updateQuestionComment/${questionCommentNo}" id="updateForm">
+				<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/updateQuestionComment/${questionCommentNo}" id="updateForm">
 					<!-- Table -->
 					<div class="row">
 						<div class="col">

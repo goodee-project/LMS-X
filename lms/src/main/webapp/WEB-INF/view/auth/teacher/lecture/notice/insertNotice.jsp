@@ -75,7 +75,7 @@
 			<!-- Page content -->
 			<div class="container-fluid mt--7">
 				<!-- Form -->
-				<form method="post" action="${PageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/insertNotice" id="insertNoticeForm">
+				<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/insertNotice" id="insertNoticeForm">
 					<!-- Table -->
 					<div class="row">
 						<div class="col">
