@@ -220,6 +220,20 @@ public class TeacherTestController {
 		return "/auth/teacher/lecture/test/answersheetOne";
 	}
 	
+	// 객관식 문제 조회
+	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/multiplechoiceOne/{multiplechoiceNo}")
+	public String multiplechoiceOne(Model model, 
+			@PathVariable(name = "lectureNo") int lectureNo,
+			@PathVariable(name = "multiplechoiceNo") int multiplechoiceNo) {
+		
+		Multiplechoice exampleList = teacherTestService.selectMultiplechoiceExampleList(multiplechoiceNo);
+		
+		model.addAttribute("exampleList", exampleList);
+		
+		// [View] /auth/teacher/lecture/test/multiplechoiceOne.jsp
+		return "/auth/teacher/lecture/test/multiplechoiceOne";
+	}
+	
 	// 객관식 문제 보기 수정 폼 
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/test/updateMultiplechoice/{multiplechoiceNo}")
 	public String multiplechoiceExampleList(Model model,
