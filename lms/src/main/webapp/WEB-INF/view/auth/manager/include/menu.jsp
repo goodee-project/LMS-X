@@ -160,7 +160,7 @@
 			    
 			    <!-- 통계 페이지 -->
 			    <li class="nav-item">
-			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/chart/chartList">
+			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/chart/chartIndex">
 			    		<i class="fas fa-chart-pie text-pink"></i>
 			    		통계</a>
 			    </li>
