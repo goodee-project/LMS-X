@@ -147,8 +147,8 @@
 		) VALUES (
 			#{studentId},
 			#{studentEmail},
-			#{studentPhone},
 			#{studentName},
+			#{studentPhone},
 			#{studentGender},
 			#{studentBirth},
 			#{studentAddressMain},

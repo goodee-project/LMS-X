@@ -190,8 +190,8 @@
 		) VALUES (
 			#{teacherId},
 			#{teacherEmail},
-			#{teacherPhone},
 			#{teacherName},
+			#{teacherPhone},
 			#{teacherGender},
 			#{teacherBirth},
 			#{teacherAddressMain},
