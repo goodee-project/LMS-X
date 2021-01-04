@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerQuestionFileMapper">
+	<!--질문 게시판 게시글 파일 이름 리스트-->
+	<select id="selectManagerQuestionFileNameList" parameterType="int" resultType="String">
+		SELECT 
+			question_file_uuid
+		FROM 
+			question_file
+		WHERE 
+			question_no = #{questionNo}
+	</select>
+
+
+	<!-- 질문 게시판 파일 삭제 -->
+	<delete id="deleteManagerQuestionFile" parameterType="int">
+		DELETE FROM 
+			question_file
+		WHERE 
+			question_No = #{questionNo}
+	</delete>
+</mapper>

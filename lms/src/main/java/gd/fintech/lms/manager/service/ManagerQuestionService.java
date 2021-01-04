@@ -1,5 +1,6 @@
 package gd.fintech.lms.manager.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import gd.fintech.lms.common.PathUtil;
+import gd.fintech.lms.manager.mapper.ManagerQuestionFileMapper;
 import gd.fintech.lms.manager.mapper.ManagerQuestionMapper;
 import gd.fintech.lms.vo.Question;
 
@@ -15,6 +18,9 @@ import gd.fintech.lms.vo.Question;
 @Transactional
 public class ManagerQuestionService {
 	@Autowired private ManagerQuestionMapper managerQuestionMapper;
+	@Autowired private ManagerQuestionFileMapper managerQuestionFileMapper;
+	
+	private final String PATH = PathUtil.PATH("questionFile");
 	
 	// 강의에 대한 질문 게시판 목록
 	public List<Question> getManagerQuestionListByPage(int lectureNo, int beginRow, int rowPerPage) {
@@ -34,8 +40,21 @@ public class ManagerQuestionService {
 	}
 	
 	// 질문 게시판 삭제
-	public int deleteManagerQuestion(int questionNo) {
-		return managerQuestionMapper.deleteManagerQuestion(questionNo);
+	public void deleteManagerQuestion(int questionNo) {
+		
+		List<String> questionFileList = managerQuestionFileMapper.selectManagerQuestionFileNameList(questionNo);
+		
+		// 실제 파일 삭제
+		for(String fn : questionFileList) {
+			File f = new File(PATH + fn);
+			f.delete();
+		}
+		
+		managerQuestionFileMapper.deleteManagerQuestionFile(questionNo);
+		
+		managerQuestionMapper.deleteManagerQuestion(questionNo);
+		
+		return;
 	}
 	
 	// 질문 게시판 상세보기

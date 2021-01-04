@@ -48,7 +48,7 @@
 			#{textbookTitle},
 			#{textbookWriter},
 			#{textbookPublisher},
-			now(),
+			#{textbookPublishdate},
 			#{textbookInfo},
 			#{textbookPrice}
 		)
@@ -69,7 +69,7 @@
 			textbook_title = #{textbookTitle},
 			textbook_writer = #{textbookWriter},
 			textbook_publisher = #{textbookPublisher},
-			textbook_publishdate = now(),
+			textbook_publishdate = #{textbookPublishdate},
 			textbook_info = #{textbookInfo},
 			textbook_price = #{textbookPrice}
 		WHERE

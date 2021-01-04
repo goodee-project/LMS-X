@@ -12,7 +12,12 @@
 			student_birth studentBirth,
 			student_accessdate studentAccessdate
 		FROM
-			student 
+			student
+		<where>
+			<if test="searchText != ''">
+				AND student_id LIKE CONCAT('%',#{searchText},'%')
+			</if>
+		</where>
 		ORDER BY
 			student_accessdate DESC
 		LIMIT

@@ -158,11 +158,7 @@ th {
 											<c:set var="uuid">${qfl.questionFileUuid}</c:set>
 											<c:if test="${!empty question.questionFileList[0].questionFileOriginal}">
 												<div>
-													<a
-														onclick="fileDownloadCount('${qfl.questionFileUuid}','${qfl.questionFileCount}')"
-														href="${pageContext.request.contextPath}/resource/questionFile/${qfl.questionFileUuid}"
-														download="${qfl.questionFileOriginal}">
-														${qfl.questionFileOriginal} </a>
+													<a onclick="fileDownloadCount('${qfl.questionFileUuid}','${qfl.questionFileCount}')" href="${pageContext.request.contextPath}/resource/questionFile/${qfl.questionFileUuid}" download="${qfl.questionFileOriginal}"> ${qfl.questionFileOriginal} </a>
 													<!-- 다운 횟수 -->
 													<div id="fileCount${fn:split(uuid, '.')[0]}"
 														style="display: inline;">다운로드 횟수 :

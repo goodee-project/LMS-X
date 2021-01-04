@@ -38,7 +38,7 @@
 								<div class="row align-items-center">
 									<br>
 									<div class="col-8">
-										<h3 class="mb-0">교재 수정</h3>
+										<h3 class="mb-0">교재 추가</h3>
 									</div>
 									<div class="col-4 text-right">
 									</div>
@@ -63,6 +63,10 @@
 									<tr>
 										<td>교재 출판사</td>
 										<td><input type="text" name="textbookPublisher" class="form-control"></td>
+									</tr>
+									<tr>
+										<td>교재 출판일</td>
+										<td><input type="date" name="textbookPublishdate" class="form-control"></td>
 									</tr>
 									<tr>
 										<td>교재 정보</td>

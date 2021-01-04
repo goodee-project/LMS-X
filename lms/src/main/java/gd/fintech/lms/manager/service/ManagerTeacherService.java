@@ -1,6 +1,7 @@
 package gd.fintech.lms.manager.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,11 @@ public class ManagerTeacherService {
 	private String PATH = PathUtil.PATH("mypageImage"); 
 	
 	// 강사 목록 페이징
-	public List<Teacher> getTeacherListByPage(Map<String, Object> map) {
+	public List<Teacher> getTeacherListByPage(int beginRow, int rowPerPage, String searchText) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("beginRow", beginRow);			// 시작 데이터
+		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
+		map.put("searchText", searchText);		// 문자열 검색
 		return managerTeacherMapper.selectTeacherListByPage(map);
 	}
 	

@@ -66,7 +66,7 @@
 										</tr>
 										<tr>
 											<td>교재 출판일</td>
-											<td><input type="text" name="textbookPublishdate" class="form-control" value="${textbook.textbookPublishdate}"></td>
+											<td><input type="date" name="textbookPublishdate" class="form-control" value="${textbook.textbookPublishdate}"></td>
 										</tr>
 										<tr>
 											<td>교재 정보</td>
