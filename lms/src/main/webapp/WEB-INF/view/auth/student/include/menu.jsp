@@ -98,7 +98,8 @@
 				<li class="nav-item">
 					<a class="nav-link" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/1">
 						<i class="far fa-envelope"></i>
-						쪽지
+						쪽지 &nbsp;
+						<span class="badge badge-danger">${noteNotReadReceiveCount}</span>
 					</a>
 				</li>
 				
@@ -106,7 +107,7 @@
 				<li class="nav-item">
 					<a class="nav-link" href="${pageContext.request.contextPath}/auth/student/mypage/mypageOne">
 						<i class="ni ni-circle-08 text-pink"></i>
-						마이페이지
+						마이페이지 
 					</a>
 				</li>
 				

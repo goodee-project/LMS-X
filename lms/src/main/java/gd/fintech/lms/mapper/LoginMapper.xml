@@ -79,4 +79,15 @@
 		WHERE
 			account_id = #{accountId}
 	</select>
+	
+	<!-- 읽지 않은 수신 쪽지 개수 가져오기 -->
+	<select id="selectNoteReceiveCount" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			note
+		WHERE
+			note_receiver_id = #{accountId} AND 
+			note_is_read = 'N'
+	</select>
 </mapper>

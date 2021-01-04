@@ -62,4 +62,9 @@ public class LoginService {
 	public String getLoginImage(String accountId) {
 		return loginMapper.selectLoginImage(accountId);
 	}
+	
+	// 안읽은 수신 쪽지 개수
+	public int selectNoteReceiveCount(String accountId) {
+		return loginMapper.selectNoteReceiveCount(accountId);
+	}
 }

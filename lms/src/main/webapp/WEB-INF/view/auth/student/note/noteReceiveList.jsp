@@ -58,8 +58,11 @@
 						<div class="card shadow">
 							<div class="card-header border-0">
 								<div class="row align-items-center">
-									<div class="col">
+									<div class="col-2">
 										<h3 class="mb-0">쪽지 수신함</h3>
+									</div>
+									<div class="col" style="font-size: 13px;">
+										읽지 않은 쪽지 : ${noteNotReadReceiveCount}개
 									</div>
 								</div>
 							</div>

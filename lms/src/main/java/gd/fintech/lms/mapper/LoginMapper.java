@@ -31,4 +31,7 @@ public interface LoginMapper {
 	
 	// 로그인시 이미지 조회
 	public String selectLoginImage(String accountId);
+	
+	// 안읽은 수신 쪽지 개수
+	public int selectNoteReceiveCount(String accountId);
 }
