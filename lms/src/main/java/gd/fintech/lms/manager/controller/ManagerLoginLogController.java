@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,25 +22,27 @@ import gd.fintech.lms.vo.LoginLog;
 public class ManagerLoginLogController {
 	@Autowired private ManagerLoginLogService managerLoginLogService;
 	
-	@GetMapping("/auth/manager/access/accessList/{currentPage}")
+	// Logger 사용
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@GetMapping("/auth/manager/access/accessList/{currentPage}/{currentYear}/{currentMonth}/{currentDay}")
 	public String managerLoginLogList(Model model, HttpSession session,
 			@PathVariable(name="currentPage") int currentPage,
-			@RequestParam(name="searchText", defaultValue = "") String searchText,
-			@RequestParam(name="searchDate", defaultValue = "date") String searchDate) {
+			@RequestParam(name="currentYear", defaultValue = "0")int currentYear,
+			@RequestParam(name="currentMonth", defaultValue = "0")int currentMonth,
+			@RequestParam(name="currentDay", defaultValue = "0")int currentDay,
+			@RequestParam(name="searchText", defaultValue = "") String searchText) {
 		
-		
-		// 오늘 날짜을 구하기 위한 코드
 		Calendar logDay = Calendar.getInstance();
+		logDay.set(Calendar.YEAR, currentYear);
+		logDay.set(Calendar.MONTH, currentMonth - 1);
+		logDay.set(Calendar.DATE, currentDay);
 		
-		int currentYear = logDay.get(Calendar.YEAR);		// 년
-		int currentMonth = logDay.get(Calendar.MONTH) + 1;	// 월
-		int currentDay = logDay.get(Calendar.DATE); 		// 일
-		
-		
-		
-		// View에서 오늘 날짜 로그 기록 출력을 위한 if 문	
-		if (searchDate.equals("date")) {
-			searchDate = currentYear + "-" + currentMonth + "-" + currentDay;
+		// View에서 오늘 날짜 로그 기록 출력을 위한 if 문
+		if (currentYear == 0 || currentMonth == 0 || currentDay == 0) {
+			logDay.set(Calendar.YEAR, currentYear);
+			logDay.set(Calendar.MONTH, currentMonth - 1);
+			logDay.set(Calendar.DATE, currentDay);
 		}
 		
 		// 한 페이지에 표시할 데이터 수
@@ -47,11 +51,15 @@ public class ManagerLoginLogController {
 		// 시작 페이지 계산
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
-		List<LoginLog> loginLogList = managerLoginLogService.getLoginLogList(beginRow, rowPerPage, searchText, searchDate);
+		List<LoginLog> loginLogList = managerLoginLogService.getLoginLogList(beginRow, rowPerPage, searchText, 
+				logDay.get(Calendar.YEAR), logDay.get(Calendar.MONTH) + 1, logDay.get(Calendar.DATE));
+		
+		// [Logger] 학생 출석 목록(attendanceList)
+				logger.trace("loginLogList[" + loginLogList + "]");
 		
 		// 페이징 코드
 		// 전체 데이터 수
-		int totalCount = managerLoginLogService.getLoginLogCount(searchText, searchDate);
+		int totalCount = managerLoginLogService.getLoginLogCount(searchText,logDay.get(Calendar.YEAR), logDay.get(Calendar.MONTH) + 1, logDay.get(Calendar.DATE));
 		
 		int lastPage = totalCount / rowPerPage;
 		
@@ -107,8 +115,10 @@ public class ManagerLoginLogController {
 		model.addAttribute("nextPage", nextPage);
 		
 		model.addAttribute("searchText", searchText);
-		model.addAttribute("searchDate", searchDate);
 		
+		model.addAttribute("currentYear", logDay.get(Calendar.YEAR));			// 년도
+		model.addAttribute("currentMonth", logDay.get(Calendar.MONTH) + 1);		// 월
+		model.addAttribute("currentDay", logDay.get(Calendar.DATE));			// 일
 		// [View] /auth/manager/access/accessList.jsp
 		return "auth/manager/access/accessList";
 	}

@@ -22,20 +22,24 @@ public class ManagerLoginLogService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	// 로그인 로그 목록 출력
-	public List<LoginLog> getLoginLogList(int beginRow, int rowPerPage, String searchText, String searchDate) {
+	public List<LoginLog> getLoginLogList(int beginRow, int rowPerPage, String searchText, int currentYear, int currentMonth, int currentDay) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("beginRow", beginRow);			// 시작 데이터
 		map.put("rowPerPage", rowPerPage);		// 한 페이지당 표시할 데이터 수
 		map.put("searchText", searchText);		// 문자열 검색
-		map.put("searchDate", searchDate);		// 날짜 검색
+		map.put("currentYear", currentYear);	// 현재 년도
+		map.put("currentMonth", currentMonth);	// 현재 월
+		map.put("currentDay", currentDay);		// 현재 일
 		return managerLoginLogMapper.selectLoginLogList(map);
 	}
 	
 	//  로그인 로그 목록 페이징 카운트
-	public int getLoginLogCount(String searchText, String searchDate) {
+	public int getLoginLogCount(String searchText, int currentYear, int currentMonth, int currentDay) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("searchText", searchText);	// 문자열 검색
-		map.put("searchDate", searchDate);	// 날짜 검색
+		map.put("currentYear", currentYear);	// 현재 년도
+		map.put("currentMonth", currentMonth);	// 현재 월
+		map.put("currentDay", currentDay);		// 현재 일
 		
 		return managerLoginLogMapper.selectLoginLogCount(map);
 	}
