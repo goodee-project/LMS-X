@@ -88,12 +88,13 @@
 				</li>
 		
 				<!-- 쪽지 -->
-				<li class="nav-item">
-					<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/note/noteReceiveList/1">
-						<i class="far fa-envelope"></i>
-						쪽지
-					</a>
-				</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/note/noteReceiveList/1">
+                        <i class="far fa-envelope"></i>
+                        쪽지 &nbsp;
+                        <span class="badge badge-danger">${noteNotReadReceiveCount}</span>
+                    </a>
+                </li>
 		
 				<!-- 마이페이지 -->
 				<li class="nav-item">
@@ -172,7 +173,7 @@
 			<ul class="navbar-nav mr-auto">
 				<!-- 운영자 접속 기록 -->
 				<li class="nav-item">
-					<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/access/accessList/1/0/0/0">
+					<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/access/accessList/1">
 						<i class="far fa-question-circle"></i>
 						접속 기록 관리
 					</a>

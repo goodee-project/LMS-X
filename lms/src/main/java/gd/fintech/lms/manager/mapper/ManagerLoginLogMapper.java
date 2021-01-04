@@ -11,7 +11,6 @@ import gd.fintech.lms.vo.LoginLog;
 public interface ManagerLoginLogMapper {
 
 	// 로그인 로그 목록
-	// 날짜(currentYear, currentMonth, currentDay)
 	public List<LoginLog> selectLoginLogList(Map<String,Object> map);
 	
 	// 로그인 로그 목록 페이징 카운트

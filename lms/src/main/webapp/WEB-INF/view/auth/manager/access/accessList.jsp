@@ -47,11 +47,9 @@
 .table {
 	text-align: center;
 }
-
 .table td {
 	vertical-align: middle;
 }
-
 th {
 	text-align: center;
 }
