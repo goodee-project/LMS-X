@@ -31,13 +31,22 @@
 							url : '${pageContext.request.contextPath}/signup/accountIdCheck/'+$('#accountId').val(),
 							type : 'get',
 							success : function(data) {
-								if (data == "true") {
+								if ($('#accountId').val().length < 4 || $('#accountId').val().length > 12) {
+									$('#accountId').focus();
+									$('#idCheckMs').html('<span class="text-danger">아이디는 4 ~ 12자로 이루어져있습니다. </span>');
+									return;
+								}
+								if (checkId($('#accountId').val()) == false) {
+									$('#accountId').focus();
+									$('#idCheckMs').html('<span class="text-danger">영문, 숫자로만 입력이 가능합니다. </span>');
+									return;
+								}
+								if (data == "false") {
+									$("#idCheckMs").html('<span class="text-danger">사용 불가능한 아이디입니다.</span>');
+									return;
+								} else {
 									$("#idCheckMs").html('<span class="text-success">사용 가능한 아이디입니다.</span>');
 									idCheck = "true";
-								} else {
-									$("#idCheckMs").html('<span class="text-danger">사용 불가능한 아이디입니다.</span>');
-								
-									return;
 								}
 							}
 						})
@@ -77,6 +86,18 @@
 						}
 					}
 				});
+
+				// 아이디 체크
+				function checkId(str) {
+					// 아이디와 패스워드가 적합한지 검사할 정규식
+					var id =  /^[a-zA-Z0-9]{4,12}$/ 
+						
+					if (id.test(str)) {
+						return true;
+					} else {
+						return false;
+					}
+				} 
 				
 				// 주소 검색
 				// 공백 체크
@@ -201,6 +222,41 @@
 						return false;
 					}
 				}
+
+				// 전화번호 - 자동 추가
+				var autoHypenPhone = function(str){
+				      str = str.replace(/[^0-9]/g, '');
+				      var tmp = '';
+				      if( str.length < 4){
+				          return str;
+				      }else if(str.length < 7){
+				          tmp += str.substr(0, 3);
+				          tmp += '-';
+				          tmp += str.substr(3);
+				          return tmp;
+				      }else if(str.length < 11){
+				          tmp += str.substr(0, 3);
+				          tmp += '-';
+				          tmp += str.substr(3, 3);
+				          tmp += '-';
+				          tmp += str.substr(6);
+				          return tmp;
+				      }else{              
+				          tmp += str.substr(0, 3);
+				          tmp += '-';
+				          tmp += str.substr(3, 4);
+				          tmp += '-';
+				          tmp += str.substr(7);
+				          return tmp;
+				      }
+				  
+				      return str;
+				}
+				var phoneNum = document.getElementById('managerPhone');
+
+				phoneNum.onkeyup = function(){
+					this.value = autoHypenPhone( this.value ) ;  
+				}   
 	
 				// 회원가입 버튼을 눌렀을 경우
 				$('#btn').click(function() {

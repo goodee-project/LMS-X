@@ -43,7 +43,7 @@
 							$('#teacherEmailCheck').html('<span class="text-danger">이메일 형식이 잘못 되었습니다.</span>');
 							return;
 						} else {
-							if ($('#teacherEmail').val() != $('#originalteacherEmail').val()) {
+							if ($('#teacherEmail').val() != $('#originalTeacherEmail').val()) {
 								$.ajax({
 									url : '${pageContext.request.contextPath}/signup/emailCheck/'+$('#teacherEmail').val(),
 									type : 'get',
@@ -201,6 +201,42 @@
 				       return false;
 				   }
 				}
+
+				// 전화번호 - 자동 추가
+				var autoHypenPhone = function(str){
+				      str = str.replace(/[^0-9]/g, '');
+				      var tmp = '';
+				      if( str.length < 4){
+				          return str;
+				      }else if(str.length < 7){
+				          tmp += str.substr(0, 3);
+				          tmp += '-';
+				          tmp += str.substr(3);
+				          return tmp;
+				      }else if(str.length < 11){
+				          tmp += str.substr(0, 3);
+				          tmp += '-';
+				          tmp += str.substr(3, 3);
+				          tmp += '-';
+				          tmp += str.substr(6);
+				          return tmp;
+				      }else{              
+				          tmp += str.substr(0, 3);
+				          tmp += '-';
+				          tmp += str.substr(3, 4);
+				          tmp += '-';
+				          tmp += str.substr(7);
+				          return tmp;
+				      }
+				  
+				      return str;
+				}
+				var phoneNum = document.getElementById('teacherPhone');
+
+				phoneNum.onkeyup = function(){
+					this.value = autoHypenPhone( this.value ) ;  
+				} 
+				
 				$('#btn').click(function() {
 					
 					// 이메일 검사
@@ -423,7 +459,7 @@
 											<div class="col-lg-12">
 												<div class="form-group">
 													<label class="form-control-label">이메일</label>
-														<input type="email" class="form-control form-control-alternative" value="${teacher.teacherEmail}" id="originalteacherEmail" hidden="hidden">
+														<input type="email" class="form-control form-control-alternative" value="${teacher.teacherEmail}" id="originalTeacherEmail" hidden="hidden">
 													<div class="input-group">
 														<input type="email" class="form-control form-control-alternative" name="teacherEmail" id="teacherEmail" value="${teacher.teacherEmail}" placeholder="  abc@abc.abc">
 														<div class="input-group-append">

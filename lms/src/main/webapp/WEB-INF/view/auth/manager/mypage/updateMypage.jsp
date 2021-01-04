@@ -49,7 +49,7 @@
 									
 								}
 							});
-						}else{
+						} else {
 							$('#managerEmailCheck').html('<span class="text-success">동일한 이메일 입니다. 사용 가능 이메일입니다.</span>');
 							emailCheck = "ture";
 						}
@@ -182,6 +182,42 @@
 			       return false;
 			   }
 			}
+
+			// 전화번호 - 자동 추가
+			var autoHypenPhone = function(str){
+			      str = str.replace(/[^0-9]/g, '');
+			      var tmp = '';
+			      if( str.length < 4){
+			          return str;
+			      }else if(str.length < 7){
+			          tmp += str.substr(0, 3);
+			          tmp += '-';
+			          tmp += str.substr(3);
+			          return tmp;
+			      }else if(str.length < 11){
+			          tmp += str.substr(0, 3);
+			          tmp += '-';
+			          tmp += str.substr(3, 3);
+			          tmp += '-';
+			          tmp += str.substr(6);
+			          return tmp;
+			      }else{              
+			          tmp += str.substr(0, 3);
+			          tmp += '-';
+			          tmp += str.substr(3, 4);
+			          tmp += '-';
+			          tmp += str.substr(7);
+			          return tmp;
+			      }
+			  
+			      return str;
+			}
+			var phoneNum = document.getElementById('managerPhone');
+
+			phoneNum.onkeyup = function(){
+				this.value = autoHypenPhone( this.value ) ;  
+			} 
+			
 			$('#btn').click(function() {
 				
 				// 이메일 검사
@@ -415,7 +451,7 @@
 										<div class="col-lg-12">
 											<div class="form-group">
 												<label class="form-control-label">이메일</label>
-													<input type="email" class="form-control form-control-alternative" value="${manager.managerEmail}" id="originalmanagerEmail" hidden="hidden">
+													<input type="email" class="form-control form-control-alternative" value="${manager.managerEmail}" id="originalManagerEmail" hidden="hidden">
 												<div class="input-group">
 													<input type="email" class="form-control form-control-alternative" name="managerEmail" id="managerEmail" value="${manager.managerEmail}" placeholder="  abc@abc.abc">
 													<div class="input-group-append">
