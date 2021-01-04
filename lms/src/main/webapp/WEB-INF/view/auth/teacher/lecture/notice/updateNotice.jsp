@@ -36,11 +36,13 @@
 				$('#updateBtn').click(function() {
 					// 스마트 에디터 내용 적용
 					oEditors.getById["lectureNoticeContent"].exec("UPDATE_CONTENTS_FIELD", []);
+					let lc = $("#lectureNoticeContent").val();
+					lc = lc.replace(/(\s*)/g, "")
 					if ($('#noticeTitleText').val().length <= 0) {
 						alert('제목을 입력해주세요.');
 						return;
 					}
-					if ($('#lectureNoticeContent').val().length <= 0) {
+					if(lc == '' || lc  == null || lc == '&nbsp;' || lc == '<p>&nbsp;</p>'){
 						alert('내용을 입력해주세요.');
 						return;
 					}
