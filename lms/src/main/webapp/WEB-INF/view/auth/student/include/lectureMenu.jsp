@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="row col-9">
-	<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+	<div class="row col-9">
 		<div class="container-fluid">
 			<ul class="navbar-nav">		
 				<li class="nav-item">
@@ -13,6 +13,7 @@
 				<li class="nav-item">
 					<a class="nav-link active" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/1">질문 게시판</a>
 				</li>
+				
 				<li class="nav-item">
 					<a class="nav-link active" href="${pageContext.request.contextPath}/auth/student/lecture/syllabus/syllabus/${lectureNo}">강의계획서</a>
 				</li>
@@ -30,5 +31,5 @@
 				</li>
 			</ul>
 		</div>
-	</nav>
-</div>
+	</div>
+</nav>

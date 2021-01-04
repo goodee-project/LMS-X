@@ -164,7 +164,21 @@
 												<div class="row">
 													<c:if test="${reportSubmit.reportSubmitFileList[0].reportSubmitFileOriginal != null}">
 														<a onclick="fileDownloadCount('${rsf.reportSubmitFileUuid}','${rsf.reportSubmitFileCount}')" download="${rsf.reportSubmitFileOriginal}" href="${pageContext.request.contextPath}/resource/reportSubmitFile/${rsf.reportSubmitFileUuid}">${rsf.reportSubmitFileOriginal}</a>
-														&nbsp;(${rsf.reportSubmitFileType}, ${rsf.reportSubmitFileSize}KByte, &nbsp;<div id="fileCount${fn:split(uuid ,'.')[0]}">다운로드 : ${rsf.reportSubmitFileCount}회</div>)
+														&nbsp;(														
+								    					<!-- 파일 사이즈 -->
+								    					<c:choose>
+								    						<c:when test="${rsf.reportSubmitFileSize >= (1024 * 1024)}">
+								    							<fmt:formatNumber value="${rsf.reportSubmitFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
+								    						</c:when>
+								    						<c:when test="${rsf.reportSubmitFileSize >= 1024}">
+								    							<fmt:formatNumber value="${rsf.reportSubmitFileSize/1024}" type="pattern" pattern="0.00" />B 
+								    						</c:when>
+								    						<c:otherwise>
+								    							<fmt:formatNumber value="${rsf.reportSubmitFileSize}" type="pattern" pattern="0.00" />KB 	
+								    						</c:otherwise>
+								    					</c:choose>,
+														 &nbsp;
+														<div id="fileCount${fn:split(uuid ,'.')[0]}">다운로드 : ${rsf.reportSubmitFileCount}회</div>)
 													</c:if>
 													<c:if test="${reportSubmit.reportSubmitFileList[0].reportSubmitFileOriginal == null}">
 														(첨부파일이 없습니다)	

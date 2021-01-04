@@ -139,7 +139,7 @@ public class StudentQnaController {
 		// 비밀글일 경우
 		if (!question.getQuestionPassword().equals("")) {
 			// 비밀번호가 다르면 비밀번호 입력창으로 이동
-			if(!question.getQuestionPassword().equals(questionPassword)) {
+			if(!question.getQuestionPassword().equals(questionPassword) && !question.getAccountId().equals(accountId)) {
 				return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaPassword/" + questionNo;
 			}
 		}
@@ -280,11 +280,12 @@ public class StudentQnaController {
 		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaList/1";
 	}
 	// 댓글 작성 
-	@PostMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/insertStduentQuestionComment")
+	@PostMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/insertStduentQuestionComment/{questionPassword}")
 	public String insertStduentQuestionComment(QuestionComment questionComment,
 			ServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo,
-			@PathVariable(name = "questionNo") int questionNo) {
+			@PathVariable(name = "questionNo") int questionNo,
+			@PathVariable(name = "questionPassword") String questionPassword) {
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		String accountId = (String)session.getAttribute("loginId");
@@ -295,15 +296,16 @@ public class StudentQnaController {
 		
 		studentQnaCommentService.insertQnaComment(questionComment);
 		
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo + "/1/0";
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo + "/1/" + questionPassword;
 	}
 	
 	// 댓글 수정 폼
-	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/updateQuestionComment/{questionCommentNo}")
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/updateQuestionComment/{questionCommentNo}/{questionPassword}")
 	public String updateStudentQuestionComment(Model model,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo,
-			@PathVariable(name = "questionCommentNo") int questionCommentNo) {
+			@PathVariable(name = "questionCommentNo") int questionCommentNo,
+			@PathVariable(name = "questionPassword") String questionPassword) {
 		
 	Question question = studentQnaService.getStudentQnaOne(questionNo);
 	
@@ -320,26 +322,28 @@ public class StudentQnaController {
 	}
 	
 	// 댓글 수정 액션
-	@PostMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/updateStduentQuestionComment")
+	@PostMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/updateStduentQuestionComment/{questionPassword}")
 	public String updateStduentQuestionComment(QuestionComment questionComment,
 			@PathVariable(name = "lectureNo") int lectureNo,
-			@PathVariable(name = "questionNo") int questionNo) {
+			@PathVariable(name = "questionNo") int questionNo,
+			@PathVariable(name = "questionPassword") String questionPassword) {
 		
 		studentQnaCommentService.updateQnaComment(questionComment);
 		
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo + "/1/0";
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/" + questionNo + "/1/" + questionPassword;
 	}
 	
 	// 댓글 삭제
-	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/deleteQuestionComment/{questionCommentNo}")
+	@GetMapping("/auth/student/lecture/{lectureNo}/qna/qnaOne/{questionNo}/deleteQuestionComment/{questionCommentNo}/{questionPassword}")
 	public String deleteQuestionComment(Model model,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo,
-			@PathVariable(name = "questionCommentNo") int questionCommentNo) {
+			@PathVariable(name = "questionCommentNo") int questionCommentNo,
+			@PathVariable(name = "questionPassword") String questionPassword) {
 		
 		studentQnaCommentService.deleteQnaComment(questionCommentNo);
 		
-		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1/0";
+		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaOne/ " + questionNo + "/1/" + questionPassword;
 	}
 	
 }

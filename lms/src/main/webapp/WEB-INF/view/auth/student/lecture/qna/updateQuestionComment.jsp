@@ -50,7 +50,7 @@
     	<!-- 접속자 -->
 		<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
 		<h1>댓글 수정</h1>
-		<form method="post" id="updateCommentForm" action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateStduentQuestionComment">
+		<form method="post" id="updateCommentForm" action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateStduentQuestionComment/${questionPassword}">
 		<input type="hidden" name="questionNo" value="${questionComment.questionNo}"> 
 			<table class="table">
 				<tr>

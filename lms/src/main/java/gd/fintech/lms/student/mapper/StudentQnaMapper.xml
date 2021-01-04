@@ -8,6 +8,7 @@
 		<result property="lectureNo" column="lecture_no"/>
 		<result property="questionNo" column="question_no"/>
 		<result property="questionWriter" column="question_writer"/>
+		<result property="accountId" column="account_id"/>
 		<result property="questionTitle" column="question_title"/>
 		<result property="questionContent" column="question_content"/>
 		<result property="questionCount" column="question_count"/>
@@ -32,6 +33,7 @@
 			question_no questionNo,
 			lecture_no lectureNo,
 			question_writer questionWriter,
+			account_id accountId,
 			question_title questionTitle,
 			question_createdate questionCreatedate,
 			question_count questionCount,
@@ -87,6 +89,7 @@
 			q.lecture_no,
 			q.question_no,
 			q.question_writer,
+			q.account_id,
 			q.question_title,
 			q.question_content,
 			q.question_count,

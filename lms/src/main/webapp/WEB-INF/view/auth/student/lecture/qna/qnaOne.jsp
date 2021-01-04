@@ -106,8 +106,10 @@
 									</div>
 									<div class="col-4 text-right">
 										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/1">목록</a>
-										<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}/${questionPassword}">수정</a>
-										<a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
+										<c:if test="${sessionScope.loginId == question.questionWriter}">
+											<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}/${questionPassword}">수정</a>
+											<a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}/${questionPassword}">삭제</a>
+										</c:if>
 									</div>
 								</div>
 							</div>
@@ -194,13 +196,15 @@
 							<div class="table-responsive">
 								<table class="table commentTable align-items-center table-flush">
 									<thead class="thead-light">
-										<th width="10%">번호</th>
-										<th width="10%">작성자</th>
-										<th width="24%">내용</th>
-										<th width="15%">작성일시</th>
-										<th width="15%">수정일시</th>
-										<th width="8%">수정</th>
-										<th width="8%">삭제</th>
+										<tr>
+											<th width="10%">번호</th>
+											<th width="10%">작성자</th>
+											<th width="24%">내용</th>
+											<th width="15%">작성일시</th>
+											<th width="15%">수정일시</th>
+											<th width="8%">수정</th>
+											<th width="8%">삭제</th>
+										</tr>
 									</thead>
 									<tbody>
 										<c:if test="${!empty questionComment}">
@@ -211,12 +215,18 @@
 														<td>${qc.questionCommentContent}</td>
 														<td>${qc.questionCommentCreatedate}</td>
 														<td>${qc.questionCommentUpdatedate}</td>
-														<td>
-															<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}'">수정</button>
-														</td>
-														<td>
-															<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
-														</td>
+														
+														<c:if test="${sessionScope.loginId == qc.accountId}">
+															<td>
+																<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateQuestionComment/${qc.questionCommentNo}/${questionPassword}'">수정</button>														
+															</td>
+															<td>
+																<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}/${questionPassword}'">삭제</button>
+															</td>
+														</c:if>
+														<c:if test="${sessionScope.loginId != qc.accountId}">
+															<td colspan="2"></td>
+														</c:if>
 													</tr>
 											</c:forEach>
 										</c:if>
@@ -343,7 +353,7 @@
 							
 							<div class="card-footer py-4">
 								<nav aria-label="...">
-									<form action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/insertStduentQuestionComment" method="post" id="insertCommentForm">
+									<form action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/insertStduentQuestionComment/${questionPassword}" method="post" id="insertCommentForm">
 										<div>
 											<div>
 												<textarea rows="3" cols="50" name="questionCommentContent" class="form-control" id="questionCommentContent"></textarea>
