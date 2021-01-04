@@ -49,20 +49,6 @@
 				})
 			})
 		</script>
-		
-		<style>
-			.table {
-				text-align: center;
-			}
-			
-			.table td {
-				vertical-align: middle;
-			}
-			
-			th {
-				text-align: center;
-			}
-		</style>
 	</head>
 	
 	<body>
@@ -105,36 +91,50 @@
 													<th width="50%" style="text-align:left">문제<input type="text" name="multiplechoiceQuestion" class="form-control" value="${exampleList.multiplechoiceQuestion}"></th>
 													<th style="text-align:left">
 														정답
-														<select class="form-control" name="multiplechoiceAnswer">
-															<option value="1">1</option>
-															<c:if test="${exampleList.multiplechoiceAnswer == 1}">
-																<option selected="selected" value="1">1</option>
-															</c:if>
-															<option value="2">2</option>
-															<c:if test="${exampleList.multiplechoiceAnswer == 2}">
-																<option selected="selected" value="2">2</option>
-															</c:if>
-															<option value="3">3</option>
-															<c:if test="${exampleList.multiplechoiceAnswer == 3}">
-																<option selected="selected" value="3">3</option>
-															</c:if>
-															<option value="4">4</option>
-															<c:if test="${exampleList.multiplechoiceAnswer == 4}">
-																<option selected="selected" value="4">4</option>
-															</c:if>
-															<option value="5">5</option>
-															<c:if test="${exampleList.multiplechoiceAnswer == 5}">
-																<option selected="selected" value="5">5</option>
-															</c:if>
-														</select>
+														<select class="form-control" name="multiplechoiceAnswer" readonly="readonly">
+													<c:if test="${exampleList.multiplechoiceAnswer == 1}">
+														<option value="1" selected="selected">1</option>
+													</c:if>
+													<c:if test="${exampleList.multiplechoiceAnswer != 1}">
+														<option value="1">1</option>
+													</c:if>
+													<c:if test="${exampleList.multiplechoiceAnswer == 2}">
+														<option value="2" selected="selected">2</option>
+													</c:if>
+													<c:if test="${exampleList.multiplechoiceAnswer != 2}">
+														<option value="2">2</option>
+													</c:if>
+													<c:if test="${exampleList.multiplechoiceAnswer == 3}">
+														<option value="3" selected="selected">3</option>
+													</c:if>
+													<c:if test="${exampleList.multiplechoiceAnswer != 3}">
+														<option value="3">3</option>
+													</c:if>
+													<c:if test="${exampleList.multiplechoiceAnswer == 4}">
+														<option value="4" selected="selected">4</option>
+													</c:if>
+													<c:if test="${exampleList.multiplechoiceAnswer != 4}">
+														<option value="4">4</option>
+													</c:if>
+													<c:if test="${exampleList.multiplechoiceAnswer == 5}">
+														<option value="5" selected="selected">5</option>
+													</c:if>
+													<c:if test="${exampleList.multiplechoiceAnswer != 5}">
+														<option value="5">5</option>
+													</c:if>
 													</th>
 													<th style="text-align:left">점수<input type="text" name="multiplechoiceScore" class="form-control" value="${exampleList.multiplechoiceScore}"></th>
 												</tr>
 											</thead>
 											<c:forEach var="me" items="${exampleList.multiplechoiceExampleList}">
 												<tr>
-													<td><input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${me.multiplechoiceExampleId}">${me.multiplechoiceExampleId}번.</td>
-													<td colspan="3"><input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent" value="${me.multiplechoiceExampleContent}"></td>
+													<th>
+														<input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${me.multiplechoiceExampleId}">
+														${me.multiplechoiceExampleId}
+													</th>
+													<td colspan="3">
+														<input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent" value="${me.multiplechoiceExampleContent}">
+													</td>
 												</tr>
 											</c:forEach>
 										</table>

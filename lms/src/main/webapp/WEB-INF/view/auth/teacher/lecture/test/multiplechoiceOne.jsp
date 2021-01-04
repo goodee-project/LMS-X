@@ -68,39 +68,36 @@
 									<thead class="thead-light">
 										<tr>
 											<th width="10%"><input type="hidden" name="multiplechoiceId" class="form-control" value="${exampleList.multiplechoiceId}">객관식 문제 ${exampleList.multiplechoiceId}번.</th>
-											<th width="50%" style="text-align:left">문제<input type="text" name="multiplechoiceQuestion" class="form-control" value="${exampleList.multiplechoiceQuestion}"></th>
-											<th style="text-align:left">
-												정답
-												<select class="form-control" name="multiplechoiceAnswer" readonly="readonly">
-													<option value="1">1</option>
-													<c:if test="${exampleList.multiplechoiceAnswer == 1}">
-														<option selected="selected" value="1">1</option>
-													</c:if>
-													<option value="2">2</option>
-													<c:if test="${exampleList.multiplechoiceAnswer == 2}">
-														<option selected="selected" value="2">2</option>
-													</c:if>
-													<option value="3">3</option>
-													<c:if test="${exampleList.multiplechoiceAnswer == 3}">
-														<option selected="selected" value="3">3</option>
-													</c:if>
-													<option value="4">4</option>
-													<c:if test="${exampleList.multiplechoiceAnswer == 4}">
-														<option selected="selected" value="4">4</option>
-													</c:if>
-													<option value="5">5</option>
-													<c:if test="${exampleList.multiplechoiceAnswer == 5}">
-														<option selected="selected" value="5">5</option>
-													</c:if>
-												</select>
+											<th width="50%">
+												문제
+												<div>
+													<font size="4">${exampleList.multiplechoiceQuestion}</font>
+												</div>
 											</th>
-											<th style="text-align:left">점수<input type="text" name="multiplechoiceScore" class="form-control" value="${exampleList.multiplechoiceScore}"></th>
+											<th>
+												정답
+												<div>
+													<font size="4">${exampleList.multiplechoiceAnswer}</font>
+												</div>
+											</th>
+											<th>
+												점수
+												<div>
+													<font size="4">${exampleList.multiplechoiceScore}</font>
+												</div>
+											</th>
 										</tr>
 									</thead>
 									<c:forEach var="me" items="${exampleList.multiplechoiceExampleList}">
 										<tr>
-											<td><input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${me.multiplechoiceExampleId}">${me.multiplechoiceExampleId}번.</td>
-											<td colspan="3"><input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent" value="${me.multiplechoiceExampleContent}"></td>
+											<th>
+												${me.multiplechoiceExampleId}
+											</th>
+											<td colspan="3">
+												<div>
+													<font size="4">${me.multiplechoiceExampleContent}</font>
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 								</table>
