@@ -136,7 +136,7 @@ th {
 									</tr>
 									<tr>
 										<td>FAQ 카테고리</td>
-										<td><select name="faqCategory" class="form-control">
+										<td><select name="faqCategory" class="form-control form-control-alternative">
 												<c:forEach var="f" items="${faqCategoryList}">
 													<option value="${f.faqCategory}">${f.faqCategory}</option>
 												</c:forEach>

@@ -52,24 +52,20 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<th width="10%">과목 번호</th>
-										<td width="40%">${subject.subjectNo}</td>
-										<th width="10%">과목 생성일시</th>
-										<td width="40%">${subject.subjectCreatedate}</td>
+										<th>과목 번호</th>
+										<td>${subject.subjectNo}</td>
 									</tr>
 									<tr>
 										<th>과목 이름</th>
 										<td>${subject.subjectName}</td>
-										<th>과목 수정일시</th>
-										<td>${subject.subjectUpdatedate}</td>
 									</tr>
 									<tr>
 										<th>과목 총 일수</th>
-										<td colspan="3">${subject.subjectTotalday}</td>
+										<td >${subject.subjectTotalday}</td>
 									</tr>
 									<tr>
 										<th>과목 정보</th>
-										<td colspan="3">${subject.subjectInfo}</td>
+										<td>${subject.subjectInfo}</td>
 									</tr>
 								</table>
 							</div>

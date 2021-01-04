@@ -19,6 +19,7 @@
 		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function(){
+				
 				$('#subjectBtn').click(function(){
 					
 					if ($('#subjectName').val().replace(/(\s*)/g, "") == "") {
@@ -26,6 +27,15 @@
 						return;
 					}
 
+					if ($('#subjectTotalday').val() == "") {
+						$('#subjectTotalday').focus();
+						return;
+					}
+					if ($('#subjectInfo').val().replace(/(\s*)/g, "") == "") {
+						$('#subjectInfo').focus();
+						return;
+					}
+					$('#subjectForm').submit();
 				});
 			});
 
@@ -67,7 +77,7 @@
 											</tr>
 											<tr>
 												<td>과목 총 일수</td>
-												<td><input type="text" id="subjectTotalday" name="subjectTotalday" class="form-control"></td>
+												<td><input type="number" id="subjectTotalday" name="subjectTotalday" class="form-control"></td>
 											</tr>
 											<tr>
 												<td>과목 정보</td>

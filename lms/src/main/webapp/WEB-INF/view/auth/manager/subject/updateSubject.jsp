@@ -17,6 +17,26 @@
 			rel="stylesheet" />
 		<!-- CSS Files -->
 		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+		<!-- jQuery / Ajax Google CDN -->
+		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				
+				$('#subjectBtn').click(function(){
+					
+					if ($('#subjectTotalday').val() == "") {
+						$('#subjectTotalday').focus();
+						return;
+					}
+					if ($('#subjectInfo').val().replace(/(\s*)/g, "") == "") {
+						$('#subjectInfo').focus();
+						return;
+					}
+					$('#subjectForm').submit();
+				});
+			});
+
+		</script>		
 </head>
 	<body>
 	<!-- 내비게이션 메인 메뉴 -->
@@ -46,7 +66,7 @@
 									</div>
 								</div>
 							<div class="table-responsive">
-								<form method="post" action="${pageContext.request.contextPath}/auth/manager/subject/updateSubject">
+								<form id="subjectForm" method="post" action="${pageContext.request.contextPath}/auth/manager/subject/updateSubject">
 									<table class="table align-items-center table-flush">
 										<tr>
 											<td>과목 번호</td>
@@ -58,15 +78,15 @@
 										</tr>
 										<tr>
 											<td>과목 총 일수</td>
-											<td><input type="text" name="subjectTotalday" class="form-control" value="${subject.subjectTotalday}"></td>
+											<td><input type="number" id ="subjectTotalday" name="subjectTotalday" class="form-control" value="${subject.subjectTotalday}"></td>
 										</tr>
 										<tr>
 											<td>과목 정보</td>
-											<td><input type="text" name="subjectInfo" class="form-control" value="${subject.subjectInfo}"></td>
+											<td><input  type="text" id="subjectInfo" name="subjectInfo" class="form-control" value="${subject.subjectInfo}"></td>
 										</tr>
 									</table>
 									<div style="text-align: right">
-										<button type="submit" class="btn btn-outline-primary">과목 수정</button>
+										<button type="button" id ="subjectBtn" class="btn btn-outline-primary">과목 수정</button>
 									</div>
 								</form>
 							</div>
