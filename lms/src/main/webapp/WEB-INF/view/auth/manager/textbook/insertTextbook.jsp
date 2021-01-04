@@ -26,14 +26,17 @@
 		<div class="container-fluid">
 			<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
 		</div>
-			<!-- 접속자 -->
-            <jsp:include page="/WEB-INF/view/auth/manager/include/connector.jsp" />
-			<!-- Page content -->
-			<div class="container-fluid mt--7">
-				<!-- Table -->
-				<div class="row">
-					<div class="col">
-						<div class="card shadow">
+		
+		<!-- 접속자 -->
+        <jsp:include page="/WEB-INF/view/auth/manager/include/connector.jsp" />
+        
+		<!-- Page content -->
+		<div class="container-fluid mt--7">
+			<!-- Table -->
+			<div class="row">
+				<div class="col">
+					<div class="card shadow">
+						<form method="post" action="${pageContext.request.contextPath}/auth/manager/textbook/insertTextbook">
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<br>
@@ -41,50 +44,50 @@
 										<h3 class="mb-0">교재 추가</h3>
 									</div>
 									<div class="col-4 text-right">
+										<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/textbook/textbookList/1'">목록</button>
+										<button type="submit" class="btn btn-sm btn-success">추가</button>
 									</div>
 									<br>
 								</div>
 							</div>
+							
 							<div class="table-responsive">
-							<form method="post" action="${pageContext.request.contextPath}/auth/manager/textbook/insertTextbook">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="20%">교재 isbn</td>
-										<td><input type="text" name="textbookIsbn" class="form-control"></td>
+										<th width="20%">교재 ISBN</th>
+										<td width="80%"><input type="text" name="textbookIsbn" class="form-control"></td>
 									</tr>
 									<tr>
-										<td>교재 이름</td>
+										<th>교재 이름</th>
 										<td><input type="text" name="textbookTitle" class="form-control"></td>
 									</tr>
 									<tr>
-										<td>교재 저자</td>
+										<th>교재 저자</th>
 										<td><input type="text" name="textbookWriter" class="form-control"></td>
 									</tr>
 									<tr>
-										<td>교재 출판사</td>
+										<th>교재 출판사</th>
 										<td><input type="text" name="textbookPublisher" class="form-control"></td>
 									</tr>
 									<tr>
-										<td>교재 출판일</td>
+										<th>교재 출판일</th>
 										<td><input type="date" name="textbookPublishdate" class="form-control"></td>
 									</tr>
 									<tr>
-										<td>교재 정보</td>
+										<th>교재 정보</th>
 										<td><input type="text" name="textbookInfo" class="form-control"></td>
 									</tr>
 									<tr>
-										<td>교재 가격</td>
+										<th>교재 가격</th>
 										<td><input type="text" name="textbookPrice" class="form-control"></td>
 									</tr>
 								</table>
-								<div style="text-align: right">
-									<button type="submit" class="btn btn-outline-primary">입력</button>
-								</div>
-							</form>
-						</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
+			
 			<!-- Footer -->
 			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 		</div>

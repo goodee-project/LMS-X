@@ -52,8 +52,8 @@
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<th>과목 번호</th>
-										<td>${subject.subjectNo}</td>
+										<th width="20%">과목 번호</th>
+										<td width="80%">${subject.subjectNo}</td>
 									</tr>
 									<tr>
 										<th>과목 이름</th>

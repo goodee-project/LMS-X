@@ -44,51 +44,54 @@
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
 		<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
+		
 		<div class="main-content">
 			<!-- 내비게이션 상단 메뉴 -->
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
 			</div>
+			
 			<!-- 접속자 -->
             <jsp:include page="/WEB-INF/view/auth/manager/include/connector.jsp" />
+            
 			<!-- Page content -->
 			<div class="container-fluid mt--7">
 				<!-- Table -->
 				<div class="row">
 					<div class="col">
 						<div class="card shadow">
-							<div class="card-header bg-white border-0">
-								<div class="row align-items-center">
-									<br>
-									<div class="col-8">
-										<h3 class="mb-0">과목 추가</h3>
+							<form id="subjectForm" method="post" action="${pageContext.request.contextPath}/auth/manager/subject/insertSubject">
+								<div class="card-header bg-white border-0">
+									<div class="row align-items-center">
+										<br>
+										<div class="col-8">
+											<h3 class="mb-0">과목 추가</h3>
+										</div>
+										<div class="col-4 text-right">
+											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/subject/subjectList/1'">목록</button>
+											<button type="button" id="subjectBtn" class="btn btn-sm btn-success">추가</button>
+										</div>
+										<br>
 									</div>
-									<div class="col-4 text-right">
-									</div>
-									<br>
 								</div>
-							</div>
+								
 								<div class="table-responsive">
-									<form id="subjectForm" method="post" action="${pageContext.request.contextPath}/auth/manager/subject/insertSubject">
 										<table class="table align-items-center table-flush">
 											<tr>
-												<td width="20%">과목 이름</td>
+												<th width="20%">과목 이름</th>
 												<td width="80%"><input id="subjectName" type="text" name="subjectName" class="form-control"></td>
 											</tr>
 											<tr>
-												<td>과목 총 일수</td>
+												<th>과목 총 일수</th>
 												<td><input type="number" id="subjectTotalday" name="subjectTotalday" class="form-control"></td>
 											</tr>
 											<tr>
-												<td>과목 정보</td>
+												<th>과목 정보</th>
 												<td><input type="text" id="subjectInfo" name="subjectInfo" class="form-control"></td>
 											</tr>
 										</table>
-										<div style="text-align: right">
-											<button type="button" id="subjectBtn" class="btn btn-outline-primary">입력</button>
-										</div>
-									</form>
-								</div>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>

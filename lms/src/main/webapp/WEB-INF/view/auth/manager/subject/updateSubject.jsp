@@ -41,19 +41,24 @@
 	<body>
 	<!-- 내비게이션 메인 메뉴 -->
 	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
+	
 	<div class="main-content">
 		<!-- 내비게이션 상단 메뉴 -->
 		<div class="container-fluid">
 			<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
 		</div>
+		
 		<!-- 접속자 -->
            <jsp:include page="/WEB-INF/view/auth/manager/include/connector.jsp" />
+           
 			<!-- Page content -->
-				<div class="container-fluid mt--7">
-					<!-- Table -->
-					<div class="row">
-						<div class="col">
-							<div class="card shadow">
+			<div class="container-fluid mt--7">
+			
+				<!-- Table -->
+				<div class="row">
+					<div class="col">
+						<div class="card shadow">
+							<form id="subjectForm" method="post" action="${pageContext.request.contextPath}/auth/manager/subject/updateSubject">
 								<div class="card-header bg-white border-0">
 									<div class="row align-items-center">
 										<br>
@@ -61,35 +66,34 @@
 											<h3 class="mb-0">과목 수정</h3>
 										</div>
 										<div class="col-4 text-right">
+											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/subject/subjectList/1'">목록</button>
+											<button type="button" id="subjectBtn" class="btn btn-sm btn-primary">수정</button>
 										</div>
 										<br>
 									</div>
 								</div>
-							<div class="table-responsive">
-								<form id="subjectForm" method="post" action="${pageContext.request.contextPath}/auth/manager/subject/updateSubject">
+							
+								<div class="table-responsive">
 									<table class="table align-items-center table-flush">
 										<tr>
-											<td>과목 번호</td>
-											<td><input type="text" name="subjectNo" class="form-control" readonly="readonly" value="${subject.subjectNo}" readonly="readonly"></td>
+											<th width="20%">과목 번호</th>
+											<th width="80%"><input type="text" name="subjectNo" class="form-control" readonly="readonly" value="${subject.subjectNo}" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>과목 이름</td>
+											<th>과목 이름</th>
 											<td><input type="text" name="subjectName" class="form-control" value="${subject.subjectName}" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>과목 총 일수</td>
+											<th>과목 총 일수</th>
 											<td><input type="number" id ="subjectTotalday" name="subjectTotalday" class="form-control" value="${subject.subjectTotalday}"></td>
 										</tr>
 										<tr>
-											<td>과목 정보</td>
+											<th>과목 정보</th>
 											<td><input  type="text" id="subjectInfo" name="subjectInfo" class="form-control" value="${subject.subjectInfo}"></td>
 										</tr>
 									</table>
-									<div style="text-align: right">
-										<button type="button" id ="subjectBtn" class="btn btn-outline-primary">과목 수정</button>
-									</div>
-								</form>
-							</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>

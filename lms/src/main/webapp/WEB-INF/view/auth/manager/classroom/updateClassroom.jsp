@@ -42,24 +42,6 @@
 <!-- jQuery library -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 </head>
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
@@ -90,7 +72,7 @@ th {
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark"
 											onclick="location.href='${pageContext.request.contextPath}/auth/manager/classroom/classroomList/1'">목록</button>
-										<button type="submit" class="btn btn-sm btn-success">입력</button>
+										<button type="submit" class="btn btn-sm btn-primary">수정</button>
 									</div>
 									<br>
 								</div>
@@ -99,23 +81,23 @@ th {
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td>강의실 번호</td>
-										<td><input type="text" name="classroomNo"
+										<th width="20%">강의실 번호</th>
+										<td width="80%"><input type="text" class="form-control" name="classroomNo"
 											value="${classroom.classroomNo}" readonly="readonly"></td>
 									<tr>
 									<tr>
-										<td>강의실 호실</td>
-										<td><input type="text" name="classroomNumber"
+										<th>강의실 호실</th>
+										<td><input type="text" class="form-control" name="classroomNumber"
 											value="${classroom.classroomNumber}"></td>
 									</tr>
 									<tr>
-										<td>강의실 사이즈</td>
-										<td><input type="text" name="classroomSize"
+										<th>강의실 사이즈</th>
+										<td><input type="text" class="form-control" name="classroomSize"
 											value="${classroom.classroomSize}"></td>
 									</tr>
 									<tr>
-										<td>강의실 총 인원</td>
-										<td><input type="text" name="classroomTotal"
+										<th>강의실 총 인원</th>
+										<td><input type="text" class="form-control" name="classroomTotal"
 											value="${classroom.classroomTotal}"></td>
 									</tr>
 								</table>

@@ -43,24 +43,6 @@
 <!-- jQuery library -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
 	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
@@ -99,16 +81,16 @@ th {
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td>호실</td>
-										<td><input type="text" name="classroomNumber"></td>
+										<th width="20%">호실</th>
+										<td width="80%"><input type="text" class="form-control" name="classroomNumber"></td>
 									</tr>
 									<tr>
-										<td>강의실 크기</td>
-										<td><input type="text" name="classroomSize"></td>
+										<th>강의실 크기</th>
+										<td><input type="text" class="form-control" name="classroomSize"></td>
 									</tr>
 									<tr>
-										<td>강의실 인원 제한</td>
-										<td><input type="text" name="classroomTotal"></td>
+										<th>강의실 인원 제한</th>
+										<td><input type="text" class="form-control" name="classroomTotal"></td>
 									</tr>
 								</table>
 							</div>

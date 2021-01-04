@@ -21,19 +21,23 @@
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
 	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
+	
 	<div class="main-content">
 		<!-- 내비게이션 상단 메뉴 -->
 		<div class="container-fluid">
 			<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
 		</div>
+		
 		<!-- 접속자 -->
 		<jsp:include page="/WEB-INF/view/auth/manager/include/connector.jsp" />
+		
 		<!-- Page content -->
-			<div class="container-fluid mt--7">
-				<!-- Table -->
-				<div class="row">
-					<div class="col">
-						<div class="card shadow">
+		<div class="container-fluid mt--7">
+			<!-- Table -->
+			<div class="row">
+				<div class="col">
+					<div class="card shadow">
+						<form method="post" action="${pageContext.request.contextPath}/auth/manager/textbook/updateTextbook">
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<br>
@@ -41,47 +45,46 @@
 										<h3 class="mb-0">교재 수정</h3>
 									</div>
 									<div class="col-4 text-right">
+										<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/textbook/textbookList/1'">목록</button>
+										<button type="submit" class="btn btn-sm btn-primary">수정</button>
 									</div>
 									<br>
 								</div>
 							</div>
+							
 							<div class="table-responsive">
-								<form method="post" action="${pageContext.request.contextPath}/auth/manager/textbook/updateTextbook">
-									<table class="table align-items-center table-flush">
-										<tr>
-											<td>교재 isbn</td>
-											<td><input type="text" name="textbookIsbn" class="form-control" readonly="readonly" value="${textbook.textbookIsbn}"></td>
-										</tr>
-										<tr>
-											<td>교재 이름</td>
-											<td><input type="text" name="textbookTitle" class="form-control" value="${textbook.textbookTitle}"></td>
-										</tr>
-										<tr>
-											<td>교재 저자</td>
-											<td><input type="text" name="textbookWriter" class="form-control" value="${textbook.textbookWriter}"></td>
-										</tr>
-										<tr>
-											<td>교재 출판사</td>
-											<td><input type="text" name="textbookPublisher" class="form-control" value="${textbook.textbookPublisher}"></td>
-										</tr>
-										<tr>
-											<td>교재 출판일</td>
-											<td><input type="date" name="textbookPublishdate" class="form-control" value="${textbook.textbookPublishdate}"></td>
-										</tr>
-										<tr>
-											<td>교재 정보</td>
-											<td><input type="text" name="textbookInfo" class="form-control" value="${textbook.textbookInfo}"></td>
-										</tr>
-										<tr>
-											<td>교재 가격</td>
-											<td><input type="text" name="textbookPrice" class="form-control" value="${textbook.textbookPrice}"></td>
-										</tr>
-									</table>
-								<div style="text-align: right">
-									<button type="submit" class="btn btn-outline-primary">교재 수정</button>
-								</div>
-							</form>
-						</div>
+								<table class="table align-items-center table-flush">
+									<tr>
+										<th width="20%">교재 ISBN</th>
+										<td width="80%"><input type="text" name="textbookIsbn" class="form-control" readonly="readonly" value="${textbook.textbookIsbn}"></td>
+									</tr>
+									<tr>
+										<th>교재 이름</th>
+										<td><input type="text" name="textbookTitle" class="form-control" value="${textbook.textbookTitle}"></td>
+									</tr>
+									<tr>
+										<th>교재 저자</th>
+										<td><input type="text" name="textbookWriter" class="form-control" value="${textbook.textbookWriter}"></td>
+									</tr>
+									<tr>
+										<th>교재 출판사</th>
+										<td><input type="text" name="textbookPublisher" class="form-control" value="${textbook.textbookPublisher}"></td>
+									</tr>
+									<tr>
+										<th>교재 출판일</th>
+										<td><input type="date" name="textbookPublishdate" class="form-control" value="${textbook.textbookPublishdate}"></td>
+									</tr>
+									<tr>
+										<th>교재 정보</th>
+										<td><input type="text" name="textbookInfo" class="form-control" value="${textbook.textbookInfo}"></td>
+									</tr>
+									<tr>
+										<th>교재 가격</th>
+										<td><input type="text" name="textbookPrice" class="form-control" value="${textbook.textbookPrice}"></td>
+									</tr>
+								</table>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>

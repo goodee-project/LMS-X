@@ -83,7 +83,7 @@ th {
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">강의실 Index</h3>
+									<h3 class="mb-0">강의실 목록</h3>
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-success"
@@ -112,10 +112,10 @@ th {
 											<td>${cr.classroomNumber}</td>
 											<td>${cr.classroomSize}</td>
 											<td>${cr.classroomTotal}</td>
-											<td><a
-												href="${pageContext.request.contextPath }/auth/manager/classroom/updateClassroom/${cr.classroomNo}">수정</a></td>
-											<td><a
-												href="${pageContext.request.contextPath}/auth/manager/classroom/deleteClassroom?classroomNo=${cr.classroomNo}">삭제</a></td>
+											<td><button class="btn btn-sm btn-primary"
+												onclick="location.href='${pageContext.request.contextPath}/auth/manager/classroom/updateClassroom/${cr.classroomNo}'">수정</button></td>
+											<td><button class="btn btn-sm btn-danger"
+												onclick="location.href='${pageContext.request.contextPath}/auth/manager/classroom/deleteClassroom/${cr.classroomNo}'">삭제</button></td>
 										</tr>
 									</c:forEach>
 								</tbody>

@@ -42,24 +42,6 @@
 <!-- jQuery library -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 <script>
 	$(document).ready(function() {
 		$('#insertBtn').click(function() {
@@ -113,7 +95,7 @@ th {
 								<div class="row align-items-center">
 									<br>
 									<div class="col-8">
-										<h3 class="mb-0">강좌 목록</h3>
+										<h3 class="mb-0">강좌 개설</h3>
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark"
@@ -128,15 +110,15 @@ th {
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="20%">강사 계정</td>
-										<td width="80%"><select class="form-control" name="accountId">
+										<th width="20%">강사 계정</th>
+										<th width="80%"><select class="form-control" name="accountId">
 												<c:forEach var="a" items="${accountList}">
 													<option value="${a.accountId}">${a.accountId}</option>
 												</c:forEach>
-										</select></td>
+										</select></th>
 									</tr>
 									<tr>
-										<td>과목</td>
+										<th>과목</th>
 										<td><select class="form-control" name="subjectNo">
 												<c:forEach var="s" items="${subjectList}">
 													<option value="${s.subjectNo}">${s.subjectName}</option>
@@ -144,17 +126,17 @@ th {
 										</select></td>
 									</tr>
 									<tr>
-										<td>강사 명</td>
+										<th>강사 이름</th>
 										<td><input type="text" class="form-control" name="teacherName"
-											id="teacherNametext" placeholder="강사 명을 입력해주세요."></td>
+											id="teacherNametext" placeholder="강사 이름을 입력해주세요."></td>
 									</tr>
 									<tr>
-										<td>강의 명</td>
+										<th>강좌 이름</th>
 										<td><input type="text" class="form-control" name="lectureName"
-											id="lectureNametext" placeholder="강의 명을 입력해주세요."></td>
+											id="lectureNametext" placeholder="강좌 이름을 입력해주세요."></td>
 									</tr>
 									<tr>
-										<td>교재</td>
+										<th>교재</th>
 										<td><select class="form-control" name="textbookIsbn">
 												<c:forEach var="t" items="${textbookList}">
 													<option value="${t.textbookIsbn}">${t.textbookTitle}:${t.textbookIsbn}</option>
@@ -162,22 +144,22 @@ th {
 										</select></td>
 									</tr>
 									<tr>
-										<td>개강일</td>
+										<th>개강일</th>
 										<td><input type="date" class="form-control" name="lectureStartdate"
 											id="lectureStartdate"></td>
 									</tr>
 									<tr>
-										<td>종강일</td>
+										<th>종강일</th>
 										<td><input type="date" class="form-control" name="lectureEnddate"
 											id="lectureEnddate"></td>
 									</tr>
 									<tr>
-										<td>정원</td>
+										<th>정원</th>
 										<td><input type="number" class="form-control" name="lectureTotal"
 											id="lectureTotaltext"></td>
 									</tr>
 									<tr>
-										<td>강의실</td>
+										<th>강의실</th>
 										<td><select class="form-control" name="classroomNo">
 												<c:forEach var="c" items="${classroomList}">
 													<option value="${c.classroomNo}">${c.classroomNo}:${c.classroomNumber}</option>
