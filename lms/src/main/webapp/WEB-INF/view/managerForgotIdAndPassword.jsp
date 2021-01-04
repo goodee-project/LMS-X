@@ -70,7 +70,7 @@
 		$('#btn').click(function() {
 			
 			// 이메일 검사
-			if ($('#email').val() == "") {
+			if ($('#email').val().replace(/(\s*)/g, "") == "") {
 				$('#check').html('');
 				$('#email').focus();
 				return;
@@ -85,7 +85,7 @@
 			}
 
 			// 이름 검사
-			if ($('#name').val() == "") {
+			if ($('#name').val().replace(/(\s*)/g, "") == "") {
 				$('#check').html('');
 				$('#name').focus();
 				return;
@@ -99,7 +99,7 @@
 	    		return false;
 			}
 			// 핸드폰 검사
-			if ($('#phone').val() == "") {
+			if ($('#phone').val().replace(/(\s*)/g, "") == "") {
 				$('#check').html('');
 				$('#phone').focus();
 				return;

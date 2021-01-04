@@ -66,14 +66,14 @@
 				});
 				$('#careerBtn').click(function(){
 			
-					if ($('#careerContent').val() == "" ) {
+					if ($('#careerContent').val().replace(/(\s*)/g, "") == "" ) {
 						$('#careerContent').focus();
 						return;
 					}
-					if ($('#careerStartdate').val() == "") {
+					if ($('#careerStartdate').val().replace(/(\s*)/g, "") == "") {
 						$('#careerDateCheck').html('<span class="text-danger">경력 일자를 입력해주세요.</span>');
 						return;
-					} else if ($('#careerEnddate').val()== "") {
+					} else if ($('#careerEnddate').val().replace(/(\s*)/g, "") == "") {
 						$('#careerDateCheck').html('<span class="text-danger">경력 일자를 입력해주세요.</span>');
 						return;
 					} else if ($('#careerStartdate').val().replace(/-/gi,"") > $('#careerEnddate').val().replace(/-/gi,"")) {

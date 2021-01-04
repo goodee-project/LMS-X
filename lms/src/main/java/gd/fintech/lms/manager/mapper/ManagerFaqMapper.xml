@@ -94,4 +94,12 @@
 		WHERE
 			faq_no = #{faqNo}
 	</update>
+	
+	<!-- FAQ 추가의 카테고리 목록 출력용 -->
+	<select id="selectFaqCategoryList" resultType="gd.fintech.lms.vo.FaqCategory">
+		SELECT
+			faq_category faqCategory
+		FROM
+			faq_category
+	</select>
 </mapper>

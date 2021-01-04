@@ -26,7 +26,7 @@
 				// 아이디 중복 검사
 				let idCheck = "false";
 				$('#idCheck').click(function() {
-					if ($('#accountId').val() != "") {
+					if ($('#accountId').val().replace(/(\s*)/g, "") != "") {
 						$.ajax({
 							url : '${pageContext.request.contextPath}/signup/accountIdCheck/'+$('#accountId').val(),
 							type : 'get',
@@ -57,7 +57,7 @@
 				let emailCheck ="false" ; // 이메일 체크
 				$('#emailCheck').click(function(){
 					
-					if ( $('#teacherEmail').val() != "" ) {
+					if ( $('#teacherEmail').val().replace(/(\s*)/g, "") != "" ) {
 						$('#teacherEmailCheck').html("");
 						if (CheckEmail( $('#teacherEmail').val()) == false) {
 							$('#teacherEmail').focus();
@@ -121,7 +121,7 @@
 				
 				$('#check').click(function() {
 					$('#addressCheck').html("");
-					if ($('#street').val().length > 1) {
+					if ($('#street').val().replace(/(\s*)/g, "").length > 1) {
 						$('#addressWait').html("(잠시만 기다려 주세요...)");
 						let street = null;
 						let building1 = null;
@@ -261,7 +261,7 @@
 				// 회원가입 버튼을 눌렀을 경우
 				$('#btn').click(function() {
 					// 아이디검사
-					if ($('#accountId').val() == "") {
+					if ($('#accountId').val().replace(/(\s*)/g, "") == "") {
 						$('#accountId').focus();
 						return;
 					} else if ( idCheck == "false" ) {
@@ -274,7 +274,7 @@
 					if ($('#teacherPw1').val().length < 7) {
 						$('#teacherPw1').focus();
 						return;
-					} else if ($('#teacherPw2').val() == "") {
+					} else if ($('#teacherPw2').val().replace(/(\s*)/g, "") == "") {
 						$('#teacherPw2').focus();
 						return;
 					} else if (isJobPassword($('#teacherPw1').val()) == false) {
@@ -291,7 +291,7 @@
 					}
 					
 					// 이메일 검사
-					if ($('#teacherEmail').val() == "") {
+					if ($('#teacherEmail').val().replace(/(\s*)/g, "") == "") {
 						$('#teacherEmail').focus();
 						return;
 					} else if (CheckEmail($('#teacherEmail').val()) == false) {
@@ -307,7 +307,7 @@
 					}
 	
 					// 이름 검사
-					if ($('#teacherName').val() == "") {
+					if ($('#teacherName').val().replace(/(\s*)/g, "") == "") {
 						$('#teacherName').focus();
 						return;
 					}
@@ -320,7 +320,7 @@
 			    		return false;
 					}
 					// 핸드폰 검사
-					if ($('#teacherPhone').val() == "") {
+					if ($('#teacherPhone').val().replace(/(\s*)/g, "") == "") {
 						$('#teacherPhone').focus();
 						return;
 					} else if (telValidator($('#teacherPhone').val()) == false) {
@@ -341,7 +341,7 @@
 					}
 					
 					// 생년월일 검사
-					if ($('#teacherBirth').val() == "") {
+					if ($('#teacherBirth').val().replace(/(\s*)/g, "") == "") {
 						$('#teacherBirth').focus();
 						$('#teacherBirthCheck').html('<span class="text-danger">생년월일을 입력해주세요</span>')
 						return;
@@ -350,7 +350,7 @@
 					}
 					
 					// 주소 검사
-					if ($('#teacherAddressMain').val() == "") {
+					if ($('#teacherAddressMain').val().replace(/(\s*)/g, "") == "") {
 						$('#addressCheck').html('<span class="text-danger">주소를 검색해주세요</span>')
 						return;
 					} else {
@@ -358,7 +358,7 @@
 					}
 					
 					// 상세주소 검사
-					if ($('#teacherAddressSub').val() == "") {
+					if ($('#teacherAddressSub').val().replace(/(\s*)/g, "") == "") {
 						$('#teacherAddressSub').focus();
 						return;
 					}

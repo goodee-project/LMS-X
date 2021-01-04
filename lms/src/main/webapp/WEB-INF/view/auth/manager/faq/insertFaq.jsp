@@ -53,7 +53,7 @@
 			oEditors.getById["faqContent"].exec("UPDATE_CONTENTS_FIELD", []);
 			let fc = $("#faqContent").val();
 			fc = fc.replace(/(\s*)/g, "")
-			if($('#faqTitle').val().length < 1){
+			if($('#faqTitle').val().replace(/(\s*)/g, "").length < 1){
 				alert('제목을 입력해주세요.');
 				return;
 			} 
@@ -131,24 +131,8 @@ th {
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td>계정 id</td>
-										<td><input type="text" class="form-control" name="accountId"
-											value="${sessionScope.loginId}" readonly="readonly"></td>
-									</tr>
-									<tr>
-										<td>FAQ 작성자</td>
-										<td><input type="text" class="form-control" name="faqWriter"
-											value="${sessionScope.loginId}" readonly="readonly"></td>
-									</tr>
-									<tr>
 										<td>FAQ 제목</td>
 										<td><input type="text" class="form-control" name="faqTitle" id="faqTitle"></td>
-									</tr>
-									<tr>
-										<td>FAQ 내용</td>
-										<td>
-											<textarea name="faqContent" rows="10" cols="22" class="form-control" id="faqContent"></textarea>
-										</td>
 									</tr>
 									<tr>
 										<td>FAQ 카테고리</td>
@@ -158,6 +142,13 @@ th {
 												</c:forEach>
 										</select></td>
 									</tr>
+									<tr>
+										<td>FAQ 내용</td>
+										<td>
+											<textarea name="faqContent" rows="10" cols="22" class="form-control" id="faqContent"></textarea>
+										</td>
+									</tr>
+									
 								</table>
 							</div>
 						</form>

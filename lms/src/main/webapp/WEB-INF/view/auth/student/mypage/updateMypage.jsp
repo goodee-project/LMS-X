@@ -36,7 +36,7 @@
 				let emailCheck ="false" ; // 이메일 체크
 				$('#emailCheck').click(function(){
 					
-					if ( $('#studentEmail').val() != "" ) {
+					if ( $('#studentEmail').val().replace(/(\s*)/g, "") != "" ) {
 						$('#studentEmailCheck').html("");
 						if (CheckEmail( $('#studentEmail').val()) == false) {
 							$('#studentEmail').focus();
@@ -110,9 +110,9 @@
 				}
 			
 				$('#check').click(function() {
-					$('#addressCheck').html("");
+					$('#addressCheck').html('');
 					
-					if ( $('#street').val().length > 1 ) {
+					if ( $('#street').val().replace(/(\s*)/g, "").length > 1 ) {
 						$('#addressWait').html('(잠시만 기다려 주세요...)');
 						
 						let street = null;
@@ -240,7 +240,7 @@
 				$('#btn').click(function() {
 					
 					// 이메일 검사
-					if ($('#studentEmail').val() == "") {
+					if ($('#studentEmail').val().replace(/(\s*)/g, "") == "") {
 						$('#studentEmail').focus();
 						return;
 					} else if (CheckEmail($('#studentEmail').val()) == false) {
@@ -256,7 +256,7 @@
 					}
 	
 					// 이름 검사
-					if ($('#studentName').val() == "") {
+					if ($('#studentName').val().replace(/(\s*)/g, "") == "") {
 						$('#studentName').focus();
 						return;
 					}
@@ -269,7 +269,7 @@
 			    		return false;
 					}
 					// 핸드폰 검사
-					if ($('#studentPhone').val() == "") {
+					if ($('#studentPhone').val().replace(/(\s*)/g, "") == "") {
 						$('#studentPhone').focus();
 						return;
 					} else if (telValidator($('#studentPhone').val()) == false) {
@@ -290,7 +290,7 @@
 					}
 					
 					// 생년월일 검사
-					if ($('#studentBirth').val() == "") {
+					if ($('#studentBirth').val().replace(/(\s*)/g, "") == "") {
 						$('#studentBirth').focus();
 						$('#studentBirthCheck').html('<span class="text-danger">생년월일을 입력해주세요</span>')
 						return;
@@ -299,7 +299,7 @@
 					}
 				
 					// 사진 검사
-					if ( $('#studentImage').val() != "") {
+					if ( $('#studentImage').val().replace(/(\s*)/g, "") != "") {
 						if (imageCheck == false) {
 							$('#studentImageCheck').html('<span class="text-danger">이미지 파일만 올릴 수 있습니다.</span>');
 							return;
@@ -311,7 +311,7 @@
 					}
 					
 					// 주소 검사
-					if ($('#studentAddressMain').val() == "") {
+					if ($('#studentAddressMain').val().replace(/(\s*)/g, "") == "") {
 						$('#addressCheck').html('<span class="text-danger">주소를 검색해주세요</span>')
 						return;
 					} else {
@@ -319,7 +319,7 @@
 					}
 					
 					// 상세주소 검사
-					if ($('#studentAddressSub').val() == "") {
+					if ($('#studentAddressSub').val().replace(/(\s*)/g, "") == "") {
 						$('#studentAddressSub').focus();
 						return;
 					}
@@ -488,7 +488,6 @@
 														<input id="studentAddressMain" class="form-control form-control-alternative" style="margin-bottom:5px; background-color: white;" type="text" name="studentAddressMain"  value="${student.studentAddressMain}" readonly="readonly" >
 													</div>
 												</div>
-												<span id="addressWait"></span>
 											</div>
 												<div class="col-lg-6">
 												<div class="form-group">
@@ -507,8 +506,8 @@
 															<button type="button" class="btn btn-primary" id="check">검색</button>
 														</div>
 													</div>
-													<span id="addressWait"></span>
 													<span id="addressCheck"></span>
+													<span id="addressWait"></span>
 													<div id="selectAddress" style="overflow: auto; width: 100%; max-height: 200px;"></div>
 												</div>
 											</div>

@@ -80,19 +80,19 @@
 					});
 					
 					$('#licenseBtn').click(function(){
-						if ($('#licenseNumber').val() == "") {
+						if ($('#licenseNumber').val().replace(/(\s*)/g, "") == "") {
 							$('#licenseNumber').focus();
 							return;
 						}
-						if ($('#licenseName').val() == "") {
+						if ($('#licenseName').val().replace(/(\s*)/g, "") == "") {
 							$('#licenseName').focus();
 							return;
 						}
-						if ($('#licenseAgency').val() == "") {
+						if ($('#licenseAgency').val().replace(/(\s*)/g, "") == "") {
 							$('#licenseAgency').focus();
 							return;
 						}
-						if ($('#licenseGetdate').val() == "") {
+						if ($('#licenseGetdate').val().replace(/(\s*)/g, "") == "") {
 							$('#licenseDateCheck').html('<span class="text-danger">자격증 발급 일자를 입력해주세요.</span>');
 							return;
 						} else {

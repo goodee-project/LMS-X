@@ -53,7 +53,7 @@
 			oEditors.getById["faqContent"].exec("UPDATE_CONTENTS_FIELD", []);
 			let fc = $("#faqContent").val();
 			fc = fc.replace(/(\s*)/g, "")
-			if($('#faqTitle').val().length < 1){
+			if($('#faqTitle').val().replace(/(\s*)/g, "").length < 1){
 				alert('제목을 입력해주세요.');
 				return;
 			} 
@@ -140,18 +140,18 @@ th {
 											value="${faq.faqTitle}"></td>
 									</tr>
 									<tr>
-										<td>FAQ 내용</td>
-										<td>
-											<textarea name="faqContent" id="faqContent" rows="10" cols="22" class="form-control">${faq.faqContent}</textarea>
-										</td>
-									</tr>
-									<tr>
 										<td>FAQ 카테고리</td>
 										<td><select name="faqCategory" class="form-control">
 												<c:forEach var="f" items="${faqCategoryList}">
 													<option value="${f.faqCategory}">${f.faqCategory}</option>
 												</c:forEach>
 										</select></td>
+									</tr>
+									<tr>
+										<td>FAQ 내용</td>
+										<td>
+											<textarea name="faqContent" id="faqContent" rows="10" cols="22" class="form-control">${faq.faqContent}</textarea>
+										</td>
 									</tr>
 								</table>
 							</div>

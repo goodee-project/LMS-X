@@ -2,22 +2,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>InsertSubject</title>
-	<!-- Favicon -->
-	<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
-	<!-- Fonts -->
-	<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-	<!-- Icons -->
-	<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-	<link
-	href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"
-	rel="stylesheet" />
-	<!-- CSS Files -->
-	<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>InsertSubject</title>
+		<!-- Favicon -->
+		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
+		<!-- Fonts -->
+		<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+		<!-- Icons -->
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"	rel="stylesheet" />
+		<!-- CSS Files -->
+		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+		<!-- jQuery / Ajax Google CDN -->
+		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('#subjectBtn').click(function(){
+					
+					if ($('#subjectName').val().replace(/(\s*)/g, "") == "") {
+						$('#subjectName').focus();
+						return;
+					}
+
+				});
+			});
+
+		</script>		
+	</head>
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
 		<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
@@ -46,23 +59,23 @@
 								</div>
 							</div>
 								<div class="table-responsive">
-									<form method="post" action="${pageContext.request.contextPath}/auth/manager/subject/insertSubject">
+									<form id="subjectForm" method="post" action="${pageContext.request.contextPath}/auth/manager/subject/insertSubject">
 										<table class="table align-items-center table-flush">
 											<tr>
 												<td width="20%">과목 이름</td>
-												<td width="80%"><input type="text" name="subjectName" class="form-control"></td>
+												<td width="80%"><input id="subjectName" type="text" name="subjectName" class="form-control"></td>
 											</tr>
 											<tr>
 												<td>과목 총 일수</td>
-												<td><input type="text" name="subjectTotalday" class="form-control"></td>
+												<td><input type="text" id="subjectTotalday" name="subjectTotalday" class="form-control"></td>
 											</tr>
 											<tr>
 												<td>과목 정보</td>
-												<td><input type="text" name="subjectInfo" class="form-control"></td>
+												<td><input type="text" id="subjectInfo" name="subjectInfo" class="form-control"></td>
 											</tr>
 										</table>
 										<div style="text-align: right">
-											<button type="submit" class="btn btn-outline-primary">입력</button>
+											<button type="button" id="subjectBtn" class="btn btn-outline-primary">입력</button>
 										</div>
 									</form>
 								</div>

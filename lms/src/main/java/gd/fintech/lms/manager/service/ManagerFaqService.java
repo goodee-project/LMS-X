@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.manager.mapper.ManagerFaqMapper;
 import gd.fintech.lms.vo.Faq;
+import gd.fintech.lms.vo.FaqCategory;
 
 @Service
 @Transactional
@@ -42,5 +43,10 @@ public class ManagerFaqService {
 	// FAQ 게시판 상세보기 조회수 증가
 	public int updateFaqCountUp(int faqNo) {
 		return managerFaqMapper.updateFaqCount(faqNo);
+	}
+	
+	// FAQ 카테고리 조회
+	public List<FaqCategory> getFaqCategoryList() {
+		return managerFaqMapper.selectFaqCategoryList();
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Faq;
+import gd.fintech.lms.vo.FaqCategory;
 
 @Mapper
 public interface ManagerFaqMapper {
@@ -29,4 +30,7 @@ public interface ManagerFaqMapper {
 	
 	// FAQ 게시판 조회수 증가
 	int updateFaqCount(int faqNo);
+	
+	// FAQ 카테고리
+	public List<FaqCategory> selectFaqCategoryList();
 }

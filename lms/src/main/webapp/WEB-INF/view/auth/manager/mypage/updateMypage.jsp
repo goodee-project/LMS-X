@@ -23,7 +23,7 @@
 			let emailCheck ="false" ; // 이메일 체크
 			$('#emailCheck').click(function(){
 				
-				if ( $('#managerEmail').val() != "" ) {
+				if ( $('#managerEmail').val().replace(/(\s*)/g, "") != "" ) {
 					$('#managerEmailCheck').html("");
 					if (CheckEmail( $('#managerEmail').val()) == false) {
 						$('#managerEmail').focus();
@@ -96,7 +96,7 @@
 			
 			$('#check').click(function() {
 				$('#addressCheck').html("");
-				if ( $('#street').val().length > 1 ) {
+				if ( $('#street').val().replace(/(\s*)/g, "").length > 1 ) {
 					$('#addressWait').html('(잠시만 기다려 주세요...)');
 					let street = null;
 					let building1 = null;
@@ -221,7 +221,7 @@
 			$('#btn').click(function() {
 				
 				// 이메일 검사
-				if ($('#managerEmail').val() == "") {
+				if ($('#managerEmail').val().replace(/(\s*)/g, "") == "") {
 					$('#managerEmail').focus();
 					return;
 				} else if (CheckEmail($('#managerEmail').val()) == false) {
@@ -237,7 +237,7 @@
 				}
 
 				// 이름 검사
-				if ($('#managerName').val() == "") {
+				if ($('#managerName').val().replace(/(\s*)/g, "") == "") {
 					$('#managerName').focus();
 					return;
 				}
@@ -250,7 +250,7 @@
 		    		return false;
 				}
 				// 핸드폰 검사
-				if ($('#managerPhone').val() == "") {
+				if ($('#managerPhone').val().replace(/(\s*)/g, "") == "") {
 					$('#managerPhone').focus();
 					return;
 				} else if (telValidator($('#managerPhone').val()) == false) {
@@ -271,7 +271,7 @@
 				}
 				
 				// 생년월일 검사
-				if ($('#managerBirth').val() == "") {
+				if ($('#managerBirth').val().replace(/(\s*)/g, "") == "") {
 					$('#managerBirth').focus();
 					$('#managerBirthCheck').html('<span class="text-danger">생년월일을 입력해주세요</span>')
 					return;
@@ -280,19 +280,19 @@
 				}
 				
 				// 사진 검사
-				if ( $('#managerImage').val() != "") {
+				if ( $('#managerImage').val().replace(/(\s*)/g, "") != "") {
 					if (imageCheck == false) {
 						$('#managerImageCheck').html('<span class="text-danger">이미지 파일만 올릴 수 있습니다.</span>');
 						return;
 					} else {
-						$('#managerImageCheck').html("");
+						$('#managerImageCheck').html('');
 					}
 				} else {
-					$('#managerImageCheck').html("");
+					$('#managerImageCheck').html('');
 				}
 				
 				// 주소 검사
-				if ($('#managerAddressMain').val() == "") {
+				if ($('#managerAddressMain').val().replace(/(\s*)/g, "") == "") {
 					$('#addressCheck').html('<span class="text-danger">주소를 검색해주세요</span>')
 					return;
 				} else {
@@ -300,7 +300,7 @@
 				}
 				
 				// 상세주소 검사
-				if ($('#managerAddressSub').val() == "") {
+				if ($('#managerAddressSub').val().replace(/(\s*)/g, "") == "") {
 					$('#managerAddressSub').focus();
 					return;
 				}
@@ -481,7 +481,6 @@
 													<input id="managerAddressMain" class="form-control form-control-alternative" style="margin-bottom:5px; background-color: white;" type="text" name="managerAddressMain"  value="${manager.managerAddressMain}" readonly="readonly" >
 												</div>
 											</div>
-											<span id="addressWait"></span>
 										</div>
 											<div class="col-lg-6">
 											<div class="form-group">
@@ -500,8 +499,8 @@
 														<button type="button" class="btn btn-primary" id="check">검색</button>
 													</div>
 												</div>
-												<span id="addressWait"></span>
 												<span id="addressCheck"></span>
+												<span id="addressWait"></span>
 												<div id="selectAddress" style="overflow: auto; width: 100%; max-height: 200px;"></div>
 											</div>
 										</div>

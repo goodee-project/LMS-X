@@ -61,17 +61,17 @@
 					$('#insertUpdatePW').html(insertPw);
 					$('#updatePw').click(function(){
 						// 유효성 체크
-						if ($('#nowPw').val() == "") {
+						if ($('#nowPw').val().replace(/(\s*)/g, "") == "") {
 							$('#nowPw').focus();
 							return;
 						}
 						
 						// 비밀번호검사
-						if ($('#nextPw1').val() == "") {
+						if ($('#nextPw1').val().replace(/(\s*)/g, "") == "") {
 							$('#nextPw1').focus();
 							return;
 						}
-						if ($('#nextPw2').val() == "") {
+						if ($('#nextPw2').val().replace(/(\s*)/g, "") == "") {
 							$('#nextPw2').focus();
 							return;
 						}
