@@ -47,6 +47,7 @@
 			lms_notice_title lmsNoticeTitle,
 			lms_notice_content lmsNoticeContent,
 			lms_notice_createdate lmsNoticeCreatedate,
+			lms_notice_updatedate lmsNoticeUpdatedate,
 			lms_notice_count lmsNoticeCount
 		FROM
 			lms_notice

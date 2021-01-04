@@ -43,6 +43,38 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<!-- NAVER SmartEditor2 스크립트 -->
+<script 
+	src="${pageContext.request.contextPath}/smarteditor2/js/HuskyEZCreator.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#insertBtn').click(function() {
+			// 스마트 에디터 내용 적용
+			oEditors.getById["faqContent"].exec("UPDATE_CONTENTS_FIELD", []);
+			let fc = $("#faqContent").val();
+			fc = fc.replace(/(\s*)/g, "")
+			if($('#faqTitle').val().length < 1){
+				alert('제목을 입력해주세요.');
+				return;
+			} 
+			if(fc == '' || fc  == null || fc == '&nbsp;' || fc == '<p>&nbsp;</p>'){
+				alert('내용을 입력해주세요.');
+				oEditors.getById["fc"].exec("FOCUS");
+				return;
+			}
+			$('#insertForm').submit();
+		});
+		
+		// NAVER SmartEditor2 적용 코드
+		let oEditors = [];				
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors,
+			elPlaceHolder : 'faqContent',
+			sSkinURI : '${pageContext.request.contextPath}/smarteditor2/SmartEditor2Skin.html',
+			fCreator : 'createSEditor2'
+		});
+	});
+</script>
 <style>
 .table {
 	text-align: center;
@@ -80,7 +112,7 @@ th {
 				<div class="col">
 					<div class="card shadow">
 						<form method="post"
-							action="${pageContext.request.contextPath}/auth/manager/faq/insertFaq">
+							action="${pageContext.request.contextPath}/auth/manager/faq/insertFaq" id="insertForm">
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<br>
@@ -90,7 +122,7 @@ th {
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark"
 											onclick="location.href='${pageContext.request.contextPath}/auth/manager/faq/faqList/1'">목록</button>
-										<button type="submit" class="btn btn-sm btn-success">입력</button>
+										<button type="button" class="btn btn-sm btn-success" id="insertBtn">입력</button>
 									</div>
 									<br>
 								</div>
@@ -100,25 +132,27 @@ th {
 								<table class="table align-items-center table-flush">
 									<tr>
 										<td>계정 id</td>
-										<td><input type="text" name="accountId"
+										<td><input type="text" class="form-control" name="accountId"
 											value="${sessionScope.loginId}" readonly="readonly"></td>
 									</tr>
 									<tr>
 										<td>FAQ 작성자</td>
-										<td><input type="text" name="faqWriter"
+										<td><input type="text" class="form-control" name="faqWriter"
 											value="${sessionScope.loginId}" readonly="readonly"></td>
 									</tr>
 									<tr>
 										<td>FAQ 제목</td>
-										<td><input type="text" name="faqTitle"></td>
+										<td><input type="text" class="form-control" name="faqTitle" id="faqTitle"></td>
 									</tr>
 									<tr>
 										<td>FAQ 내용</td>
-										<td><input type="text" name="faqContent"></td>
+										<td>
+											<textarea name="faqContent" rows="10" cols="22" class="form-control" id="faqContent"></textarea>
+										</td>
 									</tr>
 									<tr>
 										<td>FAQ 카테고리</td>
-										<td><select name="faqCategory">
+										<td><select name="faqCategory" class="form-control">
 												<c:forEach var="f" items="${faqCategoryList}">
 													<option value="${f.faqCategory}">${f.faqCategory}</option>
 												</c:forEach>
