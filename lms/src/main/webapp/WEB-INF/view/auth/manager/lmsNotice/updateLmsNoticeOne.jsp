@@ -45,23 +45,6 @@
 <!-- textArea자동조절 라이브러리 -->
 <script
 	src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 <script>
 	$(document).ready(function() {
 		//textarea 크기 자동 조정
@@ -124,13 +107,13 @@ th {
 								</div>
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td width="20%">제목</td>
+										<th width="20%">제목</th>
 										<td width="80%"><input id="lmsNoticeTitle" type="text"
 											class="form-control" name="lmsNoticeTitle"
 											value="${lmsNotice.lmsNoticeTitle}" placeholder="제목을 입력해주세요."></td>
 									</tr>
 									<tr>
-										<td>내용</td>
+										<th>내용</th>
 										<td><textarea id="lmsNoticeContent"
 												class="form-control autosize"
 												style="min-height: 200px; resize: none;" cols="100px"

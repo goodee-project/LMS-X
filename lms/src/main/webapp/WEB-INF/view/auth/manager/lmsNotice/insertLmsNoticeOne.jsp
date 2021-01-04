@@ -45,23 +45,6 @@
 <!-- textArea자동조절 라이브러리 -->
 <script
 	src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 
 <script>
 	$(document).ready(function() {
@@ -107,7 +90,7 @@ th {
 								<div class="row align-items-center">
 									<br>
 									<div class="col-8">
-										<h3 class="mb-0">공지사항 추가</h3>
+										<h3 class="mb-0">LMS 공지사항 추가</h3>
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark"
@@ -122,13 +105,13 @@ th {
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td>제목</td>
+										<th width="20%">제목</th>
 										<td>
 											<input class="form-control" id="lmsNoticeTitle" type="text"
 											name="lmsNoticeTitle" placeholder="제목을 입력해주세요."></td>
 									</tr>
 									<tr>
-										<td>내용</td>
+										<th width="80%">내용</th>
 										<td><textarea id="lmsNoticeContent" class="form-control autosize"
 												style="min-height: 200px; resize: none;" cols="100px"
 												name="lmsNoticeContent" placeholder="내용을 입력하세요."></textarea>

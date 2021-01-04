@@ -87,12 +87,12 @@ th {
 							<table class="table align-items-center table-flush">
 								<thead class="thead-light">
 									<tr>
-										<th>로그인 로그 번호</th>
-										<th>접속계정ID</th>
+										<th>로그 번호</th>
+										<th>계정 ID</th>
 										<th>접속 날짜</th>
 										<th>접속 브라우저</th>
 										<th>로그인 IP</th>
-										<th>로그인한 OS</th>
+										<th>로그인 OS</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -217,10 +217,19 @@ th {
 							<form method="get"
 								action="${pageContext.request.contextPath}/auth/manager/access/accessList/1"
 								class="form-inline">
-								<div class="input-group" style="width: 70%; margin: auto;">
+								<div class="input-group" style="width: 55%; margin: auto;">
+									<div class="input-group-prepend">
+										<span class="input-group-text">ID</span>
+									</div>
+									
 									<!-- 계정검색 -->
 									<input type="text" class="form-control" name="searchText"
 										value="${searchText}">
+										
+									<div class="input-group-prepend">
+										<span class="input-group-text">날짜</span>
+									</div>
+									
 									<!-- 날짜선택 -->
 									<input type="date" class="form-control" name="searchDate"
 										value="${searchDate}">

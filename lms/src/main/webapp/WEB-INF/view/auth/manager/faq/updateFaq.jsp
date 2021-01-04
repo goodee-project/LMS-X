@@ -75,23 +75,6 @@
 		});
 	});
 </script>
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
 	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
@@ -116,7 +99,7 @@ th {
 								<div class="row align-items-center">
 									<br>
 									<div class="col-8">
-										<h3 class="mb-0">Faq 수정</h3>
+										<h3 class="mb-0">FAQ 수정</h3>
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark"
@@ -130,17 +113,17 @@ th {
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
 									<tr>
-										<td>FAQ 번호</td>
-										<td><input type="text" class="form-control" name="faqNo" value="${faq.faqNo}"
+										<th width="20%">번호</th>
+										<td width="80%"><input type="text" class="form-control" name="faqNo" value="${faq.faqNo}"
 											readonly="readonly"></td>
 									<tr>
 									<tr>
-										<td>FAQ 제목</td>
+										<th>제목</th>
 										<td><input type="text" class="form-control" name="faqTitle" id="faqTitle"
 											value="${faq.faqTitle}"></td>
 									</tr>
 									<tr>
-										<td>FAQ 카테고리</td>
+										<th>카테고리</th>
 										<td><select name="faqCategory" class="form-control">
 												<c:forEach var="f" items="${faqCategoryList}">
 													<option value="${f.faqCategory}">${f.faqCategory}</option>
@@ -148,9 +131,9 @@ th {
 										</select></td>
 									</tr>
 									<tr>
-										<td>FAQ 내용</td>
+										<th>내용</th>
 										<td>
-											<textarea name="faqContent" id="faqContent" rows="10" cols="22" class="form-control">${faq.faqContent}</textarea>
+											<textarea name="faqContent" id="faqContent" rows="10" cols="22" class="form-control" style="width: 100%;">${faq.faqContent}</textarea>
 										</td>
 									</tr>
 								</table>
