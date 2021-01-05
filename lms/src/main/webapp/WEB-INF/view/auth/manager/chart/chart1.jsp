@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -92,24 +93,64 @@
 						<div class="card shadow">
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
-									<br>
 									<div class="col-8">
-										<h3 class="mb-0">통계</h3>
+										<h3 class="mb-0">통계 1</h3>
 									</div>
-									<div class="col-4 text-right"></div>
-									<br>
+									<div class="col-4 text-right">
+										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/chart/chartIndex">목록</a>
+									</div>
 								</div>
 							</div>
-	
+							
 							<div class="card-footer py-4">
 								<!--* Card init *-->
 								<div class="card">
 								
 								    <!-- Card header -->
 								    <div class="card-header">
-								    
-										<!-- Title -->
-										<h5 class="h3 mb-0">Bar형 차트 예제</h5>
+										<div class="row align-items-center">
+											<div class="col-6">
+												<!-- Title -->
+												<h5 class="h3 mb-0">Bar형 차트 예제</h5>
+											</div>
+											
+											<div class="col-6 text-right">
+												<div class="input-group">
+													<select class="form-control" name="managerPosition">
+														<c:if test="${manager.managerPosition == null}">
+															<option value="" selected="selected">==전체==</option>
+															<option value="사원">사원</option>
+															<option value="대리">대리</option>
+															<option value="팀장">팀장</option>
+														</c:if>
+														<c:if test="${manager.managerPosition == '사원'}">
+															<option value="">==전체==</option>
+															<option value="사원" selected="selected">사원</option>
+															<option value="대리">대리</option>
+															<option value="팀장">팀장</option>
+														</c:if>
+														<c:if test="${manager.managerPosition == '대리'}">
+															<option value="">==전체==</option>
+															<option value="사원">사원</option>
+															<option value="대리" selected="selected">대리</option>
+															<option value="팀장">팀장</option>
+														</c:if>
+														<c:if test="${manager.managerPosition == '팀장'}">
+															<option value="" selected="selected">==전체==</option>
+															<option value="사원">사원</option>
+															<option value="대리">대리</option>
+															<option value="팀장" selected="selected">팀장</option>
+														</c:if>
+													</select>
+													
+													<input type="text" class="form-control" name="managerName" placeholder="이름을 검색해주세요." value="${manager.managerName}">
+													
+													<div class="input-group-append">
+														<button type="submit" class="btn btn-primary">검색</button>
+													</div>
+												</div>
+											</div>
+										</div>
 								    </div>
 								    
 								    <!-- Card body -->
@@ -120,31 +161,6 @@
 										    <canvas id="chart-bars" class="chart-canvas"></canvas>
 										</div>
 								    </div>
-								</div>
-							</div>
-							
-							<div class="card-footer py-4">
-								<div class="row">
-									<div class="col-4">
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart1">강좌별 최종평가 평균</a>
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart2">강좌별 상위/하위 학생</a>
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart3">강좌별 과제 점수 평균</a>
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart4">강좌별 과제 제출률</a>
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart5">강좌별 최종평가 점수</a>
-									</div>
-									<div class="col-4">
-										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart6">과목별 최종평가 점수</a>
-										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart7">학생별 최종평가 평균</a>
-										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart8">학생별 과제 점수</a>
-										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart9">학생별 과제 점수 평균</a>
-										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart10">강좌별 평점</a>
-									</div>
-									<div class="col-4">
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart11">강좌별 종합 출석률</a>
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart12">강좌별 월별 출석률</a>
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart13">학생별 종합 출석률</a>
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart14">학생별 월별 출석률</a>
-									</div>
 								</div>
 							</div>
 						</div>
