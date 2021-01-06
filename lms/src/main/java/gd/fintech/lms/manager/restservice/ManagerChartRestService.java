@@ -38,9 +38,9 @@ public class ManagerChartRestService {
 		return managerChartRestMapper.selectAttendanceCountByLecture(lectureNo);
 	}
 	// 학생별 과제 점수
-	public List<Map<String, Object>> selectReportCountByStudent(int reprotNo, int lectureNo){
+	public List<Map<String, Object>> selectReportCountByStudent(int reportNo, int lectureNo){
 		Map<String,Integer> map = new HashMap<String, Integer>();
-		map.put("reprotNo",reprotNo);
+		map.put("reportNo",reportNo);
 		map.put("lectureNo",lectureNo);
 		return managerChartRestMapper.selectReportCountByStudent(map);
 	}
@@ -60,7 +60,7 @@ public class ManagerChartRestService {
 		return managerChartRestMapper.selectAvgReportByLecture(lectureNo);
 	}
 	// 학생별 과제 점수 평균
-	public List<Map<String, Object>> selectAvgReprotByStudent(int lectureNo){
-		return managerChartRestMapper.selectAvgReprotByStudent(lectureNo);
+	public List<Map<String, Object>> selectAvgReportByStudent(int lectureNo){
+		return managerChartRestMapper.selectAvgReportByStudent(lectureNo);
 	}
 }

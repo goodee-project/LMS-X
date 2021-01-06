@@ -29,5 +29,5 @@ public interface ManagerChartRestMapper {
 	// 강의별 과제 점수 평균
 	public List<Map<String, Object>> selectAvgReportByLecture(int lectureNo);
 	// 학생별 과제 점수 평균
-	public List<Map<String, Object>> selectAvgReprotByStudent(int lectureNo);
+	public List<Map<String, Object>> selectAvgReportByStudent(int lectureNo);
 }

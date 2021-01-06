@@ -48,11 +48,11 @@ public class ManagerChartRestController {
 		return managerChartRestService.selectAttendanceRateByStudent(lectureNo);
 	}
 	// 학생별 과제 점수
-	@GetMapping("auth/manager/chart/attendanceCountByLecture/{reporNo}/{lectureNo}")
+	@GetMapping("auth/manager/chart/attendanceCountByLecture/{lectureNo}/{reportNo}")
 	public List<Map<String, Object>> AttendanceCountByLecture(
-			@PathVariable(name="reprotNo")int reprotNo,
-			@PathVariable(name="lectureNo")int lectureNo){
-		return managerChartRestService.selectReportCountByStudent(reprotNo, lectureNo);
+			@PathVariable(name="lectureNo")int lectureNo,
+			@PathVariable(name="reportNo")int reportNo){
+		return managerChartRestService.selectReportCountByStudent(reportNo, lectureNo);
 	}
 	// 강좌별 과제 제출률
 	@GetMapping("auth/manager/chart/reportSubmissionRateByLecture/{lectureNo}")
@@ -74,9 +74,9 @@ public class ManagerChartRestController {
 		return managerChartRestService.selectAvgReportByLecture(lectureNo);
 	}
 	// 학생별 과제 점수 평균
-	@GetMapping("auth/manager/chart/avgReprotByStudent/{lectureNo}")
-	public List<Map<String, Object>> AvgReprotByStudent(
+	@GetMapping("auth/manager/chart/avgReportByStudent/{lectureNo}")
+	public List<Map<String, Object>> AvgReportByStudent(
 			@PathVariable(name="lectureNo")int lectureNo){
-		return managerChartRestService.selectAvgReprotByStudent(lectureNo);
+		return managerChartRestService.selectAvgReportByStudent(lectureNo);
 	}
 }

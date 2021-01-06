@@ -205,7 +205,7 @@
 			r.report_no
 	</select>
 	<!-- 강의별 과제 점수 평균 -->
-	<select id="selectAvgReprotByStudent" parameterType="int" resultType="java.util.Map">
+	<select id="selectAvgReportByStudent" parameterType="int" resultType="java.util.Map">
 		SELECT
 		    cr.account_id, 
 		    AVG(IFNULL(rs.report_submit_point, 0))
