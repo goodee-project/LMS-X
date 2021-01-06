@@ -31,15 +31,23 @@
 			$(document).ready(function() {	
 				// 차트 기본 정보 선언			
 				let myChart ={
-				    type: 'bar',
+				    type: 'line',
 				    data: {
-						datasets: [{
-							data: [],
-							backgroundColor: [],
-							label: '강의별 성적 평균'
-						}],
-						labels: []
-				    },
+				           labels:[],
+				           datasets:[{
+				              label:'최소 최대 점수',
+				              backgroundColor: [],
+				              borderColor: [],
+				              data:[],
+							  fill: 8
+				           },{
+				              label:'최소 최대 점수',
+				              backgroundColor: [],
+				              borderColor: [],
+				              data:[],
+							  fill: '+2'
+					       }]
+				        },
 				    options: {
 				        scales: {
 				            yAxes: [{
@@ -53,7 +61,7 @@
 
 				// 데이터 가져와서 차트에 넣기
 				$.ajax({
-					url:'${pageContext.request.contextPath}/auth/manager/chart/avgGradeByLecture',
+					url:'${pageContext.request.contextPath}/auth/manager/chart/minMaxGradeByLecture',
 					type:'get',
 					success:function(data){
 						console.log(data);
@@ -62,9 +70,17 @@
 							let ranColor1 = Math.floor(Math.random()*256);
 							let ranColor2 = Math.floor(Math.random()*256);
 							let ranColor3 = Math.floor(Math.random()*256);
+							let ranColor4 = Math.floor(Math.random()*256);
+							let ranColor5 = Math.floor(Math.random()*256);
+							let ranColor6 = Math.floor(Math.random()*256);
 							myChart.data.labels.push(value.lecture_name);
-							myChart.data.datasets[0].data.push(value.avg);
+							myChart.data.datasets[0].data.push(value.min_score);
 							myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.4)");
+							myChart.data.datasets[0].borderColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.8)");
+
+							myChart.data.datasets[1].data.push(value.max_score);
+							myChart.data.datasets[1].backgroundColor.push("rgba(" + ranColor4 +  ", "+ ranColor5 + ", " + ranColor6 + ", 0.4)");
+							myChart.data.datasets[1].borderColor.push("rgba(" + ranColor4 +  ", "+ ranColor5 + ", " + ranColor6 + ", 0.8)");							
 						});
 						
 						var ctx = document.getElementById('chart-bars').getContext('2d');
@@ -95,7 +111,7 @@
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<div class="col-8">
-										<h3 class="mb-0">통계 1</h3>
+										<h3 class="mb-0">통계 2</h3>
 									</div>
 									<div class="col-4 text-right">
 										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/chart/chartIndex">목록</a>
@@ -112,7 +128,7 @@
 										<div class="row align-items-center">
 											<div class="col-6">
 												<!-- Title -->
-												<h5 class="h3 mb-0">강의별 최종평가 평균 성적</h5>
+												<h5 class="h3 mb-0">강의별 최대 성적 / 최소 성적</h5>
 											</div>
 											
 											<div class="col-6 text-right">
