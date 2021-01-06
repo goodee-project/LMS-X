@@ -29,61 +29,65 @@
 
 		<!-- Chart -->
 		<script>
-			$('#search').click(function() {
-				console.log('Hi');
-				$.ajax({
-				     url:'${pageContext.request.contextPath}/auth/manager/chart/attendanceCountByLecture/' + $('#lectureNo').val() + '/' + ('#reportNo').val(),
-				     type:'GET',
-				     success: function(data) {
-				        var ctx = document.getElementById('totalInOfMonthByYearChartResult').getContext('2d');
-				        var chart = new Chart(ctx, {
-				           // The type of chart we want to create
-				            type: 'bar',
-				
-				            // The data for our dataset
-				            data: {
-				               // 배열 형태로 작성
-				                labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-				                datasets: [{
-				                    label: getParam("year")+'년 월별 수입 내역 차트',
-				                    backgroundColor: [
-				                       	'rgba(255, 99, 132, 0.2)',
-				                        'rgba(54, 162, 235, 0.2)',
-				                        'rgba(255, 206, 86, 0.2)',
-				                        'rgba(75, 192, 192, 0.2)',
-				                        'rgba(153, 102, 255, 0.2)',
-				                        'rgba(255, 159, 64, 0.2)', 
-				                        'rgba(255, 99, 132, 0.2)',
-				                        'rgba(54, 162, 235, 0.2)',
-				                        'rgba(255, 206, 86, 0.2)',
-				                        'rgba(75, 192, 192, 0.2)',
-				                        'rgba(153, 102, 255, 0.2)',
-				                        'rgba(255, 159, 64, 0.2)'
-				                    ],
-				                    borderColor: [
-				                       	'rgba(255, 99, 132, 1)',
-				                        'rgba(54, 162, 235, 1)',
-				                        'rgba(255, 206, 86, 1)',
-				                        'rgba(75, 192, 192, 1)',
-				                        'rgba(153, 102, 255, 1)',
-				                        'rgba(255, 159, 64, 1)',
-				                        'rgba(255, 99, 132, 1)',
-				                        'rgba(54, 162, 235, 1)',
-				                        'rgba(255, 206, 86, 1)',
-				                        'rgba(75, 192, 192, 1)',
-				                        'rgba(153, 102, 255, 1)',
-				                        'rgba(255, 159, 64, 1)'
-				                    ],
-				                    data:[data.january, data.february, data.march, data.april, data.may, data.june, 
-				                         data.july, data.august, data.september, data.october, data.november, data.december],
-				                    borderWidth: 1
-				                }]
-				            },
-				
-				            // Configuration options go here
-				        	options: {}
+			$(document).ready(function() {
+				$('#searchData').click(function() {
+					// 차트 생성 함수
+					function showChart() {
+						// 차트 기본 정보 선언			
+						let myChart = {
+						    type: 'bar',
+						    data: {
+						           labels:[],
+						           datasets:[{
+						              label:'점수',
+						              backgroundColor: [],
+						              borderColor: [],
+						              data:[]
+									}]
+							},
+						    options: {
+						        scales: {
+						            yAxes: [{
+						                ticks: {
+						                    beginAtZero: true
+						                }
+						            }]
+						        }
+						    }
+						};
+		
+						// 데이터 가져와서 차트에 넣기
+						$.ajax({
+							url:'${pageContext.request.contextPath}/auth/manager/chart/attendanceCountByLecture/' + $('#lectureList option:selected').val() + '/' +  $('#reportNo').val(),
+							type:'get',
+							success:function(data){
+								console.log(data);
+								$('#chart-parent').empty();
+								$('#chart-parent').append('<canvas id="chart-bars" class="chart-canvas"></canvas>');
+								
+								$(data).each(function(key, value) {
+									let ranColor1 = Math.floor(Math.random()*256);
+									let ranColor2 = Math.floor(Math.random()*256);
+									let ranColor3 = Math.floor(Math.random()*256);
+									myChart.data.labels.push(value.account_id);
+									myChart.data.datasets[0].data.push(value.point);
+									myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.4)");
+									myChart.data.datasets[0].borderColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.8)");
+								});
+								
+								var ctx = document.getElementById('chart-bars').getContext('2d');
+								var chart = new Chart(ctx, myChart);
+							}
 						});
 					}
+	
+					// 처음 접근시 차트 생성
+					showChart();
+	
+					// 강좌 선택시 차트 생성
+					$('#lectureList').change(function(){
+						showChart();
+					});
 				});
 			});
 		</script>
@@ -134,7 +138,11 @@
 													<div class="input-group-prepend">
 														<span class="input-group-text">강좌</span>
 													</div>
-													<input type="text" class="form-control" name="lectureNo" id="lectureNo" placeholder="강좌 고유 번호" value="${lectureNo}">
+													<select class="form-control" name="lectureList" id="lectureList">
+														<c:forEach var="l" items="${lectureList}">
+															<option value="${l.lectureNo}">${l.lectureName}</option>
+														</c:forEach>
+													</select>
 													
 													<div class="input-group-prepend">
 														<span class="input-group-text">과제번호</span>
@@ -142,7 +150,7 @@
 													<input type="text" class="form-control" name="reportNo" id="reportNo" placeholder="과제 고유 번호" value="${reportNo}">
 													
 													<div class="input-group-append">
-														<button type="button" class="btn btn-primary" id="search">검색</button>
+														<button type="button" class="btn btn-primary" id="searchData">검색</button>
 													</div>
 												</div>
 											</div>
@@ -151,11 +159,8 @@
 								    
 								    <!-- Card body -->
 								    <div class="card-body">
-	
-										<div class="chart">
-										    <!-- Chart wrapper -->
-										    <canvas id="chart-bars" class="chart-canvas"></canvas>
-										</div>
+										
+										<div class="chart" id="chart-parent"></div>
 								    </div>
 								</div>
 							</div>
