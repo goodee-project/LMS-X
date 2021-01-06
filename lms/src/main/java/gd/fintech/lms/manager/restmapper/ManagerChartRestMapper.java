@@ -18,8 +18,6 @@ public interface ManagerChartRestMapper {
 	public List<Map<String, Object>> selectAttendanceRateByStudent(int lectureNo);
 	// 강좌별 별점 점수
 	public List<Map<String, Object>> selectStarRatingByLecture();
-	// 강좌별 출석 시도와 출석 횟수
-	public List<Map<String, Object>> selectAttendanceCountByLecture(int letureNo);
 	// 학생별 과제 점수
 	public List<Map<String, Object>> selectReportCountByStudent(Map<String, Integer> map);
 	// 강좌별 과제 제출률

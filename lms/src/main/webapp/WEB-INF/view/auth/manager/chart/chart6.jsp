@@ -63,7 +63,7 @@
 						success:function(data){
 							console.log(data);
 							$('#chart-parent').empty();
-							$('#chart-parent').append('<canvas id="chart-bars" class="chart-canvas">ㅁㄴㅇㄴㅁ</canvas>');
+							$('#chart-parent').append('<canvas id="chart-bars" class="chart-canvas"></canvas>');
 							
 							$(data).each(function(key, value) {
 								let ranColor1 = Math.floor(Math.random()*256);

@@ -33,10 +33,6 @@ public class ManagerChartRestService {
 	public List<Map<String, Object>> selectStarRatingByLecture(){
 		return managerChartRestMapper.selectStarRatingByLecture();
 	}
-	// 강좌별 출석 시도와 출석 횟수
-	public List<Map<String, Object>> selectAttendanceCountByLecture(int lectureNo){
-		return managerChartRestMapper.selectAttendanceCountByLecture(lectureNo);
-	}
 	// 학생별 과제 점수
 	public List<Map<String, Object>> selectReportCountByStudent(int reportNo, int lectureNo){
 		Map<String,Integer> map = new HashMap<String, Integer>();

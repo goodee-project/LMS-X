@@ -41,12 +41,6 @@ public class ManagerChartRestController {
 	public List<Map<String, Object>> StarRatingByLecture(){
 		return managerChartRestService.selectStarRatingByLecture();
 	}
-	// 강좌별 출석 시도와 출석 횟수
-	@GetMapping("auth/manager/chart/attendanceCountByLecture/{lectureNo}")
-	public List<Map<String, Object>> AttendanceCountByLecture(
-			@PathVariable(name="lectureNo")int lectureNo){
-		return managerChartRestService.selectAttendanceRateByStudent(lectureNo);
-	}
 	// 학생별 과제 점수
 	@GetMapping("auth/manager/chart/attendanceCountByLecture/{lectureNo}/{reportNo}")
 	public List<Map<String, Object>> AttendanceCountByLecture(

@@ -61,13 +61,19 @@
 	<select id="selectAttendanceRateByStudent" parameterType="int" resultType="java.util.Map">
 		SELECT 
 		    a.lecture_no ,
-		    a.account_id, 
-		    COUNT(*) attRating
+		    a.account_id,    
+			 ROUND((COUNT(*) / sj.subject_totalday),2) * 100 att
 		FROM
 		    student s
 		LEFT JOIN
 		    attendance a ON 
 		    s.student_id = a.account_id
+		JOIN 
+		    lecture l ON
+		    l.lecture_no = a.lecture_no
+		JOIN 
+			 subject sj ON
+			 sj.subject_no = l.subject_no
 		WHERE 
 		    a.attendance_state='출석' AND 
 		    a.lecture_no = #{lectureNo}
@@ -86,29 +92,6 @@
 		    l.lecture_no = cr.lecture_no
 		GROUP BY 
 			l.lecture_name
-	</select>
-	<!-- 강좌 연도별 출석 시도와 출석 횟수, 출석률 -->
-	<select id="selectAttendanceCountByLecture" parameterType="int" resultType="java.util.Map">
-		SELECT 
-			l.lecture_name,
-			YEAR(a.attendance_day) AS YEAR, 
-			MONTHNAME(a.attendance_day) AS MONTH, 
-			COUNT(DISTINCT a.attendance_day) as totalAttCount,
-			COUNT(DISTINCT IF(a.attendance_state != '출석'
-				AND a.lecture_no=@lecture_no
-				AND a.lecture_no,a.attendance_day, NULL)) as attCount,
-			((COUNT(DISTINCT IF(a.attendance_state != '출석'
-				AND a.lecture_no=@lecture_no
-				AND a.lecture_no,a.attendance_day, NULL))) / (COUNT(DISTINCT a.attendance_day))) * 100 AS attRating
-		FROM 
-			attendance a
-		JOIN 
-			lecture l ON
-			a.lecture_no = l.lecture_no
-		WHERE 
-			a.lecture_no = #{lectureNo}
-		GROUP BY 
-			YEAR, MONTH(a.attendance_day)
 	</select>
 	<!-- 학생별 과제 점수 -->
 	<select id="selectReportCountByStudent" parameterType="java.util.Map" resultType="java.util.Map">
