@@ -34,8 +34,10 @@ public class ManagerTeacherService {
 	}
 	
 	// 강사 목록 페이징 카운트
-	public int getCountTeacher(int rowPerPage) {
-		return managerTeacherMapper.selectTeacherCount();
+	public int getCountTeacher(String searchText) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("searchText", searchText);	// 문자열 검색
+		return managerTeacherMapper.selectTeacherCount(map);
 	}
 	
 	// 강사 목록 상세보기

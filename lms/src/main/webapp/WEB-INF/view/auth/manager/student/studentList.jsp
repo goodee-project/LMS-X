@@ -92,14 +92,14 @@
 						</table>
 					</div>
 					
-					<div class="card-footer py-4">
+					<div class="card-footer py-4">		
 						<!-- 페이지 네비게이션 -->
 						<ul class="pagination justify-content-center">
 							<!-- 처음으로 버튼 -->
 							<c:choose>
 								<c:when test="${currentPage > 1}">
 									<li class="page-item">
-										<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/student/studentList/1">
+										<a class="page-link" href="${pageContext.request.contextPath}/auth/manager/student/studentList/1/">
 											<i class='fas fa-angle-double-left'></i>
 										</a>
 									</li>
@@ -192,7 +192,7 @@
 						<table style="margin: auto;">
 							<tr>
 								<td>
-									<button type="button" class="btn btn-sm btn-outline-primary">
+									<button type="button" class="btn btn-outline-primary btn-sm">
 										${currentPage} / ${lastPage} 페이지
 									</button>
 								</td>

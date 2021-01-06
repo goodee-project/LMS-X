@@ -16,7 +16,7 @@ public interface ManagerTeacherMapper {
 	public List<Teacher> selectTeacherListByPage(Map<String, Object> map);
 	
 	// 강사 페이징 카운트
-	int selectTeacherCount();		
+	public int selectTeacherCount(Map<String, Object> map);		
 	
 	// 강사 정보
 	public Teacher selectTeacherOne(String teacherId);	

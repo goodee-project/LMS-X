@@ -30,6 +30,11 @@
 			COUNT(*)
 		FROM
 			teacher
+		<where>
+			<if test="searchText != ''">
+				AND teacher_id LIKE CONCAT('%',#{searchText},'%')
+			</if>
+		</where>
 	</select>
 	
 	<resultMap type="gd.fintech.lms.vo.Teacher" id="selectTeacherOneInfomation">

@@ -22,26 +22,44 @@ public class ManagerLectureArchiveController {
 	public String archiveList(Model model,
 			@PathVariable(name="lectureNo") int lectureNo,
 			@PathVariable(name="currentPage") int currentPage) {
-		int rowPerPage = 10; // 한 페이지에 출력할 개수
-		int totalCount = managerLectureArchiveService.selectLectureArchiveCount(lectureNo); // 마지막 페이지
-		int beginRow = (currentPage - 1) * rowPerPage; // 시작 페이지
-		int lastPage = 0;
-		if(totalCount % rowPerPage == 0) {
-			lastPage = totalCount / rowPerPage;
-		} else {
-			lastPage = totalCount / rowPerPage + 1;			
+		
+		// 한 페이지에 출력할 개수
+		int rowPerPage = 10;
+		
+		// 마지막 페이지
+		int totalCount = managerLectureArchiveService.selectLectureArchiveCount(lectureNo); 
+		
+		// 시작 페이지
+		int beginRow = (currentPage - 1) * rowPerPage; 
+		
+		// 마지막 페이지
+		int lastPage = totalCount / rowPerPage; 
+		
+		// 10 미만의 개수의 데이터가 있는 페이지 표시
+		if (totalCount % rowPerPage != 0) {
+			lastPage += 1;
 		}
-		Map<String, Object> map = new HashMap<>(); // 자료실 목록 가져오기
+		// 전체 페이지가 0개이면 현재 페이지도 0으로 표시
+		if (lastPage == 0) {
+			currentPage = 0;
+		}
+		
+		// 자료실 목록 가져오기
+		Map<String, Object> map = new HashMap<>(); 
+		
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		map.put("lectureNo", lectureNo);
 		List<LectureArchive> archiveList = managerLectureArchiveService.getLectureArchiveListByPage(map);
+	
+		// 네비에 출력될 페이지 개수
+		int navPerPage = 10; 
 		
-		int navPerPage = 10; // 네비에 출력될 페이지 개수
+		// 네비의 첫 페이지
+		int navFirstPage = currentPage - (currentPage % navPerPage) + 1; 
 		
-		int navFirstPage = currentPage - (currentPage % navPerPage) + 1; // 네비의 첫 페이지
-		
-		int navLastPage = navFirstPage + navPerPage - 1; // 네비의 마지막 페이지
+		// 네비의 마지막 페이지
+		int navLastPage = navFirstPage + navPerPage - 1; 
 		
 		// 현재 페이지가 10으로 나누어 떨어질 때
 		if (currentPage % navPerPage == 0 && currentPage != 0) {

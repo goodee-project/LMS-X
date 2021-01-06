@@ -33,8 +33,10 @@ public class ManagerStudentService {
 	}
 	
 	// 학생 목록 페이징 카운트
-	public int getCountStudent(int rowPerPage) {
-		return managerStudentMapper.selectStudentCount();
+	public int getCountStudent(String searchText) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("searchText", searchText);	// 문자열 검색
+		return managerStudentMapper.selectStudentCount(map);
 	}
 	
 	// 학생 목록 상세보기

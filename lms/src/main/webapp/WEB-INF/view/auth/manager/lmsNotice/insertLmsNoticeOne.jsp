@@ -41,7 +41,38 @@
 <!-- jQuery library -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<!-- NAVER SmartEditor2 스크립트 -->
+<script 
+	src="${pageContext.request.contextPath}/smarteditor2/js/HuskyEZCreator.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#insertBtn').click(function() {
+			// 스마트 에디터 내용 적용
+			oEditors.getById["lmsNoticeContent"].exec("UPDATE_CONTENTS_FIELD", []);
+			let fc = $("#lmsNoticeContent").val();
+			fc = fc.replace(/(\s*)/g, "")
+			if($('#lmsNoticeTitle').val().replace(/(\s*)/g, "").length < 1){
+				alert('제목을 입력해주세요.');
+				return;
+			} 
+			if(fc == '' || fc  == null || fc == '&nbsp;' || fc == '<p>&nbsp;</p>'){
+				alert('내용을 입력해주세요.');
+				oEditors.getById["fc"].exec("FOCUS");
+				return;
+			}
+			$('#insertForm').submit();
+		});
+		
+		// NAVER SmartEditor2 적용 코드
+		let oEditors = [];				
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors,
+			elPlaceHolder : 'lmsNoticeContent',
+			sSkinURI : '${pageContext.request.contextPath}/smarteditor2/SmartEditor2Skin.html',
+			fCreator : 'createSEditor2'
+		});
+	});
+</script>
 <!-- textArea자동조절 라이브러리 -->
 <script
 	src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>

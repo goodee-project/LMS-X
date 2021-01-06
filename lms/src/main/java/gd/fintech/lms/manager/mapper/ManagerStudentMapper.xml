@@ -30,6 +30,11 @@
 			COUNT(*)
 		FROM
 			student
+		<where>
+			<if test="searchText != ''">
+				AND student_id LIKE CONCAT('%',#{searchText},'%')
+			</if>
+		</where>
 	</select>
 	
 	<!-- 학생목록 상세보기 -->

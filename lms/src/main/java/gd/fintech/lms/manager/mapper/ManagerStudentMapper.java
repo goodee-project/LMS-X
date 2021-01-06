@@ -16,7 +16,7 @@ public interface ManagerStudentMapper {
 	public List<Student> selectStudentListByPage(Map<String, Object> map);
 	
 	// 학생 페이징 카운트
-	int selectStudentCount();						
+	public int selectStudentCount(Map<String, Object> map);						
 	
 	// 학생 상세정보
 	Student selectStudentOne(String steudentId);	
