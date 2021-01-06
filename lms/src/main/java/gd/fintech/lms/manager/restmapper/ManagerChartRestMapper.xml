@@ -17,6 +17,7 @@
 		GROUP BY 
 		    a.lecture_no
 	</select>
+	
 	<!-- 강의별 최대/최소 성적 -->
 	<select id="selectMinMaxGradeByLecture" resultType="java.util.Map">
 		SELECT
@@ -40,6 +41,7 @@
 		        ) aa
 		GROUP BY a
 	</select>
+	
 	<!-- 과목별 학생 성적 -->
 	<select id="selectGradeBySubject" parameterType="int" resultType="java.util.Map">
 		SELECT
@@ -57,6 +59,7 @@
 		GROUP BY 
 			a.account_id
 	</select>
+	
 	<!-- 학생별 출석률 -->
 	<select id="selectAttendanceRateByStudent" parameterType="int" resultType="java.util.Map">
 		SELECT 
@@ -80,6 +83,7 @@
 		GROUP BY 
 		    a.lecture_no, a.account_id
 	</select>
+	
 	<!-- 강좌별 별점 점수 -->
 	<select id="selectStarRatingByLecture" resultType="java.util.Map">
 		SELECT
@@ -93,11 +97,12 @@
 		GROUP BY 
 			l.lecture_name
 	</select>
+	
 	<!-- 학생별 과제 점수 -->
 	<select id="selectReportCountByStudent" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 		    cr.account_id, 
-		    SUM(IFNULL(rs.report_submit_point, 0)) 
+		    SUM(IFNULL(rs.report_submit_point, 0)) point
 		FROM
 		    class_registration cr
 		LEFT JOIN
@@ -116,6 +121,7 @@
 		ORDER BY
 		   cr.account_id
 	</select>
+	
 	<!-- 강좌별 과제 제출률 -->
 	<select id="selectReportSubmissionRateByLecture" parameterType="int" resultType="java.util.Map">
 		SELECT 
@@ -144,6 +150,7 @@
 		GROUP BY 
 			r.report_no
 	</select>
+	
 	<!-- 월별 로그인 횟수 -->
 	<select id="selectLoginCountByMonth" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT 
@@ -164,6 +171,7 @@
 		    YEAR(login_log_date), 
 		    MONTH(login_log_date) DESC
 	</select>
+	
 	<!-- 강의별 과제 점수 평균 -->
 	<select id="selectAvgReportByLecture" parameterType="int" resultType="java.util.Map">
 		SELECT 
@@ -193,11 +201,12 @@
 		GROUP BY 
 			r.report_no
 	</select>
+	
 	<!-- 학생별 과제 점수 평균 -->
 	<select id="selectAvgReportByStudent" parameterType="int" resultType="java.util.Map">
 		SELECT
 		    cr.account_id, 
-		    AVG(IFNULL(rs.report_submit_point, 0)) PointAverage
+		    AVG(IFNULL(rs.report_submit_point, 0)) pointAverage
 		FROM
 		    class_registration cr
 		LEFT JOIN
