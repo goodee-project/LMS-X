@@ -41,24 +41,7 @@
 <!-- jQuery library -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
+	
 </head>
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
@@ -82,7 +65,7 @@ th {
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">강좌 목록</h3>
+									<h3 class="mb-0">강좌 정보 조회</h3>
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-dark"
@@ -101,35 +84,35 @@ th {
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
 								<tr>
-									<td>강의 번호</td>
-									<td>${lectureNo}</td>
+									<th width="20%">강좌 번호</th>
+									<td width="80%">${lectureNo}</td>
 								</tr>
 								<tr>
-									<td>강사명</td>
+									<th>강사명</th>
 									<td>${lct.lecture.teacherName}</td>
 								</tr>
 								<tr>
-									<td>강의명</td>
+									<th>강의명</th>
 									<td>${lct.lecture.lectureName}</td>
 								</tr>
 								<tr>
-									<td>교재</td>
+									<th>교재</th>
 									<td>${lct.textbook.textbookTitle}</td>
 								</tr>
 								<tr>
-									<td>강의실</td>
+									<th>강의실</th>
 									<td>${lct.classroom.classroomNumber}호</td>
 								</tr>
 								<tr>
-									<td>개강일</td>
+									<th>개강일</th>
 									<td>${lct.lecture.lectureStartdate}</td>
 								</tr>
 								<tr>
-									<td>종강일</td>
+									<th>종강일</th>
 									<td>${lct.lecture.lectureEnddate}</td>
 								</tr>
 								<tr>
-									<td>정원</td>
+									<th>정원</th>
 									<td>${lct.lecture.lectureTotal}</td>
 								</tr>
 							</table>

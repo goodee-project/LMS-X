@@ -53,10 +53,6 @@
 	vertical-align: middle;
 }
 
-.table a {
-	color: #000000;
-}
-
 th {
 	text-align: center;
 }
@@ -87,7 +83,7 @@ th {
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-success"
-										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/insertLecture'">추가</button>
+										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/insertLecture'">강좌 개설</button>
 								</div>
 								<br>
 							</div>

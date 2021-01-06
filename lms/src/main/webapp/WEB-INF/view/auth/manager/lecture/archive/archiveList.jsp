@@ -53,10 +53,6 @@
 	vertical-align: middle;
 }
 
-.table a {
-	color: #000000;
-}
-
 th {
 	text-align: center;
 }
@@ -92,25 +88,30 @@ th {
 
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
-								<tr>
-									<th>자료 번호</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>작성일</th>
-									<th>조회수</th>
-								</tr>
-								<c:forEach var="a" items="${archiveList}">
+								<thead class="thead-light">
 									<tr>
-										<td>${a.lectureArchiveNo}</td>
-										<td><a
-											href="${pageContext.request.contextPath}/auth/manager/lecture/${a.lectureNo}/archive/archiveOne/${a.lectureArchiveNo}">${a.lectureArchiveTitle}</a></td>
-										<td>${a.lectureArchiveWriter}</td>
-										<td>${a.lectureArchiveCreatedate}</td>
-										<td>${a.lectureArchiveCount}</td>
+										<th width="10%">자료 번호</th>
+										<th width="55%">제목</th>
+										<th width="10%">작성자</th>
+										<th width="15%">작성일시</th>
+										<th width="10%">조회수</th>
 									</tr>
-								</c:forEach>
+								</thead>
+								<tbody>
+									<c:forEach var="a" items="${archiveList}">
+										<tr>
+											<td>${a.lectureArchiveNo}</td>
+											<td><a
+												href="${pageContext.request.contextPath}/auth/manager/lecture/${a.lectureNo}/archive/archiveOne/${a.lectureArchiveNo}">${a.lectureArchiveTitle}</a></td>
+											<td>${a.lectureArchiveWriter}</td>
+											<td>${a.lectureArchiveCreatedate}</td>
+											<td>${a.lectureArchiveCount}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
 							</table>
 						</div>
+						
 						<!-- Page Navigation -->
 						<div class="card-footer py-4">
 							<nav aria-label="...">
@@ -200,7 +201,7 @@ th {
 								<table style="margin: auto;">
 									<tr>
 										<td>
-											<button type="button" class="btn btn-outline-dark btn-sm">
+											<button type="button" class="btn btn-sm btn-outline-primary">
 												${currentPage} / ${lastPage} 페이지</button>
 										</td>
 									</tr>

@@ -44,23 +44,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<style>
-.table {
-	text-align: center;
-}
-
-.table td {
-	vertical-align: middle;
-}
-
-.table a {
-	color: #000000;
-}
-
-th {
-	text-align: center;
-}
-</style>
 <script>
 	// 다운로드 횟수 증가 시키기
 	function fileDownloadCount(paramUuid) {
@@ -103,7 +86,7 @@ th {
 							<div class="row align-items-center">
 								<br>
 								<div class="col-8">
-									<h3 class="mb-0">자료실 상세보기</h3>
+									<h3 class="mb-0">자료실 조회</h3>
 								</div>
 								<div class="col-4 text-right">
 									<button type="button" class="btn btn-sm btn-dark"
@@ -118,35 +101,35 @@ th {
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
 								<tr>
-									<td>게시글 번호${lectureNo}</td>
-									<td>${lectureArchive.lectureArchiveNo}</td>
+									<th width="20%">게시글 번호</th>
+									<td width="80%">${lectureArchive.lectureArchiveNo}</td>
 								</tr>
 								<tr>
-									<td>작성자</td>
+									<th>작성자</th>
 									<td>${lectureArchive.lectureArchiveWriter}</td>
 								</tr>
 								<tr>
-									<td>조회수</td>
+									<th>조회수</th>
 									<td>${lectureArchive.lectureArchiveCount}</td>
 								</tr>
 								<tr>
-									<td>작성일시</td>
+									<th>작성일시</th>
 									<td>${lectureArchive.lectureArchiveCreatedate}</td>
 								</tr>
 								<tr>
-									<td>수정일시</td>
+									<th>수정일시</th>
 									<td>${lectureArchive.lectureArchiveUpdatedate}</td>
 								</tr>
 								<tr>
-									<td>제목</td>
+									<th>제목</th>
 									<td>${lectureArchive.lectureArchiveTitle}</td>
 								</tr>
 								<tr>
-									<td>내용</td>
+									<th>내용</th>
 									<td>${lectureArchive.lectureArchiveContent}</td>
 								</tr>
 								<tr>
-									<td>첨부파일</td>
+									<th>첨부파일</th>
 									<td><c:forEach var="laf"
 											items="${lectureArchive.lectureArchiveFileList}">
 											<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
@@ -163,7 +146,7 @@ th {
 													${laf.lectureArchiveFileSize}KByte,
 													<div id="fileCount${fn:split(uuid, '.')[0]}"
 														style="display: inline;">다운로드 횟수 :
-														${laf.lectureArchiveFileCount}회</div>
+														${laf.lectureArchiveFileCount}회</div>)
 												</div>
 											</c:if>
 											<c:if
