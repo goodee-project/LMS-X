@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerChartMapper">
+	<!-- 강좌 검색 -->
+	<select id="selectLecture" resultType="gd.fintech.lms.vo.Lecture">
+		SELECT
+			lecture_no lectureNo,
+			teacher_name teacherName,
+			lecture_name lectureName,
+			lecture_createdate lectureCreatedate
+		FROM
+			lecture
+	</select>
+</mapper>

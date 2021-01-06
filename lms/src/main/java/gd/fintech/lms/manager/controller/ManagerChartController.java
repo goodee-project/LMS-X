@@ -1,12 +1,18 @@
 package gd.fintech.lms.manager.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import gd.fintech.lms.manager.service.ManagerChartService;
+import gd.fintech.lms.vo.Lecture;
+
 @Controller
 public class ManagerChartController {
+	@Autowired private ManagerChartService managerChartService;
 	// 통계 Index
 	@GetMapping("/auth/manager/chart/chartIndex")
 	public String chartIndex(Model model) {
@@ -28,12 +34,16 @@ public class ManagerChartController {
 	// chart3
 	@GetMapping("/auth/manager/chart/chart3")
 	public String chart3(Model model) {
+		List<Lecture> lectureList = managerChartService.getLecture();
+		model.addAttribute("lectureList", lectureList);
 		return "/auth/manager/chart/chart3";
 	}
 	
 	// chart4
 	@GetMapping("/auth/manager/chart/chart4")
 	public String chart4(Model model) {
+		List<Lecture> lectureList = managerChartService.getLecture();
+		model.addAttribute("lectureList", lectureList);
 		return "/auth/manager/chart/chart4";
 	}
 	
