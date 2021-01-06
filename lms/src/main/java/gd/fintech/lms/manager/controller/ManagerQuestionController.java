@@ -28,17 +28,23 @@ public class ManagerQuestionController {
 		
 		// 한 페이지에 출력할 개수
 		int rowPerPage = 10;
-		// 현재 페이지 수
-		int totalCount = managerQuestionService.getManagerCountQuestion(lectureNo);
+		
 		// 시작 페이지 계산
 		int beginRow = (currentPage - 1) * rowPerPage;
-		//마지막 페이지
-		int lastPage = 0;
+		
+		// 현재 페이지 수
+		int totalCount = managerQuestionService.getManagerCountQuestion(lectureNo);
+		
+		// 마지막 페이지
+		int lastPage = totalCount / rowPerPage; 	
+		
 		// 10 미만의 개수의 데이터가 있는 페이지 표시
-		if(totalCount % rowPerPage == 0) {
-			lastPage = totalCount / rowPerPage;
-		} else {
-			lastPage = totalCount / rowPerPage + 1;			
+		if (totalCount % rowPerPage != 0) {
+			lastPage += 1;
+		}
+		// 전체 페이지가 0개이면 현재 페이지도 0으로 표시
+		if (lastPage == 0) {
+			currentPage = 0;
 		}
 		
 		// 강좌 질문 게시판 목록
