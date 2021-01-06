@@ -56,7 +56,7 @@ public class ManagerChartController {
 	}
 	
 	// chart8
-	@GetMapping("/auth/manager/chart/cchart8hart1")
+	@GetMapping("/auth/manager/chart/chart8")
 	public String chart8(Model model) {
 		return "/auth/manager/chart/chart8";
 	}
