@@ -28,34 +28,21 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 		<script>
-			$(document).ready(function() {
-				let ctx = document.getElementById('chart-bars').getContext('2d');
-				let myChart = new Chart(ctx, {
+		$(document).ready(function() {	
+			// 차트 생성 함수
+			function showChart() {
+				// 차트 기본 정보 선언			
+				let myChart = {
 				    type: 'bar',
 				    data: {
-				        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-				        datasets: [{
-				            label: '# of Votes',
-				            data: [12, 19, 3, 5, 2, 3],
-				            backgroundColor: [
-				                'rgba(255, 99, 132, 0.2)',
-				                'rgba(54, 162, 235, 0.2)',
-				                'rgba(255, 206, 86, 0.2)',
-				                'rgba(75, 192, 192, 0.2)',
-				                'rgba(153, 102, 255, 0.2)',
-				                'rgba(255, 159, 64, 0.2)'
-				            ],
-				            borderColor: [
-				                'rgba(255, 99, 132, 1)',
-				                'rgba(54, 162, 235, 1)',
-				                'rgba(255, 206, 86, 1)',
-				                'rgba(75, 192, 192, 1)',
-				                'rgba(153, 102, 255, 1)',
-				                'rgba(255, 159, 64, 1)'
-				            ],
-				            borderWidth: 1
-				        }]
-				    },
+				           labels:[],
+				           datasets:[{
+				              label:'평균 점수',
+				              backgroundColor: [],
+				              borderColor: [],
+				              data:[]
+							}]
+					},
 				    options: {
 				        scales: {
 				            yAxes: [{
@@ -65,8 +52,41 @@
 				            }]
 				        }
 				    }
+				};
+
+				// 데이터 가져와서 차트에 넣기
+				$.ajax({
+					url:'${pageContext.request.contextPath}/auth/manager/chart/avgReportByStudent/' + $('#lectureList option:selected').val(),
+					type:'get',
+					success:function(data){
+						console.log(data);
+						$('#chart-parent').empty();
+						$('#chart-parent').append('<canvas id="chart-bars" class="chart-canvas"></canvas>');
+						
+						$(data).each(function(key, value) {
+							let ranColor1 = Math.floor(Math.random()*256);
+							let ranColor2 = Math.floor(Math.random()*256);
+							let ranColor3 = Math.floor(Math.random()*256);
+							myChart.data.labels.push(value.account_id);
+							myChart.data.datasets[0].data.push(value.pointAverage);
+							myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.4)");
+							myChart.data.datasets[0].borderColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.8)");
+						});
+						
+						var ctx = document.getElementById('chart-bars').getContext('2d');
+						var chart = new Chart(ctx, myChart);
+					}
 				});
+			}
+
+			// 처음 접근시 차트 생성
+			showChart();
+
+			// 강좌 선택시 차트 생성
+			$('#lectureList').change(function(){
+				showChart();
 			});
+		});
 		</script>
 	</head>
 	<body>
@@ -90,7 +110,7 @@
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<div class="col-8">
-										<h3 class="mb-0">학생별 과제 점수 평균</h3>
+										<h3 class="mb-0">강의별 학생 과제 점수 평균</h3>
 									</div>
 									<div class="col-4 text-right">
 										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/chart/chartIndex">목록</a>
@@ -107,65 +127,37 @@
 										<div class="row align-items-center">
 											<div class="col-6">
 												<!-- Title -->
-												<h5 class="h3 mb-0">학생별 과제 점수 평균</h5>
+												<h5 class="h3 mb-0">강의별 학생 과제 점수 평균</h5>
 											</div>
-											
 											<div class="col-6 text-right">
 												<div class="input-group">
-													<select class="form-control" name="managerPosition">
-														<c:if test="${manager.managerPosition == null}">
-															<option value="" selected="selected">==전체==</option>
-															<option value="사원">사원</option>
-															<option value="대리">대리</option>
-															<option value="팀장">팀장</option>
-														</c:if>
-														<c:if test="${manager.managerPosition == '사원'}">
-															<option value="">==전체==</option>
-															<option value="사원" selected="selected">사원</option>
-															<option value="대리">대리</option>
-															<option value="팀장">팀장</option>
-														</c:if>
-														<c:if test="${manager.managerPosition == '대리'}">
-															<option value="">==전체==</option>
-															<option value="사원">사원</option>
-															<option value="대리" selected="selected">대리</option>
-															<option value="팀장">팀장</option>
-														</c:if>
-														<c:if test="${manager.managerPosition == '팀장'}">
-															<option value="" selected="selected">==전체==</option>
-															<option value="사원">사원</option>
-															<option value="대리">대리</option>
-															<option value="팀장" selected="selected">팀장</option>
-														</c:if>
-													</select>
-													
-													<input type="text" class="form-control" name="managerName" placeholder="이름을 검색해주세요." value="${manager.managerName}">
-													
-													<div class="input-group-append">
-														<button type="submit" class="btn btn-primary">검색</button>
+													<div class="input-group-prepend">
+														<span class="input-group-text">강좌</span>
 													</div>
+													<select class="form-control" name="lectureList" id="lectureList">
+														<c:forEach var="l" items="${lectureList}">
+															<option value="${l.lectureNo}">${l.lectureName}</option>
+														</c:forEach>
+													</select>
 												</div>
 											</div>
 										</div>
-								    </div>
-								    
-								    <!-- Card body -->
-								    <div class="card-body">
-	
-										<div class="chart">
-										    <!-- Chart wrapper -->
-										    <canvas id="chart-bars" class="chart-canvas"></canvas>
-										</div>
-								    </div>
+									</div>
 								</div>
-							</div>
+						    </div>
+						    <!-- Card body -->
+						    <div class="card-body">
+
+								<div id="chart-parent">
+								    <!-- Chart wrapper -->
+								</div>
+						    </div>
 						</div>
 					</div>
 				</div>
-				
-				<!-- Footer -->
-				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 			</div>
+			<!-- Footer -->
+			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 		</div>
 		<!--   Core   -->
 		<script

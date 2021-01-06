@@ -13,6 +13,8 @@
 			15 > (DATE_FORMAT(NOW(), '%Y-%m-%d') - DATE_FORMAT(login_log_date, '%Y-%m-%d'))
 		GROUP BY 
 			DATE_FORMAT(login_log_date, '%Y-%m-%d')
+		ORDER BY 
+			DATE_FORMAT(login_log_date, '%Y-%m-%d') DESC
 	</select>
 	<!-- 강의별 성적 평균 -->
 	<select id="selectAvgGradeByLecture" resultType="java.util.Map">
