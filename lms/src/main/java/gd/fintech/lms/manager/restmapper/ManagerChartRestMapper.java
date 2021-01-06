@@ -24,8 +24,6 @@ public interface ManagerChartRestMapper {
 	public List<Map<String, Object>> selectReportCountByStudent(Map<String, Integer> map);
 	// 강좌별 과제 제출률
 	public List<Map<String, Object>> selectReportSubmissionRateByLecture(int lectureNo);
-	// 학생 성적 평균
-	public List<Map<String, Object>> selectAvgGradeByStudent(int lectureNo);
 	// 월별 로그인 횟수
 	public List<Map<String, Object>> selectLoginCountByMonth(Map<String, Integer> map);
 	// 강의별 과제 점수 평균

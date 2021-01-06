@@ -48,10 +48,6 @@ public class ManagerChartRestService {
 	public List<Map<String, Object>> selectReportSubmissionRateByLecture(int lectureNo){
 		return managerChartRestMapper.selectReportSubmissionRateByLecture(lectureNo);
 	}
-	// 학생 성적 평균
-	public List<Map<String, Object>> selectAvgGradeByStudent(int lectureNo){
-		return managerChartRestMapper.selectAvgGradeByStudent(lectureNo);
-	}
 	// 월별 로그인 횟수
 	public List<Map<String, Object>> selectLoginCountByMonth(int year, int month){
 		Map<String,Integer> map = new HashMap<String, Integer>();

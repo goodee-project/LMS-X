@@ -60,12 +60,6 @@ public class ManagerChartRestController {
 			@PathVariable(name="lectureNo")int lectureNo){
 		return managerChartRestService.selectReportSubmissionRateByLecture(lectureNo);
 	}
-	// 학생 성적 평균
-	@GetMapping("auth/manger/chart/AvgGradeByStudent/{lectureNo}")
-	public List<Map<String, Object>> AvgGradeByStudent(
-			@PathVariable(name="lectureNo")int lectureNo){
-		return managerChartRestService.selectAvgGradeByStudent(lectureNo);
-	}
 	// 월별 로그인 횟수
 	@GetMapping("auth/manger/chart/LoginCountByMonth/{year}/{month}")
 	public List<Map<String, Object>> LoginCountByMonth(

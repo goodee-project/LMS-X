@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.restmapper.ManagerChartRestMapper">
+	<!-- 강의별 성적 평균 -->
 	<select id="selectAvgGradeByLecture" resultType="java.util.Map">
 		SELECT
 		    l.lecture_no,
@@ -16,28 +17,30 @@
 		GROUP BY 
 		    a.lecture_no
 	</select>
+	<!-- 강의별 최대/최소 성적 -->
 	<select id="selectMinMaxGradeByLecture" resultType="java.util.Map">
 		SELECT
 		    a lecture_no, 
 		    c lecture_name,
-		    MIN(c) min_score,
-		    MAX(c) max_score
+		    MIN(d) min_score,
+		    MAX(d) max_score
 		FROM (
-		SELECT
-			a.lecture_no a,
-			a.account_id b,
-			SUM(answer_score) c
-		FROM 
-			answersheet a
-		JOIN 
-			lecture l ON
-			a.lecture_no = l.lecture_no
-		GROUP BY 
-			a.account_id, a.lecture_no
-			) aa
-		GROUP BY 
-			a
+		    SELECT
+		        a.lecture_no a,
+		        a.account_id b,
+		        l.lecture_name c,
+		        SUM(answer_score) d
+		    FROM 
+		        answersheet a
+		    JOIN 
+		       lecture l ON
+		       a.lecture_no = l.lecture_no
+		    GROUP BY 
+		        a.account_id, a.lecture_no
+		        ) aa
+		GROUP BY a
 	</select>
+	<!-- 과목별 학생 성적 -->
 	<select id="selectGradeBySubject" parameterType="int" resultType="java.util.Map">
 		SELECT
 		    a.lecture_no,
@@ -54,6 +57,7 @@
 		GROUP BY 
 			a.account_id
 	</select>
+	<!-- 학생별 출석률 -->
 	<select id="selectAttendanceRateByStudent" parameterType="int" resultType="java.util.Map">
 		SELECT 
 		    a.lecture_no ,
@@ -70,6 +74,7 @@
 		GROUP BY 
 		    a.lecture_no, a.account_id
 	</select>
+	<!-- 강좌별 별점 점수 -->
 	<select id="selectStarRatingByLecture" resultType="java.util.Map">
 		SELECT
 		    l.lecture_name,
@@ -82,6 +87,7 @@
 		GROUP BY 
 			l.lecture_name
 	</select>
+	<!-- 강좌별 출석 시도와 출석 횟수 -->
 	<select id="selectAttendanceCountByLecture" parameterType="int" resultType="java.util.Map">
 		SELECT 
 			lecture_no,
@@ -102,6 +108,7 @@
 		GROUP BY 
 			YEAR, MONTH(attendance_day)
 	</select>
+	<!-- 학생별 과제 점수 -->
 	<select id="selectReportCountByStudent" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 		    cr.account_id, 
@@ -124,6 +131,7 @@
 		ORDER BY
 		   cr.account_id
 	</select>
+	<!-- 강좌별 과제 제출률 -->
 	<select id="selectReportSubmissionRateByLecture" parameterType="int" resultType="java.util.Map">
 		SELECT 
 			l.lecture_no, 
@@ -149,21 +157,7 @@
 		GROUP BY 
 			r.report_no
 	</select>
-	<select id="selectAvgGradeByStudent" parameterType="int" resultType="java.util.Map">
-		SELECT
-		    l.lecture_name,
-		    a.account_id,
-		    AVG(a.answer_score) '평균'
-		FROM
-		    answersheet a
-		JOIN 
-		    lecture l ON
-		    a.lecture_no = l.lecture_no
-		WHERE 
-			l.lecture_no = #{lectureNo}
-		GROUP BY 
-			a.account_id
-	</select>
+	<!-- 월별 로그인 횟수 -->
 	<select id="selectLoginCountByMonth" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT 
 		    account_id, 
@@ -183,6 +177,7 @@
 		    YEAR(login_log_date), 
 		    MONTH(login_log_date) DESC
 	</select>
+	<!-- 강의별 과제 점수 평균 -->
 	<select id="selectAvgReportByLecture" parameterType="int" resultType="java.util.Map">
 		SELECT 
 			l.lecture_no,
@@ -209,6 +204,7 @@
 		GROUP BY 
 			r.report_no
 	</select>
+	<!-- 강의별 과제 점수 평균 -->
 	<select id="selectAvgReprotByStudent" parameterType="int" resultType="java.util.Map">
 		SELECT
 		    cr.account_id, 
