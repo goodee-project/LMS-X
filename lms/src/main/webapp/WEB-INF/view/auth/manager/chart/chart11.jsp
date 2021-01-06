@@ -27,49 +27,69 @@
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		
 		<script>
 			$(document).ready(function() {	
-				// 차트 기본 정보 선언			
-				let myChart = {
-				    type: 'bar',
-				    data: {
-						datasets: [{
-							data: [],
-							backgroundColor: [],
-							label: '강의별 성적 평균'
-						}],
-						labels: []
-				    },
-				    options: {
-				        scales: {
-				            yAxes: [{
-				                ticks: {
-				                    beginAtZero: true
-				                }
-				            }]
-				        }
-				    }
-				};
+				// 차트 생성 함수
+				function showChart() {
+					// 차트 기본 정보 선언			
+					let myChart = {
+					    type: 'doughnut',
+					    data: {
+					           labels:[],
+					           datasets:[{
+					              label:'점수',
+					              backgroundColor: [],
+					              borderColor: [],
+					              data:[],
+								  steppedLine: 'middle',
+								  fill : 10,
+					              borderWidth: 2
+								}]
+						},
+					    options: { 
+					        cutoutPercentage: 45,
+					        scales: {
+					            yAxes: [{
+					                ticks: {
+					                }
+					            }]
+					        }
+					    }
+					};
+	
+					// 데이터 가져와서 차트에 넣기
+					$.ajax({
+						url:'${pageContext.request.contextPath}/auth/manager/chart/attendanceRateByStudent/' + $('#lectureList option:selected').val(),
+						type:'get',
+						success:function(data){
+							console.log(data);
+							$('#chart-parent').empty();
+							$('#chart-parent').append('<canvas id="chart-bars" class="chart-canvas"></canvas>');
+							
+							$(data).each(function(key, value) {
+								let ranColor1 = Math.floor(Math.random()*256);
+								let ranColor2 = Math.floor(Math.random()*256);
+								let ranColor3 = Math.floor(Math.random()*256);
+								myChart.data.labels.push(value.account_id + ' : ' + value.att + '%');
+								myChart.data.datasets[0].data.push(value.att);
+								myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.4)");
+								myChart.data.datasets[0].borderColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.8)");
+							});
+							
+							var ctx = document.getElementById('chart-bars').getContext('2d');
+							var chart = new Chart(ctx, myChart);
+						}
+					});
+				}
 
-				// 데이터 가져와서 차트에 넣기
-				$.ajax({
-					url:'${pageContext.request.contextPath}/auth/manager/chart/avgGradeByLecture',
-					type:'get',
-					success:function(data){
-						console.log(data);
-						
-						$(data).each(function(key, value) {
-							let ranColor1 = Math.floor(Math.random()*256);
-							let ranColor2 = Math.floor(Math.random()*256);
-							let ranColor3 = Math.floor(Math.random()*256);
-							myChart.data.labels.push(value.lecture_name);
-							myChart.data.datasets[0].data.push(value.avg);
-							myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.4)");
-						});
-						
-						var ctx = document.getElementById('chart-bars').getContext('2d');
-						var chart = new Chart(ctx, myChart);
-					}
+				// 처음 접근시 차트 생성
+				showChart();
+
+				// 강좌 선택시 차트 생성
+				$('#lectureList').change(function(){
+					showChart();
 				});
 			});
 		</script>
@@ -95,7 +115,7 @@
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<div class="col-8">
-										<h3 class="mb-0">통계 1</h3>
+										<h3 class="mb-0">통계 11</h3>
 									</div>
 									<div class="col-4 text-right">
 										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/chart/chartIndex">목록</a>
@@ -112,18 +132,28 @@
 										<div class="row align-items-center">
 											<div class="col-6">
 												<!-- Title -->
-												<h5 class="h3 mb-0">강의별 최종평가 평균 성적</h5>
+												<h5 class="h3 mb-0">과목별 학생 출석률</h5>
 											</div>
 											
+											<div class="col-6 text-right">
+												<div class="input-group">
+													<select class="form-control" name="lectureList" id="lectureList">
+														<c:forEach var="l" items="${lectureList}">
+															<option value="${l.lectureNo}">${l.lectureName}</option>
+														</c:forEach>
+													</select>
+													
+												</div>
+											</div>
 										</div>
 								    </div>
 								    
 								    <!-- Card body -->
 								    <div class="card-body">
 										
-										<div class="chart">
+										<div class="chart" id="chart-parent">
 										    <!-- Chart wrapper -->
-										    <canvas id="chart-bars" class="chart-canvas"></canvas>
+										    
 										</div>
 								    </div>
 								</div>

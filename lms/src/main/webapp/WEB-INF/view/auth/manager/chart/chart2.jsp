@@ -131,42 +131,6 @@
 												<h5 class="h3 mb-0">강의별 최대 성적 / 최소 성적</h5>
 											</div>
 											
-											<div class="col-6 text-right">
-												<div class="input-group">
-													<select class="form-control" name="managerPosition">
-														<c:if test="${manager.managerPosition == null}">
-															<option value="" selected="selected">==전체==</option>
-															<option value="사원">사원</option>
-															<option value="대리">대리</option>
-															<option value="팀장">팀장</option>
-														</c:if>
-														<c:if test="${manager.managerPosition == '사원'}">
-															<option value="">==전체==</option>
-															<option value="사원" selected="selected">사원</option>
-															<option value="대리">대리</option>
-															<option value="팀장">팀장</option>
-														</c:if>
-														<c:if test="${manager.managerPosition == '대리'}">
-															<option value="">==전체==</option>
-															<option value="사원">사원</option>
-															<option value="대리" selected="selected">대리</option>
-															<option value="팀장">팀장</option>
-														</c:if>
-														<c:if test="${manager.managerPosition == '팀장'}">
-															<option value="" selected="selected">==전체==</option>
-															<option value="사원">사원</option>
-															<option value="대리">대리</option>
-															<option value="팀장" selected="selected">팀장</option>
-														</c:if>
-													</select>
-													
-													<input type="text" class="form-control" name="managerName" placeholder="이름을 검색해주세요." value="${manager.managerName}">
-													
-													<div class="input-group-append">
-														<button type="submit" class="btn btn-primary">검색</button>
-													</div>
-												</div>
-											</div>
 										</div>
 								    </div>
 								    
