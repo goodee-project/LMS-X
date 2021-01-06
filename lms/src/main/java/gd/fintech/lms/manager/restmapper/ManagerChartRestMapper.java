@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ManagerChartRestMapper {
+	// 최근 2주일 접속 트래픽
+	public List<Map<String, Object>> selectLatestLoginLog();
 	// 강의별 성적 평균
 	public List<Map<String, Object>> selectAvgGradeByLecture();
 	// 강의별 최대/ 최소 성적

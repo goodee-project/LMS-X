@@ -13,6 +13,11 @@ import gd.fintech.lms.manager.restmapper.ManagerChartRestMapper;
 public class ManagerChartRestService {
 	@Autowired ManagerChartRestMapper managerChartRestMapper;
 	
+	// 최근 2주일 접속 트래픽
+	public List<Map<String, Object>> selectLatestLoginLog(){
+		return managerChartRestMapper.selectLatestLoginLog();
+	}
+	
 	//  강의별 성적 평균
 	public List<Map<String, Object>> selectAvgGradeByLecture(){
 		return managerChartRestMapper.selectAvgGradeByLecture();

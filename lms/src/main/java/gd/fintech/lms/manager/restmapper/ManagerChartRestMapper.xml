@@ -3,6 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.restmapper.ManagerChartRestMapper">
+	<!-- 최근 2주일 접속 트래픽 -->
+	<select id="selectLatestLoginLog" resultType="java.util.Map">
+		SELECT 
+			DATE_FORMAT(login_log_date, '%Y-%m-%d') day, 
+			COUNT(*) cnt
+		FROM login_log
+		WHERE 
+			15 > (DATE_FORMAT(NOW(), '%Y-%m-%d') - DATE_FORMAT(login_log_date, '%Y-%m-%d'))
+		GROUP BY 
+			DATE_FORMAT(login_log_date, '%Y-%m-%d')
+	</select>
 	<!-- 강의별 성적 평균 -->
 	<select id="selectAvgGradeByLecture" resultType="java.util.Map">
 		SELECT

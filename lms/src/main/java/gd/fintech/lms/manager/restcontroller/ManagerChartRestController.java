@@ -14,6 +14,12 @@ import gd.fintech.lms.manager.restservice.ManagerChartRestService;
 public class ManagerChartRestController {
 	@Autowired ManagerChartRestService managerChartRestService;
 	
+	// 최근 2주일 접속 트래픽
+	@GetMapping("auth/manager/chart/latestLoginLog")
+	public List<Map<String, Object>> LatestLoginLog(){
+		return managerChartRestService.selectLatestLoginLog();
+	}
+	
 	// 강의별 성적 평균
 	@GetMapping("auth/manager/chart/avgGradeByLecture")
 	public List<Map<String, Object>> AvgGradeByLecture(){
