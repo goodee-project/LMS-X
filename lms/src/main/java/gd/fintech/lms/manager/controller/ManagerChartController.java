@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import gd.fintech.lms.manager.service.ManagerChartService;
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.Report;
 
 @Controller
 public class ManagerChartController {
@@ -56,6 +57,8 @@ public class ManagerChartController {
 	// chart6
 	@GetMapping("/auth/manager/chart/chart6")
 	public String chart6(Model model) {
+		List<Lecture> lectureList = managerChartService.getLecture();
+		model.addAttribute("lectureList", lectureList);
 		return "/auth/manager/chart/chart6";
 	}
 	
@@ -68,12 +71,16 @@ public class ManagerChartController {
 	// chart8
 	@GetMapping("/auth/manager/chart/chart8")
 	public String chart8(Model model) {
+		List<Lecture> lectureList = managerChartService.getLecture();
+		model.addAttribute("lectureList", lectureList);
 		return "/auth/manager/chart/chart8";
 	}
 	
 	// chart9
 	@GetMapping("/auth/manager/chart/chart9")
 	public String chart9(Model model) {
+		List<Lecture> lectureList = managerChartService.getLecture();
+		model.addAttribute("lectureList", lectureList);
 		return "/auth/manager/chart/chart9";
 	}
 	
