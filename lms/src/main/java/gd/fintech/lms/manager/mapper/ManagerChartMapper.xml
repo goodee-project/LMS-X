@@ -10,5 +10,8 @@
 			lecture_createdate lectureCreatedate
 		FROM
 			lecture
+		WHERE
+			!(lecture_startdate = '0000-00-00' AND 
+			lecture_enddate = '0000-00-00')
 	</select>
 </mapper>

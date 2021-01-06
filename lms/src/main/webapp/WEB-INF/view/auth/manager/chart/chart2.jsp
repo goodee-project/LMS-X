@@ -30,7 +30,7 @@
 		<script>
 			$(document).ready(function() {	
 				// 차트 기본 정보 선언			
-				let myChart ={
+				let myChart = {
 				    type: 'line',
 				    data: {
 				           labels:[],
