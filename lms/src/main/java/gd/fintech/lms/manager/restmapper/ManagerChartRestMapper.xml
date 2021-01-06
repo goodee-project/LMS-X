@@ -106,7 +106,7 @@
 			lecture l ON
 			a.lecture_no = l.lecture_no
 		WHERE 
-			a.lecture_no = {lectureNo}
+			a.lecture_no = #{lectureNo}
 		GROUP BY 
 			YEAR, MONTH(a.attendance_day)
 	</select>
