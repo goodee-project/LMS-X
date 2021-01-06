@@ -26,92 +26,6 @@
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
-		<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
-		
-		<script>
-			$(document).ready(function(){
-				var utils = Samples.utils;
-
-				utils.srand(110);	
-				
-				let data = {
-					labels: [],
-					datasets: [{	
-			            label:[],
-						backgroundColor : [],
-						borderColor : [],
-						data: []
-					}]
-				};
-				
-				
-				$.ajax({
-					url:'${pageContext.request.contextPath}/auth/manager/chart/latestLoginLog',
-					type:'get',
-					success:function(data1){
-						console.log(data1);
-						let ranColor1 = Math.floor(Math.random()*256);
-						let ranColor2 = Math.floor(Math.random()*256);
-						let ranColor3 = Math.floor(Math.random()*256);
-						
-						$(data1).each(function(key, value) {
-							data.datasets[0].data.push({
-								x: value.day,
-								y: value.cnt,
-								v: utils.rand(0, 1000)
-							});		
-							data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.35)");
-							data.datasets[0].borderColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.6)");
-						});
-						chart.update();
-						
-					}
-				});
-
-
-				var options = {
-					aspectRatio: 1,
-
-					elements: {
-						point: {
-							title: {
-								display: true,
-							},
-							
-							borderWidth: function(context) {
-								return Math.min(Math.max(1, context.datasetIndex + 2), 10);
-							},
-
-							hoverBackgroundColor: 'transparent',
-
-							hoverBorderColor: function(context) {
-								return utils.color(context.datasetIndex);
-							},
-
-							hoverBorderWidth: function(context) {
-								var value = context.dataset.data[context.dataIndex];
-								return Math.round(8 * value.v / 1000);
-							},
-
-							radius: function(context) {
-								var value = context.dataset.data[context.dataIndex];
-								var size = context.chart.width;
-								var base = Math.abs(value.v) / 1000;
-								return (size / 24) * base;
-							}
-						}
-					}
-				};
-
-				var chart = new Chart('chart', {
-					type: 'bubble',
-					data: data,
-					options: options
-				});
-	
-				
-			});
-		</script>
 	</head>
 	<body>
 		<!-- 내비게이션 메인 메뉴 -->
@@ -142,28 +56,6 @@
 								</div>
 							</div>
 	
-							<div class="card-footer py-4">
-								<!--* Card init *-->
-								<div class="card">
-								
-								    <!-- Card header -->
-								    <div class="card-header">
-								    
-										<!-- Title -->
-										<h5 class="h3 mb-0">최근 2주일 접속 트래픽</h5>
-								    </div>
-								    
-								    <!-- Card body -->
-								    <div class="card-body">
-	
-										<div class="chart-parent">
-										    <!-- Chart wrapper -->
-										    <canvas id="chart" class="chart-canvas"></canvas>
-										</div>
-								    </div>
-								</div>
-							</div>
-							
 							<div class="card-footer py-4">
 								<div class="row">
 									<div class="col-4">
