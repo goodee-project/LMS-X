@@ -30,65 +30,94 @@
 		<!-- Chart -->
 		<script>
 			$(document).ready(function() {
-				$('#searchData').click(function() {
-					// 차트 생성 함수
-					function showChart() {
-						// 차트 기본 정보 선언			
-						let myChart = {
-						    type: 'bar',
-						    data: {
-						           labels:[],
-						           datasets:[{
-						              label:'점수',
-						              backgroundColor: [],
-						              borderColor: [],
-						              data:[]
-									}]
-							},
-						    options: {
-						        scales: {
-						            yAxes: [{
-						                ticks: {
-						                    beginAtZero: true
-						                }
-						            }]
-						        }
-						    }
-						};
-		
-						// 데이터 가져와서 차트에 넣기
-						$.ajax({
-							url:'${pageContext.request.contextPath}/auth/manager/chart/attendanceCountByLecture/' + $('#lectureList option:selected').val() + '/' +  $('#reportNo').val(),
-							type:'get',
-							success:function(data){
-								console.log(data);
-								$('#chart-parent').empty();
-								$('#chart-parent').append('<canvas id="chart-bars" class="chart-canvas"></canvas>');
-								
-								$(data).each(function(key, value) {
-									let ranColor1 = Math.floor(Math.random()*256);
-									let ranColor2 = Math.floor(Math.random()*256);
-									let ranColor3 = Math.floor(Math.random()*256);
-									myChart.data.labels.push(value.account_id);
-									myChart.data.datasets[0].data.push(value.point);
-									myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.4)");
-									myChart.data.datasets[0].borderColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.8)");
-								});
-								
-								var ctx = document.getElementById('chart-bars').getContext('2d');
-								var chart = new Chart(ctx, myChart);
-							}
-						});
-					}
-	
-					// 처음 접근시 차트 생성
-					showChart();
-	
-					// 강좌 선택시 차트 생성
-					$('#lectureList').change(function(){
-						showChart();
-					});
+				// 강좌 선택시
+				$('#lectureList').change(function() {
+					// 과제 생성
+					createReportList();
+				})
+				// 과제 선택시
+				$('#reportList').change(function() {
+					// 차트 생성
+					showChart();					
 				});
+
+				// 과제 목록 생성 함수
+				function createReportList(){
+					$.ajax({
+						url:'${pageContext.request.contextPath}/auth/manager/chart/reportListByLectureNo/' + $('#lectureList option:selected').val(),
+						type:'get',
+						success:function(data){
+							console.log(data);
+							// 과제가 없을시
+							if(data == ''){
+								$('#chart-parent').empty();
+								$('#reportList').empty();
+								$('#chart-parent').html('과제가 없습니다.');
+								return;
+							}
+							$('#reportList').empty();
+							
+							$(data).each(function(key, value) {
+								$('#reportList').append('<option value="' + value.reportNo + '">' + value.reportTitle + "</option>");
+							});
+							
+							// 차트 생성
+							showChart();
+						}
+					});
+				}
+				// 차트 생성 함수
+				function showChart() {
+					// 차트 기본 정보 선언			
+					let myChart = {
+					    type: 'bar',
+					    data: {
+					           labels:[],
+					           datasets:[{
+					              label:'점수',
+					              backgroundColor: [],
+					              borderColor: [],
+					              data:[]
+								}]
+						},
+					    options: {
+					        scales: {
+					            yAxes: [{
+					                ticks: {
+					                    beginAtZero: true
+					                }
+					            }]
+					        }
+					    }
+					};
+	
+					// 데이터 가져와서 차트에 넣기
+					$.ajax({
+						url:'${pageContext.request.contextPath}/auth/manager/chart/attendanceCountByLecture/' + $('#lectureList option:selected').val() + '/' +  $('#reportList option:selected').val(),
+						type:'get',
+						success:function(data){
+							console.log(data);
+							$('#chart-parent').empty();
+							$('#chart-parent').append('<canvas id="chart-bars" class="chart-canvas"></canvas>');
+							
+							$(data).each(function(key, value) {
+								let ranColor1 = Math.floor(Math.random()*256);
+								let ranColor2 = Math.floor(Math.random()*256);
+								let ranColor3 = Math.floor(Math.random()*256);
+								myChart.data.labels.push(value.account_id);
+								myChart.data.datasets[0].data.push(value.point);
+								myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.4)");
+								myChart.data.datasets[0].borderColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.8)");
+							});
+							
+							var ctx = document.getElementById('chart-bars').getContext('2d');
+							var chart = new Chart(ctx, myChart);
+						}
+					});
+				}
+
+				// 처음 접근시 과제 목록과 차트 생성
+				createReportList();
 			});
 		</script>
 	</head>
@@ -147,11 +176,8 @@
 													<div class="input-group-prepend">
 														<span class="input-group-text">과제번호</span>
 													</div>
-													<input type="text" class="form-control" name="reportNo" id="reportNo" placeholder="과제 고유 번호" value="${reportNo}">
-													
-													<div class="input-group-append">
-														<button type="button" class="btn btn-primary" id="searchData">검색</button>
-													</div>
+													<select class="form-control" name="reportList" id="reportList">
+													</select>
 												</div>
 											</div>
 										</div>

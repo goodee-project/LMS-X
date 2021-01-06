@@ -8,11 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gd.fintech.lms.manager.restmapper.ManagerChartRestMapper;
+import gd.fintech.lms.vo.Report;
 
 @Service
 public class ManagerChartRestService {
 	@Autowired ManagerChartRestMapper managerChartRestMapper;
 	
+	// 해당 강좌의 과제 리스트 가져오기
+	public List<Report> selectReportListByLectureNo(int lectureNo){
+		return managerChartRestMapper.selectReportListByLectureNo(lectureNo);
+	}
 	// 최근 2주일 접속 트래픽
 	public List<Map<String, Object>> selectLatestLoginLog(){
 		return managerChartRestMapper.selectLatestLoginLog();

@@ -9,10 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import gd.fintech.lms.manager.restservice.ManagerChartRestService;
+import gd.fintech.lms.vo.Report;
 
 @RestController
 public class ManagerChartRestController {
 	@Autowired ManagerChartRestService managerChartRestService;
+	
+	// 해당 강좌의 과제 리스트 가져오기
+	@GetMapping("auth/manager/chart/reportListByLectureNo/{lectureNo}")
+	public List<Report> reportListByLectureNo(@PathVariable(name="lectureNo") int lectureNo){
+		return managerChartRestService.selectReportListByLectureNo(lectureNo);
+	}
 	
 	// 최근 2주일 접속 트래픽
 	@GetMapping("auth/manager/chart/latestLoginLog")

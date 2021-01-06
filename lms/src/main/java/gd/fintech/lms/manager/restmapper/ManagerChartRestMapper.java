@@ -5,9 +5,13 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import gd.fintech.lms.vo.Report;
+
 
 @Mapper
 public interface ManagerChartRestMapper {
+	// 해당 강좌의 과제 리스트 가져오기
+	public List<Report> selectReportListByLectureNo(int lectureNo);
 	// 최근 2주일 접속 트래픽
 	public List<Map<String, Object>> selectLatestLoginLog();
 	// 강의별 성적 평균
