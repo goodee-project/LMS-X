@@ -62,7 +62,7 @@
 		SELECT 
 		    a.lecture_no ,
 		    a.account_id, 
-		    COUNT(*) 출석률
+		    COUNT(*) attRating
 		FROM
 		    student s
 		LEFT JOIN
@@ -78,7 +78,7 @@
 	<select id="selectStarRatingByLecture" resultType="java.util.Map">
 		SELECT
 		    l.lecture_name,
-		    round(avg(cr.class_registration_point),0)
+		    round(avg(cr.class_registration_point),0) point
 		FROM 
 			class_registration cr
 		JOIN 
@@ -93,13 +93,13 @@
 			l.lecture_name,
 			YEAR(a.attendance_day) AS YEAR, 
 			MONTHNAME(a.attendance_day) AS MONTH, 
-			COUNT(DISTINCT a.attendance_day) as 출석시도,
+			COUNT(DISTINCT a.attendance_day) as totalAttCount,
 			COUNT(DISTINCT IF(a.attendance_state != '출석'
 				AND a.lecture_no=@lecture_no
-				AND a.lecture_no,a.attendance_day, NULL)) as 출석횟수,
+				AND a.lecture_no,a.attendance_day, NULL)) as attCount,
 			((COUNT(DISTINCT IF(a.attendance_state != '출석'
 				AND a.lecture_no=@lecture_no
-				AND a.lecture_no,a.attendance_day, NULL))) / (COUNT(DISTINCT a.attendance_day))) * 100 AS A
+				AND a.lecture_no,a.attendance_day, NULL))) / (COUNT(DISTINCT a.attendance_day))) * 100 AS attRating
 		FROM 
 			attendance a
 		JOIN 
@@ -114,7 +114,7 @@
 	<select id="selectReportCountByStudent" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 		    cr.account_id, 
-		    SUM(IFNULL(rs.report_submit_point, 0))
+		    SUM(IFNULL(rs.report_submit_point, 0)) 
 		FROM
 		    class_registration cr
 		LEFT JOIN
@@ -136,11 +136,13 @@
 	<!-- 강좌별 과제 제출률 -->
 	<select id="selectReportSubmissionRateByLecture" parameterType="int" resultType="java.util.Map">
 		SELECT 
-			l.lecture_no, 
-			r.report_no,
-			COUNT(rs.report_submit_no) "제출 학생수",
-			COUNT(cr.class_registration_no) "총 학생수",
-			ROUND(COUNT(rs.report_submit_no)/COUNT(cr.class_registration_no)*100) "제출률(%)"
+			l.lecture_no lectureNo,
+            l.lecture_name lectureName,
+            r.report_no reportNo,
+            r.report_title reportTitle,
+			COUNT(rs.report_submit_no) studentSubmitted,
+			COUNT(cr.class_registration_no) totalStudent,
+			ROUND(COUNT(rs.report_submit_no)/COUNT(cr.class_registration_no)*100) submissionRate
 		FROM 
 			lecture l
 		INNER JOIN 
@@ -182,11 +184,13 @@
 	<!-- 강의별 과제 점수 평균 -->
 	<select id="selectAvgReportByLecture" parameterType="int" resultType="java.util.Map">
 		SELECT 
-			l.lecture_no,
-			 r.report_no,
-		     COUNT(rs.report_submit_no) "제출 학생수",
-		     COUNT(cr.class_registration_no) "총 학생수",
-		    sum(rs.report_submit_point)/COUNT(cr.class_registration_no) "과제 평균 점수"
+			l.lecture_no lectureNo,
+            l.lecture_name lectureName,
+            r.report_no reportNo,
+            r.report_title reportTitle,
+			COUNT(rs.report_submit_no) studentSubmitted,
+			COUNT(cr.class_registration_no) totalStudent,
+		    sum(rs.report_submit_point)/COUNT(cr.class_registration_no) Averagescore
 		FROM 
 			lecture l
 		INNER JOIN 
@@ -206,11 +210,11 @@
 		GROUP BY 
 			r.report_no
 	</select>
-	<!-- 강의별 과제 점수 평균 -->
+	<!-- 학생별 과제 점수 평균 -->
 	<select id="selectAvgReportByStudent" parameterType="int" resultType="java.util.Map">
 		SELECT
 		    cr.account_id, 
-		    AVG(IFNULL(rs.report_submit_point, 0))
+		    AVG(IFNULL(rs.report_submit_point, 0)) PointAverage
 		FROM
 		    class_registration cr
 		LEFT JOIN
