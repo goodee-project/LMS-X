@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.restmapper.ManagerChartRestMapper">
+	<select id="selectAvgGradeByLecture" resultType="java.util.Map">
+		SELECT
+		    l.lecture_no,
+		    l.lecture_name,
+		    AVG(a.answer_score) avg
+		FROM 
+		    answersheet a
+		JOIN 
+		    lecture l ON
+		    a.lecture_no = l.lecture_no
+		GROUP BY 
+		    a.lecture_no
+	</select>
+	<select id="selectMinMaxGradeByLecture" resultType="java.util.Map">
+		SELECT
+		    a lecture_no, 
+		    c lecture_name,
+		    MIN(c) min_score,
+		    MAX(c) max_score
+		FROM (
+		SELECT
+			a.lecture_no a,
+			a.account_id b,
+			SUM(answer_score) c
+		FROM 
+			answersheet a
+		JOIN 
+			lecture l ON
+			a.lecture_no = l.lecture_no
+		GROUP BY 
+			a.account_id, a.lecture_no
+			) aa
+		GROUP BY 
+			a
+	</select>
+	<select id="selectGradeBySubject" parameterType="int" resultType="java.util.Map">
+		SELECT
+		    a.lecture_no,
+		    l.lecture_name,
+		    a.account_id,
+		    SUM(a.answer_score) sum_score
+		FROM 
+		    answersheet a
+		JOIN 
+		    lecture l ON
+		    a.lecture_no = l.lecture_no
+		WHERE 
+			l.lecture_no = #{lectureNo}
+		GROUP BY 
+			a.account_id
+	</select>
+	<select id="selectAttendanceRateByStudent" parameterType="int" resultType="java.util.Map">
+		SELECT 
+		    a.lecture_no ,
+		    a.account_id, 
+		    COUNT(*) 출석률
+		FROM
+		    student s
+		LEFT JOIN
+		    attendance a ON 
+		    s.student_id = a.account_id
+		WHERE 
+		    a.attendance_state='출석' AND 
+		    a.lecture_no = #{lectureNo}
+		GROUP BY 
+		    a.lecture_no, a.account_id
+	</select>
+	<select id="selectStarRatingByLecture" resultType="java.util.Map">
+		SELECT
+		    l.lecture_name,
+		    round(avg(cr.class_registration_point),0)
+		FROM 
+			class_registration cr
+		JOIN 
+			lecture l ON 
+		    l.lecture_no = cr.lecture_no
+		GROUP BY 
+			l.lecture_name
+	</select>
+	<select id="selectAttendanceCountByLecture" parameterType="int" resultType="java.util.Map">
+		SELECT 
+			lecture_no,
+			account_id,
+			YEAR(attendance_day) AS YEAR, 
+			MONTHNAME(attendance_day) AS MONTH, 
+			COUNT(DISTINCT attendance_day) as 출석시도,
+			COUNT(DISTINCT IF(attendance_state != '출석'
+			AND lecture_no=#{lectureNo}	
+			AND lecture_no,attendance_day, NULL)) as 출석횟수,
+			((COUNT(DISTINCT IF(attendance_state != '출석'
+			AND lecture_no=#{lectureNo}	
+			AND lecture_no,attendance_day, NULL))) / (COUNT(DISTINCT attendance_day))) * 100 AS A
+		FROM 
+			attendance
+		WHERE 
+			lecture_no = #{lectureNo}
+		GROUP BY 
+			YEAR, MONTH(attendance_day)
+	</select>
+	<select id="selectReportCountByStudent" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		    cr.account_id, 
+		    SUM(IFNULL(rs.report_submit_point, 0))
+		FROM
+		    class_registration cr
+		LEFT JOIN
+		    report_submit rs ON
+		    rs.account_id = cr.account_id AND
+		    rs.report_no = #{reportNo}
+		LEFT JOIN
+		    report r ON
+		    r.report_no = rs.report_no
+		WHERE
+		    (cr.class_registration_state = "수강중" OR
+		    cr.class_registration_state = "수료") AND
+		    cr.lecture_no = #{lectureNo}
+		GROUP BY
+		    cr.account_id
+		ORDER BY
+		   cr.account_id
+	</select>
+	<select id="selectReportSubmissionRateByLecture" parameterType="int" resultType="java.util.Map">
+		SELECT 
+			l.lecture_no, 
+			r.report_no,
+			COUNT(rs.report_submit_no) "제출 학생수",
+			COUNT(cr.class_registration_no) "총 학생수",
+			ROUND(COUNT(rs.report_submit_no)/COUNT(cr.class_registration_no)*100) "제출률(%)"
+		FROM 
+			lecture l
+		INNER JOIN 
+			report r ON l.lecture_no = r.lecture_no
+		LEFT OUTER JOIN 
+			class_registration cr
+			ON l.lecture_no = cr.lecture_no
+		LEFT OUTER JOIN 
+			report_submit rs
+			ON r.report_no = rs.report_no AND
+		    cr.account_id = rs.account_id
+		WHERE 
+			(cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료") AND
+			l.lecture_no = #{lectureNo}
+		GROUP BY 
+			r.report_no
+	</select>
+	<select id="selectAvgGradeByStudent" parameterType="int" resultType="java.util.Map">
+		SELECT
+		    l.lecture_name,
+		    a.account_id,
+		    AVG(a.answer_score) '평균'
+		FROM
+		    answersheet a
+		JOIN 
+		    lecture l ON
+		    a.lecture_no = l.lecture_no
+		WHERE 
+			l.lecture_no = #{lectureNo}
+		GROUP BY 
+			a.account_id
+	</select>
+	<select id="selectLoginCountByMonth" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT 
+		    account_id, 
+		    YEAR(login_log_date), 
+		    MONTH(login_log_date), 
+		    COUNT(*)
+		FROM 
+			login_log
+		WHERE 
+		    YEAR(login_log_date) = #{Year} AND 
+		    MONTH(login_log_date) = #{Month}
+		GROUP BY 
+		    account_id, 
+		    YEAR(login_log_date), 
+		    MONTH(login_log_date)
+		ORDER BY 
+		    YEAR(login_log_date), 
+		    MONTH(login_log_date) DESC
+	</select>
+	<select id="selectAvgReportByLecture" parameterType="int" resultType="java.util.Map">
+		SELECT 
+			l.lecture_no,
+			 r.report_no,
+		     COUNT(rs.report_submit_no) "제출 학생수",
+		     COUNT(cr.class_registration_no) "총 학생수",
+		    sum(rs.report_submit_point)/COUNT(cr.class_registration_no) "과제 평균 점수"
+		FROM 
+			lecture l
+		INNER JOIN 
+			report r
+			ON l.lecture_no = r.lecture_no
+		LEFT OUTER JOIN 
+			class_registration cr
+			ON l.lecture_no = cr.lecture_no
+		LEFT OUTER JOIN 
+			report_submit rs
+			ON r.report_no = rs.report_no AND
+		    cr.account_id = rs.account_id
+		WHERE 
+			(cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료") AND
+			l.lecture_no = #{lectureNo}
+		GROUP BY 
+			r.report_no
+	</select>
+	<select id="selectAvgReprotByStudent" parameterType="int" resultType="java.util.Map">
+		SELECT
+		    cr.account_id, 
+		    AVG(IFNULL(rs.report_submit_point, 0))
+		FROM
+		    class_registration cr
+		LEFT JOIN
+		    report_submit rs ON
+		    rs.account_id = cr.account_id
+		LEFT JOIN
+		    report r ON
+		    r.report_no = rs.report_no
+		WHERE
+		    (cr.class_registration_state = "수강중" OR
+		    cr.class_registration_state = "수료") AND
+		    cr.lecture_no = #{lectureNo}
+		GROUP BY
+		    cr.account_id
+		ORDER BY
+		   cr.account_id
+	</select>
+</mapper>
