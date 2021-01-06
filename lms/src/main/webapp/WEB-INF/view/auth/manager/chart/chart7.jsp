@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>chartIndex</title>
+		<title>chart7</title>
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 		
@@ -115,7 +115,7 @@
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<div class="col-8">
-										<h3 class="mb-0">통계 11</h3>
+										<h3 class="mb-0">통계 7</h3>
 									</div>
 									<div class="col-4 text-right">
 										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/chart/chartIndex">목록</a>
@@ -130,13 +130,17 @@
 								    <!-- Card header -->
 								    <div class="card-header">
 										<div class="row align-items-center">
-											<div class="col-6">
+											<div class="col-8">
 												<!-- Title -->
 												<h5 class="h3 mb-0">과목별 학생 출석률</h5>
 											</div>
 											
-											<div class="col-6 text-right">
-												<div class="input-group">
+											<div class="col-4 text-right">
+												<div class="input-group input-group-alternative">
+													<div class="input-group-prepend">
+														<span class="input-group-text">강좌</span>
+													</div>
+												
 													<select class="form-control" name="lectureList" id="lectureList">
 														<c:forEach var="l" items="${lectureList}">
 															<option value="${l.lectureNo}">${l.lectureName}</option>

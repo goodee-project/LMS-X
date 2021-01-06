@@ -50,7 +50,7 @@
 						data: {
 							labels: [],
 							datasets: [{
-								label:'최근 2주일 접속 트래픽',
+								label:'최근 2주간 접속 트래픽',
 								data: [],
 								backgroundColor: [],
 								borderColor: [],
@@ -159,24 +159,26 @@
 								</div>
 							</div>
 	
-							<div class="table-responsive">
-								<div class="card-footer py-4">
-									<!--* Card init *-->
-									<div class="card">
+							<div class="card-footer py-4">
+								<!--* Card init *-->
+								<div class="card">
+								
+								    <!-- Card header -->
+								    <div class="card-header">
+								    
+										<!-- Title -->
+										<h5 class="h3 mb-0">최근 2주간 접속 트래픽</h5>
+								    </div>
 									
-									    <!-- Card header -->
-									    <div class="card-header">
-									    
-											<!-- Title -->
-											<h5 class="h3 mb-0">최근 2주일 접속 트래픽</h5>
-									    </div>
-									    <div class="chart-parent">
-										    <!-- Chart wrapper -->
+									<!-- Card body -->
+								    <div class="card-body">
+										
+										<div class="chart" id="chart-parent">
+											<!-- Chart wrapper -->
 										    <canvas id="chart" class="chart-canvas"></canvas>
 										</div>
-									</div>
+								    </div>
 								</div>
-								
 							</div>
 						</div>
 					</div>

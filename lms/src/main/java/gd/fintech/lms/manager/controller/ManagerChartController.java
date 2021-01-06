@@ -64,7 +64,9 @@ public class ManagerChartController {
 	
 	// chart7
 	@GetMapping("/auth/manager/chart/chart7")
-	public String chart7(Model model) {
+	public String chart11(Model model) {
+		List<Lecture> lectureList = managerChartService.getLecture();
+		model.addAttribute("lectureList", lectureList);
 		return "/auth/manager/chart/chart7";
 	}
 	
@@ -89,13 +91,4 @@ public class ManagerChartController {
 	public String chart10(Model model) {
 		return "/auth/manager/chart/chart10";
 	}
-	
-	// chart11
-	@GetMapping("/auth/manager/chart/chart11")
-	public String chart11(Model model) {
-		List<Lecture> lectureList = managerChartService.getLecture();
-		model.addAttribute("lectureList", lectureList);
-		return "/auth/manager/chart/chart11";
-	}
-	
 }

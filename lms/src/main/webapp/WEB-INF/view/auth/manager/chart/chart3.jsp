@@ -4,7 +4,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>avgReportByLecture</title>
+		<!-- avgReportByLecture -->
+		<title>chart3</title>
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 		
@@ -116,10 +117,10 @@
 								<div class="row align-items-center">
 									<br>
 									<div class="col-8">
-										<h3 class="mb-0">통계</h3>
+										<h3 class="mb-0">통계 3</h3>
 									</div>
 									<div class="col-4 text-right">
-											<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/chart/chartIndex">목록</a>
+										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/chart/chartIndex">목록</a>
 									</div>
 									<br>
 								</div>
@@ -131,13 +132,18 @@
 									
 								    <!-- Card header -->
 								    <div class="card-header">
-										<!-- Title -->
-										<div class="row">
-											<div class="col-4">
-												<h5 class="h3 mb-0=">강의별 과제 점수 평균</h5>
+										<div class="row align-items-center">
+											<div class="col-8">
+												<!-- Title -->
+												<h5 class="h3 mb-0=">강좌별 과제 점수 평균</h5>
 											</div>
-											<div class="col-4">
+											
+											<div class="col-4 text-right">
 												<div class="input-group input-group-alternative">
+													<div class="input-group-prepend">
+														<span class="input-group-text">강좌</span>
+													</div>
+													
 													<select id="lecture" class="form-control">
 														<c:forEach var="l" items="${lectureList}">
 															<option value="${l.lectureNo}">${l.lectureName} (${l.teacherName})</option>

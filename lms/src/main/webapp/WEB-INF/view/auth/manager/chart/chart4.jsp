@@ -4,7 +4,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>avgReportByLecture</title>
+		<!-- avgReportByLecture -->
+		<title>chart4</title>
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 		
@@ -128,13 +129,18 @@
 									
 								    <!-- Card header -->
 								    <div class="card-header">
-										<!-- Title -->
 										<div class="row">
-											<div class="col-4">
+											<div class="col-8">
+												<!-- Title -->
 												<h5 class="h3 mb-0=">강좌별 과제 제출률</h5>
 											</div>
-											<div class="col-4">
+											
+											<div class="col-4 text-right">
 												<div class="input-group input-group-alternative">
+													<div class="input-group-prepend">
+														<span class="input-group-text">강좌</span>
+													</div>
+												
 													<select id="lecture" class="form-control">
 														<c:forEach var="l" items="${lectureList}">
 															<option value="${l.lectureNo}">${l.lectureName} (${l.teacherName})</option>

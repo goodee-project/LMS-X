@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>chartIndex</title>
+		<title>chart1</title>
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 		
@@ -36,7 +36,7 @@
 						datasets: [{
 							data: [],
 							backgroundColor: [],
-							label: '강의별 성적 평균'
+							label: '강좌별 성적 평균'
 						}],
 						labels: []
 				    },
@@ -112,7 +112,7 @@
 										<div class="row align-items-center">
 											<div class="col-6">
 												<!-- Title -->
-												<h5 class="h3 mb-0">강의별 최종평가 평균 성적</h5>
+												<h5 class="h3 mb-0">강좌별 최종평가 평균 성적</h5>
 											</div>
 											
 										</div>

@@ -110,7 +110,7 @@
 										<div class="row align-items-center">
 											<div class="col-6">
 												<!-- Title -->
-												<h5 class="h3 mb-0">강의별 별점</h5>
+												<h5 class="h3 mb-0">강좌별 별점</h5>
 											</div>
 										</div>
 								    </div>

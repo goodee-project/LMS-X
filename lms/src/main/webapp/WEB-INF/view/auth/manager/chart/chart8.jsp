@@ -163,7 +163,7 @@
 											</div>
 											
 											<div class="col-6 text-right">
-												<div class="input-group">
+												<div class="input-group input-group-alternative">
 													<div class="input-group-prepend">
 														<span class="input-group-text">강좌</span>
 													</div>

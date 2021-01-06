@@ -110,7 +110,7 @@
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<div class="col-8">
-										<h3 class="mb-0">강의별 학생 과제 점수 평균</h3>
+										<h3 class="mb-0">통계 9</h3>
 									</div>
 									<div class="col-4 text-right">
 										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/manager/chart/chartIndex">목록</a>
@@ -125,15 +125,17 @@
 								    <!-- Card header -->
 								    <div class="card-header">
 										<div class="row align-items-center">
-											<div class="col-6">
+											<div class="col-8">
 												<!-- Title -->
 												<h5 class="h3 mb-0">강의별 학생 과제 점수 평균</h5>
 											</div>
-											<div class="col-6 text-right">
-												<div class="input-group">
+											
+											<div class="col-4 text-right">
+												<div class="input-group input-group-alternative">
 													<div class="input-group-prepend">
 														<span class="input-group-text">강좌</span>
 													</div>
+													
 													<select class="form-control" name="lectureList" id="lectureList">
 														<c:forEach var="l" items="${lectureList}">
 															<option value="${l.lectureNo}">${l.lectureName}</option>
@@ -143,19 +145,19 @@
 											</div>
 										</div>
 									</div>
-								</div>
-						    </div>
-						    <!-- Card body -->
-						    <div class="card-body">
-
-								<div id="chart-parent">
-								    <!-- Chart wrapper -->
+									
+									<!-- Card body -->
+								    <div class="card-body">
+		
+										<div class="chart" id="chart-parent"></div>
+								    </div>
 								</div>
 						    </div>
 						</div>
 					</div>
 				</div>
 			</div>
+			
 			<!-- Footer -->
 			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 		</div>
