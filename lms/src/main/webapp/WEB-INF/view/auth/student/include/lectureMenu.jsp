@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-	<div class="row col-9">
+<div class="row col-9">
+	<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
 		<div class="container-fluid">
 			<ul class="navbar-nav">		
 				<li class="nav-item">
@@ -31,5 +31,5 @@
 				</li>
 			</ul>
 		</div>
-	</div>
-</nav>
+	</nav>
+</div>
