@@ -39,8 +39,11 @@
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
-							<div class="col">
-								<h3 class="mb-0">과제 목록</h3>
+							<div class="col-8">
+								<h3 class="mb-0">FAQ 조회</h3>
+							</div>
+							<div class="col-4 text-right">
+								<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/student/faq/faqList/1'">목록</button>
 							</div>
 						</div>
 					</div>

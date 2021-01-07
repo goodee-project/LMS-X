@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>Update Question Comment</title>
+	<head>
+		<meta charset="UTF-8">
+		<title>Update Question Comment</title>
+		
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 		
@@ -37,8 +38,8 @@
 				});
 			});
 		</script>
-</head>
-<body>
+	</head>
+	<body>
 		<!-- 메인 Navbar -->
 		<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
 		
@@ -102,5 +103,5 @@
 	        application: "argon-dashboard-free"
 	      });
 	  </script>
-</body>
+	</body>
 </html>

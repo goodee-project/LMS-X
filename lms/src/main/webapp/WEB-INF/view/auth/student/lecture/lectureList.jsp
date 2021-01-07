@@ -48,10 +48,50 @@
 						data: {lectureNo:paramLectureNo},
 						success: function(data){
 							if(data == false){
-								alert('이미 수강신청한 강좌입니다.');
+								$('#parentModal').html(`
+									<div>
+										<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="infoModalLabel">정보</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">이미 수강신청한 강좌입니다.</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								`);
+								$("#infoModal").modal("show");
 								return;
 							} else if(paramStudentTotal == paramLectureTotal){
-								alert('정원이 초과된 강좌입니다.');
+								$('#parentModal').html(`
+									<div>
+										<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="infoModalLabel">정보</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">정원이 초과된 강좌입니다.</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								`);
+								$("#infoModal").modal("show");
 								return;
 							} else{
 								$('#classRegistrationForm' + paramLectureNo).submit();
@@ -118,6 +158,7 @@
 											<form id="classRegistrationForm${l.lectureNo}" action="${pageContext.request.contextPath}/auth/student/lecture/registrationClass" method="post">
 												<input type="hidden" name="lectureNo" value="${l.lectureNo}">
 												<button type="button" class="classRegistrationBtn btn btn-sm btn-primary" value="${l.lectureNo},${l.studentTotal},${l.lectureTotal}">수강 신청</button>
+												<div id="parentModal"></div>
 											</form>
 										</td>
 									</tr>	
