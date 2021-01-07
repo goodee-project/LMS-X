@@ -47,18 +47,18 @@
 				$(document).on("click", "#insertUpdatePwBtn", function() {
 					$('#pwBtn').html('');
 					let insertPw = `
-							<div style="margin-bottom : 10px;">
-								<input type="password" id="nowPw" class="form-control form-control-alternative" placeholder="현재 비밀번호를 입력하세요.">
-							</div>
-							<div style="margin-bottom : 10px;">
-								<input type="password" id="nextPw1" class="form-control form-control-alternative" placeholder="새로운 비밀번호를 입력하세요." >
-							</div>
-							<div style="margin-bottom : 10px;">
-								<input type="password" id="nextPw2" class="form-control form-control-alternative" placeholder="새로운 비밀번호를 다시 입력하세요">
-							</div>
-							<div id="pwCheck"></div>
-							<button type="button" class="btn btn-sm btn-primary" id="updatePw">비밀번호 수정</button>
-						 `;
+						<div style="margin-bottom : 10px;">
+							<input type="password" id="nowPw" class="form-control form-control-alternative" placeholder="현재 비밀번호를 입력하세요.">
+						</div>
+						<div style="margin-bottom : 10px;">
+							<input type="password" id="nextPw1" class="form-control form-control-alternative" placeholder="새로운 비밀번호를 입력하세요." >
+						</div>
+						<div style="margin-bottom : 10px;">
+							<input type="password" id="nextPw2" class="form-control form-control-alternative" placeholder="새로운 비밀번호를 다시 입력하세요">
+						</div>
+						<div id="pwCheck"></div>
+						<button type="button" class="btn btn-sm btn-primary" id="updatePw">비밀번호 수정</button>
+					 `;
 					$('#insertUpdatePW').html(insertPw);
 					$('#updatePw').click(function(){
 						// 유효성 체크
