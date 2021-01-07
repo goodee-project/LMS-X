@@ -28,20 +28,6 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		
-		<style>
-			.table {
-				text-align: center;
-			}
-			
-			.table td {
-				vertical-align: middle;
-			}
-			
-			th {
-				text-align: center;
-			}
-		</style>
 	</head>
 	
 	<body>
@@ -82,19 +68,19 @@
 									
 									<table class="table align-items-center table-flush">
 										<tr>
-											<td width="20%">시험 시작</td>
+											<th width="20%">시험 시작</th>
 											<td width="80%">
 												<input type="datetime-local" class="form-control" name="testStartdate">
 											</td>
 										</tr>
 										<tr>
-											<td>시험 종료</td>
+											<th>시험 종료</th>
 											<td>
 												<input type="datetime-local" class="form-control" name="testEnddate">
 											</td>
 										</tr>
 										<tr>
-											<td>시험 제목</td>
+											<th>시험 제목</th>
 											<td>
 												<input type="text" class="form-control" name="testContent">
 											</td>
