@@ -49,7 +49,7 @@
 	<div class="main-content">
 		<!-- 내비게이션 상단 메뉴 -->
 		<div class="container-fluid">
-			<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
+			<jsp:include page="/WEB-INF/view/auth/manager/include/lectureMenu.jsp" />
 		</div>
 
 		<!-- 접속자 -->
@@ -72,12 +72,6 @@
 										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/lectureList/1'">목록</button>
 									<button type="button" class="btn btn-sm btn-primary"
 										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/updateLecture/${lectureNo}'">수정</button>
-									<button type="button" class="btn btn-sm btn-info"
-										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/archive/archiveList/1'">자료실</button>
-									<button type="button" class="btn btn-sm btn-info"
-										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/1'">질문 게시판</button>
-									<button type="button" class="btn btn-sm btn-danger"
-										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/studentManagement'">수강 학생 관리</button>
 								</div>
 								<br>
 							</div>

@@ -69,7 +69,7 @@
 	<div class="main-content">
 		<!-- 내비게이션 상단 메뉴 -->
 		<div class="container-fluid">
-			<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
+			<jsp:include page="/WEB-INF/view/auth/manager/include/lectureMenu.jsp" />
 		</div>
 
 		<!-- 접속자 -->
