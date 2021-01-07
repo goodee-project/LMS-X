@@ -34,7 +34,7 @@
 			$(document).ready(function() {
 				$('#submitBtn').click(function() {
 					let ck = true;
-					$('.syllbusfile').each(function(index, item) {
+					$('.syllabusFileList').each(function(index, item) {
 						console.log($(item).val());
 						if ($(item).val() == '') {
 							ck = false;
@@ -43,6 +43,7 @@
 					
 					if (ck == false) { // if(ck)
 						alert('선택하지 않은 파일이 있습니다');
+						return;
 					} else {
 						$('#insertSyllabusForm').submit();
 					}
