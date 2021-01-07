@@ -90,7 +90,7 @@ public class ManagerClassroomController {
 	
 	@GetMapping("/auth/manager/classroom/deleteClassroom/{classroomNo}")
 	public String deleteClassroom(
-			@PathVariable(name = "classeoomNo") int classroomNo) {
+			@PathVariable(name = "classroomNo") int classroomNo) {
 		managerClassroomService.deleteClassroom(classroomNo);
 		return "redirect:/auth/manager/classroom/classroomList/1";
 	}
