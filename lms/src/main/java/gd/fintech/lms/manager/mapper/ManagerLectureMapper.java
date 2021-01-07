@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import gd.fintech.lms.vo.ClassRegistration;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureAndClassAndTextbook;
 
@@ -32,5 +33,15 @@ public interface ManagerLectureMapper {
 	// 강의 상태 변경
 	// Lecture 객체에 담긴 데이터를 수정 함
 	int updateLectureStat(Lecture lecture);
+	
+	// 강의의 수강 학생 목록
+	List<ClassRegistration> selectClassRegistrationList(int lectureNo);
+	// 강의의 대기중인 수강 학생 목록
+	List<ClassRegistration> selectClassRegistrationListByState(int lectureNo);
+	// 강의의 수강 학생 목록 개수
+	int selectClassRegistrationListCount(int lectureNo);
+	// 강의의 대기중인 수강 학생 목록 개수
+	int selectClassRegistrationListByStateCount(int lectureNo);
+	
 }
  

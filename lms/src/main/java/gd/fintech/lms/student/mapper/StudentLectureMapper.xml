@@ -189,7 +189,8 @@
 			l.subject_no = s.subject_no
 		LEFT JOIN
 			class_registration cr ON
-			cr.lecture_no = l.lecture_no
+			cr.lecture_no = l.lecture_no AND
+			cr.class_registration_state = '취소'
 		WHERE 
 			l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
 		GROUP BY 
@@ -208,6 +209,9 @@
 		JOIN
 			subject s ON 
 			l.subject_no = s.subject_no
+		LEFT JOIN
+			class_registration cr ON
+			cr.lecture_no = l.lecture_no
 		WHERE 
 			l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</select>

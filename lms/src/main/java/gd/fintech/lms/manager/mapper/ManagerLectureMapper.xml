@@ -128,4 +128,76 @@
 		WHERE
 			lecture_no = #{lectureNo}
 	</update>
+	<!-- 강의의 수강 학생 목록 -->
+	<select id="selectClassRegistrationList" parameterType="int" resultType="gd.fintech.lms.vo.ClassRegistration">
+		SELECT 
+			class_registration_no classRegistrationNo,
+			lecture_no lectureNo,
+			account_id accountId,
+			class_registration_state classRegistrationState,
+			class_registration_createdate classRegistrationCreatedate,
+			class_registration_updatedate classRegistrationUpdatedate
+		FROM 
+			class_registration 
+		WHERE 
+			lecture_no = #{lectureNo} AND
+			class_registration_state != '대기' AND
+			class_registration_state != '취소'
+	</select>
+	<!-- 강의의 대기중인 수강 학생 목록 -->
+	<select id="selectClassRegistrationListByState" parameterType="int" resultType="gd.fintech.lms.vo.ClassRegistration">
+		SELECT 
+			class_registration_no classRegistrationNo,
+			lecture_no lectureNo,
+			account_id accountId,
+			class_registration_state classRegistrationState,
+			class_registration_createdate classRegistrationCreatedate,
+			class_registration_updatedate classRegistrationUpdatedate
+		FROM 
+			class_registration 
+		WHERE 
+			lecture_no = #{lectureNo} AND
+			class_registration_state = '대기'
+	</select>
+	<!-- 강의의 수강 학생 목록 개수 -->
+	<select id="selectClassRegistrationListCount" parameterType="int" resultType="int">
+		SELECT 
+			COUNT(*) cnt
+		FROM 
+			class_registration 
+		WHERE 
+			lecture_no = #{lectureNo} AND
+			class_registration_state != '대기' AND
+			class_registration_state != '취소'
+	</select>
+	<!-- 강의의 대기중인 수강 학생 목록 개수 -->
+	<select id="selectClassRegistrationListByStateCount" parameterType="int" resultType="int">
+		SELECT 
+			COUNT(*) cnt
+		FROM 
+			class_registration 
+		WHERE 
+			lecture_no = #{lectureNo} AND
+			class_registration_state = '대기' 
+	</select>
+	<!-- 학생 수강 승인 -->
+	<update id="updateClassRegistrationAccess">
+		UPDATE
+			class_registration
+		SET 
+			class_registration_state = '수강중' 
+		WHERE 
+			lecture_no = #{lectureNo} AND
+			account_id = #{accountId}
+	</update>
+	<!-- 학생 수강 거절 -->
+	<update id="updateClassRegistrationDenied">
+		UPDATE
+			class_registration
+		SET 
+			class_registration_state = '취소' 
+		WHERE 
+			lecture_no = #{lectureNo} AND
+			account_id = #{accountId}
+	</update>
 </mapper>

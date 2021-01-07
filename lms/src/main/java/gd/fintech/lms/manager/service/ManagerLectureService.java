@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gd.fintech.lms.manager.mapper.ManagerLectureMapper;
+import gd.fintech.lms.vo.ClassRegistration;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureAndClassAndTextbook;
 
@@ -38,5 +39,22 @@ public class ManagerLectureService {
 	// 강의 상태 변경
 	public void updateLectureStat(Lecture lecture) {
 		managerLectureMapper.updateLectureStat(lecture);
+	}
+
+	// 강의의 수강 학생 목록
+	public List<ClassRegistration> selectClassRegistrationList(int lectureNo){
+		return managerLectureMapper.selectClassRegistrationList(lectureNo);
+	}
+	// 강의의 대기중인 수강 학생 목록
+	public List<ClassRegistration> selectClassRegistrationListByState(int lectureNo){
+		return managerLectureMapper.selectClassRegistrationListByState(lectureNo);
+	}
+	// 강의의 수강 학생 목록 개수
+	public int selectClassRegistrationListCount(int lectureNo) {
+		return managerLectureMapper.selectClassRegistrationListCount(lectureNo);
+	}
+	// 강의의 대기중인 수강 학생 목록 개수
+	public int selectClassRegistrationListByStateCount(int lectureNo) {
+		return managerLectureMapper.selectClassRegistrationListByStateCount(lectureNo);
 	}
 }

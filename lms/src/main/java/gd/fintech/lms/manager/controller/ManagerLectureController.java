@@ -18,6 +18,7 @@ import gd.fintech.lms.manager.service.ManagerLectureService;
 import gd.fintech.lms.manager.service.ManagerSubjectService;
 import gd.fintech.lms.manager.service.ManagerTextbookService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.ClassRegistration;
 import gd.fintech.lms.vo.Classroom;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureAndClassAndTextbook;
@@ -165,5 +166,25 @@ public class ManagerLectureController {
 	public String updateLectureStat(Lecture lecture, @PathVariable(value = "lectureNo") int lectureNo) {
 		managerLectureService.updateLectureStat(lecture);
 		return "redirect:/auth/manager/lecture/lectureList/1";
+	}
+	
+	// 수강 학생 관리 폼
+	@GetMapping("/auth/manager/lecture/{lectureNo}/studentManagement")
+	public String studentManagement(Model model, @PathVariable(value = "lectureNo") int lectureNo) {
+		// 수강중인 학생 리스트
+		List<ClassRegistration> studentList = managerLectureService.selectClassRegistrationList(lectureNo);
+		// 대기중인 학생 리스트
+		List<ClassRegistration> studentListByState = managerLectureService.selectClassRegistrationListByState(lectureNo);
+		// 수강중인 학생 수
+		int studentListCount = managerLectureService.selectClassRegistrationListCount(lectureNo);
+		// 대기중인 학생 수
+		int studentListByStateCount = managerLectureService.selectClassRegistrationListByStateCount(lectureNo);
+		
+		model.addAttribute("studentList", studentList);
+		model.addAttribute("studentListByState", studentListByState);
+		model.addAttribute("studentListCount", studentListCount);
+		model.addAttribute("studentListByStateCount", studentListByStateCount);
+		
+		return "/auth/manager/lecture/studentManagement";
 	}
 }
