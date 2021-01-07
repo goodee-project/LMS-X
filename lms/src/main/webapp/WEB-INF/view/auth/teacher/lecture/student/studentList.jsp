@@ -112,7 +112,7 @@
 										<c:choose>
 											<c:when test="${currentPage > 1}">
 												<li class="page-item"><a class="page-link"
-													href="${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentList/1">
+													href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/student/studentList/1">
 														<i class='fas fa-angle-double-left'></i>
 												</a></li>
 											</c:when>
@@ -127,7 +127,7 @@
 										<c:choose>
 											<c:when test="${currentPage > 1}">
 												<li class="page-item"><a class="page-link"
-													href="${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentList/${prePage}">
+													href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/student/studentList/${prePage}">
 														<i class='fas fa-angle-left'></i>
 												</a></li>
 											</c:when>
@@ -150,7 +150,7 @@
 													<%-- 현재 페이지가 아닌 선택 가능한 페이지 --%>
 													<c:otherwise>
 														<li class="page-item"><a class="page-link"
-															href="${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentList/${i}">${i}</a>
+															href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/student/studentList/${i}">${i}</a>
 														</li>
 													</c:otherwise>
 												</c:choose>
@@ -161,7 +161,7 @@
 										<c:choose>
 											<c:when test="${currentPage < lastPage}">
 												<li class="page-item"><a class="page-link"
-													href="${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentList/${nextPage}">
+													href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/student/studentList/${nextPage}">
 														<i class='fas fa-angle-right'></i>
 												</a></li>
 											</c:when>
@@ -176,7 +176,7 @@
 										<c:choose>
 											<c:when test="${currentPage < lastPage}">
 												<li class="page-item"><a class="page-link"
-													href="${pageContext.request.contextPath}/auth/teacher/lecture/${LASACR.lecture.lectureNo}/student/studentList/${lastPage}">
+													href="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/student/studentList/${lastPage}">
 														<i class='fas fa-angle-double-right'></i>
 												</a></li>
 											</c:when>
