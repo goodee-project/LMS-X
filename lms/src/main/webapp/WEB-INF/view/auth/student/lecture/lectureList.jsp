@@ -50,7 +50,7 @@
 							if(data == false){
 								alert('이미 수강신청한 강좌입니다.');
 								return;
-							} else if(paramStudentTotal >= paramLectureTotal){
+							} else if(paramStudentTotal == paramLectureTotal){
 								alert('정원이 초과된 강좌입니다.');
 								return;
 							} else{
