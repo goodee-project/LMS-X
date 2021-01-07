@@ -89,7 +89,7 @@
 		
 				<!-- 쪽지 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/auth/teacher/note/noteReceiveList/1">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/note/noteReceiveList/1">
                         <i class="far fa-envelope"></i>
                         쪽지 &nbsp;
                         <span class="badge badge-danger">${noteNotReadReceiveCount}</span>

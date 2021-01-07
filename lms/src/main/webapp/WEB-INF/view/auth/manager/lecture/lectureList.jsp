@@ -111,7 +111,7 @@ th {
 													<a
 														href="${pageContext.request.contextPath}/auth/manager/lecture/lectureOne/${l.lectureNo}">${l.lectureName}</a>
 												</c:if> <c:if test="${l.lectureStartdate == '0000-00-00'}">
-													${l.lectureNo}
+													${l.lectureName}
 												</c:if></td>
 											<td>${l.lectureStartdate}</td>
 											<td>${l.lectureEnddate}</td>
