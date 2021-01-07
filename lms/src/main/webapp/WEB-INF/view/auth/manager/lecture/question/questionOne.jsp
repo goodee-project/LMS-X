@@ -103,7 +103,7 @@
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark"
-											onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/1'">추가</button>
+											onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/1'">목록</button>
 										<button type="button" class="btn btn-sm btn-danger"
 											onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/deleteQuestion/${question.questionNo}'">삭제</button>
 									</div>
