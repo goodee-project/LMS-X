@@ -95,11 +95,12 @@ public class AdminManagerController {
 	}
 	
 	// 운영자 승인 거절
-	@GetMapping("/auth/admin/negativeManager/{accountId}")
-	public String negativeManager(@PathVariable(name="accountId") String accountId){
+	@GetMapping("/auth/admin/negativeManager/{currentPage}/{accountId}")
+	public String negativeManager(@PathVariable(name="currentPage") String currentPage,
+								  @PathVariable(name="accountId") String accountId){
 		
 		adminManagerService.negativeManager(accountId);
-		return "redirect:/auth/admin/managerQueue";
+		return "redirect:/auth/admin/managerQueue/"+currentPage;
 	}
 	// 운영자 승인
 	@GetMapping("/auth/admin/accessManager/{currentPage}/{accountId}")
