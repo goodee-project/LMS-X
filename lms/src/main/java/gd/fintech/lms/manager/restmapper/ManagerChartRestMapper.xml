@@ -68,7 +68,7 @@
 		GROUP BY a
 	</select>
 	
-	<!-- 과목별 학생 성적 -->
+	<!-- 학생별 성적 -->
 	<select id="selectGradeBySubject" parameterType="int" resultType="java.util.Map">
 		SELECT
 		    a.lecture_no,
@@ -249,5 +249,17 @@
 		    cr.account_id
 		ORDER BY
 		   cr.account_id
+	</select>
+	
+	<!-- 학생별 별점 점수  -->
+	<select id="selectStudentStarRating" parameterType="int" resultType="java.util.Map">
+		SELECT 
+		   lecture_no,
+		   account_id, 
+		   class_registration_point 
+		FROM 
+		   class_registration
+		WHERE 
+		   lecture_no = #{lectureNo}
 	</select>
 </mapper>

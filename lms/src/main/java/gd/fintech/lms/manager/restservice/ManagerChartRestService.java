@@ -31,7 +31,7 @@ public class ManagerChartRestService {
 	public List<Map<String, Object>> selectMinMaxGradeByLecture(){
 		return managerChartRestMapper.selectMinMaxGradeByLecture();
 	}
-	// 과목별 학생 성적
+	// 학생별 성적
 	public List<Map<String, Object>> selectGradeBySubject(int lectureNo){
 		return managerChartRestMapper.selectGradeBySubject(lectureNo);
 	}
@@ -68,5 +68,9 @@ public class ManagerChartRestService {
 	// 학생별 과제 점수 평균
 	public List<Map<String, Object>> selectAvgReportByStudent(int lectureNo){
 		return managerChartRestMapper.selectAvgReportByStudent(lectureNo);
+	}
+	// 학생별 별점 점수
+	public List<Map<String, Object>> selectStudentStarRatingScore(int lectureNo){
+		return managerChartRestMapper.selectStudentStarRating(lectureNo);
 	}
 }

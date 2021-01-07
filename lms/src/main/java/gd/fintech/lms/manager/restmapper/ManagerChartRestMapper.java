@@ -18,7 +18,7 @@ public interface ManagerChartRestMapper {
 	public List<Map<String, Object>> selectAvgGradeByLecture();
 	// 강의별 최대/ 최소 성적
 	public List<Map<String, Object>> selectMinMaxGradeByLecture();
-	// 과목별 학생 성적
+	// 학생별 성적
 	public List<Map<String, Object>> selectGradeBySubject(int lectureNo);
 	// 학생별 출석률
 	public List<Map<String, Object>> selectAttendanceRateByStudent(int lectureNo);
@@ -34,4 +34,6 @@ public interface ManagerChartRestMapper {
 	public List<Map<String, Object>> selectAvgReportByLecture(int lectureNo);
 	// 학생별 과제 점수 평균
 	public List<Map<String, Object>> selectAvgReportByStudent(int lectureNo);
+	// 학생별 별점
+	public List<Map<String, Object>> selectStudentStarRating(int lectureNo);
 }
