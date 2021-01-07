@@ -69,19 +69,94 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="sql" items="${studentQueueList}">
+							<c:if test="${!empty studentQueueList}">
+								<c:forEach var="sql" items="${studentQueueList}">
+									<tr>
+										<td style="font-size: 13px;">${sql.studentId}</td>
+										<td style="font-size: 13px;">${sql.studentEmail}</td>
+										<td style="font-size: 13px;">${sql.studentPhone}</td>
+										<td style="font-size: 13px;">${sql.studentName}</td>
+										<td style="font-size: 13px;">${sql.studentGender}</td>
+										<td style="font-size: 13px;">${sql.studentBirth}</td>
+										<td style="font-size: 10px;">${sql.studentAddressMain} <br> ${sql.studentAddressSub}</td>
+										<td style="font-size: 13px;">
+											<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-default">승인</button>
+											
+											<div class="modal fade" id="modal-default" tabindex="-1"
+												role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+												<div class="modal-dialog modal- modal-dialog-centered modal-"
+													role="document">
+													<div class="modal-content">
+										
+														<div class="modal-header">
+															<h6 class="modal-title" id="modal-title-notification">확인</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+										
+														<div class="modal-body">
+										
+															<div class="py-3 text-center">
+																<i class="ni ni-bell-55 ni-3x"></i>
+																<h4 class="heading mt-4">승인 확인</h4>
+																<p>선택한 학생의 회원가입을 승인하시겠습니까?</p>
+															</div>
+										
+														</div>
+										
+														<div class="modal-footer">
+															<button type="button" class="btn btn-link" data-dismiss="modal">취소</button>
+															<button type="button" class="btn btn-primary ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/student/accessStudent/${currentPage}/${sql.studentId}'">승인</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+										<td style="font-size: 13px;">
+											<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">거절</button>
+											
+											<div class="modal fade" id="modal-notification" tabindex="-1"
+												role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+												<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+													role="document">
+													<div class="modal-content bg-gradient-danger">
+										
+														<div class="modal-header">
+															<h6 class="modal-title" id="modal-title-notification">경고</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+										
+														<div class="modal-body">
+										
+															<div class="py-3 text-center">
+																<i class="ni ni-bell-55 ni-3x"></i>
+																<h4 class="heading mt-4">거절 확인</h4>
+																<p>선택한 학생의 회원가입을 거절하시겠습니까?</p>
+															</div>
+										
+														</div>
+										
+														<div class="modal-footer">
+															<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+															<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/student/negativeStudent/${sql.studentId}'">삭제</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:if>
+							<c:if test="${empty studentQueueList}">
 								<tr>
-									<td style="font-size: 13px;">${sql.studentId}</td>
-									<td style="font-size: 13px;">${sql.studentEmail}</td>
-									<td style="font-size: 13px;">${sql.studentPhone}</td>
-									<td style="font-size: 13px;">${sql.studentName}</td>
-									<td style="font-size: 13px;">${sql.studentGender}</td>
-									<td style="font-size: 13px;">${sql.studentBirth}</td>
-									<td style="font-size: 10px;">${sql.studentAddressMain} <br> ${sql.studentAddressSub}</td>
-									<td style="font-size: 13px;"><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/manager/student/accessStudent/${currentPage}/${sql.studentId}">승인</a></td>
-									<td style="font-size: 13px;"><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/manager/student/negativeStudent/${sql.studentId}">거절</a></td>
+									<td colspan="9">(대기중인 학생이 없습니다)</td>
 								</tr>
-							</c:forEach>
+							</c:if>
 						</tbody>
 					</table>
 				</div>

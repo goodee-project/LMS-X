@@ -2,47 +2,50 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>teacherQueueList</title>
-	<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
-	<!-- Fonts -->
-	<link
-		href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
-		rel="stylesheet">
-	<!-- Icons -->
-	<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
-	<link
-		href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"
-		rel="stylesheet" />
-	<!-- CSS Files -->
-	<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+	<head>
+		<meta charset="UTF-8">
+		<title>teacherQueueList</title>
+		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
+		<!-- Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+			rel="stylesheet">
+		<!-- Icons -->
+		<link href="${pageContext.request.contextPath}/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+		<link
+			href="${pageContext.request.contextPath}/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css"
+			rel="stylesheet" />
+		<!-- CSS Files -->
+		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+		
+		<style>
+			.table {
+				text-align: center;
+			}
+			
+			.table td {
+				vertical-align: middle;
+			}
+			
+			th {
+				text-align: center;
+			}
+		</style>	
+	</head>
 	
-	<style>
-		.table {
-			text-align: center;
-		}
+	<body>
+		<!-- 내비게이션 메인 메뉴 -->
+		<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
+		<div class="main-content">
 		
-		.table td {
-			vertical-align: middle;
-		}
+		<!-- 내비게이션 상단 메뉴 -->
+		<div class="container-fluid">
+			<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
+		</div>
 		
-		th {
-			text-align: center;
-		}
-	</style>	
-</head>
-
-<body>
-	<!-- 내비게이션 메인 메뉴 -->
-	<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
-	<div class="main-content">
-	<!-- 내비게이션 상단 메뉴 -->
-	<div class="container-fluid">
-		<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
-	</div>
 		<!-- 접속자 -->
 		<jsp:include page="/WEB-INF/view/auth/manager/include/connector.jsp" />
+			
 			<div class="container-fluid mt--7">
 				<div class="card shadow">
 					<div class="card-header bg-white border-0">
@@ -72,19 +75,94 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="tql" items="${teacherQueueList}">
+								<c:if test="${!empty teacherQueueList}">
+									<c:forEach var="tql" items="${teacherQueueList}">
+										<tr>
+											<td style="font-size: 13px;">${tql.teacherId}</td>
+											<td style="font-size: 13px;">${tql.teacherEmail}</td>
+											<td style="font-size: 13px;">${tql.teacherPhone}</td>
+											<td style="font-size: 13px;">${tql.teacherName}</td>
+											<td style="font-size: 13px;">${tql.teacherGender}</td>
+											<td style="font-size: 13px;">${tql.teacherBirth}</td>
+											<td style="font-size: 10px;">${tql.teacherAddressMain}<br>${tql.teacherAddressSub}</td>
+											<td style="font-size: 13px;">
+												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-default">승인</button>
+											
+												<div class="modal fade" id="modal-default" tabindex="-1"
+													role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+													<div class="modal-dialog modal- modal-dialog-centered modal-"
+														role="document">
+														<div class="modal-content">
+											
+															<div class="modal-header">
+																<h6 class="modal-title" id="modal-title-notification">확인</h6>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
+																	<span aria-hidden="true">×</span>
+																</button>
+															</div>
+											
+															<div class="modal-body">
+											
+																<div class="py-3 text-center">
+																	<i class="ni ni-bell-55 ni-3x"></i>
+																	<h4 class="heading mt-4">승인 확인</h4>
+																	<p>선택한 강사의 회원가입을 승인하시겠습니까?</p>
+																</div>
+											
+															</div>
+											
+															<div class="modal-footer">
+																<button type="button" class="btn btn-link" data-dismiss="modal">취소</button>
+																<button type="button" class="btn btn-primary ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/teacher/accessTeacher/${currentPage}/${tql.teacherId}'">승인</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+											<td style="font-size: 13px;">
+												<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">거절</button>
+											
+												<div class="modal fade" id="modal-notification" tabindex="-1"
+													role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+													<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+														role="document">
+														<div class="modal-content bg-gradient-danger">
+											
+															<div class="modal-header">
+																<h6 class="modal-title" id="modal-title-notification">경고</h6>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
+																	<span aria-hidden="true">×</span>
+																</button>
+															</div>
+											
+															<div class="modal-body">
+											
+																<div class="py-3 text-center">
+																	<i class="ni ni-bell-55 ni-3x"></i>
+																	<h4 class="heading mt-4">거절 확인</h4>
+																	<p>선택한 강사의 회원가입을 거절하시겠습니까?</p>
+																</div>
+											
+															</div>
+											
+															<div class="modal-footer">
+																<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+																<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/teacher/negativeTeacher/${tql.teacherId}'">삭제</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty teacherQueueList}">
 									<tr>
-										<td style="font-size: 13px;">${tql.teacherId}</td>
-										<td style="font-size: 13px;">${tql.teacherEmail}</td>
-										<td style="font-size: 13px;">${tql.teacherPhone}</td>
-										<td style="font-size: 13px;">${tql.teacherName}</td>
-										<td style="font-size: 13px;">${tql.teacherGender}</td>
-										<td style="font-size: 13px;">${tql.teacherBirth}</td>
-										<td style="font-size: 10px;">${tql.teacherAddressMain}<br>${tql.teacherAddressSub}</td>
-										<td style="font-size: 13px;"><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/manager/teacher/accessTeacher/${currentPage}/${tql.teacherId}">승인</a></td>
-										<td style="font-size: 13px;"><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/manager/teacher/negativeTeacher/${tql.teacherId}">거절</a></td>
+										<td colspan="9">(대기중인 강사가 없습니다)</td>
 									</tr>
-								</c:forEach>
+								</c:if>
 							</tbody>
 						</table>
 					</div>
