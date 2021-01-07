@@ -80,36 +80,28 @@
 						<div class="table-responsive">
 							<table class="table align-items-center table-flush">
 								<tr>
-									<th width="20%">강좌 번호</th>
-									<td width="80%">${lectureNo}</td>
+									<th width="10%">강좌 번호</th>
+									<td width="40%">${lectureNo}</td>
+									<th width="10%">정원</th>
+									<td width="40%">${lct.lecture.lectureTotal}</td>
 								</tr>
 								<tr>
+									<th>강좌명</th>
+									<td>${lct.lecture.lectureName}</td>
 									<th>강사명</th>
 									<td>${lct.lecture.teacherName}</td>
 								</tr>
 								<tr>
-									<th>강의명</th>
-									<td>${lct.lecture.lectureName}</td>
-								</tr>
-								<tr>
 									<th>교재</th>
 									<td>${lct.textbook.textbookTitle}</td>
-								</tr>
-								<tr>
 									<th>강의실</th>
 									<td>${lct.classroom.classroomNumber}호</td>
 								</tr>
 								<tr>
 									<th>개강일</th>
 									<td>${lct.lecture.lectureStartdate}</td>
-								</tr>
-								<tr>
 									<th>종강일</th>
 									<td>${lct.lecture.lectureEnddate}</td>
-								</tr>
-								<tr>
-									<th>정원</th>
-									<td>${lct.lecture.lectureTotal}</td>
 								</tr>
 							</table>
 						</div>

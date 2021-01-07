@@ -113,15 +113,15 @@
 				</li>
 			</ul>
 			
-			<!-- 구분 선 -->
+			<!-- 구분선 -->
 			<hr class="my-3">
 			
 			<ul class="navbar-nav mr-auto">
-				<!-- 강의 관리 -->
+				<!-- 강좌 관리 -->
 			    <li class="nav-item">
 			    	<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/lecture/lectureList/1">
 			    		<i class="fas fa-chalkboard-teacher text-yellow"></i>
-			    		강의 관리</a>
+			    		강좌 관리</a>
 			    </li>
 			    
 			    <!-- 강의실 관리 -->
