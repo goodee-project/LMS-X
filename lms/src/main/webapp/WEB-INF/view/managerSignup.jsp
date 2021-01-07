@@ -274,9 +274,11 @@
 					// 비밀번호검사
 					if ($('#managerPw1').val().length < 7) {
 						$('#managerPw1').focus();
+						$('#managerPwCheck').html('<span class="text-danger">8~10자 영문, 숫자를 입력해주세요</span>');
 						return;
-					} else if ($('#managerPw2').val().replace(/(\s*)/g, "") == "") {
+					} else if ($('#managerPw1').val().replace(/(\s*)/g, "") == "") {
 						$('#managerPw2').focus();
+						$('#managerPwCheck').html('<span class="text-danger">비밀번호를 다시 입력해주세요.</span>');
 						return;
 					} else if (isJobPassword($('#managerPw1').val()) == false) {
 						$('#managerPw1').focus();

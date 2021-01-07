@@ -252,7 +252,7 @@
 				  
 				      return str;
 				}
-				var phoneNum = document.getElementById('managerPhone');
+				var phoneNum = document.getElementById('studentPhone');
 
 				phoneNum.onkeyup = function(){
 					this.value = autoHypenPhone( this.value ) ;  
@@ -273,9 +273,11 @@
 					// 비밀번호검사
 					if ($('#studentPw1').val().length < 7) {
 						$('#studentPw1').focus();
+						$('#studentPwCheck').html('<span class="text-danger">8~10자 영문, 숫자를 입력해주세요</span>');
 						return;
-					} else if ($('#studentPw2').val().replace(/(\s*)/g, "") == "") {
+					} else if ($('#studentPw1').val().replace(/(\s*)/g, "") == "") {
 						$('#studentPw2').focus();
+						$('#studentPwCheck').html('<span class="text-danger">비밀번호를 다시 입력해주세요.</span>');
 						return;
 					} else if (isJobPassword($('#studentPw1').val()) == false) {
 						$('#studentPw1').focus();
