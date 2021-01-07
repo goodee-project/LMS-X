@@ -190,7 +190,8 @@
 		LEFT JOIN
 			class_registration cr ON
 			cr.lecture_no = l.lecture_no AND
-			cr.class_registration_state != '취소'
+			cr.class_registration_state != '취소' AND
+			cr.class_registration_state != '대기'			
 		WHERE 
 			l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
 		GROUP BY 

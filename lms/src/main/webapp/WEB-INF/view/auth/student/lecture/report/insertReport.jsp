@@ -60,7 +60,8 @@
 				// 과제 제출 버튼
 				$('#reportSubmitBtn').click(function(){
 					oEditors.getById["reportSubmitContent"].exec("UPDATE_CONTENTS_FIELD", []); // 스마트 에디터 내용 적용
-					var rsc = $("reportSubmitContent").val();
+					var rsc = $("#reportSubmitContent").val();
+					console.log(rsc);
 					// 제목, 내용 유효성 검사
 					if($('#reportSubmitTitle').val().length < 1){
 						alert('제목을 입력해 주세요.');
