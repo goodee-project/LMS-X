@@ -97,7 +97,7 @@ th {
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${!empty noteList[0].noteNo}">
+									<c:if test="${!empty noteList}">
 										<c:forEach var="nl" items="${noteList}">
 											<tr>
 												<td>${nl.noteDispatcherName}(${nl.noteDispatcherId})</td>
@@ -114,7 +114,7 @@ th {
 											</tr>
 										</c:forEach>
 									</c:if>
-									<c:if test="${empty noteList[0].noteNo}">
+									<c:if test="${empty noteList}">
 										<tr>
 											<td colspan="4">(받은 쪽지가 없습니다)</td>
 										</tr>

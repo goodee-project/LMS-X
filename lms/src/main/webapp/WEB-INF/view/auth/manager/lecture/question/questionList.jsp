@@ -90,6 +90,7 @@
 								<table class="table align-items-center table-flush">
 									<thead class="thead-light">
 										<tr>
+											<th width="10%">번호</th>
 											<th width="55%">제목</th>
 											<th width="10%">작성자</th>
 											<th width="15%">작성일시</th>
@@ -97,15 +98,22 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${managerQuestionList}" var="q">
+										<c:if test="${!empty managerQuestionList}">
+											<c:forEach items="${managerQuestionList}" var="q">
+												<tr>
+													<td>${q.questionNo}</td>
+													<td><a href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionOne/${q.questionNo}/1">${q.questionTitle}</a></td>
+													<td>${q.questionWriter}</td>
+													<td>${q.questionCreatedate}</td>
+													<td>${q.questionCount}</td>
+												</tr>
+											</c:forEach>
+										</c:if>
+										<c:if test="${empty managerQuestionList}">
 											<tr>
-												<td><a
-													href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionOne/${q.questionNo}/1">${q.questionTitle}</a></td>
-												<td>${q.questionWriter}</td>
-												<td>${q.questionCreatedate}</td>
-												<td>${q.questionCount}</td>
+												<td>(등록된 질문이 없습니다)</td>
 											</tr>
-										</c:forEach>
+										</c:if>
 									</tbody>
 								</table>
 							</div>

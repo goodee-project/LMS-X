@@ -8,7 +8,7 @@
 			note_title noteTitle,
 			note_content noteContent,
 			note_dispatcher_id noteDispatcherId,
-			note_dispatcher_name noteDispatcherId,
+			note_dispatcher_name noteDispatcherName,
 			note_receiver_id noteReceiverId,
 			note_receiver_name noteReceiverName,
 			note_send_date noteSendDate,

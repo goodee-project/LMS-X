@@ -149,7 +149,7 @@
 											
 															<div class="modal-footer">
 																<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
-																<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/teacher/negativeTeacher/${tql.teacherId}'">삭제</button>
+																<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/teacher/negativeTeacher/${tql.teacherId}'">거절</button>
 															</div>
 														</div>
 													</div>

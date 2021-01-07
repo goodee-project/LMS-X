@@ -6,7 +6,7 @@
 		<ul class="navbar-nav mr-auto">
 			<!-- 쪽지 수신함 -->
 			<li class="nav-item">
-				<a class="nav-link active" href="${pageContext.request.contextPath}/auth/student/note/noteReceiveList/1">		
+				<a class="nav-link" href="${pageContext.request.contextPath}/auth/manager/note/noteReceiveList/1">		
 					쪽지 수신함
 					<span class="badge badge-secondary" style="color: black">${noteNotReadReceiveCount}</span>
 				</a>

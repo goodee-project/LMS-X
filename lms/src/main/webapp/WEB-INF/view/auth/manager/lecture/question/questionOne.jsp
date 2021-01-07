@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -44,19 +44,15 @@
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
 		<style>
-			.table {
+			.commentTable {
 				text-align: center;
 			}
 			
-			.table td {
+			.commentTable td {
 				vertical-align: middle;
 			}
 			
-			.table a {
-				color: #000000;
-			}
-			
-			th {
+			.commentTable th {
 				text-align: center;
 			}
 		</style>
@@ -97,79 +93,92 @@
 						<div class="card shadow">
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
-									<br>
 									<div class="col-8">
-										<h3 class="mb-0">질문 목록</h3>
+										<h3 class="mb-0">질문 조회</h3>
 									</div>
 									<div class="col-4 text-right">
-										<button type="button" class="btn btn-sm btn-dark"
-											onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/1'">목록</button>
-										<button type="button" class="btn btn-sm btn-danger"
-											onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/deleteQuestion/${question.questionNo}'">삭제</button>
+										<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionList/1'">목록</button>
+										<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-content">삭제</button>
 									</div>
-									<br>
+									<div class="modal fade" id="modal-content" tabindex="-1"
+										role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+										<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+											role="document">
+											<div class="modal-content bg-gradient-danger">
+								
+												<div class="modal-header">
+													<h6 class="modal-title" id="modal-title-notification">경고</h6>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+												</div>
+								
+												<div class="modal-body">
+								
+													<div class="py-3 text-center">
+														<i class="ni ni-bell-55 ni-3x"></i>
+														<h4 class="heading mt-4">삭제 확인</h4>
+														<p>게시글을 삭제하시겠습니까?</p>
+													</div>
+								
+												</div>
+								
+												<div class="modal-footer">
+													<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+													<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/deleteQuestion/${question.questionNo}'">삭제</button>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 	
 							<div class="table-responsive">
 								<table class="table align-items-center table-flush">
-									<tr>
-										<td>질문 번호</td>
-										<td>${question.questionNo}</td>
-									<tr>
-									<tr>
-										<td>강의 번호</td>
-										<td>${question.lectureNo}</td>
-									</tr>
-									<tr>
-										<td>계정 번호</td>
-										<td>${question.accountId}</td>
-									</tr>
-									<tr>
-										<td>질문 작성자</td>
-										<td>${question.questionWriter}</td>
-									</tr>
-									<tr>
-										<td>질문 제목</td>
-										<td>${question.questionTitle}</td>
-									</tr>
-									<tr>
-										<td>질문 내용</td>
-										<td>${question.questionContent}</td>
-									</tr>
-									<tr>
-										<td>질문 작성날짜</td>
-										<td>${question.questionCreatedate}</td>
-									</tr>
-									<tr>
-										<td>질문 수정날짜</td>
-										<td>${question.questionUpdatedate}</td>
-									</tr>
-									<tr>
-										<td>질문 조회수</td>
-										<td>${question.questionCount}</td>
-									</tr>
-									<tr>
-										<td>첨부파일</td>
-										<td><c:forEach var="qfl"
-												items="${question.questionFileList}">
-												<!-- 태그 id에 .이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
-												<c:set var="uuid">${qfl.questionFileUuid}</c:set>
-												<c:if test="${!empty question.questionFileList[0].questionFileOriginal}">
-													<div>
-														<a onclick="fileDownloadCount('${qfl.questionFileUuid}','${qfl.questionFileCount}')" href="${pageContext.request.contextPath}/resource/questionFile/${qfl.questionFileUuid}" download="${qfl.questionFileOriginal}"> ${qfl.questionFileOriginal} </a>
-														<!-- 다운 횟수 -->
-														<div id="fileCount${fn:split(uuid, '.')[0]}"
-															style="display: inline;">다운로드 횟수 :
-															${qfl.questionFileCount}회</div>
-													</div>
+									<tbody>
+										<tr>
+											<th width="10%">작성자</th>
+											<td width="40%">${question.questionWriter}</td>
+											<th width="10%">조회수</th>
+											<td width="40%">${question.questionCount}</td>
+										</tr>
+										<tr>
+											<th>작성일시</th>
+											<td>${question.questionCreatedate}</td>
+											<th>수정일시</th>
+											<td>${question.questionUpdatedate}</td>
+										</tr>
+										<tr>
+											<th>제목</th>
+											<td colspan="3">${question.questionTitle}</td>
+										</tr>
+										<tr>
+											<th>내용</th>
+											<td colspan="3">${question.questionContent}</td>
+										</tr>
+										<tr>
+											<th>첨부파일</th>
+											<td colspan="3">
+												<c:if test="${!empty question.questionFileList}">
+													<c:forEach var="qfl" items="${question.questionFileList}">
+														<!-- 태그 id에 .이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
+														<c:set var="uuid">${qfl.questionFileUuid}</c:set>
+														<div>
+															<a onclick="fileDownloadCount('${qfl.questionFileUuid}','${qfl.questionFileCount}')" href="${pageContext.request.contextPath}/resource/questionFile/${qfl.questionFileUuid}" download="${qfl.questionFileOriginal}"> ${qfl.questionFileOriginal} </a>
+															<!-- 다운 횟수 -->
+															<div id="fileCount${fn:split(uuid, '.')[0]}"
+																style="display: inline;">다운로드 횟수 :
+																${qfl.questionFileCount}회</div>
+														</div>
+													</c:forEach>
 												</c:if>
-												<c:if
-													test="${empty question.questionFileList[0].questionFileOriginal}">
-													<p>(첨부파일이 없습니다.)</p>
+												<c:if test="${empty question.questionFileList}">
+													(첨부파일이 없습니다)
 												</c:if>
-											</c:forEach></td>
-									</tr>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</div>
 						</div>
@@ -195,28 +204,73 @@
 	
 							<div class="table-responsive">
 								<table class="table commentTable align-items-center table-flush">
-									<c:if test="${!empty questionComment[0].questionCommentNo}">
-										<c:forEach var="qc" items="${questionComment}">
+									<thead class="thead-light">
+										<tr>
+											<th width="10%">번호</th>
+											<th width="10%">작성자</th>
+											<th width="32%">내용</th>
+											<th width="15%">작성일시</th>
+											<th width="15%">수정일시</th>
+											<th width="8%">삭제</th>
+										<tr>
+									</thead>
+									<tbody>
+										<c:if test="${!empty questionComment[0].questionCommentNo}">
+											<c:forEach var="qc" items="${questionComment}">
+												<tr>
+													<td>${qc.questionCommentNo}</td>
+													<td>${qc.questionCommentWriter}</td>
+													<td>${qc.questionCommentContent}</td>
+													<td>${qc.questionCommentCreatedate}</td>
+													<td>${qc.questionCommentUpdatedate}</td>
+													<td>
+														<!-- ALERT -->
+														<div>
+															<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-comment">삭제</button>
+															<div class="modal fade" id="modal-comment" tabindex="-1"
+																role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+																<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+																	role="document">
+																	<div class="modal-content bg-gradient-danger">
+														
+																		<div class="modal-header">
+																			<h6 class="modal-title" id="modal-title-notification">경고</h6>
+																			<button type="button" class="close" data-dismiss="modal"
+																				aria-label="Close">
+																				<span aria-hidden="true">×</span>
+																			</button>
+																		</div>
+														
+																		<div class="modal-body">
+														
+																			<div class="py-3 text-center">
+																				<i class="ni ni-bell-55 ni-3x"></i>
+																				<h4 class="heading mt-4">삭제 확인</h4>
+																				<p>선택한 댓글을 삭제하시겠습니까?</p>
+																			</div>
+														
+																		</div>
+														
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+																			<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</c:forEach>
+										</c:if>
+										<c:if test="${empty questionComment[0].questionCommentNo}">
 											<tr>
-												<td>${qc.questionCommentNo}</td>
-												<td>${qc.questionCommentWriter}</td>
-												<td>${qc.questionCommentContent}</td>
-												<td>${qc.questionCommentCreatedate}</td>
-												<td>${qc.questionCommentUpdatedate}</td>
 												<td>
-													<button type="button" class="btn btn-sm btn-danger"
-														onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/question/questionOne/${questionNo}/deleteQuestionComment/${qc.questionCommentNo}'">삭제</button>
+													<p>(댓글이 없습니다.)</p>
 												</td>
 											</tr>
-										</c:forEach>
-									</c:if>
-									<c:if test="${empty questionComment[0].questionCommentNo}">
-										<tr>
-											<td>
-												<p>(댓글이 없습니다.)</p>
-											</td>
-										</tr>
-									</c:if>
+										</c:if>
+									</tbody>
 								</table>
 							</div>
 	
