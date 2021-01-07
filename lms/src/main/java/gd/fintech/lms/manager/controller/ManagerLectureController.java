@@ -187,4 +187,20 @@ public class ManagerLectureController {
 		
 		return "/auth/manager/lecture/studentManagement";
 	}
+	// 수강 학생 상태 변경
+	@GetMapping("/auth/manager/lecture/{lectureNo}/updateStudentClassState/{accountId}/{state}")
+	public String updateStudentClassState(
+			@PathVariable(value = "lectureNo") int lectureNo,
+			@PathVariable(value = "accountId") String accountId,
+			@PathVariable(value = "state") String state) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("accountId", accountId);
+		map.put("state", state);
+		
+		managerLectureService.updateClassRegistrationState(map);
+		
+		return "redirect:/auth/manager/lecture/" + lectureNo + "/studentManagement";
+	}
 }

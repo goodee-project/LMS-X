@@ -57,4 +57,8 @@ public class ManagerLectureService {
 	public int selectClassRegistrationListByStateCount(int lectureNo) {
 		return managerLectureMapper.selectClassRegistrationListByStateCount(lectureNo);
 	}
+	// 학생 수강 승인
+	public int updateClassRegistrationState(Map<String, Object> map) {
+		return managerLectureMapper.updateClassRegistrationState(map);
+	}
 }

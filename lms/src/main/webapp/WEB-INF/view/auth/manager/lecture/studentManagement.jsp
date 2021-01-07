@@ -41,7 +41,27 @@
 <!-- jQuery library -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
+
+<script>
+	$(document).ready(function(){
+		$('#studnetAccessBtn').on('click', function(){
+			let paramId = $(this).val();
+			$.ajax({
+				url: '${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/isLectureTotalFull/${studentListCount}',
+				type:'get',
+				success: function(data){
+					if(!data) {
+						alert('이미 정원이 초과되었습니다.');
+						return;
+					}
+					else {
+						$(location).attr('href', '${pageContext.request.contextPath}/auth/manager/lecture/' + ${lectureNo} + '/updateStudentClassState/' + paramId + '/수강중')
+					}
+				}
+			});
+		})
+	})
+</script>
 </head>
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
@@ -68,7 +88,7 @@
 									<h3 class="mb-0">강좌 정보 조회</h3>
 								</div>
 								<div class="col-4 text-right">
-									<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/lectureList/1'">목록</button>
+									<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/lectureOne/${lectureNo}'">이전</button>
 								</div>
 								<br>
 							</div>
@@ -93,9 +113,9 @@
 									</thead>
 									<c:forEach var="sl" items="${studentList}">
 										<tr>
-											<td>${sls.accountId}</td>
-											<td>${sls.classRegistrationState}</td>
-											<td>${sls.classRegistrationUpdatedate}</td>
+											<td>${sl.accountId}</td>
+											<td>${sl.classRegistrationState}</td>
+											<td>${sl.classRegistrationUpdatedate}</td>
 										</tr>
 									</c:forEach>
 								</table>
@@ -124,10 +144,10 @@
 											<td>${sls.classRegistrationState}</td>
 											<td>${sls.classRegistrationUpdatedate}</td>
 											<td>
-												<a href="" class="btn btn-primary btn-sm">승인</a>
+												<button value="${sls.accountId}" style="color:white" id="studnetAccessBtn" class="btn btn-primary btn-sm">승인</button>
 											</td>
 											<td>
-												<a href="" class="btn btn-danger btn-sm">거절</a>
+												<a href="${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/updateStudentClassState/${sls.accountId}/취소" class="btn btn-danger btn-sm">거절</a>
 											</td>
 										</tr>
 									</c:forEach>

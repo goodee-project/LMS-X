@@ -42,6 +42,9 @@ public interface ManagerLectureMapper {
 	int selectClassRegistrationListCount(int lectureNo);
 	// 강의의 대기중인 수강 학생 목록 개수
 	int selectClassRegistrationListByStateCount(int lectureNo);
+
+	// 학생 수강 승인
+	public int updateClassRegistrationState(Map<String, Object> map);
 	
 }
  

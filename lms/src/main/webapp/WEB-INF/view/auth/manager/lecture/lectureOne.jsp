@@ -64,10 +64,10 @@
 						<div class="card-header bg-white border-0">
 							<div class="row align-items-center">
 								<br>
-								<div class="col-8">
+								<div class="col-6">
 									<h3 class="mb-0">강좌 정보 조회</h3>
 								</div>
-								<div class="col-4 text-right">
+								<div class="col-6 text-right">
 									<button type="button" class="btn btn-sm btn-dark"
 										onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/lectureList/1'">목록</button>
 									<button type="button" class="btn btn-sm btn-primary"

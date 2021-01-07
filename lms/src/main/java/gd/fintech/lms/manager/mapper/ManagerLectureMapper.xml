@@ -76,30 +76,31 @@
 		</collection>
 	</resultMap>
 	<!-- 강의 상세 보기 출력 쿼리문 -->
-	<select id="selectLectureOne" parameterType="int" resultMap="selectLectureOneResult">			
-		SELECT
-			l.lecture_no, 
-			l.account_id, 
-			l.subject_no,	
-			l.teacher_name,
-			l.lecture_name,	
-			t.textbook_title,	
-			l.lecture_startdate,
-			l.lecture_enddate,
-			l.lecture_total,
-			l.classroom_no,
-			c.classroom_number
-		FROM 
-			lecture AS l 
-		LEFT JOIN 
-			textbook AS t ON 
-			l.textbook_isbn = t.textbook_isbn
-		LEFT JOIN 
-			classroom AS c ON 
-			l.classroom_no = c.classroom_no
-		WHERE 
-			lecture_no = #{lectureNo}
-	</select>
+	<select id="selectLectureOne" parameterType="int" resultMap="selectLectureOneResult">
+        SELECT
+            l.lecture_no, 
+            l.account_id, 
+            l.subject_no,
+            l.teacher_name,
+            l.lecture_name,
+            t.textbook_isbn,
+            t.textbook_title,
+            l.lecture_startdate,
+            l.lecture_enddate,
+            l.lecture_total,
+            l.classroom_no,
+            c.classroom_number
+        FROM 
+            lecture AS l 
+        LEFT JOIN 
+            textbook AS t ON 
+            l.textbook_isbn = t.textbook_isbn
+        LEFT JOIN 
+            classroom AS c ON 
+            l.classroom_no = c.classroom_no
+        WHERE 
+            lecture_no = #{lectureNo}
+    </select>
 	<!-- 강의 수정 쿼리문 -->
 	<update id="updateLecture" parameterType="gd.fintech.lms.vo.Lecture">
 		UPDATE 
@@ -180,22 +181,12 @@
 			lecture_no = #{lectureNo} AND
 			class_registration_state = '대기' 
 	</select>
-	<!-- 학생 수강 승인 -->
-	<update id="updateClassRegistrationAccess">
+	<!-- 학생 수강 상태 변경 -->
+	<update id="updateClassRegistrationState" parameterType="java.util.Map">
 		UPDATE
 			class_registration
 		SET 
-			class_registration_state = '수강중' 
-		WHERE 
-			lecture_no = #{lectureNo} AND
-			account_id = #{accountId}
-	</update>
-	<!-- 학생 수강 거절 -->
-	<update id="updateClassRegistrationDenied">
-		UPDATE
-			class_registration
-		SET 
-			class_registration_state = '취소' 
+			class_registration_state = #{state} 
 		WHERE 
 			lecture_no = #{lectureNo} AND
 			account_id = #{accountId}
