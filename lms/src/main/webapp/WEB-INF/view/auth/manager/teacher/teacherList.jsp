@@ -80,7 +80,42 @@
 										<td style="font-size: 13px;">${t.teacherPhone}</td>
 										<td style="font-size: 13px;">${t.teacherAccessdate}</td>
 										<td style="font-size: 13px;">
-											<a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/manager/teacher/deleteTeacher/${currentPage}/${t.teacherId}">탈퇴</a>
+											<!-- ALERT -->
+											<div>
+												<button type="button" class="btn btn-sm btn-danger"
+													data-toggle="modal" data-target="#modal-notification">탈퇴</button>
+												<div class="modal fade" id="modal-notification" tabindex="-1"
+													role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+													<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+														role="document">
+														<div class="modal-content bg-gradient-danger">
+											
+															<div class="modal-header">
+																<h6 class="modal-title" id="modal-title-notification">경고</h6>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
+																	<span aria-hidden="true">×</span>
+																</button>
+															</div>
+											
+															<div class="modal-body">
+											
+																<div class="py-3 text-center">
+																	<i class="ni ni-bell-55 ni-3x"></i>
+																	<h4 class="heading mt-4">탈퇴 처리 확인</h4>
+																	<p>선택한 강사를 탈퇴처리하시겠습니까?</p>
+																</div>
+											
+															</div>
+											
+															<div class="modal-footer">
+																<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+																<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/teacher/deleteTeacher/${currentPage}/${t.teacherId}'">탈퇴</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 										</td>
 									</tr>	
 								</c:forEach>
@@ -202,6 +237,9 @@
 							class="form-inline">
 							<div class="input-group" style="width: 30%; margin: auto;">
 								<!-- 계정검색 -->
+								<div class="input-group-prepend">
+									<span class="input-group-text">아이디</span>
+								</div>
 								<input type="text" class="form-control" name="searchText"
 									value="${searchText}">
 								<div class="input-group-append">
