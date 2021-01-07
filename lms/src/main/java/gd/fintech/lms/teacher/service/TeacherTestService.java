@@ -81,9 +81,13 @@ public class TeacherTestService {
 	}
 	
 	// 평가 학생 답안지 조회
-	// 강좌 고유번호(lectureNo)
-	public List<Multiplechoice> selectMultiplechoiceOne(int lectureNo) {
-		List<Multiplechoice> multiplechoiceList = teacherTestMapper.selectMultiplechoiceOne(lectureNo);
+	// 강좌 고유번호(lectureNo), 학생 아이디(accountId)
+	public List<Multiplechoice> selectMultiplechoiceOne(int lectureNo, String accountId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);		// 강좌 고유번호
+		map.put("accountId", accountId);		// 학생 아이디
+		
+		List<Multiplechoice> multiplechoiceList = teacherTestMapper.selectMultiplechoiceOne(map);
 		
 		// [Logger] 객관식 문제 목록(multiplechoiceList)
 		logger.trace("multiplechoiceList[" + multiplechoiceList + "]");

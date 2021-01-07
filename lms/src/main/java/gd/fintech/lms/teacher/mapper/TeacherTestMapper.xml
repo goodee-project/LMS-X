@@ -17,6 +17,9 @@
 		<result property="multiplechoiceQuestion" column="multiplechoice_question" />
 		<result property="multiplechoiceAnswer" column="multiplechoice_answer" />
 		<result property="multiplechoiceScore" column="multiplechoice_score" />
+		<collection property="answersheetList" ofType="gd.fintech.lms.vo.Answersheet">
+			<result property="answerSelect" column="answer_select" />
+		</collection>
 		<collection property="multiplechoiceExampleList" ofType="gd.fintech.lms.vo.MultiplechoiceExample">
 			<result property="multiplechoiceExampleNo" column="multiplechoice_example_no" />
 			<result property="multiplechoiceExampleId" column="multiplechoice_example_id" />
@@ -125,11 +128,12 @@
 	</select>
 	
 	<!-- 평가 학생 답안지 조회 -->
-	<select id="selectMultiplechoiceOne" parameterType="Integer" resultMap="selectMultiplechoiceOneResult">
+	<select id="selectMultiplechoiceOne" parameterType="java.util.Map" resultMap="selectMultiplechoiceOneResult">
 		SELECT
 			mc.multiplechoice_no, 
 			mc.lecture_no, 
 			mc.multiplechoice_id, 
+			ans.answer_select, 
 			mc.multiplechoice_question, 
 			mc.multiplechoice_answer, 
 			mc.multiplechoice_score, 
@@ -141,11 +145,16 @@
 		LEFT OUTER JOIN
 			multiplechoice_example mce ON
 			mc.multiplechoice_no = mce.multiplechoice_no
+		LEFT OUTER JOIN
+			answersheet ans ON
+			mc.multiplechoice_no = ans.multiplechoice_no AND
+			ans.account_id = #{accountId}
 		WHERE
 			mc.lecture_no = #{lectureNo}
 		ORDER BY
 			mc.multiplechoice_id
 	</select>
+	
 	<!-- 객관식 문제 보기 조회 -->
 	<select id="selectMultiplechoiceExampleList" parameterType="Integer" resultMap="selectMultiplechoiceOneResult">
 		SELECT

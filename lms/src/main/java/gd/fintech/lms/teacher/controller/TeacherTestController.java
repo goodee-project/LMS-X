@@ -211,7 +211,10 @@ public class TeacherTestController {
 			@PathVariable(name = "lectureNo") int lectureNo, 		// 강좌 고유번호
 			@PathVariable(name = "studentId") String studentId) {	// 학생 아이디
 		
-		List<Multiplechoice> multiplechoiceList = teacherTestService.selectMultiplechoiceOne(lectureNo);
+		List<Multiplechoice> multiplechoiceList = teacherTestService.selectMultiplechoiceOne(lectureNo, studentId);
+		
+		// [Logger] 객관식 문제 목록(multiplechoiceList)
+		logger.trace("multiplechoiceList[" + multiplechoiceList + "]");
 		
 		// model을 통해 View에 다음과 같은 정보들을 보내준다
 		model.addAttribute("multiplechoiceList", multiplechoiceList);

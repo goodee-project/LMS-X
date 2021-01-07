@@ -37,8 +37,8 @@ public interface TeacherTestMapper {
 	int selectMultiplechoiceListCount(int lectureNo);
 	
 	// 평가 학생 답안지 조회
-	// 강좌 고유번호(lectureNo)
-	List<Multiplechoice> selectMultiplechoiceOne(int lectureNo);
+	// 강좌 고유번호(lectureNo), 학생 아이디(accountId)
+	List<Multiplechoice> selectMultiplechoiceOne(Map<String, Object> map);
 	
 	// 객관식 문제 보기
 	Multiplechoice selectMultiplechoiceExampleList(int multiplechoiceNo);

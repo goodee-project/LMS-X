@@ -67,7 +67,7 @@
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<div class="col-8">
-										<h3 class="mb-0">학생 답안지 조회</h3>
+										<h3 class="mb-0">학생 답안지 조회&nbsp;&nbsp;<span class="badge badge-primary">${studentId}</span></h3>
 									</div>
 									<div class="col-4 text-right">
 										<button class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/answersheetList'">목록</button>
@@ -80,11 +80,17 @@
 									<table class="table align-items-center table-flush">
 										<thead class="thead-light">
 											<tr>
-												<tr>
-													<th width="30%">${mcl.multiplechoiceId}</th>
-													<th width="70%">${mcl.multiplechoiceQuestion}</th>
-												</tr>
-											</thead>
+												<th colspan="3" width="20%">${mcl.multiplechoiceId}</th>
+												<th width="80%">${mcl.multiplechoiceQuestion}</th>
+											</tr>
+										</thead>
+										<thead>
+											<tr>
+												<th>보기 번호</th>
+												<th>학생 제출</th>
+												<th>정답</th>
+											</tr>
+										</thead>
 										<tbody>
 											<c:forEach var="mcel" items="${mcl.multiplechoiceExampleList}">
 												<tr>
@@ -95,6 +101,18 @@
 														<c:if test="${mcel.multiplechoiceExampleId == 4}">④</c:if>
 														<c:if test="${mcel.multiplechoiceExampleId == 5}">⑤</c:if>
 													</td>
+													<c:if test="${mcel.multiplechoiceExampleId == mcl.answersheetList[0].answerSelect}">
+														<td style="background-color: #bbdefb;"></td>
+													</c:if>
+													<c:if test="${mcel.multiplechoiceExampleId != mcl.answersheetList[0].answerSelect}">
+														<td></td>
+													</c:if>
+													<c:if test="${mcel.multiplechoiceExampleId == mcl.multiplechoiceAnswer}">
+														<td style="background-color: #aeed58;"></td>
+													</c:if>
+													<c:if test="${mcel.multiplechoiceExampleId != mcl.multiplechoiceAnswer}">
+														<td></td>
+													</c:if>
 													<td>
 														${mcel.multiplechoiceExampleContent}
 													</td>
