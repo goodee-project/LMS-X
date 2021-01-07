@@ -123,7 +123,7 @@
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark"
-											onclick="location.href='${pageContext.request.contextPath}/auth/manager/faq/faqList/1'">목록</button>
+											onclick="location.href='${pageContext.request.contextPath}/auth/manager/lmsNotice/lmsNoticeOne/${lmsNotice.lmsNoticeNo}'">취소</button>
 										<button id="updateBtn" class="btn btn-sm btn-primary"
 											type="button">수정</button>
 									</div>
