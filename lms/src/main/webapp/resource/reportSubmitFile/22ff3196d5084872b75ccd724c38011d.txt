@@ -1,0 +1,60 @@
+<html>
+	<body>
+		<h1>글 작성하기</h1>
+		<form>
+			<table>
+				<tr>
+					<td>작성자</td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td>아이디</td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td>
+						<input type="text">@<input type="text">
+					</td>
+				</tr>
+				<tr>
+					<td>휴대폰</td>
+					<td>
+						<select>
+							<option>010</option>
+							<option>011</option>
+						</select>
+						<input type="text">-<input type="text">
+					</td>
+				</tr>
+				<tr>
+					<td>글제목</td>
+					<td><input type="text"></td>
+				</tr>
+				<tr>
+					<td>내용</td>
+					<td><textarea rows="3" cols="80"></textarea></td>
+				</tr>
+				<tr>
+					<td>성별</td>
+					<td>
+						<input type="radio" name="gender">남
+						<input type="radio" name="gender">여
+					</td>
+				</tr>
+				<tr>
+					<td>취미</td>
+					<td>
+						<input type="checkbox">야구
+						<input type="checkbox">축구
+						<input type="checkbox">게임
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td><button>제출</button></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>
