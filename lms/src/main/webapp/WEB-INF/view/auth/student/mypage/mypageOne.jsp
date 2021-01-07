@@ -43,7 +43,8 @@
 						return false;
 					}
 				}
-				$('#insertUpdatePwBtn').click(function(){
+				
+				$(document).on("click", "#insertUpdatePwBtn", function() {
 					$('#pwBtn').html('');
 					let insertPw = `
 							<div style="margin-bottom : 10px;">
@@ -66,44 +67,68 @@
 							return;
 						}
 						
-						// 비밀번호검사
+						// 비밀번호 검사
 						if ($('#nextPw1').val().replace(/(\s*)/g, "") == "") {
 							$('#nextPw1').focus();
 							return;
 						}
+						
 						if ($('#nextPw2').val().replace(/(\s*)/g, "") == "") {
 							$('#nextPw2').focus();
 							return;
 						}
+						
 						if (isJobPassword($('#nextPw1').val()) == false) {
 							$('#studentPw1').focus();
 							$('#pwCheck').html('<span style="font-size:12px;" class="text-danger">8자 이상 영문,숫자 조합으로 입력해주세요.</span>');
 							return;
-						}else if ($('#nextPw1').val() != $('#nextPw2').val()) {
+						} else if ($('#nextPw1').val() != $('#nextPw2').val()) {
 							$('#nextPw1').focus();
-							$('#pwCheck').html('<span class="text-danger">비밀번호가 일치하지않습니다.</span>');
+							$('#pwCheck').html('<span class="text-danger">비밀번호가 일치하지 않습니다.</span>');
 							return;
 						} else {
 							$('#pwCheck').html('');
 						}
 						
-						
 						$.ajax({
 							url : '${pageContext.request.contextPath}/auth/pwUpdate/selectPw/'+$('#nowPw').val(),
 							type : 'get',
 							success : function(data){
-									if (data == 'false') {
-										$('#nowPw').focus();
-										$('#pwCheck').html('<span class="text-danger">현재 비밀번호를 확인해주세요</span>')
-									} else {
-										$.ajax({
-											url : '${pageContext.request.contextPath}/auth/pwUpdate/updatePw/'+$('#nextPw1').val(),
-											type : 'get',
-											success : function(data) {
-												$('#insertUpdatePW').html('');
-											}
-										});
-									}
+								if (data == 'false') {
+									$('#nowPw').focus();
+									$('#pwCheck').html('<span class="text-danger">현재 비밀번호를 확인해주세요</span>')
+								} else {
+									$.ajax({
+										url : '${pageContext.request.contextPath}/auth/pwUpdate/updatePw/'+$('#nextPw1').val(),
+										type : 'get',
+										success : function(data) {
+											$('#insertUpdatePW').html(`
+											<div>
+												<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-dialog-centered" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="infoModalLabel">정보</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">비밀번호가 정상적으로 변경되었습니다.</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										`);
+										$("#infoModal").modal("show");
+										$('#pwBtn').html(`
+											<button type="button" class="btn btn-sm btn-primary" id="insertUpdatePwBtn">비밀번호 수정</button>
+										`);
+										}
+									});
+								}
 							}
 						});
 					});

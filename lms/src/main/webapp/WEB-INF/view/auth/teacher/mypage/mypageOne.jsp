@@ -67,7 +67,7 @@
 							return;
 						}
 						
-						// 비밀번호검사
+						// 비밀번호 검사
 						if ($('#nextPw1').val().replace(/(\s*)/g, "") == "") {
 							$('#nextPw1').focus();
 							return;
@@ -84,7 +84,7 @@
 							return;
 						} else if ($('#nextPw1').val() != $('#nextPw2').val()) {
 							$('#nextPw1').focus();
-							$('#pwCheck').html('<span class="text-danger">비밀번호가 일치하지않습니다.</span>');
+							$('#pwCheck').html('<span class="text-danger">비밀번호가 일치하지 않습니다.</span>');
 							return;
 						} else {
 							$('#pwCheck').html('');
