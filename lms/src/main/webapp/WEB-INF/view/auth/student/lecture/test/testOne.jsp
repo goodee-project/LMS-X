@@ -115,7 +115,7 @@
 	    	<!-- 접속자 -->
 			<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
 			
-   			<div class="container-fluid mt--7 col-7 ">
+   			<div class="container-fluid mt--7 col-8 ">
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
@@ -132,11 +132,15 @@
 							    	<table class="table">
 							    		<thead class="thead-light">
 								    		<tr>
-								    			<th>문제${m.multiplechoiceId} - </th>
-								    			<th>내용</th>
-								    			<th>${m.multiplechoiceQuestion}</th>
-								    			<th>배점</th>
-								    			<th>${m.multiplechoiceScore}</th>
+								    			<th width="15%">
+								    				문제${m.multiplechoiceId} - 
+								    			</th>
+								    			<th>
+								    				${m.multiplechoiceQuestion}	
+								    			</th>
+								    			<th width="10%">						    		
+								    				배점 : ${m.multiplechoiceScore}
+								    			</th>
 								    		</tr>
 							    		</thead>
 								    	<c:forEach items="${m.multiplechoiceExampleList}" var="me">
@@ -145,14 +149,13 @@
 									    		<!-- c:otherwise = 학생이 체크한 정답이 아닐경우 -->
 									    		<c:choose>
 									    			<c:when test="${m.answersheetList[0].answerSelect == me.multiplechoiceExampleId}">
-								    					<td><input checked="checked" type="radio" name="submit${me.multiplechoiceNo}" class="submit${me.multiplechoiceNo}" id="${me.multiplechoiceNo}" value="${me.multiplechoiceExampleId}"></td>			    			
+								    					<td><input checked="checked" type="radio" name="submit${me.multiplechoiceNo}" class="submit${me.multiplechoiceNo}" id="${me.multiplechoiceNo}" value="${me.multiplechoiceExampleId}"> ${me.multiplechoiceExampleId}번</td>			    			
 									    			</c:when>
 									    			<c:otherwise>
-								    					<td><input type="radio" name="submit${me.multiplechoiceNo}" class="submit${me.multiplechoiceNo}" id="${me.multiplechoiceNo}" value="${me.multiplechoiceExampleId}"></td>			    							    		
+								    					<td><input type="radio" name="submit${me.multiplechoiceNo}" class="submit${me.multiplechoiceNo}" id="${me.multiplechoiceNo}" value="${me.multiplechoiceExampleId}"> ${me.multiplechoiceExampleId}번</td>			    							    		
 									    			</c:otherwise>
 									    		</c:choose>
-									    		<td>${me.multiplechoiceExampleId}번. </td>
-								    			<td colspan="3">${me.multiplechoiceExampleContent}</td>
+								    			<td colspan="2">${me.multiplechoiceExampleContent}</td>
 									   		</tr>
 								    	</c:forEach>
 							    	</table>

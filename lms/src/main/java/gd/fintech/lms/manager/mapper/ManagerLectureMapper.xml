@@ -125,7 +125,8 @@
 			lecture
 		SET
 			lecture_startdate = 0000-00-00,
-			lecture_enddate = 0000-00-00
+			lecture_enddate = 0000-00-00,
+			lecture_updatedate = NOW()
 		WHERE
 			lecture_no = #{lectureNo}
 	</update>
@@ -186,7 +187,8 @@
 		UPDATE
 			class_registration
 		SET 
-			class_registration_state = #{state} 
+			class_registration_state = #{state},
+			class_registration_updatedate = NOW()
 		WHERE 
 			lecture_no = #{lectureNo} AND
 			account_id = #{accountId}

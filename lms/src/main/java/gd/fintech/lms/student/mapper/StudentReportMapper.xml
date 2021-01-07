@@ -54,6 +54,8 @@
         <result property="reportSubmitContent" column="report_submit_content" />
         <result property="reportSubmitPoint" column="report_submit_point" />
         <result property="reportSubmitFeedback" column="report_submit_feedback" />
+        <result property="reportSubmitCreatedate" column="report_submit_createdate" />
+        <result property="reportSubmitUpdatedate" column="report_submit_updatedate" />
         <!-- 과제 제출 첨부파일 -->
 		<collection  property="reportSubmitFileList" ofType="gd.fintech.lms.vo.ReportSubmitFile">
              <result property="reportSubmitFileUuid" column="report_submit_file_uuid" />
@@ -74,6 +76,8 @@
 		 	rs.report_submit_content,
 		 	rs.report_submit_point,
 		 	rs.report_submit_feedback,
+		 	rs.report_submit_createdate,
+		 	rs.report_submit_updatedate,
 		 	rsf.report_submit_file_uuid,
 		 	rsf.report_submit_file_original,
 		 	rsf.report_submit_file_size,
@@ -121,7 +125,8 @@
 		SET
 			report_submit_updatedate = NOW(),
 			report_submit_title = #{reportSubmitTitle},
-			report_submit_content = #{reportSubmitContent}
+			report_submit_content = #{reportSubmitContent},
+			report_submit_updatedate = NOW()
 		WHERE
 			report_submit_no = #{reportSubmitNo}	
 	</update>
