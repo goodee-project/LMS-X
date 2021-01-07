@@ -73,13 +73,22 @@
 									<th width="45%">제출 기간</th>
 								</tr>
 							</thead>
-							<c:forEach items="${reportList}" var="r">
-								<tr>
-									<td>${r.reportNo}</td>
-									<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${r.lectureNo}/report/reportOne/${r.reportNo}">${r.reportTitle}</a></td>
-									<td>${r.reportStartdate} ~ ${r.reportEnddate}</td>
-								</tr>	
-							</c:forEach>
+							<tbody>
+								<c:if test="${!empty reportList}">
+									<c:forEach items="${reportList}" var="r">
+										<tr>
+											<td>${r.reportNo}</td>
+											<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${r.lectureNo}/report/reportOne/${r.reportNo}">${r.reportTitle}</a></td>
+											<td>${r.reportStartdate} ~ ${r.reportEnddate}</td>
+										</tr>	
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty reportList}">
+									<tr>
+										<td colspan="3">(과제가 없습니다)</td>
+									</tr>
+								</c:if>
+							</tbody>
 						</table>
 					</div>			
 									

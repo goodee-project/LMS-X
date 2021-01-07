@@ -104,15 +104,24 @@
 										<th>점수</th>
 									</tr>
 								</thead>
-								<tr>
-									<td id="testContent"><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/1">${test.testContent}</a></td>
-									<td>${test.testCreatedate}</td>
-									<td>${test.testStartdate}</td>
-									<td>${test.testEnddate}</td>
-									<td id="totalScore">				
-										${test.totalScore}
-									</td>
-								</tr>	
+								<tbody>
+									<c:if test="${!empty test}">
+										<tr>
+											<td id="testContent"><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/1">${test.testContent}</a></td>
+											<td>${test.testCreatedate}</td>
+											<td>${test.testStartdate}</td>
+											<td>${test.testEnddate}</td>
+											<td id="totalScore">				
+												${test.totalScore}
+											</td>
+										</tr>
+									</c:if>
+									<c:if test="${empty test}">
+										<tr>
+											<td colspan="5">(등록된 시험이 없습니다)</td>
+										</tr>
+									</c:if>
+								</tbody>
 							</table>	
 						</div>
 					</div>			

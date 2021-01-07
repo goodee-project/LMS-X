@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>syllabus</title>
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 		<!-- Fonts -->
@@ -72,31 +72,38 @@
 					<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
 		   			<c:set var="uuid">${syllabus.syllabusFileUuid}</c:set>
 					<table class="table">
-						<tr>
-							<th width="10%">업로드 날짜</th>
-							<td width="40%">${syllabus.syllabusFileCreatedate}</td>
-							<th width="10%">다운로드</th>
-							<td width="40%" id="fileCount${fn:split(uuid ,'.')[0]}">${syllabus.syllabusFileCount}회</td>
-						</tr>
-						<tr>
-							<th>파일 이름</th>
-							<td><a onclick="fileDownloadCount('${syllabus.syllabusFileUuid}','${syllabus.syllabusFileCount}')" download="${syllabus.syllabusFileOriginal}" href="${pageContext.request.contextPath}/resource/syllabusFile/${syllabus.syllabusFileUuid}">${syllabus.syllabusFileOriginal}</a></td>
-							<th>크기</th>
-							<!-- 크기 -->
-							<td>
-		    					<c:choose>
-		    						<c:when test="${syllabus.syllabusFileSize >= (1024 * 1024)}">
-		    							<fmt:formatNumber value="${syllabus.syllabusFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
-		    						</c:when>
-		    						<c:when test="${syllabus.syllabusFileSize >= 1024}">
-		    							<fmt:formatNumber value="${syllabus.syllabusFileSize/1024}" type="pattern" pattern="0.00" />B 
-		    						</c:when>
-		    						<c:otherwise>
-		    							<fmt:formatNumber value="${syllabus.syllabusFileSize}" type="pattern" pattern="0.00" />KB 	
-		    						</c:otherwise>
-		    					</c:choose>
-		    				</td>
-						</tr>
+						<c:if test="${!empty syllabus}">
+							<tr>
+								<th width="10%">업로드 날짜</th>
+								<td width="40%">${syllabus.syllabusFileCreatedate}</td>
+								<th width="10%">다운로드</th>
+								<td width="40%" id="fileCount${fn:split(uuid ,'.')[0]}">${syllabus.syllabusFileCount}회</td>
+							</tr>
+							<tr>
+								<th>파일 이름</th>
+								<td><a onclick="fileDownloadCount('${syllabus.syllabusFileUuid}','${syllabus.syllabusFileCount}')" download="${syllabus.syllabusFileOriginal}" href="${pageContext.request.contextPath}/resource/syllabusFile/${syllabus.syllabusFileUuid}">${syllabus.syllabusFileOriginal}</a></td>
+								<th>크기</th>
+								<!-- 크기 -->
+								<td>
+			    					<c:choose>
+			    						<c:when test="${syllabus.syllabusFileSize >= (1024 * 1024)}">
+			    							<fmt:formatNumber value="${syllabus.syllabusFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
+			    						</c:when>
+			    						<c:when test="${syllabus.syllabusFileSize >= 1024}">
+			    							<fmt:formatNumber value="${syllabus.syllabusFileSize/1024}" type="pattern" pattern="0.00" />B 
+			    						</c:when>
+			    						<c:otherwise>
+			    							<fmt:formatNumber value="${syllabus.syllabusFileSize}" type="pattern" pattern="0.00" />KB 	
+			    						</c:otherwise>
+			    					</c:choose>
+			    				</td>
+							</tr>
+						</c:if>
+						<c:if test="${empty syllabus}">
+							<tr>
+								<td style="text-align: center;">(강의계획서가 없습니다)</td>
+							</tr>
+						</c:if>
 					</table>
 				</div>
 				

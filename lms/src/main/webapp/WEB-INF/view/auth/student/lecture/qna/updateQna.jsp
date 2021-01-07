@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Update Qna</title>
+	<title>updateQna</title>
 	<!-- Favicon -->
 	<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 	<!-- Fonts -->
@@ -32,7 +32,7 @@
 						return;
 					}
 		
-					let html =`<div><input type="file" name="questionFile" class="questionFile"></div>`;
+					let html =`<div><input type="file" name="questionFile" class="form-control questionFile"></div>`;
 					$('#fileInput').append(html);
 		
 				})
@@ -95,7 +95,7 @@
 				});
 			})
 		</script>
-</head>
+	</head>
 	<body>
 		<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
 			<div class="container-fluid">
@@ -107,84 +107,114 @@
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/student/include/topMenu.jsp" />
 	    	</div>
+	    	
 			<!-- 강좌 Navbar -->
 			<div class="container-fluid">
 				<jsp:include page="/WEB-INF/view/auth/student/include/lectureMenu.jsp" />
 	    	</div>
 	    	
-	    	
 	    	<!-- 접속자 -->
 			<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
-	    <div class="container-fluid mt--7">
-			<div class="card shadow">
-				<div class="card-header border-0">
-					<div class="row align-items-center">
-						<div class="col">
-							<h3 class="mb-0">질문 수정</h3>
+		    <div class="container-fluid mt--7">
+				<div class="card shadow">
+					<div class="card-header border-0">
+						<div class="row align-items-center">
+							<div class="col-8">
+								<h3 class="mb-0">질문 수정</h3>
+							</div>
+							<div class="col-4 text-right">
+								<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/1'">목록</button>
+								<button type="button" class="btn btn-sm btn-primary" id="updateQnaBtn">수정</button>
+							</div>
 						</div>
 					</div>
-				</div>
-	    <!-- 질문 수정 폼 -->
-			<div class="row align-items-center">
-			<div class="col-12">
-	    	<form id="updateQnaForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/${question.lectureNo}/qna/updateQna/${question.questionNo}">
-	    	<input type="hidden" id="questionNo" name="questionNo" value="${question.questionNo}">   	 
-	    		<!-- 내용 -->
-		    	<table class="table">
-		    		<tr>
-		    			<th width="10%">제목</th>
-		    			<td><input id="qnaTitle" type="text" name="questionTitle" value="${question.questionTitle}" class="form-control"></td>
-		    		</tr>
-		    		<tr>
-		    			<th>비밀번호(선택)</th>
-		    			<td><input id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword" class="form-control" value="${question.questionPassword}"></td>
-		    		</tr>
-		    		<tr>
-		    			<th>내용</th>
-		    			<td><textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px">${question.questionContent}</textarea></td>
-		    		</tr>
-		    		 <c:forEach var="qf" items="${question.questionFileList}">
-						<tr>
-							<td>기존파일</td>
-							<td><a href="${pageContext.request.contextPath}/resource/questionFile/${qf.questionFileUuid}">${qf.questionFileOriginal}</a>
-								<c:if test="${not empty qf.questionFileOriginal}">
-									<td><button class="deleteQnaFileOneBtn" value="${qf.questionFileUuid}" type="button" class="btn btn-outline-danger">X</button></td>
-								</c:if>
-							</td>
-						</tr>
-					</c:forEach>
-		    	</table>
-
-		    	<!-- 첨부파일 -->
-		    		<table class="table">
-		    			<tr>
-		    				<th><h3>첨부파일</h3></th>
-		    			</tr>
-		    				<td>
-		    					<div>
-					   				<button id="addFileBtn" type="button" class="btn btn-outline-primary">파일 추가</button>
-					   				<button id="delFileBtn" type="button" class="btn btn-outline-danger">파일 삭제</button>
-			   					</div>
-			   				</td>
-			   			<tr>
-	    					<td><div id="fileInput"></div></td>
-	    				</tr>
-	    			</table>
-		    			<!-- 과제 제출 -->   
-		    			<table class="table">
-			    				<tr>
-			    					<th>
-						    		<div><button id="updateQnaBtn" type="button" class="btn btn-outline-primary">질문 수정</button></div>
-						    		</th>
-								</tr>
-						</table>
-	    			</form>
-				</div>
-	    	</div>
-   			<!-- Footer -->
-			<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
-	    </div>
-	</div>
+		    	
+			    	<!-- 질문 수정 폼 -->
+					<div class="row align-items-center">
+						<div class="col-12">
+				    		<form id="updateQnaForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/auth/student/lecture/${question.lectureNo}/qna/updateQna/${question.questionNo}">
+				    			<input type="hidden" id="questionNo" name="questionNo" value="${question.questionNo}">   	 
+						    		
+					    		<!-- 내용 -->
+						    	<table class="table">
+						    		<tr>
+						    			<th width="20%">제목</th>
+						    			<td width="80%">
+						    				<input id="qnaTitle" type="text" name="questionTitle" value="${question.questionTitle}" class="form-control">
+						    			</td>
+						    		</tr>
+						    		<tr>
+						    			<th>비밀번호(선택)</th>
+						    			<td>
+						    				<input id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword" class="form-control" value="${question.questionPassword}">
+						    			</td>
+						    		</tr>
+						    		<tr>
+						    			<th>내용</th>
+						    			<td>
+						    				<textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px">${question.questionContent}</textarea>
+						    			</td>
+						    		</tr>
+						    	</table>
+						    	
+						    	<!-- 기존 첨부파일 -->
+					    		<table class="table">
+					    			<thead class="thead-light">
+					    				<tr>
+						    				<th>기존 첨부파일</th>
+					    				</tr>
+					    			</thead>
+					    			<tbody>
+					    				<c:if test="${!empty question.questionFileList}">
+						    			<c:forEach var="qf" items="${question.questionFileList}">
+											<tr>
+												<td>
+													<a href="${pageContext.request.contextPath}/resource/questionFile/${qf.questionFileUuid}">${qf.questionFileOriginal}</a>
+													<c:if test="${!empty qf.questionFileOriginal}">
+														<td><button class="deleteQnaFileOneBtn" value="${qf.questionFileUuid}" type="button" class="btn btn-outline-danger">X</button></td>
+													</c:if>
+												</td>
+											</tr>
+										</c:forEach>
+										</c:if>
+					    				<c:if test="${empty question.questionFileList}">
+					    					<tr>
+					    						<td>(첨부파일이 없습니다)</td>
+					    					</tr>
+					    				</c:if>
+						   			</tbody>
+				    			</table>
+		
+				    			<!-- 신규 첨부파일 -->
+					    		<table class="table">
+					    			<thead class="thead-light">
+					    				<tr>
+						    				<th>신규 첨부파일</th>
+					    				</tr>
+					    			</thead>
+					    			<tbody>
+						    			<tr>
+						    				<td>
+						    					<div>
+									   				<button id="addFileBtn" type="button" class="btn btn-sm btn-primary">파일 추가</button>
+							   						<button id="delFileBtn" type="button" class="btn btn-sm btn-danger">파일 삭제</button>
+							   					</div>
+							   				</td>
+							   			</tr>
+							   			<tr>
+					    					<td><div id="fileInput"></div></td>
+					    				</tr>
+				    				</tbody>
+				    			</table>
+			    			</form>
+						</div>
+					</div>
+		    	</div>
+		    	
+	   			<!-- Footer -->
+				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
+		    </div>
+		</div>
 	    <!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>insertQnA</title>
+	<title>insertQna</title>
 	<!-- Favicon -->
 	<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
 	<!-- Fonts -->
@@ -29,7 +29,7 @@
 						return;
 					}
 		
-					let html =`<div><input type="file" name="questionFile" class="questionFile"></div>`;
+					let html =`<div><input type="file" name="questionFile" class="form-control questionFile"></div>`;
 					$('#fileInput').append(html);
 		
 				})
@@ -104,12 +104,17 @@
 				<div class="card shadow">
 				<div class="card-header border-0">
 					<div class="row align-items-center">
-						<div class="col">
+						<div class="col-8">
 							<h3 class="mb-0">질문 작성</h3>
+						</div>
+						<div class="col-4 text-right">
+							<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/1'">목록</button>
+							<button type="button" class="btn btn-sm btn-success" id="qnaBtn">작성</button>
 						</div>
 					</div>
 				</div>
-		    <!-- 질문 작성 폼 -->
+				
+		    	<!-- 질문 작성 폼 -->
 		   		 <div>
 		   		 	<div class="row align-items-center">
 						<div class="col-12">
@@ -118,44 +123,46 @@
 				    		<!-- 내용 -->
 					    	<table class="table">
 					    		<tr>
-					    			<th width="10%">제목</th>
-					    			<td><input class="form-control" id="qnaTitle" type="text" name="questionTitle"></td>
+					    			<th width="20%">제목</th>
+					    			<td width="80%">
+					    				<input class="form-control" id="qnaTitle" type="text" name="questionTitle">
+					    			</td>
 					    		</tr>
 								<tr>
 					    			<th>비밀 글 설정</th>
-					    			<td><input class="form-control" id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword"></td>
+					    			<td>
+					    				<input class="form-control" id="qnaPassword" type="password" placeholder="비밀글로 설정하실려면 비밀번호를 입력해주세요" name="questionPassword">
+					    			</td>
 					    		</tr>
 					    		<tr>
 					    			<th>내용</th>
-					    			<td><textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px" class="form-control"></textarea></td>
+					    			<td>
+					    				<textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px" class="form-control"></textarea>
+					    			</td>
 					    		</tr>
 					    	</table>
 				    	
 				    		<!-- 첨부파일 -->
 				    		<table class="table">
-				    			<tr>
-				    				<th><h3>첨부파일</h3></th>
-				    			</tr>
-				    			<tr>
-				    				<td>
-				    					<div>
-						   					<button id="addFileBtn" type="button" class="btn btn-outline-primary">파일 추가</button>
-					   						<button id="delFileBtn" type="button" class="btn btn-outline-danger">파일 삭제</button>
-			   							</div>
-			   						</td>
-			   					</tr>
-		   						<tr>
-		    						<td><div id="fileInput"></div></td>
-		    					</tr>
+				    			<thead class="thead-light">
+				    				<tr>
+					    				<th>첨부파일</th>
+				    				</tr>
+				    			</thead>
+				    			<tbody>
+					    			<tr>
+					    				<td>
+					    					<div>
+							   					<button id="addFileBtn" type="button" class="btn btn-sm btn-primary">파일 추가</button>
+						   						<button id="delFileBtn" type="button" class="btn btn-sm btn-danger">파일 삭제</button>
+				   							</div>
+				   						</td>
+				   					</tr>
+			   						<tr>
+			    						<td><div id="fileInput"></div></td>
+			    					</tr>
+		    					</tbody>
 		    				</table>
-		    				<!-- 과제 제출 -->
-		    				<table class="table">    
-					    		<tr>
-					    			<th>
-					  	  				<div style="float: right"><button id="qnaBtn" type="button" class="btn btn-outline-primary">질문 작성</button></div>
-					 	   			</th>
-					 	   		</tr>
-					 	   	</table>
 			    		</form>
 			    	</div>
 		    	</div>

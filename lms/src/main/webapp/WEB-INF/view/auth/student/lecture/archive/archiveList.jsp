@@ -72,15 +72,24 @@
 									<th width="10%">조회수</th>
 								</tr>
 							</thead>
-							<c:forEach items="${archiveList}" var="a">
-								<tr>
-									<td>${a.lectureArchiveNo}</td>
-									<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/archive/archiveOne/${a.lectureArchiveNo}">${a.lectureArchiveTitle}</a></td>
-									<td>${a.lectureArchiveWriter}</td>
-									<td>${a.lectureArchiveCreatedate}</td>
-									<td>${a.lectureArchiveCount}</td>
-								</tr>	
-							</c:forEach>
+							<tbody>
+								<c:if test="${!empty archiveList}">
+									<c:forEach items="${archiveList}" var="a">
+										<tr>
+											<td>${a.lectureArchiveNo}</td>
+											<td><a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/archive/archiveOne/${a.lectureArchiveNo}">${a.lectureArchiveTitle}</a></td>
+											<td>${a.lectureArchiveWriter}</td>
+											<td>${a.lectureArchiveCreatedate}</td>
+											<td>${a.lectureArchiveCount}</td>
+										</tr>	
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty archiveList}">
+									<tr>
+										<td colspan="5">(등록된 자료가 없습니다)</td>
+									</tr>
+								</c:if>
+							</tbody>
 						</table>
 					</div>
 					
