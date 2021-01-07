@@ -79,10 +79,9 @@
 										<button type="button" class="btn btn-sm btn-dark"
 											onclick="location.href='${pageContext.request.contextPath}/auth/manager/lmsNotice/lmsNoticeList/1'">목록</button>
 										<c:if test="${lmsNotice.accountId == sessionScope.loginId}">
-											<button type="button" class="btn btn-sm btn-primary"
-												onclick="location.href='${pageContext.request.contextPath}/auth/manager/lmsNotice/updateLmsNoticeOne/${lmsNotice.lmsNoticeNo}'">수정</button>
+											<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lmsNotice/updateLmsNoticeOne/${lmsNotice.lmsNoticeNo}'">수정</button>
+											<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">삭제</button>
 										</c:if>
-										<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">삭제</button>
 									</div>
 									<div class="modal fade" id="modal-notification" tabindex="-1"
 										role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
