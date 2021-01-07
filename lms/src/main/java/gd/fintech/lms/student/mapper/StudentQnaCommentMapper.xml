@@ -16,7 +16,7 @@
 		WHERE
 			question_no = #{questionNo}
 		ORDER BY
-			question_comment_no DESC
+			question_comment_createdate 
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>
