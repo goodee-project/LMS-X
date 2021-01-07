@@ -51,16 +51,45 @@
 						<div class="card shadow">
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
-									<br>
 									<div class="col-8">
 										<h3 class="mb-0">공지사항 조회</h3>
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark"  onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeList/1'">목록</button>
 										<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/updateNotice/${lectureNoticeNo}'">수정</button>
-										<button type="button" class="btn btn-sm btn-danger" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/deleteNotice/${lectureNoticeNo}'">삭제</button>
+										<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">삭제</button>
 									</div>
-									<br>
+									<div class="modal fade" id="modal-notification" tabindex="-1"
+										role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+										<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+											role="document">
+											<div class="modal-content bg-gradient-danger">
+								
+												<div class="modal-header">
+													<h6 class="modal-title" id="modal-title-notification">경고</h6>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+												</div>
+								
+												<div class="modal-body">
+								
+													<div class="py-3 text-center">
+														<i class="ni ni-bell-55 ni-3x"></i>
+														<h4 class="heading mt-4">삭제 확인</h4>
+														<p>게시물을 삭제하시겠습니까?</p>
+													</div>
+								
+												</div>
+								
+												<div class="modal-footer">
+													<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+													<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/deleteNotice/${lectureNoticeNo}'">삭제</button>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="table-responsive">

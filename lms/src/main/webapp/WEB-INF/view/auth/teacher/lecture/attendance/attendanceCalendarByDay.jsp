@@ -198,64 +198,71 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="al" items="${attendanceList}">
+										<c:if test="${!empty attendanceList}">
+											<c:forEach var="al" items="${attendanceList}">
+												<tr>
+													<td>${al.accountId}</td>
+													<td>${al.student.studentName}</td>
+													<td>${al.student.studentGender}</td>
+													<c:if test="${al.attendanceState != null}">
+														<td>
+															<select class="form-control" id="${al.accountId}AttendanceState" name="attendanceState">
+																<c:if test="${al.attendanceState == '출석'}">
+																	<option value="출석" selected="selected">출석</option>
+																</c:if>
+																<c:if test="${al.attendanceState != '출석'}">
+																	<option value="출석">출석</option>
+																</c:if>
+																<c:if test="${al.attendanceState == '결석'}">
+																	<option value="결석" selected="selected">결석</option>
+																</c:if>
+																<c:if test="${al.attendanceState != '결석'}">
+																	<option value="결석">결석</option>
+																</c:if>
+																<c:if test="${al.attendanceState == '외출'}">
+																	<option value="외출" selected="selected">외출</option>
+																</c:if>
+																<c:if test="${al.attendanceState != '외출'}">
+																	<option value="외출">외출</option>
+																</c:if>
+																<c:if test="${al.attendanceState == '조퇴'}">
+																	<option value="조퇴" selected="selected">조퇴</option>
+																</c:if>
+																<c:if test="${al.attendanceState != '조퇴'}">
+																	<option value="조퇴">조퇴</option>
+																</c:if>
+																<c:if test="${al.attendanceState == '지각'}">
+																	<option value="지각" selected="selected">지각</option>
+																</c:if>
+																<c:if test="${al.attendanceState != '지각'}">
+																	<option value="지각">지각</option>
+																</c:if>
+															</select>
+														</td>
+														<td>
+															<input type="text" class="form-control" id="${al.accountId}AttendanceRemark" value="${al.attendanceRemark}">
+														</td>
+														<td>
+															<button type="button" class="btn btn-sm btn-dark submitBtn" value="${al.accountId}">변경</button>
+														</td>
+													</c:if>
+													<c:if test="${al.attendanceState == null}">
+														<td colspan="3" id="${al.accountId}AttendanceStateTable">
+															<button type="button" class="btn btn-sm btn-primary attendanceBtn" value="${al.accountId}">출석</button>
+															<button type="button" class="btn btn-sm btn-danger attendanceBtn" value="${al.accountId}">결석</button>
+															<button type="button" class="btn btn-sm btn-warning attendanceBtn" value="${al.accountId}">외출</button>
+															<button type="button" class="btn btn-sm btn-info attendanceBtn" value="${al.accountId}">조퇴</button>
+															<button type="button" class="btn btn-sm btn-secondary attendanceBtn" value="${al.accountId}">지각</button>
+														</td>
+													</c:if>
+												</tr>
+											</c:forEach>
+										</c:if>
+										<c:if test="${empty attendanceList}">
 											<tr>
-												<td>${al.accountId}</td>
-												<td>${al.student.studentName}</td>
-												<td>${al.student.studentGender}</td>
-												<c:if test="${al.attendanceState != null}">
-													<td>
-														<select class="form-control" id="${al.accountId}AttendanceState" name="attendanceState">
-															<c:if test="${al.attendanceState == '출석'}">
-																<option value="출석" selected="selected">출석</option>
-															</c:if>
-															<c:if test="${al.attendanceState != '출석'}">
-																<option value="출석">출석</option>
-															</c:if>
-															<c:if test="${al.attendanceState == '결석'}">
-																<option value="결석" selected="selected">결석</option>
-															</c:if>
-															<c:if test="${al.attendanceState != '결석'}">
-																<option value="결석">결석</option>
-															</c:if>
-															<c:if test="${al.attendanceState == '외출'}">
-																<option value="외출" selected="selected">외출</option>
-															</c:if>
-															<c:if test="${al.attendanceState != '외출'}">
-																<option value="외출">외출</option>
-															</c:if>
-															<c:if test="${al.attendanceState == '조퇴'}">
-																<option value="조퇴" selected="selected">조퇴</option>
-															</c:if>
-															<c:if test="${al.attendanceState != '조퇴'}">
-																<option value="조퇴">조퇴</option>
-															</c:if>
-															<c:if test="${al.attendanceState == '지각'}">
-																<option value="지각" selected="selected">지각</option>
-															</c:if>
-															<c:if test="${al.attendanceState != '지각'}">
-																<option value="지각">지각</option>
-															</c:if>
-														</select>
-													</td>
-													<td>
-														<input type="text" class="form-control" id="${al.accountId}AttendanceRemark" value="${al.attendanceRemark}">
-													</td>
-													<td>
-														<button type="button" class="btn btn-sm btn-dark submitBtn" value="${al.accountId}">변경</button>
-													</td>
-												</c:if>
-												<c:if test="${al.attendanceState == null}">
-													<td colspan="3" id="${al.accountId}AttendanceStateTable">
-														<button type="button" class="btn btn-sm btn-primary attendanceBtn" value="${al.accountId}">출석</button>
-														<button type="button" class="btn btn-sm btn-danger attendanceBtn" value="${al.accountId}">결석</button>
-														<button type="button" class="btn btn-sm btn-warning attendanceBtn" value="${al.accountId}">외출</button>
-														<button type="button" class="btn btn-sm btn-info attendanceBtn" value="${al.accountId}">조퇴</button>
-														<button type="button" class="btn btn-sm btn-secondary attendanceBtn" value="${al.accountId}">지각</button>
-													</td>
-												</c:if>
+												<td>(해당 강의를 수강중인 학생이 없습니다)</td>
 											</tr>
-										</c:forEach>
+										</c:if>
 									</tbody>
 								</table>
 							</div>
