@@ -79,7 +79,7 @@
 									</tr>
 									<tr>
 										<th>교재 가격</th>
-										<td><input type="text" name="textbookPrice" class="form-control"></td>
+										<td><input type="number" name="textbookPrice" class="form-control"></td>
 									</tr>
 								</table>
 							</div>

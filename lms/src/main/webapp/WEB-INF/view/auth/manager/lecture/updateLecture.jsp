@@ -118,7 +118,12 @@
 											<th>강사 계정</th>
 											<td><select class="form-control" name="accountId">
 													<c:forEach var="a" items="${accountList}">
-														<option value="${a.accountId}">${a.accountId}</option>
+														<c:if test="${a.accountId == lct.lecture.accountId}">
+															<option value="${a.accountId}" selected="selected">${a.accountId}</option>
+														</c:if>
+														<c:if test="${a.accountId != lct.lecture.accountId}">
+															<option value="${a.accountId}">${a.accountId}</option>
+														</c:if>
 													</c:forEach>
 											</select></td>
 										</tr>
@@ -126,7 +131,12 @@
 											<th>과목</th>
 											<td><select class="form-control" name="subjectNo">
 													<c:forEach var="s" items="${subjectList}">
-														<option value="${s.subjectNo}">${s.subjectName}</option>
+														<c:if test="${s.subjectNo == lct.lecture.subjectNo}">
+															<option value="${s.subjectNo}" selected="selected">${s.subjectName}</option>
+														</c:if>
+														<c:if test="${s.subjectNo != lct.lecture.subjectNo}">
+															<option value="${s.subjectNo}">${s.subjectName}</option>
+														</c:if>
 													</c:forEach>
 											</select></td>
 										</tr>
@@ -144,11 +154,11 @@
 											<th>교재</th>
 											<td><select class="form-control" name="textbookIsbn">
 													<c:forEach var="t" items="${textbookList}">
-														<c:if test="${t.textbookIsbn == lct.lecture.textbookIsbn}">
+														<c:if test="${t.textbookIsbn == lct.textbook.textbookIsbn}">
 															<option value="${t.textbookIsbn}" selected="selected">${t.textbookTitle}:${t.textbookIsbn}</option>
 														</c:if>
-														<c:if test="${t.textbookIsbn != lct.lecture.textbookIsbn}">
-															<option value="${t.textbookIsbn}" selected="selected">${t.textbookTitle}:${t.textbookIsbn}</option>
+														<c:if test="${t.textbookIsbn != lct.textbook.textbookIsbn}">
+															<option value="${t.textbookIsbn}">${t.textbookTitle}:${t.textbookIsbn}</option>
 														</c:if>
 													</c:forEach>
 											</select></td>

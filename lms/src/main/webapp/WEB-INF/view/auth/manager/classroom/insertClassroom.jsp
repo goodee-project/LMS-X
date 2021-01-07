@@ -89,8 +89,8 @@
 										<td><input type="text" class="form-control" name="classroomSize"></td>
 									</tr>
 									<tr>
-										<th>강의실 인원 제한</th>
-										<td><input type="text" class="form-control" name="classroomTotal"></td>
+										<th>강의실 최대 인원</th>
+										<td><input type="number" class="form-control" name="classroomTotal"></td>
 									</tr>
 								</table>
 							</div>

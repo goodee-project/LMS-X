@@ -96,8 +96,8 @@
 											value="${classroom.classroomSize}"></td>
 									</tr>
 									<tr>
-										<th>강의실 총 인원</th>
-										<td><input type="text" class="form-control" name="classroomTotal"
+										<th>강의실 최대 인원</th>
+										<td><input type="number" class="form-control" name="classroomTotal"
 											value="${classroom.classroomTotal}"></td>
 									</tr>
 								</table>

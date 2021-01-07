@@ -97,10 +97,9 @@ th {
 							<table class="table align-items-center table-flush">
 								<thead class="thead-light">
 									<tr>
-										<th>강의실 번호</th>
 										<th>강의실 호실</th>
 										<th>강의실 사이즈</th>
-										<th>강의실 총 인원</th>
+										<th>강의실 최대 인원</th>
 										<th>수정</th>
 										<th>삭제</th>
 									</tr>
@@ -108,7 +107,6 @@ th {
 								<tbody>
 									<c:forEach items="${classroomList}" var="cr">
 										<tr>
-											<td>${cr.classroomNo}</td>
 											<td>${cr.classroomNumber}</td>
 											<td>${cr.classroomSize}</td>
 											<td>${cr.classroomTotal}</td>
