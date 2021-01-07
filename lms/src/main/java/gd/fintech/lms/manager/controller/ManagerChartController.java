@@ -89,6 +89,8 @@ public class ManagerChartController {
 	// chart10
 	@GetMapping("/auth/manager/chart/chart10")
 	public String chart10(Model model) {
+		List<Lecture> lectureList = managerChartService.getLecture();
+		model.addAttribute("lectureList", lectureList);
 		return "/auth/manager/chart/chart10";
 	}
 }

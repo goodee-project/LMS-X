@@ -132,7 +132,7 @@
 										<div class="row align-items-center">
 											<div class="col-8">
 												<!-- Title -->
-												<h5 class="h3 mb-0">과목별 학생 출석률</h5>
+												<h5 class="h3 mb-0">학생별 강좌 출석률</h5>
 											</div>
 											
 											<div class="col-4 text-right">

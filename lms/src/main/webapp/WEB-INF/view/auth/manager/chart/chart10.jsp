@@ -29,47 +29,7 @@
 		
 		<script>
 			$(document).ready(function() {	
-				// 차트 기본 정보 선언			
-				let myChart ={
-				    type: 'bar',
-				    data: {
-				           datasets:[{
-				              data:[],
-				              backgroundColor: [],
-				              label:'별점',
-					       }],
-					       labels:[],
-				    },
-				    options: {
-				        scales: {
-				            yAxes: [{
-				                ticks: {
-				                    beginAtZero: true
-				                }
-				            }]
-				        }
-				    }
-				};
-
-				// 데이터 가져와서 차트에 넣기
-				$.ajax({
-					url:'${pageContext.request.contextPath}/auth/manager/chart/starRatingByLecture',
-					type:'get',
-					success:function(data){
-						console.log(data);
-						
-						$(data).each(function(key, value) {
-							let ranColor1 = Math.floor(Math.random()*256);
-							let ranColor2 = Math.floor(Math.random()*256);
-							let ranColor3 = Math.floor(Math.random()*256);
-							myChart.data.labels.push(value.lecture_name);
-							myChart.data.datasets[0].data.push(value.point);
-							myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.4)");
-						});
-						var ctx = document.getElementById('chart-bars').getContext('2d');
-						var chart = new Chart(ctx, myChart);
-					}
-				});
+				
 			});
 		</script>
 	</head>
@@ -108,9 +68,23 @@
 								    <!-- Card header -->
 								    <div class="card-header">
 										<div class="row align-items-center">
-											<div class="col-6">
+											<div class="col-8">
 												<!-- Title -->
-												<h5 class="h3 mb-0">강좌별 별점</h5>
+												<h5 class="h3 mb-0">학생별 강좌 별점</h5>
+											</div>
+											
+											<div class="col-4 text-right">
+												<div class="input-group input-group-alternative">
+													<div class="input-group-prepend">
+														<span class="input-group-text">강좌</span>
+													</div>
+													
+													<select class="form-control" name="lectureList" id="lectureList">
+														<c:forEach var="l" items="${lectureList}">
+															<option value="${l.lectureNo}">${l.lectureName}</option>
+														</c:forEach>
+													</select>
+												</div>
 											</div>
 										</div>
 								    </div>

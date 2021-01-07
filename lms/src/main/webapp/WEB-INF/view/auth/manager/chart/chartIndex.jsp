@@ -63,14 +63,14 @@
 										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart2">강좌별 최대/최소 성적</a>
 										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart3">강좌별 과제 점수 평균</a>
 										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart4">강좌별 과제 제출률</a>
-										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart5">강좌별 최종평가 점수</a>
+										<a class="btn btn-lg btn-primary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart5">강좌별 평균 별점</a>
 									</div>
 									<div class="col-6">
-										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart6">과목별 최종평가 점수</a>
-										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart7">과목별 학생 출석률</a>
+										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart6">학생별 최종평가 점수</a>
+										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart7">학생별 과목 출석률</a>
 										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart8">학생별 과제 점수</a>
 										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart9">학생별 과제 점수 평균</a>
-										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart10">강좌별 평점</a>
+										<a class="btn btn-lg btn-secondary btn-block" href="${pageContext.request.contextPath}/auth/manager/chart/chart10">학생별 강좌 별점</a>
 									</div>
 								</div>
 							</div>
