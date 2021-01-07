@@ -56,27 +56,34 @@
 			<!-- 접속자 -->
 			<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
 			
-		<h1>댓글 수정</h1>
+			<div class="container-fluid mt--7">
+				<div class="card shadow">
+					<div class="card-header border-0">
+						<div class="row align-items-center">
+							<div class="col-8">
+								<h3 class="mb-0">댓글 수정</h3>
+							</div>
+							<div class="col-4 text-right">
+								<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/notice/noticeList/1">목록</a>
+							</div>
+						</div>
+					</div>	
+
 		<form method="post" id="updateCommentForm" action="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/updateStduentQuestionComment/${questionPassword}">
-		<input type="hidden" name="questionNo" value="${questionComment.questionNo}"> 
+		<input type="hidden" name="questionNo" value="${questionComment.questionNo}">
+		<input type="hidden" name="questionCommentNo" value="${questionComment.questionCommentNo}" readonly="readonly"  class="form-control">
+		<input type="hidden" name="questionCommentWriter" value="${questionComment.questionCommentWriter}" readonly="readonly" class="form-control">
 			<table class="table">
 				<tr>
-					<td width="10%">번호</td>
-					<td width="40%"><input type="text" name="questionCommentNo" value="${questionComment.questionCommentNo}" readonly="readonly"  class="form-control"></td>
-				</tr>
-				<tr>
-					<td>작성자</td>
-					<td><input type="text" name="questionCommentWriter" value="${questionComment.questionCommentWriter}" readonly="readonly" class="form-control"></td>
-				</tr>
-				<tr>
-					<td>댓글 내용</td>
-					<td><textarea rows="22px" style="width:100%;" name="questionCommentContent" id="qnaCommentContent">${questionComment.questionCommentContent}</textarea></td>
+					<td><textarea rows="22px" style="width:100%;" name="questionCommentContent" id="qnaCommentContent" class="form-control">${questionComment.questionCommentContent}</textarea></td>
 				</tr>
 			</table>
 			 <div style="text-align: right;"><button type="button" id="updateBtn" class="btn btn-outline-primary">댓글입력</button></div>
 		</form>
+		</div>
 		<!-- Footer -->
 		<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
+		</div>
 		</div>
 		<!--   Core   -->
 		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
