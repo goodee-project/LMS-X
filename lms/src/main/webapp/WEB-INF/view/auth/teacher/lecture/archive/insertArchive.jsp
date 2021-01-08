@@ -43,7 +43,7 @@
 		<!-- jQuery를 이용하여 제목, 내용 검사 -->
 		<script>
 			$(document).ready(function() {	// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
-				$('lectureArchiveTitle').focus();	// 시작 시 폼 커서를 lectureArchiveTitle쪽으로 이동
+				$('#lectureArchiveTitle').focus();					// 시작 시 폼 커서를 lectureArchiveTitle쪽으로 이동
 				
 				// 파일 추가 버튼을 누를 때
 				$('#addBtn').click(function() {

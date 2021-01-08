@@ -35,7 +35,7 @@
 		<!-- jQuery를 이용하여 유효성 검사 -->
 		<script>
 			$(document).ready(function() {							// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
-				$('lectureNoticeTitle').focus();					// 시작 시 폼 커서를 lectureNoticeTitle쪽으로 이동
+				$('#lectureNoticeTitle').focus();					// 시작 시 폼 커서를 lectureNoticeTitle쪽으로 이동
 
 				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
 				$("#submitBtn").click(function() {
