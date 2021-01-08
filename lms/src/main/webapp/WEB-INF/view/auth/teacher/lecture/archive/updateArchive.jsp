@@ -61,6 +61,8 @@
 					// 스마트 에디터 내용 적용
 					oEditors.getById["lectureArchiveContent"].exec("UPDATE_CONTENTS_FIELD", []);
 				
+					let content = $("#lectureArchiveContent").val().replace(/(\s*)/g, "");
+				
 					if ($("#lectureArchiveTitle").val() == "") {	// lectureArchiveTitle이 공백인 경우 수행
 						$("#lectureArchiveTitleMsg").html('');		// 메시지 초기화
 						$('#lectureArchiveTitleMsg').append('<div style="margin-top: 10px;">제목을 입력하세요<div>');
@@ -71,7 +73,7 @@
 						$("#lectureArchiveTitleMsg").text('');	// 메시지 초기화
 					}
 
-					if ($("#lectureArchiveContent").val() == "") { 	// lectureArchiveContent가 공백인 경우 수행
+					if (content == '' || content  == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') { 	// lectureArchiveContent가 공백인 경우 수행
 						$("#lectureArchiveContentMsg").html('');	// 메시지 초기화
 						$('#lectureArchiveContentMsg').append('<div style="margin-top: 10px;">내용을 입력하세요<div>');
 						$('#lectureArchiveContent').focus();
