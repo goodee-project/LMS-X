@@ -99,13 +99,15 @@
 										<tr>
 											<th width="20%">점수</th>
 											<td width="80%">
-												<input type="number" class="form-control" name="reportSubmitPoint" value="${reportSubmit[0].reportSubmitPoint}">
+												<input type="number" class="form-control" name="reportSubmitPoint" id="reportSubmitPoint" value="${reportSubmit[0].reportSubmitPoint}">
+												<div class="msgDiv" id="reportSubmitPointMsg"></div>
 											</td>
 										</tr>
 										<tr>
 											<th>평가 내용</th>
 											<td>
-												<input type="text" class="form-control" name="reportSubmitFeedback" value="${reportSubmit[0].reportSubmitFeedback}">
+												<input type="text" class="form-control" name="reportSubmitFeedback" id="reportSubmitFeedback" value="${reportSubmit[0].reportSubmitFeedback}">
+												<div class="msgDiv" id="reportSubmitFeedbackMsg"></div>
 											</td>
 										</tr>
 									</table>
