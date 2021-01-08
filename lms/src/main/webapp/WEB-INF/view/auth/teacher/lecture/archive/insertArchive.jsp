@@ -114,7 +114,7 @@
 			
 			function checkSize(input) {
 			    if (input.files && input.files[0].size > (10 * 1024 * 1000)) {
-			        alert("파일 사이즈가 10MB 를 넘습니다.");
+			        $("#modal-notification").modal("show");
 			        input.value = null;
 			    }
 			}
@@ -190,6 +190,36 @@
 													<button type="button" class="btn btn-sm btn-dark" id="delBtn">파일 삭제</button>
 												</div>
 												<div id="fileinput"></div>
+												<div class="modal fade" id="modal-notification" tabindex="-1"
+													role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+													<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+														role="document">
+														<div class="modal-content bg-gradient-danger">
+											
+															<div class="modal-header">
+																<h6 class="modal-title" id="modal-title-notification">경고</h6>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
+																	<span aria-hidden="true">×</span>
+																</button>
+															</div>
+											
+															<div class="modal-body">
+											
+																<div class="py-3 text-center">
+																	<i class="ni ni-bell-55 ni-3x"></i>
+																	<h4 class="heading mt-4">첨부파일 확인</h4>
+																	<p>첨부파일은 10MB를 넘을 수 없습니다</p>
+																</div>
+											
+															</div>
+											
+															<div class="modal-footer">
+																<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
+															</div>
+														</div>
+													</div>
+												</div>
 											</td>
 										</tr>
 									</table>
