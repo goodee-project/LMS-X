@@ -28,6 +28,38 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- jQuery를 이용하여 유효성 검사 -->
+		<script>
+			$(document).ready(function() {	// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
+				$('lectureArchiveTitle').focus();	// 시작 시 폼 커서를 lectureArchiveTitle쪽으로 이동
+				
+				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+				$("#submitBtn").click(function() {
+					if ($("#reportSubmitPoint").val() == "") {		// reportSubmitPoint이 공백인 경우 수행
+						$("#reportSubmitPointMsg").html('');		// 메시지 초기화
+						$('#reportSubmitPointMsg').append('<div style="margin-top: 10px;">점수를 입력하세요<div>');
+						$('#reportSubmitPoint').focus();
+					
+						return;
+					} else {
+						$("#reportSubmitPointMsg").text('');		// 메시지 초기화
+					}
+
+					if ($("#reportSubmitFeedback").val() == "") { 	// reportSubmitFeedback가 공백인 경우 수행
+						$("#reportSubmitFeedbackMsg").html('');		// 메시지 초기화
+						$('#reportSubmitFeedbackMsg').append('<div style="margin-top: 10px;">내용을 입력하세요<div>');
+						$('#reportSubmitFeedback').focus();
+					
+						return;
+					} else {
+						$("#reportSubmitFeedbackMsg").html('');		// 메시지 초기화
+					}
+
+					$('#reportSubmitForm').submit();
+				});
+			});
+		</script>
 	</head>
 	
 	<body>
@@ -48,7 +80,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="card shadow">
-							<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}/updateReportSubmit/${reportSubmitNo}">
+							<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}/updateReportSubmit/${reportSubmitNo}" id="reportSubmitForm">
 								<div class="card-header bg-white border-0">
 									<div class="row align-items-center">
 										<br>
@@ -56,9 +88,8 @@
 											<h3 class="mb-0">과제 평가 수정</h3>
 										</div>
 										<div class="col-4 text-right">
-												<button type="button" class="btn btn-sm btn-dark"
-													onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}/reportSubmitOne/${reportSubmitNo}'">목록</button>
-												<button type="submit" class="btn btn-sm btn-primary">수정</button>
+												<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}/reportSubmitOne/${reportSubmitNo}'">목록</button>
+												<button type="button" class="btn btn-sm btn-primary" id="submitBtn">수정</button>
 											</div>
 										<br>
 									</div>
@@ -68,7 +99,7 @@
 										<tr>
 											<th width="20%">점수</th>
 											<td width="80%">
-												<input type="text" class="form-control" name="reportSubmitPoint" value="${reportSubmit[0].reportSubmitPoint}">
+												<input type="number" class="form-control" name="reportSubmitPoint" value="${reportSubmit[0].reportSubmitPoint}">
 											</td>
 										</tr>
 										<tr>
