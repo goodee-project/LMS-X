@@ -41,7 +41,9 @@
 				$("#submitBtn").click(function() {
 					// 스마트 에디터 내용 적용
 					oEditors.getById["reportContent"].exec("UPDATE_CONTENTS_FIELD", []);
-				
+					
+					let content = $("#reportContent").val().replace(/(\s*)/g, "");
+					
 					if ($("#reportTitle").val() == "") {			// reportTitle이 공백인 경우 수행
 						$("#reportTitleMsg").html('');				// 메시지 초기화
 						$('#reportTitleMsg').append('<div style="margin-top: 10px;">이름을 입력하세요<div>');
@@ -52,7 +54,7 @@
 						$("#reportTitleMsg").text('');				// 메시지 초기화
 					}
 
-					if ($("#reportContent").val() == "") { 			// reportContent가 공백인 경우 수행
+					if (content == '' || content  == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') { 			// reportContent가 공백인 경우 수행
 						$("#reportContentTitleMsg").html('');		// 메시지 초기화
 						$('#reportContentTitleMsg').append('<div style="margin-top: 10px;">내용을 입력하세요<div>');
 						$('#reportContent').focus();
