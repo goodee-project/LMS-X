@@ -21,7 +21,7 @@ import gd.fintech.lms.vo.LectureArchive;
 public class StudentLectureArchiveController {
 	@Autowired StudentLectureArchiveService studentLectureArchiveService;
 	
-	// 강좌 자료식 목록
+	// 강좌 자료실 목록
 	@GetMapping("auth/student/lecture/{lectureNo}/archive/archiveList/{currentPage}")
 	public String archiveList(Model model,
 			@PathVariable(name="lectureNo") int lectureNo,
@@ -87,6 +87,7 @@ public class StudentLectureArchiveController {
 		model.addAttribute("nextPage", nextPage);
 		
 		model.addAttribute("archiveList", archiveList);
+		model.addAttribute("currentPage", currentPage);
 		return "/auth/student/lecture/archive/archiveList";
 	}
 	

@@ -17,7 +17,7 @@ public interface StudentLectureNoticeMapper {
 	LectureNotice selectStudentLectureNoticeOne(int lectureNoticeNo);
 	
 	// 페이징(end페이지 등)을 하기 위한 공지사항 개수
-	int selectLectureNoticeCount();
+	int selectLectureNoticeCount(int lectureNo);
 	
 	// 상세보기 클릭시 조회수 증가
 	int updateStudentLectureNoticeCountUp(int lectureNoticeNo);

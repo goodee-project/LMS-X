@@ -17,7 +17,7 @@ public interface StudentQnaMapper {
 	Question selectStudentQnaOne(int questionNo);
 	
 	// 페이징을 위한 질문 게시글 수
-	int selectQnaCount();
+	int selectQnaCount(int lectureNo);
 	
 	// 학생 : 질문 게시판 게시글 작성
 	int insertStudentQna(Question question);

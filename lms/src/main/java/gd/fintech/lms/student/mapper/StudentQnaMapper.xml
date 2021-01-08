@@ -49,11 +49,13 @@
 	</select>
 	
 	<!-- 질문 게시판의 게시글 수 : 학생  -->
-	<select id="selectQnaCount" parameterType="String" resultType="int">
+	<select id="selectQnaCount" parameterType="int" resultType="int">
 		SELECT
-		COUNT(*)
+			COUNT(*)
 		FROM 
 			question 
+		WHERE 
+			lecture_no = #{lectureNo}
 	</select>
 	
 	<!--질문 게시판 게시글 작성-->

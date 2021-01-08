@@ -108,7 +108,7 @@
 										<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaList/1">목록</a>
 										<c:if test="${sessionScope.loginId == question.accountId}">
 											<a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/updateQna/${question.questionNo}/${questionPassword}">수정</a>
-											<a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}/${questionPassword}">삭제</a>
+											<a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/deleteQuestion/${question.questionNo}">삭제</a>
 										</c:if>
 									</div>
 								</div>

@@ -34,7 +34,7 @@ public class StudentQnaController {
 		// 한 페이지에 출력할 게시물의 수
 		int rowPerPage = 10;
 		// 전체 데이터(게시글)의 수
-		int totalCount = studentQnaService.getCountStudentQnaList();
+		int totalCount = studentQnaService.getCountStudentQnaList(lectureNo);
 		// 시작 페이지
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
@@ -44,6 +44,11 @@ public class StudentQnaController {
 				lastPage = totalCount / rowPerPage;
 		} else {
 				lastPage = totalCount / rowPerPage + 1;			
+		}
+
+		// 전체 페이지가 0개이면 현재 페이지도 0으로 표시
+		if (lastPage == 0) {
+			currentPage = 0;
 		}
 		
 		// 질문게시판 게시글 리스트 가져오기

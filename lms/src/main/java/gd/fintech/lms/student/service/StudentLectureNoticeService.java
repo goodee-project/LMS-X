@@ -23,8 +23,8 @@ public class StudentLectureNoticeService {
 
 	}
 	// 게시글 수 구하기
-	public int getCountLectureNotice() {
-		return studentLectureNoticeMapper.selectLectureNoticeCount();
+	public int getCountLectureNotice(int lectureNo) {
+		return studentLectureNoticeMapper.selectLectureNoticeCount(lectureNo);
 	}
 	
 	// 학생이 강의 공지사항을 상세보기

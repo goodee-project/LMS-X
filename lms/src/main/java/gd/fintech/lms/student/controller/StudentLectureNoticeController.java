@@ -25,7 +25,7 @@ public class StudentLectureNoticeController {
 		// 한 페이지에 출력할 게시물의 개수는 20개입니다
 		int rowPerPage = 20; 
 		// 전체 데이터 수
-		int totalCount = studentLectureNoticeService.getCountLectureNotice(); 
+		int totalCount = studentLectureNoticeService.getCountLectureNotice(lectureNo); 
 		// 시작 페이지
 		int beginRow = (currentPage - 1) * rowPerPage; 
 		
@@ -36,7 +36,11 @@ public class StudentLectureNoticeController {
 		} else {
 			lastPage = totalCount / rowPerPage + 1;			
 		}
-		
+
+		// 전체 페이지가 0개이면 현재 페이지도 0으로 표시
+		if (lastPage == 0) {
+			currentPage = 0;
+		}
 		//공지사항 리스트 가져오기
 		Map<String, Object> map = new HashMap<>();
 		map.put("lectureNo", lectureNo);

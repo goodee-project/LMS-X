@@ -210,9 +210,6 @@
 		JOIN
 			subject s ON 
 			l.subject_no = s.subject_no
-		LEFT JOIN
-			class_registration cr ON
-			cr.lecture_no = l.lecture_no
 		WHERE 
 			l.lecture_startdate > DATE_FORMAT(NOW(), '%Y-%m-%d')
 	</select>

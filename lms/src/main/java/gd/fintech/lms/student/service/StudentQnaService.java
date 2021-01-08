@@ -49,8 +49,8 @@ public class StudentQnaService {
 	}
 	
 	// 질문 게시판의 게시글 수를 확인, endPage 수를 구하기
-	public int getCountStudentQnaList() {
-		return studentQnaMapper.selectQnaCount();
+	public int getCountStudentQnaList(int lectureNo) {
+		return studentQnaMapper.selectQnaCount(lectureNo);
 	}
 	
 	// 질문 게시판 게시글 작성
