@@ -72,7 +72,7 @@
 									$('#studentEmailCheck').html('');
 									if ( data == "true" ) {
 										$('#studentEmailCheck').html('<span class="text-success">사용 가능한 이메일입니다.</span>');
-										emailCheck = "ture";
+										emailCheck = "true";
 										return;
 										
 									} else {
@@ -190,7 +190,7 @@
 									$('#addressView').html(`<span class="text-primary" style="margin: auto; width: 80px;">주소</span>
 															<input id="studentAddressMain" class="form-control" style=" background-color: white;" type="text" name="studentAddressMain" readonly="readonly" >`);
 									document.getElementById("studentAddressMain").value = $(this).val();
-
+									$('#studentAddressSub').focus();
 								});
 							
 							}	
@@ -257,6 +257,54 @@
 				phoneNum.onkeyup = function(){
 					this.value = autoHypenPhone( this.value ) ;  
 				}   
+
+				// enter키 인식하여 클릭이벤트 실행
+				$('#accountId').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#idCheck').click();
+						if (idCheck == "true") {
+							$('#studentPw1').focus();
+						}
+					}
+				});
+				$('#studentPw1').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#studentPw2').focus();
+					}
+				});
+				$('#studentPw2').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#studentEmail').focus();
+					}
+				});
+				$('#studentEmail').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#emailCheck').click();
+						if (emailCheck == "true") {
+							$('#studentName').focus();
+						}
+					}
+				});
+				$('#studentName').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#studentPhone').focus();
+					}
+				});
+				$('#studentPhone').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#street').focus();
+					}
+				});
+				$('#street').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#check').click();
+					}
+				});
+				$('#studentAddressSub').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#btn').click();
+					}
+				});
 	
 				// 회원가입 버튼을 눌렀을 경우
 				$('#btn').click(function() {

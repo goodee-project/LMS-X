@@ -73,6 +73,19 @@
 					`;
 				$('#signup').html(signup);
 				
+				// enter하면 자동 넘어가기
+				$('#accountId').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#accountPw').focus();
+					}
+
+				});
+				$('#accountPw').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#loginBtn').click();
+					}
+				});
+				
 				$('#loginBtn').click(function(){
 					// 아이디 입력 체크
 					if ( $('#accountId').val() == "" ) {
@@ -162,6 +175,19 @@
 	        		</div>
 					`;
 				$('#signup').html(signup);
+
+				// enter하면 자동 넘어가기
+				$('#accountId').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#accountPw').focus();
+					}
+
+				});
+				$('#accountPw').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#loginBtn').click();
+					}
+				});
 				
 				$('#loginBtn').click(function(){
 					// 아이디 입력 체크
@@ -252,6 +278,19 @@
 	        		</div>
 					`;
 				$('#signup').html(signup);
+
+				// enter하면 자동 넘어가기
+				$('#accountId').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#accountPw').focus();
+					}
+
+				});
+				$('#accountPw').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#loginBtn').click();
+					}
+				});
 				
 				$('#loginBtn').click(function(){
 					// 아이디 입력 체크
@@ -293,7 +332,7 @@
 					});
 				});
 			});
-
+		
 			// 관리자 로그인
 			$('#adminLogin').click(function() {
 				let loginInput = `

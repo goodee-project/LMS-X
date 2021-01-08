@@ -25,6 +25,7 @@
 			$(document).ready(function(){
 				// 아이디 중복 검사
 				let idCheck = "false";
+				
 				$('#idCheck').click(function() {
 					if ($('#accountId').val().replace(/(\s*)/g, "") != "") {
 						$.ajax({
@@ -72,7 +73,7 @@
 									$('#managerEmailCheck').html('');
 									if ( data == "true" ) {
 										$('#managerEmailCheck').html('<span class="text-success">사용 가능한 이메일입니다.</span>');
-										emailCheck = "ture";
+										emailCheck = "true";
 										return;
 										
 									} else {
@@ -189,7 +190,7 @@
 									$('#addressView').html(`<span class="text-primary" style="margin: auto; width: 80px;">주소</span>
 															<input id="managerAddressMain" class="form-control" style=" background-color: white;" type="text" name="managerAddressMain" readonly="readonly" >`);
 									document.getElementById("managerAddressMain").value = $(this).val();
-
+									$('#managerAddressSub').focus();
 								});
 							
 							}	
@@ -256,7 +257,55 @@
 				phoneNum.onkeyup = function(){
 					this.value = autoHypenPhone( this.value ) ;  
 				}   
-	
+				
+				// enter키 인식하여 클릭이벤트 실행
+				$('#accountId').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#idCheck').click();
+						if (idCheck == "true") {
+							$('#managerPw1').focus();
+						}
+					}
+				});
+				$('#managerPw1').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#managerPw2').focus();
+					}
+				});
+				$('#managerPw2').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#managerEmail').focus();
+					}
+				});
+				$('#managerEmail').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#emailCheck').click();
+						if (emailCheck == "true") {
+							$('#managerName').focus();
+						}
+					}
+				});
+				$('#managerName').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#managerPhone').focus();
+					}
+				});
+				$('#managerPhone').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#street').focus();
+					}
+				});
+				$('#street').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#check').click();
+					}
+				});
+				$('#managerAddressSub').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#btn').click();
+					}
+				});
+				
 				// 회원가입 버튼을 눌렀을 경우
 				$('#btn').click(function() {
 					// 아이디검사

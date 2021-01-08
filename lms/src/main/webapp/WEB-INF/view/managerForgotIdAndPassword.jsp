@@ -65,7 +65,25 @@
 		phoneNum.onkeyup = function(){
 			this.value = autoHypenPhone( this.value ) ;  
 		}   
+		
+		// enter키 인식하여 클릭이벤트 실행
+		$('#email').on('keypress',function(e){
+			if (e.keyCode == '13') {
+				$('#name').focus();
+			}
+		});
+		$('#name').on('keypress',function(e){
+			if (e.keyCode == '13') {
+				$('#phone').focus();
+			}
+		});
+		$('#phone').on('keypress',function(e){
+			if (e.keyCode == '13') {
+				$('#btn').click();
+			}
+		});
 
+		
 		// 아이디 및 비밀번호 찾기버튼을 눌렀을 경우
 		$('#btn').click(function() {
 			

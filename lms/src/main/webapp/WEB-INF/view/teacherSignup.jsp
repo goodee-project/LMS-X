@@ -72,7 +72,7 @@
 									$('#teacherEmailCheck').html('');
 									if ( data == "true" ) {
 										$('#teacherEmailCheck').html('<span class="text-success">사용 가능한 이메일입니다.</span>');
-										emailCheck = "ture";
+										emailCheck = "true";
 										return;
 										
 									} else {
@@ -190,7 +190,7 @@
 									$('#addressView').html(`<span class="text-primary" style="margin: auto; width: 80px;">주소</span>
 															<input id="teacherAddressMain" class="form-control" style=" background-color: white;" type="text" name="teacherAddressMain" readonly="readonly" >`);
 									document.getElementById("teacherAddressMain").value = $(this).val();
-
+									$('#teacherAddressSub').focus();
 								});
 							
 							}	
@@ -257,7 +257,55 @@
 				phoneNum.onkeyup = function(){
 					this.value = autoHypenPhone( this.value ) ;  
 				}   
-	
+
+				// enter키 인식하여 클릭이벤트 실행
+				$('#accountId').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#idCheck').click();
+						if (idCheck == "true") {
+							$('#teacherPw1').focus();
+						}
+					}
+				});
+				$('#teacherPw1').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#teacherPw2').focus();
+					}
+				});
+				$('#teacherPw2').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#teacherEmail').focus();
+					}
+				});
+				$('#teacherEmail').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#emailCheck').click();
+						if (emailCheck == "true") {
+							$('#teacherName').focus();
+						}
+					}
+				});
+				$('#teacherName').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#teacherPhone').focus();
+					}
+				});
+				$('#teacherPhone').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#street').focus();
+					}
+				});
+				$('#street').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#check').click();
+					}
+				});
+				$('#teacherAddressSub').on('keypress',function(e){
+					if (e.keyCode == '13') {
+						$('#btn').click();
+					}
+				});
+				
 				// 회원가입 버튼을 눌렀을 경우
 				$('#btn').click(function() {
 					// 아이디검사
