@@ -46,7 +46,7 @@
 						$("#reportSubmitPointMsg").text('');		// 메시지 초기화
 					}
 
-					if ($("#reportSubmitFeedback").val() == "") { 	// reportSubmitFeedback가 공백인 경우 수행
+					if ($("#reportSubmitFeedback").val().replace(/(\s*)/g, "") == "") { 	// reportSubmitFeedback가 공백인 경우 수행
 						$("#reportSubmitFeedbackMsg").html('');		// 메시지 초기화
 						$('#reportSubmitFeedbackMsg').append('<div style="margin-top: 10px;">내용을 입력하세요<div>');
 						$('#reportSubmitFeedback').focus();

@@ -44,7 +44,7 @@
 					
 					let content = $("#lectureNoticeContent").val().replace(/(\s*)/g, "");
 					
-					if ($("#lectureNoticeTitle").val() == "") {		// lectureNoticeTitle이 공백인 경우 수행
+					if ($("#lectureNoticeTitle").val().replace(/(\s*)/g, "") == "") {		// lectureNoticeTitle이 공백인 경우 수행
 						$("#lectureNoticeTitleMsg").html('');		// 메시지 초기화
 						$('#lectureNoticeTitleMsg').append('<div style="margin-top: 10px;">제목을 입력하세요<div>');
 						$('#lectureNoticeTitle').focus();

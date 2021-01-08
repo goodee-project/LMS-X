@@ -44,7 +44,7 @@
 					
 					let content = $("#reportContent").val().replace(/(\s*)/g, "");
 					
-					if ($("#reportTitle").val() == "") {			// reportTitle이 공백인 경우 수행
+					if ($("#reportTitle").val().replace(/(\s*)/g, "") == "") {			// reportTitle이 공백인 경우 수행
 						$("#reportTitleMsg").html('');				// 메시지 초기화
 						$('#reportTitleMsg').append('<div style="margin-top: 10px;">이름을 입력하세요<div>');
 						$('#reportTitle').focus();
@@ -82,6 +82,16 @@
 						return;
 					} else {
 						$("#reportEnddateMsg").text('');			// 메시지 초기화
+					}
+					
+					if ($('#reportStartdate').val() >= $('#reportEnddate').val()) {	// 시작일시보다 종료일시가 더 빠른 경우 수행
+						$("#reportStartdateMsg").html('');			// 메시지 초기화
+						$('#reportStartdateMsg').append('<div style="margin-top: 10px;">시작일시는 종료일시보다 빨라야합니다.<div>');
+						$('#reportStartdate').focus();
+						
+						return;
+					} else {
+						$("#reportStartdateMsg").text('');			// 메시지 초기화
 					}
 
 					$('#reportForm').submit();

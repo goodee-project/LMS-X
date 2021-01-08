@@ -56,7 +56,7 @@
 						$("#testEnddateMsg").text('');		// 메시지 초기화
 					}
 
-					if ($("#testContent").val() == "") { 	// testContent가 공백인 경우 수행
+					if ($("#testContent").val().replace(/(\s*)/g, "") == "") { 	// testContent가 공백인 경우 수행
 						$("#testContentMsg").html('');		// 메시지 초기화
 						$('#testContentMsg').append('<div style="margin-top: 10px;">시험 제목을 입력하세요<div>');
 						$('#testContent').focus();
@@ -64,6 +64,16 @@
 						return;
 					} else {
 						$("#testContentMsg").html('');		// 메시지 초기화
+					}
+					
+					if ($('#testStartdate').val() >= $('#testEnddate').val()) {	// 시작일시보다 종료일시가 더 빠른 경우 수행
+						$("#testStartdateMsg").html('');	// 메시지 초기화
+						$('#testStartdateMsg').append('<div style="margin-top: 10px;">시작일시는 종료일시보다 빨라야합니다.<div>');
+						$('#testStartdate').focus();
+						
+						return;
+					} else {
+						$("#testStartdateMsg").text('');	// 메시지 초기화
 					}
 
 					$('#testForm').submit();

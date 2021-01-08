@@ -63,7 +63,7 @@
 				
 					let content = $("#lectureArchiveContent").val().replace(/(\s*)/g, "");
 				
-					if ($("#lectureArchiveTitle").val() == "") {	// lectureArchiveTitle이 공백인 경우 수행
+					if ($("#lectureArchiveTitle").val().replace(/(\s*)/g, "") == "") {	// lectureArchiveTitle이 공백인 경우 수행
 						$("#lectureArchiveTitleMsg").html('');		// 메시지 초기화
 						$('#lectureArchiveTitleMsg').append('<div style="margin-top: 10px;">제목을 입력하세요<div>');
 						$('#lectureArchiveTitle').focus();

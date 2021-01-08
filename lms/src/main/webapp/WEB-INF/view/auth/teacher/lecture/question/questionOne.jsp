@@ -49,7 +49,7 @@
 		<script>
 			$(document).ready(function(){
 				$('#submitBtn').click(function(){
-					if ($("#questionCommentContent").val() == "") {		// questionCommentContent이 공백인 경우 수행
+					if ($("#questionCommentContent").val().replace(/(\s*)/g, "") == "") {		// questionCommentContent이 공백인 경우 수행
 						$("#questionCommentContentMsg").html('');		// 메시지 초기화
 						$('#questionCommentContentMsg').append('<div style="margin-top: 10px;">댓글을 입력하세요<div>');
 						$('#questionCommentContent').focus();
