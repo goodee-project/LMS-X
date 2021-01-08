@@ -29,24 +29,71 @@
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
-		<!-- jQuery를 이용하여 제목, 내용 검사 -->
+		<!-- NAVER SmartEditor2 스크립트 -->
+		<script src="${pageContext.request.contextPath}/smarteditor2/js/HuskyEZCreator.js"></script>
+		
+		<!-- jQuery를 이용하여 유효성 검사 -->
 		<script>
-			/*
-			// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
-			$(document).ready(function() {
+			$(document).ready(function() {							// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
+				$('reportTitle').focus();							// 시작 시 폼 커서를 reportTitle쪽으로 이동
+
 				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
 				$("#submitBtn").click(function() {
-					if () {
-						alert('날짜 오류 발생. 입력 확인바랍니다.');
-						
+					// 스마트 에디터 내용 적용
+					oEditors.getById["reportContent"].exec("UPDATE_CONTENTS_FIELD", []);
+				
+					if ($("#reportTitle").val() == "") {			// reportTitle이 공백인 경우 수행
+						$("#reportTitleMsg").html('');				// 메시지 초기화
+						$('#reportTitleMsg').append('<div style="margin-top: 10px;">이름을 입력하세요<div>');
+						$('#reportTitle').focus();
+					
 						return;
+					} else {
+						$("#reportTitleMsg").text('');				// 메시지 초기화
 					}
 
-					// 폼 내용을 POST로 전송한다.
+					if ($("#reportContent").val() == "") { 			// reportContent가 공백인 경우 수행
+						$("#reportContentTitleMsg").html('');		// 메시지 초기화
+						$('#reportContentTitleMsg').append('<div style="margin-top: 10px;">내용을 입력하세요<div>');
+						$('#reportContent').focus();
+					
+						return;
+					} else {
+						$("#reportContentTitleMsg").html('');		// 메시지 초기화
+					}
+					
+					if ($("#reportStartdate").val() == "") {		// reportStartdate이 공백인 경우 수행
+						$("#reportStartdateMsg").html('');			// 메시지 초기화
+						$('#reportStartdateMsg').append('<div style="margin-top: 10px;">과제 시작일시를 입력하세요<div>');
+						$('#reportStartdate').focus();
+					
+						return;
+					} else {
+						$("#reportStartdateMsg").text('');			// 메시지 초기화
+					}
+					
+					if ($("#reportEnddate").val() == "") {			// reportEnddate이 공백인 경우 수행
+						$("#reportEnddateMsg").html('');			// 메시지 초기화
+						$('#reportEnddateMsg').append('<div style="margin-top: 10px;">과제 종료일시를 입력하세요<div>');
+						$('#reportEnddate').focus();
+					
+						return;
+					} else {
+						$("#reportEnddateMsg").text('');			// 메시지 초기화
+					}
+
 					$('#reportForm').submit();
-				}
-			}
-			*/
+				});
+				
+				// NAVER SmartEditor2 적용 코드
+				let oEditors = [];				
+				nhn.husky.EZCreator.createInIFrame({
+					oAppRef : oEditors,
+					elPlaceHolder : 'reportContent',
+					sSkinURI : '${pageContext.request.contextPath}/smarteditor2/SmartEditor2Skin.html',
+					fCreator : 'createSEditor2'
+				});
+			});
 		</script>
 	</head>
 	
@@ -74,12 +121,12 @@
 									<div class="row align-items-center">
 										<br>
 										<div class="col-8">
-											<h3 class="mb-0">과제 정보</h3>
+											<h3 class="mb-0">과제 정보 수정</h3>
 										</div>
 										<div class="col-4 text-right">
 											<button type="button" class="btn btn-sm btn-dark"
 												onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/report/reportOne/${reportNo}'">목록</button>
-											<button type="submit" class="btn btn-sm btn-primary" id="submitBtn">수정</button>
+											<button type="button" class="btn btn-sm btn-primary" id="submitBtn">수정</button>
 										</div>
 										<br>
 									</div>
@@ -97,25 +144,29 @@
 										<tr>
 											<th>과제 이름</th>
 											<td>
-												<input type="text" class="form-control" name="reportTitle" value="${report.reportTitle}">
+												<input type="text" class="form-control" name="reportTitle" id="reportTitle" value="${report.reportTitle}">
+												<div class="msgDiv" id="reportTitleMsg"></div>
 											</td>
 										</tr>
 										<tr>
 											<th>과제 내용</th>
 											<td>
-												<textarea class="form-control" name="reportContent">${report.reportContent}</textarea>
+												<textarea class="form-control" name="reportContent" id="reportContent" style="width:100%">${report.reportContent}</textarea>
+												<div class="msgDiv" id="reportContentTitleMsg"></div>
 											</td>
 										</tr>
 										<tr>
 											<th>과제 시작일시</th>
 											<td>
 												<input type="datetime-local" class="form-control" name="reportStartdate" id="reportStartdate" value="${report.reportStartdate}">
+												<div class="msgDiv" id="reportStartdateMsg"></div>
 											</td>
 										</tr>
 										<tr>
 											<th>과제 종료일시</th>
 											<td>
 												<input type="datetime-local" class="form-control" name="reportEnddate" id="reportEnddate" value="${report.reportEnddate}">
+												<div class="msgDiv" id="reportEnddateMsg"></div>
 											</td>
 										</tr>
 									</table>
