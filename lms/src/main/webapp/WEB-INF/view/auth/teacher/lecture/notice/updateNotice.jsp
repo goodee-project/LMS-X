@@ -29,28 +29,43 @@
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
-		<!-- NAVER SmartEditor2 스크립트 -->
-		<script src="${pageContext.request.contextPath}/smarteditor2/js/HuskyEZCreator.js"></script>
+		<!-- jQuery를 이용하여 유효성 검사 -->
 		<script>
-			$(document).ready(function() {
-				$('#updateBtn').click(function() {
+			$(document).ready(function() {							// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
+				$('lectureNoticeTitle').focus();					// 시작 시 폼 커서를 lectureNoticeTitle쪽으로 이동
+
+				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+				$("#submitBtn").click(function() {
 					// 스마트 에디터 내용 적용
 					oEditors.getById["lectureNoticeContent"].exec("UPDATE_CONTENTS_FIELD", []);
-					let lc = $("#lectureNoticeContent").val();
-					lc = lc.replace(/(\s*)/g, "")
-					if ($('#noticeTitleText').val().length <= 0) {
-						alert('제목을 입력해주세요.');
+					
+					let content = $("#lectureNoticeContent").val().replace(/(\s*)/g, "");
+					
+					if ($("#lectureNoticeTitle").val() == "") {		// lectureNoticeTitle이 공백인 경우 수행
+						$("#lectureNoticeTitleMsg").html('');		// 메시지 초기화
+						$('#lectureNoticeTitleMsg').append('<div style="margin-top: 10px;">제목을 입력하세요<div>');
+						$('#lectureNoticeTitle').focus();
+					
 						return;
+					} else {
+						$("#lectureNoticeTitleMsg").text('');		// 메시지 초기화
 					}
-					if(lc == '' || lc  == null || lc == '&nbsp;' || lc == '<p>&nbsp;</p>'){
-						alert('내용을 입력해주세요.');
+
+					if (content == '' || content  == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') { 	// lectureNoticeContent가 공백인 경우 수행
+						$("#lectureNoticeContentMsg").html('');		// 메시지 초기화
+						$('#lectureNoticeContentMsg').append('<div style="margin-top: 10px;">내용을 입력하세요<div>');
+						$('#lectureNoticeContent').focus();
+					
 						return;
+					} else {
+						$("#lectureNoticeContentMsg").html('');		// 메시지 초기화
 					}
-					$('#updateNoticeForm').submit();
+
+					$('#noticeForm').submit();
 				});
 				
 				// NAVER SmartEditor2 적용 코드
-				let oEditors = [];
+				let oEditors = [];				
 				nhn.husky.EZCreator.createInIFrame({
 					oAppRef : oEditors,
 					elPlaceHolder : 'lectureNoticeContent',
@@ -78,8 +93,7 @@
 			<div class="container-fluid mt--7">
 				<!-- Form -->
 				<form method="post"
-					action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/updateNotice/${lectureNoticeNo}"
-					id="updateNoticeForm">
+					action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/updateNotice/${lectureNoticeNo}" id="noticeForm">
 					<!-- Table -->
 					<div class="row">
 						<div class="col">
@@ -92,7 +106,7 @@
 										</div>
 										<div class="col-4 text-right">
 											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/notice/noticeOne/${lectureNoticeNo}'">목록</button>
-											<button type="button" class="btn btn-sm btn-primary" id="updateBtn">수정</button>
+											<button type="button" class="btn btn-sm btn-primary" id="submitBtn">수정</button>
 										</div>
 										<br>
 									</div>
@@ -103,15 +117,15 @@
 										<tr>
 											<th width="20%">제목</th>
 											<td width="80%">
-												<input type="text" class="form-control" value="${lectureNotice.lectureNoticeTitle}" name="lectureNoticeTitle" id="noticeTitleText">
+												<input type="text" class="form-control" name="lectureNoticeTitle" id="lectureNoticeTitle" value="${lectureNotice.lectureNoticeTitle}">
+												<div class="msgDiv" id="lectureNoticeTitleMsg"></div>
 											</td>
 										</tr>
 										<tr>
 											<th>내용</th>
 											<td>
-												<textarea class="form-control" rows="22" name="lectureNoticeContent" id="lectureNoticeContent" style="width:100%">
-													${lectureNotice.lectureNoticeContent}
-												</textarea>
+												<textarea class="form-control" name="lectureNoticeContent" id="lectureNoticeContent" style="width:100%">${lectureNotice.lectureNoticeContent}</textarea>
+												<div class="msgDiv" id="lectureNoticeContentMsg"></div>
 											</td>
 										</tr>
 									</table>

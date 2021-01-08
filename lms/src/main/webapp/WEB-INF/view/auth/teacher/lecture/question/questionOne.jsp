@@ -48,14 +48,20 @@
 		
 		<script>
 			$(document).ready(function(){
-				$('#insertBtn').click(function(){
-					if($('#insertCommentText').val().length <= 0){
-						alert('댓글을 입력해주세요.');
+				$('#submitBtn').click(function(){
+					if ($("#questionCommentContent").val() == "") {		// questionCommentContent이 공백인 경우 수행
+						$("#questionCommentContentMsg").html('');		// 메시지 초기화
+						$('#questionCommentContentMsg').append('<div style="margin-top: 10px;">댓글을 입력하세요<div>');
+						$('#questionCommentContent').focus();
+					
 						return;
-						}
-					$('#insertCommentForm').submit();
-					});
+					} else {
+						$("#questionCommentContentMsg").text('');		// 메시지 초기화
+					}
+					
+					$('#commentForm').submit();
 				});
+			});
 				
 			// 다운로드 횟수 증가 시키기
 			function fileDownloadCount(paramUuid){
@@ -376,13 +382,14 @@
 							
 							<div class="card-footer py-4">
 								<nav aria-label="...">
-									<form action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/insertTeacherQuestionComment" method="post" id="insertCommentForm">
+									<form action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/question/questionOne/${questionNo}/insertTeacherQuestionComment" method="post" id="commentForm">
 										<div>
 											<div>
-												<textarea rows="3" cols="50" name="questionCommentContent" class="form-control" id="insertCommentText"></textarea>
+												<textarea class="form-control" rows="3" cols="50" name="questionCommentContent" id="questionCommentContent"></textarea>
 											</div>
+											<div class="msgDiv" id="questionCommentContentMsg"></div>
 											<br>
-											<button type="submit" class="btn btn-sm btn-success" style="float:right" id="insertBtn">댓글 입력</button>
+											<button type="button" class="btn btn-sm btn-success" id="submitBtn" style="float:right">댓글 입력</button>
 										</div>
 									</form>
 								</nav>
