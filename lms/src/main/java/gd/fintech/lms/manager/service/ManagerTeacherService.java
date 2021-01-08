@@ -24,6 +24,11 @@ public class ManagerTeacherService {
 	// 첨부파일 경로
 	private String PATH = PathUtil.PATH("mypageImage"); 
 	
+	// 강좌 페이지 강사 리스트
+	public List<Teacher> getTeacherList(){
+		return managerTeacherMapper.selectTeacherList();
+	}
+	
 	// 강사 목록 페이징
 	public List<Teacher> getTeacherListByPage(int beginRow, int rowPerPage, String searchText) {
 		Map<String,Object> map = new HashMap<String, Object>();

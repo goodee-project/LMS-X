@@ -45,11 +45,7 @@
 		<script>
 			$(document).ready(function() {
 				$('#updateBtn').click(function() {
-					if ($('#teacherNametext').val().length <= 0) {
-						alert('강사명을 입력해주세요.');
-						return;
-					}
-					if ($('#lectureNametext').val().length <= 0) {
+					if ($('#lectureNametext').val().replace(/(\s*)/g, "") == "") {
 						alert('강의명을 입력해주세요.');
 						return;
 					}
@@ -110,22 +106,27 @@
 								<div class="table-responsive">
 									<table class="table align-items-center table-flush">
 										<tr>
-											<th width="10%">강좌 번호</th>
+											<th width="10%">강좌명</th>
 											<td width="40%">
-												<input type="text" class="form-control" name="lectureNo" value="${lectureNo}" readonly="readonly">
+												<input type="text" class="form-control" name="lectureName" id="lectureNametext" value="${lct.lecture.lectureName}">
 											</td>
-											<th width="10%">정원</th>
+											<th width="10%">강사 계정</th>
 											<td width="40%">
-												<input type="number" class="form-control" name="lectureTotal" id="lectureTotaltext" value="${lct.lecture.lectureTotal}">
+												<select class="form-control" name="accountId">
+													<c:forEach var="t" items="${teacherList}">
+														<c:if test="${t.teacherId == lct.lecture.accountId}">
+															<option value="${t.teacherId}" selected="selected">${t.teacherId}(${t.teacherName})</option>
+														</c:if>
+														<c:if test="${t.teacherId != lct.lecture.accountId}">
+															<option value="${t.teacherId}">${t.teacherId}(${t.teacherName})</option>
+														</c:if>
+													</c:forEach>
+												</select>
 											</td>
 										</tr>
 										<tr>
-											<th>강좌명</th>
-											<td>
-												<input type="text" class="form-control" name="lectureName" id="lectureNametext" value="${lct.lecture.lectureName}">
-											</td>
-											<th>과목</th>
-											<td>
+											<th width="10%">과목</th>
+											<td width="40%">
 												<select class="form-control" name="subjectNo">
 													<c:forEach var="s" items="${subjectList}">
 														<c:if test="${s.subjectNo == lct.lecture.subjectNo}">
@@ -137,28 +138,10 @@
 													</c:forEach>
 												</select>
 											</td>
-										</tr>
-										<tr>
-											<th>강사 계정</th>
-											<td>
-												<select class="form-control" name="accountId">
-													<c:forEach var="a" items="${accountList}">
-														<c:if test="${a.accountId == lct.lecture.accountId}">
-															<option value="${a.accountId}" selected="selected">${a.accountId}</option>
-														</c:if>
-														<c:if test="${a.accountId != lct.lecture.accountId}">
-															<option value="${a.accountId}">${a.accountId}</option>
-														</c:if>
-													</c:forEach>
-												</select>
+											<th width="10%">정원</th>
+											<td width="40%">
+												<input type="number" class="form-control" name="lectureTotal" id="lectureTotaltext" value="${lct.lecture.lectureTotal}">
 											</td>
-											<th>강사명</th>
-											<td>
-												<input type="text" class="form-control" name="teacherName" id="teacherNametext" value="${lct.lecture.teacherName}">
-											</td>
-										</tr>
-										<tr>
-											
 										</tr>
 										<tr>
 											<th>교재</th>

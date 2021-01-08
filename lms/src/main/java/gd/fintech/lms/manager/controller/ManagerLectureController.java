@@ -16,6 +16,7 @@ import gd.fintech.lms.manager.service.ManagerAccountService;
 import gd.fintech.lms.manager.service.ManagerClassroomService;
 import gd.fintech.lms.manager.service.ManagerLectureService;
 import gd.fintech.lms.manager.service.ManagerSubjectService;
+import gd.fintech.lms.manager.service.ManagerTeacherService;
 import gd.fintech.lms.manager.service.ManagerTextbookService;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.ClassRegistration;
@@ -23,13 +24,14 @@ import gd.fintech.lms.vo.Classroom;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureAndClassAndTextbook;
 import gd.fintech.lms.vo.Subject;
+import gd.fintech.lms.vo.Teacher;
 import gd.fintech.lms.vo.Textbook;
 
 @Controller
 public class ManagerLectureController {
 	@Autowired private ManagerLectureService managerLectureService;
 	// 강사 계정 리스트 출력을 위한 AutoWired
-	@Autowired private ManagerAccountService managerAccountService;
+	@Autowired private ManagerTeacherService managerTeacherService;
 	// 과목 리스트 출력을 위한 AutoWired
 	@Autowired private ManagerSubjectService managerSubjectService;
 	// 교재 리스트 출력을 위한 AutoWired
@@ -101,6 +103,8 @@ public class ManagerLectureController {
 	// 강의 개설 액션 
 	@PostMapping("/auth/manager/lecture/insertLecture")
 	public String insertLecture(Lecture lecture) { // 커맨트 객체
+		Teacher teacherOne = managerTeacherService.getTeacherOne(lecture.getAccountId());
+		lecture.setTeacherName(teacherOne.getTeacherName());
 		managerLectureService.insertLecture(lecture);
 		return "redirect:/auth/manager/lecture/lectureList/1";
 	}
@@ -109,14 +113,14 @@ public class ManagerLectureController {
 	public String insertLecture(Model model) {
 		//강의 개설 시 필요한 리스트
 		//강사 계정 리스트
-		List<Account> accountList = managerAccountService.getAccountList();
+		List<Teacher> teacherList = managerTeacherService.getTeacherList();
 		//교과목 리스트
 		List<Subject> subjectList = managerSubjectService.getSubjectList();
 		//교재 리스트
 		List<Textbook> textbookList = managertextbookService.getTextbookList();
 		//강의실 리스트
 		List<Classroom> classroomList = managerClassroomService.getClassroomList();
-		model.addAttribute("accountList", accountList);
+		model.addAttribute("teacherList", teacherList);
 		model.addAttribute("subjectList", subjectList);
 		model.addAttribute("textbookList", textbookList);
 		model.addAttribute("classroomList", classroomList);
@@ -136,6 +140,8 @@ public class ManagerLectureController {
 	//강의 수정 액션
 	@PostMapping("/auth/manager/lecture/updateLecture/{lectureNo}")
 	public String updateLecture(Lecture lecture, @PathVariable(value = "lectureNo") int lectureNo) {
+		Teacher teacherOne = managerTeacherService.getTeacherOne(lecture.getAccountId());
+		lecture.setTeacherName(teacherOne.getTeacherName());
 		managerLectureService.updateLecture(lecture);
 		return "redirect:/auth/manager/lecture/lectureList/1";
 	}
@@ -145,7 +151,7 @@ public class ManagerLectureController {
 		LectureAndClassAndTextbook LectureAndClassAndTextbook = managerLectureService.getLectureOne(lectureNo);
 		//강의 수정 시 편의성을 위해 필요한 리스트 
 		//강사 계정 리스트
-		List<Account> accountList = managerAccountService.getAccountList();
+		List<Teacher> teacherList = managerTeacherService.getTeacherList();
 		//교과목 리스트
 		List<Subject> subjectList = managerSubjectService.getSubjectList();
 		//교재 리스트
@@ -153,7 +159,7 @@ public class ManagerLectureController {
 		//강의실 리스트
 		List<Classroom> classroomList = managerClassroomService.getClassroomList();
 		model.addAttribute("lct",LectureAndClassAndTextbook);
-		model.addAttribute("accountList", accountList);
+		model.addAttribute("teacherList", teacherList);
 		model.addAttribute("subjectList", subjectList);
 		model.addAttribute("textbookList", textbookList);
 		model.addAttribute("classroomList", classroomList);

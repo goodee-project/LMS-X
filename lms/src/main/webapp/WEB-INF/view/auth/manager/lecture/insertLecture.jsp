@@ -45,12 +45,8 @@
 	<script>
 		$(document).ready(function() {
 			$('#insertBtn').click(function() {
-				if ($('#teacherNametext').val().length <= 0) {
-					alert('강사명을 입력해주세요.');
-					return;
-				}
-				if ($('#lectureNametext').val().length <= 0) {
-					alert('강의명을 입력해주세요.');
+				if ($('#lectureNametext').val().replace(/(\s*)/g, "") == "") {
+					alert('강좌명을 입력해주세요.');
 					return;
 				}
 				if ($('#lectureEnddate').val() <= $('#lectureStartdate').val()) {
@@ -112,9 +108,16 @@
 											<td width="40%">
 												<input type="text" class="form-control" name="lectureName" id="lectureNametext" placeholder="강좌 이름을 입력해주세요.">
 											</td>
-											<th width="10%"></th>
-											<td width="40%"></td>
+											<th width="10%">강사 계정</th>
+											<td width="40%">
+												<select class="form-control" name="accountId">
+													<c:forEach var="t" items="${teacherList}">
+														<option value="${t.teacherId}">${t.teacherId}(${t.teacherName})</option>
+													</c:forEach>
+												</select>
+											</td>
 										</tr>
+											
 										<tr>
 											<th width="10%">과목</th>
 											<td width="40%">
@@ -129,21 +132,6 @@
 												<input type="number" class="form-control" name="lectureTotal" id="lectureTotaltext">
 											</td>
 										</tr>
-										<tr>
-											<th>강사 계정</th>
-											<th>
-												<select class="form-control" name="accountId">
-													<c:forEach var="a" items="${accountList}">
-														<option value="${a.accountId}">${a.accountId}</option>
-													</c:forEach>
-												</select>
-											</th>
-											<th>강사 이름</th>
-											<td>
-												<input type="text" class="form-control" name="teacherName" id="teacherNametext" placeholder="강사 이름을 입력해주세요.">
-											</td>
-										</tr>
-										
 										<tr>
 											<th>교재</th>
 											<td>

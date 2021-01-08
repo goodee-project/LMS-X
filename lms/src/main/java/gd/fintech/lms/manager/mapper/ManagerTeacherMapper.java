@@ -12,6 +12,9 @@ import gd.fintech.lms.vo.TeacherQueue;
 
 @Mapper
 public interface ManagerTeacherMapper {
+	// 강좌 페이지 강사 리스트
+	public List<Teacher> selectTeacherList();
+	
 	// 강사 리스트
 	public List<Teacher> selectTeacherListByPage(Map<String, Object> map);
 	

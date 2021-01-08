@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerTeacherMapper"> 
+	<!-- 강좌 페이지 강사 리스트 -->
+	<select id="selectTeacherList" resultType="gd.fintech.lms.vo.Teacher">
+		SELECT 
+			teacher_id teacherId,
+			teacher_email teacherEmail,
+			teacher_name teacherName,
+			teacher_phone teacherPhone,
+			teacher_gender teacherGender,
+			teacher_birth teacherBirth,
+			teacher_accessdate teacherAccessdate
+		FROM
+			teacher
+	</select>
+	
 	<!-- 강사목록 리스트와 페이징 -->
 	<select id="selectTeacherListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Teacher">
 		SELECT 
