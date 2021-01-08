@@ -89,8 +89,7 @@
 											<c:forEach items="${LASACR}" var="la">
 												<tr>
 													<td>${la.classRegistration.lectureNo}</td>
-													<td><a
-														href="${pageContext.request.contextPath}/auth/teacher/lecture/${la.lecture.lectureNo}/student/studentOne/${la.student.studentId}/-1/-1">${la.student.studentName}</a></td>
+													<td><a href="${pageContext.request.contextPath}/auth/teacher/lecture/${la.lecture.lectureNo}/student/studentOne/${la.student.studentId}/-1/-1">${la.student.studentName}</a></td>
 													<td>${la.student.studentPhone}</td>
 													<td>${la.student.studentGender}</td>
 													<td>${la.student.studentAddressMain}</td>
@@ -98,7 +97,11 @@
 											</c:forEach>
 										</c:if>
 										<c:if test="${empty LASACR}">
-											(해당 강좌를 듣는 학생이 없습니다)
+											<tr>
+												<td colspan="5">
+													(해당 강좌를 듣는 학생이 없습니다)
+												</td>
+											</tr>
 										</c:if>
 									</tbody>
 								</table>

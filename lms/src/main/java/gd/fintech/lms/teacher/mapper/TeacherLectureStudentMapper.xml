@@ -43,12 +43,14 @@
 			ON l.lecture_no = cr.lecture_no
 		LEFT OUTER JOIN student s
 			ON s.student_id = cr.account_id
-		WHERE 
-			cr.lecture_no = 1
+		WHERE
+			(cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료") AND
+			cr.lecture_no = #{lectureNo}
 		ORDER BY
 		 	s.student_id DESC
 		 LIMIT
-		 	0, 10
+		 	#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- 강의를 듣는 학생 수 -->
@@ -64,6 +66,8 @@
 		LEFT OUTER JOIN teacher t
 			ON t.teacher_name = l.teacher_name
 		WHERE
+			(cr.class_registration_state = "수강중" OR
+			cr.class_registration_state = "수료") AND
 			l.lecture_no = #{lectureNo}
 	</select>
 	
