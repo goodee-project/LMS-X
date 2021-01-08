@@ -36,6 +36,7 @@
 					let ck = true;
 					$('.syllabusFileList').each(function(index, item) {
 						console.log($(item).val());
+						
 						if ($(item).val() == '') {
 							ck = false;
 						}
@@ -49,6 +50,12 @@
 					}
 				});
 			});
+			function checkSize(input) {
+			    if (input.files && input.files[0].size > (10 * 1024 * 1000)) {
+			        alert("파일 사이즈가 10MB 를 넘습니다.");
+			        input.value = null;
+			    }
+			}
 		</script>
 	</head>
 	
@@ -90,7 +97,7 @@
 										<tr>
 											<td>
 												<input type="hidden" value="${lectureNo}" name="lectureNo">
-												<input type="file" name="syllabusFileList" class="syllabusFileList">
+												<input type="file" name="syllabusFileList" class="syllabusFileList" onChange="checkSize(this)">
 											</td>
 										</tr>
 									</table>
