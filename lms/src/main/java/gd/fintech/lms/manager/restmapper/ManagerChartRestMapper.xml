@@ -113,22 +113,25 @@
 	<!-- 강좌별 별점 점수 -->
 	<select id="selectStarRatingByLecture" resultType="java.util.Map">
 		SELECT
-		    l.lecture_name,
-		    round(avg(cr.class_registration_point),0) point
+		   l.lecture_name,
+			ROUND(AVG(case when cr.class_registration_point != 0 then cr.class_registration_point
+			when cr.class_registration_point = 0 then 0 END),1) point
 		FROM 
 			class_registration cr
 		JOIN 
 			lecture l ON 
-		    l.lecture_no = cr.lecture_no
+		   l.lecture_no = cr.lecture_no
 		GROUP BY 
-			l.lecture_name
+			cr.lecture_no
 	</select>
 	
 	<!-- 학생별 과제 점수 -->
 	<select id="selectReportCountByStudent" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 		    cr.account_id, 
-		    SUM(IFNULL(rs.report_submit_point, 0)) point
+		    SUM(case when rs.report_submit_point = -1 then 0
+		    		when rs.report_submit_point IS NULL then 0
+					 ELSE rs.report_submit_point END) point
 		FROM
 		    class_registration cr
 		LEFT JOIN
@@ -207,7 +210,9 @@
             r.report_title reportTitle,
 			COUNT(rs.report_submit_no) studentSubmitted,
 			COUNT(cr.class_registration_no) totalStudent,
-		    sum(rs.report_submit_point)/COUNT(cr.class_registration_no) Averagescore
+		    SUM(case when rs.report_submit_point = -1 then 0
+			 		when rs.report_submit_point != -1 then rs.report_submit_point END)
+			 	/COUNT(cr.class_registration_no) Averagescore
 		FROM 
 			lecture l
 		INNER JOIN 
@@ -223,7 +228,7 @@
 		WHERE 
 			(cr.class_registration_state = "수강중" OR
 			cr.class_registration_state = "수료") AND
-			l.lecture_no = #{lectureNo}
+			l.lecture_no = 1
 		GROUP BY 
 			r.report_no
 	</select>
@@ -232,12 +237,15 @@
 	<select id="selectAvgReportByStudent" parameterType="int" resultType="java.util.Map">
 		SELECT
 		    cr.account_id, 
-		    AVG(IFNULL(rs.report_submit_point, 0)) pointAverage
+		    ROUND(AVG(case when rs.report_submit_point = -1 then 0
+		    		when rs.report_submit_point IS NULL then 0
+					 ELSE rs.report_submit_point END), 1) point
 		FROM
 		    class_registration cr
 		LEFT JOIN
 		    report_submit rs ON
-		    rs.account_id = cr.account_id
+		    rs.account_id = cr.account_id AND
+		    rs.report_no = #{reportNo}
 		LEFT JOIN
 		    report r ON
 		    r.report_no = rs.report_no
