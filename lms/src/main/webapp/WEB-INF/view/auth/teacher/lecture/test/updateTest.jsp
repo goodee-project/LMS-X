@@ -28,6 +28,48 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- jQuery를 이용하여 유효성 검사 -->
+		<script>
+			$(document).ready(function() {	// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
+				$('testStartdate').focus();					// 시작 시 폼 커서를 testStartdate쪽으로 이동
+				
+				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+				$("#submitBtn").click(function() {
+					if ($("#testStartdate").val() == "") {	// testStartdate이 공백인 경우 수행
+						$("#testStartdateMsg").html('');	// 메시지 초기화
+						$('#testStartdateMsg').append('<div style="margin-top: 10px;">시험 시작일시를 입력하세요<div>');
+						$('#testStartdate').focus();
+					
+						return;
+					} else {
+						$("#testStartdateMsg").text('');	// 메시지 초기화
+					}
+					
+					if ($("#testEnddate").val() == "") {	// testEnddate이 공백인 경우 수행
+						$("#testEnddateMsg").html('');		// 메시지 초기화
+						$('#testEnddateMsg').append('<div style="margin-top: 10px;">시험 종료일시를 입력하세요<div>');
+						$('#testEnddate').focus();
+					
+						return;
+					} else {
+						$("#testEnddateMsg").text('');		// 메시지 초기화
+					}
+
+					if ($("#testContent").val() == "") { 	// testContent가 공백인 경우 수행
+						$("#testContentMsg").html('');		// 메시지 초기화
+						$('#testContentMsg').append('<div style="margin-top: 10px;">시험 제목을 입력하세요<div>');
+						$('#testContent').focus();
+					
+						return;
+					} else {
+						$("#testContentMsg").html('');		// 메시지 초기화
+					}
+
+					$('#testForm').submit();
+				});
+			});
+		</script>
 	</head>
 	
 	<body>
@@ -49,7 +91,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="card shadow">
-							<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/updateTest">
+							<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/updateTest" id="testForm">
 								<div class="card-header bg-white border-0">
 									<div class="row align-items-center">
 										<div class="col-8">
@@ -57,7 +99,7 @@
 										</div>
 										<div class="col-4 text-right">
 											<button class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/testOne'">목록</button>
-											<button type="submit" class="btn btn-sm btn-primary">수정</button>
+											<button type="button" class="btn btn-sm btn-primary" id="submitBtn">수정</button>
 										</div>
 									</div>
 								</div>
@@ -70,19 +112,22 @@
 										<tr>
 											<th width="20%">시험 시작</th>
 											<td width="80%">
-												<input type="datetime-local" class="form-control" name="testStartdate" value="${test.testStartdate}">
+												<input type="datetime-local" class="form-control" name="testStartdate" id="testStartdate" value="${test.testStartdate}">
+												<div class="msgDiv" id="testStartdateMsg"></div>
 											</td>
 										</tr>
 										<tr>
 											<th>시험 종료</th>
 											<td>
-												<input type="datetime-local" class="form-control" name="testEnddate" value="${test.testEnddate}">
+												<input type="datetime-local" class="form-control" name="testEnddate" id="testEnddate" value="${test.testEnddate}">
+												<div class="msgDiv" id="testEnddateMsg"></div>
 											</td>
 										</tr>
 										<tr>
 											<th>시험 제목</th>
 											<td>
-												<input type="text" class="form-control" name="testContent" value="${test.testContent}">
+												<input type="text" class="form-control" name="testContent" id="testContent" value="${test.testContent}">
+												<div class="msgDiv" id="testContentMsg"></div>
 											</td>
 										</tr>
 									</table>
