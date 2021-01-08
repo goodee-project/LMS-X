@@ -46,7 +46,7 @@
 						return;
 					}
 		
-					let html =`<div><input class="btn btn-outline-success reportSubmitFileList" type="file" name="reportSubmitFileList" ></div>`;
+					let html =`<div><input class="btn btn-outline-success reportSubmitFileList" type="file" name="reportSubmitFileList" onchange="checkSize(this)"></div>`;
 					$('#fileInput').append(html);
 		
 				})
@@ -99,6 +99,13 @@
 					fCreator : 'createSEditor2'
 				});
 			})
+			
+			function checkSize(input) {
+			    if (input.files && input.files[0].size > (10 * 1024 * 1000)) {
+			        alert("파일 사이즈가 10MB 를 넘습니다.");
+			        input.value = null;
+			    }
+			}
 		</script>
 	</head>
 	<body class="">
