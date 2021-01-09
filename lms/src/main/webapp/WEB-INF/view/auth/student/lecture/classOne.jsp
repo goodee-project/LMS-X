@@ -209,11 +209,58 @@
 										<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
 										<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
 										<div id="cancelClass"></div>
-										<button type="button" class="btn btn-sm btn-block btn-danger" id="cancelClassBtn" value="수강 신청 취소">수강 신청 취소</button>
+										<button type="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal" data-target="#modal-notification">수강 신청 취소</button>
+										<div class="modal fade" id="modal-notification" tabindex="-1"
+											role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+											<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+												role="document">
+												<div class="modal-content bg-gradient-danger">
+									
+													<div class="modal-header">
+														<h6 class="modal-title" id="modal-title-notification">경고</h6>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+									
+													<div class="modal-body">
+									
+														<div class="py-3 text-center">
+															<i class="ni ni-bell-55 ni-3x"></i>
+															<h4 class="heading mt-4">취소 확인</h4>
+															<p>수강 신청을 취소하시겠습니까?</p>
+														</div>
+									
+													</div>
+									
+													<div class="modal-footer">
+														<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+														<button type="button" class="btn btn-link text-white ml-auto" id="cancelClassBtn" value="수강 신청 취소">수강 신청 취소</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</form>
 								</c:if>
 								<c:if test="${lcstc.classRegistration.classRegistrationState != '대기'}">	
-									<button type="button" class="btn btn-sm btn-block btn-primary">수강 대기시에만 취소가 가능합니다</button>
+									<button type="button" class="btn btn-sm btn-block btn-primary" data-toggle="modal" data-target="#infoModal">수강 대기시에만 취소가 가능합니다</button>
+									<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="infoModalLabel">정보</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">수강 대기시에만 취소가 가능합니다</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+												</div>
+											</div>
+										</div>
+									</div>
 								</c:if>
 							</div>
 						</div>
