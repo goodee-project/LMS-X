@@ -65,7 +65,8 @@
 								<h3 class="mb-0">댓글 수정</h3>
 							</div>
 							<div class="col-4 text-right">
-								<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/notice/noticeList/1">목록</a>
+								<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/qna/qnaOne/${questionNo}/1/${questionPassword}">목록</a>
+								<button class="btn btn-sm btn-primary" id="updateBtn">수정</button>
 							</div>
 						</div>
 					</div>	
@@ -76,10 +77,11 @@
 		<input type="hidden" name="questionCommentWriter" value="${questionComment.questionCommentWriter}" readonly="readonly" class="form-control">
 			<table class="table">
 				<tr>
-					<td><textarea rows="22px" style="width:100%;" name="questionCommentContent" id="qnaCommentContent" class="form-control">${questionComment.questionCommentContent}</textarea></td>
+					<td>
+						<textarea class="form-control" name="questionCommentContent" cols="50" rows="10" id="qnaCommentContent">${questionComment.questionCommentContent}</textarea>
+					</td>
 				</tr>
 			</table>
-			 <div style="text-align: right;"><button type="button" id="updateBtn" class="btn btn-outline-primary">댓글입력</button></div>
 		</form>
 		</div>
 		<!-- Footer -->
