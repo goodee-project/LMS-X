@@ -85,11 +85,10 @@
 						<div class="col-12">
 							<table class="table">
 								<tr>
-									<th>보낸사람</th>
-									<td>${note.noteDispatcherName} (${note.noteDispatcherId})</td>
-									<th>받는사람</th>
-									<td>${note.noteReceiverName} (${note.noteReceiverId})</td>
-									
+									<th width="10%">보낸사람</th>
+									<td width="40%">${note.noteDispatcherName} (${note.noteDispatcherId})</td>
+									<th width="10%">받는사람</th>
+									<td width="40%">${note.noteReceiverName} (${note.noteReceiverId})</td>
 								</tr>
 								<tr>
 									<th>날짜</th>
