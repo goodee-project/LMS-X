@@ -125,7 +125,29 @@
 			t.teacher_name = #{teacherName} AND 
 			cr.account_id = #{accountId}
 	</select>
-
+	
+	<!-- 강의를 듣는 학생 이미지  -->
+	<select id="selectTeacherLecureStudentOneImage" parameterType="String" resultType="String">
+		SELECT
+			mypage_image_uuid
+		FROM
+			mypage_image
+		WHERE
+			account_id = #{accountId}
+	</select>
+	
+	<!-- 강의를 듣는 학생 자격증 -->
+	<select id="selectTeacherLecureStudentOneLicese" parameterType="String" resultType="gd.fintech.lms.vo.License">
+		SELECT
+			license_number licenseNumber,
+			license_name licenseName,
+			license_agency licenseAgency,
+			license_getdate licenseGetdate
+		FROM
+			license
+		WHERE
+			account_id = #{accountId}
+	</select>
 	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectTeacherAttendanceStudentResult">
 		<result property="accountId" column="account_id" />
 		<result property="attendanceState" column="attendance_state" />

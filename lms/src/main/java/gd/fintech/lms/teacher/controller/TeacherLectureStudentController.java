@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import gd.fintech.lms.teacher.service.TeacherLectureStudentService;
 import gd.fintech.lms.vo.Attendance;
 import gd.fintech.lms.vo.LectureAndStudentAndClassRegistration;
+import gd.fintech.lms.vo.License;
 
 
 @Controller
@@ -151,12 +152,16 @@ public class TeacherLectureStudentController {
 		
 		List<Attendance> attendanceList = teacherLectureStudentService.getTeacherAttendanceByStudentAndMonth(lectureNo, currentYear, currentMonth, accountId);
 		LectureAndStudentAndClassRegistration LASACR = teacherLectureStudentService.getStudentOne(map);
+		String studentImage = teacherLectureStudentService.getTeacherLectureStudentOneImage(accountId);
+		List<License> studentLicenseList = teacherLectureStudentService.getTeacherLectureStudentOneLicense(accountId);
 		
 		model.addAttribute("currentYear", currentYear);					// 년도
 		model.addAttribute("currentMonth", currentMonth);				// 월
 		model.addAttribute("lastDay", lastDay);							// 마지막 날
 		model.addAttribute("firstDayOfWeek", firstDayOfWeek);			// 1일의 요일
 		
+		model.addAttribute("studentLicenseList",studentLicenseList);
+		model.addAttribute("studentImage",studentImage);
 		model.addAttribute("LASACR", LASACR);							// vo
 		model.addAttribute("attendanceList", attendanceList);
 		

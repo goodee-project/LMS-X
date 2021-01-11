@@ -78,26 +78,12 @@
 						<div class="card-body">
 							<h6 class="heading-small text-muted mb-4">개인정보</h6>
 							<div class="pl-lg-4">
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label class="form-control-label" for="input-username">아이디</label>
-											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerId}" disabled="disabled">
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label class="form-control-label" for="input-last-name">생년월일</label>
-											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerBirth}" disabled="disabled">
-										</div>
-									</div>
-								</div>
 								<form method="post"	action="${pageContext.request.contextPath}/auth/admin/updatePosition/${manager.managerId}">
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label class="form-control-label" for="input-username">직급</label>
-												<select name="managerPosition" class="form-control">
+												<label class="form-control-label " for="input-username">직급</label>
+												<select name="managerPosition" class="form-control form-control-alternative">
 													<c:if test="${manager.managerPosition eq '사원'}">
 														<option value="사원" selected="selected">사원</option>
 														<option value="대리">대리</option>
@@ -123,12 +109,66 @@
 										</div>
 									</div>
 								</form>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >아이디</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerId}" disabled="disabled">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >생년월일</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerBirth}" disabled="disabled">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >이름</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerName}" disabled="disabled">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >성별</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerGender}" disabled="disabled">
+										</div>
+									</div>
+								</div>
+							
+							
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >이메일</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerEmail}" disabled="disabled">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" >전화번호</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerPhone}" disabled="disabled">
+										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label class="form-control-label" >주소</label>
+											<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${manager.managerAddressMain} ${manager.managerAddressSub}" disabled="disabled">
+										</div>
+									</div>
+								</div>
 							</div>
 							<hr class="my-4" />
 							<h6 class="heading-small text-muted mb-4">부가정보</h6>
 							<div class="pl-lg-4">
 								<div class="form-group">
 									<label class="form-control-label" for="input-username">경력</label>
+									<c:if test="${manager.careerList[0].careerContent != null}">
 									<c:forEach var="c" items="${manager.careerList}">
 										<div class="row">
 											<div class="col-lg-6">
@@ -143,36 +183,53 @@
 											</div>
 										</div>
 									</c:forEach>
+									</c:if>
+									<c:if test="${manager.careerList[0].careerContent == null}">
+										<div class="row">
+											<div class="col-lg-3">
+												<h5>(경력이 없습니다)</h5>
+											</div>
+										</div>
+									</c:if>
 								</div>
 							</div>
 						
 							<div class="pl-lg-4">
 								<div class="form-group">
 									<label class="form-control-label" for="input-username">자격증</label>
-									<c:forEach var="l" items="${manager.licenseList}">
+									<c:if test="${manager.licenseList[0].licenseNumber != null}">
+										<c:forEach var="l" items="${manager.licenseList}">
+											<div class="row">
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseNumber}" disabled="disabled">
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseName}" disabled="disabled">
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseAgency}" disabled="disabled">
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group ">
+														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseGetdate}" disabled="disabled">
+													</div>
+												</div>
+											</div>
+										</c:forEach>
+									</c:if>
+									<c:if test="${manager.licenseList[0].licenseNumber == null}">
 										<div class="row">
 											<div class="col-lg-3">
-												<div class="form-group ">
-													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseNumber}" disabled="disabled">
-												</div>
-											</div>
-											<div class="col-lg-3">
-												<div class="form-group ">
-													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseName}" disabled="disabled">
-												</div>
-											</div>
-											<div class="col-lg-3">
-												<div class="form-group ">
-													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseAgency}" disabled="disabled">
-												</div>
-											</div>
-											<div class="col-lg-3">
-												<div class="form-group ">
-													<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseGetdate}" disabled="disabled">
-												</div>
+												<h5>(자격증이 없습니다)</h5>
 											</div>
 										</div>
-									</c:forEach>
+									</c:if>
 								</div>
 							</div>
 						</div>

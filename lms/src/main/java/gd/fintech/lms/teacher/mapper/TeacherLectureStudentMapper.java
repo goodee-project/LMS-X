@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Attendance;
 import gd.fintech.lms.vo.LectureAndStudentAndClassRegistration;
+import gd.fintech.lms.vo.License;
 
 @Mapper
 public interface TeacherLectureStudentMapper {
@@ -16,6 +17,12 @@ public interface TeacherLectureStudentMapper {
 	
 	// 강의를 듣는 학생 상세보기
 	public LectureAndStudentAndClassRegistration selectTeacherLectureStudentOne(Map<String, Object> map);
+	
+	// 강의를 듣는 학생 이미지
+	public String selectTeacherLecureStudentOneImage(String accountId);
+	
+	// 강의를 듣는 학생 자격증
+	public List<License> selectTeacherLecureStudentOneLicese(String accountId);
 	
 	// 강의를 듣는 학생 수
 	public int selectTeacherLectureStudentCount(Map<String, Object> map);
