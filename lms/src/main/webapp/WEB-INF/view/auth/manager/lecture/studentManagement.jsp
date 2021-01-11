@@ -256,7 +256,7 @@
 													
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
-																		<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/updateStudentClassState/${sls.accountId}/취소'">취소</button>
+																		<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/lecture/${lectureNo}/updateStudentClassState/${sls.accountId}/취소'">거절</button>
 																	</div>
 																</div>
 															</div>
