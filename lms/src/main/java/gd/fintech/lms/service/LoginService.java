@@ -67,4 +67,9 @@ public class LoginService {
 	public int selectNoteReceiveCount(String accountId) {
 		return loginMapper.selectNoteReceiveCount(accountId);
 	}
+	
+	// 6개월 이상 로그인 하지 않은 계정에 대해 휴면계정 전환
+	public int updateDormantAccount() {
+		return loginMapper.updateDormantAccount();
+	}
 }

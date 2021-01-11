@@ -90,4 +90,39 @@
 			note_receiver_id = #{accountId} AND 
 			note_is_read = 'N'
 	</select>
+	
+	<!-- 6개월 이상 로그인 하지 않은 계정에 대해 휴면계정 전환 -->
+	<update id="updateDormantAccount">
+		UPDATE 
+		    account a,
+		    (
+		        SELECT 
+		            account_id, 
+		            ml
+		        FROM 
+		            (
+		            SELECT 
+		                a.account_id,
+		                MAX(l.login_log_date) ml
+		            FROM 
+		                login_log l
+		            RIGHT JOIN
+		                account a
+		            ON 
+		                a.account_id = l.account_id
+		            GROUP BY 
+		                a.account_id
+		            ) t1
+		        WHERE 
+		            (DATE_ADD(NOW(), INTERVAL -6 MONTH) > ml) OR 
+		            t1.ml IS NULL
+		    ) t2
+		SET 
+		    a.account_state = '휴면'
+		WHERE 
+		     a.account_id = t2.account_id AND
+		    (a.account_level = 1 OR
+		    a.account_level = 2) AND
+		    a.account_state = '활성화'
+	</update>
 </mapper>
