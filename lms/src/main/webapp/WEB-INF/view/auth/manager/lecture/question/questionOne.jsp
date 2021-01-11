@@ -226,8 +226,8 @@
 													<td>
 														<!-- ALERT -->
 														<div>
-															<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-comment">삭제</button>
-															<div class="modal fade" id="modal-comment" tabindex="-1"
+															<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-comment-${qc.questionCommentNo}">삭제</button>
+															<div class="modal fade" id="modal-comment-${qc.questionCommentNo}" tabindex="-1"
 																role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
 																<div class="modal-dialog modal-danger modal-dialog-centered modal-"
 																	role="document">
@@ -265,9 +265,7 @@
 										</c:if>
 										<c:if test="${empty questionComment[0].questionCommentNo}">
 											<tr>
-												<td>
-													<p>(댓글이 없습니다.)</p>
-												</td>
+												<td colspan="6">(등록된 댓글이 없습니다)</td>
 											</tr>
 										</c:if>
 									</tbody>

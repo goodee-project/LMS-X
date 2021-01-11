@@ -191,11 +191,11 @@
 													<td>${sls.classRegistrationState}</td>
 													<td>${sls.classRegistrationUpdatedate}</td>
 													<td>
-														<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-default">승인</button>
+														<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-default-${sls.accountId}">승인</button>
 														
 														<div id="parentModal"></div>
 														
-														<div class="modal fade" id="modal-default" tabindex="-1"
+														<div class="modal fade" id="modal-default-${sls.accountId}" tabindex="-1"
 															role="dialog" aria-labelledby="modal-default" aria-hidden="true">
 															<div class="modal-dialog modal- modal-dialog-centered modal-"
 																role="document">
@@ -214,23 +214,23 @@
 																		<div class="py-3 text-center">
 																			<i class="ni ni-bell-55 ni-3x"></i>
 																			<h4 class="heading mt-4">승인 확인</h4>
-																			<p>선택한 학생의 수강신청을 승인하시겠습니까?</p>
+																			<p>${sls.accountId} 학생의 수강신청을 승인하시겠습니까?</p>
 																		</div>
 													
 																	</div>
 													
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-link" data-dismiss="modal">취소</button>
-																		<button type="button" class="btn btn-primary ml-auto" id="studnetAccessBtn" value="${sls.accountId}">승인</button>
+																		<button type="button" class="btn btn-primary ml-auto" id="studnetAccessBtn" value="${sls.accountId}" data-dismiss="modal">승인</button>
 																	</div>
 																</div>
 															</div>
 														</div>
 													</td>
 													<td>
-														<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">거절</button>
+														<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification-${sls.accountId}">거절</button>
 														
-														<div class="modal fade" id="modal-notification" tabindex="-1"
+														<div class="modal fade" id="modal-notification-${sls.accountId}" tabindex="-1"
 															role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
 															<div class="modal-dialog modal-danger modal-dialog-centered modal-"
 																role="document">
@@ -249,7 +249,7 @@
 																		<div class="py-3 text-center">
 																			<i class="ni ni-bell-55 ni-3x"></i>
 																			<h4 class="heading mt-4">거절 확인</h4>
-																			<p>선택한 학생의 수강신청을 거절하시겠습니까?</p>
+																			<p>${sls.accountId} 학생의 수강신청을 거절하시겠습니까?</p>
 																		</div>
 													
 																	</div>

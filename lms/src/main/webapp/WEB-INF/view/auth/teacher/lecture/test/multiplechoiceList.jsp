@@ -101,8 +101,8 @@
 														<button type="button" class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/updateMultiplechoice/${mcl.multiplechoiceNo}'">수정</button>
 													</td>
 													<td>
-														<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">삭제</button>
-														<div class="modal fade" id="modal-notification" tabindex="-1"
+														<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification-${mcl.multiplechoiceNo}">삭제</button>
+														<div class="modal fade" id="modal-notification-${mcl.multiplechoiceNo}" tabindex="-1"
 															role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
 															<div class="modal-dialog modal-danger modal-dialog-centered modal-"
 																role="document">
@@ -121,7 +121,7 @@
 																		<div class="py-3 text-center">
 																			<i class="ni ni-bell-55 ni-3x"></i>
 																			<h4 class="heading mt-4">삭제 확인</h4>
-																			<p>문제를 삭제하시겠습니까?</p>
+																			<p>${mcl.multiplechoiceId}번 문제를 삭제하시겠습니까?</p>
 																		</div>
 													
 																	</div>

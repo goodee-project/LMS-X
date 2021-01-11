@@ -59,19 +59,26 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="mql" items="${managerQueueList}">
+									<c:if test="${!empty managerQueueList}">
+										<c:forEach var="mql" items="${managerQueueList}">
+											<tr>
+												<td style="font-size: 13px;">${mql.managerId}</td>
+												<td style="font-size: 13px;">${mql.managerEmail}</td>
+												<td style="font-size: 13px;">${mql.managerPhone}</td>
+												<td style="font-size: 13px;">${mql.managerName}</td>
+												<td style="font-size: 13px;">${mql.managerGender}</td>
+												<td style="font-size: 13px;">${mql.managerBirth}</td>
+												<td style="font-size: 10px;">${mql.managerAddressMain}<br> ${mql.managerAddressSub}</td>
+												<td style="font-size: 13px;"><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/admin/accessManager/${currentPage}/${mql.managerId}">승인</a></td>
+												<td style="font-size: 13px;"><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/admin/negativeManager/${currentPage}/${mql.managerId}">거절</a></td>
+											</tr>
+										</c:forEach>
+									</c:if>
+									<c:if test="${empty managerQueueList}">
 										<tr>
-											<td style="font-size: 13px;">${mql.managerId}</td>
-											<td style="font-size: 13px;">${mql.managerEmail}</td>
-											<td style="font-size: 13px;">${mql.managerPhone}</td>
-											<td style="font-size: 13px;">${mql.managerName}</td>
-											<td style="font-size: 13px;">${mql.managerGender}</td>
-											<td style="font-size: 13px;">${mql.managerBirth}</td>
-											<td style="font-size: 10px;">${mql.managerAddressMain}<br> ${mql.managerAddressSub}</td>
-											<td style="font-size: 13px;"><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/auth/admin/accessManager/${currentPage}/${mql.managerId}">승인</a></td>
-											<td style="font-size: 13px;"><a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/auth/admin/negativeManager/${currentPage}/${mql.managerId}">거절</a></td>
+											<td colspan="9">(승인 대기중인 운영자가 없습니다)</td>
 										</tr>
-									</c:forEach>
+									</c:if>
 								</tbody>
 							</table>
 						</div>

@@ -37,7 +37,7 @@
 		<script>
 			$(document).ready(function(){
 				$('.classRegistrationBtn').on('click', function(){
-					let paramSplit = $(this).val().split(',');
+					let paramSplit = $(this).val().split('-');
 					let paramLectureNo = paramSplit[0];	// 강좌 no
 					let paramStudentTotal = paramSplit[1];	// 강좌 신청 인원
 					let paramLectureTotal = paramSplit[2];	// 강좌 최대 인원
@@ -157,7 +157,7 @@
 										<td>
 											<form id="classRegistrationForm${l.lectureNo}" action="${pageContext.request.contextPath}/auth/student/lecture/registrationClass" method="post">
 												<input type="hidden" name="lectureNo" value="${l.lectureNo}">
-												<button type="button" class="classRegistrationBtn btn btn-sm btn-primary" value="${l.lectureNo},${l.studentTotal},${l.lectureTotal}">수강 신청</button>
+												<button type="button" class="classRegistrationBtn btn btn-sm btn-primary" value="${l.lectureNo}-${l.studentTotal}-${l.lectureTotal}">수강 신청</button>
 												<div id="parentModal"></div>
 											</form>
 										</td>

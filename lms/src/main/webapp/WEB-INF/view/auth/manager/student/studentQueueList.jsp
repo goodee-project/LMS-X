@@ -80,9 +80,9 @@
 										<td style="font-size: 13px;">${sql.studentBirth}</td>
 										<td style="font-size: 10px;">${sql.studentAddressMain} <br> ${sql.studentAddressSub}</td>
 										<td style="font-size: 13px;">
-											<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-default">승인</button>
+											<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-default-${sql.studentId}">승인</button>
 											
-											<div class="modal fade" id="modal-default" tabindex="-1"
+											<div class="modal fade" id="modal-default-${sql.studentId}" tabindex="-1"
 												role="dialog" aria-labelledby="modal-default" aria-hidden="true">
 												<div class="modal-dialog modal- modal-dialog-centered modal-"
 													role="document">
@@ -101,7 +101,7 @@
 															<div class="py-3 text-center">
 																<i class="ni ni-bell-55 ni-3x"></i>
 																<h4 class="heading mt-4">승인 확인</h4>
-																<p>선택한 학생의 회원가입을 승인하시겠습니까?</p>
+																<p>${sql.studentId} 학생의 회원가입을 승인하시겠습니까?</p>
 															</div>
 										
 														</div>
@@ -115,9 +115,9 @@
 											</div>
 										</td>
 										<td style="font-size: 13px;">
-											<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">거절</button>
+											<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification-${sql.studentId}">거절</button>
 											
-											<div class="modal fade" id="modal-notification" tabindex="-1"
+											<div class="modal fade" id="modal-notification-${sql.studentId}" tabindex="-1"
 												role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
 												<div class="modal-dialog modal-danger modal-dialog-centered modal-"
 													role="document">
@@ -136,7 +136,7 @@
 															<div class="py-3 text-center">
 																<i class="ni ni-bell-55 ni-3x"></i>
 																<h4 class="heading mt-4">거절 확인</h4>
-																<p>선택한 학생의 회원가입을 거절하시겠습니까?</p>
+																<p>${sql.studentId} 학생의 회원가입을 거절하시겠습니까?</p>
 															</div>
 										
 														</div>

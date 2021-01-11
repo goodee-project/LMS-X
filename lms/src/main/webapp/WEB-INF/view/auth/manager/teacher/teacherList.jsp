@@ -83,8 +83,8 @@
 											<!-- ALERT -->
 											<div>
 												<button type="button" class="btn btn-sm btn-danger"
-													data-toggle="modal" data-target="#modal-notification">탈퇴</button>
-												<div class="modal fade" id="modal-notification" tabindex="-1"
+													data-toggle="modal" data-target="#modal-notification-${t.teacherId}">탈퇴</button>
+												<div class="modal fade" id="modal-notification-${t.teacherId}" tabindex="-1"
 													role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
 													<div class="modal-dialog modal-danger modal-dialog-centered modal-"
 														role="document">
@@ -103,7 +103,7 @@
 																<div class="py-3 text-center">
 																	<i class="ni ni-bell-55 ni-3x"></i>
 																	<h4 class="heading mt-4">탈퇴 처리 확인</h4>
-																	<p>선택한 강사를 탈퇴처리하시겠습니까?</p>
+																	<p>${t.teacherId} 강사를 탈퇴처리하시겠습니까?</p>
 																</div>
 											
 															</div>

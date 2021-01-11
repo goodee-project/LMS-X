@@ -116,9 +116,9 @@
 													<button class="btn btn-sm btn-primary" onclick="location.href='${pageContext.request.contextPath}/auth/manager/classroom/updateClassroom/${cr.classroomNo}'">수정</button>
 												</td>
 												<td>
-													<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">삭제</button>
+													<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification-${cr.classroomNo}">삭제</button>
 													
-													<div class="modal fade" id="modal-notification" tabindex="-1"
+													<div class="modal fade" id="modal-notification-${cr.classroomNo}" tabindex="-1"
 														role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
 														<div class="modal-dialog modal-danger modal-dialog-centered modal-"
 															role="document">
@@ -137,7 +137,7 @@
 																	<div class="py-3 text-center">
 																		<i class="ni ni-bell-55 ni-3x"></i>
 																		<h4 class="heading mt-4">강의실 삭제 확인</h4>
-																		<p>선택한 강의실을 삭제하시겠습니까?</p>
+																		<p>${cr.classroomNumber} 강의실을 삭제하시겠습니까?</p>
 																	</div>
 												
 																</div>

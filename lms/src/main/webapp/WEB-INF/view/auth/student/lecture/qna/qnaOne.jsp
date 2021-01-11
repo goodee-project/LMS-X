@@ -223,8 +223,8 @@
 															<td>
 																<!-- ALERT -->
 																<div>
-																	<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">삭제</button>
-																	<div class="modal fade" id="modal-notification" tabindex="-1"
+																	<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification-${qc.questionCommentNo}">삭제</button>
+																	<div class="modal fade" id="modal-notification-${qc.questionCommentNo}" tabindex="-1"
 																		role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
 																		<div class="modal-dialog modal-danger modal-dialog-centered modal-"
 																			role="document">

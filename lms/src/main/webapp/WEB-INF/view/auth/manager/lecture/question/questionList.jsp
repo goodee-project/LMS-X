@@ -111,7 +111,7 @@
 										</c:if>
 										<c:if test="${empty managerQuestionList}">
 											<tr>
-												<td>(등록된 질문이 없습니다)</td>
+												<td colspan="5">(등록된 질문이 없습니다)</td>
 											</tr>
 										</c:if>
 									</tbody>
