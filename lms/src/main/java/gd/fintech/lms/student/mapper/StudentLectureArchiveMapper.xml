@@ -41,6 +41,7 @@
         <result property="lectureArchiveTitle" column="lecture_archive_title" />
         <result property="lectureArchiveContent" column="lecture_archive_content" />
         <result property="lectureArchiveCreatedate" column="lecture_archive_createdate" />
+        <result property="lectureArchiveUpdatedate" column="lecture_archive_updatedate" />
         <result property="lectureArchiveCount" column="lecture_archive_count" />
         <!-- 자료실 첨부파일 -->
 		<collection property="lectureArchiveFileList" ofType="gd.fintech.lms.vo.LectureArchiveFile">
@@ -60,6 +61,7 @@
 			la.lecture_archive_title,
 			la.lecture_archive_content,
 			la.lecture_archive_createdate,
+			la.lecture_archive_updatedate,
 			la.lecture_archive_count,
 			laf.lecture_archive_file_uuid,
 			laf.lecture_archive_file_original,

@@ -103,28 +103,37 @@
 							    			<th colspan="3">첨부파일</th>
 							    		</tr>
 						    		</thead>
-						    		<c:forEach items="${archive.lectureArchiveFileList}" var="laf">
-						    			<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
-						   				<c:set var="uuid">${laf.lectureArchiveFileUuid}</c:set>
-						    			<tr>
-						    				<td><a onclick="fileDownloadCount('${laf.lectureArchiveFileUuid}','${laf.lectureArchiveFileCount}')" download="${laf.lectureArchiveFileOriginal}" href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
-						    				<td>
-						    					<!-- 파일 사이즈 -->
-						    					<c:choose>
-						    						<c:when test="${laf.lectureArchiveFileSize >= (1024 * 1024)}">
-						    							<fmt:formatNumber value="${laf.lectureArchiveFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
-						    						</c:when>
-						    						<c:when test="${laf.lectureArchiveFileSize >= 1024}">
-						    							<fmt:formatNumber value="${laf.lectureArchiveFileSize/1024}" type="pattern" pattern="0.00" />B 
-						    						</c:when>
-						    						<c:otherwise>
-						    							<fmt:formatNumber value="${laf.lectureArchiveFileSize}" type="pattern" pattern="0.00" />KB 	
-						    						</c:otherwise>
-						    					</c:choose>
-						    				</td>
-						    				<td id="fileCount${fn:split(uuid ,'.')[0]}">다운 횟수 : ${laf.lectureArchiveFileCount}회</td>
-						    			</tr>
-						    		</c:forEach>
+						    		<tbody>
+						    			<c:if test="${!empty archive.lectureArchiveFileList}">
+								    		<c:forEach items="${archive.lectureArchiveFileList}" var="laf">
+								    			<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
+								   				<c:set var="uuid">${laf.lectureArchiveFileUuid}</c:set>
+								    			<tr>
+								    				<td><a onclick="fileDownloadCount('${laf.lectureArchiveFileUuid}','${laf.lectureArchiveFileCount}')" download="${laf.lectureArchiveFileOriginal}" href="${pageContext.request.contextPath}/resource/archiveFile/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
+								    				<td>
+								    					<!-- 파일 사이즈 -->
+								    					<c:choose>
+								    						<c:when test="${laf.lectureArchiveFileSize >= (1024 * 1024)}">
+								    							<fmt:formatNumber value="${laf.lectureArchiveFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
+								    						</c:when>
+								    						<c:when test="${laf.lectureArchiveFileSize >= 1024}">
+								    							<fmt:formatNumber value="${laf.lectureArchiveFileSize/1024}" type="pattern" pattern="0.00" />B 
+								    						</c:when>
+								    						<c:otherwise>
+								    							<fmt:formatNumber value="${laf.lectureArchiveFileSize}" type="pattern" pattern="0.00" />KB 	
+								    						</c:otherwise>
+								    					</c:choose>
+								    				</td>
+								    				<td id="fileCount${fn:split(uuid ,'.')[0]}">다운 횟수 : ${laf.lectureArchiveFileCount}회</td>
+								    			</tr>
+								    		</c:forEach>
+							    		</c:if>
+							    		<c:if test="${empty archive.lectureArchiveFileList}">
+							    			<tr>
+							    				<td>(첨부파일이 없습니다)</td>
+							    			</tr>
+							    		</c:if>
+						    		</tbody>
 						    	</table>
 						    </div>    
 						</div>
