@@ -106,16 +106,18 @@
 							// 승인 대기 상태
 							if ( data == "wait" ) {
 								let msg = `승인 대기 상태입니다. \n승인 후 이용가능합니다.`;
-								alert(msg)
+								alert(msg);
 								return;
 							}
 							// 탈퇴 상태
 							if ( data == "secession" ) {
+								let msg = `탈퇴한 계정입니다. \n회원가입을 해주세요.`;
 								alert("탈퇴한 계정입니다.");
 							}
 							// 정보가 없는 경우
 							if ( data == "none") {
-								$('#idCheck').html('가입하지 않은 아이디이거나, <br>잘못된 비밀번호입니다.');
+								let msg = `가입하지 않은 아이디이거나, \n잘못된 비밀번호입니다.`;
+								alert(msg);
 							} 
 							// 활성화 상태
 							if ( data == "active" ) {
@@ -124,7 +126,8 @@
 
 							// 휴면 상태
 							if (data == "dormant") {
-								alert('휴면계정입니다.<br> 관리자에 문의 해주세요.');
+								let msg = `휴면계정입니다. \n운영자에 문의 해주세요.`;
+								alert(msg);
 							}
 							
 						}
@@ -214,24 +217,28 @@
 							// 승인 대기 상태
 							if ( data == "wait" ) {
 								let msg = `승인 대기 상태입니다. \n승인 후 이용가능합니다.`;
-								alert(msg)
+								alert(msg);
 								return;
 							}
 							// 탈퇴 상태
 							if ( data == "secession" ) {
-								alert("탈퇴한 계정입니다.")
+								let msg = `탈퇴한 계정입니다. \n회원가입을 해주세요.`;
+								alert("탈퇴한 계정입니다.");
 							}
 							// 정보가 없는 경우
 							if ( data == "none") {
-								$('#idCheck').html('가입하지 않은 아이디이거나, <br>잘못된 비밀번호입니다.')
+								let msg = `가입하지 않은 아이디이거나, \n잘못된 비밀번호입니다.`;
+								alert(msg);
 							} 
 							// 활성화 상태
 							if ( data == "active" ) {
 								$('#loginForm').submit();
 							}
+
 							// 휴면 상태
 							if (data == "dormant") {
-								alert('휴면계정입니다.<br> 관리자에 문의 해주세요.');
+								let msg = `휴면계정입니다. \n운영자에 문의 해주세요.`;
+								alert(msg);
 							}
 							
 						}
@@ -321,24 +328,22 @@
 							// 승인 대기 상태
 							if ( data == "wait" ) {
 								let msg = `승인 대기 상태입니다. \n승인 후 이용가능합니다.`;
-								alert(msg)
+								alert(msg);
 								return;
 							}
 							// 탈퇴 상태
 							if ( data == "secession" ) {
-								alert("탈퇴한 계정입니다.")
+								let msg = `탈퇴한 계정입니다. \n회원가입을 해주세요.`;
+								alert("탈퇴한 계정입니다.");
 							}
 							// 정보가 없는 경우
 							if ( data == "none") {
-								$('#idCheck').html('가입하지 않은 아이디이거나, <br>잘못된 비밀번호입니다.')
+								let msg = `가입하지 않은 아이디이거나, \n잘못된 비밀번호입니다.`;
+								alert(msg);
 							} 
 							// 활성화 상태
 							if ( data == "active" ) {
 								$('#loginForm').submit();
-							}
-							// 휴면 상태
-							if (data == "dormant") {
-								alert('휴면계정입니다.<br> 관리자에 문의 해주세요.');
 							}
 							
 						}
@@ -414,15 +419,17 @@
 						url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 						type : 'get',
 						success : function(data) {
-							
 							// 정보가 없는 경우
 							if ( data == "none") {
-								$('#idCheck').html('가입하지 않은 아이디이거나, <br>잘못된 비밀번호입니다.')
+								let msg = `가입하지 않은 아이디이거나, \n 잘못된 비밀번호입니다.`;
+								alert(msg);
 							} 
 							// 활성화 상태
 							if ( data == "active" ) {
 								$('#loginForm').submit();
 							}
+
+							
 						}
 					});
 				});
