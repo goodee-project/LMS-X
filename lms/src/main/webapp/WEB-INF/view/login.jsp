@@ -593,7 +593,7 @@
 										</div>
 						
 										<div class="modal-footer">
-											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
+											<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
 										</div>
 									</div>
 								</div>
@@ -623,7 +623,7 @@
 										</div>
 						
 										<div class="modal-footer">
-											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
+											<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
 										</div>
 									</div>
 								</div>
@@ -653,7 +653,7 @@
 										</div>
 						
 										<div class="modal-footer">
-											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
+											<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
 										</div>
 									</div>
 								</div>
@@ -683,7 +683,7 @@
 										</div>
 						
 										<div class="modal-footer">
-											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
+											<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
 										</div>
 									</div>
 								</div>
@@ -713,7 +713,7 @@
 										</div>
 						
 										<div class="modal-footer">
-											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
+											<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
 										</div>
 									</div>
 								</div>
