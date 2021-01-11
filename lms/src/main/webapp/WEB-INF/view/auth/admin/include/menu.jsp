@@ -22,7 +22,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="${pageContext.request.contextPath}/auth/admin/managerQueue//1">
+					<a class="nav-link" href="${pageContext.request.contextPath}/auth/admin/managerQueue/1">
 						<i class="ni ni-circle-08 text-pink"></i> 운영자 승인
 					</a>
 				</li>
