@@ -45,7 +45,7 @@ public class SignupController {
 		
 		// 계정, 학생대기테이블 추가
 		signupService.insertStudentAccount(account, studentQueue); 
-		return "redirect:/";
+		return "redirect:/login?member=student";
 	}
 	// 강사 회원가입
 	@GetMapping("/teacher/signup")
@@ -76,7 +76,7 @@ public class SignupController {
 		
 		// 계정, 강사대기테이블 추가
 		signupService.insertTeacherAccount(account, teacherQueue); 
-		return "redirect:/";
+		return "redirect:/login?member=teacher";
 	}
 	// 운영자 회원가입
 	@GetMapping("/manager/signup")
@@ -107,7 +107,7 @@ public class SignupController {
 		
 		// 계정, 운영자대기테이블 추가
 		signupService.insertManagerAccount(account, managerQueue); 
-		return "redirect:/";
+		return "redirect:/login?member=manager";
 	}
 	
 }

@@ -160,7 +160,38 @@
 											<h3 class="mb-0">수강 후기</h3>
 										</div>
 										<div class="col-4 text-right">
-											<button id="classReviewBtn" type="button" class="btn btn-sm btn-primary">저장</button>
+											<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-default">저장</button>
+											<div class="modal fade" id="modal-default" tabindex="-1"
+												role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+												<div class="modal-dialog modal- modal-dialog-centered modal-"
+													role="document">
+													<div class="modal-content">
+										
+														<div class="modal-header">
+															<h6 class="modal-title" id="modal-title-notification">확인</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+										
+														<div class="modal-body">
+										
+															<div class="py-3 text-center">
+																<i class="ni ni-bell-55 ni-3x"></i>
+																<h4 class="heading mt-4">저장 확인</h4>
+																<p>수강 후기를 저장하시겠습니까?</p>
+															</div>
+										
+														</div>
+										
+														<div class="modal-footer">
+															<button type="button" class="btn btn-link" data-dismiss="modal">취소</button>
+															<button type="button" class="btn btn-primary ml-auto" id="classReviewBtn" data-dismiss="modal">저장</button>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>

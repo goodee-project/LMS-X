@@ -69,7 +69,7 @@
 						url: '${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/insertAttendance/${currentYear}/${currentMonth}/${currentDay}/' + accountId + '?attendanceState=' + attendanceState, 
 						type: 'get', 
 						success: function() {
-							alert(accountId + ' 학생의 출석 상태가 입력되었습니다.');
+							$("#modal-default-" + accountId).modal("show");
 							
 							let selected = '';
 							
@@ -89,7 +89,17 @@
 							$('#' + accountId + 'AttendanceStateTable').removeAttr('colspan');
 							
 							// 추가할 내용
-							let html = '<td><select class="form-control" id="' + accountId + 'AttendanceState" name="attendanceState">' + selected + '</select></td><td><input type="text" class="form-control" id="' + accountId + 'AttendanceRemark"></td><td><button type="button" class="btn btn-sm btn-dark submitBtn" value="' + accountId + '">변경</button></td>';
+							let html = `
+								<td>
+									<select class="form-control" id="` + accountId + `AttendanceState" name="attendanceState">` + selected + `</select>
+								</td>
+								<td>
+									<input type="text" class="form-control" id="' + accountId + 'AttendanceRemark">
+								</td>
+								<td>
+									<button type="button" class="btn btn-sm btn-dark submitBtn" value="` + accountId + `">변경</button>
+								</td>
+							`;
 							
 							// 해당 요소 태그 내부의 내용을 비운다
 							$('#' + accountId + 'AttendanceStateTable').html('');
@@ -123,7 +133,7 @@
 						url: '${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/attendance/updateAttendance/${currentYear}/${currentMonth}/${currentDay}/' + accountId + '?attendanceState=' + attendanceState + '&attendanceRemark=' + attendanceRemark, 
 						type: 'get', 
 						success: function() {
-							alert(accountId + ' 학생의 출석 상태가 변경되었습니다.');
+							$("#modal-default-" + accountId).modal("show");
 						}, 
 						error: function() {
 							alert('데이터베이스 접근에 실패하였습니다.\n인터넷 연결을 다시 한 번 확인해주세요.');
@@ -201,7 +211,39 @@
 										<c:if test="${!empty attendanceList}">
 											<c:forEach var="al" items="${attendanceList}">
 												<tr>
-													<td>${al.accountId}</td>
+													<td>
+														${al.accountId}
+														<div class="modal fade" id="modal-default-${al.accountId}" tabindex="-1"
+															role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+															<div class="modal-dialog modal- modal-dialog-centered modal-"
+																role="document">
+																<div class="modal-content">
+													
+																	<div class="modal-header">
+																		<h6 class="modal-title" id="modal-title-notification">확인</h6>
+																		<button type="button" class="close" data-dismiss="modal"
+																			aria-label="Close">
+																			<span aria-hidden="true">×</span>
+																		</button>
+																	</div>
+													
+																	<div class="modal-body">
+													
+																		<div class="py-3 text-center">
+																			<i class="ni ni-bell-55 ni-3x"></i>
+																			<h4 class="heading mt-4">출석 확인</h4>
+																			<p>${al.accountId} 학생의 출석 상태가 변경되었습니다</p>
+																		</div>
+													
+																	</div>
+													
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-primary ml-auto" data-dismiss="modal">확인</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</td>
 													<td>${al.student.studentName}</td>
 													<td>${al.student.studentGender}</td>
 													<c:if test="${al.attendanceState != null}">
