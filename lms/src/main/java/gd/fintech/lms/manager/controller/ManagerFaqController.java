@@ -123,7 +123,7 @@ public class ManagerFaqController {
 	@PostMapping("/auth/manager/faq/updateFaq")
 	public String updateFaq(Faq faq) {
 		managerFaqService.updateFaq(faq);
-		return "redirect:/auth/manager/faq/faqList/1";
+		return "redirect:/auth/manager/faq/faqOne/" + faq.getFaqNo();
 	}
 	
 	@GetMapping("/auth/manager/faq/faqOne/{faqNo}")
