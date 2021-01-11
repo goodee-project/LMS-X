@@ -105,7 +105,7 @@ public class ManagerSubjectController {
 	@PostMapping("/auth/manager/subject/updateSubject")
 	public String updateSubject(Subject subject) {
 		managerSubjectService.updateSubject(subject);
-		return "redirect:/auth/manager/subject/subjectList/1";
+		return "redirect:/auth/manager/subject/subjectOne/" + subject.getSubjectNo();
 	}
 	
 	@GetMapping("/auth/manager/subject/subjectOne/{subjectNo}")

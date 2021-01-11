@@ -106,7 +106,8 @@ public class ManagerTextbookController {
 	@PostMapping("/auth/manager/textbook/updateTextbook")
 	public String updateTextbook(Textbook textbook) {
 		managerTextbookService.updateTextbook(textbook);
-		return "redirect:/auth/manager/textbook/textbookList/1";
+		System.out.println(textbook);
+		return "redirect:/auth/manager/textbook/textbookOne/"+ textbook.getTextbookIsbn();
 	}
 	
 	@GetMapping("/auth/manager/textbook/textbookOne/{textbookIsbn}")

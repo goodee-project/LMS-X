@@ -143,7 +143,7 @@ public class ManagerLectureController {
 		Teacher teacherOne = managerTeacherService.getTeacherOne(lecture.getAccountId());
 		lecture.setTeacherName(teacherOne.getTeacherName());
 		managerLectureService.updateLecture(lecture);
-		return "redirect:/auth/manager/lecture/lectureList/1";
+		return "redirect:/auth/manager/lecture/lectureOne/"+ lectureNo;
 	}
 	//강의 수정 폼
 	@GetMapping("/auth/manager/lecture/updateLecture/{lectureNo}")
