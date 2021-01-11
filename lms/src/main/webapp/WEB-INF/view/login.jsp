@@ -142,32 +142,33 @@
 							type : 'get',
 							success : function(data) {
 								// 승인 대기 상태
-								if ( data == "wait" ) {
-									let msg = `승인 대기 상태입니다. \n승인 후 이용가능합니다.`;
-									alert(msg);
+								if (data == "wait") {
+									$("#modal-wait").modal("show");
 									return;
 								}
+								
 								// 탈퇴 상태
-								if ( data == "secession" ) {
-									let msg = `탈퇴한 계정입니다. \n회원가입을 해주세요.`;
-									alert("탈퇴한 계정입니다.");
+								if (data == "secession") {
+									$("#modal-secession").modal("show");
+									return;
 								}
+								
 								// 정보가 없는 경우
-								if ( data == "none") {
-									let msg = `가입하지 않은 아이디이거나, \n잘못된 비밀번호입니다.`;
-									alert(msg);
+								if (data == "none") {
+									$("#modal-none").modal("show");
+									return;
 								} 
-								// 활성화 상태
-								if ( data == "active" ) {
-									$('#loginForm').submit();
-								}
 	
 								// 휴면 상태
 								if (data == "dormant") {
-									let msg = `휴면계정입니다. \n운영자에 문의 해주세요.`;
-									alert(msg);
+									$("#modal-dormant-manager").modal("show");
+									return;
 								}
 								
+								// 활성화 상태
+								if (data == "active") {
+									$('#loginForm').submit();
+								}
 							}
 						});
 					});
@@ -253,32 +254,33 @@
 							type : 'get',
 							success : function(data) {
 								// 승인 대기 상태
-								if ( data == "wait" ) {
-									let msg = `승인 대기 상태입니다. \n승인 후 이용가능합니다.`;
-									alert(msg);
+								if (data == "wait") {
+									$("#modal-wait").modal("show");
 									return;
 								}
+								
 								// 탈퇴 상태
-								if ( data == "secession" ) {
-									let msg = `탈퇴한 계정입니다. \n회원가입을 해주세요.`;
-									alert("탈퇴한 계정입니다.");
-								}
-								// 정보가 없는 경우
-								if ( data == "none") {
-									let msg = `가입하지 않은 아이디이거나, \n잘못된 비밀번호입니다.`;
-									alert(msg);
-								} 
-								// 활성화 상태
-								if ( data == "active" ) {
-									$('#loginForm').submit();
-								}
-	
-								// 휴면 상태
-								if (data == "dormant") {
-									let msg = `휴면계정입니다. \n운영자에 문의 해주세요.`;
-									alert(msg);
+								if (data == "secession") {
+									$("#modal-secession").modal("show");
+									return;
 								}
 								
+								// 정보가 없는 경우
+								if (data == "none") {
+									$("#modal-none").modal("show");
+									return;
+								} 
+	
+								// 휴면 상태
+								if (data == "dormant-manager") {
+									$("#modal-dormant").modal("show");
+									return;
+								}
+								
+								// 활성화 상태
+								if (data == "active") {
+									$('#loginForm').submit();
+								}
 							}
 						});
 					});
@@ -364,26 +366,33 @@
 							type : 'get',
 							success : function(data) {
 								// 승인 대기 상태
-								if ( data == "wait" ) {
-									let msg = `승인 대기 상태입니다. \n승인 후 이용가능합니다.`;
-									alert(msg);
+								if (data == "wait") {
+									$("#modal-wait").modal("show");
 									return;
 								}
+								
 								// 탈퇴 상태
-								if ( data == "secession" ) {
-									let msg = `탈퇴한 계정입니다. \n회원가입을 해주세요.`;
-									alert("탈퇴한 계정입니다.");
-								}
-								// 정보가 없는 경우
-								if ( data == "none") {
-									let msg = `가입하지 않은 아이디이거나, \n잘못된 비밀번호입니다.`;
-									alert(msg);
-								} 
-								// 활성화 상태
-								if ( data == "active" ) {
-									$('#loginForm').submit();
+								if (data == "secession") {
+									$("#modal-secession").modal("show");
+									return;
 								}
 								
+								// 정보가 없는 경우
+								if (data == "none") {
+									$("#modal-none").modal("show");
+									return;
+								} 
+	
+								// 휴면 상태
+								if (data == "dormant") {
+									$("#modal-dormant-admin").modal("show");
+									return;
+								}
+								
+								// 활성화 상태
+								if (data == "active") {
+									$('#loginForm').submit();
+								}
 							}
 						});
 					});
@@ -456,18 +465,17 @@
 						$.ajax({
 							url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 							type : 'get',
-							success : function(data) {
+							success : function(data) {								
 								// 정보가 없는 경우
 								if ( data == "none") {
-									let msg = `가입하지 않은 아이디이거나, \n 잘못된 비밀번호입니다.`;
-									alert(msg);
-								} 
+									$("#modal-none").modal("show");
+									return;
+								}
+								
 								// 활성화 상태
 								if ( data == "active" ) {
 									$('#loginForm').submit();
 								}
-	
-								
 							}
 						});
 					});
@@ -556,6 +564,156 @@
 						
 										<div class="modal-footer">
 											<button type="button" class="btn btn-primary ml-auto" data-dismiss="modal">닫기</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal fade" id="modal-wait" tabindex="-1"
+								role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+								<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+									role="document">
+									<div class="modal-content bg-gradient-danger">
+						
+										<div class="modal-header">
+											<h6 class="modal-title" id="modal-title-notification">경고</h6>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+										</div>
+						
+										<div class="modal-body">
+						
+											<div class="py-3 text-center">
+												<i class="ni ni-bell-55 ni-3x"></i>
+												<h4 class="heading mt-4">로그인 불가</h4>
+												<p>승인 대기 상태입니다<br>승인 후 이용가능합니다</p>
+											</div>
+						
+										</div>
+						
+										<div class="modal-footer">
+											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal fade" id="modal-secession" tabindex="-1"
+								role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+								<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+									role="document">
+									<div class="modal-content bg-gradient-danger">
+						
+										<div class="modal-header">
+											<h6 class="modal-title" id="modal-title-notification">경고</h6>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+										</div>
+						
+										<div class="modal-body">
+						
+											<div class="py-3 text-center">
+												<i class="ni ni-bell-55 ni-3x"></i>
+												<h4 class="heading mt-4">로그인 불가</h4>
+												<p>탈퇴한 회원입니다<br>해당 계정은 이용이 불가능합니다</p>
+											</div>
+						
+										</div>
+						
+										<div class="modal-footer">
+											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal fade" id="modal-none" tabindex="-1"
+								role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+								<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+									role="document">
+									<div class="modal-content bg-gradient-danger">
+						
+										<div class="modal-header">
+											<h6 class="modal-title" id="modal-title-notification">경고</h6>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+										</div>
+						
+										<div class="modal-body">
+						
+											<div class="py-3 text-center">
+												<i class="ni ni-bell-55 ni-3x"></i>
+												<h4 class="heading mt-4">로그인 불가</h4>
+												<p>가입하지 않은 아이디이거나, <br>잘못된 비밀번호입니다</p>
+											</div>
+						
+										</div>
+						
+										<div class="modal-footer">
+											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal fade" id="modal-dormant-manager" tabindex="-1"
+								role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+								<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+									role="document">
+									<div class="modal-content bg-gradient-danger">
+						
+										<div class="modal-header">
+											<h6 class="modal-title" id="modal-title-notification">경고</h6>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+										</div>
+						
+										<div class="modal-body">
+						
+											<div class="py-3 text-center">
+												<i class="ni ni-bell-55 ni-3x"></i>
+												<h4 class="heading mt-4">로그인 불가</h4>
+												<p>휴면계정입니다<br>운영자에게 문의해주세요</p>
+											</div>
+						
+										</div>
+						
+										<div class="modal-footer">
+											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal fade" id="modal-dormant-admin" tabindex="-1"
+								role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+								<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+									role="document">
+									<div class="modal-content bg-gradient-danger">
+						
+										<div class="modal-header">
+											<h6 class="modal-title" id="modal-title-notification">경고</h6>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+										</div>
+						
+										<div class="modal-body">
+						
+											<div class="py-3 text-center">
+												<i class="ni ni-bell-55 ni-3x"></i>
+												<h4 class="heading mt-4">로그인 불가</h4>
+												<p>휴면계정입니다<br>관리자에게 문의해주세요</p>
+											</div>
+						
+										</div>
+						
+										<div class="modal-footer">
+											<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">확인</button>
 										</div>
 									</div>
 								</div>
