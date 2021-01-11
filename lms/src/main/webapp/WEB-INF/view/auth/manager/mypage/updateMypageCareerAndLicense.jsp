@@ -348,30 +348,61 @@
 										<c:forEach var="l" items="${manager.licenseList}">
 											<div class="row">
 												<div class="col-lg-2">
-													<div class="form-group ">
+													<div class="form-group">
 														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseNumber}" disabled="disabled">
 													</div>
 												</div>
 												<div class="col-lg-3">
-													<div class="form-group ">
+													<div class="form-group">
 														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseName}" disabled="disabled">
 													</div>
 												</div>
 												<div class="col-lg-3">
-													<div class="form-group ">
+													<div class="form-group">
 														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseAgency}" disabled="disabled">
 													</div>
 												</div>
 												<div class="col-lg-3">
-													<div class="form-group ">
+													<div class="form-group">
 														<input type="text" class="form-control form-control-alternative" style="background-color: white;" value="${l.licenseGetdate}" disabled="disabled">
 													</div>
 												</div>
 												<div class="col-lg-1">
-													<div class="form-group ">
+													<div class="form-group">
 														<span style="font-size: 25px;" >
-															<a class="text-danger" href="${pageContext.request.contextPath}/auth/manager/mypage/deleteMypageLicense/${l.licenseNo}">x</a>
+															<a class="text-danger" data-toggle="modal" data-target="#modal-notification-${l.licenseNo}" href="#">×</a>
 														</span>
+													
+														<div class="modal fade" id="modal-notification-${l.licenseNo}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+															<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+																role="document">
+																<div class="modal-content bg-gradient-danger">
+													
+																	<div class="modal-header">
+																		<h6 class="modal-title" id="modal-title-notification">경고</h6>
+																		<button type="button" class="close" data-dismiss="modal"
+																			aria-label="Close">
+																			<span aria-hidden="true">×</span>
+																		</button>
+																	</div>
+													
+																	<div class="modal-body">
+													
+																		<div class="py-3 text-center">
+																			<i class="ni ni-bell-55 ni-3x"></i>
+																			<h4 class="heading mt-4">삭제 확인</h4>
+																			<p>선택한 자격증을 삭제하시겠습니까?</p>
+																		</div>
+													
+																	</div>
+													
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+																		<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/mypage/deleteMypageLicense/${l.licenseNo}'">삭제</button>
+																	</div>
+																</div>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
