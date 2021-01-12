@@ -20,22 +20,10 @@
 		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 		<!-- jQuery / Ajax Google CDN -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- reCAPTCHA -->
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 		
-		<!-- 동기 -->
 		<script>
-			// 현재 페이지의 이름을 확인하는 함수
-			function getPageName(){
-			    let pageName = "";
-			 
-			    let tempPageName = window.location.href;
-			    let strPageName = tempPageName.split("/");
-			    pageName = strPageName[strPageName.length-1].split("?")[0];
-			 
-			    return pageName;
-			}
-			
-			var thisPageName = getPageName();
-			console.log(thisPageName);
 		
 			// url에서 parameter 추출
 			function getParam(sname) {
@@ -49,10 +37,28 @@
 			    }
 			    return sval;
 			}
+			
+			/* 서브밋 전에 리캡챠 체크 여부 를 확인합니다. */
+			function formSubmit() {
+				console.log("recaptchaCheck"+recaptchaCheck);
+				if(recaptchaCheck >=3 ){
+					
+					if (grecaptcha.getResponse().length == 0) {
+						alert("reCAPTCHA를 다시 한 번 확인하세요");
+						return false;
+					} else {
+						return true;
+					}
+				} else {
+					return true;
+				} 
+			}
+			
 		</script>
 		
-		<!-- 비동기 -->
+		
 		<script>
+			let recaptchaCheck = 1;
 			$(document).ready(function() {
 				// 회원가입 완료시 알림창
 				let param = getParam("member");
@@ -66,7 +72,7 @@
 				$('#studentLogin').click(function() {
 					let loginInput = `
 						<div class="card-body px-lg-5 py-lg-5">
-							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
+							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login" onsubmit="return formSubmit();">
 								<div class="text-center text-muted mb-4">
 									<h3>학생 로그인</h3>
 								</div>
@@ -97,7 +103,7 @@
 						</div> `;
 						
 					$('#login').html(loginInput);
-					
+				
 					// 회원가입 및 아이디,비밀번호 찾기
 					let signup = `
 						<div class="row mt-3">
@@ -136,11 +142,16 @@
 							$('#accountPw').focus();
 							return;
 						}
+						// recaptcha 입력 체크
+						if (recaptchaCheck >= 3) {
+							$('#recaptchaHidden').removeAttr('hidden');
+						}
 						// 비동기로 계정 상태 체크
 						$.ajax({
 							url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 							type : 'get',
 							success : function(data) {
+								recaptchaCheck += 1;
 								// 승인 대기 상태
 								if (data == "wait") {
 									$("#modal-wait").modal("show");
@@ -178,7 +189,7 @@
 				$('#teacherLogin').click(function() {
 					let loginInput = `
 						<div class="card-body px-lg-5 py-lg-5">
-							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
+							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login" onsubmit="return formSubmit();">
 								<div class="text-center text-muted mb-4">
 									<h3>강사 로그인</h3>
 								</div>
@@ -248,11 +259,16 @@
 							$('#accountPw').focus();
 							return;
 						}
+						// recaptcha 입력 체크
+						if (recaptchaCheck >= 3) {
+							$('#recaptchaHidden').removeAttr('hidden');
+						}
 						// 비동기로 계정 상태 체크
 						$.ajax({
 							url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 							type : 'get',
 							success : function(data) {
+								recaptchaCheck += 1;
 								// 승인 대기 상태
 								if (data == "wait") {
 									$("#modal-wait").modal("show");
@@ -290,37 +306,39 @@
 				$('#managerLogin').click(function() {
 					let loginInput = `
 						<div class="card-body px-lg-5 py-lg-5">
-						<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
-							<div class="text-center text-muted mb-4">
-								<h3>운영자 로그인</h3>
-							</div>
-							<input id="accountLevel" type="text" name="accountLevel" value="3" hidden="hidden">
-							<div class="form-group mb-3">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i
-											class="ni ni-email-83"></i></span>
-									</div>
-									<input type="text" class="form-control" name="accountId" id="accountId" placeholder="아이디" value="manager1">
+							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login" onsubmit="return formSubmit();">
+								<div class="text-center text-muted mb-4">
+									<h3>운영자 로그인</h3>
 								</div>
-							</div>
-							<div class="form-group">
-								<div class="input-group input-group-alternative">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i
-											class="ni ni-lock-circle-open"></i></span>
+								<input id="accountLevel" type="text" name="accountLevel" value="3" hidden="hidden">
+								<div class="form-group mb-3">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="ni ni-email-83"></i></span>
+										</div>
+										<input type="text" class="form-control" name="accountId" id="accountId" placeholder="아이디" value="manager1">
 									</div>
-									<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="qwer1234">
 								</div>
-							</div>
-							<div class="text-danger" id="idCheck"></div>
-							<div class="text-center">
-								<button type="button" class="btn btn-primary my-4" id="loginBtn">로그인</button>
-							</div>
-						</form>
+								<div class="form-group">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="ni ni-lock-circle-open"></i></span>
+										</div>
+										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="qwer1234">
+									</div>
+								</div>
+						
+								<div class="text-danger" id="idCheck"></div>
+								<div class="text-center">
+									<button type="button" class="btn btn-primary my-4" id="loginBtn">로그인</button>
+								</div>
+							</form>
 						</div> `;
 						
 					$('#login').html(loginInput);
+					
 					
 					// 회원가입 및 아이디,비밀번호 찾기
 					let signup = `
@@ -360,11 +378,16 @@
 							$('#accountPw').focus();
 							return;
 						}
+						// recaptcha 입력 체크
+						if (recaptchaCheck >= 3) {
+							$('#recaptchaHidden').removeAttr('hidden');
+						}
 						// 비동기로 계정 상태 체크
 						$.ajax({
 							url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 							type : 'get',
 							success : function(data) {
+								recaptchaCheck += 1;
 								// 승인 대기 상태
 								if (data == "wait") {
 									$("#modal-wait").modal("show");
@@ -461,11 +484,16 @@
 							$('#accountPw').focus();
 							return;
 						}
+						// recaptcha 입력 체크
+						if (recaptchaCheck >= 3) {
+							$('#recaptchaHidden').removeAttr('hidden');
+						}
 						// 비동기로 계정 상태 체크
 						$.ajax({
 							url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 							type : 'get',
-							success : function(data) {								
+							success : function(data) {	
+								recaptchaCheck += 1;							
 								// 정보가 없는 경우
 								if ( data == "none") {
 									$("#modal-none").modal("show");
@@ -744,7 +772,9 @@
 								</div>
 							</div>
 							<div id="login">
-							
+							</div>
+							<div id="recaptchaHidden" class="card-header bg-transparent pb-5" style="margin: auto;" hidden="hidden">
+								<div class="g-recaptcha" data-sitekey="6Ld3fCgaAAAAABJiBnVPCJWEfxsTDo4alLo58Tbx" ></div>
 							</div>
 						</div>
 						<div id="signup"></div>
