@@ -94,7 +94,7 @@
 									<select class="form-control" id="` + accountId + `AttendanceState" name="attendanceState">` + selected + `</select>
 								</td>
 								<td>
-									<input type="text" class="form-control" id="' + accountId + 'AttendanceRemark">
+									<input type="text" class="form-control" id="` + accountId + `AttendanceRemark">
 								</td>
 								<td>
 									<button type="button" class="btn btn-sm btn-dark submitBtn" value="` + accountId + `">변경</button>
