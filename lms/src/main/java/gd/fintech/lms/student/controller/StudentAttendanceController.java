@@ -66,6 +66,8 @@ public class StudentAttendanceController {
 		 
 		// 해당 달의 출석 리스트
 		List<Attendance> attendanceList = studentAttendanceService.selectAttendanceList(map);
+		// 전체일 출석률 
+		double attendancePercent = studentAttendanceService.selectAttendancePercent(map);
 		
 		// 뷰 연결
 		model.addAttribute("currentYear", currentDay.get(Calendar.YEAR)); 
@@ -73,6 +75,7 @@ public class StudentAttendanceController {
 		model.addAttribute("lastDay", lastDay);
 		model.addAttribute("firstDayOfWeek", firstDayOfWeek);
 		model.addAttribute("attendanceList", attendanceList);
+		model.addAttribute("attendancePercent", attendancePercent);
 		model.addAttribute("accountId", accountId);
 		
 		return "auth/student/lecture/attendance/attendanceByMonth";

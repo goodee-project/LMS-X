@@ -19,4 +19,21 @@
 			YEAR(attendance_day) = #{currentYear} AND
 			MONTH(attendance_day) = #{currentMonth}
 	</select>
+	<!-- 학생의 한 강좌 출석률 -->
+	<select id="selectAttendancePercent" resultType="double" parameterType="java.util.Map">
+		SELECT 
+			IFNULL(ROUND((COUNT(*)/s.subject_totalday * 100), 1),0) rating
+		FROM 
+			subject s
+		JOIN 
+			lecture l ON 
+			s.subject_no = l.lecture_no
+		JOIN 
+			attendance a ON 
+			a.lecture_no = l.lecture_no
+		WHERE 
+			a.attendance_state = '출석' AND
+			a.account_id = #{accountId} AND
+			a.lecture_no = #{lectureNo}
+	</select>
 </mapper>

@@ -18,4 +18,9 @@ public class StudentAttendanceService {
 	public List<Attendance> selectAttendanceList(Map<String, Object> map){
 		return studentAttendanceMapper.selectAttendanceList(map);
 	}
+	
+	// 학생의 한 강좌 출석률
+	public double selectAttendancePercent(Map<String, Object> map) {
+		return studentAttendanceMapper.selectAttendancePercent(map);
+	}
 }

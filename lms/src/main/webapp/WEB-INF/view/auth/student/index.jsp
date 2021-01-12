@@ -91,8 +91,14 @@
 										<tr>
 											<td>${l.lecture.teacherName}</td>
 											<td>${l.subject.subjectName}</td>
-											<td><a
-												href="${pageContext.request.contextPath}/auth/student/lecture/classOne/${l.lecture.lectureNo}">${l.lecture.lectureName}</a></td>
+											<td>
+												<c:if test="${l.classRegistration.classRegistrationState != '취소'}">
+													<a href="${pageContext.request.contextPath}/auth/student/lecture/classOne/${l.lecture.lectureNo}">${l.lecture.lectureName}</a>
+												</c:if>
+												<c:if test="${l.classRegistration.classRegistrationState == '취소'}">
+													${l.lecture.lectureName}
+												</c:if>
+											</td>
 											<td>${l.subject.subjectTotalday}일</td>
 											<td>${l.lecture.lectureStartdate}</td>
 											<td>${l.lecture.lectureEnddate}</td>

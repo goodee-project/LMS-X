@@ -59,6 +59,22 @@
 								<h3 class="mb-0">출석 현황</h3>
 							</div>
 						</div>
+						<div class="progress-wrapper">
+							<div class="progress-info">
+								<div class="progress-label">
+									<span>출석률</span>
+								</div>
+								<div class="progress-percentage">
+									<span>${attendancePercent}%</span>
+								</div>
+							</div>
+							<div class="progress">
+								<div class="progress-bar bg-success" role="progressbar"
+									aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+									style="width: ${attendancePercent}%;">
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="row align-items-center">
 						<div class="col-12">

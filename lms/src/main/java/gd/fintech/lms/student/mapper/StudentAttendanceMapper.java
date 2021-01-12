@@ -11,4 +11,6 @@ import gd.fintech.lms.vo.Attendance;
 public interface StudentAttendanceMapper {
 	// 학생의 한 강좌 출석 리스트 불러오기
 	List<Attendance> selectAttendanceList(Map<String, Object> map);
+	// 학생의 한 강좌 출석률
+	double selectAttendancePercent(Map<String, Object> map);
 }
