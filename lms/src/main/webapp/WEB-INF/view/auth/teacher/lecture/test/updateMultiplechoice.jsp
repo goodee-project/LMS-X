@@ -31,23 +31,37 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function(){
-				$('#updateMultiplechoiceExampleBtn').click(function(){
+				$('#multiplechoiceQuestion').focus();		// 시작 시 폼 커서를 multiplechoiceQuestion쪽으로 이동
+				
+				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+				$("#submitBtn").click(function() {
+					if ($("#multiplechoiceQuestion").val().replace(/(\s*)/g, "") == "") {	// multiplechoiceQuestion이 공백인 경우 수행
+						$("#modal-notification-question").modal("show");
+						
+						return;
+					}
+					
+					if ($("#multiplechoiceScore").val().replace(/(\s*)/g, "") == "") {		// multiplechoiceScore이 공백인 경우 수행
+						$("#modal-notification-score").modal("show");
+					
+						return;
+					}
+					
 					let submitCk = true;
 					$('.multiplechoiceExampleContent').each(function(index, item){
 						if($(item).val().length < 1 && submitCk){
-							alert('보기 내용을 작성해주세요.');
+							$("#modal-notification-content").modal("show");
+							
 							submitCk = false;
 							return;
 						} 
-					})
+					});
 					
-					if(submitCk){
-						alert('저장이 완료되었습니다.');		
-						$('#updateMultiplechoiceExampleForm').submit();
+					if (submitCk) {
+						$('#submitForm').submit();
 					}
-					
-				})
-			})
+				});
+			});
 		</script>
 	</head>
 	
@@ -70,7 +84,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="card shadow">
-							<form id="updateMultiplechoiceExampleForm" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/updateMultiplechoice/${multiplechoiceNo}" method="post">
+							<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/updateMultiplechoice/${multiplechoiceNo}" id="submitForm">
 								<div class="card-header bg-white border-0">
 									<div class="row align-items-center">
 										<div class="col-8">
@@ -78,66 +92,157 @@
 										</div>
 										<div class="col-4 text-right">
 											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
-											<button type="button" class="btn btn-sm btn-primary" id="updateMultiplechoiceExampleBtn">수정</button>									
+											<button type="button" class="btn btn-sm btn-primary" id="submitBtn">수정</button>									
+										</div>
+										<div class="modal fade" id="modal-notification-question" tabindex="-1"
+											role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+											<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+												role="document">
+												<div class="modal-content bg-gradient-danger">
+									
+													<div class="modal-header">
+														<h6 class="modal-title" id="modal-title-notification">경고</h6>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+									
+													<div class="modal-body">
+									
+														<div class="py-3 text-center">
+															<i class="ni ni-bell-55 ni-3x"></i>
+															<h4 class="heading mt-4">유효성 확인</h4>
+															<p>문제를 입력하세요</p>
+														</div>
+									
+													</div>
+									
+													<div class="modal-footer">
+														<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal fade" id="modal-notification-score" tabindex="-1"
+											role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+											<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+												role="document">
+												<div class="modal-content bg-gradient-danger">
+									
+													<div class="modal-header">
+														<h6 class="modal-title" id="modal-title-notification">경고</h6>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+									
+													<div class="modal-body">
+									
+														<div class="py-3 text-center">
+															<i class="ni ni-bell-55 ni-3x"></i>
+															<h4 class="heading mt-4">유효성 확인</h4>
+															<p>점수를 입력하세요</p>
+														</div>
+									
+													</div>
+									
+													<div class="modal-footer">
+														<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal fade" id="modal-notification-content" tabindex="-1"
+											role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+											<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+												role="document">
+												<div class="modal-content bg-gradient-danger">
+									
+													<div class="modal-header">
+														<h6 class="modal-title" id="modal-title-notification">경고</h6>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+									
+													<div class="modal-body">
+									
+														<div class="py-3 text-center">
+															<i class="ni ni-bell-55 ni-3x"></i>
+															<h4 class="heading mt-4">유효성 확인</h4>
+															<p>보기를 입력하세요</p>
+														</div>
+									
+													</div>
+									
+													<div class="modal-footer">
+														<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 								
 								<div class="table-responsive">
-										<table class="table align-items-center table-flush">
-											<thead class="thead-light">
-												<tr>
-													<th width="10%"><input type="hidden" name="multiplechoiceId" class="form-control" value="${exampleList.multiplechoiceId}">객관식 문제 ${exampleList.multiplechoiceId}번.</th>
-													<th width="50%" style="text-align:left">문제<input type="text" name="multiplechoiceQuestion" class="form-control" value="${exampleList.multiplechoiceQuestion}"></th>
-													<th style="text-align:left">
-														정답
-														<select class="form-control" name="multiplechoiceAnswer" readonly="readonly">
-													<c:if test="${exampleList.multiplechoiceAnswer == 1}">
-														<option value="1" selected="selected">1</option>
-													</c:if>
-													<c:if test="${exampleList.multiplechoiceAnswer != 1}">
-														<option value="1">1</option>
-													</c:if>
-													<c:if test="${exampleList.multiplechoiceAnswer == 2}">
-														<option value="2" selected="selected">2</option>
-													</c:if>
-													<c:if test="${exampleList.multiplechoiceAnswer != 2}">
-														<option value="2">2</option>
-													</c:if>
-													<c:if test="${exampleList.multiplechoiceAnswer == 3}">
-														<option value="3" selected="selected">3</option>
-													</c:if>
-													<c:if test="${exampleList.multiplechoiceAnswer != 3}">
-														<option value="3">3</option>
-													</c:if>
-													<c:if test="${exampleList.multiplechoiceAnswer == 4}">
-														<option value="4" selected="selected">4</option>
-													</c:if>
-													<c:if test="${exampleList.multiplechoiceAnswer != 4}">
-														<option value="4">4</option>
-													</c:if>
-													<c:if test="${exampleList.multiplechoiceAnswer == 5}">
-														<option value="5" selected="selected">5</option>
-													</c:if>
-													<c:if test="${exampleList.multiplechoiceAnswer != 5}">
-														<option value="5">5</option>
-													</c:if>
-													</th>
-													<th style="text-align:left">점수<input type="text" name="multiplechoiceScore" class="form-control" value="${exampleList.multiplechoiceScore}"></th>
-												</tr>
-											</thead>
-											<c:forEach var="me" items="${exampleList.multiplechoiceExampleList}">
-												<tr>
-													<th>
-														<input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${me.multiplechoiceExampleId}">
-														${me.multiplechoiceExampleId}
-													</th>
-													<td colspan="3">
-														<input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent" value="${me.multiplechoiceExampleContent}">
-													</td>
-												</tr>
-											</c:forEach>
-										</table>
+									<table class="table align-items-center table-flush">
+										<thead class="thead-light">
+											<tr>
+												<th width="10%"><input type="hidden" name="multiplechoiceId" class="form-control" value="${exampleList.multiplechoiceId}">객관식 문제 ${exampleList.multiplechoiceId}번.</th>
+												<th width="50%" style="text-align:left">문제<input type="text" class="form-control" name="multiplechoiceQuestion" id="multiplechoiceQuestion" value="${exampleList.multiplechoiceQuestion}"></th>
+												<th style="text-align:left">
+													정답
+													<select class="form-control" name="multiplechoiceAnswer" readonly="readonly">
+														<c:if test="${exampleList.multiplechoiceAnswer == 1}">
+															<option value="1" selected="selected">1</option>
+														</c:if>
+														<c:if test="${exampleList.multiplechoiceAnswer != 1}">
+															<option value="1">1</option>
+														</c:if>
+														<c:if test="${exampleList.multiplechoiceAnswer == 2}">
+															<option value="2" selected="selected">2</option>
+														</c:if>
+														<c:if test="${exampleList.multiplechoiceAnswer != 2}">
+															<option value="2">2</option>
+														</c:if>
+														<c:if test="${exampleList.multiplechoiceAnswer == 3}">
+															<option value="3" selected="selected">3</option>
+														</c:if>
+														<c:if test="${exampleList.multiplechoiceAnswer != 3}">
+															<option value="3">3</option>
+														</c:if>
+														<c:if test="${exampleList.multiplechoiceAnswer == 4}">
+															<option value="4" selected="selected">4</option>
+														</c:if>
+														<c:if test="${exampleList.multiplechoiceAnswer != 4}">
+															<option value="4">4</option>
+														</c:if>
+														<c:if test="${exampleList.multiplechoiceAnswer == 5}">
+															<option value="5" selected="selected">5</option>
+														</c:if>
+														<c:if test="${exampleList.multiplechoiceAnswer != 5}">
+															<option value="5">5</option>
+														</c:if>
+													</select>
+												</th>
+												<th style="text-align:left">점수<input type="number" name="multiplechoiceScore" id="multiplechoiceScore" class="form-control" value="${exampleList.multiplechoiceScore}"></th>
+											</tr>
+										</thead>
+										<c:forEach var="me" items="${exampleList.multiplechoiceExampleList}">
+											<tr>
+												<th>
+													<input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${me.multiplechoiceExampleId}">
+													${me.multiplechoiceExampleId}
+												</th>
+												<td colspan="3">
+													<input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent" value="${me.multiplechoiceExampleContent}">
+												</td>
+											</tr>
+										</c:forEach>
+									</table>
 								</div>
 							</form>
 						</div>

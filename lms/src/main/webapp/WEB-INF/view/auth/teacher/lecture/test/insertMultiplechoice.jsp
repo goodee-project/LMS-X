@@ -31,22 +31,37 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 			$(document).ready(function(){
-				$('#insertMultiplechoiceExampleBtn').click(function(){
+				$('#multiplechoiceQuestion').focus();		// 시작 시 폼 커서를 multiplechoiceQuestion쪽으로 이동
+				
+				// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+				$("#submitBtn").click(function() {
+					if ($("#multiplechoiceQuestion").val().replace(/(\s*)/g, "") == "") {	// multiplechoiceQuestion이 공백인 경우 수행
+						$("#modal-notification-question").modal("show");
+						
+						return;
+					}
+					
+					if ($("#multiplechoiceScore").val().replace(/(\s*)/g, "") == "") {		// multiplechoiceScore이 공백인 경우 수행
+						$("#modal-notification-score").modal("show");
+					
+						return;
+					}
+					
 					let submitCk = true;
 					$('.multiplechoiceExampleContent').each(function(index, item){
 						if($(item).val().length < 1 && submitCk){
-							alert('보기 내용을 작성해주세요.');
+							$("#modal-notification-content").modal("show");
+							
 							submitCk = false;
 							return;
 						} 
-					})
+					});
 					
-					if(submitCk){	
-						$('#insertMultiplechoiceExampleForm').submit();
+					if (submitCk) {
+						$('#submitForm').submit();
 					}
-					
-				})
-			})
+				});
+			});
 		</script>
 		<style>
 			.table {
@@ -82,7 +97,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="card shadow">
-							<form id="insertMultiplechoiceExampleForm" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/insertMultiplechoice" method="post">
+							<form method="post" action="${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/insertMultiplechoice" id="submitForm">
 								<div class="card-header bg-white border-0">
 									<div class="row align-items-center">
 										<div class="col-8">
@@ -90,38 +105,131 @@
 										</div>
 										<div class="col-4 text-right">
 											<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/multiplechoiceList/1'">목록</button>
-											<button type="button" class="btn btn-sm btn-success" id="insertMultiplechoiceExampleBtn">입력</button>
+											<button type="button" class="btn btn-sm btn-success" id="submitBtn">입력</button>
+										</div>
+										<div class="modal fade" id="modal-notification-question" tabindex="-1"
+											role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+											<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+												role="document">
+												<div class="modal-content bg-gradient-danger">
+									
+													<div class="modal-header">
+														<h6 class="modal-title" id="modal-title-notification">경고</h6>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+									
+													<div class="modal-body">
+									
+														<div class="py-3 text-center">
+															<i class="ni ni-bell-55 ni-3x"></i>
+															<h4 class="heading mt-4">유효성 확인</h4>
+															<p>문제를 입력하세요</p>
+														</div>
+									
+													</div>
+									
+													<div class="modal-footer">
+														<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal fade" id="modal-notification-score" tabindex="-1"
+											role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+											<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+												role="document">
+												<div class="modal-content bg-gradient-danger">
+									
+													<div class="modal-header">
+														<h6 class="modal-title" id="modal-title-notification">경고</h6>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+									
+													<div class="modal-body">
+									
+														<div class="py-3 text-center">
+															<i class="ni ni-bell-55 ni-3x"></i>
+															<h4 class="heading mt-4">유효성 확인</h4>
+															<p>점수를 입력하세요</p>
+														</div>
+									
+													</div>
+									
+													<div class="modal-footer">
+														<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal fade" id="modal-notification-content" tabindex="-1"
+											role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+											<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+												role="document">
+												<div class="modal-content bg-gradient-danger">
+									
+													<div class="modal-header">
+														<h6 class="modal-title" id="modal-title-notification">경고</h6>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+									
+													<div class="modal-body">
+									
+														<div class="py-3 text-center">
+															<i class="ni ni-bell-55 ni-3x"></i>
+															<h4 class="heading mt-4">유효성 확인</h4>
+															<p>보기를 입력하세요</p>
+														</div>
+									
+													</div>
+									
+													<div class="modal-footer">
+														<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 								
 								<div class="table-responsive">
-										<table class="table align-items-center table-flush">
-											<thead class="thead-light">
-												<tr>
-													<th></th>
-													<th width="50%" style="text-align:left">문제<input type="text" name="multiplechoiceQuestion" class="form-control"></th>
-													<th style="text-align:left">
-														정답
-														<select class="form-control" name="multiplechoiceAnswer">
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>	
-															<option value="4">4</option>
-															<option value="5">5</option>
-														</select>
-													</th>
-													<th style="text-align:left">점수<input type="text" name="multiplechoiceScore" class="form-control"></th>
-												</tr>
-											</thead>
-											<c:forEach var="i" begin="1" end="5">
-												<tr>
-													<td><input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${i}">${i}</td>
-													<td colspan="3"><input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent"></td>
-													
-												</tr>
-											</c:forEach>
-										</table>
+									<table class="table align-items-center table-flush">
+										<thead class="thead-light">
+											<tr>
+												<th>&nbsp;</th>
+												<th width="50%" style="text-align:left">문제<input type="text" class="form-control" name="multiplechoiceQuestion" id="multiplechoiceQuestion"></th>
+												<th style="text-align:left">
+													정답
+													<select class="form-control" name="multiplechoiceAnswer">
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>	
+														<option value="4">4</option>
+														<option value="5">5</option>
+													</select>
+												</th>
+												<th style="text-align:left">점수<input type="number" name="multiplechoiceScore" id="multiplechoiceScore" class="form-control"></th>
+											</tr>
+										</thead>
+										<c:forEach var="i" begin="1" end="5">
+											<tr>
+												<td>
+													<input type="hidden" name="multiplechoiceExampleId" class="form-control multiplechoiceExampleId" value="${i}">${i}
+												</td>
+												<td colspan="3">
+													<input type="text" name="multiplechoiceExampleContent" class="form-control multiplechoiceExampleContent">
+												</td>
+											</tr>
+										</c:forEach>
+									</table>
 								</div>
 							</form>
 						</div>
