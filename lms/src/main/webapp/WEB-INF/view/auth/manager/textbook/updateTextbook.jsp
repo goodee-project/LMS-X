@@ -17,6 +17,42 @@
 	rel="stylesheet" />
 	<!-- CSS Files -->
 	<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+	<!-- jQuery / Ajax Google CDN -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#updateTextbookBtn').click(function(){
+				
+				if ($('#textbookTitle').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookTitle').focus();
+					return;
+				}
+				if ($('#textbookWriter').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookWriter').focus();
+					return;
+				}
+				if ($('#textbookPublisher').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookPublisher').focus();
+					return;
+				}
+				if ($('#textbookPublishdate').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookPublishdate').focus();
+					return;
+				}
+				if ($('#textbookInfo').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookInfo').focus();
+					return;
+				}
+				if ($('#textbookPrice').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookPrice').focus();
+					return;
+				}
+				
+				$('#textbookForm').submit();
+				
+			});
+		});
+	</script>
 </head>
 <body>
 	<!-- 내비게이션 메인 메뉴 -->
@@ -37,7 +73,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="card shadow">
-						<form method="post" action="${pageContext.request.contextPath}/auth/manager/textbook/updateTextbook">
+						<form id="textbookForm" method="post" action="${pageContext.request.contextPath}/auth/manager/textbook/updateTextbook">
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<br>
@@ -46,7 +82,7 @@
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/textbook/textbookList/1'">목록</button>
-										<button type="submit" class="btn btn-sm btn-primary">수정</button>
+										<button type="button" id="updateTextbookBtn" class="btn btn-sm btn-primary">수정</button>
 									</div>
 									<br>
 								</div>
@@ -60,27 +96,27 @@
 									</tr>
 									<tr>
 										<th>교재 이름</th>
-										<td><input type="text" name="textbookTitle" class="form-control" value="${textbook.textbookTitle}"></td>
+										<td><input type="text" name="textbookTitle" class="form-control" value="${textbook.textbookTitle}" id="textbookTitle"></td>
 									</tr>
 									<tr>
 										<th>교재 저자</th>
-										<td><input type="text" name="textbookWriter" class="form-control" value="${textbook.textbookWriter}"></td>
+										<td><input type="text" name="textbookWriter" class="form-control" value="${textbook.textbookWriter}" id="textbookWriter"></td>
 									</tr>
 									<tr>
 										<th>교재 출판사</th>
-										<td><input type="text" name="textbookPublisher" class="form-control" value="${textbook.textbookPublisher}"></td>
+										<td><input type="text" name="textbookPublisher" class="form-control" value="${textbook.textbookPublisher}" id="textbookPublisher"></td>
 									</tr>
 									<tr>
 										<th>교재 출판일</th>
-										<td><input type="date" name="textbookPublishdate" class="form-control" value="${textbook.textbookPublishdate}"></td>
+										<td><input type="date" name="textbookPublishdate" class="form-control" value="${textbook.textbookPublishdate}" id="textbookPublishdate"></td>
 									</tr>
 									<tr>
 										<th>교재 정보</th>
-										<td><input type="text" name="textbookInfo" class="form-control" value="${textbook.textbookInfo}"></td>
+										<td><input type="text" name="textbookInfo" class="form-control" value="${textbook.textbookInfo}" id="textbookInfo"></td>
 									</tr>
 									<tr>
 										<th>교재 가격</th>
-										<td><input type="number" name="textbookPrice" class="form-control" value="${textbook.textbookPrice}"></td>
+										<td><input type="number" name="textbookPrice" class="form-control" value="${textbook.textbookPrice}" id="textbookPrice"></td>
 									</tr>
 								</table>
 							</div>

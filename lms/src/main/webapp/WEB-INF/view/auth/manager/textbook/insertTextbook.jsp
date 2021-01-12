@@ -17,6 +17,58 @@
 	rel="stylesheet" />
 	<!-- CSS Files -->
 	<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+	<!-- jQuery / Ajax Google CDN -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#insertTextbookBtn').click(function(){
+				
+				if ($('#textbookIsbn').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookIsbn').focus();
+					return;
+				}
+				
+				if ($('#textbookTitle').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookTitle').focus();
+					return;
+				}
+				if ($('#textbookWriter').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookWriter').focus();
+					return;
+				}
+				if ($('#textbookPublisher').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookPublisher').focus();
+					return;
+				}
+				if ($('#textbookPublishdate').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookPublishdate').focus();
+					return;
+				}
+				if ($('#textbookInfo').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookInfo').focus();
+					return;
+				}
+				if ($('#textbookPrice').val().replace(/(\s*)/g, "") == "") {
+					$('#textbookPrice').focus();
+					return;
+				}
+				$.ajax({
+					url : '${pageContext.request.contextPath}/auth/manager/textbook/textbookCheck/'+$('#textbookIsbn').val(),
+					type : 'get',
+					success : function(data){
+						
+						if (data == "false") {
+							$('#textbookIsbn').focus();
+							alert('이미 등록한 교제입니다.');
+							return;
+						} else {
+							$('#textbookForm').submit();
+						}
+					}
+				});
+			});
+		});
+	</script>
 </head>
 	<body>
 	<!-- 내비게이션 메인 메뉴 -->
@@ -36,7 +88,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="card shadow">
-						<form method="post" action="${pageContext.request.contextPath}/auth/manager/textbook/insertTextbook">
+						<form id="textbookForm" method="post" action="${pageContext.request.contextPath}/auth/manager/textbook/insertTextbook">
 							<div class="card-header bg-white border-0">
 								<div class="row align-items-center">
 									<br>
@@ -45,7 +97,7 @@
 									</div>
 									<div class="col-4 text-right">
 										<button type="button" class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/manager/textbook/textbookList/1'">목록</button>
-										<button type="submit" class="btn btn-sm btn-success">추가</button>
+										<button type="button" id="insertTextbookBtn" class="btn btn-sm btn-success">추가</button>
 									</div>
 									<br>
 								</div>
@@ -55,31 +107,31 @@
 								<table class="table align-items-center table-flush">
 									<tr>
 										<th width="20%">교재 ISBN</th>
-										<td width="80%"><input type="text" name="textbookIsbn" class="form-control"></td>
+										<td width="80%"><input type="text" name="textbookIsbn" class="form-control" id="textbookIsbn"></td>
 									</tr>
 									<tr>
 										<th>교재 이름</th>
-										<td><input type="text" name="textbookTitle" class="form-control"></td>
+										<td><input type="text" name="textbookTitle" class="form-control" id="textbookTitle"></td>
 									</tr>
 									<tr>
 										<th>교재 저자</th>
-										<td><input type="text" name="textbookWriter" class="form-control"></td>
+										<td><input type="text" name="textbookWriter" class="form-control" id="textbookWriter"></td>
 									</tr>
 									<tr>
 										<th>교재 출판사</th>
-										<td><input type="text" name="textbookPublisher" class="form-control"></td>
+										<td><input type="text" name="textbookPublisher" class="form-control" id="textbookPublisher"></td>
 									</tr>
 									<tr>
 										<th>교재 출판일</th>
-										<td><input type="date" name="textbookPublishdate" class="form-control"></td>
+										<td><input type="date" name="textbookPublishdate" class="form-control" id="textbookPublishdate"></td>
 									</tr>
 									<tr>
 										<th>교재 정보</th>
-										<td><input type="text" name="textbookInfo" class="form-control"></td>
+										<td><input type="text" name="textbookInfo" class="form-control" id="textbookInfo"></td>
 									</tr>
 									<tr>
 										<th>교재 가격</th>
-										<td><input type="number" name="textbookPrice" class="form-control"></td>
+										<td><input type="number" name="textbookPrice" class="form-control" id="textbookPrice"></td>
 									</tr>
 								</table>
 							</div>
