@@ -26,9 +26,77 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
 		
 		<script>
-			$(document).ready(function() {	
+			$(document).ready(function(){		
+				function showChart() {
+					let myChart = {
+						type: 'line', 
+				        data: {
+				           labels:[],
+				           datasets:[{
+				              label:'별점',
+							  fill: false,
+							  pointRadius: 15,
+							  pointHoverRadius: 20,
+							  showLine: false,
+				              backgroundColor: [],
+				              borderColor: [],
+				                 data:[],
+				                 borderWidth: 1
+				           }]
+				        },
+						options: {
+							responsive: true,
+							title: {
+								display: true,
+								text: '별점'
+							},
+							legend: {
+								display: false
+							},
+							elements: {
+								point: {	
+									pointStyle: 'rectRot'
+								}
+							}
+						}
+					};
+					
+					$.ajax({
+						url:'${pageContext.request.contextPath}/auth/manager/chart/studentStarRatingScore/' + $('#lectureList option:selected').val(),
+						type:'get',
+						success:function(data){
+							console.log(data);
+							$('#chart-parent').empty();
+							$('#chart-parent').append('<canvas id="chart"></canvas>');
+							
+							$(data).each(function(key, value) {
+								let ranColor1 = Math.floor(Math.random()*256);
+								let ranColor2 = Math.floor(Math.random()*256);
+								let ranColor3 = Math.floor(Math.random()*256);
+								myChart.data.labels.push(value.account_id);
+								myChart.data.datasets[0].data.push(value.class_registration_point);
+								myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.3)");
+								myChart.data.datasets[0].borderColor.push("rgb(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ")");
+								
+							});
+							
+							var ctx = document.getElementById('chart').getContext('2d');
+							var chart = new Chart(ctx, myChart);
+						}
+					});
+					
+				};
+				
+				// 처음 접근시 차트 생성
+				showChart();
+
+				// 강좌 선택시 차트 생성
+				$('#lectureList').change(function(){
+					showChart();
+				});
 				
 			});
 		</script>
@@ -89,12 +157,10 @@
 										</div>
 								    </div>
 								    
-								    <!-- Card body -->
+									<!-- Card body -->
 								    <div class="card-body">
-										<div class="chart">
-										    <!-- Chart wrapper -->
-										    <canvas id="chart-bars" class="chart-canvas"></canvas>
-										</div>
+		
+										<div class="chart" id="chart-parent"></div>
 								    </div>
 								</div>
 							</div>

@@ -68,7 +68,7 @@
 							let ranColor2 = Math.floor(Math.random()*256);
 							let ranColor3 = Math.floor(Math.random()*256);
 							myChart.data.labels.push(value.account_id);
-							myChart.data.datasets[0].data.push(value.pointAverage);
+							myChart.data.datasets[0].data.push(value.point);
 							myChart.data.datasets[0].backgroundColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.4)");
 							myChart.data.datasets[0].borderColor.push("rgba(" + ranColor1 +  ", "+ ranColor2 + ", " + ranColor3 + ", 0.8)");
 						});

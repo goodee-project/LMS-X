@@ -228,7 +228,7 @@
 		WHERE 
 			(cr.class_registration_state = "수강중" OR
 			cr.class_registration_state = "수료") AND
-			l.lecture_no = 1
+			l.lecture_no = #{lectureNo}
 		GROUP BY 
 			r.report_no
 	</select>
@@ -244,8 +244,7 @@
 		    class_registration cr
 		LEFT JOIN
 		    report_submit rs ON
-		    rs.account_id = cr.account_id AND
-		    rs.report_no = #{reportNo}
+		    rs.account_id = cr.account_id
 		LEFT JOIN
 		    report r ON
 		    r.report_no = rs.report_no
