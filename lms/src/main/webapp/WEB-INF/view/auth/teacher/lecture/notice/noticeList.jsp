@@ -88,15 +88,22 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${teacherLectureNoticeList}" var="n">
+										<c:if test="${!empty teacherLectureNoticeList}">
+											<c:forEach items="${teacherLectureNoticeList}" var="n">
+												<tr>
+													<td>${n.lectureNoticeNo}</td>
+													<td><a
+														href="${pageContext.request.contextPath}/auth/teacher/lecture/${n.lectureNo}/notice/noticeOne/${n.lectureNoticeNo}">${n.lectureNoticeTitle}</a></td>
+													<td>${n.lectureNoticeCreatedate}</td>
+													<td>${n.lectureNoticeCount}</td>
+												</tr>
+											</c:forEach>
+										</c:if>
+										<c:if test="${empty teacherLectureNoticeList}">
 											<tr>
-												<td>${n.lectureNoticeNo}</td>
-												<td><a
-													href="${pageContext.request.contextPath}/auth/teacher/lecture/${n.lectureNo}/notice/noticeOne/${n.lectureNoticeNo}">${n.lectureNoticeTitle}</a></td>
-												<td>${n.lectureNoticeCreatedate}</td>
-												<td>${n.lectureNoticeCount}</td>
+												<td colspan="4">(공지사항이 없습니다)</td>
 											</tr>
-										</c:forEach>
+										</c:if>
 									</tbody>
 								</table>
 							</div>
