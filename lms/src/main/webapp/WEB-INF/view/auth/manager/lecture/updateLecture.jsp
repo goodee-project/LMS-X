@@ -57,7 +57,7 @@
 						alert('0보다 커야합니다.');
 						return;
 					}
-					if ($('#lectureTotaltext').val() > 24) {
+					if ($('#lectureTotaltext').val() >= 26) {
 						alert('25보다 작아야합니다.');
 						return;
 					}
