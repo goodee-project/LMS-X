@@ -70,6 +70,7 @@
 										<h3 class="mb-0">강좌 정보</h3>
 									</div>
 									<div class="col-4 text-right">
+										<button class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/1/test/testIndex'">평가 관리 목록</button>
 									</div>
 								</div>
 							</div>

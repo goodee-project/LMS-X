@@ -70,6 +70,7 @@
 										<h3 class="mb-0">문제 목록</h3>
 									</div>
 									<div class="col-4 text-right">
+										<button class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/1/test/testIndex'">평가 관리 목록</button>
 										<button type="button" class="btn btn-sm btn-success" onclick="location.href='${pageContext.request.contextPath}/auth/teacher/lecture/${lectureNo}/test/insertMultiplechoice'">신규 문제 출제</button>
 									</div>
 								</div>
