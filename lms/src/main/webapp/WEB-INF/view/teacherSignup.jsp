@@ -20,6 +20,8 @@
 		<link href="${pageContext.request.contextPath}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 		<!-- jQuery / Ajax Google CDN -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- reCAPTCHA -->
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 		
 		<script>
 			$(document).ready(function(){
@@ -417,6 +419,18 @@
 				});
 			});	
 		</script>
+		
+		<script>
+			/* 서브밋 전에 리캡챠 체크 여부 를 확인합니다. */
+			function formSubmit() {
+				if (grecaptcha.getResponse().length == 0) {
+					alert("reCAPTCHA를 다시 한 번 확인하세요");
+					return false;
+				} else {
+					return true;
+				}
+			}
+		</script>
 	</head>
 		<body class="bg-default">
 		<div class="main-content">
@@ -467,8 +481,8 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-7 col-md-7">
 						<div class="card bg-secondary shadow border-0">
-							<div class="card-header bg-transparent pb-5">
-								<form id="teacherForm" method="post" action="${pageContext.request.contextPath}/teacher/signup">
+							<div class="card-header bg-transparent">
+								<form id="teacherForm" method="post" action="${pageContext.request.contextPath}/teacher/signup"  onsubmit="return formSubmit();">
 									<input type="text" hidden="hidden" name="accountLevel" value="2">
 									<input type="text" hidden="hidden" name="accountState" value="대기">
 									<!-- 아이디 -->
@@ -550,6 +564,22 @@
 											<input id="teacherAddressMain" class="form-control" style=" background-color: white;" type="text" placeholder="  주소를 검색해주세요." name="teacherAddressMain" readonly="readonly" >
 										</div>
 									</div>
+									<!-- 주소 검색 -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="input-group input-group-alternative" >
+											<span class="text-primary" style="margin: auto; width: 80px;">주소 검색</span>
+											<input type="text" class="form-control" name="street" id="street" placeholder="  도로명을 입력하세요.">
+											<div class="input-group-append">
+												<button type="button" class="btn btn-primary" id="check">검색</button>
+											</div>
+										</div>
+										<span id="addressCheck"></span>
+										<span id="addressWait"></span>
+										<div class="input-group input-group-alternative" >
+											<div id="teacherAddressMain"></div>
+											<div id="selectAddress" style="overflow: auto; width: 100%; max-height: 200px;"></div>
+										</div>
+									</div>
 									<!-- 상세 주소 -->
 									<div class="btn-wrapper text-center mt-3">
 										<div class="input-group input-group-alternative" >
@@ -557,26 +587,15 @@
 											<input type="text" class="form-control" id="teacherAddressSub" placeholder="  상세 주소를 입력하세요"	name="teacherAddressSub">
 										</div>
 									</div>
-									<div style="margin-top: 20px;"class = "text-center">
-										<button type="button" class="btn btn-primary" id="btn">회원가입</button>
+									<!-- reCAPTCHA -->
+									<div class="btn-wrapper text-center mt-3">
+										<div class="g-recaptcha" data-sitekey="6Ld3fCgaAAAAABJiBnVPCJWEfxsTDo4alLo58Tbx"></div>
 									</div>
 								</form>
 							</div>
-							<div class="card-header bg-transparent pb-5">
-								<div class="btn-wrapper text-center mt-3">
-									<div class="input-group input-group-alternative" >
-										<span class="text-primary" style="margin: auto; width: 80px;">주소 검색</span>
-										<input type="text" class="form-control" name="street" id="street" placeholder="  도로명을 입력하세요.">
-										<div class="input-group-append">
-											<button type="button" class="btn btn-primary" id="check">검색</button>
-										</div>
-									</div>
-									<span id="addressCheck"></span>
-									<span id="addressWait"></span>
-									<div class="input-group input-group-alternative" >
-										<div id="teacherAddressMain"></div>
-										<div id="selectAddress" style="overflow: auto; width: 100%; max-height: 200px;"></div>
-									</div>
+							<div class="card-header bg-transparent">
+								<div class="text-center">
+									<button type="button" class="btn btn-primary" id="btn">회원가입</button>
 								</div>
 							</div>
 						</div>

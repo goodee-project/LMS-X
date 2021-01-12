@@ -86,7 +86,7 @@
 											<span class="input-group-text"><i
 												class="ni ni-lock-circle-open"></i></span>
 										</div>
-										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
+										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="qwer1234">
 									</div>
 								</div>
 								<div class="text-danger" id="idCheck"></div>
@@ -198,7 +198,7 @@
 											<span class="input-group-text"><i
 												class="ni ni-lock-circle-open"></i></span>
 										</div>
-										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
+										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="qwer1234">
 									</div>
 								</div>
 								<div class="text-danger" id="idCheck"></div>
@@ -310,7 +310,7 @@
 										<span class="input-group-text"><i
 											class="ni ni-lock-circle-open"></i></span>
 									</div>
-									<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
+									<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="qwer1234">
 								</div>
 							</div>
 							<div class="text-danger" id="idCheck"></div>
@@ -422,7 +422,7 @@
 											<span class="input-group-text"><i
 												class="ni ni-lock-circle-open"></i></span>
 										</div>
-										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="1234">
+										<input type="password" class="form-control" name="accountPw" id="accountPw" placeholder="비밀번호" value="qwer1234">
 									</div>
 								</div>
 								<div class="text-danger" id="idCheck"></div>
