@@ -51,7 +51,7 @@
 									url: '${pageContext.request.contextPath}/auth/student/lecture/test/updateAnswersheet',
 									type:'post',
 									data: {multiplechoiceNo : paramNo, answerSelect : paramSelect, lectureNo : ${lectureNo}},
-									success: function(data){
+									success: function(data) {
 									}
 								});
 								return;
@@ -61,14 +61,14 @@
 									url: '${pageContext.request.contextPath}/auth/student/lecture/test/insertAnswersheet',
 									type:'post',
 									data: {multiplechoiceNo : paramNo, answerSelect : paramSelect, lectureNo : ${lectureNo}},
-									success: function(data){
+									success: function(data) {
 									}
 								});
 								return;
 							}
 						}
 					});
-				})
+				});
 
 				// 평가 종료 버튼 클릭시
 				$('#finishTest').click(function(){
@@ -88,10 +88,8 @@
 							}
 						}
 					});
-					
-				})
-				
-			})
+				});
+			});
 		</script>
 	</head>
 	<body class="">
@@ -115,7 +113,7 @@
 	    	<!-- 접속자 -->
 			<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
 			
-   			<div class="container-fluid mt--7 col-8 ">
+   			<div class="container-fluid mt--7">
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
@@ -138,8 +136,10 @@
 								    			<th>
 								    				${m.multiplechoiceQuestion}	
 								    			</th>
-								    			<th width="10%">						    		
-								    				배점 : ${m.multiplechoiceScore}
+								    			<th width="10%">
+								    				<div class="text-right">		    		
+								    					배점 : ${m.multiplechoiceScore}
+								    				</div>
 								    			</th>
 								    		</tr>
 							    		</thead>
@@ -161,28 +161,32 @@
 							    	</table>
 						    	</c:forEach>
 						    </div>
-						    <!-- 페이징 -->
-						    <div class="col-12">
-							    <div class="mt-3 col-12">
-							    	${currentPage}/${lastPage} 페이지
-							    	<c:if test="${currentPage > 1}">
-							    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage - 1}">이전 페이지</a>
-							    	</c:if>
-							    	<c:if test="${currentPage < lastPage}">
-							    		<a href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage + 1}">다음 페이지</a>
-							    	</c:if>
-							    </div>
-							    
-							    <!-- 평가 제출 -->
-							    <div class="mt-4 col-12">
-							    	<c:if test="${currentPage == lastPage}">
-							    		<button type="button" id="finishTest" class="btn btn-outline-primary">평가 종료</button>
-							    	</c:if>
-							    </div>
-						    </div>
 						</div>
-					</div>	
+					</div>
+					
+					<!-- 페이징 -->
+					<div class="card-footer border-0">
+						<div class="text-center">
+							<button class="btn btn-sm btn-outline-primary">${currentPage} / ${lastPage} 페이지</button>
+				    	</div>
+				    	<div class="text-center row">
+					    	<c:if test="${currentPage > 1}">
+					    		<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage - 1}">이전 페이지</a>
+					    	</c:if>
+					    	<c:if test="${currentPage < lastPage}">
+					    		<a class="btn btn-sm btn-dark" href="${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/test/testOne/${currentPage + 1}">다음 페이지</a>
+					    	</c:if>
+				    	</div>
+					</div>
+					
+					<!-- 평가 제출 -->
+					<div class="card-footer border-0">
+						<c:if test="${currentPage == lastPage}">
+				    		<button type="button" id="finishTest" class="btn btn-success btn-block">평가 종료</button>
+				    	</c:if>
+					</div>
 				</div>
+				
 				<!-- Footer -->
 				<jsp:include page="/WEB-INF/view/auth/include/footer.jsp"></jsp:include>
 			</div>		
