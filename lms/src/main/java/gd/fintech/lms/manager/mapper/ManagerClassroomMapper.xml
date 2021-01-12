@@ -19,6 +19,10 @@
 			classroom_total classroomTotal
 		FROM
 			classroom
+		ORDER BY
+			classroom_no DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<select id="selectClassroomCount" resultType="int">
