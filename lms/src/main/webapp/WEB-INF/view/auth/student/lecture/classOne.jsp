@@ -57,25 +57,25 @@
 					}
 				})
 				changePoint();
-		
-				// 수강 신청 취소 버튼
-				$('#cancelClassBtn').click(function(){
-					console.log($('#cancelClassBtn').text());
-					// 처음 수강 신청 버튼 클릭시
-					// 수강 신청 사유를 적을 수 있는 칸이 출력되고 버튼 값이 바뀜
-					if ($('#cancelClassBtn').text() == '수강 신청 취소'){
-						let cancelHtml = `취소 사유 : <textarea cols="50" rows="3" name="cancelContent" id="cancelContent"></textarea>`;
-						$('#cancelClassBtn').text('수강 취소하기');
+				
+				let checkCancel = false;
+				$('#beforeCancelClassBtn').click(function(){
+					if (!checkCancel) {
+						checkCancel = true;
+						let cancelHtml = `취소 사유 : <textarea cols="50" rows="3" class="form-control" name="cancelContent" id="cancelContent"></textarea>`;
 						$('#cancelClass').html(cancelHtml);
 						
-					// 사유 작성후 다시 버튼 클릭시
-					// 취소 폼을 submit함
-					} else if ($('#cancelClassBtn').text() == '수강 취소하기'){
-						$('#cancelClassForm').submit();
+						return;
 					}
-				})
-		
-			})
+					
+					$("#modal-notification").modal("show");
+				});
+				
+				// 수강 신청 취소 버튼
+				$('#cancelClassBtn').click(function() {
+					$('#cancelClassForm').submit();
+				});
+			});
 		</script>
 	</head>	
 	<body class="">
@@ -240,7 +240,7 @@
 										<input type="hidden" name="classRegistrationNo" id="classRegistrationNo" value="${lcstc.classRegistration.classRegistrationNo}">
 										<input type="hidden" name="lectureNo" id="lectureNo" value="${lcstc.lecture.lectureNo}">
 										<div id="cancelClass"></div>
-										<button type="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal" data-target="#modal-notification">수강 신청 취소</button>
+										<button type="button" class="btn btn-sm btn-block btn-danger" id="beforeCancelClassBtn">수강 신청 취소</button>
 										<div class="modal fade" id="modal-notification" tabindex="-1"
 											role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
 											<div class="modal-dialog modal-danger modal-dialog-centered modal-"
@@ -267,7 +267,7 @@
 									
 													<div class="modal-footer">
 														<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
-														<button type="button" class="btn btn-link text-white ml-auto" id="cancelClassBtn" value="수강 신청 취소">수강 신청 취소</button>
+														<button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" id="cancelClassBtn" value="수강 신청 취소">수강 신청 취소</button>
 													</div>
 												</div>
 											</div>
