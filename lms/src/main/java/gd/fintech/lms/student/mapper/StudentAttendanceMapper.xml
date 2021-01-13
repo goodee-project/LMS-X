@@ -27,8 +27,8 @@
 			subject s
 		JOIN 
 			lecture l ON 
-			s.subject_no = l.lecture_no
-		JOIN 
+			s.subject_no = l.subject_no
+		RIGHT JOIN 
 			attendance a ON 
 			a.lecture_no = l.lecture_no
 		WHERE 
