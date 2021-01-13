@@ -218,12 +218,21 @@ public class ManagerStudentController {
 		return "redirect:/auth/manager/student/studentQueueList/1";
 	}
 	
+	// 학생 휴면 해제
+	@GetMapping("/auth/manager/student/dormantStudent/{currentPage}/{studentId}")
+	public String dormantStudent(
+			@PathVariable(name="currentPage") String currentPage,
+			@PathVariable(name="studentId") String studentId) {
+		managerStudentService.dormantStudent(studentId);
+		return "redirect:/auth/manager/student/studentList/" + currentPage;
+	}
+	
 	// 학생 탈퇴
 	@GetMapping("/auth/manager/student/deleteStudent/{currentPage}/{studentId}")
 	public String deleteManager(
 			@PathVariable(name="currentPage") String currentPage,
 			@PathVariable(name="studentId") String studentId) {
 		managerStudentService.deleteStudentAll(studentId);
-		return "redirect:/auth/manager/student/studentList/1";
+		return "redirect:/auth/manager/student/studentList/" + currentPage;
 	}
 }

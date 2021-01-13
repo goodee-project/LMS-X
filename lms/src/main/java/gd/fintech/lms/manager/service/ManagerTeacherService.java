@@ -88,6 +88,11 @@ public class ManagerTeacherService {
 		managerTeacherMapper.deleteTeacherQueue(accountId);
 	}
 	
+	// 강사 휴면 해제
+	public void dormantTeacher(String teacherId) {
+		managerTeacherMapper.dormantTeacher(teacherId);
+	}
+	
 	// 강사 탈퇴
 	public void deleteTeacherOneAll(String accountId) {
 		Account account = new Account();

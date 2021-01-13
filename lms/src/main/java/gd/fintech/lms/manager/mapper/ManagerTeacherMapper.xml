@@ -15,18 +15,35 @@
 			teacher
 	</select>
 	
+	<resultMap type="gd.fintech.lms.vo.Teacher" id="selectTeacherListByPageResult">
+		<result property="teacherId" column="teacher_id" />
+		<result property="teacherEmail" column="teacher_email" />
+		<result property="teacherName" column="teacher_name" />
+		<result property="teacherPhone" column="teacher_phone" />
+		<result property="teacherGender" column="teacher_gender" />
+		<result property="teacherBirth" column="teacher_birth" />
+		<result property="teacherAccessdate" column="teacher_accessdate" />
+		<collection property="account" ofType="gd.fintech.lms.vo.Account">
+			<result property="accountState" column="account_state" />
+		</collection>
+	</resultMap>
+	
 	<!-- 강사목록 리스트와 페이징 -->
-	<select id="selectTeacherListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Teacher">
+	<select id="selectTeacherListByPage" parameterType="java.util.Map" resultMap="selectTeacherListByPageResult">
 		SELECT 
-			teacher_id teacherId,
-			teacher_email teacherEmail,
-			teacher_name teacherName,
-			teacher_phone teacherPhone,
-			teacher_gender teacherGender,
-			teacher_birth teacherBirth,
-			teacher_accessdate teacherAccessdate
+			teacher_id,
+			teacher_email,
+			teacher_name,
+			teacher_phone,
+			teacher_gender,
+			teacher_birth,
+			a.account_state,
+			teacher_accessdate
 		FROM
-			teacher
+			teacher t
+		JOIN
+			account a ON
+			a.account_id = t.teacher_id
 		<where>
 			<if test="searchText != ''">
 				AND teacher_id LIKE CONCAT('%',#{searchText},'%')
@@ -79,6 +96,7 @@
 			<result property="licenseGetdate" column="license_getdate"/>
 		</collection>
 	</resultMap>
+	
 	<!-- 강사목록 상세보기 -->
 	<select id="selectTeacherOne" parameterType="String" resultMap="selectTeacherOneInfomation">
 		SELECT 
@@ -230,6 +248,7 @@
 		WHERE
 			teacher_id = #{accountId}
 	</delete>
+	
 	<!-- 강사 경력 삭제 -->
 	<delete id="deleteTeacherCareer" parameterType="String">
 		DELETE FROM
@@ -237,6 +256,7 @@
 		WHERE
 			account_id = #{accountId}
 	</delete>
+	
 	<!-- 강사 자격증 삭제 -->
 	<delete id="delteTeacherLicense" parameterType="String">
 		DELETE FROM
@@ -244,6 +264,7 @@
 		WHERE
 			account_id = #{accountId}
 	</delete>
+	
 	<!-- 강사 이미지 삭제 -->
 	<delete id="deleteTeacherImage" parameterType="String">
 		DELTE FROM
@@ -251,4 +272,15 @@
 		WHERE
 			account_id = #{accountId}
 	</delete>
+	
+	<!-- 강사 휴면 해제 -->
+	<update id="dormantTeacher" parameterType="String">
+		UPDATE 
+		   account 
+		SET 
+		   account_state = '활성화', 
+		   account_updatedate = NOW()
+		WHERE 
+		   account_id = #{accountId}
+	</update>
 </mapper>

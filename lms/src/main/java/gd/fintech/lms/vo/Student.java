@@ -20,4 +20,5 @@ public class Student {
 	private String	studentUpdatedate;		// 학생 계정 업데이트 일시
 	private String	managerIdAccess;		// 계정을 승인한 운영자의 아이디
 	private List<License> licenseList;		// 학생 자격증 리스트
+	private Account account;				// 계정 정보
 }

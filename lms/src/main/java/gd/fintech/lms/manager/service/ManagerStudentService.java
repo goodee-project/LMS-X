@@ -84,6 +84,10 @@ public class ManagerStudentService {
 		managerStudentMapper.deleteStudentQueue(accountId);
 	}
 	
+	// 학생 휴면 해제
+	public void dormantStudent(String studentId) {
+		managerStudentMapper.dormantStudent(studentId);
+	}
 
 	// 학생 계정 탈퇴
 	public void deleteStudentAll(String studentId) {

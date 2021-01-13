@@ -59,66 +59,110 @@
 						<table class="table">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" style="font-size: 15px; width: 15%;">아이디</th>
+									<th scope="col" style="font-size: 15px; width: 12%;">아이디</th>
 									<th scope="col" style="font-size: 15px; width: 10%;">이름</th>
-									<th scope="col" style="font-size: 15px; width: 7%;" >성별</th>
-									<th scope="col" style="font-size: 15px; width: 11%;" >생일</th>
+									<th scope="col" style="font-size: 15px; width: 8%;">성별</th>
+									<th scope="col" style="font-size: 15px; width: 10%;">생일</th>
 									<th scope="col" style="font-size: 15px; width: 18%;">이메일</th>
 									<th scope="col" style="font-size: 15px; width: 13%;">연락처</th>
 									<th scope="col" style="font-size: 15px; width: 13%;">승인날짜</th>
+									<th scope="col" style="font-size: 15px; width: 8%;">휴면</th>
 									<th scope="col" style="font-size: 15px; width: 8%;">탈퇴</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="t" items="${teacherList}" >
-									<tr>
-										<td style="font-size: 13px;"><a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherOne/${t.teacherId}">${t.teacherId}</a></td>
-										<td style="font-size: 13px;">${t.teacherName}</td>
-										<td style="font-size: 13px;">${t.teacherGender}</td>
-										<td style="font-size: 13px;">${t.teacherBirth}</td>
-										<td style="font-size: 13px;">${t.teacherEmail}</td>
-										<td style="font-size: 13px;">${t.teacherPhone}</td>
-										<td style="font-size: 13px;">${t.teacherAccessdate}</td>
-										<td style="font-size: 13px;">
-											<!-- ALERT -->
-											<div>
-												<button type="button" class="btn btn-sm btn-danger"
-													data-toggle="modal" data-target="#modal-notification-${t.teacherId}">탈퇴</button>
-												<div class="modal fade" id="modal-notification-${t.teacherId}" tabindex="-1"
-													role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-													<div class="modal-dialog modal-danger modal-dialog-centered modal-"
-														role="document">
-														<div class="modal-content bg-gradient-danger">
-											
-															<div class="modal-header">
-																<h6 class="modal-title" id="modal-title-notification">경고</h6>
-																<button type="button" class="close" data-dismiss="modal"
-																	aria-label="Close">
-																	<span aria-hidden="true">×</span>
-																</button>
-															</div>
-											
-															<div class="modal-body">
-											
-																<div class="py-3 text-center">
-																	<i class="ni ni-bell-55 ni-3x"></i>
-																	<h4 class="heading mt-4">탈퇴 처리 확인</h4>
-																	<p>${t.teacherId} 강사를 탈퇴처리하시겠습니까?</p>
+								<c:if test="${!empty teacherList}">
+									<c:forEach var="t" items="${teacherList}" >
+										<tr>
+											<td style="font-size: 13px;"><a href="${pageContext.request.contextPath}/auth/manager/teacher/teacherOne/${t.teacherId}">${t.teacherId}</a></td>
+											<td style="font-size: 13px;">${t.teacherName}</td>
+											<td style="font-size: 13px;">${t.teacherGender}</td>
+											<td style="font-size: 13px;">${t.teacherBirth}</td>
+											<td style="font-size: 13px;">${t.teacherEmail}</td>
+											<td style="font-size: 13px;">${t.teacherPhone}</td>
+											<td style="font-size: 13px;">${t.teacherAccessdate}</td>
+											<td style="font-size: 13px;">
+												<c:if test="${t.account.accountState == '휴면'}">
+													<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-default-${t.teacherId}">휴면 해제</button>
+													<div class="modal fade" id="modal-default-${t.teacherId}" tabindex="-1"
+														role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+														<div class="modal-dialog modal- modal-dialog-centered modal-"
+															role="document">
+															<div class="modal-content">
+												
+																<div class="modal-header">
+																	<h6 class="modal-title" id="modal-title-notification">확인</h6>
+																	<button type="button" class="close" data-dismiss="modal"
+																		aria-label="Close">
+																		<span aria-hidden="true">×</span>
+																	</button>
 																</div>
-											
+												
+																<div class="modal-body">
+												
+																	<div class="py-3 text-center">
+																		<i class="ni ni-bell-55 ni-3x"></i>
+																		<h4 class="heading mt-4">휴면해제 확인</h4>
+																		<p>${t.teacherId} 강사를 휴면해제하시겠습니까?</p>
+																	</div>
+												
+																</div>
+												
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-link" data-dismiss="modal">취소</button>
+																	<button type="button" class="btn btn-primary ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/teacher/dormantTeacher/${currentPage}/${t.teacherId}'">확인</button>
+																</div>
 															</div>
-											
-															<div class="modal-footer">
-																<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
-																<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/teacher/deleteTeacher/${currentPage}/${t.teacherId}'">탈퇴</button>
+														</div>
+													</div>
+												</c:if>
+											</td>
+											<td style="font-size: 13px;">
+												<!-- ALERT -->
+												<div>
+													<button type="button" class="btn btn-sm btn-danger"
+														data-toggle="modal" data-target="#modal-notification-${t.teacherId}">탈퇴</button>
+													<div class="modal fade" id="modal-notification-${t.teacherId}" tabindex="-1"
+														role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+														<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+															role="document">
+															<div class="modal-content bg-gradient-danger">
+												
+																<div class="modal-header">
+																	<h6 class="modal-title" id="modal-title-notification">경고</h6>
+																	<button type="button" class="close" data-dismiss="modal"
+																		aria-label="Close">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																</div>
+												
+																<div class="modal-body">
+												
+																	<div class="py-3 text-center">
+																		<i class="ni ni-bell-55 ni-3x"></i>
+																		<h4 class="heading mt-4">탈퇴 처리 확인</h4>
+																		<p>${t.teacherId} 강사를 탈퇴처리하시겠습니까?</p>
+																	</div>
+												
+																</div>
+												
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-white" data-dismiss="modal">취소</button>
+																	<button type="button" class="btn btn-link text-white ml-auto" onclick="location.href='${pageContext.request.contextPath}/auth/manager/teacher/deleteTeacher/${currentPage}/${t.teacherId}'">탈퇴</button>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-										</td>
-									</tr>	
-								</c:forEach>
+											</td>
+										</tr>	
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty teacherList}">
+									<tr>
+										<td colspan="9">(강사가 없습니다)</td>
+									</tr>
+								</c:if>
 							</tbody>
 						</table>
 					</div>

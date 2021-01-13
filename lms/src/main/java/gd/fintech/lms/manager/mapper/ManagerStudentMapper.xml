@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gd.fintech.lms.manager.mapper.ManagerStudentMapper"> 
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerStudentMapper">
+	<resultMap type="gd.fintech.lms.vo.Student" id="selectStudentListByPageResult">
+		<result property="studentId" column="student_id" />
+		<result property="studentEmail" column="student_email" />
+		<result property="studentName" column="student_name" />
+		<result property="studentPhone" column="student_phone" />
+		<result property="studentGender" column="student_gender" />
+		<result property="studentBirth" column="student_birth" />
+		<result property="studentAccessdate" column="student_accessdate" />
+		<collection property="account" ofType="gd.fintech.lms.vo.Account">
+			<result property="accountState" column="account_state" />
+		</collection>
+	</resultMap>
+
 	<!-- 학생목록 리스트와 페이징 -->
-	<select id="selectStudentListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Student">
+	<select id="selectStudentListByPage" parameterType="java.util.Map" resultMap="selectStudentListByPageResult">
 		SELECT 
-			student_id studentId,
-			student_email studentEmail,
-			student_name studentName,
-			student_phone studentPhone,
-			student_gender studentGender,
-			student_birth studentBirth,
-			student_accessdate studentAccessdate
+			s.student_id,
+			s.student_email,
+			s.student_name,
+			s.student_phone,
+			s.student_gender,
+			s.student_birth,
+			a.account_state, 
+			s.student_accessdate
 		FROM
-			student
+			student s
+		JOIN
+			account a ON
+			a.account_id = s.student_id
 		<where>
 			<if test="searchText != ''">
 				AND student_id LIKE CONCAT('%',#{searchText},'%')
@@ -199,4 +216,15 @@
 		WHERE
 			account_id = #{accountId}
 	</delete>
+	
+	<!-- 학생 휴면 해제 -->
+	<update id="dormantStudent" parameterType="String">
+		UPDATE 
+		   account 
+		SET 
+		   account_state = '활성화', 
+		   account_updatedate = NOW()
+		WHERE 
+		   account_id = #{accountId}
+	</update>
 </mapper>

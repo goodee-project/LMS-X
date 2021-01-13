@@ -215,6 +215,15 @@ public class ManagerTeacherController {
 		return "redirect:/auth/manager/teacher/teacherQueueList/1";
 	}
 	
+	// 강사 휴면 해제
+	@GetMapping("/auth/manager/teacher/dormantTeacher/{currentPage}/{teacherId}")
+	public String dormantTeacher(
+			@PathVariable(name="currentPage") String currentPage,
+			@PathVariable(name="teacherId") String teacherId) {
+		managerTeacherService.dormantTeacher(teacherId);
+		return "redirect:/auth/manager/teacher/teacherList/" + currentPage;
+	}
+	
 	// 강사 탈퇴
 	@GetMapping("/auth/manager/teacher/deleteTeacher/{currentPage}/{accountId}")
 	public String deleteTeacherAll(@PathVariable(name="currentPage") int currentPage,

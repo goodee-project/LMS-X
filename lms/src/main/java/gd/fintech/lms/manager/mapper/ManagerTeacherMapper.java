@@ -49,10 +49,16 @@ public interface ManagerTeacherMapper {
 	// 강사 탈퇴
 	// 강사 정보 삭제
 	public int deleteTeacher(String accountId);
+	
 	// 강사 경력 삭제
 	public int deleteTeacherCareer(String accountId);
+	
 	// 강사 자격증 삭제
 	public int delteTeacherLicense(String accountId);
+	
 	// 강사 이미지 삭제
 	public int deleteTeacherImage(String accountId);
+	
+	// 강사 휴면 해제
+	public int dormantTeacher(String teacherId);
 }

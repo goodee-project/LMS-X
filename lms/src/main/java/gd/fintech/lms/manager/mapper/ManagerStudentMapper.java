@@ -55,4 +55,7 @@ public interface ManagerStudentMapper {
 	
 	// 학생 이미지 삭제
 	public int deleteStudentImage(String studentId);
+	
+	// 학생 휴면 해제
+	public int dormantStudent(String studentId);
 }

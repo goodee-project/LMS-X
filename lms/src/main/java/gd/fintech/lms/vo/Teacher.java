@@ -22,4 +22,5 @@ public class Teacher {
 	private String	teacherInfo;			// 강사 한 줄 자기소개
 	private List<Career>	careerList; 	// 강사 경력 리스트
 	private List<License>	licenseList;	// 강사 자격증 리스트
+	private Account account;				// 계정 정보
 }
