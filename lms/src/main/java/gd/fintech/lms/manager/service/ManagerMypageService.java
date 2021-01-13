@@ -59,7 +59,7 @@ public class ManagerMypageService {
 		MultipartFile mf = managerForm.getManagerImage();
 		
 		// 입력한 첨부파일 이미지가 있다면
-		if(mf.getOriginalFilename() != "") {
+		if(mf.getOriginalFilename().length() > 0) {
 			
 			
 			// 이미지 파일 조회
