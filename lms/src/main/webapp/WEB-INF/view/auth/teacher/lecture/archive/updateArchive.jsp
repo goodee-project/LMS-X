@@ -200,8 +200,8 @@
 										<tr>
 											<th>기존 첨부파일</th>
 											<td>
-												<c:forEach var="laf" items="#{lectureArchive[0].lectureArchiveFileList}">
-													<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileUuid != null}">
+												<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileUuid != null}">
+													<c:forEach var="laf" items="${lectureArchive[0].lectureArchiveFileList}">
 														<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
 					      								<c:set var="uuid">${laf.lectureArchiveFileUuid}</c:set>
 														
@@ -211,11 +211,11 @@
 																<button type="button" class="btn btn-sm btn-danger deleteArchiveFileOneBtn" value="${laf.lectureArchiveFileUuid}">파일 삭제</button>
 															</div>
 														</div>
-													</c:if>
-													<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileUuid == null}">
-														(첨부파일이 없습니다)
-													</c:if>
-												</c:forEach>
+													</c:forEach>
+												</c:if>
+												<c:if test="${lectureArchive[0].lectureArchiveFileList[0].lectureArchiveFileUuid == null}">
+													(첨부파일이 없습니다)
+												</c:if>
 											</td>
 										</tr>
 										<tr>

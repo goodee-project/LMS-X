@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,57 +162,68 @@
 						    				<textarea id="questionContent" name="questionContent" style="width:100%;" rows="22px">${question.questionContent}</textarea>
 						    			</td>
 						    		</tr>
+						    		<tr>
+										<th>기존 첨부파일</th>
+										<td>
+											<c:if test="${!empty question.questionFileList}">
+												<c:forEach var="qf" items="${question.questionFileList}">
+													<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
+				      								<c:set var="uuid">${qf.questionFileUuid}</c:set>
+													
+													<div class="input-group mb-3" id="${fn:split(uuid ,'.')[0]}">
+														<input type="text" class="form-control" value="${qf.questionFileOriginal}" readonly="readonly">
+														<div class="input-group-append">
+															<button type="button" class="btn btn-sm btn-danger deleteQnaFileOneBtn" value="${qf.questionFileUuid}">파일 삭제</button>
+														</div>
+													</div>
+												</c:forEach>
+											</c:if>
+											<c:if test="${empty question.questionFileList}">
+												(첨부파일이 없습니다)
+											</c:if>
+										</td>
+									</tr>
+									<tr>
+										<th>신규 첨부파일</th>
+										<td>
+											<div>
+												<button type="button" class="btn btn-sm btn-dark" id="addFileBtn">파일 추가</button>
+												<button type="button" class="btn btn-sm btn-dark" id="delFileBtn">파일 삭제</button>
+											</div>
+											<div id="fileInput"></div>
+											<div class="modal fade" id="modal-notification" tabindex="-1"
+												role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+												<div class="modal-dialog modal-danger modal-dialog-centered modal-"
+													role="document">
+													<div class="modal-content bg-gradient-danger">
+										
+														<div class="modal-header">
+															<h6 class="modal-title" id="modal-title-notification">경고</h6>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+										
+														<div class="modal-body">
+										
+															<div class="py-3 text-center">
+																<i class="ni ni-bell-55 ni-3x"></i>
+																<h4 class="heading mt-4">첨부파일 확인</h4>
+																<p>첨부파일은 10MB를 넘을 수 없습니다</p>
+															</div>
+										
+														</div>
+										
+														<div class="modal-footer">
+															<button type="button" class="btn btn-white ml-auto" data-dismiss="modal">확인</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
 						    	</table>
-						    	
-						    	<!-- 기존 첨부파일 -->
-					    		<table class="table">
-					    			<thead class="thead-light">
-					    				<tr>
-						    				<th>기존 첨부파일</th>
-					    				</tr>
-					    			</thead>
-					    			<tbody>
-					    				<c:if test="${!empty question.questionFileList}">
-						    			<c:forEach var="qf" items="${question.questionFileList}">
-											<tr>
-												<td>
-													<a href="${pageContext.request.contextPath}/resource/questionFile/${qf.questionFileUuid}">${qf.questionFileOriginal}</a>
-													<c:if test="${!empty qf.questionFileOriginal}">
-														<td><button class="deleteQnaFileOneBtn" value="${qf.questionFileUuid}" type="button" class="btn btn-outline-danger">X</button></td>
-													</c:if>
-												</td>
-											</tr>
-										</c:forEach>
-										</c:if>
-					    				<c:if test="${empty question.questionFileList}">
-					    					<tr>
-					    						<td>(첨부파일이 없습니다)</td>
-					    					</tr>
-					    				</c:if>
-						   			</tbody>
-				    			</table>
-		
-				    			<!-- 신규 첨부파일 -->
-					    		<table class="table">
-					    			<thead class="thead-light">
-					    				<tr>
-						    				<th>신규 첨부파일</th>
-					    				</tr>
-					    			</thead>
-					    			<tbody>
-						    			<tr>
-						    				<td>
-						    					<div>
-									   				<button id="addFileBtn" type="button" class="btn btn-sm btn-primary">파일 추가</button>
-							   						<button id="delFileBtn" type="button" class="btn btn-sm btn-danger">파일 삭제</button>
-							   					</div>
-							   				</td>
-							   			</tr>
-							   			<tr>
-					    					<td><div id="fileInput"></div></td>
-					    				</tr>
-				    				</tbody>
-				    			</table>
 			    			</form>
 						</div>
 					</div>
