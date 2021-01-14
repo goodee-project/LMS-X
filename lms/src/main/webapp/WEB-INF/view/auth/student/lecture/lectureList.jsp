@@ -145,24 +145,33 @@
 										<th>수강 신청</th>
 									</tr>
 								</thead>
-								<c:forEach items="${lectureList}" var="l">
-									<tr>
-										<td>${l.teacherName}</td>
-										<td>${l.subject.subjectName}</td>
-										<td>${l.lectureName}</td>
-										<td>${l.subject.subjectTotalday}일</td>
-										<td>${l.lectureStartdate}</td>
-										<td>${l.lectureEnddate}</td>
-										<td>${l.studentTotal}/${l.lectureTotal}명</td>
-										<td>
-											<form id="classRegistrationForm${l.lectureNo}" action="${pageContext.request.contextPath}/auth/student/lecture/registrationClass" method="post">
-												<input type="hidden" name="lectureNo" value="${l.lectureNo}">
-												<button type="button" class="classRegistrationBtn btn btn-sm btn-primary" value="${l.lectureNo}-${l.studentTotal}-${l.lectureTotal}">수강 신청</button>
-												<div id="parentModal"></div>
-											</form>
-										</td>
-									</tr>	
-								</c:forEach>
+								<tbody>
+									<c:if test="${!empty lectureList}">
+										<c:forEach items="${lectureList}" var="l">
+											<tr>
+												<td>${l.teacherName}</td>
+												<td>${l.subject.subjectName}</td>
+												<td>${l.lectureName}</td>
+												<td>${l.subject.subjectTotalday}일</td>
+												<td>${l.lectureStartdate}</td>
+												<td>${l.lectureEnddate}</td>
+												<td>${l.studentTotal}/${l.lectureTotal}명</td>
+												<td>
+													<form id="classRegistrationForm${l.lectureNo}" action="${pageContext.request.contextPath}/auth/student/lecture/registrationClass" method="post">
+														<input type="hidden" name="lectureNo" value="${l.lectureNo}">
+														<button type="button" class="classRegistrationBtn btn btn-sm btn-primary" value="${l.lectureNo}-${l.studentTotal}-${l.lectureTotal}">수강 신청</button>
+														<div id="parentModal"></div>
+													</form>
+												</td>
+											</tr>	
+										</c:forEach>
+									</c:if>
+									<c:if test="${empty lectureList}">
+										<tr>
+											<td colspan="8">(수강중인 강좌가 없습니다)</td>
+										</tr>
+									</c:if>
+								</tbody>
 							</table>
 						</div>
 					</div>
