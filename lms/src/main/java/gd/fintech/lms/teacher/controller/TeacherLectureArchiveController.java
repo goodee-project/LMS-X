@@ -2,6 +2,7 @@ package gd.fintech.lms.teacher.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -144,8 +145,8 @@ public class TeacherLectureArchiveController {
 	
 	// 자료 입력 Action
 	@PostMapping("/auth/teacher/lecture/{lectureNo}/archive/insertArchive")
-	public String insertArchive(LectureArchiveForm lectureArchiveForm) {
-		LectureArchive lectureArchive = teacherLectureArchiveService.insertTeacherLectureArchive(lectureArchiveForm);
+	public String insertArchive(LectureArchiveForm lectureArchiveForm, HttpServletRequest request) {
+		LectureArchive lectureArchive = teacherLectureArchiveService.insertTeacherLectureArchive(lectureArchiveForm, request);
 		
 		// [Redirect] 자료 입력 후 새로 생성된 강좌 고유번호(lectureNo)에 해당하는 게시글로 이동
 		return "redirect:/auth/teacher/lecture/" + lectureArchiveForm.getLectureNo() + "/archive/archiveOne/" + lectureArchive.getLectureArchiveNo();
@@ -167,11 +168,11 @@ public class TeacherLectureArchiveController {
 	
 	// 자료 수정 Action
 	@PostMapping("/auth/teacher/lecture/{lectureNo}/archive/updateArchive")
-	public String updateArchive(LectureArchiveForm lectureArchiveForm) {
+	public String updateArchive(LectureArchiveForm lectureArchiveForm, HttpServletRequest request) {
 		// [Logger] 자료 Form(lectureArchiveForm)
 		logger.trace("lectureArchiveForm[ " + lectureArchiveForm + "]");
 		
-		teacherLectureArchiveService.updateTeacherLectureArchive(lectureArchiveForm);
+		teacherLectureArchiveService.updateTeacherLectureArchive(lectureArchiveForm, request);
 		
 		// [Redirect] 강좌 고유번호(lectureNo)에 해당하는 게시글로 이동
 		return "redirect:/auth/teacher/lecture/" + lectureArchiveForm.getLectureNo() + "/archive/archiveOne/" + lectureArchiveForm.getLectureArchiveNo();
@@ -179,10 +180,10 @@ public class TeacherLectureArchiveController {
 	
 	// 자료 삭제
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/deleteArchive/{archiveNo}")
-	public String deleteArchive(Model model, 
+	public String deleteArchive(Model model, HttpServletRequest request,
 			@PathVariable(value = "lectureNo") int lectureNo, 		// 강좌 고유번호
 			@PathVariable(value = "archiveNo") int archiveNo) {		// 자료 고유번호
-		teacherLectureArchiveService.deleteTeacherLectureArchive(archiveNo);
+		teacherLectureArchiveService.deleteTeacherLectureArchive(archiveNo, request);
 		
 		// [Redirect] 자료 삭제시 이동할 페이지가 없으므로 자료 목록의 1페이지로 이동
 		return "redirect:/auth/teacher/lecture/" + lectureNo + "/archive/archiveList/1";

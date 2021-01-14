@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +28,10 @@ import gd.fintech.lms.vo.LectureArchiveForm;
 public class TeacherLectureArchiveService {
 	@Autowired private TeacherLectureArchiveMapper teacherLectureArchiveMapper;
 	@Autowired private TeacherLectureArchiveFileMapper teacherLectureArchiveFileMapper;
-	
+	@Autowired private PathUtil pathUtil;
 	// Logger 사용
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	// 첨부파일 경로
-	private String PATH = PathUtil.PATH("archiveFile");
 	
 	// 강좌 자료실 목록
 	// 강좌 고유번호(lectureNo)
@@ -71,7 +71,7 @@ public class TeacherLectureArchiveService {
 	
 	// 자료 입력
 	// 자료 Form(LectureArchiveForm)
-	public LectureArchive insertTeacherLectureArchive(LectureArchiveForm lectureArchiveForm) {
+	public LectureArchive insertTeacherLectureArchive(LectureArchiveForm lectureArchiveForm, HttpServletRequest request) {
 		LectureArchive lectureArchive = new LectureArchive();
 		
 		// lectureArchiveForm의 강좌 고유번호, 아이디, 작성자, 제목, 내용을 lectureArchive 객체에 넣어준다
@@ -117,7 +117,7 @@ public class TeacherLectureArchiveService {
 				// 서버에 파일 저장
 				try {
 					// 파일을 지정된 경로에 저장한다
-					mf.transferTo(new File(PATH + filename + ext));
+					mf.transferTo(new File(pathUtil.PATH("archiveFile", request) + filename + ext));
 				} catch (Exception e) {	// 예외처리
 					// 디버깅 코드 출력
 					e.printStackTrace();
@@ -142,7 +142,7 @@ public class TeacherLectureArchiveService {
 	
 	// 자료 수정
 	// 자료 Form(LectureArchiveForm)
-	public void updateTeacherLectureArchive(LectureArchiveForm lectureArchiveForm) {
+	public void updateTeacherLectureArchive(LectureArchiveForm lectureArchiveForm, HttpServletRequest request) {
 		LectureArchive lectureArchive = new LectureArchive();
 		
 		// lectureArchiveForm의 자료 고유번호, 강좌 고유번호, 아이디, 작성자, 제목, 내용을 lectureArchive 객체에 넣어준다
@@ -189,7 +189,7 @@ public class TeacherLectureArchiveService {
 				// 서버에 파일 저장
 				try {
 					// 파일을 지정된 경로에 저장한다
-					mf.transferTo(new File(PATH + filename + ext));
+					mf.transferTo(new File(pathUtil.PATH("archiveFile", request) + filename + ext));
 				} catch (Exception e) {	// 예외처리
 					// 디버깅 코드 출력
 					e.printStackTrace();
@@ -210,14 +210,14 @@ public class TeacherLectureArchiveService {
 	}
 	
 	// 자료 삭제
-	public void deleteTeacherLectureArchive(int archiveNo) {
+	public void deleteTeacherLectureArchive(int archiveNo, HttpServletRequest request) {
 		// 게시물에 속해있는 첨부파일 목록 조회
 		List<String> teacherLectureArchiveFileList = teacherLectureArchiveFileMapper.selectTeacherLectureArchiveFileList(archiveNo);
 		
 		// 첨부파일 목록에서 파일을 하나씩 불러온다
 		for (String s: teacherLectureArchiveFileList) {
 			// 첨부파일 경로 + 첨부파일 이름
-			File file = new File(PATH + s);
+			File file = new File(pathUtil.PATH("archiveFile", request) + s);
 			
 			// 파일이 존재하는 경우
 			if (file.exists()) {

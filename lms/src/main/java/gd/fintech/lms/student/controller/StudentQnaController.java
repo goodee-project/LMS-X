@@ -215,7 +215,7 @@ public class StudentQnaController {
 	
 	// Qna 작성 액션
 	@PostMapping("/auth/student/lecture/{lectureNo}/qna/insertQna")
-	public String insertQna(QuestionForm questionForm, ServletRequest request,
+	public String insertQna(HttpServletRequest httprequest, QuestionForm questionForm, ServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo) {
 		
 		System.out.println("questionForm" + questionForm);
@@ -227,7 +227,7 @@ public class StudentQnaController {
 		questionForm.setAccountId(accountId);
 		questionForm.setQuestionWriter(loginName);
 		
-		studentQnaService.insertQuestion(questionForm);
+		studentQnaService.insertQuestion(questionForm, httprequest);
 		
 		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaList/1";
 		
@@ -255,12 +255,12 @@ public class StudentQnaController {
 	
 	// Qna 수정 액션
 	@PostMapping("/auth/student/lecture/{lectureNo}/qna/updateQna/{questionNo}")
-	public String updateQna(Model model, QuestionForm questionForm,
+	public String updateQna(Model model, QuestionForm questionForm, HttpServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo) {
 		
 		questionForm.setQuestionNo(questionNo);
-		studentQnaService.updateStudentQna(questionForm);
+		studentQnaService.updateStudentQna(questionForm, request);
 		
 		model.addAttribute("lectureNo", lectureNo);
 		model.addAttribute("questionNo", questionNo);
@@ -277,10 +277,10 @@ public class StudentQnaController {
 	
 	// Qna 삭제
 	@GetMapping("/auth/student/lecture/{lectureNo}/qna/deleteQuestion/{questionNo}")
-	public String deleteQuestion(
+	public String deleteQuestion(HttpServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo) {
-		studentQnaService.deleteStudentQnaByQnaNo(questionNo);
+		studentQnaService.deleteStudentQnaByQnaNo(questionNo, request);
 		
 		return "redirect:/auth/student/lecture/" + lectureNo + "/qna/qnaList/1";
 	}

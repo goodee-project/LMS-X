@@ -2,6 +2,8 @@ package gd.fintech.lms.student.restservice;
 
 import java.io.File;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +13,13 @@ import gd.fintech.lms.student.restmapper.StudentQnaRestMapper;
 @Service
 public class StudentQnaRestService {
 	@Autowired StudentQnaRestMapper studentQnaRestMapper;
-	
-	private final String PATH = PathUtil.PATH("questionFile");
+	@Autowired private PathUtil pathUtil;
 	
 	
 	// questionFile 한개만 삭제
-	public int deleteStudentQnaFileOne(String questionFileUuid) {
+	public int deleteStudentQnaFileOne(String questionFileUuid, HttpServletRequest request) {
 		
-		File f = new File(PATH + questionFileUuid);
+		File f = new File(pathUtil.PATH("questionFile", request) + questionFileUuid);
 		f.delete();
 		
 		return studentQnaRestMapper.deleteQnaFileOne(questionFileUuid);

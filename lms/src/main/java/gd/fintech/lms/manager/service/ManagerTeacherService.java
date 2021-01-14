@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +22,8 @@ import gd.fintech.lms.vo.TeacherQueue;
 @Transactional
 public class ManagerTeacherService {
 	@Autowired ManagerTeacherMapper managerTeacherMapper;
+	@Autowired private PathUtil pathUtil;
 	
-	// 첨부파일 경로
-	private String PATH = PathUtil.PATH("mypageImage"); 
 	
 	// 강좌 페이지 강사 리스트
 	public List<Teacher> getTeacherList(){
@@ -94,7 +95,7 @@ public class ManagerTeacherService {
 	}
 	
 	// 강사 탈퇴
-	public void deleteTeacherOneAll(String accountId) {
+	public void deleteTeacherOneAll(String accountId, HttpServletRequest request) {
 		Account account = new Account();
 		account.setAccountId(accountId);
 		account.setAccountState("탈퇴");
@@ -114,7 +115,7 @@ public class ManagerTeacherService {
 		// 데이터베이스에 기존에 있던 이미지가 있으면 파일삭제
 		if(mi != null) {
 			// 이미지 경로 + 이미지 이름
-			File file = new File(PATH + mi.getMypageImageUuid());
+			File file = new File(pathUtil.PATH("mypageImage", request) + mi.getMypageImageUuid());
 			
 			// 이미지가 존재하는 경우
 			if (file.exists()) {

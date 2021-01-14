@@ -1,5 +1,6 @@
 package gd.fintech.lms.manager.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -52,9 +53,9 @@ public class ManagerMyageController {
 		return "auth/manager/mypage/updateMypage";
 	}
 	@PostMapping("/auth/manager/mypage/updateMypage")
-	public String updateMypage(ManagerForm managerForm) {
+	public String updateMypage(ManagerForm managerForm, HttpServletRequest request) {
 		
-		managerMypageService.updateManagerMypage(managerForm);
+		managerMypageService.updateManagerMypage(managerForm, request);
 		return "redirect:/auth/manager/mypage/mypageOne";
 	}
 	

@@ -1,5 +1,7 @@
 package gd.fintech.lms.teacher.restcontroller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +24,9 @@ public class TeacherLectureArchiveRestController {
 	
 	// 강좌 자료실 첨부파일 단일 삭제
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/archive/deleteArchiveFileOne/{uuid}")
-	public void deleteArchiveFileOne(
+	public void deleteArchiveFileOne(HttpServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo, 	// 강좌 고유번호
 			@PathVariable(name = "uuid") String uuid) {			// 첨부파일 UUID
-		teacherLectureArchiveRestService.deleteArchiveFileOne(uuid);
+		teacherLectureArchiveRestService.deleteArchiveFileOne(uuid, request);
 	}
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,9 @@ import gd.fintech.lms.vo.QuestionForm;
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED)
 public class StudentQnaService {
-	
+	@Autowired private PathUtil pathUtil;
 	// Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	// localhost 서버용
-	private final String PATH = PathUtil.PATH("questionFile");
 	//	private final String PATH = "/////"
 	@Autowired StudentQnaMapper studentQnaMapper;
 	@Autowired StudentQnaFileMapper studentQnaFileMapper;
@@ -54,7 +54,7 @@ public class StudentQnaService {
 	}
 	
 	// 질문 게시판 게시글 작성
-	public void insertQuestion(QuestionForm questionForm) {
+	public void insertQuestion(QuestionForm questionForm, HttpServletRequest request) {
 		//question 변수 생성
 		Question question = new Question();
 		
@@ -103,8 +103,8 @@ public class StudentQnaService {
 
 				// try ~ catch 문 생성 (예외처리)
 				try {
-					mf.transferTo(new File(PATH + fileName + ext));
-					logger.debug("debug :" + PATH + fileName + ext);
+					mf.transferTo(new File(pathUtil.PATH("questionFile", request) + fileName + ext));
+					logger.debug("debug :" + pathUtil.PATH("questionFile", request) + fileName + ext);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -120,13 +120,13 @@ public class StudentQnaService {
 		return;
 	}
 	// questionNo에 따라 질문 삭제
-	public void deleteStudentQnaByQnaNo(int questionNo) {
+	public void deleteStudentQnaByQnaNo(int questionNo, HttpServletRequest request) {
 		
 		List<String> qnaFileList = studentQnaFileMapper.selectStudentQnaFileNameList(questionNo);
 		
 		// 실제 파일 삭제
 		for(String fn : qnaFileList) {
-			File f = new File(PATH + fn);
+			File f = new File(pathUtil.PATH("questionFile", request) + fn);
 			f.delete();
 		}
 		
@@ -138,7 +138,7 @@ public class StudentQnaService {
 	}
 
 	// 질문 게시판 게시글 수정
-	public void updateStudentQna(QuestionForm questionForm) {
+	public void updateStudentQna(QuestionForm questionForm, HttpServletRequest request) {
 		//question 변수 생성
 		Question question = new Question();
 		
@@ -185,8 +185,8 @@ public class StudentQnaService {
 
 				// try ~ catch 문 생성 (예외처리)
 				try {
-					mf.transferTo(new File(PATH + fileName + ext));
-					logger.debug("debug :" + PATH + fileName + ext);
+					mf.transferTo(new File(pathUtil.PATH("questionFile", request) + fileName + ext));
+					logger.debug("debug :" + pathUtil.PATH("questionFile" ,request) + fileName + ext);
 
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -226,10 +227,11 @@ public class ManagerTeacherController {
 	
 	// 강사 탈퇴
 	@GetMapping("/auth/manager/teacher/deleteTeacher/{currentPage}/{accountId}")
-	public String deleteTeacherAll(@PathVariable(name="currentPage") int currentPage,
-								   @PathVariable(name="accountId") String accountId) {
+	public String deleteTeacherAll(HttpServletRequest request,
+			@PathVariable(name="currentPage") int currentPage,
+			@PathVariable(name="accountId") String accountId) {
 		
-		managerTeacherService.deleteTeacherOneAll(accountId);
+		managerTeacherService.deleteTeacherOneAll(accountId, request);
 		
 		return "redirect:/auth/manager/teacher/teacherList/"+currentPage;
 	}

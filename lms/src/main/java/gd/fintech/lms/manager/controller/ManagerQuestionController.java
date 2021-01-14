@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,10 +98,10 @@ public class ManagerQuestionController {
 	
 	// 질문 삭제
 	@GetMapping("/auth/manager/lecture/{lectureNo}/question/deleteQuestion/{questionNo}")
-	public String deleteQuestion(
+	public String deleteQuestion(HttpServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "questionNo") int questionNo) {
-		managerQuestionService.deleteManagerQuestion(questionNo);
+		managerQuestionService.deleteManagerQuestion(questionNo, request);
 		return "redirect:/auth/manager/lecture/" + lectureNo + "/question/questionList/1";
 	}
 	

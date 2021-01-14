@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +21,7 @@ import gd.fintech.lms.vo.Question;
 public class ManagerQuestionService {
 	@Autowired private ManagerQuestionMapper managerQuestionMapper;
 	@Autowired private ManagerQuestionFileMapper managerQuestionFileMapper;
-	
-	private final String PATH = PathUtil.PATH("questionFile");
+	@Autowired private PathUtil pathUtil;
 	
 	// 강의에 대한 질문 게시판 목록
 	public List<Question> getManagerQuestionListByPage(int lectureNo, int beginRow, int rowPerPage) {
@@ -40,13 +41,13 @@ public class ManagerQuestionService {
 	}
 	
 	// 질문 게시판 삭제
-	public void deleteManagerQuestion(int questionNo) {
+	public void deleteManagerQuestion(int questionNo, HttpServletRequest request) {
 		
 		List<String> questionFileList = managerQuestionFileMapper.selectManagerQuestionFileNameList(questionNo);
 		
 		// 실제 파일 삭제
 		for(String fn : questionFileList) {
-			File f = new File(PATH + fn);
+			File f = new File(pathUtil.PATH("questionFile", request) + fn);
 			f.delete();
 		}
 		

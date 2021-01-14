@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,7 @@ import gd.fintech.lms.vo.MypageImage;
 @Transactional
 public class AdminManagerService {
 	@Autowired private AdminManagerMapper adminManagerMapper;
-	// 첨부파일 경로
-	private String PATH = PathUtil.PATH("mypageImage"); 
+	@Autowired private PathUtil pathUtil;
 	
 	private static final Logger log = LoggerFactory.getLogger(AdminManagerService.class);
 
@@ -86,7 +87,7 @@ public class AdminManagerService {
 	}
 	
 	// 계정 탈퇴
-	public void deleteManagerAll(String managerId) {
+	public void deleteManagerAll(String managerId, HttpServletRequest request) {
 			
 		Account account = new Account();
 		account.setAccountId(managerId);
@@ -98,7 +99,7 @@ public class AdminManagerService {
 		// 데이터베이스에 기존에 있던 이미지가 있으면 파일삭제
 		if(mi != null) {
 			// 이미지 경로 + 이미지 이름
-			File file = new File(PATH + mi.getMypageImageUuid());
+			File file = new File(pathUtil.PATH("mypageImage", request) + mi.getMypageImageUuid());
 			
 			// 이미지가 존재하는 경우
 			if (file.exists()) {

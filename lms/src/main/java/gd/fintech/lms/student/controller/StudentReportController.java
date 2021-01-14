@@ -155,7 +155,8 @@ public class StudentReportController {
 	
 	// 과제 제출 액션
 	@PostMapping("auth/student/lecture/{lectureNo}/report/insertReport")
-	public String insertReport(ReportSubmitForm reportSubmitForm, ServletRequest request,
+	public String insertReport(HttpServletRequest httprequest,
+			ReportSubmitForm reportSubmitForm, ServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo) {
 		// 세션에서 아이디 가져오기
 		HttpSession session = ((HttpServletRequest)request).getSession();	
@@ -167,7 +168,7 @@ public class StudentReportController {
 		// logger
 		logger.trace("reportSubmitForm["+reportSubmitForm+"]");
 		
-		studentReportService.insertReportSubmit(reportSubmitForm);
+		studentReportService.insertReportSubmit(reportSubmitForm, httprequest);
 		
 		return "redirect:/auth/student/lecture/" + lectureNo + "/report/reportOne/" + reportSubmitForm.getReportNo();
 	}
@@ -198,21 +199,22 @@ public class StudentReportController {
 	
 	// 과제 제출 수정 액션
 	@PostMapping("auth/student/lecture/{lectureNo}/report/updateReport")
-	public String updateReport(ReportSubmitForm reportSubmitForm, ServletRequest request,
+	public String updateReport(HttpServletRequest httprequest,
+			ReportSubmitForm reportSubmitForm, ServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo) {
 
-		studentReportService.updateReportSubmit(reportSubmitForm);
+		studentReportService.updateReportSubmit(reportSubmitForm, httprequest);
 		return "redirect:/auth/student/lecture/" + lectureNo + "/report/reportOne/" + reportSubmitForm.getReportNo();
 	}
 	
 	// 제출한 과제 삭제하기
 	@GetMapping("auth/student/lecture/{lectureNo}/report/{reportNo}/deleteReport/{reportSubmitNo}")
-	public String deleteReport(
+	public String deleteReport(HttpServletRequest request,
 			@PathVariable(name = "lectureNo") int lectureNo,
 			@PathVariable(name = "reportNo") int reportNo,
 			@PathVariable(name = "reportSubmitNo") int reportSubmitNo){
 		
-		studentReportService.deleteReportSubmit(reportSubmitNo);
+		studentReportService.deleteReportSubmit(reportSubmitNo, request);
 		
 		return "redirect:/auth/student/lecture/" + lectureNo + "/report/insertReport/" + reportNo;
 	}

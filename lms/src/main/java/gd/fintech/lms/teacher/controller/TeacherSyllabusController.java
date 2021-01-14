@@ -2,6 +2,8 @@ package gd.fintech.lms.teacher.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +51,11 @@ public class TeacherSyllabusController {
 	
 	// 강의계획서 첨부 Action
 	@PostMapping("/auth/teacher/lecture/{lectureNo}/syllabus/insertSyllabus")
-	public String insertSyllabus(SyllabusForm syllabusForm) {
+	public String insertSyllabus(SyllabusForm syllabusForm, HttpServletRequest request) {
 		// [Logger] 강의계획서 Form(syllabusForm)
 		logger.trace("syllabusForm[" + syllabusForm + "]");
 		
-		teacherSyllabusService.insertTeacherSyllabus(syllabusForm);
+		teacherSyllabusService.insertTeacherSyllabus(syllabusForm, request);
 		
 		// [Redirect] 강의계획서 첨부파일을 업로드 후 강의계획서 조회 페이지로 이동
 		return "redirect:/auth/teacher/lecture/" + syllabusForm.getLectureNo() + "/syllabus/syllabusOne";
@@ -61,8 +63,8 @@ public class TeacherSyllabusController {
 	
 	// 자료 삭제
 	@GetMapping("/auth/teacher/lecture/{lectureNo}/syllabus/deleteSyllabus")
-	public String deleteSyllabus(@PathVariable(value = "lectureNo") int lectureNo) {
-		teacherSyllabusService.deleteTeacherSyllabus(lectureNo);
+	public String deleteSyllabus(@PathVariable(value = "lectureNo") int lectureNo, HttpServletRequest request) {
+		teacherSyllabusService.deleteTeacherSyllabus(lectureNo, request);
 		// [Redirect] 강의 계획서 첨부파일을 삭제 후 강의 계획서 조회 페이지로 이동
 		return "redirect:/auth/teacher/lecture/" + lectureNo + "/syllabus/syllabusOne";
 	}

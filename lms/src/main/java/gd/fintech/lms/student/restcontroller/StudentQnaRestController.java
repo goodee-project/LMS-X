@@ -1,5 +1,7 @@
 package gd.fintech.lms.student.restcontroller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +22,15 @@ public class StudentQnaRestController {
 	
 	// 질문 게시판 첨부파일 한개 삭제
 	@GetMapping("/auth/student/lecture/qna/deleteQnaFileOne/{questionFileUuid}")
-	public void deleteQnaFileOne(@PathVariable(name = "questionFileUuid") String questionFileUuid) {
-		studentQnaRestService.deleteStudentQnaFileOne(questionFileUuid);
+	public void deleteQnaFileOne(HttpServletRequest request,
+			@PathVariable(name = "questionFileUuid") String questionFileUuid) {
+		studentQnaRestService.deleteStudentQnaFileOne(questionFileUuid, request);
 	}
 	
 	// 질문 비밀글 비밀번호 확인
 	@PostMapping("auth/student/lecture/qna/checkQnaPassword/{questionNo}")
-	public String checkQnaPassword(@PathVariable(name = "questionNo") int questionNo) {
+	public String checkQnaPassword(
+			@PathVariable(name = "questionNo") int questionNo) {
 		return studentQnaRestService.selectQnaPassword(questionNo);
 	}
 }

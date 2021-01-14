@@ -3,6 +3,8 @@ package gd.fintech.lms.manager.service;
 import java.io.File;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,9 @@ import gd.fintech.lms.vo.MypageImage;
 @Transactional
 public class ManagerMypageService {
 	@Autowired private ManagerMypageMapper managerMypageMapper;
+	@Autowired private PathUtil pathUtil;
 	
 	private static final Logger log = LoggerFactory.getLogger(ManagerMypageService.class);
-	
-	// 첨부파일 경로
-	private String PATH = PathUtil.PATH("mypageImage"); 
 	
 	// 운영자 마이페이지 정보
 	public Manager selectManagerMypage(String accountId) {
@@ -40,7 +40,7 @@ public class ManagerMypageService {
 	}
 	
 	// 운영자 마이페이지 정보 수정
-	public void updateManagerMypage(ManagerForm managerForm) {
+	public void updateManagerMypage(ManagerForm managerForm, HttpServletRequest request) {
 		Manager manager = new Manager();
 		manager.setManagerId(managerForm.getManagerId());
 		manager.setManagerEmail(managerForm.getManagerEmail());
@@ -68,7 +68,7 @@ public class ManagerMypageService {
 			// 데이터베이스에 기존에 있던 이미지가 있으면 파일삭제
 			if(mi != null) {
 				// 이미지 경로 + 이미지 이름
-				File file = new File(PATH + mi.getMypageImageUuid());
+				File file = new File(pathUtil.PATH("mypageImage", request) + mi.getMypageImageUuid());
 				
 				// 이미지가 존재하는 경우
 				if (file.exists()) {
@@ -94,7 +94,7 @@ public class ManagerMypageService {
 			// 서버에 파일 저장
 			try {
 				// 파일을 지정된 경로에 저장
-				mf.transferTo(new File(PATH+imageName+ext));
+				mf.transferTo(new File(pathUtil.PATH("mypageImage", request)+imageName+ext));
 			} catch (Exception e) {
 				// 디버깅 코드 출력
 				e.printStackTrace();

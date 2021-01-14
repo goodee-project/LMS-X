@@ -2,6 +2,8 @@ package gd.fintech.lms.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,11 +145,13 @@ public class AdminManagerController {
 	
 	// 운영자 탈퇴
 	@GetMapping("/auth/admin/deleteManager/{currentPage}/{managerId}")
-	public String deleteManager(@PathVariable(name="currentPage") String currentPage,
+	public String deleteManager(
+				HttpServletRequest request,
+				@PathVariable(name="currentPage") String currentPage,
 								@PathVariable(name="managerId") String managerId,
 								Manager manager) {
 		
-		adminManagerService.deleteManagerAll(managerId);
+		adminManagerService.deleteManagerAll(managerId, request);
 		return "redirect:/auth/admin/index/"+currentPage+"?managerPosition="+manager.getManagerPosition()+"&"+"managerName="+manager.getManagerName();
 	}
 }	

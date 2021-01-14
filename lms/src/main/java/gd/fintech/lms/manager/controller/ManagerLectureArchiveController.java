@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -109,10 +111,10 @@ public class ManagerLectureArchiveController {
 	
 	// 자료 삭제
 	@GetMapping("/auth/manager/lecture/{lectureNo}/archive/archiveOne/deleteArchive/{lectureArchiveNo}")
-	public String deleteArchive(Model model, 
+	public String deleteArchive(Model model, HttpServletRequest request,
 			@PathVariable(value = "lectureNo") int lectureNo, 						// 강의 번호
 			@PathVariable(value = "lectureArchiveNo") int lectureArchiveNo) {		// 자료 번호
-		managerLectureArchiveService.deleteManagerLectureArchive(lectureArchiveNo);
+		managerLectureArchiveService.deleteManagerLectureArchive(lectureArchiveNo, request);
 		
 		return "redirect:/auth/manager/lecture/" + lectureNo + "/archive/archiveList/1";
 	}

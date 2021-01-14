@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,9 @@ import gd.fintech.lms.vo.SyllabusForm;
 @Transactional
 public class TeacherSyllabusService {
 	@Autowired private TeacherSyllabusMapper teacherSyllabusMapper;
-	
+	@Autowired private PathUtil pathUtil;
 	// Logger 사용
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	// 첨부파일 경로
-	private String PATH = PathUtil.PATH("syllabusFile");
 	
 	// 강의계획서 상세보기
 	public Syllabus selectSyllabusOne(int lectureNo) {
@@ -34,7 +33,7 @@ public class TeacherSyllabusService {
 	}
 	
 	// 첨부파일 등록
-	public SyllabusForm insertTeacherSyllabus(SyllabusForm syllabusForm) {
+	public SyllabusForm insertTeacherSyllabus(SyllabusForm syllabusForm, HttpServletRequest request) {
 		//System.out.println("Debug : " + syllabusForm);
 		List<Syllabus> syllabusList = null;
 		// 첨부파일이 존재하는 경우
@@ -69,7 +68,7 @@ public class TeacherSyllabusService {
 				// 서버에 파일 저장
 				try {
 					// 파일을 지정된 경로에 저장
-					mf.transferTo(new File(PATH + filename + ext));
+					mf.transferTo(new File(pathUtil.PATH("syllabusFile", request) + filename + ext));
 					//System.out.println("Debug6 : 파일 저장");
 				} catch (Exception e) { // 예외처리
 					// 디버깅 코드 출력
@@ -92,14 +91,14 @@ public class TeacherSyllabusService {
 	}
 	
 	// 파일 삭제
-	public void deleteTeacherSyllabus(int lectureNo) {
+	public void deleteTeacherSyllabus(int lectureNo, HttpServletRequest request) {
 		// 강좌에 속해 있는 첨부파일 목록 조회
 		List<String> teacherSyllabusFileList = teacherSyllabusMapper.selectTeacherSyllabusFileList(lectureNo);
 		
 		// 첨부파일 목록에서 파일을 하나씩 불러온다
 		for (String s : teacherSyllabusFileList) {
 			// 첨부파일 경로 + 첨부파일 이름
-			File file = new File(PATH + s);
+			File file = new File(pathUtil.PATH("syllabusFile", request) + s);
 			
 			// 파일이 존재하는 경우
 			if (file.exists()) {

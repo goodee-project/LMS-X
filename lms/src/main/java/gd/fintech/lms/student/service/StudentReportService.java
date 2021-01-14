@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +30,13 @@ import gd.fintech.lms.vo.ReportSubmitForm;
 public class StudentReportService {
 	@Autowired StudentReportMapper studentReportMapper;
 	@Autowired StudentReportFileMapper studentReportFileMapper;
-
+	@Autowired private PathUtil pathUtil;
 	// Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	String PATH = PathUtil.PATH("reportSubmitFile");  
 	
 	// 과제 제출 (입력)
-	public void insertReportSubmit(ReportSubmitForm reportSubmitForm) {
+	public void insertReportSubmit(ReportSubmitForm reportSubmitForm, HttpServletRequest request) {
 		// 과제 내용 추가
 		ReportSubmit reportSubmit = new ReportSubmit();
 		reportSubmit.setReportNo(reportSubmitForm.getReportNo());
@@ -69,7 +70,7 @@ public class StudentReportService {
 				reportFile.add(rsf);
 				
 				try {
-					mf.transferTo(new File(PATH + filename + ext));
+					mf.transferTo(new File(pathUtil.PATH("reportSubmitFile", request) + filename + ext));
 				} catch(Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException();
@@ -107,7 +108,7 @@ public class StudentReportService {
 	}
 	
 	// 과제 제출 수정
-	public void updateReportSubmit(ReportSubmitForm reportSubmitForm) {
+	public void updateReportSubmit(ReportSubmitForm reportSubmitForm, HttpServletRequest request) {
 		// 과제 내용 추가
 		ReportSubmit reportSubmit = new ReportSubmit();
 		reportSubmit.setReportSubmitNo(reportSubmitForm.getReportSubmitNo());
@@ -139,7 +140,7 @@ public class StudentReportService {
 				reportFile.add(rsf);
 				
 				try {
-					mf.transferTo(new File(PATH + filename + ext));
+					mf.transferTo(new File(pathUtil.PATH("reportSubmitFile", request) + filename + ext));
 				} catch(Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException();
@@ -160,12 +161,12 @@ public class StudentReportService {
 	}
 	
 	// 과제 제출 삭제하기
-	public void deleteReportSubmit(int reportSubmitNo) {
+	public void deleteReportSubmit(int reportSubmitNo, HttpServletRequest request) {
 		
 		// 실제 파일 이름들 가져오기
 		List<String> fileNameList= studentReportFileMapper.selectReportSubmitFileName(reportSubmitNo);
 		for(String fn : fileNameList) {
-			File f = new File(PATH + fn);
+			File f = new File(pathUtil.PATH("reportSubmitFile", request) + fn);
 			f.delete();		
 		}
 		// DB 삭제

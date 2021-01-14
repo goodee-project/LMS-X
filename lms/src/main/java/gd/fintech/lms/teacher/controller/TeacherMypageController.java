@@ -1,5 +1,6 @@
 package gd.fintech.lms.teacher.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -52,11 +53,11 @@ public class TeacherMypageController {
 		return "auth/teacher/mypage/updateMypage";
 	}
 	@PostMapping("/auth/teacher/mypage/updateMypage")
-	public String updateMypage(TeacherForm teacherForm) {
+	public String updateMypage(TeacherForm teacherForm, HttpServletRequest request) {
 		
 		log.debug(teacherForm.toString());
 		
-		teacherMypageService.updateTeacherMypage(teacherForm);
+		teacherMypageService.updateTeacherMypage(teacherForm, request);
 		return "redirect:/auth/teacher/mypage/mypageOne";
 	}
 	

@@ -1,5 +1,7 @@
 package gd.fintech.lms.student.restcontroller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +22,9 @@ public class StudentReportRestController {
 	
 	// 과제 제출 첨부파일 한개 삭제
 	@GetMapping("auth/student/lecture/report/deleteReportSubmitFileOne/{uuid}")
-	public void deleteReportSubmitFileOne(@PathVariable(name = "uuid") String uuid) {
-		studentReportRestService.deleteReportSubmitFileOne(uuid);
+	public void deleteReportSubmitFileOne(HttpServletRequest request,
+			@PathVariable(name = "uuid") String uuid) {
+		studentReportRestService.deleteReportSubmitFileOne(uuid, request);
 	}
 	
 	// 해당 과제가 제출 기간 인지
