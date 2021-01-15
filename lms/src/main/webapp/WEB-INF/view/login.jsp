@@ -40,7 +40,6 @@
 			
 			/* 서브밋 전에 리캡챠 체크 여부 를 확인합니다. */
 			function formSubmit() {
-				console.log("recaptchaCheck"+recaptchaCheck);
 				if(recaptchaCheck >=3 ){
 					
 					if (grecaptcha.getResponse().length == 0) {
@@ -151,28 +150,31 @@
 							url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 							type : 'get',
 							success : function(data) {
-								recaptchaCheck += 1;
-								// 승인 대기 상태
+								// 승인 대기 상태 
 								if (data == "wait") {
 									$("#modal-wait").modal("show");
+									recaptchaCheck += 1;
 									return;
 								}
 								
 								// 탈퇴 상태
 								if (data == "secession") {
 									$("#modal-secession").modal("show");
+									recaptchaCheck += 1;
 									return;
 								}
 								
 								// 정보가 없는 경우
 								if (data == "none") {
 									$("#modal-none").modal("show");
+									recaptchaCheck += 1;
 									return;
 								} 
 	
 								// 휴면 상태
 								if (data == "dormant") {
 									$("#modal-dormant-manager").modal("show");
+									recaptchaCheck += 1;
 									return;
 								}
 								
@@ -268,28 +270,31 @@
 							url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 							type : 'get',
 							success : function(data) {
-								recaptchaCheck += 1;
 								// 승인 대기 상태
 								if (data == "wait") {
 									$("#modal-wait").modal("show");
+									recaptchaCheck += 1;
 									return;
 								}
 								
 								// 탈퇴 상태
 								if (data == "secession") {
 									$("#modal-secession").modal("show");
+									recaptchaCheck += 1;
 									return;
 								}
 								
 								// 정보가 없는 경우
 								if (data == "none") {
 									$("#modal-none").modal("show");
+									recaptchaCheck += 1;
 									return;
 								} 
 	
 								// 휴면 상태
 								if (data == "dormant-manager") {
 									$("#modal-dormant").modal("show");
+									recaptchaCheck += 1;
 									return;
 								}
 								
@@ -387,28 +392,32 @@
 							url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 							type : 'get',
 							success : function(data) {
-								recaptchaCheck += 1;
+							
 								// 승인 대기 상태
 								if (data == "wait") {
 									$("#modal-wait").modal("show");
+									recaptchaCheck += 1;
 									return;
 								}
 								
 								// 탈퇴 상태
 								if (data == "secession") {
 									$("#modal-secession").modal("show");
+									recaptchaCheck += 1;
 									return;
 								}
 								
 								// 정보가 없는 경우
 								if (data == "none") {
 									$("#modal-none").modal("show");
+									recaptchaCheck += 1;
 									return;
 								} 
 	
 								// 휴면 상태
 								if (data == "dormant") {
 									$("#modal-dormant-admin").modal("show");
+									recaptchaCheck += 1;
 									return;
 								}
 								
@@ -425,7 +434,7 @@
 				$('#adminLogin').click(function() {
 					let loginInput = `
 						<div class="card-body px-lg-5 py-lg-5">
-							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
+							<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login" onsubmit="return formSubmit();">
 								<div class="text-center text-muted mb-4">
 									<h3>관리자 로그인</h3>
 								</div>
@@ -473,6 +482,7 @@
 					});
 					
 					$('#loginBtn').click(function(){
+						
 						// 아이디 입력 체크
 						if ( $('#accountId').val() == "" ) {
 							$('#accountId').focus();
@@ -493,10 +503,11 @@
 							url : '${pageContext.request.contextPath}/login/stateCheck/'+$('#accountId').val()+'/'+$('#accountPw').val()+'/'+$('#accountLevel').val(),
 							type : 'get',
 							success : function(data) {	
-								recaptchaCheck += 1;							
+											
 								// 정보가 없는 경우
 								if ( data == "none") {
 									$("#modal-none").modal("show");
+									recaptchaCheck += 1;	
 									return;
 								}
 								
