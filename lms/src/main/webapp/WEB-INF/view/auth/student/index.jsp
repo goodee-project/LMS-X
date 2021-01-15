@@ -92,12 +92,14 @@
 											<td>${l.lecture.teacherName}</td>
 											<td>${l.subject.subjectName}</td>
 											<td>
-												<c:if test="${l.classRegistration.classRegistrationState != '취소'}">
-													<a href="${pageContext.request.contextPath}/auth/student/lecture/classOne/${l.lecture.lectureNo}">${l.lecture.lectureName}</a>
-												</c:if>
-												<c:if test="${l.classRegistration.classRegistrationState == '취소'}">
-													${l.lecture.lectureName}
-												</c:if>
+												<c:choose>
+													<c:when test="${!(l.classRegistration.classRegistrationState == '취소' || l.classRegistration.classRegistrationState == '대기')}">
+														<a href="${pageContext.request.contextPath}/auth/student/lecture/classOne/${l.lecture.lectureNo}">${l.lecture.lectureName}</a>								
+													</c:when>
+													<c:otherwise>
+														${l.lecture.lectureName}
+													</c:otherwise>
+												</c:choose>
 											</td>
 											<td>${l.subject.subjectTotalday}일</td>
 											<td>${l.lecture.lectureStartdate}</td>

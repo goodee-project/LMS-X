@@ -74,7 +74,7 @@
 									<th><h2>비밀글입니다</h2></th>
 								</tr>
 								<tr>
-			    					<td><input class="form-control" id="questionPassword" type="text" name="questionPassword"></td>
+			    					<td><input class="form-control" id="questionPassword" type="password" name="questionPassword"></td>
 								</tr>
 								<tr>
 			    					<td><button id="questionPasswordBtn" type="button" class="btn btn-outline-primary">확인</button></td>
