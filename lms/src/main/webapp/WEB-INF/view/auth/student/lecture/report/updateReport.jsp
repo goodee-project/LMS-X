@@ -46,7 +46,7 @@
 						return;
 					}
 		
-					let html =`<div><input type="file" class="btn btn-outline-success reportSubmitFileList" name="reportSubmitFileList" onchange="checkSize(this)"></div>`;
+					let html =`<div><input type="file" class="form-control reportSubmitFileList" name="reportSubmitFileList" onchange="checkSize(this)"></div>`;
 					$('#fileInput').append(html);
 		
 				})
@@ -146,8 +146,11 @@
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
-							<div class="col">
+							<div class="col-8">
 								<h3 class="mb-0">과제</h3>
+							</div>
+							<div class="col-4 text-right">
+								<button class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/report/reportOne/${reportNo}'">목록</button>
 							</div>
 						</div>
 					</div>
@@ -176,8 +179,11 @@
 						<div class="card shadow">
 							<div class="card-header border-0">
 								<div class="row align-items-center">
-									<div class="col">
-										<h3 class="mb-0">과제 제출</h3>
+									<div class="col-8">
+										<h3 class="mb-0">과제 수정</h3>
+									</div>
+									<div class="col-4 text-right">
+										<button class="btn btn-sm btn-primary" id="reportSubmitBtn" type="button">수정</button>
 									</div>
 								</div>
 							</div>
@@ -204,57 +210,62 @@
 							    	<table class="table">
 						    			<thead class="thead-light">
 								    		<tr>
-								    			<th colspan="4">첨부파일</th>
+								    			<th>기존 첨부파일</th>
 								    		</tr>
 								    	</thead>
-							    		<c:forEach items="${reportSubmit.reportSubmitFileList}" var="rsf">
-							    			<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
-				      						<c:set var="uuid">${rsf.reportSubmitFileUuid}</c:set>
-							    			<tr id="${fn:split(uuid ,'.')[0]}">
-							    				<td>${rsf.reportSubmitFileOriginal}</td>
-							    				<!-- 파일 사이즈 -->
-							    				<td>
-							    					<c:choose>
-							    						<c:when test="${rsf.reportSubmitFileSize >= (1024 * 1024)}">
-							    							<fmt:formatNumber value="${rsf.reportSubmitFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
-							    						</c:when>
-							    						<c:when test="${rsf.reportSubmitFileSize >= 1024}">
-							    							<fmt:formatNumber value="${rsf.reportSubmitFileSize/1024}" type="pattern" pattern="0.00" />B 
-							    						</c:when>
-							    						<c:otherwise>
-							    							<fmt:formatNumber value="${rsf.reportSubmitFileSize}" type="pattern" pattern="0.00" />KB 	
-							    						</c:otherwise>
-							    					</c:choose>
-							    				</td>
-							    				<td id="fileCount">다운 횟수 : ${rsf.reportSubmitFileCount}회</td>
-							    				<td><button class="deleteReportSubmitFileOneBtn btn btn-outline-danger" value="${rsf.reportSubmitFileUuid}" type="button">X</button></td>
-							    			</tr>
-							    		</c:forEach>
+								    	<tbody>
+								    		<c:if test="${!empty reportSubmit.reportSubmitFileList}">
+									    		<c:forEach items="${reportSubmit.reportSubmitFileList}" var="rsf">
+									    			<!-- 태그 id에 . 이 있으면 안되므로 uuid에서 확장자를 제외한 이름만 id로 지정해줌 -->
+						      						<c:set var="uuid">${rsf.reportSubmitFileUuid}</c:set>
+									    			<tr id="${fn:split(uuid ,'.')[0]}">
+									    				<td>${rsf.reportSubmitFileOriginal}</td>
+									    				<!-- 파일 사이즈 -->
+									    				<td>
+									    					<c:choose>
+									    						<c:when test="${rsf.reportSubmitFileSize >= (1024 * 1024)}">
+									    							<fmt:formatNumber value="${rsf.reportSubmitFileSize/(1024*1024)}" type="pattern" pattern="0.00" />MB					
+									    						</c:when>
+									    						<c:when test="${rsf.reportSubmitFileSize >= 1024}">
+									    							<fmt:formatNumber value="${rsf.reportSubmitFileSize/1024}" type="pattern" pattern="0.00" />B 
+									    						</c:when>
+									    						<c:otherwise>
+									    							<fmt:formatNumber value="${rsf.reportSubmitFileSize}" type="pattern" pattern="0.00" />KB 	
+									    						</c:otherwise>
+									    					</c:choose>
+									    				</td>
+									    				<td id="fileCount">다운 횟수 : ${rsf.reportSubmitFileCount}회</td>
+									    				<td><button class="deleteReportSubmitFileOneBtn btn btn-outline-danger" value="${rsf.reportSubmitFileUuid}" type="button">X</button></td>
+									    			</tr>
+									    		</c:forEach>
+								    		</c:if>
+								    		<c:if test="${empty reportSubmit.reportSubmitFileList}">
+								    			<tr>
+								    				<td>(첨부파일이 없습니다)</td>
+								    			</tr>
+								    		</c:if>
+							    		</tbody>
 							    	</table>
 							    	<!-- 첨부파일 -->
 							    	<table class="table">
-							    		<tr>
-					    					<th><h3>첨부파일</h3></th>
-					    				</tr>						    				
-							    		<tr>
-							    			<td>
-								    			<div>
-									   				<button id="addFileBtn" type="button" class="btn btn-outline-primary">파일 추가</button>
-									   				<button id="delFileBtn" type="button" class="btn btn-outline-danger">파일 삭제</button>
-								   				</div>
-							   				</td>
-						   				</tr>						    				
-							    		<tr>
-					    					<td><div id="fileInput"></div></td>
-						   				</tr>	
-						   			</table>
-					    			<!-- 과제 제출 -->  
-							    	<table class="table"> 
-							    		<tr>
-								   			<th>
-								   				<div><button class="btn btn-outline-primary" id="reportSubmitBtn" type="button">과제 수정</button></div>
-								   			</th>
-						   				</tr>	
+							    		<thead class="thead-light">
+								    		<tr>
+								    			<th>신규 첨부파일</th>
+								    		</tr>
+								    	</thead>
+								    	<tbody>					    				
+								    		<tr>
+								    			<td>
+									    			<div>
+										   				<button id="addFileBtn" type="button" class="btn btn-sm btn-dark">파일 추가</button>
+										   				<button id="delFileBtn" type="button" class="btn btn-sm btn-dark">파일 삭제</button>
+									   				</div>
+								   				</td>
+							   				</tr>						    				
+								    		<tr>
+						    					<td><div id="fileInput"></div></td>
+							   				</tr>
+						   				</tbody>
 						   			</table>						   			
 						    	</form>
 						    </div> 

@@ -46,7 +46,7 @@
 						return;
 					}
 		
-					let html =`<div><input class="btn btn-outline-success reportSubmitFileList" type="file" name="reportSubmitFileList" onchange="checkSize(this)"></div>`;
+					let html =`<div><input class="form-control reportSubmitFileList" type="file" name="reportSubmitFileList" onchange="checkSize(this)"></div>`;
 					$('#fileInput').append(html);
 		
 				})
@@ -129,8 +129,11 @@
 				<div class="card shadow">
 					<div class="card-header border-0">
 						<div class="row align-items-center">
-							<div class="col">
+							<div class="col-8">
 								<h3 class="mb-0">과제</h3>
+							</div>
+							<div class="col-4 text-right">
+								<button class="btn btn-sm btn-dark" onclick="location.href='${pageContext.request.contextPath}/auth/student/lecture/${lectureNo}/report/reportList/1'">목록</button>
 							</div>
 						</div>
 					</div>
@@ -159,8 +162,11 @@
 						<div class="card shadow">
 							<div class="card-header border-0">
 								<div class="row align-items-center">
-									<div class="col">
+									<div class="col-8">
 										<h3 class="mb-0">과제 제출</h3>
+									</div>
+									<div class="col-4 text-right">
+										<button class="btn btn-sm btn-success" id="reportSubmitBtn" type="button">제출</button>
 									</div>
 								</div>
 							</div>
@@ -184,28 +190,24 @@
 								    	
 								    	<!-- 첨부파일 -->
 								    	<table class="table">
-								    		<tr>
-						    					<th><h3>첨부파일</h3></th>
-						    				</tr>						    				
-								    		<tr>
-								    			<td>
-									    			<div>
-										   				<button id="addFileBtn" type="button" class="btn btn-outline-primary">파일 추가</button>
-										   				<button id="delFileBtn" type="button" class="btn btn-outline-danger">파일 삭제</button>
-									   				</div>
-								   				</td>
-							   				</tr>						    				
-								    		<tr>
-						    					<td><div id="fileInput"></div></td>
-							   				</tr>	
-							   			</table>
-						    			<!-- 과제 제출 -->  
-								    	<table class="table"> 
-								    		<tr>
-									   			<th>
-									   				<div><button class="btn btn-outline-primary" id="reportSubmitBtn" type="button">과제 제출</button></div>
-									   			</th>
-							   				</tr>	
+								    		<thead class="thead-light">
+									    		<tr>
+									    			<th>첨부파일</th>
+									    		</tr>
+									    	</thead>	
+									    	<tbody>		    				
+									    		<tr>
+									    			<td>
+										    			<div>
+											   				<button id="addFileBtn" type="button" class="btn btn-sm btn-dark">파일 추가</button>
+											   				<button id="delFileBtn" type="button" class="btn btn-sm btn-dark">파일 삭제</button>
+										   				</div>
+									   				</td>
+								   				</tr>						    				
+									    		<tr>
+							    					<td><div id="fileInput"></div></td>
+								   				</tr>	
+							   				</tbody>		
 							   			</table>
 							    	</form>
 							    </div> 
