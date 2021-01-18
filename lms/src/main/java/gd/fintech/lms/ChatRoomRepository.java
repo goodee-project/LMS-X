@@ -10,30 +10,29 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Repository;
 
-import gd.fintech.lms.vo.ChatRoom;
+import gd.fintech.lms.vo.ChatroomList;
 
 @Repository
 public class ChatRoomRepository {
-    private Map<String, ChatRoom> chatRoomMap;
+    private Map<String, ChatroomList> chatRoomMap;
 
     @PostConstruct
     private void init(){
         chatRoomMap = new LinkedHashMap<>();
     }
-
-    public List<ChatRoom> findAllRoom(){
-        List<ChatRoom> chatRooms = new ArrayList<>(chatRoomMap.values());
+    /*
+    public List<ChatroomList> findAllRoom(){
+        List<ChatroomList> chatRooms = new ArrayList<>(chatRoomMap.values());
         Collections.reverse(chatRooms);
         return chatRooms;
     }
+    */
 
-    public ChatRoom findRoomById(String id){
+    public ChatroomList findRoomById(String id){
         return chatRoomMap.get(id);
     }
 
-    public ChatRoom createChatRoom(String name){
-        ChatRoom chatRoom = ChatRoom.create(name);
-        chatRoomMap.put(chatRoom.getRoomId(), chatRoom);
-        return chatRoom;
+    public void createChatRoom(ChatroomList chatroomList){
+        chatRoomMap.put(chatroomList.getChatroomUuid(), chatroomList);
     }
 }

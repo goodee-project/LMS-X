@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.mapper.ChatMapper">
+	<!-- 새로운 채팅방 생성 -->
+	<insert id="insertChatroomList" parameterType="gd.fintech.lms.vo.ChatroomList">
+		INSERT INTO chatroom_list (
+			chatroom_uuid,
+			chatroom_person1_id,
+			chatroom_person1_name,
+			chatroom_person2_id,
+			chatroom_person2_name	
+		) VALUES (
+			#{chatroomUuid},
+			#{chatroomPerson1Id},
+			#{chatroomPerson1Name},
+			#{chatroomPerson2Id},
+			#{chatroomPerson2Name}
+		)
+	</insert>
+	
+	<!-- 채팅방 정보 가져오기 -->
+	<select id="selectChatroomList" parameterType="String" resultType="gd.fintech.lms.vo.ChatroomList">
+		SELECT
+			chatroom_uuid chatroomUuid,
+			chatroom_person1_id chatroomPerson1Id,
+			chatroom_person1_name chatroomPerson1Name,
+			chatroom_person2_id chatroomPerson2Id,
+			chatroom_person2_name chatroomPerson2Name
+		FROM
+			chatroom_list
+		WHERE
+			chatroom_uuid = #{chatroomUuid}		
+	</select>
+</mapper>

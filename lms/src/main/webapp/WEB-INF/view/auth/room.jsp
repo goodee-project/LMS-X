@@ -30,6 +30,83 @@
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#message').on('keypress', function(e){
+					if(e.keyCode == '13'){
+					$('#send').click();
+					}
+				});
+	
+			    var webSocket;
+			    var nickname;
+			    var roomId = '${chatroomList.chatroomUuid}';
+			    let sendId;
+			    let sendName;
+			    if('${loginId}' == '${chatroomList.chatroomPerson1Id}'){
+			    	sendId = '${chatroomList.chatroomPerson2Id}';
+			    	sendName = '${chatroomList.chatroomPerson2Name}';
+				} else {
+			    	sendId = '${chatroomList.chatroomPerson1Id}';
+			    	sendName = '${chatroomList.chatroomPerson1Name}';
+				}
+			    /*
+			    document.getElementById("name").addEventListener("click",function(){
+			        nickname = document.getElementById("nickname").value;
+			        document.getElementById("nickname").style.display = "none";
+			        document.getElementById("name").style.display = "none";
+			        connect();
+			    })
+			    */
+			    nickname = '${loginName}';
+		        // document.getElementById("nickname").style.display = "none";
+		        // document.getElementById("name").style.display = "none";
+		        connect();
+			    document.getElementById("send").addEventListener("click",function(){
+			        send();
+			    })
+			    function connect(){
+			        webSocket = new WebSocket("ws://localhost/chat");
+			        webSocket.onopen = onOpen;
+			        webSocket.onclose = onClose;
+			        webSocket.onmessage = onMessage;
+			    }
+			    function disconnect(){
+			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'LEAVE',writer:nickname}));
+			        webSocket.close();
+			    }
+			    function send(){
+			        msg = document.getElementById("message").value;
+			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'CHAT',writer:nickname,message : msg}));
+			        document.getElementById("message").value = "";
+
+			        // 스크롤 조정
+			        if (document.getElementById('chatroom').scrollHeight > 0){
+				         document.getElementById('chatroom').scrollTop = document.getElementById('chatroom').scrollHeight - 1;
+			        }
+
+			        // DB에 데이터 추가
+			        $.ajax({
+						url: '${pageContext.request.contextPath}/auth/chat/insertChatList',
+						type:'post',
+						data: {chatroomUuid : roomId, chatSendId : sendId, chatSendName : sendName, chatReceiveId : '${loginId}', chatReceiveName : '${loginName}', chatText : msg}
+					});
+					
+			    }
+			    function onOpen(){
+			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'ENTER',writer:nickname}));
+			    }
+			    function onMessage(e){
+			        data = e.data;
+			        chatroom = document.getElementById("chatroom");
+			        chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
+			    }
+			    function onClose(){
+			        disconnect();
+			    }
+			})
+			
+		</script>
 	</head>
 	<body>
 		<!-- 
@@ -40,66 +117,17 @@
 		<br> 
 		 -->
 		<label for="roomName" class="label label-default">방 이름</label>
-		<label id="roomName" class="form-inline">${room.name}</label>
+			<c:choose>
+				<c:when test="${loginId == chatroomList.chatroomPerson1Id}">
+					<label id="roomName" class="form-inline">${chatroomList.chatroomPerson2Name}</label>
+				</c:when>
+				<c:otherwise>
+					<label id="roomName" class="form-inline">${chatroomList.chatroomPerson1Name}</label>
+				</c:otherwise>
+			</c:choose>
 		<div id="chatroom" style = "overflow: auto; max-height: 610px; width:400px; height: 600px; border:1px solid; background-color : navy;color: white;"></div>
 		<input type="text" id="message" style="height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
 		<button class = "btn btn-primary" id="send">전송</button>
 	</body>
 	
-	<script type="text/javascript">
-	
-		$('#message').on('keypress', function(e){
-			if(e.keyCode == '13'){
-			$('#send').click();
-			}
-		});
-
-	    var webSocket;
-	    var nickname;
-	    var roomId = '${room.roomId}';
-	    /*
-	    document.getElementById("name").addEventListener("click",function(){
-	        nickname = document.getElementById("nickname").value;
-	        document.getElementById("nickname").style.display = "none";
-	        document.getElementById("name").style.display = "none";
-	        connect();
-	    })
-	    */
-	    nickname = '${loginName}';
-        // document.getElementById("nickname").style.display = "none";
-        // document.getElementById("name").style.display = "none";
-        connect();
-	    document.getElementById("send").addEventListener("click",function(){
-	        send();
-	    })
-	    function connect(){
-	        webSocket = new WebSocket("ws://localhost/chat");
-	        webSocket.onopen = onOpen;
-	        webSocket.onclose = onClose;
-	        webSocket.onmessage = onMessage;
-	    }
-	    function disconnect(){
-	        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'LEAVE',writer:nickname}));
-	        webSocket.close();
-	    }
-	    function send(){
-	        msg = document.getElementById("message").value;
-	        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'CHAT',writer:nickname,message : msg}));
-	        document.getElementById("message").value = "";
-	        if (document.getElementById('chatroom').scrollHeight > 0){
-		         document.getElementById('chatroom').scrollTop = document.getElementById('chatroom').scrollHeight - 1;
-	        }
-	    }
-	    function onOpen(){
-	        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'ENTER',writer:nickname}));
-	    }
-	    function onMessage(e){
-	        data = e.data;
-	        chatroom = document.getElementById("chatroom");
-	        chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
-	    }
-	    function onClose(){
-	        disconnect();
-	    }
-	</script>
 </html>
