@@ -3,8 +3,11 @@ package gd.fintech.lms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.task.TaskSchedulerBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 
 import gd.fintech.lms.service.LoginService;
@@ -14,6 +17,10 @@ import gd.fintech.lms.service.LoginService;
 public class Scheduler {
 	@Autowired LoginService loginService;
 	
+	@Bean
+	public ThreadPoolTaskScheduler taskScheduler(TaskSchedulerBuilder builder) {
+	    return builder.build();
+	}
 	// Logger 사용
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
