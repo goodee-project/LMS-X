@@ -32,28 +32,43 @@
 		
 	</head>
 	<body>
+		<!-- 
 		<input type="text" id="nickname" class="form-inline" placeholder="닉네임을 입력해주세요" required autofocus>
 		<button class = "btn btn-primary" id = "name">확인</button>
 		<label for="roomId" class="label label-default">방 번호</label>
 		<label id="roomId" class="form-inline">${room.roomId}</label>
-		<br>
+		<br> 
+		 -->
 		<label for="roomName" class="label label-default">방 이름</label>
 		<label id="roomName" class="form-inline">${room.name}</label>
-		<div id = "chatroom" style = "width:400px; height: 600px; border:1px solid; background-color : gray"></div>
-		<input type = "text" id = "message" style = "height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
+		<div id="chatroom" style = "overflow: auto; max-height: 610px; width:400px; height: 600px; border:1px solid; background-color : navy;color: white;"></div>
+		<input type="text" id="message" style="height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
 		<button class = "btn btn-primary" id="send">전송</button>
 	</body>
 	
 	<script type="text/javascript">
+	
+		$('#message').on('keypress', function(e){
+			if(e.keyCode == '13'){
+			$('#send').click();
+			}
+		});
+
 	    var webSocket;
 	    var nickname;
 	    var roomId = '${room.roomId}';
+	    /*
 	    document.getElementById("name").addEventListener("click",function(){
 	        nickname = document.getElementById("nickname").value;
 	        document.getElementById("nickname").style.display = "none";
 	        document.getElementById("name").style.display = "none";
 	        connect();
 	    })
+	    */
+	    nickname = '${loginName}';
+        // document.getElementById("nickname").style.display = "none";
+        // document.getElementById("name").style.display = "none";
+        connect();
 	    document.getElementById("send").addEventListener("click",function(){
 	        send();
 	    })
@@ -71,6 +86,9 @@
 	        msg = document.getElementById("message").value;
 	        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'CHAT',writer:nickname,message : msg}));
 	        document.getElementById("message").value = "";
+	        if (document.getElementById('chatroom').scrollHeight > 0){
+		         document.getElementById('chatroom').scrollTop = document.getElementById('chatroom').scrollHeight - 1;
+	        }
 	    }
 	    function onOpen(){
 	        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'ENTER',writer:nickname}));

@@ -38,11 +38,11 @@ public class ChatController {
         return "/auth/newRoom";
     }
 
-    @GetMapping("/auth/room/new")
+    @GetMapping("/auth/room/new/{name}")
     public String makeRoom(ChatRoomForm form){
-        chatRoomRepository.createChatRoom(form.getName());
+    	 ChatRoom chatRoom = chatRoomRepository.createChatRoom(form.getName());
 
-        return "redirect:/auth/chat";
+        return "redirect:/auth/rooms/" + chatRoom.getRoomId();
     }
     /*
     @PostMapping("/auth/room/new")
