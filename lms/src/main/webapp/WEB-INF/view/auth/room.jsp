@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
-		<title>lmsNoticeOne</title>
+		<title>chat</title>
 		
 		<!-- Favicon -->
 		<link href="${pageContext.request.contextPath}/assets/img/brand/favicon.png" rel="icon" type="image/png">
@@ -31,38 +31,32 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
 		<script type="text/javascript">
-			
-			$(document).ready(function(){
+			$(document).ready(function() {
+				// 엔터 키 누르는 이벤트와 보내기 버튼 누르는 이벤트를 동일시함
 				$('#message').on('keypress', function(e){
 					if(e.keyCode == '13'){
-					$('#send').click();
+						$('#send').click();
 					}
 				});
+				
 				// let myUrl = window.location.hostname;
+				
 			    let webSocket;
 			    let nickname = '${loginName}';
 			    let roomId = '${chatroomList.chatroomUuid}';
 			    let sendId;
 			    let sendName;
-			    if('${loginId}' == '${chatroomList.chatroomPerson1Id}'){
+			    
+			    if('${loginId}' == '${chatroomList.chatroomPerson1Id}') {
 			    	sendId = '${chatroomList.chatroomPerson2Id}';
 			    	sendName = '${chatroomList.chatroomPerson2Name}';
 				} else {
 			    	sendId = '${chatroomList.chatroomPerson1Id}';
 			    	sendName = '${chatroomList.chatroomPerson1Name}';
 				}
-			    /*
-			    document.getElementById("name").addEventListener("click",function(){
-			        nickname = document.getElementById("nickname").value;
-			        document.getElementById("nickname").style.display = "none";
-			        document.getElementById("name").style.display = "none";
-			        connect();
-			    })
-			    */
-		        // document.getElementById("nickname").style.display = "none";
-		        // document.getElementById("name").style.display = "none";
-
-			    function connect(){
+				
+				// 소켓 접속
+			    function connect() {
 			        webSocket = new WebSocket('ws://' + document.location.host + '/lms/chat');
 			        webSocket.onopen = onOpen;
 			        webSocket.onclose = onClose;
@@ -71,14 +65,18 @@
 
 			    connect();
 			    
-			    document.getElementById("send").addEventListener("click",function(){
+			    // 전송 버튼 누르기
+			    document.getElementById("send").addEventListener("click", function() {
 			        send();
-			    })
-			    function disconnect(){
+			    });
+			    
+			    function disconnect() {
 			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'LEAVE',writer:nickname}));
 			        webSocket.close();
 			    }
-			    function send(){
+			    
+			    // 메세지 보내기
+			    function send() {
 			        msg = document.getElementById("message").value;
 			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'CHAT',writer:nickname,message : msg}));
 			        document.getElementById("message").value = "";
@@ -87,65 +85,261 @@
 			        $.ajax({
 						url: '${pageContext.request.contextPath}/auth/chat/insertChatList',
 						type:'post',
-						data: {chatroomUuid : roomId, chatSendId : sendId, chatSendName : sendName, chatReceiveId : '${loginId}', chatReceiveName : '${loginName}', chatText : msg}
+						data: {
+							chatroomUuid : roomId, 
+							chatSendId : sendId, 
+							chatSendName : sendName, 
+							chatReceiveId : '${loginId}', 
+							chatReceiveName : '${loginName}', 
+							chatText : msg
+						}
 					});
-					
 			    }
-			    function onOpen(){
+			    
+			    function onOpen() {
 			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'ENTER',writer:nickname}));
 			    }
-			    function onMessage(e){
+			    
+			    // 메세지를 보낼 때 내 화면 갱신
+			    function onMessage(e) {
 			        data = e.data;
-			        chatroom = document.getElementById("chatroom");
+			        chatroom = document.getElementById("chat");
 			        chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
 			        // 스크롤 조정
 					scrollControll();
 			    }
-			    function onClose(){
+			    
+			    // 접속 종료
+			    function onClose() {
 			        disconnect();
 			    }
-			    //브라우저 종료 및 닫기 감지 
+			    
+			    // 브라우저 종료 및 닫기 감지 
 			    window.onbeforeunload = function() {		 			 
 		 			onClose(); 
-		 		} 
+		 		}
+		 		
 				// 스크롤 조정
-			    function scrollControll(){
-			        if (document.getElementById('chatroom').scrollHeight > 0){
-				         document.getElementById('chatroom').scrollTop = document.getElementById('chatroom').scrollHeight;
+			    function scrollControll() {
+			        if (document.getElementById('chat').scrollHeight > 0){
+				         document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
 			        }
 			    }
-				scrollControll();
 			    
-			})
-			
+				scrollControll();
+			});
 		</script>
+		
+		<style>
+			*{
+				box-sizing:border-box;
+			}
+			body{
+				background-color:#abd9e9;
+				font-family:Arial;
+			}
+			#container{
+				width:490px;
+				height:800px;
+				background:#eff3f7;
+				margin:0 auto;
+				font-size:0;
+				border-radius:5px;
+				overflow:hidden;
+			}
+			main{
+				width:490px;
+				height:800px;
+				display:inline-block;
+				font-size:15px;
+				vertical-align:top;
+			}
+			
+			.status{
+				width:8px;
+				height:8px;
+				border-radius:50%;
+				display:inline-block;
+				margin-right:7px;
+			}
+			.green{
+				background-color:#58b666;
+			}
+			.orange{
+				background-color:#ff725d;
+			}
+			.blue{
+				background-color:#6fbced;
+				margin-right:0;
+				margin-left:7px;
+			}
+			
+			main header{
+				height:110px;
+				padding:30px 20px 30px 40px;
+			}
+			main header > *{
+				display:inline-block;
+				vertical-align:top;
+			}
+			main header img:first-child{
+				border-radius:50%;
+			}
+			main header img:last-child{
+				width:24px;
+				margin-top:8px;
+			}
+			main header div{
+				margin-left:10px;
+				margin-right:145px;
+			}
+			main header h2{
+				font-size:16px;
+				margin-bottom:5px;
+			}
+			main header h3{
+				font-size:14px;
+				font-weight:normal;
+				color:#7e818a;
+			}
+			
+			#chat{
+				padding-left:0;
+				margin:0;
+				list-style-type:none;
+				overflow-y:scroll;
+				height:535px;
+				border-top:2px solid #fff;
+				border-bottom:2px solid #fff;
+			}
+			#chat li{
+				padding:10px 30px;
+			}
+			#chat h2,#chat h3{
+				display:inline-block;
+				font-size:13px;
+				font-weight:normal;
+			}
+			#chat h3{
+				color:#bbb;
+			}
+			#chat .entete{
+				margin-bottom:5px;
+			}
+			#chat .message{
+				padding:20px;
+				color:#fff;
+				line-height:25px;
+				max-width:90%;
+				display:inline-block;
+				text-align:left;
+				border-radius:5px;
+			}
+			#chat .me{
+				text-align:right;
+			}
+			#chat .you .message{
+				background-color:#58b666;
+			}
+			#chat .me .message{
+				background-color:#6fbced;
+			}
+			#chat .triangle{
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 0 10px 10px 10px;
+			}
+			#chat .you .triangle{
+					border-color: transparent transparent #58b666 transparent;
+					margin-left:15px;
+			}
+			#chat .me .triangle{
+					border-color: transparent transparent #6fbced transparent;
+					margin-left:375px;
+			}
+			
+			main footer{
+				height:155px;
+				padding:20px 30px 10px 20px;
+			}
+			main footer textarea{
+				resize:none;
+				border:none;
+				display:block;
+				width:100%;
+				height:80px;
+				border-radius:3px;
+				padding:20px;
+				font-size:13px;
+				margin-bottom:13px;
+			}
+			main footer textarea::placeholder{
+				color:#ddd;
+			}
+			main footer img{
+				height:30px;
+				cursor:pointer;
+			}
+		</style>
 	</head>
 	<body>
-		<!-- 
-		<input type="text" id="nickname" class="form-inline" placeholder="닉네임을 입력해주세요" required autofocus>
-		<button class = "btn btn-primary" id = "name">확인</button>
-		<label for="roomId" class="label label-default">방 번호</label>
-		<label id="roomId" class="form-inline">${room.roomId}</label>
-		<br> 
-		 -->
-		<label for="roomName" class="label label-default">방 이름</label>
-			<c:choose>
-				<c:when test="${loginId == chatroomList.chatroomPerson1Id}">
-					<label id="roomName" class="form-inline">${chatroomList.chatroomPerson2Name}</label>
-				</c:when>
-				<c:otherwise>
-					<label id="roomName" class="form-inline">${chatroomList.chatroomPerson1Name}</label>
-				</c:otherwise>
-			</c:choose>
-		<div id="chatroom" style = "overflow: auto; max-height: 610px; width:400px; height: 600px; border:1px solid; background-color : navy;color: white;">
-			<c:forEach var="cl" items="${chatList}">
-				<div>
-					"${cl.chatReceiveName}:${cl.chatText}"
-				</div>
-			</c:forEach>
+		<div id="container">
+			<main>
+				<header>
+					<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
+					<div>
+						<c:choose>
+							<c:when test="${loginId == chatroomList.chatroomPerson1Id}">
+								<h2>${chatroomList.chatroomPerson2Name}</h2>
+							</c:when>
+							<c:otherwise>
+								<h2>${chatroomList.chatroomPerson1Name}</h2>
+							</c:otherwise>
+						</c:choose>
+						<h3>already 1902 messages</h3>
+					</div>
+					<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="">
+				</header>
+				<ul id="chat">
+					<c:forEach var="cl" items="${chatList}">
+						<c:choose>
+							<c:when test="${cl.chatReceiveName == loginName}">
+								<li class="me">
+									<div class="entete">
+										<h3>${cl.chatSenddate}</h3>
+										<h2>${cl.chatReceiveName}</h2>
+										<span class="status blue"></span>
+									</div>
+									<div class="triangle"></div>
+									<div class="message">
+										${cl.chatText}
+									</div>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="you">
+									<div class="entete">
+										<span class="status green"></span>
+										<h2>${cl.chatReceiveName}</h2>
+										<h3>${cl.chatSenddate}</h3>
+									</div>
+									<div class="triangle"></div>
+									<div class="message">
+										${cl.chatText}
+									</div>
+								</li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</ul>
+				<footer>
+					<textarea id="message" placeholder="메세지를 입력하세요." autofocus></textarea>
+					<div class="text-right">
+						<button class="btn btn-sm btn-dark" id="send">보내기</button>
+					</div>
+				</footer>
+			</main>
 		</div>
-		<input type="text" id="message" style="height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
-		<button class = "btn btn-primary" id="send">전송</button>
 	</body>
-	
 </html>
