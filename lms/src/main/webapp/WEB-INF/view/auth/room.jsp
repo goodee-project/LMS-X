@@ -38,7 +38,7 @@
 					$('#send').click();
 					}
 				});
-	
+				// let myUrl = window.location.hostname;
 			    let webSocket;
 			    let nickname = '${loginName}';
 			    let roomId = '${chatroomList.chatroomUuid}';
@@ -63,7 +63,7 @@
 		        // document.getElementById("name").style.display = "none";
 
 			    function connect(){
-			        webSocket = new WebSocket("ws://localhost/chat");
+			        webSocket = new WebSocket('ws://' + document.location.host + '/lms/chat');
 			        webSocket.onopen = onOpen;
 			        webSocket.onclose = onClose;
 			        webSocket.onmessage = onMessage;

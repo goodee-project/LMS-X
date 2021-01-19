@@ -46,6 +46,9 @@
 												<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
 													<a href="${pageContext.request.contextPath}/auth/teacher/note/insertNote/${con.value.accountId}/${con.value.accountName}" class="dropdown-item">
 													 	<i	class="ni ni-single-02"></i> <span>쪽지 보내기</span>
+													</a>												
+													<a href="${pageContext.request.contextPath}/auth/room/new/${loginId}/${loginName}/${con.value.accountId}/${con.value.accountName}" class="dropdown-item">
+													 	<i	class="ni ni-single-02"></i> <span>실시간 채팅</span>
 													</a>
 												</div>
 											</li>

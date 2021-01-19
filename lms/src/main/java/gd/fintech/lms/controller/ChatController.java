@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.service.ChatService;
 import gd.fintech.lms.vo.ChatList;
-import gd.fintech.lms.vo.ChatRoomForm;
 import gd.fintech.lms.vo.ChatroomList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,13 +40,13 @@ public class ChatController {
         model.addAttribute("chatList",chatList);
         return "/auth/room";
     }
-    
+    /*
     @GetMapping("/auth/new")
     public String make(Model model){
         ChatRoomForm form = new ChatRoomForm();
         model.addAttribute("form",form);
         return "/auth/newRoom";
-    }
+    }*/
 
     // 채팅방 생성
     @GetMapping("/auth/room/new/{chatroomPerson1Id}/{chatroomPerson1Name}/{chatroomPerson2Id}/{chatroomPerson2Name}")
