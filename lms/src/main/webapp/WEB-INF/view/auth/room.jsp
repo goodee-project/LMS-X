@@ -31,6 +31,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
 		<script type="text/javascript">
+			
 			$(document).ready(function(){
 				$('#message').on('keypress', function(e){
 					if(e.keyCode == '13'){
@@ -38,9 +39,9 @@
 					}
 				});
 	
-			    var webSocket;
-			    var nickname;
-			    var roomId = '${chatroomList.chatroomUuid}';
+			    let webSocket;
+			    let nickname = '${loginName}';
+			    let roomId = '${chatroomList.chatroomUuid}';
 			    let sendId;
 			    let sendName;
 			    if('${loginId}' == '${chatroomList.chatroomPerson1Id}'){
@@ -58,19 +59,21 @@
 			        connect();
 			    })
 			    */
-			    nickname = '${loginName}';
 		        // document.getElementById("nickname").style.display = "none";
 		        // document.getElementById("name").style.display = "none";
-		        connect();
-			    document.getElementById("send").addEventListener("click",function(){
-			        send();
-			    })
+
 			    function connect(){
 			        webSocket = new WebSocket("ws://localhost/chat");
 			        webSocket.onopen = onOpen;
 			        webSocket.onclose = onClose;
 			        webSocket.onmessage = onMessage;
 			    }
+
+			    connect();
+			    
+			    document.getElementById("send").addEventListener("click",function(){
+			        send();
+			    })
 			    function disconnect(){
 			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'LEAVE',writer:nickname}));
 			        webSocket.close();
@@ -79,12 +82,7 @@
 			        msg = document.getElementById("message").value;
 			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'CHAT',writer:nickname,message : msg}));
 			        document.getElementById("message").value = "";
-
-			        // 스크롤 조정
-			        if (document.getElementById('chatroom').scrollHeight > 0){
-				         document.getElementById('chatroom').scrollTop = document.getElementById('chatroom').scrollHeight - 1;
-			        }
-
+					
 			        // DB에 데이터 추가
 			        $.ajax({
 						url: '${pageContext.request.contextPath}/auth/chat/insertChatList',
@@ -100,10 +98,24 @@
 			        data = e.data;
 			        chatroom = document.getElementById("chatroom");
 			        chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
+			        // 스크롤 조정
+					scrollControl();
 			    }
 			    function onClose(){
 			        disconnect();
+				    connect();
 			    }
+			    window.onbeforeunload = function() {//브라우저 종료 및 닫기 감지 		 			 
+		 			onClose(); 
+		 		} 
+				// 스크롤 조정
+			    function scrollControl(){
+			        if (document.getElementById('chatroom').scrollHeight > 0){
+				         document.getElementById('chatroom').scrollTop = document.getElementById('chatroom').scrollHeight;
+			        }
+			    }
+				scrollControl();
+			    
 			})
 			
 		</script>
@@ -125,7 +137,13 @@
 					<label id="roomName" class="form-inline">${chatroomList.chatroomPerson1Name}</label>
 				</c:otherwise>
 			</c:choose>
-		<div id="chatroom" style = "overflow: auto; max-height: 610px; width:400px; height: 600px; border:1px solid; background-color : navy;color: white;"></div>
+		<div id="chatroom" style = "overflow: auto; max-height: 610px; width:400px; height: 600px; border:1px solid; background-color : navy;color: white;">
+			<c:forEach var="cl" items="${chatList}">
+				<div>
+					"${cl.chatReceiveName}:${cl.chatText}"
+				</div>
+			</c:forEach>
+		</div>
 		<input type="text" id="message" style="height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
 		<button class = "btn btn-primary" id="send">전송</button>
 	</body>

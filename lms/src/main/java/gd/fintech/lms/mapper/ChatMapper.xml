@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.mapper.ChatMapper">
+	<!-- 이미 채팅방이 존재하는지 -->
+	<select id="selectCheckChatroomList" parameterType="gd.fintech.lms.vo.ChatList" resultType="String">
+		SELECT
+			chatroom_uuid chatroomUuid
+		FROM
+			chatroom_list
+		WHERE
+			(
+				chatroom_person1_id = #{chatroomPerson1Id} AND
+				chatroom_person2_id = #{chatroomPerson2Id}
+			) OR
+			(
+				chatroom_person1_id = #{chatroomPerson2Id} AND
+				chatroom_person2_id = #{chatroomPerson1Id}
+			)
+	</select>
+	<!-- 이전 채팅 내용 불러오기 -->
+	<select id="selectChatHistory" parameterType="String" resultType="gd.fintech.lms.vo.ChatList">
+		SELECT
+			chat_no chatNo,
+			chatroom_uuid chatroomUuid,
+			chat_send_id chatSendId,
+			chat_send_name chatSendName,
+			chat_receive_id chatReceiveId,
+			chat_receive_name chatReceiveName,
+			chat_text chatText,
+			chat_senddate chatSenddate
+		FROM
+			chat_list
+		WHERE
+			chatroom_uuid = #{chatroomUuid}
+		ORDER BY
+			chat_no ASC
+	</select>
 	<!-- 새로운 채팅방 생성 -->
 	<insert id="insertChatroomList" parameterType="gd.fintech.lms.vo.ChatroomList">
 		INSERT INTO chatroom_list (

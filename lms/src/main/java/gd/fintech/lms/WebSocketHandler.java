@@ -1,9 +1,10 @@
 package gd.fintech.lms;
 
+
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,8 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gd.fintech.lms.service.ChatService;
 import gd.fintech.lms.vo.ChatMessage;
-import gd.fintech.lms.vo.ChatRoom;
-import gd.fintech.lms.vo.ChatroomList;
 import gd.fintech.lms.vo.MessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,9 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class WebSocketHandler extends TextWebSocketHandler {
 	@Autowired ChatService chatService;
-    private final ChatRoomRepository chatRoomRepository;
+    // private final ChatRoomRepository chatRoomRepository;
     private final ObjectMapper objectMapper;
-    // private Set<WebSocketSession> sessions = new HashSet<>();
+    private List<WebSocketSession> sessionList = new ArrayList<>();
+    private Map<String, List<WebSocketSession>> sessions = new HashMap<>();
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -37,27 +37,53 @@ public class WebSocketHandler extends TextWebSocketHandler {
         ChatMessage chatMessage = objectMapper.readValue(msg,ChatMessage.class);
         // ChatRoom chatRoom = chatRoomRepository.findRoomById(chatMessage.getChatRoomId());
         // chatRoom.handleMessage(session,chatMessage,objectMapper);
-        /*
+        
+        // 새로운 세션(사용자)가 들어 왔을 시
         if(chatMessage.getType() == MessageType.ENTER){
-            sessions.add(session);
+        	
+        	// 해당 채팅방에 세션이 하나 이상 존재시
+        	if(sessions.get(chatMessage.getChatRoomId()) != null) {
+        		sessionList = sessions.get(chatMessage.getChatRoomId()); // 해당 채팅방의 세션들을 가져옴
+            // 해당 채팅방에 세션이 존재하지 않으면서 세션 리스트가 비어있지 않을시 
+        	} else if(sessions.get(chatMessage.getChatRoomId()) == null && !sessionList.isEmpty()) {
+        		sessionList = new ArrayList<>(); // 세션 리스트를 초기화함
+            }
+            System.out.println(session + " : session");
+        	sessionList.add(session); // 새로운 세션을 리스트에 추가함
+
+            System.out.println(sessionList + " : sessionList");
+            System.out.println(chatMessage.getChatRoomId() + " : CharRoomId");
+            
+        	sessions.put(chatMessage.getChatRoomId(), sessionList); // 새로운 세션을 해당 채팅방에 추가시켜줌
+            System.out.println(sessions + " : sessions(Map)");
             chatMessage.setMessage(chatMessage.getWriter() + "님이 입장하셨습니다.");
         }
+        // 세션(사용자)이 떠날 때
         else if(chatMessage.getType() == MessageType.LEAVE){
-            sessions.remove(session);
+        	sessionList = sessions.get(chatMessage.getChatRoomId()); // 해당 채팅방의 세션들을 가져옴
+        	sessionList.remove(session); // 해당 세션을 리스트에서 제거함
+        	sessions.remove(chatMessage.getChatRoomId());
+        	sessions.put(chatMessage.getChatRoomId(), sessionList); // 제거한 사항을 적용함
             chatMessage.setMessage(chatMessage.getWriter() + "님임 퇴장하셨습니다.");
         }
+        // 채팅시
         else{
             chatMessage.setMessage(chatMessage.getWriter() + " : " + chatMessage.getMessage());
         }
         
+        // 새로운 메세지를 해당 채팅방에만 뿌림
         TextMessage textMessage = new TextMessage(objectMapper.writeValueAsString(chatMessage.getMessage()));
-		for(WebSocketSession sess : sessions){
+		for(WebSocketSession sess : sessions.get(chatMessage.getChatRoomId())){
 			sess.sendMessage(textMessage);
 		}
-        
-        */
-        ChatroomList chatroomList = chatRoomRepository.findRoomById(chatMessage.getChatRoomId());
-        chatroomList.handleMessage(session, chatMessage, objectMapper);
+        System.out.println(sessions + " : handleTextMessage chatroomList");
+        System.out.println(session + " : handleTextMessage session");
+        /*
+        ChatroomList chatroomList = new ChatroomList();
+        chatroomList = chatService.selectChatroomList(chatMessage.getChatRoomId());
+        System.out.println(chatroomList.getSessions() + " : handleTextMessage chatroomList");
+        System.out.println(chatroomList.getSessions() + " : handleTextMessage session");
+        chatroomList.handleMessage(session, chatMessage, objectMapper);*/
     }
 
 }

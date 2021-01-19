@@ -18,12 +18,13 @@ public class ChatroomList {
 	private String chatroomPerson1Name;
 	private String chatroomPerson2Id;
 	private String chatroomPerson2Name;
-
+	/*
     private Set<WebSocketSession> sessions = new HashSet<>();
 
 
     public void handleMessage(WebSocketSession session, ChatMessage chatMessage,
                               ObjectMapper objectMapper) throws IOException {
+        System.out.println(sessions + " : ChatroomList");
         if(chatMessage.getType() == MessageType.ENTER){
             sessions.add(session);
             chatMessage.setMessage(chatMessage.getWriter() + "님이 입장하셨습니다.");
@@ -44,5 +45,5 @@ public class ChatroomList {
         for(WebSocketSession sess : sessions){
             sess.sendMessage(textMessage);
         }
-    }
+    }*/
 }

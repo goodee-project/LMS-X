@@ -1,5 +1,5 @@
 package gd.fintech.lms;
-
+/*
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -20,14 +20,13 @@ public class ChatRoomRepository {
     private void init(){
         chatRoomMap = new LinkedHashMap<>();
     }
-    /*
+    
     public List<ChatroomList> findAllRoom(){
         List<ChatroomList> chatRooms = new ArrayList<>(chatRoomMap.values());
         Collections.reverse(chatRooms);
         return chatRooms;
     }
-    */
-
+    
     public ChatroomList findRoomById(String id){
         return chatRoomMap.get(id);
     }
@@ -35,4 +34,4 @@ public class ChatRoomRepository {
     public void createChatRoom(ChatroomList chatroomList){
         chatRoomMap.put(chatroomList.getChatroomUuid(), chatroomList);
     }
-}
+}*/

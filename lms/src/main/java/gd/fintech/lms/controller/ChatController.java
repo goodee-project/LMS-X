@@ -1,5 +1,6 @@
 package gd.fintech.lms.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import gd.fintech.lms.ChatRoomRepository;
 import gd.fintech.lms.service.ChatService;
+import gd.fintech.lms.vo.ChatList;
 import gd.fintech.lms.vo.ChatRoomForm;
 import gd.fintech.lms.vo.ChatroomList;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequiredArgsConstructor
 public class ChatController {
-    private final ChatRoomRepository chatRoomRepository;
 	@Autowired ChatService chatService;
     // private final ChatRoomRepository chatRoomRepository;
-/*
+	/*
     // 채팅방 목록
     @GetMapping("/auth/chat")
     public String rooms(Model model){
@@ -35,8 +35,10 @@ public class ChatController {
     public String room(@PathVariable String id, Model model){
         // ChatRoom room = chatRoomRepository.findRoomById(id);
         ChatroomList chatroomList = chatService.selectChatroomList(id);
+        List<ChatList> chatList = chatService.selectChatHistory(id);
         // model.addAttribute("room",room);
         model.addAttribute("chatroomList",chatroomList);
+        model.addAttribute("chatList",chatList);
         return "/auth/room";
     }
     
@@ -50,9 +52,12 @@ public class ChatController {
     // 채팅방 생성
     @GetMapping("/auth/room/new/{chatroomPerson1Id}/{chatroomPerson1Name}/{chatroomPerson2Id}/{chatroomPerson2Name}")
     public String makeRoom(ChatroomList chatroomList){
+    	// 이미 채팅방이 있을경우 해당 채팅방으로 이동
+    	if(chatService.selectCheckChatroomList(chatroomList) != null) {
+            return "redirect:/auth/rooms/" + chatService.selectCheckChatroomList(chatroomList);  		
+    	}
     	chatroomList.setChatroomUuid(UUID.randomUUID().toString().replace("-", ""));
     	chatService.insertChatroomList(chatroomList);
-    	chatRoomRepository.createChatRoom(chatroomList);
         return "redirect:/auth/rooms/" + chatroomList.getChatroomUuid();
     }
     /*

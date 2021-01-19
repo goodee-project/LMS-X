@@ -14,12 +14,6 @@ import gd.fintech.lms.vo.ChatList;
 public class ChatRestController {
 	@Autowired ChatRestService chatRestService;
 	
-	// 이전 채팅 내용 불러오기
-	@GetMapping("/auth/chat/chatHistory")
-	public List<ChatList> selectChatHistory(String chatroomUuid) {
-		return chatRestService.selectChatHistory(chatroomUuid);
-	}
-	
 	// 채팅 내용 추가
 	@PostMapping("/auth/chat/insertChatList")
 	public void insertChatList(ChatList chatList) {
