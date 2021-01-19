@@ -1,7 +1,10 @@
 package gd.fintech.lms;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,15 +53,10 @@ public class WebSocketHandler extends TextWebSocketHandler {
         	} else if(sessions.get(chatMessage.getChatRoomId()) == null && !sessionList.isEmpty()) {
         		sessionList = new ArrayList<>(); // 세션 리스트를 초기화함
             }
-            System.out.println(session + " : session");
         	sessionList.add(session); // 새로운 세션을 리스트에 추가함
 
-            System.out.println(sessionList + " : sessionList");
-            System.out.println(chatMessage.getChatRoomId() + " : CharRoomId");
-            
         	sessions.put(chatMessage.getChatRoomId(), sessionList); // 새로운 세션을 해당 채팅방에 추가시켜줌
-            System.out.println(sessions + " : sessions(Map)");
-            chatMessage.setMessage(chatMessage.getWriter() + "님이 입장하셨습니다.");
+            // chatMessage.setMessage(chatMessage.getWriter() + "님이 입장하셨습니다.");
         }
         // 세션(사용자)이 떠날 때
         else if(chatMessage.getType() == MessageType.LEAVE){
@@ -66,20 +64,28 @@ public class WebSocketHandler extends TextWebSocketHandler {
         	sessionList.remove(session); // 해당 세션을 리스트에서 제거함
         	sessions.remove(chatMessage.getChatRoomId());
         	sessions.put(chatMessage.getChatRoomId(), sessionList); // 제거한 사항을 적용함
-            chatMessage.setMessage(chatMessage.getWriter() + "님임 퇴장하셨습니다.");
+            // chatMessage.setMessage(chatMessage.getWriter() + "님임 퇴장하셨습니다.");
         }
         // 채팅시
         else{
-            chatMessage.setMessage(chatMessage.getWriter() + " : " + chatMessage.getMessage());
+    		// 현재 날짜
+    		/*
+    		Calendar currentDay = Calendar.getInstance();
+        	chatMessage.setChatDate(currentDay.toString());
+        	*/
+    		Date today = new Date();
+        	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        	chatMessage.setChatDate(format1.format(today));
+        	// 메세지 내용
+            chatMessage.setMessage(chatMessage.getWriter() + "," + chatMessage.getChatDate() + "," + chatMessage.getMessage());
+            // 새로운 메세지를 해당 채팅방에만 뿌림
+            TextMessage textMessage = new TextMessage(objectMapper.writeValueAsString(chatMessage.getMessage()));
+    		for(WebSocketSession sess : sessions.get(chatMessage.getChatRoomId())){
+    			sess.sendMessage(textMessage);
+    		}
         }
         
-        // 새로운 메세지를 해당 채팅방에만 뿌림
-        TextMessage textMessage = new TextMessage(objectMapper.writeValueAsString(chatMessage.getMessage()));
-		for(WebSocketSession sess : sessions.get(chatMessage.getChatRoomId())){
-			sess.sendMessage(textMessage);
-		}
-        System.out.println(sessions + " : handleTextMessage chatroomList");
-        System.out.println(session + " : handleTextMessage session");
         /*
         ChatroomList chatroomList = new ChatroomList();
         chatroomList = chatService.selectChatroomList(chatMessage.getChatRoomId());

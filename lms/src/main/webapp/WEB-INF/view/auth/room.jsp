@@ -39,14 +39,14 @@
 					}
 				});
 				
-				// let myUrl = window.location.hostname;
-				
+				// 사용자 정보
 			    let webSocket;
 			    let nickname = '${loginName}';
 			    let roomId = '${chatroomList.chatroomUuid}';
 			    let sendId;
 			    let sendName;
-			    
+
+			    // 사용자 구분하기
 			    if('${loginId}' == '${chatroomList.chatroomPerson1Id}') {
 			    	sendId = '${chatroomList.chatroomPerson2Id}';
 			    	sendName = '${chatroomList.chatroomPerson2Name}';
@@ -62,16 +62,19 @@
 			        webSocket.onclose = onClose;
 			        webSocket.onmessage = onMessage;
 			    }
-
+				// 연결하기
 			    connect();
 			    
 			    // 전송 버튼 누르기
 			    document.getElementById("send").addEventListener("click", function() {
 			        send();
 			    });
-			    
+
+			    // 연결 해제
 			    function disconnect() {
+				    // 연결 해제 메세지
 			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'LEAVE',writer:nickname}));
+			        // 연결 해제하기
 			        webSocket.close();
 			    }
 			    
@@ -95,16 +98,54 @@
 						}
 					});
 			    }
-			    
+
+			    // 연결시
 			    function onOpen() {
+				    // 연결 메세지
 			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'ENTER',writer:nickname}));
 			    }
 			    
 			    // 메세지를 보낼 때 내 화면 갱신
 			    function onMessage(e) {
 			        data = e.data;
+			        // 메세지 분할
+			        let tempData = (data.substring(1, data.length - 1)).split(',' , '3');
+			        let dataName = tempData[0]; // 이름
+			        let dataDate = tempData[1]; // 날짜
+			        let dataMsg = tempData[2]; // 메세지 내용
 			        chatroom = document.getElementById("chat");
-			        chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
+					if(dataName == '${loginName}') {
+						chatroom.innerHTML = chatroom.innerHTML + `
+							<li class="me">
+								<div class="entete">
+									<h3>` + dataDate + `</h3>
+									<h2>` + dataName + `</h2>
+									<span class="status blue"></span>
+								</div>
+								<div class="triangle"></div>
+								<div class="message">`
+									+ dataMsg + `
+								</div>
+							</li>
+						`
+					} else {
+						chatroom.innerHTML = chatroom.innerHTML + `
+							<li class="you">
+								<div class="entete">
+									<span class="status green"></span>
+									<h3>` + dataDate + `</h3>
+									<h2>` + dataName + `</h2>
+									<span class="status blue"></span>
+								</div>
+								<div class="triangle"></div>
+								<div class="message">`
+									+ dataMsg + `
+								</div>
+							</li>
+						`
+					}
+					// 입력창 초기화
+					$('#message').text('');
 			        // 스크롤 조정
 					scrollControll();
 			    }
@@ -114,7 +155,7 @@
 			        disconnect();
 			    }
 			    
-			    // 브라우저 종료 및 닫기 감지 
+			    // 브라우저 종료 및 닫기 감지 - 비정상 종료 대처
 			    window.onbeforeunload = function() {		 			 
 		 			onClose(); 
 		 		}
