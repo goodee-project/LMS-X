@@ -99,22 +99,22 @@
 			        chatroom = document.getElementById("chatroom");
 			        chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
 			        // 스크롤 조정
-					scrollControl();
+					scrollControll();
 			    }
 			    function onClose(){
 			        disconnect();
-				    connect();
 			    }
-			    window.onbeforeunload = function() {//브라우저 종료 및 닫기 감지 		 			 
+			    //브라우저 종료 및 닫기 감지 
+			    window.onbeforeunload = function() {		 			 
 		 			onClose(); 
 		 		} 
 				// 스크롤 조정
-			    function scrollControl(){
+			    function scrollControll(){
 			        if (document.getElementById('chatroom').scrollHeight > 0){
 				         document.getElementById('chatroom').scrollTop = document.getElementById('chatroom').scrollHeight;
 			        }
 			    }
-				scrollControl();
+				scrollControll();
 			    
 			})
 			
