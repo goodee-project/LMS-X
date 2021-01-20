@@ -133,9 +133,8 @@
 							<li class="you">
 								<div class="entete">
 									<span class="status green"></span>
-									<h3>` + dataDate + `</h3>
 									<h2>` + dataName + `</h2>
-									<span class="status blue"></span>
+									<h3>` + dataDate + `</h3>
 								</div>
 								<div class="triangle"></div>
 								<div class="message">`
