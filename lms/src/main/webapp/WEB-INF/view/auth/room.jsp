@@ -73,7 +73,7 @@
 			    // 연결 해제
 			    function disconnect() {
 				    // 연결 해제 메세지
-			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'LEAVE',writer:nickname}));
+			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'LEAVE',writerName:nickname,writerId:'${loginId}'}));
 			        // 연결 해제하기
 			        webSocket.close();
 			    }
@@ -81,7 +81,7 @@
 			    // 메세지 보내기
 			    function send() {
 			        msg = document.getElementById("message").value;
-			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'CHAT',writer:nickname,message : msg}));
+			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'CHAT',writerName:nickname,writerId:'${loginId}',message : msg}));
 			        document.getElementById("message").value = "";
 					
 			        // DB에 데이터 추가
@@ -102,19 +102,25 @@
 			    // 연결시
 			    function onOpen() {
 				    // 연결 메세지
-			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'ENTER',writer:nickname}));
+			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'ENTER',writer:nickname,writerId:'${loginId}'}));
 			    }
 			    
 			    // 메세지를 보낼 때 내 화면 갱신
 			    function onMessage(e) {
 			        data = e.data;
 			        // 메세지 분할
-			        let tempData = (data.substring(1, data.length - 1)).split(',' , '3');
-			        let dataName = tempData[0]; // 이름
-			        let dataDate = tempData[1]; // 날짜
-			        let dataMsg = tempData[2]; // 메세지 내용
+			        let tempData = (data.substring(1, data.length - 1)).split(',');
+			        let dataId = tempData[0]; // 아이디
+			        let dataName = tempData[1]; // 이름
+			        let dataDate = tempData[2]; // 날짜
+			        let dataIndex = data.indexOf(',');
+			        for(let i = 0; i < 2; i++){
+			        	dataIndex = data.indexOf(',' , dataIndex + 1);
+			        	console.log(dataIndex);
+				    }
+			        let dataMsg = data.substring(dataIndex + 1, data.length - 1); // 메세지 내용
 			        chatroom = document.getElementById("chat");
-					if(dataName == '${loginName}') {
+					if(dataId == '${loginId}') {
 						chatroom.innerHTML = chatroom.innerHTML + `
 							<li class="me">
 								<div class="entete">
@@ -144,7 +150,7 @@
 						`
 					}
 					// 입력창 초기화
-					$('#message').text('');
+					document.getElementById("message").value='';
 			        // 스크롤 조정
 					scrollControll();
 			    }
@@ -344,7 +350,7 @@
 				<ul id="chat">
 					<c:forEach var="cl" items="${chatList}">
 						<c:choose>
-							<c:when test="${cl.chatReceiveName == loginName}">
+							<c:when test="${cl.chatReceiveId == loginId}">
 								<li class="me">
 									<div class="entete">
 										<h3>${cl.chatSenddate}</h3>

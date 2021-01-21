@@ -9,6 +9,9 @@ import gd.fintech.lms.vo.ChatroomList;
 
 @Mapper
 public interface ChatMapper {
+	// 채팅방 목록 가져오기
+	List<ChatroomList> selectChatroomListAll(String accountId);
+	
 	// 이미 있는 채팅방인지
 	String selectCheckChatroomList(ChatroomList chatroomList);
 	

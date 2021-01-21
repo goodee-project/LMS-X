@@ -3,7 +3,6 @@ package gd.fintech.lms;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -78,7 +77,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
         	chatMessage.setChatDate(format1.format(today));
         	// 메세지 내용
-            chatMessage.setMessage(chatMessage.getWriter() + "," + chatMessage.getChatDate() + "," + chatMessage.getMessage());
+            chatMessage.setMessage(chatMessage.getWriterId() + "," + chatMessage.getWriterName() + "," + chatMessage.getChatDate() + "," + chatMessage.getMessage());
             // 새로운 메세지를 해당 채팅방에만 뿌림
             TextMessage textMessage = new TextMessage(objectMapper.writeValueAsString(chatMessage.getMessage()));
     		for(WebSocketSession sess : sessions.get(chatMessage.getChatRoomId())){

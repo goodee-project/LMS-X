@@ -3,6 +3,10 @@ package gd.fintech.lms.controller;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,13 +35,16 @@ public class ChatController {
 
     // 채팅 내용
     @GetMapping("/auth/rooms/{id}")
-    public String room(@PathVariable String id, Model model){
-        // ChatRoom room = chatRoomRepository.findRoomById(id);
+    public String room(@PathVariable String id, Model model, ServletRequest request){
+		HttpSession session = ((HttpServletRequest)request).getSession();		
+		String accountId = (String)session.getAttribute("loginId");
         ChatroomList chatroomList = chatService.selectChatroomList(id);
         List<ChatList> chatList = chatService.selectChatHistory(id);
+        List<ChatroomList> chatroomListAll = chatService.selectChatroomListAll(accountId);
         // model.addAttribute("room",room);
         model.addAttribute("chatroomList",chatroomList);
         model.addAttribute("chatList",chatList);
+        model.addAttribute("chatroomListAll",chatroomListAll);
         return "/auth/room";
     }
     /*
