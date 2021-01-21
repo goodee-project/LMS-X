@@ -18,6 +18,7 @@ public class ChatroomList {
 	private String chatroomPerson1Name;
 	private String chatroomPerson2Id;
 	private String chatroomPerson2Name;
+	private String chatroomImage;
 	/*
     private Set<WebSocketSession> sessions = new HashSet<>();
 

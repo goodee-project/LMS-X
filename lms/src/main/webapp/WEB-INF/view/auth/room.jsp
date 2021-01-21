@@ -38,7 +38,7 @@
 						$('#send').click();
 					}
 				});
-				
+
 				// 사용자 정보
 			    let webSocket;
 			    let nickname = '${loginName}';
@@ -80,9 +80,14 @@
 			    
 			    // 메세지 보내기
 			    function send() {
+				    var pattern = /\s/g;
+				    // 메세지 유효성 검사
+				    if($('#message').val().length < 1 || ($('#message').val()).replace(/\s/g, '').length < 1) {
+						document.getElementById("message").value = '';
+						return;
+			    	}
 			        msg = document.getElementById("message").value;
 			        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'CHAT',writerName:nickname,writerId:'${loginId}',message : msg}));
-			        document.getElementById("message").value = "";
 					
 			        // DB에 데이터 추가
 			        $.ajax({
@@ -107,18 +112,21 @@
 			    
 			    // 메세지를 보낼 때 내 화면 갱신
 			    function onMessage(e) {
-			        data = e.data;
-			        // 메세지 분할
-			        let tempData = (data.substring(1, data.length - 1)).split(',');
+			        data = e.data; // 메세지 정보
+			        
+			        let tempData = (data.substring(1, data.length - 1)).split(','); // 메세지 분할
 			        let dataId = tempData[0]; // 아이디
 			        let dataName = tempData[1]; // 이름
 			        let dataDate = tempData[2]; // 날짜
-			        let dataIndex = data.indexOf(',');
+			        // 메세지 내용 분리 작업
+			        let dataIndex = data.indexOf(','); 
 			        for(let i = 0; i < 2; i++){
 			        	dataIndex = data.indexOf(',' , dataIndex + 1);
-			        	console.log(dataIndex);
 				    }
 			        let dataMsg = data.substring(dataIndex + 1, data.length - 1); // 메세지 내용
+			        dataMsg = (dataMsg.replaceAll('\\n', '<br>')).replaceAll('\\', '&#92;'); // replace
+
+			        // 메세지 내용을 뷰에 띄움
 			        chatroom = document.getElementById("chat");
 					if(dataId == '${loginId}') {
 						chatroom.innerHTML = chatroom.innerHTML + `
@@ -173,6 +181,7 @@
 			    }
 			    
 				scrollControll();
+
 			});
 		</script>
 		
@@ -181,7 +190,6 @@
 				box-sizing:border-box;
 			}
 			body{
-				background-color:#abd9e9;
 				font-family:Arial;
 			}
 			#container{
@@ -329,63 +337,131 @@
 			}
 		</style>
 	</head>
-	<body>
-		<div id="container">
-			<main>
-				<header>
-					<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
-					<div>
-						<c:choose>
-							<c:when test="${loginId == chatroomList.chatroomPerson1Id}">
-								<h2>${chatroomList.chatroomPerson2Name}</h2>
-							</c:when>
-							<c:otherwise>
-								<h2>${chatroomList.chatroomPerson1Name}</h2>
-							</c:otherwise>
-						</c:choose>
-						<h3>already 1902 messages</h3>
+	<body class="">
+		<!-- 메인 Navbar -->
+		
+		<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+			
+			<div class="container-fluid">
+				<c:choose>
+					<c:when test="${loginLevel == 1}">
+						<jsp:include page="/WEB-INF/view/auth/student/include/menu.jsp" />
+					</c:when>
+					<c:when test="${loginLevel == 2}">
+						<jsp:include page="/WEB-INF/view/auth/teacher/include/menu.jsp" />
+					</c:when>
+					<c:when test="${loginLevel == 3}">
+						<jsp:include page="/WEB-INF/view/auth/manager/include/menu.jsp" />
+					</c:when>
+				</c:choose>
+		    </div>	
+		</nav>   		
+		<div class="main-content">
+			<!-- 상단 Navbar -->
+			<div class="container-fluid">			
+				<c:choose>
+					<c:when test="${loginLevel == 1}">
+						<jsp:include page="/WEB-INF/view/auth/student/include/topMenu.jsp" />
+					</c:when>
+					<c:when test="${loginLevel == 2}">
+						<jsp:include page="/WEB-INF/view/auth/teacher/include/noLectureMenu.jsp" />
+					</c:when>
+					<c:when test="${loginLevel == 3}">
+						<jsp:include page="/WEB-INF/view/auth/manager/include/topMenu.jsp" />
+					</c:when>
+				</c:choose>
+	    	</div>
+			
+	    	<!-- 접속자 -->			
+			<c:choose>
+				<c:when test="${loginLevel == 1}">
+					<jsp:include page="/WEB-INF/view/auth/student/include/connector.jsp" />
+				</c:when>
+				<c:when test="${loginLevel == 2}">
+					<jsp:include page="/WEB-INF/view/auth/teacher/include/connector.jsp" />
+				</c:when>
+				<c:when test="${loginLevel == 3}">
+					<jsp:include page="/WEB-INF/view/auth/manager/include/connector.jsp" />
+				</c:when>
+			</c:choose>
+   			<div class="container-fluid mt--7 col-12">
+				<div class="card shadow">
+					<div class="card-header border-0">
+						<div class="row align-items-center">
+							<main>
+								<header>
+									<img width="30px" src="${pageContext.request.contextPath}/resource/mypageImage/${chatroomList.chatroomImage}" alt="">
+									<div>
+										<c:choose>
+											<c:when test="${loginId == chatroomList.chatroomPerson1Id}">
+												<h2>${chatroomList.chatroomPerson2Name}</h2>
+											</c:when>
+											<c:otherwise>
+												<h2>${chatroomList.chatroomPerson1Name}</h2>
+											</c:otherwise>
+										</c:choose>
+										<h3></h3>
+									</div>
+								</header>
+								<ul id="chat">
+									<c:forEach var="cl" items="${chatList}">
+										<c:choose>
+											<c:when test="${cl.chatReceiveId == loginId}">
+												<li class="me">
+													<div class="entete">
+														<h3>${cl.chatSenddate}</h3>
+														<h2>${cl.chatReceiveName}</h2>
+														<span class="status blue"></span>
+													</div>
+													<div class="triangle"></div>
+													<div class="message">
+														${cl.chatText}
+													</div>
+												</li>
+											</c:when>
+											<c:otherwise>
+												<li class="you">
+													<div class="entete">
+														<span class="status green"></span>
+														<h2>${cl.chatReceiveName}</h2>
+														<h3>${cl.chatSenddate}</h3>
+													</div>
+													<div class="triangle"></div>
+													<div class="message">
+														${cl.chatText}
+													</div>
+												</li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</ul>
+								<footer>
+									<textarea id="message" placeholder="메세지를 입력하세요." autofocus></textarea>
+									<div class="text-right">
+										<button class="btn btn-sm btn-dark" id="send">보내기</button>
+									</div>
+								</footer>
+							</main>
+						</div>
 					</div>
-					<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="">
-				</header>
-				<ul id="chat">
-					<c:forEach var="cl" items="${chatList}">
-						<c:choose>
-							<c:when test="${cl.chatReceiveId == loginId}">
-								<li class="me">
-									<div class="entete">
-										<h3>${cl.chatSenddate}</h3>
-										<h2>${cl.chatReceiveName}</h2>
-										<span class="status blue"></span>
-									</div>
-									<div class="triangle"></div>
-									<div class="message">
-										${cl.chatText}
-									</div>
-								</li>
-							</c:when>
-							<c:otherwise>
-								<li class="you">
-									<div class="entete">
-										<span class="status green"></span>
-										<h2>${cl.chatReceiveName}</h2>
-										<h3>${cl.chatSenddate}</h3>
-									</div>
-									<div class="triangle"></div>
-									<div class="message">
-										${cl.chatText}
-									</div>
-								</li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</ul>
-				<footer>
-					<textarea id="message" placeholder="메세지를 입력하세요." autofocus></textarea>
-					<div class="text-right">
-						<button class="btn btn-sm btn-dark" id="send">보내기</button>
-					</div>
-				</footer>
-			</main>
+				</div>
+			</div>		
 		</div>
+		<!--   Core   -->
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<!--   Optional JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+		<!--   Argon JS   -->
+		<script src="${pageContext.request.contextPath}/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+		<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+		<script>
+		    window.TrackJS &&
+		      TrackJS.install({
+		        token: "ee6fab19c5a04ac1a32a645abde4613a",
+		        application: "argon-dashboard-free"
+		    });
+  		</script>
 	</body>
 </html>

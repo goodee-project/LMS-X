@@ -1,6 +1,7 @@
 package gd.fintech.lms.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,5 +23,5 @@ public interface ChatMapper {
 	int insertChatroomList(ChatroomList chatroomList);
 	
 	// 채팅방 정보 가져오기
-	ChatroomList selectChatroomList(String chatroomUuid);
+	ChatroomList selectChatroomList(Map<String, Object> map);
 }

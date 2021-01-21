@@ -1,6 +1,8 @@
 package gd.fintech.lms.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletRequest;
@@ -25,20 +27,26 @@ import lombok.extern.slf4j.Slf4j;
 public class ChatController {
 	@Autowired ChatService chatService;
     // private final ChatRoomRepository chatRoomRepository;
-	/*
+	
     // 채팅방 목록
-    @GetMapping("/auth/chat")
-    public String rooms(Model model){
-        model.addAttribute("rooms",chatRoomRepository.findAllRoom());
-        return "/auth/chatRooms";
-    }*/
+    @GetMapping("/auth/chatroomList")
+    public String rooms(Model model, ServletRequest request){
+		HttpSession session = ((HttpServletRequest)request).getSession();		
+		String accountId = (String)session.getAttribute("loginId");
+    	List<ChatroomList> chatroomList = chatService.selectChatroomListAll(accountId);
+        model.addAttribute("chatroomList",chatroomList);
+        return "/auth/chatroomList";
+    }
 
     // 채팅 내용
     @GetMapping("/auth/rooms/{id}")
     public String room(@PathVariable String id, Model model, ServletRequest request){
 		HttpSession session = ((HttpServletRequest)request).getSession();		
 		String accountId = (String)session.getAttribute("loginId");
-        ChatroomList chatroomList = chatService.selectChatroomList(id);
+		Map<String, Object> map = new HashMap<>();
+		map.put("accountId", accountId);
+		map.put("chatroomUuid", id);
+        ChatroomList chatroomList = chatService.selectChatroomList(map);
         List<ChatList> chatList = chatService.selectChatHistory(id);
         List<ChatroomList> chatroomListAll = chatService.selectChatroomListAll(accountId);
         // model.addAttribute("room",room);
@@ -47,13 +55,6 @@ public class ChatController {
         model.addAttribute("chatroomListAll",chatroomListAll);
         return "/auth/room";
     }
-    /*
-    @GetMapping("/auth/new")
-    public String make(Model model){
-        ChatRoomForm form = new ChatRoomForm();
-        model.addAttribute("form",form);
-        return "/auth/newRoom";
-    }*/
 
     // 채팅방 생성
     @GetMapping("/auth/room/new/{chatroomPerson1Id}/{chatroomPerson1Name}/{chatroomPerson2Id}/{chatroomPerson2Name}")
@@ -66,12 +67,5 @@ public class ChatController {
     	chatService.insertChatroomList(chatroomList);
         return "redirect:/auth/rooms/" + chatroomList.getChatroomUuid();
     }
-    /*
-    @PostMapping("/auth/room/new")
-    public String makeRoom(ChatRoomForm form){
-        chatRoomRepository.createChatRoom(form.getName());
-
-        return "redirect:/auth/chat";
-    }*/
 
 }

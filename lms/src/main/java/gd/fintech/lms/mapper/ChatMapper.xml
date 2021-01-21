@@ -2,15 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.mapper.ChatMapper">
 	<!-- 채팅방 목록 가져오기 -->
+	<!-- 본인이 아닌 상대방의 프로필 이미지를 가져옴 -->
 	<select id="selectChatroomListAll" parameterType="String" resultType="gd.fintech.lms.vo.ChatroomList">
 		SELECT
-			chatroom_uuid chatroomUuid,
-			chatroom_person1_id chatroomPerson1Id,
-			chatroom_person1_name chatroomPerson1Name,
-			chatroom_person2_id chatroomPerson2Id,
-			chatroom_person2_name chatroomPerson2Name
+			c.chatroom_uuid chatroomUuid,
+			c.chatroom_person1_id chatroomPerson1Id,
+			c.chatroom_person1_name chatroomPerson1Name,
+			c.chatroom_person2_id chatroomPerson2Id,
+			c.chatroom_person2_name chatroomPerson2Name,
+			m.mypage_image_uuid chatroomImage
 		FROM
-			chatroom_list
+			chatroom_list c
+		LEFT JOIN 
+			mypage_image m 
+		ON
+			case 
+				when 
+					c.chatroom_person1_id = c.chatroom_person2_id then 
+					m.account_id = c.chatroom_person1_id
+				when
+					c.chatroom_person1_id = #{accountId} then
+					m.account_id = c.chatroom_person2_id
+				ELSE 
+					m.account_id = c.chatroom_person1_id
+			END 
 		WHERE
 			chatroom_person1_id = #{accountId} OR
 			chatroom_person2_id = #{accountId}
@@ -67,15 +82,29 @@
 	</insert>
 	
 	<!-- 채팅방 정보 가져오기 -->
-	<select id="selectChatroomList" parameterType="String" resultType="gd.fintech.lms.vo.ChatroomList">
+	<select id="selectChatroomList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.ChatroomList">
 		SELECT
-			chatroom_uuid chatroomUuid,
-			chatroom_person1_id chatroomPerson1Id,
-			chatroom_person1_name chatroomPerson1Name,
-			chatroom_person2_id chatroomPerson2Id,
-			chatroom_person2_name chatroomPerson2Name
+			c.chatroom_uuid chatroomUuid,
+			c.chatroom_person1_id chatroomPerson1Id,
+			c.chatroom_person1_name chatroomPerson1Name,
+			c.chatroom_person2_id chatroomPerson2Id,
+			c.chatroom_person2_name chatroomPerson2Name,
+			m.mypage_image_uuid chatroomImage
 		FROM
-			chatroom_list
+			chatroom_list c
+		LEFT JOIN 
+			mypage_image m 
+		ON
+			case 
+				when 
+					c.chatroom_person1_id = c.chatroom_person2_id then 
+					m.account_id = c.chatroom_person1_id
+				when
+					c.chatroom_person1_id = #{accountId} then
+					m.account_id = c.chatroom_person2_id
+				ELSE 
+					m.account_id = c.chatroom_person1_id
+			END 
 		WHERE
 			chatroom_uuid = #{chatroomUuid}		
 	</select>
