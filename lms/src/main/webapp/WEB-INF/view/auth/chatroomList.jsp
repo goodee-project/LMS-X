@@ -27,7 +27,33 @@
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		
+		<script>
+			$(document).ready(function(){
+				// 받는사람 검색 버튼
+				$('#searchAccountBtn').click(function(){
+					$('#selectAccount').html('');
+					// 계정 리스트 가져오기
+					$.ajax({
+						url: '${pageContext.request.contextPath}/auth/chat/insertChatList/' + $('#searchAccount').val(),
+						type:'get',
+						success: function(data){									
+							$(data).each(function(key, value) {
+								$('#selectAccount').append('<div><a href="${pageContext.request.contextPath}/auth/room/new/'+ value.accountId + '/' + value.accountName + '/${loginId}/${loginName}" class="btn btn-secondry form-control">' + value.accountName + '(' + value.accountId + ')</a></div>');
+							});
+
+							// 계정 한개 선택시
+							$('.selectAccountBtn').click(function(){
+								document.getElementById("noteReceiverId").value = this.id;
+								document.getElementById("noteReceiverName").value = this.value;
+								document.getElementById("searchAccountText").value = this.value + '(' + this.id + ')';
+								$('#selectAccount').html('');	
+							})	
+						}
+					});
+				})
+				
+			})
+		</script>
 		<style>
 			*{
 				box-sizing:border-box;
@@ -310,9 +336,18 @@
 						<div class="row align-items-center">						
 							<aside>
 								<header>
-									<input type="text" placeholder="search">
+									<div class="row">
+										<div class="col-9">
+											<input type="text" id="searchAccount" placeholder="search">								
+										</div>
+										<div class="col-1">
+											<button id="searchAccountBtn" class="btn btn-primary btn-lg">검색</button>
+										</div>
+									</div>
 								</header>
 								<ul>
+							    	<div id="selectAccount" style="overflow: auto; width: 90%; max-height: 200px;">
+									</div>
 									<c:forEach var="cl" items="${chatroomList}">
 										<a href="${pageContext.request.contextPath}/auth/rooms/${cl.chatroomUuid}">
 											<li>
@@ -321,10 +356,10 @@
 													<h2>
 														<c:choose>
 															<c:when test="${cl.chatroomPerson1Id == loginId}">
-																${cl.chatroomPerson2Id}
+																${cl.chatroomPerson2Name}(${cl.chatroomPerson2Id})
 															</c:when>
 															<c:otherwise>
-																${cl.chatroomPerson1Id}													
+																${cl.chatroomPerson1Name}(${cl.chatroomPerson1Id})												
 															</c:otherwise>
 														</c:choose>
 													</h2>
