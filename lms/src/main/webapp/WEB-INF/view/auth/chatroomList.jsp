@@ -351,7 +351,12 @@
 									<c:forEach var="cl" items="${chatroomList}">
 										<a href="${pageContext.request.contextPath}/auth/rooms/${cl.chatroomUuid}">
 											<li>
-												<img width="30px" src="${pageContext.request.contextPath}/resource/mypageImage/${cl.chatroomImage}" alt="">
+												<c:if test="${empty cl.chatroomImage}">
+													<img width="30px" src="${pageContext.request.contextPath}/resource/mypageImage/default.png" alt="">												
+												</c:if>
+												<c:if test="${!empty cl.chatroomImage}">
+													<img width="30px" src="${pageContext.request.contextPath}/resource/mypageImage/${cl.chatroomImage}" alt="">												
+												</c:if>
 												<div>
 													<h2>
 														<c:choose>

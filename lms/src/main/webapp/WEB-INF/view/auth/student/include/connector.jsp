@@ -48,7 +48,7 @@
 													 	<i	class="far fa-envelope"></i> <span>쪽지 보내기</span>
 													</a>
 													<a href="${pageContext.request.contextPath}/auth/room/new/${loginId}/${loginName}/${con.value.accountId}/${con.value.accountName}" class="dropdown-item">
-													 	<i	class="ni ni-single-02"></i> <span>실시간 채팅</span>
+													 	<i	class="fa fa-comments"></i> <span>실시간 채팅</span>
 													</a>
 												</div>
 											</li>

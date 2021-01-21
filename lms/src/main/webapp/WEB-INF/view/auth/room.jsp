@@ -390,7 +390,12 @@
 						<div class="row align-items-center">
 							<main>
 								<header>
-									<img width="30px" src="${pageContext.request.contextPath}/resource/mypageImage/${chatroomList.chatroomImage}" alt="">
+									<c:if test="${empty chatroomList.chatroomImage}">
+										<img width="30px" src="${pageContext.request.contextPath}/resource/mypageImage/default.png" alt="">												
+									</c:if>
+									<c:if test="${!empty chatroomList.chatroomImage}">
+										<img width="30px" src="${pageContext.request.contextPath}/resource/mypageImage/${chatroomList.chatroomImage}" alt="">												
+									</c:if>
 									<div>
 										<c:choose>
 											<c:when test="${loginId == chatroomList.chatroomPerson1Id}">

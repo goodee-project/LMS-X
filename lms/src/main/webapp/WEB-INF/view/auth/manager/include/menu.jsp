@@ -95,6 +95,14 @@
                         <span class="badge badge-danger">${noteNotReadReceiveCount}</span>
                     </a>
                 </li>
+                
+				<!-- 채팅 -->
+				<li class="nav-item">
+					<a class="nav-link" href="${pageContext.request.contextPath}/auth/chatroomList">
+						<i class="fa fa-comments" aria-hidden="true"></i>
+						채팅
+					</a>
+				</li>
 		
 				<!-- 마이페이지 -->
 				<li class="nav-item">
