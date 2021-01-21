@@ -100,6 +100,10 @@
 							chatReceiveId : '${loginId}', 
 							chatReceiveName : '${loginName}', 
 							chatText : msg
+						},
+						success:function(data){
+							// 입력창 초기화
+							document.getElementById("message").value='';
 						}
 					});
 			    }
@@ -157,8 +161,6 @@
 							</li>
 						`
 					}
-					// 입력창 초기화
-					document.getElementById("message").value='';
 			        // 스크롤 조정
 					scrollControll();
 			    }
