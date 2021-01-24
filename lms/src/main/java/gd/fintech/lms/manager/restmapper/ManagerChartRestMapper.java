@@ -12,7 +12,7 @@ import gd.fintech.lms.vo.Report;
 public interface ManagerChartRestMapper {
 	// 해당 강좌의 과제 리스트 가져오기
 	public List<Report> selectReportListByLectureNo(int lectureNo);
-	// 최근 2주일 접속 트래픽
+	// 최근 10일 접속 트래픽
 	public List<Map<String, Object>> selectLatestLoginLog();
 	// 강의별 성적 평균
 	public List<Map<String, Object>> selectAvgGradeByLecture();

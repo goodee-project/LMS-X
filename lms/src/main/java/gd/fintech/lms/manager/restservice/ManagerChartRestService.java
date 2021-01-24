@@ -18,7 +18,7 @@ public class ManagerChartRestService {
 	public List<Report> selectReportListByLectureNo(int lectureNo){
 		return managerChartRestMapper.selectReportListByLectureNo(lectureNo);
 	}
-	// 최근 2주일 접속 트래픽
+	// 최근 10일 접속 트래픽
 	public List<Map<String, Object>> selectLatestLoginLog(){
 		return managerChartRestMapper.selectLatestLoginLog();
 	}

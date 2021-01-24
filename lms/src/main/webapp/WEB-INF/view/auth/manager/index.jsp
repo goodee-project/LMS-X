@@ -50,7 +50,7 @@
 						data: {
 							labels: [],
 							datasets: [{
-								label:'최근 2주간 접속 트래픽',
+								label:'최근 10일간 접속 트래픽',
 								data: [],
 								backgroundColor: [],
 								borderColor: [],
@@ -167,7 +167,7 @@
 								    <div class="card-header">
 								    
 										<!-- Title -->
-										<h5 class="h3 mb-0">최근 2주간 접속 트래픽</h5>
+										<h5 class="h3 mb-0">최근 10일간 접속 트래픽</h5>
 								    </div>
 									
 									<!-- Card body -->

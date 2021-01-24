@@ -16,18 +16,18 @@
 		ORDER BY 
 			report_createdate DESC 
 	</select>
-	<!-- 최근 2주일 접속 트래픽 -->
+	<!-- 최근 10일 접속 트래픽 -->
 	<select id="selectLatestLoginLog" resultType="java.util.Map">
 		SELECT 
 			DATE_FORMAT(login_log_date, '%Y-%m-%d') day, 
 			COUNT(*) cnt
 		FROM login_log
 		WHERE 
-			15 > (DATE_FORMAT(NOW(), '%Y-%m-%d') - DATE_FORMAT(login_log_date, '%Y-%m-%d'))
+			DATE_FORMAT(login_log_date, '%Y-%m-%d') > DATE_ADD(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL -11 DAY)
 		GROUP BY 
 			DATE_FORMAT(login_log_date, '%Y-%m-%d')
 		ORDER BY 
-			DATE_FORMAT(login_log_date, '%Y-%m-%d') DESC
+			DATE_FORMAT(login_log_date, '%Y-%m-%d') ASC
 	</select>
 	<!-- 강의별 성적 평균 -->
 	<select id="selectAvgGradeByLecture" resultType="java.util.Map">
